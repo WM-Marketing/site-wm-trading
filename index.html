@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>WM Trading — A sua melhor escolha em importação</title>
+  <meta name="description" content="Desde 2004 somos referência em soluções tributárias, logísticas e aduaneiras para as importações da sua empresa." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Nunito+Sans:wght@800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/variables.css" />
+  <link rel="stylesheet" href="css/reset.css" />
+  <link rel="stylesheet" href="css/main.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js" defer></script>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════
+     PAGE LOADER
+══════════════════════════════════════ -->
+<div id="page-loader" aria-hidden="true">
+  <div id="loader-lottie"></div>
+</div>
+
+<!-- ══════════════════════════════════════
+     HEADER
+══════════════════════════════════════ -->
+<header class="header">
+  <div class="container">
+    <a href="/" class="header-logo">
+      <img src="images/logo/fechado_logo_wm_trading_ajustada_logo_laranja.png" alt="WM Trading — We Make it Better" />
+    </a>
+
+    <nav class="header-nav">
+      <a href="#" data-i18n="nav.segments">Segmentos</a>
+      <a href="#" data-i18n="nav.solutions">Soluções</a>
+      <a href="#" data-i18n="nav.content">Conteúdo</a>
+      <a href="#" data-i18n="nav.about">Quem somos</a>
+      <a href="#" data-i18n="nav.careers">Trabalhe conosco</a>
+      <a href="#" data-i18n="nav.contact">Contato</a>
+    </nav>
+
+    <div class="header-actions">
+      <a href="#" class="btn btn-dark" data-i18n="nav.client">Área do cliente</a>
+      <button class="header-flag" id="lang-toggle" aria-label="Switch language">
+        <span id="lang-flag">🇧🇷</span>
+        <span id="lang-code">PT</span>
+        <svg width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="#3A3A3A" stroke-width="1.5" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+
+<!-- ══════════════════════════════════════
+     HERO
+══════════════════════════════════════ -->
+<section class="hero">
+  <div class="hero-bg">
+    <img src="images/assets/hero-bg.jpg" alt="" aria-hidden="true" />
+  </div>
+
+  <!-- Decoração esquerda — WM letras -->
+  <div class="hero-deco" aria-hidden="true">
+    <img src="images/logo/WM.svg" alt="" />
+  </div>
+
+  <div class="container">
+    <div class="hero-inner">
+      <h1 class="hero-title" data-i18n-html="hero.title">
+        A sua<br>melhor escolha<br>em <span class="text-primary">importação</span>
+      </h1>
+      <div class="hero-right">
+        <p class="hero-description" data-i18n="hero.desc">
+          Desde 2004 somos referência em soluções tributárias, logísticas e aduaneiras para as importações da sua empresa
+        </p>
+        <a href="#contato" class="link-arrow" data-i18n="hero.cta">Falar com especialistas →</a>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+
+<!-- ══════════════════════════════════════
+     SECTION 2 — CARDS (sobrepostos ao hero)
+══════════════════════════════════════ -->
+<section class="section-cards">
+  <div class="container">
+    <div class="section-cards-grid">
+      <div class="card-img">
+        <img src="images/assets/Autope%C3%A7as%20.jpg" alt="Autopeças" />
+        <div class="card-img-content">
+          <p class="card-img-title" data-i18n="s2.card1">Importação de autopeças com eficiência fiscal e reposição garantida</p>
+          <a href="#" class="link-arrow" data-i18n="s2.more">Saiba mais →</a>
+        </div>
+      </div>
+      <div class="card-img">
+        <img src="images/assets/A%C3%A7o%20e%20metais%20.jpg" alt="Aço e metais" />
+        <div class="card-img-content">
+          <p class="card-img-title" data-i18n="s2.card2">Importação estratégica de aço e metais com planejamento tributário</p>
+          <a href="#" class="link-arrow" data-i18n="s2.more">Saiba mais →</a>
+        </div>
+      </div>
+      <div class="card-img">
+        <img src="images/assets/equipamentos%20fotovoltaicos.jpg" alt="Energia Solar" />
+        <div class="card-img-content">
+          <p class="card-img-title" data-i18n="s2.card3">Equipamentos fotovoltaicos importados com agilidade e menor custo</p>
+          <a href="#" class="link-arrow" data-i18n="s2.more">Saiba mais →</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Badge circular abaixo dos cards -->
+    <div class="hero-badge" aria-hidden="true">
+      <svg viewBox="0 0 100 100" width="180" height="180">
+        <defs>
+          <path id="circle-path" d="M 50,50 m -32,0 a 32,32 0 1,1 64,0 a 32,32 0 1,1 -64,0"/>
+        </defs>
+        <text font-size="7.7" font-family="Poppins, sans-serif" font-weight="600" fill="#FC5000" letter-spacing="1">
+          <textPath href="#circle-path">WE MAKE IT BETTER • WE MAKE IT BETTER •</textPath>
+        </text>
+      </svg>
+      <div class="hero-badge-center"></div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════
+     SECTION 3 — POR QUE A WM
+══════════════════════════════════════ -->
+<section class="section-motivo">
+  <div class="container">
+    <div class="motivo-header">
+      <h2 class="motivo-title" data-i18n-html="s3.title">Por que a WM é a sua <span class="text-primary">melhor escolha?</span></h2>
+      <p class="motivo-subtitle" data-i18n="s3.sub">Estudamos cada operação detalhadamente, oferecendo nossa expertise técnica e planejamento em cada etapa. Entregamos o melhor para o seu projeto, com desenho tributário especializado e gestão da importação inteligente</p>
+    </div>
+    <hr class="motivo-divider" />
+    <div class="motivo-grid-top">
+      <div class="motivo-card">
+        <div class="motivo-card-icon"></div>
+        <h3 class="motivo-card-title" data-i18n="s3.card.title">Programa de Compliance</h3>
+        <p class="motivo-card-text" data-i18n="s3.card.text">Sólido Programa de Compliance agregando transparência na operação e sólido planejamento</p>
+      </div>
+      <div class="motivo-card">
+        <div class="motivo-card-icon"></div>
+        <h3 class="motivo-card-title" data-i18n="s3.card.title">Programa de Compliance</h3>
+        <p class="motivo-card-text" data-i18n="s3.card.text">Sólido Programa de Compliance agregando transparência na operação e sólido planejamento</p>
+      </div>
+      <div class="motivo-card">
+        <div class="motivo-card-icon"></div>
+        <h3 class="motivo-card-title" data-i18n="s3.card.title">Programa de Compliance</h3>
+        <p class="motivo-card-text" data-i18n="s3.card.text">Sólido Programa de Compliance agregando transparência na operação e sólido planejamento</p>
+      </div>
+    </div>
+    <div class="motivo-grid-bottom">
+      <div class="motivo-card">
+        <div class="motivo-card-icon"></div>
+        <h3 class="motivo-card-title" data-i18n="s3.card.title">Programa de Compliance</h3>
+        <p class="motivo-card-text" data-i18n="s3.card.text">Sólido Programa de Compliance agregando transparência na operação e sólido planejamento</p>
+      </div>
+      <div class="motivo-card">
+        <div class="motivo-card-icon"></div>
+        <h3 class="motivo-card-title" data-i18n="s3.card.title">Programa de Compliance</h3>
+        <p class="motivo-card-text" data-i18n="s3.card.text">Sólido Programa de Compliance agregando transparência na operação e sólido planejamento</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════
+     SECTION 4 — NÚMEROS
+══════════════════════════════════════ -->
+<section class="section-numeros">
+  <div class="container">
+    <div class="numero-item">
+      <p class="numero-value" data-count="15">0</p>
+      <p class="numero-label" data-i18n="s4.label1">Filiais em todo Brasil e 1 no Panamá</p>
+    </div>
+    <div class="numero-item">
+      <p class="numero-value" data-count="7">0</p>
+      <p class="numero-label" data-i18n="s4.label2">Benefícios fiscais</p>
+    </div>
+    <div class="numero-item">
+      <p class="numero-value" data-count="20">0</p>
+      <p class="numero-label" data-i18n="s4.label3">Anos de mercado</p>
+    </div>
+    <div class="numero-item">
+      <p class="numero-value" data-count="98" data-suffix="%">0%</p>
+      <p class="numero-label" data-i18n="s4.label4">Índice de parametrização em canal verde</p>
+    </div>
+  </div>
+  <!-- Decoração hexágonos -->
+  <div class="numeros-deco" aria-hidden="true"></div>
+</section>
+
+
+<!-- ══════════════════════════════════════
+     SECTION 5 — BENEFÍCIOS
+══════════════════════════════════════ -->
+<section class="section-beneficios">
+  <div class="container">
+    <div class="beneficios-left">
+      <div class="beneficios-title-row">
+        <div class="beneficios-num-wrap">
+          <div class="beneficios-num">7</div>
+        </div>
+        <h2 class="beneficios-title" data-i18n-html="s5.title">
+          benefícios fiscais<br>para <span class="text-primary">otimizar as suas importações</span>
+        </h2>
+      </div>
+      <p class="beneficios-text" data-i18n-html="s5.text1">
+        Presente em <strong>14 estados brasileiros</strong> e no <strong>Panamá</strong>, otimizamos as importações e reduzimos os custos dos nossos clientes com planejamento único, sempre comprometidos a buscar as melhores oportunidades de nacionalização.
+      </p>
+      <p class="beneficios-text" data-i18n-html="s5.text2">
+        Através da Operação por Encomenda ou por Conta e Ordem, otimizamos a cadeia logística e reduzimos a carga tributária da importação nacionalizando a sua carga em estados que possuam incentivos de redução do ICMS, como o ES e SC.
+      </p>
+    </div>
+    <div class="beneficios-map">
+      <iframe src="mapa-brasil/mapa_colombia_panama.html" title="Mapa do Brasil — WM Trading" loading="lazy"></iframe>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════
+     SECTION 6 — EXPERIÊNCIA
+══════════════════════════════════════ -->
+<section class="section-experiencia">
+  <div class="container">
+    <div class="experiencia-media">
+      <img src="images/building.jpg" alt="Sede WM Trading e CEO Wendy Verjovsky" class="experiencia-img-full" />
+      <p class="experiencia-caption" data-i18n="s6.caption">Wendy Verjovsky - CEO da WM</p>
+    </div>
+    <div class="experiencia-content">
+      <h2 class="experiencia-label" data-i18n-html="s6.title">Experiência e<br>Transparência</h2>
+      <p class="experiencia-text" data-i18n="s6.text1">
+        Nosso amplo know-how, transparência em todas as etapas da importação e planejamento da importação são os principais fatores que tornam os nossos processos um sucesso.
+      </p>
+      <p class="experiencia-text" data-i18n="s6.text2">
+        Atuamos em diferentes frentes na importação. Trabalhamos nas modalidades de importação por Encomenda ou por Conta e Ordem, além de prestar Assessoria Aduaneira para grandes projetos e buscar fornecedores internacionais através do Global Sourcing.
+      </p>
+      <a href="#" class="btn-solucoes" data-i18n="s6.btn">Nossas soluções →</a>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════
+     SECTION 7 — SEGMENTOS
+══════════════════════════════════════ -->
+<section class="section-segmentos">
+  <div class="container">
+    <div class="segmentos-header">
+      <h2 class="segmentos-title" data-i18n-html="s7.title">Somos especialistas na importação em <span class="text-primary">diversos setores</span></h2>
+      <p class="segmentos-subtitle" data-i18n="s7.sub">Explore os nossos cases de sucesso e saiba mais sobre como proporcionamos melhores resultados para os nossos clientes através da nossa sólida experiência em importação</p>
+    </div>
+    <div class="segmentos-grid-wrapper">
+      <div class="segmentos-grid">
+        <div class="segmento-card">
+          <div class="segmento-card-img">
+            <img src="images/assets/Autope%C3%A7as%20.jpg" alt="Autopeças" />
+            <div class="segmento-badge-area">
+              <span class="segmento-tag" data-i18n="s7.tag1">Autopeças</span>
+            </div>
+          </div>
+          <div class="segmento-content">
+            <p class="segmento-card-desc" data-i18n="s7.desc1">Importamos peças automotivas com precisão fiscal e agilidade logística, reduzindo custos e garantindo reposição sem atrasos.</p>
+            <a href="#" class="link-arrow" data-i18n="s7.check">Confira →</a>
+          </div>
+        </div>
+        <div class="segmento-card">
+          <div class="segmento-card-img">
+            <img src="images/assets/A%C3%A7o%20e%20metais%20.jpg" alt="Aço e metais" />
+            <div class="segmento-badge-area">
+              <span class="segmento-tag" data-i18n="s7.tag2">Aço e metais</span>
+            </div>
+          </div>
+          <div class="segmento-content">
+            <p class="segmento-card-desc" data-i18n="s7.desc2">Estruturamos importações de aço e metais com planejamento tributário eficiente e total conformidade para o setor industrial.</p>
+            <a href="#" class="link-arrow" data-i18n="s7.check">Confira →</a>
+          </div>
+        </div>
+        <div class="segmento-card">
+          <div class="segmento-card-img">
+            <img src="images/assets/equipamentos%20fotovoltaicos.jpg" alt="Energia Solar" />
+            <div class="segmento-badge-area">
+              <span class="segmento-tag" data-i18n="s7.tag3">Energia Solar</span>
+            </div>
+          </div>
+          <div class="segmento-content">
+            <p class="segmento-card-desc" data-i18n="s7.desc3">Importamos equipamentos fotovoltaicos com desembaraço ágil e redução de carga tributária para expandir sua operação solar.</p>
+            <a href="#" class="link-arrow" data-i18n="s7.check">Confira →</a>
+          </div>
+        </div>
+      </div>
+      <a href="#" class="segmentos-ver-todos" aria-label="Ver todos os segmentos" data-i18n="s7.all">VER TODOS</a>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════
+     SECTION 8 — MODALIDADES (TABS)
+══════════════════════════════════════ -->
+<section class="section-modalidade">
+  <div class="container">
+    <div class="modalidade-header">
+      <h2 class="modalidade-title" data-i18n-html="s8.title">Qual <span class="text-primary">modalidade de importação</span> atende melhor o seu projeto?</h2>
+      <p class="modalidade-sub" data-i18n="s8.sub">Conheça nossas modalidades</p>
+    </div>
+
+    <div class="tabs" role="tablist">
+      <label class="tab-radio">
+        <input type="radio" name="modalidade" value="encomenda" checked>
+        <span class="tab-radio-name" data-i18n="s8.tab1">Operação por Encomenda</span>
+      </label>
+      <label class="tab-radio">
+        <input type="radio" name="modalidade" value="conta-ordem">
+        <span class="tab-radio-name" data-i18n="s8.tab2">Operação por Conta e Ordem</span>
+      </label>
+      <label class="tab-radio">
+        <input type="radio" name="modalidade" value="assessoria">
+        <span class="tab-radio-name" data-i18n="s8.tab3">Assessoria Aduaneira</span>
+      </label>
+      <label class="tab-radio">
+        <input type="radio" name="modalidade" value="sourcing">
+        <span class="tab-radio-name" data-i18n="s8.tab4">Global Sourcing</span>
+      </label>
+    </div>
+
+    <div class="tab-panels">
+    <div id="tab-encomenda" class="tab-panel active" role="tabpanel">
+      <div class="modalidade-content">
+        <div class="modalidade-text">
+          <h3 class="modalidade-content-title" data-i18n="s8.panel1.title">Operação por Encomenda</h3>
+          <p class="modalidade-content-text" data-i18n="s8.panel1.text">Organizamos todos os documentos, a logística internacional e nacional, realizamos o desembaraço aduaneiro com otimização tributária para a sua empresa.</p>
+          <a href="#" class="link-arrow" style="margin-top:8px" data-i18n="s8.learn">SAIBA MAIS →</a>
+        </div>
+        <div class="modalidade-content-img">
+          <img src="images/sections/Section 8 - Modalidade.png" alt="Operação por Encomenda" />
+        </div>
+      </div>
+    </div>
+
+    <div id="tab-conta-ordem" class="tab-panel" role="tabpanel">
+      <div class="modalidade-content">
+        <div class="modalidade-text">
+          <h3 class="modalidade-content-title" data-i18n="s8.panel2.title">Operação por Conta e Ordem</h3>
+          <p class="modalidade-content-text" data-i18n="s8.panel2.text">Na Conta e Ordem a WM atua como consignatária da carga e realiza a gestão da importação em todas as etapas. Benefícios fiscais podem ser aproveitados se a sua empresa tiver filial nos estados de SC, ES ou PE!</p>
+          <p class="modalidade-content-text" data-i18n="s8.panel2.text2">Organizamos todos os documentos, a logística internacional e nacional, realizamos o desembaraço aduaneiro com otimização tributária para a sua empresa.</p>
+          <a href="#" class="link-arrow" style="margin-top:8px" data-i18n="s8.learn">SAIBA MAIS →</a>
+        </div>
+        <div class="modalidade-content-img">
+          <img src="images/sections/Section 8 - Modalidade.png" alt="Operação por Conta e Ordem" />
+        </div>
+      </div>
+    </div>
+
+    <div id="tab-assessoria" class="tab-panel" role="tabpanel">
+      <div class="modalidade-content">
+        <div class="modalidade-text">
+          <h3 class="modalidade-content-title" data-i18n="s8.panel3.title">Assessoria Aduaneira</h3>
+          <p class="modalidade-content-text" data-i18n="s8.panel3.text">Prestamos assessoria especializada para grandes projetos de importação, com expertise técnica e planejamento tributário completo.</p>
+          <a href="#" class="link-arrow" style="margin-top:8px" data-i18n="s8.learn">SAIBA MAIS →</a>
+        </div>
+        <div class="modalidade-content-img">
+          <img src="images/sections/Section 8 - Modalidade.png" alt="Assessoria Aduaneira" />
+        </div>
+      </div>
+    </div>
+
+    <div id="tab-sourcing" class="tab-panel" role="tabpanel">
+      <div class="modalidade-content">
+        <div class="modalidade-text">
+          <h3 class="modalidade-content-title" data-i18n="s8.panel4.title">Global Sourcing</h3>
+          <p class="modalidade-content-text" data-i18n="s8.panel4.text">Buscamos os melhores fornecedores internacionais para a sua empresa, com análise criteriosa de qualidade, custo e compliance.</p>
+          <a href="#" class="link-arrow" style="margin-top:8px" data-i18n="s8.learn">SAIBA MAIS →</a>
+        </div>
+        <div class="modalidade-content-img">
+          <img src="images/sections/Section 8 - Modalidade.png" alt="Global Sourcing" />
+        </div>
+      </div>
+    </div>
+    </div><!-- /.tab-panels -->
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════
+     SECTION 9 — CTA
+══════════════════════════════════════ -->
+<section class="section-cta" id="contato">
+  <!-- Decoração WM shapes -->
+  <div class="cta-deco" aria-hidden="true">
+    <svg width="100%" height="100%" viewBox="0 0 1920 304" preserveAspectRatio="xMidYMid slice">
+      <g fill="none" stroke="white" stroke-width="1.5" opacity="0.2">
+        <!-- "W" shapes repetidos -->
+        <polyline points="0,260 48,200 96,260 144,200 192,260"/>
+        <polyline points="192,260 240,200 288,260 336,200 384,260"/>
+        <polyline points="384,260 432,200 480,260 528,200 576,260"/>
+        <polyline points="576,260 624,200 672,260 720,200 768,260"/>
+        <polyline points="768,260 816,200 864,260 912,200 960,260"/>
+        <polyline points="960,260 1008,200 1056,260 1104,200 1152,260"/>
+        <polyline points="1152,260 1200,200 1248,260 1296,200 1344,260"/>
+        <polyline points="1344,260 1392,200 1440,260 1488,200 1536,260"/>
+        <polyline points="1536,260 1584,200 1632,260 1680,200 1728,260"/>
+        <polyline points="1728,260 1776,200 1824,260 1872,200 1920,260"/>
+      </g>
+    </svg>
+  </div>
+  <div class="container">
+    <h2 class="cta-title" data-i18n="s9.title">Tem um projeto em mente?</h2>
+    <p class="cta-text" data-i18n="s9.text">Fale com os nossos especialistas e tenha a melhor operação para a sua empresa!</p>
+    <a href="#" class="btn btn-outline-white" data-i18n="s9.btn">Nossas soluções →</a>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════
+     FOOTER — FAIXA 1: Links + CTA
+══════════════════════════════════════ -->
+<div class="footer-links">
+  <div class="container">
+    <div class="footer-col">
+      <p class="footer-col-title" data-i18n="f.solutions">Soluções</p>
+      <ul>
+        <li><a href="#" data-i18n="f.sol1">Importação por Encomenda</a></li>
+        <li><a href="#" data-i18n="f.sol2">Importação Por Conta e Ordem</a></li>
+        <li><a href="#" data-i18n="f.sol3">Global Sourcing</a></li>
+        <li><a href="#" data-i18n="f.sol4">Assessoria Aduaneira</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <p class="footer-col-title" data-i18n="f.wm">A WM</p>
+      <ul>
+        <li><a href="#" data-i18n="f.wm1">Carreiras</a></li>
+        <li><a href="#" data-i18n="f.wm2">Sobre nós</a></li>
+        <li><a href="#" data-i18n="f.wm3">Compliance</a></li>
+      </ul>
+      <br>
+      <p class="footer-col-title" data-i18n="f.segments">Segmentos</p>
+    </div>
+    <div class="footer-col">
+      <p class="footer-col-title" data-i18n="f.content">Conteúdos</p>
+      <ul>
+        <li><a href="#" data-i18n="f.c1">Blog</a></li>
+        <li><a href="#" data-i18n="f.c2">Materiais</a></li>
+        <li><a href="#" data-i18n="f.c3">WM Cast</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <p class="footer-col-title" data-i18n="f.contact">Contato</p>
+      <ul>
+        <li><a href="#" data-i18n="f.ct1">Fale Conosco</a></li>
+        <li><a href="#" data-i18n="f.ct2">Ouvidoria</a></li>
+        <li><a href="#" data-i18n="f.ct3">Unidades</a></li>
+      </ul>
+      <br>
+      <p class="footer-col-title" data-i18n="f.access">Acesso</p>
+      <ul>
+        <li><a href="#" data-i18n="f.ac1">Área do cliente</a></li>
+      </ul>
+    </div>
+    <div class="footer-cta-col">
+      <p class="footer-cta-text" data-i18n-html="f.cta">Simplifique<br>suas importações<br>aqui.</p>
+      <a href="#contato" class="btn btn-outline-orange" data-i18n="f.ctabtn">Falar com especialista →</a>
+    </div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════
+     FOOTER — FAIXA 2: Logo + Social
+══════════════════════════════════════ -->
+<div class="footer-social">
+  <div class="container">
+    <div class="footer-brand">
+      <img src="images/logo/fechado_logo_wm_trading_ajustada_logo_slogan_colorido.png" alt="WM Trading — We Make it Better" />
+    </div>
+
+    <div class="footer-icons">
+      <!-- Instagram -->
+      <a href="#" class="footer-icon" aria-label="Instagram">
+        <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+      </a>
+      <!-- YouTube -->
+      <a href="#" class="footer-icon" aria-label="YouTube">
+        <svg viewBox="0 0 24 24"><path d="M23.495 6.205a3.007 3.007 0 00-2.088-2.088c-1.87-.501-9.396-.501-9.396-.501s-7.507-.01-9.396.501A3.007 3.007 0 00.527 6.205a31.247 31.247 0 00-.522 5.805 31.247 31.247 0 00.522 5.783 3.007 3.007 0 002.088 2.088c1.868.502 9.396.502 9.396.502s7.506 0 9.396-.502a3.007 3.007 0 002.088-2.088 31.247 31.247 0 00.5-5.783 31.247 31.247 0 00-.5-5.805zM9.609 15.601V8.408l6.264 3.602z"/></svg>
+      </a>
+      <!-- LinkedIn -->
+      <a href="#" class="footer-icon" aria-label="LinkedIn">
+        <svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+      </a>
+      <!-- Facebook -->
+      <a href="#" class="footer-icon" aria-label="Facebook">
+        <svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+      </a>
+      <!-- Spotify -->
+      <a href="#" class="footer-icon" aria-label="Spotify">
+        <svg viewBox="0 0 24 24"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg>
+      </a>
+      <!-- TikTok -->
+      <a href="#" class="footer-icon" aria-label="TikTok">
+        <svg viewBox="0 0 24 24"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg>
+      </a>
+    </div>
+
+    <div class="footer-badges">
+      <img src="images/assets/selo_portal_de_privacidade.png" alt="Selo Portal de Privacidade LGPD" class="footer-badge-img" />
+    </div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════
+     FOOTER — FAIXA 3: Copyright
+══════════════════════════════════════ -->
+<div class="footer-copy-bar">
+  <div class="container">
+    <p class="footer-copy-text">Copyright 2024 - WM Comercial Atacadista LTDA - 06.194.675/0001-03</p>
+    <div class="footer-privacy">
+      <a href="#">Políticas de Privacidade</a>
+    </div>
+  </div>
+</div>
+
+
+<script src="js/main.js"></script>
+<script src="js/i18n.js" defer></script>
+</body>
+</html>
