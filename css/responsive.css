@@ -95,6 +95,8 @@ html, body { overflow-x: hidden; }
   /* --- HERO --- */
   .hero { height: auto; min-height: 520px; }
   .hero .container {
+    height: auto;
+    min-height: 520px;
     padding-left: var(--container-px);
     padding-right: var(--container-px);
     padding-bottom: 100px;
@@ -142,6 +144,7 @@ html, body { overflow-x: hidden; }
 
   /* --- SECTION 5 — BENEFÍCIOS --- */
   .section-beneficios .container {
+    display: flex;
     flex-direction: column;
     gap: 32px;
   }
@@ -149,6 +152,8 @@ html, body { overflow-x: hidden; }
   .beneficios-map {
     width: 100%;
     height: 320px;
+    margin-right: 0;
+    border-radius: var(--radius-xl);
   }
   .beneficios-map iframe { height: 320px; }
   .beneficios-title { font-size: 22px; }
@@ -157,11 +162,12 @@ html, body { overflow-x: hidden; }
 
   /* --- SECTION 6 — EXPERIÊNCIA --- */
   .section-experiencia .container {
+    display: flex;
     flex-direction: column;
     gap: 28px;
   }
   .experiencia-media { width: 100%; }
-  .experiencia-img-full { height: 280px; object-fit: cover; border-radius: var(--radius-lg); }
+  .experiencia-img-full { width: 100%; height: 280px; object-fit: cover; border-radius: var(--radius-lg); }
   .experiencia-content { max-width: 100%; }
   .experiencia-label { font-size: 26px; }
 
@@ -201,12 +207,13 @@ html, body { overflow-x: hidden; }
   }
   .tab-panels { margin-top: -16px; }
   .modalidade-content {
+    display: flex;
     flex-direction: column;
     padding: calc(16px + 40px) 24px 40px;
     gap: 24px;
   }
-  .modalidade-content-img { width: 100%; }
-  .modalidade-content-img img { width: 100%; border-radius: var(--radius-lg); }
+  .modalidade-content-img { width: 100%; height: 200px; }
+  .modalidade-content-img img { width: 100%; height: 100%; border-radius: var(--radius-lg); }
   .modalidade-content-title { font-size: 20px; }
 
 
