@@ -1,0 +1,21 @@
+# Vídeos — demasiado grandes
+images/Vídeos/
+images/videos/
+*.mov
+*.mp4
+
+# macOS
+.DS_Store
+
+# Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Claude Code
+.claude/
+
+# Node
+node_modules/
+npm-debug.log*
