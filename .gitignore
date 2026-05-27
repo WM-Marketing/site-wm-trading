@@ -1,3 +1,9 @@
+# Vídeos — demasiado grandes para GitHub
+images/Vídeos/
+images/videos/
+*.mov
+*.mp4
+
 # macOS
 .DS_Store
 .AppleDouble
