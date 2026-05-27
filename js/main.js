@@ -66,6 +66,26 @@
   counters.forEach(el => observer.observe(el));
 })();
 
+// Hamburger menu toggle
+(function () {
+  const toggle = document.getElementById('menu-toggle');
+  const nav    = document.querySelector('.header-nav');
+  if (!toggle || !nav) return;
+  toggle.addEventListener('click', () => {
+    const open = nav.classList.toggle('open');
+    toggle.classList.toggle('open', open);
+    toggle.setAttribute('aria-expanded', open);
+  });
+  // Fecha ao clicar num link
+  nav.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => {
+      nav.classList.remove('open');
+      toggle.classList.remove('open');
+      toggle.setAttribute('aria-expanded', false);
+    });
+  });
+})();
+
 // Header shadow on scroll
 window.addEventListener('scroll', () => {
   document.querySelector('.header')?.classList.toggle('scrolled', window.scrollY > 10);

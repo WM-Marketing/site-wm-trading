@@ -1,0 +1,265 @@
+/* =============================================
+   WM Trading 2.0 — Responsive Styles
+   Mobile-first breakpoints: 768px | 480px
+   ============================================= */
+
+/* Previne overflow horizontal global */
+html, body { overflow-x: hidden; }
+
+/* =============================================
+   TABLET (≤ 1024px)
+   ============================================= */
+@media (max-width: 1024px) {
+  :root {
+    --container-px: 40px;
+  }
+
+  .hero .container { padding-left: var(--container-px); }
+  .motivo-grid-top { grid-template-columns: repeat(2, 1fr); }
+  .section-beneficios .container { gap: 40px; }
+  .beneficios-map { min-width: 0; }
+  .footer-links .container { grid-template-columns: repeat(3, 1fr); }
+}
+
+
+/* =============================================
+   MOBILE (≤ 768px)
+   ============================================= */
+@media (max-width: 768px) {
+
+  /* --- TOKENS --- */
+  :root {
+    --container-px: 20px;
+    --section-py: 56px;
+    --fs-2xl: 34px;
+    --fs-lg:  22px;
+    --fs-xl:  26px;
+  }
+
+
+  /* --- HEADER --- */
+  .header { height: 64px; }
+  .header-logo img { height: 44px; }
+
+  .header-nav {
+    display: none;
+    position: fixed;
+    top: 64px;
+    left: 0; right: 0;
+    background: #fff;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0;
+    padding: 16px 0 24px;
+    border-bottom: 1px solid #f0f0f0;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+    z-index: 99;
+  }
+  .header-nav.open { display: flex; }
+  .header-nav a {
+    width: 100%;
+    padding: 14px 24px;
+    font-size: 15px;
+    border-bottom: 1px solid #f8f8f8;
+  }
+
+  .header-actions .btn { display: none; }
+  .header-flag { display: none; }
+
+  /* Hamburger */
+  .menu-toggle {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    width: 36px;
+    height: 36px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+  }
+  .menu-toggle span {
+    display: block;
+    height: 2px;
+    background: var(--color-text-dark);
+    border-radius: 2px;
+    transition: all 0.25s ease;
+  }
+  /* X ao abrir */
+  .menu-toggle.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .menu-toggle.open span:nth-child(2) { opacity: 0; }
+  .menu-toggle.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+
+  /* --- HERO --- */
+  .hero { height: auto; min-height: 520px; }
+  .hero .container {
+    padding-left: var(--container-px);
+    padding-right: var(--container-px);
+    padding-bottom: 100px;
+    align-items: flex-end;
+  }
+  .hero-inner {
+    grid-template-columns: 1fr;
+    row-gap: 20px;
+  }
+  .hero-title { font-size: 34px; }
+  .hero-right { max-width: 100%; }
+  .hero-deco img { left: -260px; width: 520px; }
+  .hero-badge { top: auto; bottom: -50px; right: 10px; width: 130px; height: 130px; }
+
+
+  /* --- SECTION 2 — CARDS --- */
+  .section-cards { margin-top: -60px; }
+  .section-cards-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+  .card-img { height: 200px; }
+
+
+  /* --- SECTION 3 — MOTIVO --- */
+  .motivo-grid-top  { grid-template-columns: 1fr; gap: 12px; }
+  .motivo-grid-bottom { grid-template-columns: 1fr; gap: 12px; }
+  .motivo-title { font-size: 22px; }
+
+
+  /* --- SECTION 4 — NÚMEROS --- */
+  .section-numeros .container {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0;
+  }
+  .numero-item {
+    padding: 40px 20px;
+    border-right: 1px solid rgba(255,255,255,0.15);
+    border-bottom: 1px solid rgba(255,255,255,0.15);
+  }
+  .numero-item:nth-child(2n) { border-right: none; }
+  .numero-item:nth-child(3),
+  .numero-item:nth-child(4) { border-bottom: none; }
+
+
+  /* --- SECTION 5 — BENEFÍCIOS --- */
+  .section-beneficios .container {
+    flex-direction: column;
+    gap: 32px;
+  }
+  .beneficios-left { max-width: 100%; }
+  .beneficios-map {
+    width: 100%;
+    height: 320px;
+  }
+  .beneficios-map iframe { height: 320px; }
+  .beneficios-title { font-size: 22px; }
+  .beneficios-num { font-size: 48px; }
+
+
+  /* --- SECTION 6 — EXPERIÊNCIA --- */
+  .section-experiencia .container {
+    flex-direction: column;
+    gap: 28px;
+  }
+  .experiencia-media { width: 100%; }
+  .experiencia-img-full { height: 280px; object-fit: cover; border-radius: var(--radius-lg); }
+  .experiencia-content { max-width: 100%; }
+  .experiencia-label { font-size: 26px; }
+
+
+  /* --- SECTION 7 — SEGMENTOS --- */
+  .segmentos-grid-wrapper { flex-direction: column; }
+  .segmentos-grid { grid-template-columns: 1fr; gap: 24px; }
+  .segmento-card-img img { aspect-ratio: 16/9; }
+  .segmentos-ver-todos {
+    writing-mode: horizontal-tb;
+    text-orientation: mixed;
+    width: 100%;
+    height: 48px;
+    border-radius: var(--radius-lg);
+  }
+  .segmentos-title { font-size: 22px; }
+
+
+  /* --- SECTION 8 — MODALIDADES --- */
+  .modalidade-title { font-size: 22px; }
+  .section-modalidade { overflow: hidden; }
+  .tabs {
+    width: calc(100vw - 40px);
+    max-width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    padding: 6px;
+    scrollbar-width: none;
+  }
+  .tabs::-webkit-scrollbar { display: none; }
+  .tab-radio-name {
+    white-space: nowrap;
+    padding: 8px 16px;
+    font-size: 13px;
+  }
+  .tab-panels { margin-top: -16px; }
+  .modalidade-content {
+    flex-direction: column;
+    padding: calc(16px + 40px) 24px 40px;
+    gap: 24px;
+  }
+  .modalidade-content-img { width: 100%; }
+  .modalidade-content-img img { width: 100%; border-radius: var(--radius-lg); }
+  .modalidade-content-title { font-size: 20px; }
+
+
+  /* --- SECTION 9 — CTA --- */
+  .section-cta { padding: 56px 0; overflow: hidden; }
+  .cta-title { font-size: 22px; }
+  .cta-deco { overflow: hidden; }
+
+
+  /* --- FOOTER --- */
+  .footer-links .container {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 32px;
+  }
+  .footer-cta-col {
+    grid-column: 1 / -1;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    border-top: 1px solid #f0f0f0;
+    padding-top: 24px;
+  }
+  .footer-cta-text { font-size: 20px; }
+
+  .footer-social .container {
+    flex-direction: column;
+    gap: 20px;
+    padding: 32px var(--container-px);
+  }
+  .footer-brand img { height: 36px; }
+}
+
+
+/* =============================================
+   SMALL MOBILE (≤ 480px)
+   ============================================= */
+@media (max-width: 480px) {
+  :root {
+    --fs-2xl: 28px;
+  }
+
+  .hero-title { font-size: 28px; }
+  .hero-badge { width: 100px; height: 100px; }
+
+  .section-numeros .container { grid-template-columns: repeat(2, 1fr); }
+  .numero-value { font-size: 48px; }
+
+  .footer-links .container { grid-template-columns: 1fr 1fr; gap: 24px; }
+  .footer-cta-col { flex-direction: column; align-items: flex-start; gap: 16px; }
+}
+
+
+/* --- HAMBURGER ALWAYS HIDDEN ON DESKTOP --- */
+@media (min-width: 769px) {
+  .menu-toggle { display: none; }
+}
