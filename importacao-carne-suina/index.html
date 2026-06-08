@@ -27,17 +27,15 @@
 
 <link rel="icon" type="image/png" href="assets/og-image.jpg" />
 
-<!-- Fonts (mesmas do site institucional) -->
+<!-- Fontes da marca -->
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Nunito+Sans:wght@800&display=swap" rel="stylesheet" />
 
-<!-- Design system do site WM Trading 2.0 -->
+<!-- Fundamentos da marca (compartilhado) + layout próprio da LP -->
 <link rel="stylesheet" href="../css/variables.css" />
 <link rel="stylesheet" href="../css/reset.css" />
-<link rel="stylesheet" href="../css/main.css" />
-<link rel="stylesheet" href="../css/responsive.css" />
-<!-- Estilos específicos desta LP -->
+<link rel="stylesheet" href="../css/foundations.css" />
 <link rel="stylesheet" href="lp.css" />
 
 <!-- ============ GEO / Structured Data (JSON-LD) ============ -->
@@ -111,207 +109,155 @@
 </head>
 <body>
 
-<!-- ══════════════ HEADER (mesmo do site) ══════════════ -->
-<header class="header">
-  <div class="container">
-    <a href="https://www.wmtrading.com.br/" class="header-logo">
+<!-- ══════════════ HEADER ══════════════ -->
+<header class="lp-header">
+  <div class="container lp-nav">
+    <a href="https://www.wmtrading.com.br/" class="lp-logo" aria-label="WM Trading">
       <img src="../images/logo/fechado_logo_wm_trading_ajustada_logo_laranja.png" alt="WM Trading — We Make it Better" />
     </a>
-    <nav class="header-nav">
-      <a href="#desafios">Desafios</a>
-      <a href="#processo">Como atuamos</a>
-      <a href="#beneficios">Benefícios</a>
-      <a href="#mercados">Mercados</a>
-      <a href="#faq">Dúvidas</a>
+    <nav>
+      <ul class="lp-nav-links" id="navLinks">
+        <li><a href="#desafios">Desafios</a></li>
+        <li><a href="#processo">Como atuamos</a></li>
+        <li><a href="#beneficios">Benefícios</a></li>
+        <li><a href="#mercados">Mercados</a></li>
+        <li><a href="#faq">Dúvidas</a></li>
+      </ul>
     </nav>
-    <div class="header-actions">
-      <a href="#cotacao" class="btn btn-dark">Solicitar Cotação</a>
-      <button class="menu-toggle" id="menu-toggle" aria-label="Menu" aria-expanded="false">
-        <span></span><span></span><span></span>
-      </button>
+    <div class="lp-nav-actions">
+      <a class="lp-phone" href="tel:+552730229700"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92Z"/></svg>(27) 3022-9700</a>
+      <a class="btn" href="#lead">Solicitar Cotação</a>
+      <button class="lp-burger" id="burger" aria-label="Menu"><span></span><span></span><span></span></button>
     </div>
   </div>
 </header>
 
 
-<!-- ══════════════ HERO ══════════════ -->
-<section class="hero hero-lp">
-  <div class="hero-bg">
-    <img src="../images/assets/hero-bg.jpg" alt="" aria-hidden="true" />
-  </div>
-  <div class="hero-deco" aria-hidden="true">
-    <img src="../images/logo/WM.svg" alt="" />
-  </div>
-  <div class="container">
-    <div class="hero-inner">
-      <h1 class="hero-title">
-        Importação de<br><span class="text-primary">Carne Suína</span><br>com expertise<br>internacional
-      </h1>
-      <div class="hero-right">
-        <span class="hero-eyebrow">Comércio internacional de proteína animal</span>
-        <p class="hero-description">
-          A WM Trading conecta sua empresa aos principais fornecedores internacionais de carne suína fresca, refrigerada e congelada — com conformidade, rastreabilidade e eficiência em todo o processo.
-        </p>
-        <ul class="hero-benes">
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6 9 17l-5-5"/></svg>Fornecedores internacionais qualificados</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6 9 17l-5-5"/></svg>Gestão completa da operação</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6 9 17l-5-5"/></svg>Suporte regulatório e logístico integrado</li>
-        </ul>
-        <div class="hero-cta-row">
-          <a href="#cotacao" class="btn btn-orange btn-lg">Solicitar Cotação →</a>
-          <a href="#cotacao" class="btn btn-ghost-white btn-lg">Falar com um Especialista</a>
+<!-- ══════════════ HERO (com formulário acima da dobra) ══════════════ -->
+<section class="lp-hero" id="topo">
+  <div class="lp-hero-bg"><img src="assets/hero-bg.jpg" alt="" aria-hidden="true" /></div>
+  <div class="container lp-hero-grid">
+    <div class="lp-hero-copy">
+      <span class="eyebrow">Comércio internacional de proteína animal</span>
+      <h1 class="lp-hero-title">Importação de <span class="text-primary">Carne Suína</span> com segurança e expertise internacional</h1>
+      <p class="lp-hero-sub">A WM Trading conecta sua empresa aos principais fornecedores internacionais de carne suína fresca, refrigerada e congelada — com conformidade, rastreabilidade e eficiência em todo o processo.</p>
+      <ul class="lp-benes">
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6 9 17l-5-5"/></svg>Fornecedores internacionais qualificados</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6 9 17l-5-5"/></svg>Gestão completa da operação e logística integrada</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6 9 17l-5-5"/></svg>Suporte regulatório e segurança em todas as etapas</li>
+      </ul>
+      <div class="lp-hero-actions">
+        <a class="btn btn-lg" href="#lead">Solicitar Cotação →</a>
+        <a class="btn btn-ghost-light btn-lg" href="https://wa.me/552730229700" target="_blank" rel="noopener">Falar com um Especialista</a>
+      </div>
+      <div class="lp-trust-mini">
+        <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="M22 4 12 14.01l-3-3"/></svg>Desde 2004 no comércio exterior</span>
+        <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"/></svg>Certificação ISO 9001</span>
+        <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>15 filiais + Panamá</span>
+      </div>
+    </div>
+
+    <div class="lp-formcard" id="lead">
+      <form id="leadForm" novalidate>
+        <h3>Solicitar Cotação</h3>
+        <p class="lp-form-sub">Preencha os dados e um especialista entrará em contato.</p>
+        <div class="lp-fgrid">
+          <div class="field"><label for="nome">Nome <span class="req">*</span></label><input id="nome" name="nome" type="text" required placeholder="Seu nome" /></div>
+          <div class="field"><label for="empresa">Empresa <span class="req">*</span></label><input id="empresa" name="empresa" type="text" required placeholder="Razão social" /></div>
+          <div class="field"><label for="cargo">Cargo <span class="req">*</span></label><input id="cargo" name="cargo" type="text" required placeholder="Seu cargo" /></div>
+          <div class="field"><label for="email">E-mail <span class="req">*</span></label><input id="email" name="email" type="email" required placeholder="email@empresa.com" /></div>
+          <div class="field"><label for="telefone">Telefone <span class="req">*</span></label><input id="telefone" name="telefone" type="tel" required placeholder="(00) 00000-0000" /></div>
+          <div class="field"><label for="volume">Volume de interesse <span class="req">*</span></label>
+            <select id="volume" name="volume" required>
+              <option value="" disabled selected>Selecione</option>
+              <option>Até 1 contêiner / mês</option>
+              <option>2 a 5 contêineres / mês</option>
+              <option>6 a 20 contêineres / mês</option>
+              <option>Acima de 20 contêineres / mês</option>
+              <option>Ainda avaliando</option>
+            </select>
+          </div>
+          <div class="field full"><label for="mensagem">Mensagem</label><textarea id="mensagem" name="mensagem" placeholder="Conte sobre sua necessidade de importação..."></textarea></div>
         </div>
+        <button type="submit" class="btn btn-lg">Solicitar Cotação →</button>
+        <p class="lp-form-note"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>Seus dados estão seguros e não serão compartilhados.</p>
+      </form>
+      <div class="lp-form-success" id="formSuccess">
+        <div class="ok"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M20 6 9 17l-5-5"/></svg></div>
+        <h3>Solicitação enviada!</h3>
+        <p>Obrigado. Um especialista da WM Trading entrará em contato em breve para conduzir sua importação de carne suína.</p>
       </div>
     </div>
   </div>
 </section>
 
 
-<!-- ══════════════ SECTION 2 — CARDS (sobrepostos ao hero) ══════════════ -->
-<section class="section-cards">
+<!-- ══════════════ TRUST BAR ══════════════ -->
+<section class="lp-trustbar">
   <div class="container">
-    <div class="section-cards-grid">
-      <div class="card-img">
-        <img src="../images/assets/combine-harvester-harvests-ripe-wheat-concept-rich-harvest-agriculture-image.jpg" alt="Fornecedores internacionais de proteína animal" />
-        <div class="card-img-content">
-          <p class="card-img-title">Rede global de fornecedores qualificados de proteína animal</p>
-          <a href="#beneficios" class="link-arrow">Saiba mais →</a>
-        </div>
-      </div>
-      <div class="card-img">
-        <img src="../images/assets/hero-bg.jpg" alt="Logística internacional" />
-        <div class="card-img-content">
-          <p class="card-img-title">Logística internacional integrada com cadeia fria garantida</p>
-          <a href="#processo" class="link-arrow">Saiba mais →</a>
-        </div>
-      </div>
-      <div class="card-img">
-        <img src="../images/building.jpg" alt="Experiência e compliance WM Trading" />
-        <div class="card-img-content">
-          <p class="card-img-title">Experiência e compliance que dão segurança à operação</p>
-          <a href="#processo" class="link-arrow">Saiba mais →</a>
-        </div>
-      </div>
-    </div>
+    <div class="lp-tb-item"><div class="n" data-count="20" data-suffix="+">0</div><div class="c">Anos de mercado no comércio exterior</div></div>
+    <div class="lp-tb-item"><div class="n" data-count="15">0</div><div class="c">Filiais no Brasil + unidade no Panamá</div></div>
+    <div class="lp-tb-item"><div class="n"><span>ISO</span> 9001</div><div class="c">Gestão da qualidade certificada</div></div>
+    <div class="lp-tb-item"><div class="n" data-count="98" data-suffix="%">0</div><div class="c">Parametrização em canal verde</div></div>
   </div>
 </section>
 
 
-<!-- ══════════════ SECTION 3 — DESAFIOS ══════════════ -->
-<section class="section-motivo" id="desafios">
-  <div class="container">
-    <div class="motivo-header">
-      <h2 class="motivo-title">Os principais desafios na <span class="text-primary">importação de carne suína</span></h2>
-      <p class="motivo-subtitle">Importar carne suína exige conhecimento técnico, fornecedores confiáveis e gestão eficiente para garantir qualidade, conformidade regulatória e segurança comercial.</p>
-    </div>
-    <hr class="motivo-divider" />
-    <div class="lp-cards">
-      <div class="motivo-card">
-        <span class="motivo-card-num">01</span>
-        <div class="motivo-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg></div>
-        <h3 class="motivo-card-title">Encontrar fornecedores confiáveis</h3>
-        <p class="motivo-card-text">Garantir parceiros internacionais com histórico comprovado e padrões de qualidade consistentes.</p>
-      </div>
-      <div class="motivo-card">
-        <span class="motivo-card-num">02</span>
-        <div class="motivo-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"/><path d="m9 12 2 2 4-4"/></svg></div>
-        <h3 class="motivo-card-title">Cumprir exigências sanitárias</h3>
-        <p class="motivo-card-text">Atender normas nacionais e internacionais relacionadas à importação de proteína animal.</p>
-      </div>
-      <div class="motivo-card">
-        <span class="motivo-card-num">03</span>
-        <div class="motivo-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M9 13h6M9 17h6"/></svg></div>
-        <h3 class="motivo-card-title">Gerenciar documentação</h3>
-        <p class="motivo-card-text">Controlar processos documentais complexos e exigidos pelas autoridades competentes.</p>
-      </div>
-      <div class="motivo-card">
-        <span class="motivo-card-num">04</span>
-        <div class="motivo-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
-        <h3 class="motivo-card-title">Controlar custos logísticos</h3>
-        <p class="motivo-card-text">Planejar operações de forma eficiente para reduzir custos e riscos.</p>
-      </div>
-      <div class="motivo-card">
-        <span class="motivo-card-num">05</span>
-        <div class="motivo-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M21 12a9 9 0 1 1-6.2-8.56"/><path d="M12 3v6m0 6v6M3 12h6m6 0h6"/></svg></div>
-        <h3 class="motivo-card-title">Garantir rastreabilidade</h3>
-        <p class="motivo-card-text">Assegurar transparência e controle em toda a cadeia de fornecimento.</p>
-      </div>
-      <div class="motivo-card">
-        <span class="motivo-card-num">06</span>
-        <div class="motivo-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0Z"/><path d="M12 9v4M12 17h.01"/></svg></div>
-        <h3 class="motivo-card-title">Reduzir riscos operacionais</h3>
-        <p class="motivo-card-text">Evitar atrasos, não conformidades e problemas regulatórios.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-
-<!-- ══════════════ SECTION 4 — NÚMEROS (KPIs) ══════════════ -->
-<section class="section-numeros">
-  <div class="container">
-    <div class="numero-item">
-      <p class="numero-value" data-count="20" data-suffix="+">0</p>
-      <p class="numero-label">Anos de mercado no comércio exterior</p>
-    </div>
-    <div class="numero-item">
-      <p class="numero-value" data-count="15">0</p>
-      <p class="numero-label">Filiais no Brasil e 1 no Panamá</p>
-    </div>
-    <div class="numero-item">
-      <p class="numero-value" data-count="40" data-suffix="+">0</p>
-      <p class="numero-label">Países parceiros mapeados</p>
-    </div>
-    <div class="numero-item">
-      <p class="numero-value" data-count="98" data-suffix="%">0%</p>
-      <p class="numero-label">Índice de parametrização em canal verde</p>
-    </div>
-  </div>
-  <div class="numeros-deco" aria-hidden="true"></div>
-</section>
-
-
-<!-- ══════════════ SECTION — COMO A WM ATUA (8 etapas) ══════════════ -->
-<section class="lp-section bg-light" id="processo">
+<!-- ══════════════ DESAFIOS ══════════════ -->
+<section class="lp-section surface" id="desafios">
   <div class="container">
     <div class="lp-head">
-      <h2 class="motivo-title">A WM Trading cuida de <span class="text-primary">todo o processo</span></h2>
-      <p class="motivo-subtitle">Da identificação do fornecedor à entrega da operação concluída, conduzimos cada etapa com segurança, controle e expertise internacional.</p>
+      <span class="eyebrow">Desafios da importação</span>
+      <h2>Os principais desafios na <span class="text-primary">importação de carne suína</span></h2>
+      <p>Importar carne suína exige conhecimento técnico, fornecedores confiáveis e gestão eficiente para garantir qualidade, conformidade regulatória e segurança comercial.</p>
     </div>
-    <div class="lp-flow">
-      <div class="lp-step reveal"><div class="lp-step-num">1</div><h3>Identificação de fornecedores</h3><p>Mapeamento de fornecedores internacionais qualificados.</p></div>
-      <div class="lp-step reveal"><div class="lp-step-num">2</div><h3>Homologação e qualificação</h3><p>Validação de certificações, capacidade e padrões de qualidade.</p></div>
-      <div class="lp-step reveal"><div class="lp-step-num">3</div><h3>Negociação comercial</h3><p>Condições, volumes e termos com segurança comercial.</p></div>
-      <div class="lp-step reveal"><div class="lp-step-num">4</div><h3>Gestão documental</h3><p>Licenças, certificados sanitários e compliance regulatório.</p></div>
-      <div class="lp-step reveal"><div class="lp-step-num">5</div><h3>Planejamento logístico</h3><p>Rotas, modais e cadeia fria otimizados de ponta a ponta.</p></div>
-      <div class="lp-step reveal"><div class="lp-step-num">6</div><h3>Coordenação do embarque</h3><p>Acompanhamento de cargas, prazos e documentação de embarque.</p></div>
-      <div class="lp-step reveal"><div class="lp-step-num">7</div><h3>Acompanhamento da importação</h3><p>Monitoramento aduaneiro e status em tempo real.</p></div>
-      <div class="lp-step reveal"><div class="lp-step-num">8</div><h3>Entrega da operação concluída</h3><p>Mercadoria liberada, conforme e pronta para sua empresa.</p></div>
+    <div class="lp-grid c3">
+      <article class="lp-card reveal"><span class="num">01</span><div class="ico ico-badge"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg></div><h3>Encontrar fornecedores confiáveis</h3><p>Garantir parceiros internacionais com histórico comprovado e padrões de qualidade consistentes.</p></article>
+      <article class="lp-card reveal"><span class="num">02</span><div class="ico ico-badge"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"/><path d="m9 12 2 2 4-4"/></svg></div><h3>Cumprir exigências sanitárias</h3><p>Atender normas nacionais e internacionais relacionadas à importação de proteína animal.</p></article>
+      <article class="lp-card reveal"><span class="num">03</span><div class="ico ico-badge"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M9 13h6M9 17h6"/></svg></div><h3>Gerenciar documentação</h3><p>Controlar processos documentais complexos e exigidos pelas autoridades competentes.</p></article>
+      <article class="lp-card reveal"><span class="num">04</span><div class="ico ico-badge"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div><h3>Controlar custos logísticos</h3><p>Planejar operações de forma eficiente para reduzir custos e riscos.</p></article>
+      <article class="lp-card reveal"><span class="num">05</span><div class="ico ico-badge"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M21 12a9 9 0 1 1-6.2-8.56"/><path d="M12 3v6m0 6v6M3 12h6m6 0h6"/></svg></div><h3>Garantir rastreabilidade</h3><p>Assegurar transparência e controle em toda a cadeia de fornecimento.</p></article>
+      <article class="lp-card reveal"><span class="num">06</span><div class="ico ico-badge"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0Z"/><path d="M12 9v4M12 17h.01"/></svg></div><h3>Reduzir riscos operacionais</h3><p>Evitar atrasos, não conformidades e problemas regulatórios.</p></article>
     </div>
   </div>
 </section>
 
 
-<!-- ══════════════ SECTION — SOBRE O PRODUTO ══════════════ -->
-<section class="section-experiencia" id="produto" style="padding-top:var(--section-py)">
+<!-- ══════════════ PROCESSO ══════════════ -->
+<section class="lp-section surface-light" id="processo">
   <div class="container">
-    <div class="experiencia-media">
-      <div class="lp-product-visual reveal">
-        <div class="lp-product-pills">
-          <span class="lp-pill">Fresca</span>
-          <span class="lp-pill">Refrigerada</span>
-          <span class="lp-pill">Congelada</span>
-        </div>
-        <div class="lp-product-stat">
-          <div class="big">100<span>%</span></div>
-          <div class="cap">Conformidade sanitária e rastreabilidade em toda a cadeia de fornecimento</div>
-        </div>
-      </div>
+    <div class="lp-head">
+      <span class="eyebrow">Processo ponta a ponta</span>
+      <h2>A WM Trading cuida de <span class="text-primary">todo o processo</span></h2>
+      <p>Da identificação do fornecedor à entrega da operação concluída, conduzimos cada etapa com segurança, controle e expertise internacional.</p>
     </div>
-    <div class="experiencia-content reveal">
-      <h2 class="experiencia-label">Importação de carnes de animais<br>da espécie suína</h2>
-      <p class="experiencia-text">A importação de carnes de animais da espécie suína — frescas, refrigeradas ou congeladas — representa uma alternativa estratégica para empresas que buscam diversificar fornecedores, ampliar a competitividade e garantir abastecimento contínuo.</p>
-      <p class="experiencia-text">A WM Trading atua na identificação de fornecedores qualificados, negociação internacional e gestão completa do processo de importação, oferecendo suporte especializado em todas as etapas da operação.</p>
+    <div class="lp-steps">
+      <div class="lp-step reveal"><div class="sn">1</div><h3>Identificação de fornecedores</h3><p>Mapeamento de fornecedores internacionais qualificados.</p></div>
+      <div class="lp-step reveal"><div class="sn">2</div><h3>Homologação e qualificação</h3><p>Validação de certificações, capacidade e padrões de qualidade.</p></div>
+      <div class="lp-step reveal"><div class="sn">3</div><h3>Negociação comercial</h3><p>Condições, volumes e termos com segurança comercial.</p></div>
+      <div class="lp-step reveal"><div class="sn">4</div><h3>Gestão documental</h3><p>Licenças, certificados sanitários e compliance regulatório.</p></div>
+      <div class="lp-step reveal"><div class="sn">5</div><h3>Planejamento logístico</h3><p>Rotas, modais e cadeia fria otimizados de ponta a ponta.</p></div>
+      <div class="lp-step reveal"><div class="sn">6</div><h3>Coordenação do embarque</h3><p>Acompanhamento de cargas, prazos e documentação de embarque.</p></div>
+      <div class="lp-step reveal"><div class="sn">7</div><h3>Acompanhamento da importação</h3><p>Monitoramento aduaneiro e status em tempo real.</p></div>
+      <div class="lp-step reveal"><div class="sn">8</div><h3>Entrega da operação concluída</h3><p>Mercadoria liberada, conforme e pronta para sua empresa.</p></div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════ SOBRE O PRODUTO ══════════════ -->
+<section class="lp-section surface" id="produto">
+  <div class="container lp-split">
+    <div class="lp-media reveal">
+      <img src="assets/produto.jpg" alt="" aria-hidden="true" />
+      <div class="lp-pills"><span class="lp-pill">Fresca</span><span class="lp-pill">Refrigerada</span><span class="lp-pill">Congelada</span></div>
+      <div class="lp-stat"><div class="big">100<span>%</span></div><div class="cap">Conformidade sanitária e rastreabilidade em toda a cadeia de fornecimento</div></div>
+    </div>
+    <div class="lp-split-copy reveal">
+      <span class="eyebrow">Sobre o produto</span>
+      <h2>Importação de carnes de animais da espécie suína</h2>
+      <p>A importação de carnes de animais da espécie suína — frescas, refrigeradas ou congeladas — representa uma alternativa estratégica para empresas que buscam diversificar fornecedores, ampliar a competitividade e garantir abastecimento contínuo.</p>
+      <p>A WM Trading atua na identificação de fornecedores qualificados, negociação internacional e gestão completa do processo de importação, oferecendo suporte especializado em todas as etapas da operação.</p>
       <div class="lp-coldstrip">
         <div class="seg"><b>Fresca</b><span>Cadeia fria</span></div>
         <div class="seg"><b>Refrigerada</b><span>Temperatura controlada</span></div>
@@ -322,101 +268,95 @@
 </section>
 
 
-<!-- ══════════════ SECTION — BENEFÍCIOS ══════════════ -->
-<section class="section-motivo" id="beneficios" style="background:var(--color-bg-light)">
-  <div class="container">
-    <div class="motivo-header">
-      <h2 class="motivo-title">Por que importar com a <span class="text-primary">WM Trading?</span></h2>
-      <p class="motivo-subtitle">Uma parceria que transforma a complexidade da importação internacional em vantagem competitiva para o seu negócio.</p>
-    </div>
-    <hr class="motivo-divider" />
-    <div class="lp-cards cols-4">
-      <div class="motivo-card"><div class="motivo-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15 15 0 0 1 0 20 15 15 0 0 1 0-20Z"/></svg></div><h3 class="motivo-card-title">Rede global de fornecedores</h3><p class="motivo-card-text">Acesso a parceiros internacionais qualificados e confiáveis.</p></div>
-      <div class="motivo-card"><div class="motivo-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg></div><h3 class="motivo-card-title">Experiência internacional</h3><p class="motivo-card-text">Mais de duas décadas conduzindo operações globais.</p></div>
-      <div class="motivo-card"><div class="motivo-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 9h6v6H9z"/></svg></div><h3 class="motivo-card-title">Gestão completa da operação</h3><p class="motivo-card-text">Controle integral, do sourcing à entrega final.</p></div>
-      <div class="motivo-card"><div class="motivo-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"/></svg></div><h3 class="motivo-card-title">Maior segurança comercial</h3><p class="motivo-card-text">Mitigação de riscos em cada negociação e contrato.</p></div>
-      <div class="motivo-card"><div class="motivo-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M5 18H3a1 1 0 0 1-1-1V8a1 1 0 0 1 1-1h11a1 1 0 0 1 1 1v9h-4"/><path d="M14 9h4l3 4v4h-3"/><circle cx="7.5" cy="18.5" r="2.5"/><circle cx="17.5" cy="18.5" r="2.5"/></svg></div><h3 class="motivo-card-title">Eficiência logística</h3><p class="motivo-card-text">Rotas e modais otimizados com cadeia fria garantida.</p></div>
-      <div class="motivo-card"><div class="motivo-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4"/><circle cx="12" cy="12" r="3"/></svg></div><h3 class="motivo-card-title">Redução de riscos</h3><p class="motivo-card-text">Prevenção de atrasos, multas e não conformidades.</p></div>
-      <div class="motivo-card"><div class="motivo-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg></div><h3 class="motivo-card-title">Transparência total</h3><p class="motivo-card-text">Acompanhamento e visibilidade completa da operação.</p></div>
-      <div class="motivo-card"><div class="motivo-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div><h3 class="motivo-card-title">Atendimento consultivo</h3><p class="motivo-card-text">Especialistas dedicados ao seu negócio, de ponta a ponta.</p></div>
-    </div>
-  </div>
-</section>
-
-
-<!-- ══════════════ SECTION — MERCADOS INTERNACIONAIS (mapa do site) ══════════════ -->
-<section class="section-beneficios" id="mercados">
-  <div class="container">
-    <div class="beneficios-left">
-      <div class="beneficios-title-row">
-        <div class="beneficios-num-wrap"><div class="beneficios-num">+40</div></div>
-        <h2 class="beneficios-title">países parceiros<br>conectando sua empresa aos <span class="text-primary">mercados globais</span></h2>
-      </div>
-      <p class="beneficios-text">A WM Trading atua na conexão entre compradores e fornecedores internacionais, apoiando operações de importação de carne suína com foco em <strong>qualidade, conformidade e eficiência logística</strong>.</p>
-      <p class="beneficios-text">Com presença em <strong>15 filiais no Brasil e unidade no Panamá</strong>, estruturamos a nacionalização da sua carga aproveitando incentivos fiscais e otimizando toda a cadeia logística internacional.</p>
-    </div>
-    <div class="beneficios-map">
-      <iframe src="../mapa-brasil/mapa_colombia_panama.html" title="Presença WM Trading — Brasil e Panamá" loading="lazy"></iframe>
-    </div>
-  </div>
-</section>
-
-
-<!-- ══════════════ SECTION — DIFERENCIAIS ══════════════ -->
-<section class="section-motivo" id="diferenciais">
-  <div class="container">
-    <div class="motivo-header">
-      <h2 class="motivo-title">Por que escolher a <span class="text-primary">WM Trading</span></h2>
-      <p class="motivo-subtitle">A combinação de experiência, rede e conhecimento técnico que dá segurança a cada importação.</p>
-    </div>
-    <hr class="motivo-divider" />
-    <div class="lp-cards">
-      <div class="motivo-card"><div class="motivo-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></svg></div><h3 class="motivo-card-title">Experiência internacional</h3><p class="motivo-card-text">Mais de duas décadas atuando no comércio global.</p></div>
-      <div class="motivo-card"><div class="motivo-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><circle cx="12" cy="12" r="3"/><circle cx="4" cy="6" r="2"/><circle cx="20" cy="6" r="2"/><circle cx="4" cy="18" r="2"/><circle cx="20" cy="18" r="2"/></svg></div><h3 class="motivo-card-title">Rede estratégica</h3><p class="motivo-card-text">Relacionamento sólido com parceiros internacionais.</p></div>
-      <div class="motivo-card"><div class="motivo-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="m9 15 2 2 4-4"/></svg></div><h3 class="motivo-card-title">Conhecimento regulatório</h3><p class="motivo-card-text">Suporte especializado em compliance e exigências sanitárias.</p></div>
-      <div class="motivo-card"><div class="motivo-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M20 7h-9M14 17H5"/><circle cx="17" cy="17" r="3"/><circle cx="7" cy="7" r="3"/></svg></div><h3 class="motivo-card-title">Gestão ponta a ponta</h3><p class="motivo-card-text">Controle integral da operação de importação.</p></div>
-      <div class="motivo-card"><div class="motivo-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div><h3 class="motivo-card-title">Atendimento consultivo</h3><p class="motivo-card-text">Especialistas dedicados ao seu negócio.</p></div>
-      <div class="motivo-card"><div class="motivo-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg></div><h3 class="motivo-card-title">Transparência</h3><p class="motivo-card-text">Acompanhamento em todas as etapas.</p></div>
-    </div>
-  </div>
-</section>
-
-
-<!-- ══════════════ SECTION — PROVA SOCIAL ══════════════ -->
-<section class="lp-section bg-light" id="prova">
+<!-- ══════════════ BENEFÍCIOS ══════════════ -->
+<section class="lp-section surface-light" id="beneficios">
   <div class="container">
     <div class="lp-head">
-      <h2 class="motivo-title">Experiência que <span class="text-primary">gera confiança</span></h2>
-      <p class="motivo-subtitle">Resultados construídos ao longo de mais de 20 anos conectando empresas brasileiras aos melhores fornecedores internacionais.</p>
+      <span class="eyebrow">Vantagens estratégicas</span>
+      <h2>Por que importar com a <span class="text-primary">WM Trading?</span></h2>
+      <p>Uma parceria que transforma a complexidade da importação internacional em vantagem competitiva para o seu negócio.</p>
+    </div>
+    <div class="lp-grid c4">
+      <article class="lp-card reveal"><div class="ico ico-badge"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15 15 0 0 1 0 20 15 15 0 0 1 0-20Z"/></svg></div><h3>Rede global de fornecedores</h3><p>Acesso a parceiros internacionais qualificados e confiáveis.</p></article>
+      <article class="lp-card reveal"><div class="ico ico-badge"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/></svg></div><h3>Experiência internacional</h3><p>Mais de duas décadas conduzindo operações globais.</p></article>
+      <article class="lp-card reveal"><div class="ico ico-badge"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 9h6v6H9z"/></svg></div><h3>Gestão completa</h3><p>Controle integral da operação, do sourcing à entrega final.</p></article>
+      <article class="lp-card reveal"><div class="ico ico-badge"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"/></svg></div><h3>Segurança comercial</h3><p>Mitigação de riscos em cada negociação e contrato.</p></article>
+      <article class="lp-card reveal"><div class="ico ico-badge"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M5 18H3a1 1 0 0 1-1-1V8a1 1 0 0 1 1-1h11a1 1 0 0 1 1 1v9h-4"/><path d="M14 9h4l3 4v4h-3"/><circle cx="7.5" cy="18.5" r="2.5"/><circle cx="17.5" cy="18.5" r="2.5"/></svg></div><h3>Eficiência logística</h3><p>Rotas e modais otimizados com cadeia fria garantida.</p></article>
+      <article class="lp-card reveal"><div class="ico ico-badge"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4"/></svg></div><h3>Redução de riscos</h3><p>Prevenção de atrasos, multas e não conformidades.</p></article>
+      <article class="lp-card reveal"><div class="ico ico-badge"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg></div><h3>Transparência total</h3><p>Acompanhamento e visibilidade completa da operação.</p></article>
+      <article class="lp-card reveal"><div class="ico ico-badge"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div><h3>Atendimento consultivo</h3><p>Especialistas dedicados ao seu negócio, de ponta a ponta.</p></article>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════ MERCADOS (dark) ══════════════ -->
+<section class="lp-section lp-section--dark" id="mercados">
+  <div class="container">
+    <div class="lp-markets-grid">
+      <div class="lp-markets-copy reveal">
+        <span class="eyebrow">Mercados internacionais</span>
+        <h2>Conectando sua empresa aos <span class="text-primary">mercados globais</span></h2>
+        <p>A WM Trading atua na conexão entre compradores e fornecedores internacionais, apoiando operações de importação de carne suína com foco em <strong>qualidade, conformidade e eficiência logística</strong>.</p>
+        <p>Com presença em <strong>15 filiais no Brasil e unidade no Panamá</strong>, estruturamos a nacionalização da sua carga aproveitando incentivos fiscais e otimizando toda a cadeia logística internacional.</p>
+      </div>
+      <div class="lp-markets-visual reveal"><img src="assets/mercados.jpg" alt="Rotas internacionais de importação convergindo para o Brasil" /></div>
+    </div>
+    <div class="lp-market-stats">
+      <div class="lp-ms reveal"><div class="v" data-count="40" data-prefix="+">0</div><div class="l">Países parceiros mapeados</div></div>
+      <div class="lp-ms reveal"><div class="v" data-count="15">0</div><div class="l">Filiais estratégicas + Panamá</div></div>
+      <div class="lp-ms reveal"><div class="v" data-count="7">0</div><div class="l">Benefícios fiscais aplicáveis</div></div>
+      <div class="lp-ms reveal"><div class="v">24<span>/7</span></div><div class="l">Acompanhamento da operação</div></div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════ DIFERENCIAIS ══════════════ -->
+<section class="lp-section surface" id="diferenciais">
+  <div class="container">
+    <div class="lp-head">
+      <span class="eyebrow">Diferenciais WM Trading</span>
+      <h2>Por que escolher a <span class="text-primary">WM Trading</span></h2>
+      <p>A combinação de experiência, rede e conhecimento técnico que dá segurança a cada importação.</p>
+    </div>
+    <div class="lp-grid c3">
+      <article class="lp-card reveal"><div class="ico ico-badge"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></svg></div><h3>Experiência internacional</h3><p>Mais de duas décadas atuando no comércio global.</p></article>
+      <article class="lp-card reveal"><div class="ico ico-badge"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><circle cx="12" cy="12" r="3"/><circle cx="4" cy="6" r="2"/><circle cx="20" cy="6" r="2"/><circle cx="4" cy="18" r="2"/><circle cx="20" cy="18" r="2"/></svg></div><h3>Rede estratégica</h3><p>Relacionamento sólido com parceiros internacionais.</p></article>
+      <article class="lp-card reveal"><div class="ico ico-badge"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="m9 15 2 2 4-4"/></svg></div><h3>Conhecimento regulatório</h3><p>Suporte especializado em compliance e exigências sanitárias.</p></article>
+      <article class="lp-card reveal"><div class="ico ico-badge"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M20 7h-9M14 17H5"/><circle cx="17" cy="17" r="3"/><circle cx="7" cy="7" r="3"/></svg></div><h3>Gestão ponta a ponta</h3><p>Controle integral da operação de importação.</p></article>
+      <article class="lp-card reveal"><div class="ico ico-badge"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div><h3>Atendimento consultivo</h3><p>Especialistas dedicados ao seu negócio.</p></article>
+      <article class="lp-card reveal"><div class="ico ico-badge"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg></div><h3>Transparência</h3><p>Acompanhamento em todas as etapas.</p></article>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════ PROVA SOCIAL ══════════════ -->
+<section class="lp-section surface-light" id="prova">
+  <div class="container">
+    <div class="lp-head">
+      <span class="eyebrow">Prova social</span>
+      <h2>Experiência que <span class="text-primary">gera confiança</span></h2>
+      <p>Resultados construídos ao longo de mais de 20 anos conectando empresas brasileiras aos melhores fornecedores internacionais.</p>
     </div>
     <div class="lp-quotes">
-      <figure class="lp-quote reveal">
-        <div class="stars">★★★★★</div>
-        <p>"A WM Trading conduziu nossa importação de proteína com total transparência e cumprimento de prazos. Suporte regulatório impecável."</p>
-        <figcaption class="who"><span class="av">FR</span><span><b>Diretor de Suprimentos</b><span>Frigorífico · placeholder</span></span></figcaption>
-      </figure>
-      <figure class="lp-quote reveal">
-        <div class="stars">★★★★★</div>
-        <p>"Reduzimos riscos e custos logísticos com a gestão ponta a ponta da WM. Parceria estratégica que recomendo."</p>
-        <figcaption class="who"><span class="av">DI</span><span><b>Head de Compras</b><span>Distribuidora · placeholder</span></span></figcaption>
-      </figure>
-      <figure class="lp-quote reveal">
-        <div class="stars">★★★★★</div>
-        <p>"Acesso a fornecedores internacionais qualificados e acompanhamento em tempo real. Operação segura do início ao fim."</p>
-        <figcaption class="who"><span class="av">RS</span><span><b>Gerente de Importação</b><span>Rede supermercadista · placeholder</span></span></figcaption>
-      </figure>
+      <figure class="lp-quote reveal"><div class="stars">★★★★★</div><p>"A WM Trading conduziu nossa importação de proteína com total transparência e cumprimento de prazos. Suporte regulatório impecável."</p><figcaption class="who"><span class="av">FR</span><span><b>Diretor de Suprimentos</b><span>Frigorífico · placeholder</span></span></figcaption></figure>
+      <figure class="lp-quote reveal"><div class="stars">★★★★★</div><p>"Reduzimos riscos e custos logísticos com a gestão ponta a ponta da WM. Parceria estratégica que recomendo."</p><figcaption class="who"><span class="av">DI</span><span><b>Head de Compras</b><span>Distribuidora · placeholder</span></span></figcaption></figure>
+      <figure class="lp-quote reveal"><div class="stars">★★★★★</div><p>"Acesso a fornecedores internacionais qualificados e acompanhamento em tempo real. Operação segura do início ao fim."</p><figcaption class="who"><span class="av">RS</span><span><b>Gerente de Importação</b><span>Rede supermercadista · placeholder</span></span></figcaption></figure>
     </div>
-    <p class="lp-ph-note">Depoimentos exibidos como <code>placeholder</code> — substituir por cases e indicadores validados pela WM Trading.</p>
+    <p class="lp-ph-note">Depoimentos exibidos como <code>placeholder</code> — substituir por cases validados pela WM Trading.</p>
   </div>
 </section>
 
 
-<!-- ══════════════ SECTION — FAQ ══════════════ -->
-<section class="lp-section bg-white" id="faq">
+<!-- ══════════════ FAQ ══════════════ -->
+<section class="lp-section surface" id="faq">
   <div class="container">
     <div class="lp-head">
-      <h2 class="motivo-title">Perguntas <span class="text-primary">frequentes</span></h2>
-      <p class="motivo-subtitle">Respostas objetivas e técnicas sobre a importação de carne suína com a WM Trading.</p>
+      <span class="eyebrow">Perguntas frequentes</span>
+      <h2>Perguntas <span class="text-primary">frequentes</span></h2>
+      <p>Respostas objetivas e técnicas sobre a importação de carne suína com a WM Trading.</p>
     </div>
     <div class="lp-faq-grid">
       <div>
@@ -436,167 +376,114 @@
 </section>
 
 
-<!-- ══════════════ SECTION — CTA FINAL + FORMULÁRIO ══════════════ -->
-<section class="lp-cta-form" id="cotacao">
-  <div class="cta-deco" aria-hidden="true">
-    <svg width="100%" height="100%" viewBox="0 0 1920 304" preserveAspectRatio="xMidYMid slice">
-      <g fill="none" stroke="white" stroke-width="1.5" opacity="0.2">
-        <polyline points="0,260 48,200 96,260 144,200 192,260"/>
-        <polyline points="192,260 240,200 288,260 336,200 384,260"/>
-        <polyline points="384,260 432,200 480,260 528,200 576,260"/>
-        <polyline points="576,260 624,200 672,260 720,200 768,260"/>
-        <polyline points="768,260 816,200 864,260 912,200 960,260"/>
-        <polyline points="960,260 1008,200 1056,260 1104,200 1152,260"/>
-        <polyline points="1152,260 1200,200 1248,260 1296,200 1344,260"/>
-        <polyline points="1344,260 1392,200 1440,260 1488,200 1536,260"/>
-        <polyline points="1536,260 1584,200 1632,260 1680,200 1728,260"/>
-        <polyline points="1728,260 1776,200 1824,260 1872,200 1920,260"/>
-      </g>
-    </svg>
-  </div>
+<!-- ══════════════ CTA FINAL ══════════════ -->
+<section class="lp-cta">
+  <svg class="lp-cta-deco" width="100%" height="100%" viewBox="0 0 1920 160" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
+    <g fill="none" stroke="#fff" stroke-width="2">
+      <polyline points="0,140 48,90 96,140 144,90 192,140 240,90 288,140 336,90 384,140 432,90 480,140 528,90 576,140 624,90 672,140 720,90 768,140 816,90 864,140 912,90 960,140 1008,90 1056,140 1104,90 1152,140 1200,90 1248,140 1296,90 1344,140 1392,90 1440,140 1488,90 1536,140 1584,90 1632,140 1680,90 1728,140 1776,90 1824,140 1872,90 1920,140"/>
+    </g>
+  </svg>
   <div class="container">
-    <div class="lp-cta-grid">
-      <div class="lp-cta-copy">
-        <h2>Pronto para importar carne suína com mais segurança e eficiência?</h2>
-        <p>Conte com a experiência internacional da WM Trading para conectar sua empresa aos melhores fornecedores e conduzir todo o processo de importação com segurança, transparência e eficiência.</p>
-        <ul class="lp-cta-mini">
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6 9 17l-5-5"/></svg>Resposta de um especialista dedicado</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6 9 17l-5-5"/></svg>Análise personalizada da sua operação</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6 9 17l-5-5"/></svg>Sem compromisso · 100% consultivo</li>
-        </ul>
-      </div>
-
-      <div class="lp-form-card">
-        <form id="leadForm" novalidate>
-          <h3>Solicitar Cotação</h3>
-          <p class="lp-form-sub">Preencha os dados e nossa equipe entrará em contato.</p>
-          <div class="lp-fgrid">
-            <div class="lp-field"><label for="nome">Nome <span class="req">*</span></label><input id="nome" name="nome" type="text" required placeholder="Seu nome" /></div>
-            <div class="lp-field"><label for="empresa">Empresa <span class="req">*</span></label><input id="empresa" name="empresa" type="text" required placeholder="Razão social" /></div>
-            <div class="lp-field"><label for="cargo">Cargo <span class="req">*</span></label><input id="cargo" name="cargo" type="text" required placeholder="Seu cargo" /></div>
-            <div class="lp-field"><label for="email">E-mail <span class="req">*</span></label><input id="email" name="email" type="email" required placeholder="email@empresa.com" /></div>
-            <div class="lp-field"><label for="telefone">Telefone <span class="req">*</span></label><input id="telefone" name="telefone" type="tel" required placeholder="(00) 00000-0000" /></div>
-            <div class="lp-field"><label for="volume">Volume de interesse <span class="req">*</span></label>
-              <select id="volume" name="volume" required>
-                <option value="" disabled selected>Selecione</option>
-                <option>Até 1 contêiner / mês</option>
-                <option>2 a 5 contêineres / mês</option>
-                <option>6 a 20 contêineres / mês</option>
-                <option>Acima de 20 contêineres / mês</option>
-                <option>Ainda avaliando</option>
-              </select>
-            </div>
-            <div class="lp-field full"><label for="mensagem">Mensagem</label><textarea id="mensagem" name="mensagem" placeholder="Conte sobre sua necessidade de importação..."></textarea></div>
-          </div>
-          <button type="submit" class="btn btn-orange">Solicitar Cotação →</button>
-          <p class="lp-form-note"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>Seus dados estão seguros e não serão compartilhados.</p>
-        </form>
-        <div class="lp-form-success" id="formSuccess">
-          <div class="ok"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M20 6 9 17l-5-5"/></svg></div>
-          <h3>Solicitação enviada!</h3>
-          <p>Obrigado. Um especialista da WM Trading entrará em contato em breve para conduzir sua importação de carne suína.</p>
-        </div>
-      </div>
+    <h2>Pronto para importar carne suína com mais segurança e eficiência?</h2>
+    <p>Conte com a experiência internacional da WM Trading para conectar sua empresa aos melhores fornecedores e conduzir todo o processo de importação com segurança, transparência e eficiência.</p>
+    <div class="lp-cta-actions">
+      <a class="btn btn-white btn-lg" href="#lead">Solicitar Cotação →</a>
+      <a class="btn btn-ghost-light btn-lg" href="https://wa.me/552730229700" target="_blank" rel="noopener">Falar com um Especialista</a>
     </div>
   </div>
 </section>
 
 
-<!-- ══════════════ FOOTER (mesmo do site) ══════════════ -->
-<div class="footer-links">
+<!-- ══════════════ FOOTER ══════════════ -->
+<footer class="lp-footer">
   <div class="container">
-    <div class="footer-col">
-      <p class="footer-col-title">Soluções</p>
-      <ul>
-        <li><a href="#produto">Importação de Carne Suína</a></li>
-        <li><a href="#processo">Sourcing internacional</a></li>
-        <li><a href="#processo">Gestão documental</a></li>
-        <li><a href="#processo">Assessoria aduaneira</a></li>
-      </ul>
+    <div class="lp-foot-grid">
+      <div>
+        <img class="flogo" src="../images/logo/fechado_logo_wm_trading_ajustada_logo_slogan_colorido.png" alt="WM Trading — We Make it Better" style="filter:brightness(0) invert(1)" />
+        <p class="fabout">Desde 2004, referência em soluções tributárias, logísticas e aduaneiras para importação. Parceira estratégica na importação de carne suína fresca, refrigerada e congelada.</p>
+      </div>
+      <div>
+        <h4>Soluções</h4>
+        <ul>
+          <li><a href="#produto">Importação de Carne Suína</a></li>
+          <li><a href="#processo">Sourcing internacional</a></li>
+          <li><a href="#processo">Gestão documental</a></li>
+          <li><a href="#processo">Assessoria aduaneira</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Conteúdo</h4>
+        <ul>
+          <li><a href="#faq">Perguntas frequentes</a></li>
+          <li><a href="#desafios">Desafios da importação</a></li>
+          <li><a href="#mercados">Mercados internacionais</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contato</h4>
+        <ul class="lp-foot-contact">
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92Z"/></svg><a href="tel:+552730229700">+55 (27) 3022-9700</a></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 5L2 7"/></svg><a href="mailto:comercial@wmtrading.com.br">comercial@wmtrading.com.br</a></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>15 filiais no Brasil + Panamá</li>
+        </ul>
+      </div>
     </div>
-    <div class="footer-col">
-      <p class="footer-col-title">A WM</p>
-      <ul>
-        <li><a href="https://www.wmtrading.com.br/">Sobre nós</a></li>
-        <li><a href="https://www.wmtrading.com.br/">Compliance</a></li>
-        <li><a href="https://www.wmtrading.com.br/">Carreiras</a></li>
-      </ul>
-    </div>
-    <div class="footer-col">
-      <p class="footer-col-title">Conteúdos</p>
-      <ul>
-        <li><a href="#faq">Perguntas frequentes</a></li>
-        <li><a href="#desafios">Desafios da importação</a></li>
-        <li><a href="#mercados">Mercados internacionais</a></li>
-      </ul>
-    </div>
-    <div class="footer-col">
-      <p class="footer-col-title">Contato</p>
-      <ul>
-        <li><a href="tel:+552730229700">+55 (27) 3022-9700</a></li>
-        <li><a href="mailto:comercial@wmtrading.com.br">Fale conosco</a></li>
-        <li><a href="#mercados">Unidades</a></li>
-      </ul>
-    </div>
-    <div class="footer-cta-col">
-      <p class="footer-cta-text">Importação de<br>carne suína<br>começa aqui.</p>
-      <a href="#cotacao" class="btn btn-outline-orange">Solicitar Cotação →</a>
+    <div class="lp-foot-bottom">
+      <span>© 2026 WM Comercial Atacadista LTDA · CNPJ 06.194.675/0001-03 · Todos os direitos reservados.</span>
+      <div class="lp-foot-social">
+        <a href="#" aria-label="LinkedIn"><svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
+        <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></a>
+        <a href="#" aria-label="YouTube"><svg viewBox="0 0 24 24"><path d="M23.495 6.205a3.007 3.007 0 00-2.088-2.088c-1.87-.501-9.396-.501-9.396-.501s-7.507-.01-9.396.501A3.007 3.007 0 00.527 6.205a31.247 31.247 0 00-.522 5.805 31.247 31.247 0 00.522 5.783 3.007 3.007 0 002.088 2.088c1.868.502 9.396.502 9.396.502s7.506 0 9.396-.502a3.007 3.007 0 002.088-2.088 31.247 31.247 0 00.5-5.783 31.247 31.247 0 00-.5-5.805zM9.609 15.601V8.408l6.264 3.602z"/></svg></a>
+      </div>
     </div>
   </div>
-</div>
-
-<div class="footer-social">
-  <div class="container">
-    <div class="footer-brand">
-      <img src="../images/logo/fechado_logo_wm_trading_ajustada_logo_slogan_colorido.png" alt="WM Trading — We Make it Better" />
-    </div>
-    <div class="footer-icons">
-      <a href="#" class="footer-icon" aria-label="Instagram"><svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></a>
-      <a href="#" class="footer-icon" aria-label="YouTube"><svg viewBox="0 0 24 24"><path d="M23.495 6.205a3.007 3.007 0 00-2.088-2.088c-1.87-.501-9.396-.501-9.396-.501s-7.507-.01-9.396.501A3.007 3.007 0 00.527 6.205a31.247 31.247 0 00-.522 5.805 31.247 31.247 0 00.522 5.783 3.007 3.007 0 002.088 2.088c1.868.502 9.396.502 9.396.502s7.506 0 9.396-.502a3.007 3.007 0 002.088-2.088 31.247 31.247 0 00.5-5.783 31.247 31.247 0 00-.5-5.805zM9.609 15.601V8.408l6.264 3.602z"/></svg></a>
-      <a href="#" class="footer-icon" aria-label="LinkedIn"><svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
-      <a href="#" class="footer-icon" aria-label="Facebook"><svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></a>
-    </div>
-    <div class="footer-badges">
-      <img src="../images/assets/selo_portal_de_privacidade.png" alt="Selo Portal de Privacidade LGPD" class="footer-badge-img" />
-    </div>
-  </div>
-</div>
-
-<div class="footer-copy-bar">
-  <div class="container">
-    <p class="footer-copy-text">Copyright 2026 - WM Comercial Atacadista LTDA - 06.194.675/0001-03</p>
-    <div class="footer-privacy"><a href="https://www.wmtrading.com.br/">Políticas de Privacidade</a></div>
-  </div>
-</div>
+</footer>
 
 
-<!-- WhatsApp float + sticky CTA (CRO) -->
-<a class="lp-whatsapp" href="https://wa.me/552730229700" target="_blank" rel="noopener" aria-label="Falar no WhatsApp">
+<!-- Flutuantes CRO -->
+<a class="lp-whats" href="https://wa.me/552730229700" target="_blank" rel="noopener" aria-label="Falar no WhatsApp">
   <svg viewBox="0 0 24 24"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38a9.9 9.9 0 0 0 4.74 1.21h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2Zm0 18.13h-.01a8.2 8.2 0 0 1-4.18-1.15l-.3-.18-3.11.82.83-3.04-.2-.31a8.2 8.2 0 0 1-1.26-4.38c0-4.54 3.7-8.23 8.24-8.23 2.2 0 4.27.86 5.82 2.42a8.18 8.18 0 0 1 2.41 5.82c0 4.54-3.69 8.23-8.24 8.23Zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.13-.16.25-.64.81-.79.97-.14.17-.29.19-.54.06-.25-.12-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.01-.38.11-.51.11-.11.25-.29.37-.43.13-.15.17-.25.25-.42.08-.17.04-.31-.02-.43-.06-.12-.56-1.34-.76-1.84-.2-.48-.41-.42-.56-.42l-.48-.01c-.17 0-.43.06-.66.31-.23.25-.86.85-.86 2.07 0 1.22.89 2.4 1.01 2.56.12.17 1.75 2.67 4.23 3.74.59.26 1.05.41 1.41.52.59.19 1.13.16 1.56.1.48-.07 1.47-.6 1.67-1.18.21-.58.21-1.07.15-1.18-.06-.11-.22-.17-.47-.29Z"/></svg>
 </a>
 <div class="lp-sticky" id="stickyCta">
-  <div class="st-txt"><b>Importação de Carne Suína</b><span>Fale com um especialista WM Trading</span></div>
-  <a class="btn btn-orange" href="#cotacao">Solicitar Cotação</a>
+  <div class="st"><b>Importação de Carne Suína</b><span>Fale com um especialista WM Trading</span></div>
+  <a class="btn" href="#lead">Solicitar Cotação</a>
 </div>
 
-
-<!-- JS compartilhado do site (contador, hamburger, reveal, magic-card) -->
-<script src="../js/main.js"></script>
-<!-- JS específico da LP -->
 <script>
-/* Dispara animações de entrada (não há loader nesta LP) */
-document.body.classList.add('loaded');
+/* Header burger */
+const burger = document.getElementById('burger');
+const navLinks = document.getElementById('navLinks');
+burger.addEventListener('click', () => navLinks.classList.toggle('open'));
+navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navLinks.classList.remove('open')));
 
-/* Sticky CTA ao rolar */
+/* Sticky CTA */
 const sticky = document.getElementById('stickyCta');
-window.addEventListener('scroll', () => {
-  sticky.classList.toggle('show', window.scrollY > 800);
-}, { passive: true });
+window.addEventListener('scroll', () => sticky.classList.toggle('show', window.scrollY > 760), { passive: true });
+
+/* Reveal on scroll */
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('revealed'); io.unobserve(e.target); } });
+}, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+document.querySelectorAll('.reveal').forEach((el, i) => { el.style.setProperty('--reveal-delay', (i % 4 * 0.08) + 's'); io.observe(el); });
+
+/* Count-up */
+function countUp(el) {
+  const target = +el.dataset.count, suf = el.dataset.suffix || '', pre = el.dataset.prefix || '';
+  const dur = 1500, start = performance.now();
+  (function step(now) {
+    const p = Math.min((now - start) / dur, 1), eased = 1 - Math.pow(1 - p, 3);
+    el.textContent = pre + Math.floor(eased * target) + suf;
+    if (p < 1) requestAnimationFrame(step);
+  })(start);
+}
+const cio = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) { countUp(e.target); cio.unobserve(e.target); } });
+}, { threshold: 0.5 });
+document.querySelectorAll('[data-count]').forEach(el => cio.observe(el));
 
 /* FAQ accordion */
 document.querySelectorAll('.lp-faq-item').forEach(item => {
-  const q = item.querySelector('.lp-faq-q');
-  const a = item.querySelector('.lp-faq-a');
+  const q = item.querySelector('.lp-faq-q'), a = item.querySelector('.lp-faq-a');
   q.addEventListener('click', () => {
     const open = item.classList.contains('open');
     if (open) { item.classList.remove('open'); a.style.maxHeight = null; }
@@ -604,7 +491,7 @@ document.querySelectorAll('.lp-faq-item').forEach(item => {
   });
 });
 
-/* Máscara de telefone */
+/* Phone mask */
 const tel = document.getElementById('telefone');
 tel.addEventListener('input', e => {
   let v = e.target.value.replace(/\D/g, '').slice(0, 11);
@@ -615,7 +502,7 @@ tel.addEventListener('input', e => {
   e.target.value = v;
 });
 
-/* Envio do formulário (demo front-end) */
+/* Form submit (demo) */
 const form = document.getElementById('leadForm');
 form.addEventListener('submit', e => {
   e.preventDefault();

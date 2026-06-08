@@ -42,6 +42,21 @@ site-wm-trading/
 
 ---
 
+## Design System
+
+O design system está documentado em [`docs/`](docs/), separado em duas camadas:
+
+- **[Fundamentos da Marca](docs/01-fundamentos-da-marca.md)** — camada reutilizável
+  (fontes, logo, cores, tamanhos, bordas, sombras, botões). Arquivos:
+  `css/variables.css` (tokens) + `css/foundations.css` (primitivas).
+- **[Design de Landing Pages](docs/02-design-landing-pages.md)** — diretrizes de
+  layout/composição para LPs de campanha, que **herdam** os fundamentos mas têm
+  diagramação e imagens próprias (não replicam a home).
+
+> A home usa `css/main.css` + `css/responsive.css` (sua diagramação específica).
+> As LPs **não** importam esses arquivos — só os fundamentos + um `lp.css` próprio.
+> Exemplo: [`importacao-carne-suina/`](importacao-carne-suina/).
+
 ## Design Tokens
 
 ### Cores
