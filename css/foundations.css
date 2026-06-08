@@ -111,8 +111,10 @@ strong { font-weight: var(--fw-semibold); }
   box-shadow: 0 0 0 3px rgba(252,80,0,0.12);
 }
 
-/* ---------- REVEAL (entrada com blur) ---------- */
-.reveal {
+/* ---------- REVEAL (entrada com blur) ----------
+   À prova de falhas: o estado oculto só vale quando o JS está ativo
+   (html.js). Sem JS / se o script falhar, o conteúdo aparece normalmente. */
+html.js .reveal {
   opacity: 0;
   filter: blur(6px);
   transform: translateY(20px);
@@ -121,7 +123,7 @@ strong { font-weight: var(--fw-semibold); }
     filter 0.65s ease var(--reveal-delay, 0s),
     transform 0.65s ease var(--reveal-delay, 0s);
 }
-.reveal.revealed { opacity: 1; filter: blur(0); transform: none; }
+html.js .reveal.revealed { opacity: 1; filter: blur(0); transform: none; }
 
 /* ---------- UTILITÁRIOS ---------- */
 .eyebrow {
