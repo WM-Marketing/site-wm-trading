@@ -33,7 +33,19 @@
     </a>
 
     <nav class="header-nav">
-      <a href="#" data-i18n="nav.segments">Segmentos</a>
+      <div class="nav-dropdown">
+        <button class="nav-dropdown__trigger" aria-haspopup="true" aria-expanded="false">
+          <span data-i18n="nav.segments">Segmentos</span>
+          <svg width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="nav-dropdown__menu" role="menu">
+          <a href="segmentos-aeronaves.html" role="menuitem">✈ Aeronaves</a>
+          <a href="#" role="menuitem">🚗 Autopeças</a>
+          <a href="#" role="menuitem">⚙ Aço e Metais</a>
+          <a href="#" role="menuitem">☀ Energia Solar</a>
+          <a href="#" role="menuitem">🏭 Máquinas e Equipamentos</a>
+        </div>
+      </div>
       <a href="#" data-i18n="nav.solutions">Soluções</a>
       <a href="#" data-i18n="nav.content">Conteúdo</a>
       <a href="#" data-i18n="nav.about">Quem somos</a>

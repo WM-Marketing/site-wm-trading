@@ -66,6 +66,40 @@
   counters.forEach(el => observer.observe(el));
 })();
 
+// Nav Dropdown — keyboard + mobile tap support
+(function () {
+  document.querySelectorAll('.nav-dropdown').forEach(dropdown => {
+    const trigger = dropdown.querySelector('.nav-dropdown__trigger');
+    const menu    = dropdown.querySelector('.nav-dropdown__menu');
+    if (!trigger || !menu) return;
+
+    function openDropdown() {
+      trigger.classList.add('open');
+      menu.classList.add('open');
+      trigger.setAttribute('aria-expanded', 'true');
+    }
+    function closeDropdown() {
+      trigger.classList.remove('open');
+      menu.classList.remove('open');
+      trigger.setAttribute('aria-expanded', 'false');
+    }
+
+    // Toggle on click (for touch/mobile)
+    trigger.addEventListener('click', e => {
+      e.stopPropagation();
+      menu.classList.contains('open') ? closeDropdown() : openDropdown();
+    });
+
+    // Close when clicking outside
+    document.addEventListener('click', () => closeDropdown());
+
+    // Keyboard: Escape closes
+    trigger.addEventListener('keydown', e => {
+      if (e.key === 'Escape') closeDropdown();
+    });
+  });
+})();
+
 // Hamburger menu toggle
 (function () {
   const toggle = document.getElementById('menu-toggle');
