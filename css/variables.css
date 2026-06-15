@@ -40,6 +40,6 @@
   --radius-xl:   24px;
   --radius-full: 9999px;
 
-  --transition: 0.2s ease;
+  --transition: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
   --shadow-card: 0 2px 16px rgba(0,0,0,0.07);
 }

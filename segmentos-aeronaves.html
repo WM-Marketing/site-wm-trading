@@ -74,47 +74,591 @@
 ══════════════════════════════════════ -->
 <section class="aero-hero">
 
-  <!-- Decorativos de fundo -->
-  <div class="aero-deco aero-deco--lg-left"></div>
-  <div class="aero-deco aero-deco--sm-left"></div>
-  <div class="aero-deco aero-deco--lg-right"></div>
+  <!-- Wrapper centralizado: controla tamanho e responsividade ao zoom -->
+  <div class="aero-hero__inner">
 
-  <div class="container aero-hero__container">
-
-    <!-- Coluna esquerda: conteúdo -->
-    <div class="aero-hero__content">
-      <h1 class="aero-hero__title">
-        Importe o seu avião<br>
-        ou helicóptero com<br>
-        <span class="aero-hero__title-highlight">agilidade e segurança</span>
-      </h1>
-      <p class="aero-hero__text">
-        Entre em contato com a trading mais completa do Brasil para tornar esse sonho realidade. Clique no botão abaixo para falar com um dos nossos especialistas na importação de aeronaves!
-      </p>
-      <a href="#contato" class="aero-hero__cta">
-        <div class="aero-hero__cta-icon">
-          <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <rect x="1" y="1" width="26" height="26" rx="7" stroke="#FB5000" stroke-width="2"/>
-            <path d="M8 20L20 8M20 8H12M20 8V16" stroke="#FB5000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </div>
-        <span class="aero-hero__cta-text">Saber<br>mais</span>
-      </a>
+    <!-- Wrapper: centering + efeito 3D (mouse). A img cuida só da entrada -->
+    <div class="aero-hero__bg-wrap">
+      <img
+        src="images/assets/background_hero_aeronaves.svg"
+        alt=""
+        aria-hidden="true"
+        class="aero-hero__bg-img"
+      />
     </div>
 
-    <!-- Coluna direita: imagens -->
-    <div class="aero-hero__images">
-      <div class="aero-hero__img aero-hero__img--top">
-        <img src="images/assets/magnific_a-gulfstream-g650-private_2968669225.png" alt="Helicóptero em aeroporto" />
+    <!-- Conteúdo sobreposto à esquerda -->
+    <div class="aero-hero__overlay container">
+      <div class="aero-hero__content">
+        <h1 class="aero-hero__title">
+          Importe o seu avião<br>
+          ou helicóptero com<br>
+          <span class="aero-hero__title-highlight">agilidade e segurança</span>
+        </h1>
+        <p class="aero-hero__text">
+          Entre em contato com a trading mais completa do Brasil para tornar esse sonho realidade. Clique no botão abaixo para falar com um dos nossos especialistas na importação de aeronaves!
+        </p>
+        <a href="#contato" class="aero-hero__cta">
+          <img src="images/assets/icone_botao_saiba_mais.svg" alt="" class="aero-hero__cta-icon" />
+          <span class="aero-hero__cta-text">Saber<br>mais</span>
+        </a>
       </div>
-      <div class="aero-hero__img aero-hero__img--bottom">
-        <img src="images/assets/magnific_crie-uma-imagem-publicita_2974899082.png" alt="Peças e equipamentos aeronáuticos" />
+    </div>
+
+  </div>
+
+</section>
+
+
+
+<!-- ══════════════════════════════════════
+     SEÇÃO 2 — IMAGEM FULL-WIDTH (JET)
+══════════════════════════════════════ -->
+<section class="aero-jet">
+  <img
+    src="images/assets/magnific_private-jet-inspired-by-e_1sBIX1dr4r.jpg"
+    alt="Private Jet"
+    class="aero-jet__img"
+  />
+</section>
+
+
+<!-- ══════════════════════════════════════
+     SEÇÃO 3 — INTRO: título + texto + vídeo
+══════════════════════════════════════ -->
+<section class="aero-intro">
+  <div class="container">
+
+    <!-- Linha 1: título esquerda + texto direita -->
+    <div class="aero-intro__header reveal">
+      <div class="aero-intro__left">
+        <h2 class="aero-intro__title">
+          Importação<br>
+          de <span class="aero-intro__title-hl">Aeronaves</span>
+        </h2>
+        <a href="#solucoes" class="btn btn-primary aero-intro__btn">Nossas soluções →</a>
+      </div>
+      <div class="aero-intro__right">
+        <p class="aero-intro__text">
+          Com 21 anos de experiência no mercado de importações, somos especialistas em
+          planejamento tributário e logístico para otimizar as operações de nossos clientes.
+          Oferecemos ampla experiência na importação de aeronaves executivas, com
+          domínio total das leis e regulamentos aeronáuticos.
+        </p>
+      </div>
+    </div>
+
+    <!-- Linha 2: card de vídeo com borda laranja -->
+    <div class="aero-intro__video-wrap reveal">
+      <div class="aero-intro__video-card">
+        <img
+          src="images/assets/magnific_a-gulfstream-g650-private_2968669225.png"
+          alt="Aeronave executiva"
+          class="aero-intro__video-img"
+        />
+        <button class="aero-intro__play" aria-label="Reproduzir vídeo">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <polygon points="6,3 20,12 6,21" fill="#FB5000"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Linha 3: legenda centralizada -->
+    <p class="aero-intro__caption reveal">
+      A WM tem tempo recorde na liberação de aeronaves importadas e expertise em diferentes modelos executivas.
+    </p>
+
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════
+     SEÇÃO 4 — 6 PASSOS (CARROSSEL)
+══════════════════════════════════════ -->
+<section class="aero-steps">
+
+  <div class="container">
+    <h2 class="aero-steps__title reveal">
+      <span class="aero-steps__title-hl">6 passos</span> para importar sua aeronave
+    </h2>
+  </div>
+
+  <div class="aero-steps__stage">
+
+    <!-- Nav esquerda: acima-esquerda do card ativo -->
+    <button class="aero-steps__nav aero-steps__nav--prev" aria-label="Passo anterior">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+    </button>
+
+    <!-- Track: prev + active + next visíveis -->
+    <div class="aero-steps__track" id="stepsTrack">
+
+      <!-- PASSO 1 -->
+      <article class="aero-steps__card" data-index="0">
+        <div class="aero-steps__card-img">
+          <img src="images/assets/magnific_private-jet-inspired-by-e_Xt63d6LBfo.png" alt="Seleção da Aeronave" />
+          <div class="aero-steps__card-overlay">
+            <p class="aero-steps__overlay-title">1. Seleção da Aeronave</p>
+          </div>
+        </div>
+        <div class="aero-steps__card-body">
+          <h3 class="aero-steps__step-title">1. Seleção da Aeronave</h3>
+          <div class="aero-steps__step-line"></div>
+          <p class="aero-steps__step-text">Na primeira etapa a LOI é elaborada, a Carta de Intenção de compra da aeronave. Também é necessário realizar a abertura da conta Escrow e o depósito do sinal da aeronave.</p>
+          <span class="aero-steps__step-num" aria-hidden="true">1</span>
+        </div>
+      </article>
+
+      <!-- PASSO 2 -->
+      <article class="aero-steps__card" data-index="1">
+        <div class="aero-steps__card-img">
+          <img src="images/assets/phenom-300e-4.jpg" alt="Assinatura do APA" />
+          <div class="aero-steps__card-overlay">
+            <p class="aero-steps__overlay-title">2. Assinatura do APA e Início da PPI</p>
+          </div>
+        </div>
+        <div class="aero-steps__card-body">
+          <h3 class="aero-steps__step-title">2. Assinatura do APA e Início da PPI</h3>
+          <div class="aero-steps__step-line"></div>
+          <p class="aero-steps__step-text">O contrato de compra e venda (APA) é assinado entre WM e vendedor. Após isso se inicia a inspeção pré compra (PPI), o vôo de teste e a abertura da Trust para intermediar a compra internacional.</p>
+          <span class="aero-steps__step-num" aria-hidden="true">2</span>
+        </div>
+      </article>
+
+      <!-- PASSO 3 -->
+      <article class="aero-steps__card" data-index="2">
+        <div class="aero-steps__card-img">
+          <img src="images/assets/magnific_a-gulfstream-g650-private_2968669225.png" alt="Finalização da PPI e Closing" />
+          <div class="aero-steps__card-overlay">
+            <p class="aero-steps__overlay-title">3. Finalização da PPI e Closing</p>
+          </div>
+        </div>
+        <div class="aero-steps__card-body">
+          <h3 class="aero-steps__step-title">3. Finalização da PPI e Closing</h3>
+          <div class="aero-steps__step-line"></div>
+          <p class="aero-steps__step-text">Após a PPI, relatório técnico da inspeção é elaborado. Com a aceitação da aeronave, o valor restante é depositado na conta Escrow e o pagamento ao vendedor é realizado, transferindo a propriedade.</p>
+          <span class="aero-steps__step-num" aria-hidden="true">3</span>
+        </div>
+      </article>
+
+      <!-- PASSO 4 -->
+      <article class="aero-steps__card" data-index="3">
+        <div class="aero-steps__card-img">
+          <img src="images/assets/p600e_exterior-2.jpg" alt="Checklist e Exportação" />
+          <div class="aero-steps__card-overlay">
+            <p class="aero-steps__overlay-title">4. Checklist da Documentação e Exportação</p>
+          </div>
+        </div>
+        <div class="aero-steps__card-body">
+          <h3 class="aero-steps__step-title">4. Checklist da Documentação e Exportação</h3>
+          <div class="aero-steps__step-line"></div>
+          <p class="aero-steps__step-text">Ocorre o processo de exportação e desregistro no país de origem. São contratados o piloto e os seguros. Os documentos de importação são emitidos, define-se a rota e emite-se a autorização de voo para o Brasil.</p>
+          <span class="aero-steps__step-num" aria-hidden="true">4</span>
+        </div>
+      </article>
+
+      <!-- PASSO 5 -->
+      <article class="aero-steps__card" data-index="4">
+        <div class="aero-steps__card-img">
+          <img src="images/assets/magnific_private-jet-inspired-by-e_1sBIX1dr4r.jpg" alt="Chegada da Aeronave" />
+          <div class="aero-steps__card-overlay">
+            <p class="aero-steps__overlay-title">5. Chegada da Aeronave</p>
+          </div>
+        </div>
+        <div class="aero-steps__card-body">
+          <h3 class="aero-steps__step-title">5. Chegada da Aeronave</h3>
+          <div class="aero-steps__step-line"></div>
+          <p class="aero-steps__step-text">Após o primeiro pouso, a AVANAC é validada pela Aduana. Realiza-se o registro da Declaração de Importação, pagamento dos impostos de nacionalização. A aeronave é parametrizada, desembaraçada e faturada como bem nacional.</p>
+          <span class="aero-steps__step-num" aria-hidden="true">5</span>
+        </div>
+      </article>
+
+      <!-- PASSO 6 -->
+      <article class="aero-steps__card" data-index="5">
+        <div class="aero-steps__card-img">
+          <img src="images/assets/Helicoptero_wm.png" alt="Direcionamento à VTI e Entrega" />
+          <div class="aero-steps__card-overlay">
+            <p class="aero-steps__overlay-title">6. Direcionamento à VTI e Entrega ao Cliente</p>
+          </div>
+        </div>
+        <div class="aero-steps__card-body">
+          <h3 class="aero-steps__step-title">6. Direcionamento à VTI e Entrega ao Cliente</h3>
+          <div class="aero-steps__step-line"></div>
+          <p class="aero-steps__step-text">A aeronave é direcionada para a Vistoria Técnica Inicial na oficina elegida. Assim que finalizada, é entregue ao cliente, com o endosso do seguro e emissão do CA e CM.</p>
+          <span class="aero-steps__step-num" aria-hidden="true">6</span>
+        </div>
+      </article>
+
+    </div><!-- /.aero-steps__track -->
+
+    <!-- Nav direita: abaixo-direita do card ativo -->
+    <button class="aero-steps__nav aero-steps__nav--next" aria-label="Próximo passo">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+    </button>
+
+  </div><!-- /.aero-steps__stage -->
+
+  <!-- Decoração WM repetida no rodapé da seção -->
+  <div class="numeros-deco" aria-hidden="true"></div>
+
+</section>
+
+
+<!-- ══════════════════════════════════════
+     SEÇÃO 5 — E-BOOK CTA
+══════════════════════════════════════ -->
+<section class="aero-ebook">
+
+    <!-- Faixa laranja de ponta a ponta -->
+    <div class="aero-ebook__banner">
+      <div class="aero-ebook__banner-inner container">
+
+      <!-- Capa do e-book: sai pelo topo via transform -->
+      <div class="aero-ebook__cover-wrap">
+        <img
+          src="images/assets/ebook-importacao-aeronaves-mockup-wm.webp"
+          alt="E-book: Importação de Aeronaves — Guia completo"
+          class="aero-ebook__cover"
+          loading="lazy"
+        >
+      </div>
+
+      <!-- Conteúdo textual -->
+      <div class="aero-ebook__text">
+        <span class="aero-ebook__label">E-BOOK</span>
+        <h2 class="aero-ebook__title">
+          Importação de aeronaves:<br>
+          Guia para importação de<br>
+          aviões e helicópteros
+        </h2>
+      </div>
+
+      <!-- Botão -->
+      <a href="#" class="aero-ebook__btn">
+        Baixar e-book grátis
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+      </a>
+
+      </div><!-- /.aero-ebook__banner-inner -->
+    </div><!-- /.aero-ebook__banner -->
+</section>
+
+
+<!-- ══════════════════════════════════════
+     SEÇÃO 6 — DIFERENCIAIS DA WM
+══════════════════════════════════════ -->
+<section class="aero-diff">
+  <div class="container">
+
+    <!-- Título -->
+    <h2 class="aero-diff__title">
+      <span class="aero-diff__title-hl">Diferenciais da WM</span> na importação de aeronaves
+    </h2>
+
+    <!-- Cards -->
+    <div class="aero-diff__cards">
+
+      <div class="aero-diff__card aero-diff__card--outer">
+        <span class="aero-diff__num">01</span>
+        <p class="aero-diff__text">Experiência na importação de aeronaves</p>
+      </div>
+
+      <div class="aero-diff__card aero-diff__card--mid">
+        <span class="aero-diff__num">02</span>
+        <p class="aero-diff__text">Domínio das leis e regulamentos aeronáuticos</p>
+      </div>
+
+      <div class="aero-diff__card aero-diff__card--featured">
+        <span class="aero-diff__num">03</span>
+        <p class="aero-diff__text">Possuímos o Ato COTEPE/ICMS 32/19 (permite a importação de aeronaves e garante a redução da alíquota de ICMS)</p>
+      </div>
+
+      <div class="aero-diff__card aero-diff__card--mid">
+        <span class="aero-diff__num">04</span>
+        <p class="aero-diff__text">Contrato com os principais bancos nas operações de leasing aeronáutico</p>
+      </div>
+
+      <div class="aero-diff__card aero-diff__card--outer">
+        <span class="aero-diff__num">05</span>
+        <p class="aero-diff__text">Somos associados à AERA, a Associação de Empresas Revendedoras de Aeronaves</p>
+      </div>
+
+    </div><!-- /.aero-diff__cards -->
+
+    <!-- Swoosh / trajetória — elemento avião -->
+    <div class="aero-diff__swoosh" aria-hidden="true">
+      <img src="images/assets/elemento_avião.svg" alt="" class="aero-diff__swoosh-img">
+    </div>
+
+    <!-- Rodapé: estatística + AERA -->
+    <div class="aero-diff__footer">
+      <div class="aero-diff__stat">
+        <span class="aero-diff__stat-num">100%</span>
+        <span class="aero-diff__stat-label">das operações com<br>canal verde em 2024</span>
+      </div>
+      <div class="aero-diff__divider"></div>
+      <div class="aero-diff__aera">
+        <img src="images/assets/logo aera.png" alt="AERA — Associação de Empresas Revendedoras de Aeronaves" class="aero-diff__aera-logo">
+      </div>
+    </div>
+
+  </div><!-- /.container -->
+</section>
+
+
+<!-- ══════════════════════════════════════
+     SEÇÃO 7 — BENTO GRID
+══════════════════════════════════════ -->
+<section class="aero-bento">
+  <div class="aero-bento__grid">
+    <!-- Linha 1 -->
+    <div class="aero-bento__cell aero-bento__cell--1">1</div>
+    <div class="aero-bento__cell aero-bento__cell--2">2</div>
+    <div class="aero-bento__cell aero-bento__cell--3">3</div>
+    <div class="aero-bento__cell aero-bento__cell--4">4</div>
+    <div class="aero-bento__cell aero-bento__cell--5">5</div>
+    <div class="aero-bento__cell aero-bento__cell--6">6</div>
+    <div class="aero-bento__cell aero-bento__cell--7">7</div>
+    <!-- Linha 2 -->
+    <div class="aero-bento__cell aero-bento__cell--8">8</div>
+    <div class="aero-bento__cell aero-bento__cell--9">9</div>
+    <div class="aero-bento__cell aero-bento__cell--10">10</div>
+    <div class="aero-bento__cell aero-bento__cell--11">11</div>
+    <div class="aero-bento__cell aero-bento__cell--12">12</div>
+    <!-- Linha 3 -->
+    <div class="aero-bento__cell aero-bento__cell--13">13</div>
+    <div class="aero-bento__cell aero-bento__cell--14">14</div>
+    <div class="aero-bento__cell aero-bento__cell--15">15</div>
+    <div class="aero-bento__cell aero-bento__cell--16">16</div>
+    <div class="aero-bento__cell aero-bento__cell--17">17</div>
+    <!-- Linha 4 -->
+    <div class="aero-bento__cell aero-bento__cell--18">18</div>
+    <div class="aero-bento__cell aero-bento__cell--19">19</div>
+    <div class="aero-bento__cell aero-bento__cell--20">20</div>
+    <div class="aero-bento__cell aero-bento__cell--21">21</div>
+    <!-- Linha 5 -->
+    <div class="aero-bento__cell aero-bento__cell--22">22</div>
+    <div class="aero-bento__cell aero-bento__cell--23">23</div>
+    <div class="aero-bento__cell aero-bento__cell--24">24</div>
+    <div class="aero-bento__cell aero-bento__cell--25">25</div>
+    <!-- Linha 6 -->
+    <div class="aero-bento__cell aero-bento__cell--26">26</div>
+    <div class="aero-bento__cell aero-bento__cell--27">27</div>
+    <div class="aero-bento__cell aero-bento__cell--28">
+      <div class="aero-bento28__inner">
+        <h2 class="aero-bento28__title">Presença nas principais <span class="aero-bento28__hl">feiras e eventos</span> do segmento</h2>
+        <p class="aero-bento28__sub">Expertise em diferentes modelos de aeronaves</p>
+        <div class="aero-bento28__tags">
+          <span class="aero-bento28__tag">M600</span>
+          <span class="aero-bento28__tag">King Air C90 B</span>
+          <span class="aero-bento28__tag">M500</span>
+          <span class="aero-bento28__tag">Jetprop</span>
+          <span class="aero-bento28__tag">King Air C90 A</span>
+          <span class="aero-bento28__tag">Cheyenne</span>
+          <span class="aero-bento28__tag">King Air F90</span>
+          <span class="aero-bento28__tag">Pilatus PC 24</span>
+          <span class="aero-bento28__tag">King Air B200</span>
+          <span class="aero-bento28__tag">Falcon 7X</span>
+        </div>
+      </div>
+    </div>
+    <div class="aero-bento__cell aero-bento__cell--31">31</div>
+    <div class="aero-bento__cell aero-bento__cell--32">
+      <div class="bento-giro bento-giro--32">
+        <div class="bento-giro__face bento-giro__front"></div>
+        <div class="bento-giro__face bento-giro__back"></div>
+      </div>
+    </div>
+    <div class="aero-bento__cell aero-bento__cell--34">
+      <div class="bento-giro bento-giro--34">
+        <div class="bento-giro__face bento-giro__front"></div>
+        <div class="bento-giro__face bento-giro__back"></div>
+      </div>
+    </div>
+    <div class="aero-bento__cell aero-bento__cell--35">35</div>
+    <div class="aero-bento__cell aero-bento__cell--36">36</div>
+    <div class="aero-bento__cell aero-bento__cell--37">37</div>
+    <div class="aero-bento__cell aero-bento__cell--38">38</div>
+    <div class="aero-bento__cell aero-bento__cell--39">39</div>
+    <div class="aero-bento__cell aero-bento__cell--43">
+      <div class="bento-giro bento-giro--43">
+        <div class="bento-giro__face bento-giro__front"></div>
+        <div class="bento-giro__face bento-giro__back"></div>
+      </div>
+    </div>
+    <div class="aero-bento__cell aero-bento__cell--46">46</div>
+    <div class="aero-bento__cell aero-bento__cell--47">47</div>
+    <div class="aero-bento__cell aero-bento__cell--48">48</div>
+    <div class="aero-bento__cell aero-bento__cell--49">49</div>
+    <div class="aero-bento__cell aero-bento__cell--50">50</div>
+    <div class="aero-bento__cell aero-bento__cell--51">51</div>
+    <div class="aero-bento__cell aero-bento__cell--55">
+      <div class="aero-bento55__inner">
+        <p class="aero-bento55__text"><strong class="aero-bento55__label">FEIRA:</strong> Catarina Aviation Show</p>
+      </div>
+    </div>
+    <div class="aero-bento__cell aero-bento__cell--57">
+      <div class="bento-giro bento-giro--57">
+        <div class="bento-giro__face bento-giro__front"></div>
+        <div class="bento-giro__face bento-giro__back"></div>
+      </div>
+    </div>
+    <div class="aero-bento__cell aero-bento__cell--58">58</div>
+    <div class="aero-bento__cell aero-bento__cell--60">60</div>
+    <div class="aero-bento__cell aero-bento__cell--61">61</div>
+    <div class="aero-bento__cell aero-bento__cell--62">62</div>
+    <div class="aero-bento__cell aero-bento__cell--63">63</div>
+    <div class="aero-bento__cell aero-bento__cell--64">64</div>
+    <div class="aero-bento__cell aero-bento__cell--65">65</div>
+    <div class="aero-bento__cell aero-bento__cell--66">66</div>
+    <div class="aero-bento__cell aero-bento__cell--67">67</div>
+    <div class="aero-bento__cell aero-bento__cell--68">68</div>
+    <div class="aero-bento__cell aero-bento__cell--69">69</div>
+    <div class="aero-bento__cell aero-bento__cell--72">72</div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════
+     SEÇÃO 8 — BENTO GRID 2 (mapa em branco)
+══════════════════════════════════════ -->
+<section class="aero-bento2">
+  <div class="aero-bento2__grid">
+    <div class="aero-bento2__cell aero-bento2__cell--1">1</div>
+    <div class="aero-bento2__cell aero-bento2__cell--2">2</div>
+    <div class="aero-bento2__cell aero-bento2__cell--3">3</div>
+    <div class="aero-bento2__cell aero-bento2__cell--4">
+      <div class="aero-bento2-4__inner">
+        <h2 class="aero-bento2-4__title"><span class="aero-bento2-4__hl">Vantagens</span> de importar com a WM Trading</h2>
+        <p class="aero-bento2-4__sub">O mercado de aeronaves executivas cresce cada vez mais no Brasil, e importar traz diversas vantagens.</p>
+      </div>
+    </div>
+    <div class="aero-bento2__cell aero-bento2__cell--7">
+      <div class="aero-bento2-7__inner">
+        <div class="aero-bento2-7__item">
+          <img class="aero-bento2-7__icon" src="images/icons/condicoes_de_uso.svg" alt="">
+          <div class="aero-bento2-7__text">
+            <h3 class="aero-bento2-7__title">Condições de uso</h3>
+            <p class="aero-bento2-7__desc">É possível encontrar uma grande variedade de aeronaves seminovas com poucas horas de voo e em excelente estado.</p>
+          </div>
+        </div>
+        <div class="aero-bento2-7__divider"></div>
+        <div class="aero-bento2-7__item">
+          <img class="aero-bento2-7__icon" src="images/icons/reducao_de_custos.svg" alt="">
+          <div class="aero-bento2-7__text">
+            <h3 class="aero-bento2-7__title">Redução de Custos</h3>
+            <p class="aero-bento2-7__desc">No total, a economia pode chegar a 30% sobre o valor de uma aeronave semelhante que já esteja no Brasil.</p>
+          </div>
+        </div>
+        <div class="aero-bento2-7__divider"></div>
+        <div class="aero-bento2-7__item">
+          <img class="aero-bento2-7__icon" src="images/icons/oferta_no_mercado.svg" alt="">
+          <div class="aero-bento2-7__text">
+            <h3 class="aero-bento2-7__title">Oferta no mercado</h3>
+            <p class="aero-bento2-7__desc">Enquanto no mercado nacional as opções seguem limitadas, no mercado global sobram oportunidades.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="aero-bento2__cell aero-bento2__cell--10">10</div>
+    <div class="aero-bento2__cell aero-bento2__cell--11">11</div>
+    <div class="aero-bento2__cell aero-bento2__cell--12">12</div>
+    <div class="aero-bento2__cell aero-bento2__cell--13">13</div>
+    <div class="aero-bento2__cell aero-bento2__cell--14">14</div>
+    <div class="aero-bento2__cell aero-bento2__cell--15">15</div>
+    <div class="aero-bento2__cell aero-bento2__cell--22">22</div>
+    <div class="aero-bento2__cell aero-bento2__cell--23">23</div>
+    <div class="aero-bento2__cell aero-bento2__cell--24">24</div>
+    <div class="aero-bento2__cell aero-bento2__cell--25">25</div>
+    <div class="aero-bento2__cell aero-bento2__cell--26">26</div>
+    <div class="aero-bento2__cell aero-bento2__cell--27">27</div>
+    <div class="aero-bento2__cell aero-bento2__cell--34">34</div>
+    <div class="aero-bento2__cell aero-bento2__cell--35">35</div>
+    <div class="aero-bento2__cell aero-bento2__cell--36">36</div>
+    <div class="aero-bento2__cell aero-bento2__cell--37">37</div>
+    <div class="aero-bento2__cell aero-bento2__cell--38">38</div>
+    <div class="aero-bento2__cell aero-bento2__cell--39">39</div>
+    <div class="aero-bento2__cell aero-bento2__cell--46">46</div>
+    <div class="aero-bento2__cell aero-bento2__cell--47">47</div>
+    <div class="aero-bento2__cell aero-bento2__cell--48">48</div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════
+     SEÇÃO 9 — CTA + FORMULÁRIO
+══════════════════════════════════════ -->
+<section class="aero-cta" id="contato">
+  <div class="aero-cta__bg-pattern" aria-hidden="true"></div>
+  <div class="aero-cta__container">
+
+    <!-- Lado esquerdo -->
+    <div class="aero-cta__left">
+      <img class="aero-cta__icon" src="images/icons/jet.svg" alt="">
+      <h2 class="aero-cta__title">Importe seu avião ou helicóptero com <span class="aero-cta__hl">agilidade e segurança</span></h2>
+      <p class="aero-cta__text">A importação de jatos, helicópteros e turboélices é uma grande oportunidade no Brasil. Conte com especialistas para cuidar de todo o processo com agilidade, segurança e suporte completo.</p>
+      <p class="aero-cta__cta-label">Fale com um especialista e tire suas dúvidas.</p>
+      <div class="aero-cta__actions">
+        <a href="https://wa.me/5527302297000" class="btn btn-dark aero-cta__btn--whatsapp" target="_blank" rel="noopener">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          WhatsApp
+        </a>
+        <a href="tel:+552730229700" class="btn btn-outline-white aero-cta__btn--phone">(27) 3022-9700</a>
+      </div>
+    </div>
+
+    <!-- Lado direito — formulário placeholder -->
+    <div class="aero-cta__right">
+      <div class="aero-cta__form-card">
+        <div class="aero-cta__form-row aero-cta__form-row--full">
+          <label class="aero-cta__label">Nome</label>
+          <input class="aero-cta__input" type="text" placeholder="">
+        </div>
+        <div class="aero-cta__form-row aero-cta__form-row--half">
+          <div>
+            <label class="aero-cta__label">E-mail</label>
+            <input class="aero-cta__input" type="email" placeholder="">
+          </div>
+          <div>
+            <label class="aero-cta__label">Número de Telefone</label>
+            <input class="aero-cta__input" type="tel" placeholder="">
+          </div>
+        </div>
+        <div class="aero-cta__form-row aero-cta__form-row--thirds">
+          <div>
+            <label class="aero-cta__label">Empresa</label>
+            <input class="aero-cta__input" type="text" placeholder="">
+          </div>
+          <div>
+            <label class="aero-cta__label">Estado</label>
+            <input class="aero-cta__input" type="text" placeholder="">
+          </div>
+          <div>
+            <label class="aero-cta__label">Segmento</label>
+            <input class="aero-cta__input" type="text" placeholder="">
+          </div>
+        </div>
+        <div class="aero-cta__form-row aero-cta__form-row--full">
+          <label class="aero-cta__label">Como deseja ser respondido?</label>
+          <input class="aero-cta__input" type="text" placeholder="">
+        </div>
+        <div class="aero-cta__form-row aero-cta__form-row--full">
+          <label class="aero-cta__label">Mensagem</label>
+          <input class="aero-cta__input" type="text" placeholder="">
+        </div>
+        <div class="aero-cta__form-row aero-cta__form-row--full">
+          <label class="aero-cta__checkbox-label">
+            <input type="checkbox" class="aero-cta__checkbox">
+            <span>Estou de acordo com a política de privacidade</span>
+          </label>
+        </div>
+        <button class="aero-cta__submit btn btn-dark">ENVIAR</button>
       </div>
     </div>
 
   </div>
 </section>
-
 
 
 <!-- ══════════════════════════════════════
@@ -220,7 +764,133 @@
 </div>
 
 
+<!-- ══════════════════════════════════════
+     MODAL — Vídeo YouTube
+══════════════════════════════════════ -->
+<div id="aero-video-modal" class="aero-video-modal" role="dialog" aria-modal="true" aria-label="Vídeo institucional" hidden>
+  <div class="aero-video-modal__backdrop"></div>
+  <div class="aero-video-modal__inner">
+    <button class="aero-video-modal__close" aria-label="Fechar vídeo">
+      <svg viewBox="0 0 24 24" fill="none">
+        <path d="M18 6L6 18M6 6l12 12" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+      </svg>
+    </button>
+    <div class="aero-video-modal__frame" id="aero-video-frame"></div>
+  </div>
+</div>
+
 <script src="js/main.js"></script>
+<script src="js/aeronaves.js"></script>
 <script src="js/i18n.js" defer></script>
+
+<!-- ── Carrossel de giro Y ── -->
+<script>
+(function () {
+  const INTERVAL = 5000;  // ms entre cada giro
+  const LONGEST  = 1050;  // ms após o giro mais longo (0.95s + margem)
+
+  const BLOCKS = [
+    {
+      selector: '.aero-bento__cell--32',
+      catarina: 'images/assets/Feira%20Catarina%20Aviation%20Show/Amanda5013.png',
+      labace:   'images/assets/Feira%20LABACE/Wendy.jpg',
+    },
+    {
+      selector: '.aero-bento__cell--34',
+      catarina: 'images/assets/Feira%20Catarina%20Aviation%20Show/magnific_posproducao-nivel-agencia_YVlwUVYWeC.png',
+      labace:   'images/assets/Feira%20LABACE/hero-bg.jpg',
+    },
+    {
+      selector: '.aero-bento__cell--43',
+      catarina: 'images/assets/Feira%20Catarina%20Aviation%20Show/DJI_20260522_163602_566.JPG',
+      labace:   'images/assets/Feira%20LABACE/phenom-300e-3.jpg',
+    },
+    {
+      selector: '.aero-bento__cell--57',
+      catarina: 'images/assets/Feira%20Catarina%20Aviation%20Show/DJI_20260522_171418_127.JPG',
+      labace:   'images/assets/Feira%20LABACE/p600e_exterior-2.jpg',
+    },
+  ];
+
+  let frontState = 'catarina'; // estado exibido atualmente na face frontal
+
+  function bgUrl(path) { return "url('" + path + "')"; }
+
+  function setFace(el, state, b) {
+    el.style.backgroundImage = bgUrl(state === 'catarina' ? b.catarina : b.labace);
+  }
+
+  function updateText(state) {
+    const el = document.querySelector('.aero-bento55__text');
+    if (!el) return;
+    const label = state === 'catarina' ? 'Catarina Aviation Show' : 'LABACE';
+    // fade-out + slide up
+    el.classList.add('is-changing');
+    setTimeout(() => {
+      el.innerHTML = '<strong class="aero-bento55__label">FEIRA:</strong> ' + label;
+      // entra de baixo → posição normal
+      el.style.transform = 'translateY(5px)';
+      el.classList.remove('is-changing');
+      requestAnimationFrame(() => requestAnimationFrame(() => { el.style.transform = ''; }));
+    }, 260);
+  }
+
+  function init() {
+    BLOCKS.forEach(function (b) {
+      var cell = document.querySelector(b.selector);
+      if (!cell) return;
+      b.cell  = cell;
+      b.giro  = cell.querySelector('.bento-giro');
+      b.front = cell.querySelector('.bento-giro__front');
+      b.back  = cell.querySelector('.bento-giro__back');
+      if (b.front) setFace(b.front, 'catarina', b);
+      if (b.back)  setFace(b.back,  'labace',   b);
+    });
+    updateText('catarina');
+  }
+
+  function flip() {
+    var nextState = frontState === 'catarina' ? 'labace' : 'catarina';
+
+    // Dispara o giro em todos os blocos simultaneamente
+    BLOCKS.forEach(function (b) {
+      if (b.giro) b.giro.classList.add('is-flipped');
+    });
+
+    // Atualiza o texto do bloco 55 no início do giro
+    updateText(nextState);
+
+    // Após o giro mais longo terminar: troca as faces silenciosamente
+    setTimeout(function () {
+      BLOCKS.forEach(function (b) {
+        if (!b.giro) return;
+        b.giro.style.transition = 'none';           // pausa a transição
+        b.giro.classList.remove('is-flipped');       // volta à posição 0° (sem animar)
+        setFace(b.front, nextState, b);              // frente agora = estado novo
+        var prevState = frontState;
+        setFace(b.back, prevState, b);               // verso = estado anterior
+      });
+
+      // Re-ativa a transição após dois frames (garante que o reset foi renderizado)
+      requestAnimationFrame(function () {
+        requestAnimationFrame(function () {
+          BLOCKS.forEach(function (b) {
+            if (b.giro) b.giro.style.transition = '';
+          });
+        });
+      });
+
+      frontState = nextState;
+    }, LONGEST);
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', function () { init(); setInterval(flip, INTERVAL); });
+  } else {
+    init();
+    setInterval(flip, INTERVAL);
+  }
+})();
+</script>
 </body>
 </html>

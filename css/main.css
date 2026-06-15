@@ -1186,18 +1186,24 @@
    ============================================= */
 .reveal {
   opacity: 0;
-  filter: blur(6px);
-  transform: translateY(20px);
+  transform: translateY(18px);
   transition:
-    opacity 0.65s ease var(--reveal-delay, 0s),
-    filter  0.65s ease var(--reveal-delay, 0s),
-    transform 0.65s ease var(--reveal-delay, 0s);
+    opacity   0.6s cubic-bezier(0.4, 0, 0.2, 1) var(--reveal-delay, 0s),
+    transform 0.6s cubic-bezier(0.4, 0, 0.2, 1) var(--reveal-delay, 0s);
+  will-change: opacity, transform;
 }
 .reveal.revealed {
   opacity: 1;
-  filter: blur(0);
   transform: translateY(0);
 }
+
+/* Variante só-opacidade — para elementos que já têm transform próprio */
+.reveal-fade {
+  opacity: 0;
+  transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1) var(--reveal-delay, 0s);
+  will-change: opacity;
+}
+.reveal-fade.revealed { opacity: 1; }
 
 
 /* =============================================
