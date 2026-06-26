@@ -1,0 +1,17 @@
+{
+  "slug": "bonded-warehouse",
+  "name": "Gestão de Entreposto Aduaneiro",
+  "title": "Gestão de Entreposto Aduaneiro (Bonded Warehouse)",
+  "subtitle": "Venda para o Brasil com menos barreiras e mais controle. Armazene sua mercadoria com suspensão de impostos e nacionalize sob demanda, sem abrir filial no país.",
+  "intro": "Sua carga é admitida no Brasil com os impostos de importação suspensos e permanece sob controle da Receita Federal até ser nacionalizada. Como consignatária das mercadorias, a WM cuida de toda a gestão documental, fiscal e logística da operação — do embarque internacional ao processo de admissão, registro da Declaração de Admissão (DA) e gestão contínua do estoque entrepostado. Estruturamos a melhor estratégia de armazenagem, combinando eficiência logística e planejamento tributário.",
+  "benefits": [
+    { "title": "Certificação ISO 9001", "desc": "Primeira trading do Brasil certificada com a ISO 9001, garantindo qualidade em todos os processos logísticos." },
+    { "title": "Benefícios fiscais e cobertura", "desc": "Com 7 benefícios fiscais e presença em 14 estados brasileiros e no Panamá." },
+    { "title": "Liberação em Canal Verde", "desc": "99,5% das operações são liberadas em Canal Verde, permitindo a liberação mais rápida da carga." }
+  ],
+  "sections": [
+    { "heading": "Por que gerir um entreposto aduaneiro com a WM Trading?", "text": "Seleção estratégica do entreposto mais vantajoso em custo. Gestão de estoque sob medida e com total rastreabilidade. Know-how técnico e legal de mais de 20 anos. Equipe especializada na admissão e gestão de itens entrepostados." },
+    { "heading": "Ofereça mais valor aos seus clientes", "text": "Com a armazenagem entrepostada, seus produtos já estão no Brasil, próximos do comprador final e prontos para envio rápido. Seu cliente fica livre da necessidade de imobilizar capital durante o transporte internacional ou de se expor às variações cambiais. A WM ajuda seus clientes a nacionalizar os pedidos com logística e planejamento tributário personalizados, aproveitando incentivos fiscais e reduzindo custos." },
+    { "heading": "Experiência em que você pode confiar", "text": "Desde 2004, a WM Trading simplifica a logística internacional com inteligência e precisão. Transformamos desafios de importação em operações integradas, com gestão completa de ponta a ponta. Combinamos expertise logística, tributária e operacional para entregar eficiência em toda a sua cadeia de importação." }
+  ]
+}

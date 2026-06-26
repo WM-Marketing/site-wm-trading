@@ -1,0 +1,16 @@
+{
+  "slug": "maquinas",
+  "name": "Máquinas",
+  "heroQuestion": "Quer importar máquinas com agilidade e segurança?",
+  "heroSub": "Entre em contato com a trading mais completa do Brasil para tornar esse sonho realidade.",
+  "benefits": [
+    { "title": "Parametrização", "desc": "Contamos com 92% de parametrização no canal verde, e apenas 5% das operações são retidas em canal amarelo." },
+    { "title": "Benefícios Fiscais", "desc": "Nossos benefícios fiscais e assessoria especializada são focados na melhor gestão da sua importação." },
+    { "title": "Planejamento Inteligente", "desc": "Sua operação é desenhada para o melhor modelo de importação, sempre pensando na otimização e na eficiência." }
+  ],
+  "sections": [
+    { "heading": "Desafios do setor", "text": "No Brasil, investir em máquinas com tecnologia avançada pode ter altos custos. Além da dificuldade de encontrar opções com melhores valores e bom desempenho, a variedade de máquinas para indústrias como têxtil, alimentícia e agrícola ainda é limitada. A Licença de Importação é um processo crucial e, se não for feita corretamente, pode gerar problemas na operação — principalmente em máquinas usadas. A WM auxilia na análise da classificação fiscal mais adequada; verifica a necessidade de licenciamento ou sua dispensa; assessora junto ao IBAMA a emissão do LCVM nos casos aplicáveis; e cumpre todas as etapas para o deferimento da Licença de Importação." },
+    { "heading": "Oportunidades e soluções para o setor", "text": "É no mercado internacional que estão as melhores e mais avançadas máquinas, capazes de potencializar o volume de produção das grandes empresas. Com a redução do Imposto de Importação para determinados bens de produção, o empresário tem a oportunidade de importar com preços menores e mais competitivos. Estamos estrategicamente localizados em 14 estados para garantir maior otimização de custos logísticos. Expanda seu negócio através de um planejamento inteligente e de reduções de custos." },
+    { "heading": "Nossos resultados", "text": "Como resultado do desejo de importar máquinas com as condições mais vantajosas do mercado, conquistamos o índice de 92% de parametrização em canal verde, agregando mais segurança e agilidade às operações. Isso significa que o tempo de nacionalização e liberação da carga no porto com a WM é muito mais rápido. Conte com o know-how da WM para importar máquinas através das melhores oportunidades do comércio internacional." }
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "slug": "pilatus-24",
+  "name": "Pilatus PC-24",
+  "maker": "Pilatus",
+  "heroTitle": "Pilatus PC-24 importado com menos custos",
+  "heroSub": "Pilatus",
+  "intro": "Projetado para acessar aeroportos menores e operar em curtas distâncias (940 m), o PC-24 permite desembarcar mais perto do seu destino, evitando transferências terrestres e longos atrasos.",
+  "specs": [
+    { "label": "Alcance máximo", "value": "2.040 nm" },
+    { "label": "Vel. máx. de cruzeiro", "value": "815 km/h" },
+    { "label": "Assentos", "value": "10" },
+    { "label": "Mach máximo", "value": "0,74M" },
+    { "label": "Pistas", "value": "Terra, grama, cascalho e neve" }
+  ],
+  "sections": [
+    { "heading": "Conforto incomparável", "text": "A cabine silenciosa e ampla cria um ambiente tranquilo, ideal para o trabalho ou o descanso, com um voo muito mais relaxante e produtivo." },
+    { "heading": "Flexibilidade operacional", "text": "Projetado com versatilidade, permite configurações modulares de assentos, capacidade de carga pela porta traseira e operação com piloto único." },
+    { "heading": "Cabine espaçosa", "text": "O espaço do PC-24 supera o de jatos executivos muito mais caros — até seis assentos e um divã estendido, com conforto e elegância em cada detalhe." }
+  ]
+}

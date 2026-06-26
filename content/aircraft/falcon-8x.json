@@ -1,0 +1,20 @@
+{
+  "slug": "falcon-8x",
+  "name": "Falcon 8X",
+  "maker": "Dassault",
+  "heroTitle": "Falcon 8X",
+  "heroSub": "Dassault",
+  "intro": "Equipado com três motores que encurtam rotas transoceânicas, o Falcon 8X leva você ao destino em menos tempo, com segurança e conforto.",
+  "specs": [
+    { "label": "Alcance máximo", "value": "6.235 nm" },
+    { "label": "Vel. máx. de cruzeiro", "value": "920 km/h" },
+    { "label": "Assentos", "value": "Até 14" },
+    { "label": "Mach máximo", "value": "0,9M" }
+  ],
+  "sections": [
+    { "heading": "Privacidade a bordo", "text": "Viaje em uma suíte privativa, perfeita para descanso ou para trabalhar com tranquilidade, garantindo uma experiência única e personalizada." },
+    { "heading": "Cabine silenciosa", "text": "A cabine do Falcon 8X é a mais silenciosa da sua categoria, proporcionando uma experiência relaxante aos passageiros durante o voo." },
+    { "heading": "Eficiência de combustível", "text": "15% mais eficiente no consumo de combustível que outras aeronaves de ultra longo alcance, com excelente desempenho e redução de emissões." },
+    { "heading": "Viaje mais, em menos tempo", "text": "Os três motores encurtam rotas transoceânicas e permitem operar em pistas mais curtas, aumentando sua flexibilidade operacional." }
+  ]
+}

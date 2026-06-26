@@ -1,0 +1,16 @@
+{
+  "slug": "varejo",
+  "name": "Varejo",
+  "heroQuestion": "Quer importar para o varejo com agilidade e segurança?",
+  "heroSub": "Entre em contato com a trading mais completa do Brasil para tornar esse sonho realidade.",
+  "benefits": [
+    { "title": "Acompanhamento em tempo real", "desc": "Disponibilizamos um dashboard completo para você administrar suas importações e demandas." },
+    { "title": "Planejamento Tributário", "desc": "O planejamento tributário é o nosso grande diferencial, sempre elaborado com inteligência e expertise." },
+    { "title": "Importação de ponta a ponta", "desc": "Suas importações estarão sob a responsabilidade de uma equipe experiente, encarregada de realizar cada etapa com excelência." }
+  ],
+  "sections": [
+    { "heading": "Desafios do setor", "text": "Mudanças, incertezas e volatilidade na economia mundial ainda são o principal desafio da indústria do varejo. Com a transformação digital, o e-commerce vem crescendo em ritmo mais acelerado que o varejo tradicional. Isso sem falar da mudança no perfil do consumidor, que busca produtos com mais qualidade, entrega rápida e segura e variedades que atendam às suas necessidades." },
+    { "heading": "Soluções na importação para o varejo", "text": "O futuro da logística do varejo é dinâmico, rápido e integrado entre canais e plataformas. Desde que se adaptem, varejistas terão sucesso nesse novo mercado digital, que já é uma realidade, aprimorando a experiência do cliente e aumentando a velocidade de entrega." },
+    { "heading": "Nossos resultados", "text": "Expertise e histórico de sucesso é o que cerca a WM Trading. Buscamos sempre as melhores condições para os nossos clientes. Importe com a WM Trading — inovação e excelência em comércio internacional." }
+  ]
+}

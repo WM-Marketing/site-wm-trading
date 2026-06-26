@@ -1,0 +1,34 @@
+{
+  "slug": "vinho",
+  "name": "Vinho",
+  "heroQuestion": "Quer importar vinhos com agilidade e segurança?",
+  "heroSub": "Entre em contato com a trading mais completa do Brasil para tornar esse sonho realidade.",
+  "benefits": [
+    {
+      "title": "Agilidade",
+      "desc": "Com expertise no mercado, cuidamos de toda operação através de uma equipe altamente capacitada que garante a segurança e agilidade da sua importação."
+    },
+    {
+      "title": "Benefícios Fiscais",
+      "desc": "Nossos benefícios fiscais e assessoria especializada são focados na melhor gestão da sua importação."
+    },
+    {
+      "title": "Planejamento Inteligente",
+      "desc": "Desenhamos o melhor modelo para a sua importação, sempre visando rápido desembaraço aduaneiro mesmo para novos rótulos que exigem análise para nacionalização."
+    }
+  ],
+  "sections": [
+    {
+      "heading": "O setor de vinho",
+      "text": "O vinho é uma das bebidas mais importadas pelo Brasil. Hoje estamos entre os 15 maiores mercados importadores de vinhos do mundo. O consumo dessa bebida tem aumentado no país e as perspectivas de crescimento são bem otimistas. Para quem investe ou deseja investir nessa área tão promissora, a melhor opção é importar os vinhos de países como o Chile, Argentina, Portugal, Itália, França e Espanha."
+    },
+    {
+      "heading": "Soluções para a importação de vinhos",
+      "text": "Como acontece com qualquer produto, os trâmites para importação de bebidas alcoólicas são complexos e burocráticos. A WM é certificada pelo MAPA, registro necessário na importação de vinhos que, dependendo da modalidade, dispensa o importador de se certificar também. Além disso, auxiliamos em todo o processo de coleta de amostras para geração do laudo de cada rótulo pela certificadora."
+    },
+    {
+      "heading": "Nossos resultados",
+      "text": "A WM possui expertise na importação de vinhos realizando nacionalizações recorrentes deste produto. Garantimos que as suas importações venham nas condições de temperatura adequadas sem onerar o custo das operações. Nossa parametrização média nesse segmento é de 95% em canal verde, com tempo médio de liberação de 3 a 5 dias, considerando que já se tenha o CI dos vinhos."
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "slug": "compliance",
+  "name": "Compliance",
+  "title": "Compliance",
+  "subtitle": "Com o Compliance, as operações ficam protegidas de possíveis danos colaterais que possam ocorrer durante o processo de importação.",
+  "intro": "Para gerenciar e dar maior embasamento ao Programa de Compliance, desenvolvemos políticas que norteiam comportamentos e diretrizes da empresa. Essas políticas abordam temas desde anticorrupção até o regimento interno do Comitê de Compliance. Comprometimento e transparência são valores básicos da nossa cultura — por isso disponibilizamos o acesso a algumas dessas políticas.",
+  "benefits": [
+    { "title": "Prêmio Integridade 2019", "desc": "Por nosso comprometimento com a ética nas práticas diárias, fomos vencedores do Prêmio Integridade 2019." },
+    { "title": "Programa desde 2018", "desc": "O Programa de Compliance da WM foi iniciado em agosto de 2018 e segue em constante desenvolvimento e aprimoramento." },
+    { "title": "Auditoria semestral", "desc": "O programa passa por auditoria independente a cada 6 meses, mapeando e mitigando novos riscos." }
+  ],
+  "sections": [
+    { "heading": "Como a WM protege a si e aos seus clientes de fraudes e não conformidades?", "text": "A WM realiza diligência periódica e constante em todos os seus terceiros intermediários, que também passam por treinamentos e assinam Códigos de Conduta. Todas as diligências são aprovadas no Comitê de Compliance, com auditoria dessas informações a cada 6 meses." },
+    { "heading": "Embasamento legal", "text": "A WM se baseia na Lei 12.846/2013 para o fortalecimento do seu Programa de Compliance." },
+    { "heading": "Proteção da informação", "text": "Temos um sério compromisso com a segurança da informação. Possuímos sistemas de criptografia em diversos níveis para evitar invasões, além de gerador de energia independente para a manutenção desses sistemas. Todos os colaboradores assinam termo de confidencialidade." },
+    { "heading": "Canal de ouvidoria", "text": "A WM possui um canal de ouvidoria independente com o objetivo de captar denúncias, não conformidades ou qualquer ato ilícito relacionado ao poder público e privado. O canal também recebe elogios, sugestões e demais comentários." },
+    { "heading": "Cultura e liderança", "text": "Seguimos o modelo 'tone from the top', em que os líderes estão engajados em diferentes atividades voltadas ao Compliance. Promovemos campanhas e treinamentos constantes, desde a contratação até a rescisão, mantendo uma forte cultura organizacional. Adotamos ainda estritas políticas de relacionamento com Pessoas Expostas Politicamente (PEP) e princípios de segregação de tarefas para gerenciar conflitos de interesse." }
+  ]
+}

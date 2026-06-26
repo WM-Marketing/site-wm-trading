@@ -1,0 +1,18 @@
+{
+  "slug": "solucoes-4pl",
+  "name": "Soluções 4PL",
+  "title": "Eleve sua logística com o 4PL da WM Trading",
+  "subtitle": "Gestão estratégica da sua cadeia logística, com tecnologia e integração de ponta a ponta.",
+  "intro": "A solução 4PL da WM Trading conecta processos, fornecedores e sistemas, oferecendo uma gestão de ponta a ponta com mais visibilidade, eficiência e controle para a sua operação.",
+  "benefits": [
+    { "title": "Gestão centralizada de fornecedores", "desc": "Mais eficiência e menos ruído operacional, com um único ponto de coordenação." },
+    { "title": "Visibilidade e previsibilidade de custos", "desc": "Controle total da operação logística em tempo real." },
+    { "title": "Rastreabilidade ponta a ponta", "desc": "Da origem ao destino final, com dados acionáveis para decisões mais rápidas." }
+  ],
+  "sections": [
+    { "heading": "De centro de custo a vantagem competitiva", "text": "A WM Trading define SLAs sob medida, monitorando os pontos críticos da operação para garantir fluidez e previsibilidade. Assim, sua empresa ganha eficiência operacional e entrega mais valor ao cliente final." },
+    { "heading": "Vantagens exclusivas do 4PL WM Trading", "text": "Menos fornecedores e mais controle. Tecnologia integrada, com plataformas conectadas para mais agilidade. Previsibilidade total, acompanhando sua operação em tempo real. Escalabilidade para crescer com controle. E mais tempo para o que realmente importa no seu negócio." },
+    { "heading": "Tecnologia que entrega inteligência", "text": "Com tecnologia e automação, a WM Trading oferece visibilidade e controle logístico em tempo real." },
+    { "heading": "Confiança e experiência", "text": "Desde 2004, a WM Trading simplifica a logística internacional com inteligência e precisão. Somos a primeira trading do Brasil certificada com a ISO 9001. Com 7 benefícios fiscais, presença em 14 estados brasileiros e no Panamá, e 99,5% das operações em Canal Verde — o que possibilita a liberação mais rápida da carga." }
+  ]
+}

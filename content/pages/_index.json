@@ -1,0 +1,303 @@
+[
+  {
+    "slug": "/segmentos",
+    "type": "institucional",
+    "texts": 0,
+    "images": 0,
+    "file": "segmentos.json"
+  },
+  {
+    "slug": "/about",
+    "type": "institucional",
+    "texts": 0,
+    "images": 0,
+    "file": "about.json"
+  },
+  {
+    "slug": "/carreiras",
+    "type": "institucional",
+    "texts": 0,
+    "images": 0,
+    "file": "carreiras.json"
+  },
+  {
+    "slug": "/segmentos/importacao-aeronaves",
+    "type": "segmento",
+    "texts": 28,
+    "images": 9,
+    "file": "segmentos_importacao-aeronaves.json"
+  },
+  {
+    "slug": "/compliance",
+    "type": "institucional",
+    "texts": 0,
+    "images": 0,
+    "file": "compliance.json"
+  },
+  {
+    "slug": "/materiais",
+    "type": "institucional",
+    "texts": 0,
+    "images": 0,
+    "file": "materiais.json"
+  },
+  {
+    "slug": "/podcast",
+    "type": "institucional",
+    "texts": 0,
+    "images": 0,
+    "file": "podcast.json"
+  },
+  {
+    "slug": "/unidades",
+    "type": "institucional",
+    "texts": 0,
+    "images": 0,
+    "file": "unidades.json"
+  },
+  {
+    "slug": "/segmentos/equipamentos-fotovoltaicos",
+    "type": "segmento",
+    "texts": 25,
+    "images": 11,
+    "file": "segmentos_equipamentos-fotovoltaicos.json"
+  },
+  {
+    "slug": "/segmentos/produtos-quimicos",
+    "type": "segmento",
+    "texts": 20,
+    "images": 9,
+    "file": "segmentos_produtos-quimicos.json"
+  },
+  {
+    "slug": "/segmentos/combustivel",
+    "type": "segmento",
+    "texts": 19,
+    "images": 8,
+    "file": "segmentos_combustivel.json"
+  },
+  {
+    "slug": "/segmentos/cosmeticos",
+    "type": "segmento",
+    "texts": 25,
+    "images": 8,
+    "file": "segmentos_cosmeticos.json"
+  },
+  {
+    "slug": "/segmentos/autopecas",
+    "type": "segmento",
+    "texts": 20,
+    "images": 8,
+    "file": "segmentos_autopecas.json"
+  },
+  {
+    "slug": "/segmentos/informatica-e-telecomunicacoes",
+    "type": "segmento",
+    "texts": 21,
+    "images": 10,
+    "file": "segmentos_informatica-e-telecomunicacoes.json"
+  },
+  {
+    "slug": "/segmentos/aco",
+    "type": "segmento",
+    "texts": 19,
+    "images": 9,
+    "file": "segmentos_aco.json"
+  },
+  {
+    "slug": "/segmentos/maquinas",
+    "type": "segmento",
+    "texts": 22,
+    "images": 7,
+    "file": "segmentos_maquinas.json"
+  },
+  {
+    "slug": "/segmentos/varejo",
+    "type": "segmento",
+    "texts": 20,
+    "images": 8,
+    "file": "segmentos_varejo.json"
+  },
+  {
+    "slug": "/segmentos/vinho",
+    "type": "segmento",
+    "texts": 25,
+    "images": 8,
+    "file": "segmentos_vinho.json"
+  },
+  {
+    "slug": "/segmentos/drone",
+    "type": "segmento",
+    "texts": 18,
+    "images": 8,
+    "file": "segmentos_drone.json"
+  },
+  {
+    "slug": "/segmentos/rebocadores",
+    "type": "segmento",
+    "texts": 22,
+    "images": 6,
+    "file": "segmentos_rebocadores.json"
+  },
+  {
+    "slug": "/segmentos/cases-de-usinas-fotovoltaicas",
+    "type": "segmento",
+    "texts": 24,
+    "images": 10,
+    "file": "segmentos_cases-de-usinas-fotovoltaicas.json"
+  },
+  {
+    "slug": "/politica-de-privacidade",
+    "type": "institucional",
+    "texts": 15,
+    "images": 0,
+    "file": "politica-de-privacidade.json"
+  },
+  {
+    "slug": "/politica-de-cookies",
+    "type": "institucional",
+    "texts": 24,
+    "images": 5,
+    "file": "politica-de-cookies.json"
+  },
+  {
+    "slug": "/segmentos/aeronaves-m600",
+    "type": "segmento",
+    "texts": 10,
+    "images": 2,
+    "file": "segmentos_aeronaves-m600.json"
+  },
+  {
+    "slug": "/importacao-por-conta-e-ordem",
+    "type": "institucional",
+    "texts": 70,
+    "images": 10,
+    "file": "importacao-por-conta-e-ordem.json"
+  },
+  {
+    "slug": "/fale-conosco",
+    "type": "institucional",
+    "texts": 5,
+    "images": 4,
+    "file": "fale-conosco.json"
+  },
+  {
+    "slug": "/importacao-por-encomenda",
+    "type": "institucional",
+    "texts": 75,
+    "images": 10,
+    "file": "importacao-por-encomenda.json"
+  },
+  {
+    "slug": "/solucoes-wm",
+    "type": "institucional",
+    "texts": 52,
+    "images": 15,
+    "file": "solucoes-wm.json"
+  },
+  {
+    "slug": "/assessoria-aduaneira",
+    "type": "institucional",
+    "texts": 53,
+    "images": 10,
+    "file": "assessoria-aduaneira.json"
+  },
+  {
+    "slug": "/global-sourcing",
+    "type": "institucional",
+    "texts": 53,
+    "images": 9,
+    "file": "global-sourcing.json"
+  },
+  {
+    "slug": "/solucoes-4pl",
+    "type": "institucional",
+    "texts": 31,
+    "images": 8,
+    "file": "solucoes-4pl.json"
+  },
+  {
+    "slug": "/m500",
+    "type": "aeronave",
+    "texts": 43,
+    "images": 13,
+    "file": "m500.json"
+  },
+  {
+    "slug": "/phenom-100",
+    "type": "aeronave",
+    "texts": 45,
+    "images": 16,
+    "file": "phenom-100.json"
+  },
+  {
+    "slug": "/phenom-300",
+    "type": "aeronave",
+    "texts": 52,
+    "images": 17,
+    "file": "phenom-300.json"
+  },
+  {
+    "slug": "/pilatus-24",
+    "type": "aeronave",
+    "texts": 47,
+    "images": 15,
+    "file": "pilatus-24.json"
+  },
+  {
+    "slug": "/falcon-6x",
+    "type": "aeronave",
+    "texts": 43,
+    "images": 15,
+    "file": "falcon-6x.json"
+  },
+  {
+    "slug": "/falcon-900lx",
+    "type": "aeronave",
+    "texts": 44,
+    "images": 15,
+    "file": "falcon-900lx.json"
+  },
+  {
+    "slug": "/falcon-8x",
+    "type": "aeronave",
+    "texts": 43,
+    "images": 15,
+    "file": "falcon-8x.json"
+  },
+  {
+    "slug": "/bonded-warehouse",
+    "type": "institucional",
+    "texts": 21,
+    "images": 7,
+    "file": "bonded-warehouse.json"
+  },
+  {
+    "slug": "/en/aircraft-falcon-8x",
+    "type": "aeronave",
+    "texts": 42,
+    "images": 15,
+    "file": "en_aircraft-falcon-8x.json"
+  },
+  {
+    "slug": "/segmentos/derivados-petroleo",
+    "type": "segmento",
+    "texts": 20,
+    "images": 9,
+    "file": "segmentos_derivados-petroleo.json"
+  },
+  {
+    "slug": "/citation-jet",
+    "type": "aeronave",
+    "texts": 32,
+    "images": 12,
+    "file": "citation-jet.json"
+  },
+  {
+    "slug": "/coque-de-petroleo",
+    "type": "aeronave",
+    "texts": 11,
+    "images": 2,
+    "file": "coque-de-petroleo.json"
+  }
+]

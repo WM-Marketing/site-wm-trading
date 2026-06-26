@@ -1,0 +1,16 @@
+{
+  "slug": "autopecas",
+  "name": "Autopeças",
+  "heroQuestion": "Quer importar autopeças com agilidade e segurança?",
+  "heroSub": "Entre em contato com a trading mais completa do Brasil para otimizar essa operação para sua empresa!",
+  "benefits": [
+    { "title": "Acompanhamento em tempo real", "desc": "Disponibilizamos um dashboard completo para você administrar suas importações e demandas." },
+    { "title": "Sucesso comprovado", "desc": "Contratando nossos serviços, você estará confiando suas operações a uma empresa experiente no mercado de nacionalização, com certificações significativas e benefícios fiscais." },
+    { "title": "Importação de ponta a ponta", "desc": "Suas importações estarão sob a responsabilidade de uma equipe experiente, encarregada de realizar cada etapa com excelência." }
+  ],
+  "sections": [
+    { "heading": "Oportunidades da importação", "text": "Uma grande quantidade das autopeças comercializadas no Brasil é importada, o que indica um mercado altamente lucrativo e competitivo para empresas que desejam importar e investir nesse ramo. Quando compradas diretamente com os fornecedores estrangeiros, o valor das peças pode sair até 80% mais barato do que a compra de itens produzidos no Brasil." },
+    { "heading": "Benefícios na importação de autopeças", "text": "O setor também é beneficiado pelo PIS e COFINS monofásicos, que reduzem o pagamento de impostos de importação de autopeças. Com a WM, a sua empresa acessa esses benefícios e importa com os melhores custos do mercado, aumentando a lucratividade do seu negócio." },
+    { "heading": "Soluções para a importação de autopeças", "text": "A WM possui expertise e know-how na importação de autopeças. Analisamos o estado onde o cliente está localizado para alcançar as melhores oportunidades tributárias e logísticas e otimizar custos. Além disso, contamos com uma ampla rede de fornecedores localizados em mercados competitivos e de alta produtividade, obtendo com eles preços, disponibilidade e vantagens exclusivas." }
+  ]
+}

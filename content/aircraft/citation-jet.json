@@ -1,0 +1,19 @@
+{
+  "slug": "citation-jet",
+  "name": "Cessna Citation",
+  "maker": "Cessna",
+  "heroTitle": "Importe seu CJ com quem entende do assunto",
+  "heroSub": "Cessna Citation Jet",
+  "intro": "Versatilidade, desempenho e elegância para quem busca autonomia e baixo custo operacional. A importação do seu Citation Jet começa agora.",
+  "specs": [
+    { "label": "Alcance máximo", "value": "1.127 nm" },
+    { "label": "Vel. de cruzeiro", "value": "698 km/h" },
+    { "label": "Assentos", "value": "6" },
+    { "label": "Consumo", "value": "134 gal/h" }
+  ],
+  "sections": [
+    { "heading": "Citation Jet 1", "text": "Operação single pilot, flexibilidade para voos regionais com excelente custo-benefício e menor consumo com o motor Williams FJ44-1AP." },
+    { "heading": "Citation Jet M2", "text": "Operação single pilot, pousa em pistas curtas — ideal para pequenos aeródromos. Alcance de até 1.550 nm e velocidade de cruzeiro de 748 km/h." },
+    { "heading": "Citation Jet 3", "text": "Cabine premium com assentos artesanais, desempenho em pistas curtas e operação intercontinental. Cockpit Garmin G3000, autothrottle e sistema EAL." }
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "slug": "phenom-300",
+  "name": "Phenom 300",
+  "maker": "Embraer",
+  "heroTitle": "Phenom 300",
+  "heroSub": "Embraer",
+  "intro": "O jato executivo monopiloto mais rápido e de maior alcance em sua classe — líder em vendas na categoria leve por mais de 10 anos consecutivos.",
+  "specs": [
+    { "label": "Alcance máximo", "value": "1.903 nm" },
+    { "label": "Vel. máx. de cruzeiro", "value": "822 km/h" },
+    { "label": "Assentos", "value": "9" },
+    { "label": "Mach máximo", "value": "0,78M" },
+    { "label": "Comprimento", "value": "15,6 m" }
+  ],
+  "sections": [
+    { "heading": "Operação com piloto único", "text": "Flexibilidade operacional que permite redução de custos e comporta mais passageiros, mantendo os padrões de segurança." },
+    { "heading": "Bagagem sem preocupação", "text": "O compartimento de 85 pés cúbicos oferece espaço generoso, atendendo às necessidades em viagens de negócios ou lazer." },
+    { "heading": "Elegância aerodinâmica", "text": "Linhas e contornos cuidadosamente esculpidos otimizam o perfil aerodinâmico, resultando em estabilidade e eficiência de combustível excepcionais." },
+    { "heading": "Velocidade e alcance fenomenais", "text": "O jato monopiloto mais rápido e de maior alcance da classe, permitindo viagens intercontinentais e liderança em vendas por mais de 10 anos." }
+  ]
+}
