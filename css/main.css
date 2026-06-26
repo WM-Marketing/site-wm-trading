@@ -201,6 +201,46 @@
   color: var(--color-primary);
 }
 
+/* ── Mega-menu (Segmentos) ── */
+.nav-dropdown__menu--mega {
+  display: none;
+  left: 50%;
+  transform: translateX(-50%) translateY(-6px);
+  min-width: 680px;
+  flex-direction: row;
+  gap: 0;
+  padding: 20px 8px;
+}
+.nav-dropdown:hover .nav-dropdown__menu--mega,
+.nav-dropdown__menu--mega.open {
+  display: flex;
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateX(-50%) translateY(0);
+}
+.nav-mega-col {
+  flex: 1;
+  padding: 0 12px;
+  border-right: 1px solid #f0f0f0;
+  display: flex;
+  flex-direction: column;
+}
+.nav-mega-col:last-child { border-right: none; }
+.nav-mega-label {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: #aaa;
+  padding: 0 8px 8px;
+  display: block;
+}
+.nav-mega-col a {
+  padding: 7px 8px !important;
+  font-size: 12.5px !important;
+  white-space: normal !important;
+}
+
 .header-actions {
   display: flex;
   align-items: center;
