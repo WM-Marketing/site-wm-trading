@@ -351,6 +351,8 @@ def load_template_elements():
     head_content = re.sub(r'<link\s+rel="canonical"[^>]*/?>', "", head_content)
     head_content = re.sub(r'<meta\s+(?:property="(?:og|article):[^"]*"|name="twitter:[^"]*")[^>]*/?>', "", head_content)
     head_content = re.sub(r'<script\s+type="application/ld\+json">.*?</script>', "", head_content, flags=re.S)
+    # remove linhas em branco deixadas pelas remocoes acima
+    head_content = re.sub(r'\n\s*\n+', '\n', head_content)
     
     # Inject dynamic-pages styles and contact-form script
     head_content += '\n  <link rel="stylesheet" href="/css/dynamic-pages.css" />'
