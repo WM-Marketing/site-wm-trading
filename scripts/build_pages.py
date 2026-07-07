@@ -10,8 +10,8 @@ import glob
 import shutil
 from datetime import datetime
 
-# Define workspace directories
-ROOT_DIR = "d:/projects/site_wm/site-wm-trading"
+# Define workspace directories (derived from this script's location, works on any machine)
+ROOT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 CONTENT_DIR = os.path.join(ROOT_DIR, "content")
 CSS_DIR = os.path.join(ROOT_DIR, "css")
 JS_DIR = os.path.join(ROOT_DIR, "js")
@@ -324,12 +324,15 @@ def load_template_elements():
     with open(index_path, "r", encoding="utf-8") as f:
         html = f.read()
 
-    # Extract head content (excluding title and description)
+    # Extract head content (excluding title, description, charset and viewport —
+    # render_html_page already emits its own, and duplicating them is invalid HTML)
     head_start = html.find("<head>")
     head_end = html.find("</head>")
     head_content = html[head_start + 6:head_end]
     head_content = re.sub(r"<title>.*?</title>", "", head_content)
     head_content = re.sub(r'<meta\s+name="description"\s+content=".*?"\s*/?>', "", head_content)
+    head_content = re.sub(r'<meta\s+charset=".*?"\s*/?>', "", head_content)
+    head_content = re.sub(r'<meta\s+name="viewport"\s+content=".*?"\s*/?>', "", head_content)
     
     # Inject dynamic-pages styles and contact-form script
     head_content += '\n  <link rel="stylesheet" href="/css/dynamic-pages.css" />'
@@ -340,40 +343,14 @@ def load_template_elements():
     header_end = html.find("</header>") + 9
     header_content = html[loader_start:header_end]
 
-    # Update header links
-    header_content = re.sub(
-        r'<a\s+href="segmentos-aeronaves\.html"\s+role="menuitem">',
-        r'<a href="/segmentos-aeronaves.html" role="menuitem">',
-        header_content
-    )
-    # Add actual generated paths for other segments in the menu
-    header_content = re.sub(
-        r'<a\s+href="#"\s+role="menuitem">🚗 Autopeças</a>',
-        r'<a href="/segmentos/autopecas.html" role="menuitem">🚗 Autopeças</a>',
-        header_content
-    )
-    header_content = re.sub(
-        r'<a\s+href="#"\s+role="menuitem">⚙ Aço e Metais</a>',
-        r'<a href="/segmentos/aco.html" role="menuitem">⚙ Aço e Metais</a>',
-        header_content
-    )
-    header_content = re.sub(
-        r'<a\s+href="#"\s+role="menuitem">☀ Energia Solar</a>',
-        r'<a href="/segmentos/equipamentos-fotovoltaicos.html" role="menuitem">☀ Energia Solar</a>',
-        header_content
-    )
-    header_content = re.sub(
-        r'<a\s+href="#"\s+role="menuitem">🏭 Máquinas e Equipamentos</a>',
-        r'<a href="/segmentos/maquinas.html" role="menuitem">🏭 Máquinas e Equipamentos</a>',
-        header_content
-    )
-    
-    # Extract footer
+    # Extract footer (up to </body> — the closing </body></html> is emitted
+    # by render_html_page; including it here duplicated the closing tags)
     footer_comment = "<!-- ══════════════════════════════════════\n     FOOTER — FAIXA 1: Links + CTA\n══════════════════════════════════════ -->"
     footer_start = html.find(footer_comment)
     if footer_start == -1:
         footer_start = html.find('<div class="footer-links">')
-    footer_content = html[footer_start:]
+    footer_end = html.find("</body>")
+    footer_content = html[footer_start:footer_end if footer_end != -1 else len(html)]
 
     # Make all assets paths absolute
     head_content = make_paths_absolute(head_content)
@@ -383,19 +360,15 @@ def load_template_elements():
     return head_content, header_content, footer_content
 
 def make_paths_absolute(content):
-    """Prefixes relative css, js, images, and HTML paths with '/' for subdirectories compatibility."""
-    content = re.sub(r'href="css/', r'href="/css/', content)
-    content = re.sub(r'src="js/', r'src="/js/', content)
-    content = re.sub(r'src="images/', r'src="/images/', content)
-    content = re.sub(r'src="mapa-brasil/', r'src="/mapa-brasil/', content)
-    content = re.sub(r'href="about\.html"', r'href="/about.html"', content)
-    content = re.sub(r'href="carreiras\.html"', r'href="/carreiras.html"', content)
-    content = re.sub(r'href="fale-conosco\.html"', r'href="/fale-conosco.html"', content)
-    content = re.sub(r'href="solucoes-wm\.html"', r'href="/solucoes-wm.html"', content)
-    content = re.sub(r'href="index\.html"', r'href="/index.html"', content)
-    content = re.sub(r'href="segmentos-aeronaves\.html"', r'href="/segmentos-aeronaves.html"', content)
-    content = re.sub(r'href="blog/index\.html"', r'href="/blog/index.html"', content)
-    return content
+    """Prefixes ALL relative href/src paths with '/' so templates work from any subdirectory.
+
+    External URLs (http/https///), anchors (#), mailto:, tel: and data: URIs are left untouched.
+    """
+    return re.sub(
+        r'(href|src)="(?!/|https?://|//|#|mailto:|tel:|data:)([^"]+)"',
+        r'\1="/\2"',
+        content,
+    )
 
 def render_html_page(output_path, title, description, content_body, head_tpl, header_tpl, footer_tpl):
     """Wraps page content in a fully styled, absolute-path templates block and saves it."""
@@ -516,11 +489,23 @@ def markdown_to_html(text):
     # Inline tags replacement
     # Bold
     html = re.sub(r'\*\*(.*?)\*\*', r'<strong>\1</strong>', html)
+    # Images (must run before links, otherwise ![alt](url) becomes !<a>)
+    def _img_repl(m):
+        alt, src, title = m.group(1), m.group(2), m.group(3)
+        title_attr = f' title="{title}"' if title else ''
+        return f'<img src="{src}" alt="{alt}"{title_attr} loading="lazy" />'
+    html = re.sub(r'!\[(.*?)\]\(\s*([^)\s]+)(?:\s+"([^"]*)")?\s*\)', _img_repl, html)
     # Links
     html = re.sub(r'\[(.*?)\]\((.*?)\)', r'<a href="\2">\1</a>', html)
-    # Emphasis
-    html = re.sub(r'_(.*?)_', r'<em>\1</em>', html)
-    
+    # Emphasis — only outside HTML tags, so URLs/attributes with "_" are never corrupted
+    parts = re.split(r'(<[^>]+>)', html)
+    html = ''.join(
+        p if p.startswith('<') else re.sub(r'(?<!\\)_(.*?)(?<!\\)_', r'<em>\1</em>', p)
+        for p in parts
+    )
+    # Markdown-escaped underscores (\_) render as literal "_"
+    html = html.replace('\\_', '_')
+
     return html
 
 def parse_mdx(file_path):
