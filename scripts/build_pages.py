@@ -337,6 +337,7 @@ def load_template_elements():
     # Inject dynamic-pages styles and contact-form script
     head_content += '\n  <link rel="stylesheet" href="/css/dynamic-pages.css" />'
     head_content += '\n  <script src="/js/contact-form.js" defer></script>'
+    head_content += '\n  <script src="/js/lightbox.js" defer></script>'
 
     # Extract header (including loader)
     loader_start = html.find('<div id="page-loader"')
@@ -505,6 +506,18 @@ def markdown_to_html(text):
     )
     # Markdown-escaped underscores (\_) render as literal "_"
     html = html.replace('\\_', '_')
+
+    # Cluster consecutive standalone images into a thumbnail gallery
+    # (rendered as a grid; js/lightbox.js opens them enlarged in a popup).
+    # 1) unwrap paragraphs that contain only images
+    html = re.sub(r'<p>((?:\s*<img [^>]*/>)+)\s*</p>', r'\1', html)
+    # 2) group runs of 2+ adjacent images into .post-gallery
+    def _gallery_repl(m):
+        imgs = re.findall(r'<img [^>]*/>', m.group(0))
+        if len(imgs) < 2:
+            return m.group(0)
+        return '\n<div class="post-gallery">\n' + '\n'.join(imgs) + '\n</div>\n'
+    html = re.sub(r'(?:<img [^>]*/>\s*){2,}', _gallery_repl, html)
 
     return html
 

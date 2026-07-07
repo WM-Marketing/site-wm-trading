@@ -626,6 +626,101 @@ textarea.input-wm {
   border: none;
 }
 
+/* ---------- POST IMAGES & GALLERY ---------- */
+.prose-wm img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 32px auto;
+  border-radius: var(--radius-lg);
+  cursor: zoom-in;
+}
+.post-gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 12px;
+  margin: 32px 0;
+}
+.post-gallery img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  margin: 0;
+  border-radius: var(--radius-lg);
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+.post-gallery img:hover {
+  transform: scale(1.03);
+  box-shadow: 0 8px 24px rgba(26, 26, 26, 0.18);
+}
+@media (max-width: 600px) {
+  .post-gallery { grid-template-columns: repeat(2, 1fr); }
+  .post-gallery img { height: 140px; }
+}
+
+/* ---------- LIGHTBOX ---------- */
+.wm-lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(26, 26, 26, 0.92);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease;
+}
+.wm-lightbox.is-open {
+  opacity: 1;
+  pointer-events: auto;
+}
+.wm-lightbox__img {
+  max-width: min(92vw, 1100px);
+  max-height: 84vh;
+  border-radius: var(--radius-lg);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+}
+.wm-lightbox__caption {
+  position: absolute;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  max-width: 80vw;
+  color: #ffffff;
+  font-size: 14px;
+  text-align: center;
+  opacity: 0.85;
+}
+.wm-lightbox__btn {
+  position: absolute;
+  background: none;
+  border: none;
+  color: #ffffff;
+  cursor: pointer;
+  line-height: 1;
+  opacity: 0.8;
+  transition: opacity 0.2s ease, color 0.2s ease;
+}
+.wm-lightbox__btn:hover {
+  opacity: 1;
+  color: var(--color-primary);
+}
+.wm-lightbox__close { top: 20px; right: 28px; font-size: 40px; }
+.wm-lightbox__prev,
+.wm-lightbox__next {
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 56px;
+  padding: 0 18px;
+}
+.wm-lightbox__prev { left: 8px; }
+.wm-lightbox__next { right: 8px; }
+@media (max-width: 600px) {
+  .wm-lightbox__prev,
+  .wm-lightbox__next { font-size: 40px; padding: 0 8px; }
+}
+
 /* ---------- LEGAL & POLICIES ---------- */
 .legal-container {
   max-width: 800px;
