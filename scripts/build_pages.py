@@ -371,11 +371,11 @@ def make_paths_absolute(content):
         content,
     )
 
-def render_html_page(output_path, title, description, content_body, head_tpl, header_tpl, footer_tpl):
+def render_html_page(output_path, title, description, content_body, head_tpl, header_tpl, footer_tpl, lang="pt-BR"):
     """Wraps page content in a fully styled, absolute-path templates block and saves it."""
     # Build complete HTML page
     html = f"""<!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="{lang}">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -1144,7 +1144,10 @@ def main():
         
         body_content = hero_html + specs_html + highlights_html + cta_html
         output_path = os.path.join(AIRCRAFT_OUT_DIR, f"{slug}.html")
-        render_html_page(output_path, f"Importação {a['maker']} {a['name']}", a["heroTitle"], body_content, head_tpl, header_tpl, footer_tpl)
+        # "name" may already include the maker (e.g. "Piper M500") — avoid "Piper Piper M500"
+        full_name = a["name"] if a["name"].lower().startswith(a["maker"].lower()) else f"{a['maker']} {a['name']}"
+        meta_desc = a.get("metaDescription", a["heroTitle"])
+        render_html_page(output_path, f"Importação {full_name}", meta_desc, body_content, head_tpl, header_tpl, footer_tpl)
 
     # 5. GENERATE EBOOKS LANDING PAGES
     print("\nGenerating Ebook landing pages...")
@@ -1702,7 +1705,9 @@ A WM Trading não coleta dados de crianças ou adolescentes menores de 16 anos d
         """
         
         post_out_path = os.path.join(BLOG_OUT_DIR, f"{slug}.html")
-        render_html_page(post_out_path, title, excerpt[:155], post_detail_html, head_tpl, header_tpl, footer_tpl)
+        # Posts em ingles (frontmatter lang: "en", ou originalUrl /en/) declaram o idioma correto
+        post_lang = fm.get("lang") or ("en" if "/en/" in fm.get("originalUrl", "") else "pt-BR")
+        render_html_page(post_out_path, title, excerpt[:155], post_detail_html, head_tpl, header_tpl, footer_tpl, lang=post_lang)
 
     # Sort listing data by date descending
     posts_data.sort(key=lambda x: x["date"], reverse=True)
