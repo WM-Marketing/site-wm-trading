@@ -1,10 +1,4 @@
-# WM Trading — robots.txt
-# Buscadores e crawlers de IA sao bem-vindos (SEO + GEO).
+# Projeto pausado. Nao indexar nem rastrear.
 
 User-agent: *
-Allow: /
-
-# Nao ha valor em indexar respostas da API
-Disallow: /api/
-
-Sitemap: https://www.wmtrading.com.br/sitemap.xml
+Disallow: /
