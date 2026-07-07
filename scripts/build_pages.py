@@ -12,6 +12,19 @@ from datetime import datetime
 
 # Define workspace directories (derived from this script's location, works on any machine)
 ROOT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+# SEO: canonical/og/sitemap sempre apontam para o dominio FINAL (nao o vercel.app),
+# para consolidar indexacao no dominio oficial antes e depois da virada.
+SITE_URL = "https://www.wmtrading.com.br"
+DEFAULT_OG_IMAGE = "/images/logo/fechado_logo_wm_trading_ajustada_logo_laranja.png"
+ORGANIZATION_JSONLD = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "WM Trading",
+    "url": SITE_URL,
+    "logo": SITE_URL + DEFAULT_OG_IMAGE,
+    "description": "Trading company especializada em solucoes completas de importacao e comercio exterior para empresas no Brasil.",
+}
 CONTENT_DIR = os.path.join(ROOT_DIR, "content")
 CSS_DIR = os.path.join(ROOT_DIR, "css")
 JS_DIR = os.path.join(ROOT_DIR, "js")
@@ -333,6 +346,11 @@ def load_template_elements():
     head_content = re.sub(r'<meta\s+name="description"\s+content=".*?"\s*/?>', "", head_content)
     head_content = re.sub(r'<meta\s+charset=".*?"\s*/?>', "", head_content)
     head_content = re.sub(r'<meta\s+name="viewport"\s+content=".*?"\s*/?>', "", head_content)
+    # SEO tags do index.html nao devem vazar para as paginas geradas
+    # (render_html_page emite as suas proprias, especificas de cada pagina)
+    head_content = re.sub(r'<link\s+rel="canonical"[^>]*/?>', "", head_content)
+    head_content = re.sub(r'<meta\s+(?:property="(?:og|article):[^"]*"|name="twitter:[^"]*")[^>]*/?>', "", head_content)
+    head_content = re.sub(r'<script\s+type="application/ld\+json">.*?</script>', "", head_content, flags=re.S)
     
     # Inject dynamic-pages styles and contact-form script
     head_content += '\n  <link rel="stylesheet" href="/css/dynamic-pages.css" />'
@@ -371,8 +389,41 @@ def make_paths_absolute(content):
         content,
     )
 
-def render_html_page(output_path, title, description, content_body, head_tpl, header_tpl, footer_tpl, lang="pt-BR"):
+def _esc_attr(s):
+    """Escapa texto para uso seguro em atributos HTML."""
+    return str(s).replace("&", "&amp;").replace('"', "&quot;").replace("<", "&lt;")
+
+
+def render_html_page(output_path, title, description, content_body, head_tpl, header_tpl, footer_tpl,
+                     lang="pt-BR", og_type="website", og_image=None, jsonld=None):
     """Wraps page content in a fully styled, absolute-path templates block and saves it."""
+    # SEO: canonical + Open Graph + Twitter Card + JSON-LD, apontando para o dominio final
+    rel_path = os.path.relpath(output_path, ROOT_DIR).replace(os.sep, "/")
+    canonical_url = f"{SITE_URL}/{rel_path}"
+    og_img = og_image or DEFAULT_OG_IMAGE
+    if og_img.startswith("/"):
+        og_img = SITE_URL + og_img
+    full_title = _esc_attr(f"WM Trading — {title}")
+    desc_attr = _esc_attr(description)
+    og_locale = "en_US" if lang == "en" else "pt_BR"
+
+    jsonld_blocks = [ORGANIZATION_JSONLD] + ([jsonld] if jsonld else [])
+    jsonld_html = "\n  ".join(
+        '<script type="application/ld+json">%s</script>' % json.dumps(b, ensure_ascii=False)
+        for b in jsonld_blocks
+    )
+
+    seo_block = f"""<link rel="canonical" href="{canonical_url}" />
+  <meta property="og:title" content="{full_title}" />
+  <meta property="og:description" content="{desc_attr}" />
+  <meta property="og:url" content="{canonical_url}" />
+  <meta property="og:type" content="{og_type}" />
+  <meta property="og:image" content="{og_img}" />
+  <meta property="og:site_name" content="WM Trading" />
+  <meta property="og:locale" content="{og_locale}" />
+  <meta name="twitter:card" content="summary_large_image" />
+  {jsonld_html}"""
+
     # Build complete HTML page
     html = f"""<!DOCTYPE html>
 <html lang="{lang}">
@@ -380,7 +431,8 @@ def render_html_page(output_path, title, description, content_body, head_tpl, he
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>WM Trading — {title}</title>
-  <meta name="description" content="{description}" />
+  <meta name="description" content="{desc_attr}" />
+  {seo_block}
   {head_tpl}
 </head>
 <body>
@@ -1707,7 +1759,18 @@ A WM Trading não coleta dados de crianças ou adolescentes menores de 16 anos d
         post_out_path = os.path.join(BLOG_OUT_DIR, f"{slug}.html")
         # Posts em ingles (frontmatter lang: "en", ou originalUrl /en/) declaram o idioma correto
         post_lang = fm.get("lang") or ("en" if "/en/" in fm.get("originalUrl", "") else "pt-BR")
-        render_html_page(post_out_path, title, excerpt[:155], post_detail_html, head_tpl, header_tpl, footer_tpl, lang=post_lang)
+        post_jsonld = {
+            "@context": "https://schema.org",
+            "@type": "BlogPosting",
+            "headline": title,
+            "datePublished": date_str,
+            "author": {"@type": "Person", "name": author},
+            "publisher": {"@type": "Organization", "name": "WM Trading", "logo": {"@type": "ImageObject", "url": SITE_URL + DEFAULT_OG_IMAGE}},
+            "image": (SITE_URL + cover) if cover else (SITE_URL + DEFAULT_OG_IMAGE),
+            "mainEntityOfPage": f"{SITE_URL}/blog/{slug}.html",
+        }
+        render_html_page(post_out_path, title, excerpt[:155], post_detail_html, head_tpl, header_tpl, footer_tpl,
+                         lang=post_lang, og_type="article", og_image=cover or None, jsonld=post_jsonld)
 
     # Sort listing data by date descending
     posts_data.sort(key=lambda x: x["date"], reverse=True)
@@ -1849,6 +1912,31 @@ A WM Trading não coleta dados de crianças ou adolescentes menores de 16 anos d
     """.replace("{filter_buttons_html}", filter_buttons_html).replace("{cards_grid_html}", cards_grid_html)
     
     render_html_page(os.path.join(ROOT_DIR, "blog", "index.html"), "Blog da WM Trading", "Confira as notícias e artigos da WM Trading.", blog_listing_html, head_tpl, header_tpl, footer_tpl)
+
+    # 9. SITEMAP.XML — todas as paginas .html do site, apontando para o dominio final
+    print("\nGenerating sitemap.xml...")
+    skip_dirs = {".git", ".claude", ".agents", ".cursor", ".windsurf", "node_modules",
+                 "scripts", "content", "docs", "brand", "api", "js", "css", "images",
+                 "wp-content", "mapa-brasil"}
+    sitemap_pages = []
+    for walk_root, walk_dirs, walk_files in os.walk(ROOT_DIR):
+        walk_dirs[:] = [d for d in walk_dirs if d not in skip_dirs and not d.startswith(".")]
+        for fn in walk_files:
+            if fn.endswith(".html"):
+                rel = os.path.relpath(os.path.join(walk_root, fn), ROOT_DIR).replace(os.sep, "/")
+                mtime = datetime.fromtimestamp(os.path.getmtime(os.path.join(walk_root, fn)))
+                sitemap_pages.append((rel, mtime.strftime("%Y-%m-%d")))
+    sitemap_pages.sort()
+    entries = []
+    for rel, lastmod in sitemap_pages:
+        loc = SITE_URL + "/" if rel == "index.html" else f"{SITE_URL}/{rel}"
+        entries.append(f"  <url>\n    <loc>{loc}</loc>\n    <lastmod>{lastmod}</lastmod>\n  </url>")
+    sitemap_xml = ('<?xml version="1.0" encoding="UTF-8"?>\n'
+                   '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
+                   + "\n".join(entries) + "\n</urlset>\n")
+    with open(os.path.join(ROOT_DIR, "sitemap.xml"), "w", encoding="utf-8") as f:
+        f.write(sitemap_xml)
+    print(f" - sitemap.xml com {len(sitemap_pages)} paginas")
 
     print("\n[OK] Static site pages successfully generated!")
 
