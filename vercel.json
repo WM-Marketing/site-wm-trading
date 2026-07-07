@@ -233,6 +233,56 @@
       "permanent": true
     },
     {
+      "source": "/como-funcionara-o-regime-de-cotas-para-modulos-fotovoltaicos",
+      "destination": "/ebooks/regime-de-cotas-modulos-fotovoltaicos.html",
+      "permanent": true
+    },
+    {
+      "source": "/e-book-4pl",
+      "destination": "/ebooks/4pl-ebook.html",
+      "permanent": true
+    },
+    {
+      "source": "/4pl",
+      "destination": "/ebooks/4pl-ebook.html",
+      "permanent": true
+    },
+    {
+      "source": "/principais-impostos-incidentes-na-importacao",
+      "destination": "/ebooks/principais-impostos-incidentes.html",
+      "permanent": true
+    },
+    {
+      "source": "/gestao-logistica",
+      "destination": "/ebooks/gestao-logistica-da-wm.html",
+      "permanent": true
+    },
+    {
+      "source": "/importacao-de-aeronaves-e-helicopteros",
+      "destination": "/ebooks/aeronaves-e-helicopteros.html",
+      "permanent": true
+    },
+    {
+      "source": "/contato",
+      "destination": "/fale-conosco.html",
+      "permanent": true
+    },
+    {
+      "source": "/sobre",
+      "destination": "/about.html",
+      "permanent": true
+    },
+    {
+      "source": "/quem-somos",
+      "destination": "/about.html",
+      "permanent": true
+    },
+    {
+      "source": "/trabalhe-conosco",
+      "destination": "/carreiras.html",
+      "permanent": true
+    },
+    {
       "source": "/blog/category/:path*",
       "destination": "/blog/index.html",
       "permanent": true
