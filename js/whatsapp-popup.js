@@ -11,7 +11,7 @@
 (function () {
   'use strict';
 
-  var WA_NUMBER = '552730229700'; // oficial: (27) 3022-9700
+  var WA_NUMBER = '5527981610055'; // WhatsApp oficial (confirmado Renato 09/07); o fixo (27) 3022-9700 é só telefone
   var DEFAULT_WA_URL = 'https://wa.me/' + WA_NUMBER;
 
   var CSS = [
