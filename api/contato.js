@@ -54,6 +54,20 @@ module.exports = async function handler(req, res) {
       url: data.url || '',
       origem: data.origem || 'site wmtrading.com.br',
       enviado_em: new Date().toISOString(),
+      // Atribuição de mídia/orgânico (preenchidos por js/utm-tracking.js)
+      utm_source: data.utm_source || '',
+      utm_medium: data.utm_medium || '',
+      utm_campaign: data.utm_campaign || '',
+      utm_term: data.utm_term || '',
+      utm_content: data.utm_content || '',
+      utm_source_inicial: data.utm_source_inicial || '',
+      utm_campaign_inicial: data.utm_campaign_inicial || '',
+      gclid: data.gclid || '',
+      msclkid: data.msclkid || '',
+      fbclid: data.fbclid || '',
+      clientid: data.clientid || '',
+      referrer_inicial: data.referrer_inicial || '',
+      pagina_entrada: data.pagina_entrada || '',
     };
 
     const response = await fetch(webhook, {

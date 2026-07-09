@@ -188,6 +188,11 @@
       origem: 'site wmtrading.com.br'
     };
 
+    // Campos de atribuição (UTMs, gclid, GA client id — js/utm-tracking.js)
+    if (window.wmTracking) {
+      Object.assign(payload, window.wmTracking.getFields());
+    }
+
     fetch('/api/contato', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },

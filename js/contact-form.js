@@ -43,6 +43,11 @@
     payload.url = window.location.href;
     payload.origem = 'site wmtrading.com.br';
 
+    // Attribution fields (UTMs, gclid, GA client id — see js/utm-tracking.js)
+    if (window.wmTracking) {
+      Object.assign(payload, window.wmTracking.getFields());
+    }
+
     try {
       const response = await fetch('/api/contato', {
         method: 'POST',
@@ -61,6 +66,21 @@
 
       if (!response.ok || !result.ok) {
         throw new Error(result.error || 'Não foi possível enviar o formulário. Tente novamente.');
+      }
+
+      // Conversion events for GTM/GA4 (real lead — fires only after server accepts)
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({
+        event: 'form_submit',
+        form_type: payload.formulario,
+        page: window.location.pathname
+      });
+      if (payload.formulario === 'ebook') {
+        window.dataLayer.push({
+          event: 'ebook_download',
+          ebook: form.getAttribute('data-ebook-title') || '',
+          page: window.location.pathname
+        });
       }
 
       // Success behavior
