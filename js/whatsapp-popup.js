@@ -15,7 +15,8 @@
   var DEFAULT_WA_URL = 'https://wa.me/' + WA_NUMBER;
 
   var CSS = [
-    '.wm-wa-fab{position:fixed;bottom:24px;right:24px;width:60px;height:60px;border-radius:50%;',
+    // bottom deixa espaço para o webchat Botmaker (via GTM), que ocupa o canto inferior direito
+    '.wm-wa-fab{position:fixed;bottom:104px;right:24px;width:60px;height:60px;border-radius:50%;',
     'background:#25D366;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;',
     'box-shadow:0 6px 20px rgba(0,0,0,.25);z-index:990;transition:transform .2s ease,box-shadow .2s ease;padding:0;}',
     '.wm-wa-fab:hover{transform:scale(1.07);box-shadow:0 8px 24px rgba(0,0,0,.3);}',
@@ -56,7 +57,7 @@
     'text-decoration:none;}',
     '.wm-wa-success a.wm-wa-open:hover{background:#1EBE5D;}',
     '.wm-wa-success a.wm-wa-open svg{width:20px;height:20px;fill:#fff;}',
-    '@media(max-width:600px){.wm-wa-fab{bottom:16px;right:16px;width:54px;height:54px;}',
+    '@media(max-width:600px){.wm-wa-fab{bottom:94px;right:16px;width:54px;height:54px;}',
     '.wm-wa-fab svg{width:29px;height:29px;}.wm-wa-modal{padding:22px;}}',
     '@media print{.wm-wa-fab,.wm-wa-overlay{display:none!important;}}'
   ].join('');
