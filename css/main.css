@@ -184,6 +184,20 @@
   transform: translateX(-50%) translateY(0);
 }
 
+/* Ponte invisível sobre o vão de 14px entre o botão e o submenu:
+   sem ela o :hover se perde no trajeto do mouse e o menu fecha
+   antes de alcançar as opções (só em desktop; mobile usa clique) */
+@media (hover: hover) {
+  .nav-dropdown:hover::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: -16px;
+    right: -16px;
+    height: 16px;
+  }
+}
+
 .nav-dropdown__menu a {
   display: block;
   padding: 10px 20px;
