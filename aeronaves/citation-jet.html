@@ -26,17 +26,10 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js" defer></script>
   <script src="/js/whatsapp-popup.js" defer></script>
   <script src="/js/utm-tracking.js"></script>
-  <!-- GTM GTM-K58GFND: carrega só no domínio oficial (evita poluir métricas com o vercel.app);
-       para testar no vercel.app: localStorage.setItem('wm_gtm_test','1') e recarregar -->
-  <script>
-  (function(){var h=location.hostname,t;try{t=localStorage.getItem('wm_gtm_test')}catch(e){}
-  if(h!=='www.wmtrading.com.br'&&h!=='wmtrading.com.br'&&!t)return;
-  (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});
-  var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;
-  j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-  })(window,document,'script','dataLayer','GTM-K58GFND');
-  })();
-  </script>
+  <!-- Consentimento LGPD + Consent Mode v2 + GTM (GTM-K58GFND): tudo em js/consent.js.
+       Nenhuma tag carrega antes do aceite; GTM só no domínio oficial
+       (teste no vercel.app: localStorage.setItem('wm_gtm_test','1') e recarregar) -->
+  <script src="/js/consent.js"></script>
 
   <link rel="stylesheet" href="/css/dynamic-pages.css" />
   <script src="/js/contact-form.js" defer></script>
@@ -352,6 +345,7 @@
     <p class="footer-copy-text">Copyright 2024 - WM Comercial Atacadista LTDA - 06.194.675/0001-03</p>
     <div class="footer-privacy">
       <a href="/politica-de-privacidade.html">Políticas de Privacidade</a>
+      <a href="#" data-wm-consent-prefs>Preferências de cookies</a>
     </div>
   </div>
 </div>
