@@ -65,6 +65,27 @@ SEGMENTS_LIST = [
     "Setor Automotivo", "Outros"
 ]
 
+# Card thumbnails for the segments index page (segmentos/index.html).
+# Order here = display order on the page (aviação → energia/indústria → consumo/tech).
+# 400x200 thumbs herdados da página /segmentos/ do site antigo; banners como fallback.
+SEGMENT_INDEX_THUMBS = {
+    "importacao-aeronaves": "/wp-content/uploads/2025/03/IMPORTACAO-DE-AERONAVES-1.webp",
+    "rebocadores": "/wp-content/uploads/2024/07/aircraft-tug-tows.png",
+    "drone": "/wp-content/uploads/2024/05/imagens-thumbnail-site_drones.webp",
+    "equipamentos-fotovoltaicos": "/wp-content/uploads/2024/05/imagens-thumbnail-site_equi-fotovoltaico.webp",
+    "cases-de-usinas-fotovoltaicas": "/wp-content/uploads/2024/06/banner-usinas.webp",
+    "produtos-quimicos": "/wp-content/uploads/2024/05/imagens-thumbnail-site_produtos_quimicos.webp",
+    "combustivel": "/wp-content/uploads/2024/05/imagens-thumbnail-site_combustivel.webp",
+    "derivados-petroleo": "/wp-content/uploads/2024/06/banner-combustivel.webp",
+    "maquinas": "/wp-content/uploads/2024/05/imagens-thumbnail-site_maquinas.webp",
+    "aco": "/wp-content/uploads/2024/05/imagens-thumbnail-site_aco.webp",
+    "cosmeticos": "/wp-content/uploads/2024/05/imagens-thumbnail-site_cosmeticos.webp",
+    "informatica-e-telecomunicacoes": "/wp-content/uploads/2024/05/imagens-thumbnail-site_infomartica.webp",
+    "autopecas": "/wp-content/uploads/2024/05/imagens-thumbnail-site_autopecas.webp",
+    "varejo": "/wp-content/uploads/2024/05/imagens-thumbnail-site_varejo.webp",
+    "vinho": "/wp-content/uploads/2024/05/imagens-thumbnail-site_vinho.webp",
+}
+
 # States for contact form select
 STATES_LIST = [
     "Acre", "Amapá", "Amazonas", "Pará", "Rondônia", "Roraima", "Tocantins",
@@ -401,6 +422,9 @@ def render_html_page(output_path, title, description, content_body, head_tpl, he
     """Wraps page content in a fully styled, absolute-path templates block and saves it."""
     # SEO: canonical + Open Graph + Twitter Card + JSON-LD, apontando para o dominio final
     rel_path = os.path.relpath(output_path, ROOT_DIR).replace(os.sep, "/")
+    # index.html canoniza para a URL do diretório (/segmentos/, /blog/)
+    if rel_path.endswith("index.html"):
+        rel_path = rel_path[:-len("index.html")]
     canonical_url = f"{SITE_URL}/{rel_path}"
     og_img = og_image or DEFAULT_OG_IMAGE
     if og_img.startswith("/"):
@@ -1113,6 +1137,89 @@ def main():
         body_content = hero_html + intro_html + sections_html + benefits_html + contact_section_html
         output_path = os.path.join(SEGMENTS_OUT_DIR, f"{slug}.html")
         render_html_page(output_path, f"Importação de {s['name']}", s.get("heroQuestion", s["name"]), body_content, head_tpl, header_tpl, footer_tpl)
+
+    # 3b. GENERATE SEGMENTS INDEX PAGE (segmentos/index.html) — lista todos os
+    # segmentos em cards no padrão da home; alvo do "VER TODOS" e da URL antiga /segmentos/
+    print(" - compiling segments index (segmentos/index.html)...")
+    seg_by_slug = {}
+    for file_path in segments_files:
+        with open(file_path, "r", encoding="utf-8") as f:
+            s = json.load(f)
+        seg_by_slug[s["slug"]] = s
+
+    def build_segment_index_card(slug, s, thumb):
+        name = s["name"]
+        # cardDesc = texto do card na página /segmentos/ do site antigo
+        desc = s.get("cardDesc") or s.get("heroQuestion") or f"Importação de {name} com agilidade e segurança."
+        return f"""
+        <div class="segmento-card">
+          <div class="segmento-card-img">
+            <a href="/segmentos/{slug}.html" aria-label="Importação de {_esc_attr(name)}">
+              <img src="{thumb}" alt="Importação de {_esc_attr(name)}" loading="lazy" />
+            </a>
+            <div class="segmento-badge-area">
+              <span class="segmento-tag">{name}</span>
+            </div>
+          </div>
+          <div class="segmento-content">
+            <p class="segmento-card-desc">{desc}</p>
+            <a href="/segmentos/{slug}.html" class="link-arrow">Confira →</a>
+          </div>
+        </div>"""
+
+    index_cards_html = ""
+    for slug, thumb in SEGMENT_INDEX_THUMBS.items():
+        s = seg_by_slug.pop(slug, None)
+        if s:
+            index_cards_html += build_segment_index_card(slug, s, thumb)
+    # segmentos novos sem thumb mapeado entram no fim usando a capa da própria página
+    for slug, s in seg_by_slug.items():
+        cover = SEGMENT_IMAGES_MAP.get(slug, {}).get("cover") or \
+            f"/wp-content/uploads/2024/05/imagens-thumbnail-site_{slug}.webp"
+        index_cards_html += build_segment_index_card(slug, s, cover)
+
+    index_form_html = build_contact_form_html("segmentos", "Outros")
+    index_body = f"""
+    <section class="dynamic-hero">
+      <div class="container dynamic-hero__container">
+        <p class="dynamic-hero__eyebrow">Segmentos</p>
+        <h1 class="dynamic-hero__title" style="font-weight: var(--fw-light);">Especialistas na importação em<br><b><span class="text-primary" style="font-weight: var(--fw-extrabold);">DIVERSOS SETORES</span></b></h1>
+        <p class="dynamic-hero__subtitle">A WM Trading está desde 2004 no mercado e é especialista na importação de diversos setores. Com nossos cases, comprovamos como nossa expertise técnica e planejamento nos fazem referência no mercado.</p>
+      </div>
+    </section>
+
+    <section class="page-section page-section--alternate">
+      <div class="container">
+        <div class="segmentos-index-grid">
+          {index_cards_html}
+        </div>
+      </div>
+    </section>
+
+    <section class="page-section">
+      <div class="container" style="max-width: 800px; margin: 0 auto; text-align: center;">
+        <h2 class="section-title-center" style="margin-bottom: 16px;">Confira nosso <span class="text-primary">Blog</span></h2>
+        <p class="card-desc" style="font-size: var(--fs-base); line-height: 1.7; color: var(--color-text-dark);">Notícias, artigos e conteúdos sobre importação e comércio exterior para a sua empresa.</p>
+        <a href="/blog/" class="btn btn-lg" style="margin-top: 24px;">Acessar o Blog →</a>
+      </div>
+    </section>
+
+    <section class="page-section" id="contato-form" style="background: var(--color-bg-dark); color: var(--color-text-white);">
+      <div class="container" style="max-width:800px;">
+        <h2 class="section-title-center" style="color:var(--color-text-white); font-weight:var(--fw-semibold);">Não encontrou o seu segmento?</h2>
+        <p class="text-center" style="color:rgba(255,255,255,0.7); margin-bottom:30px;">A WM atua em muitos outros setores. Preencha o formulário e um dos nossos especialistas entrará em contato com você.</p>
+        <div style="background:#fff; color:var(--color-text-dark); padding: 40px; border-radius: var(--radius-xl); box-shadow: 0 10px 30px rgba(0,0,0,0.25);">
+          {index_form_html}
+        </div>
+      </div>
+    </section>
+    """
+    render_html_page(
+        os.path.join(SEGMENTS_OUT_DIR, "index.html"),
+        "Segmentos",
+        "A WM Trading é especialista na importação de diversos setores: aeronaves, energia solar, aço, máquinas, cosméticos, informática e muito mais.",
+        index_body, head_tpl, header_tpl, footer_tpl
+    )
 
     # 4. GENERATE AIRCRAFT PAGES
     print("\nGenerating Aircraft models...")
@@ -1931,7 +2038,13 @@ A WM Trading não coleta dados de crianças ou adolescentes menores de 16 anos d
     sitemap_pages.sort()
     entries = []
     for rel, lastmod in sitemap_pages:
-        loc = SITE_URL + "/" if rel == "index.html" else f"{SITE_URL}/{rel}"
+        if rel == "index.html":
+            loc = SITE_URL + "/"
+        elif rel.endswith("/index.html"):
+            # index.html de subpasta entra como URL do diretório (/segmentos/, /blog/)
+            loc = f"{SITE_URL}/{rel[:-len('index.html')]}"
+        else:
+            loc = f"{SITE_URL}/{rel}"
         entries.append(f"  <url>\n    <loc>{loc}</loc>\n    <lastmod>{lastmod}</lastmod>\n  </url>")
     sitemap_xml = ('<?xml version="1.0" encoding="UTF-8"?>\n'
                    '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'

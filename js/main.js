@@ -87,6 +87,17 @@
     // Toggle on click (for touch/mobile)
     trigger.addEventListener('click', e => {
       e.stopPropagation();
+      // Trigger que também é link (ex.: Segmentos → /segmentos/):
+      // desktop (hover abre o submenu) o clique navega; no touch o 1º toque
+      // abre o submenu e o 2º toque navega
+      if (trigger.tagName === 'A') {
+        if (window.matchMedia('(hover: hover)').matches) return;
+        if (!menu.classList.contains('open')) {
+          e.preventDefault();
+          openDropdown();
+        }
+        return;
+      }
       menu.classList.contains('open') ? closeDropdown() : openDropdown();
     });
 
@@ -98,6 +109,33 @@
       if (e.key === 'Escape') closeDropdown();
     });
   });
+})();
+
+// Segmentos carousel — setas avançam 1 card; snap do CSS alinha o trilho
+(function () {
+  const track = document.querySelector('.segmentos-carousel .segmentos-grid');
+  const prev  = document.querySelector('.segmentos-nav--prev');
+  const next  = document.querySelector('.segmentos-nav--next');
+  if (!track || !prev || !next) return;
+
+  function step() {
+    const card = track.querySelector('.segmento-card');
+    if (!card) return 0;
+    const gap = parseFloat(getComputedStyle(track).columnGap) || 20;
+    return card.getBoundingClientRect().width + gap;
+  }
+
+  function update() {
+    const max = track.scrollWidth - track.clientWidth - 1;
+    prev.disabled = track.scrollLeft <= 0;
+    next.disabled = track.scrollLeft >= max;
+  }
+
+  prev.addEventListener('click', () => track.scrollBy({ left: -step(), behavior: 'smooth' }));
+  next.addEventListener('click', () => track.scrollBy({ left: step(), behavior: 'smooth' }));
+  track.addEventListener('scroll', update, { passive: true });
+  window.addEventListener('resize', update);
+  update();
 })();
 
 // Hamburger menu toggle

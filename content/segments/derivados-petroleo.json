@@ -3,14 +3,33 @@
   "name": "Combustível e Derivados de Petróleo",
   "heroQuestion": "Sua empresa precisa importar combustíveis e derivados de petróleo?",
   "heroSub": "Conte com a WM — somos a sua escolha certa para superar esse desafio com agilidade e segurança.",
+  "cardDesc": "Importamos combustíveis e derivados de petróleo com certificação ANP, agilidade e segurança em toda a operação",
   "benefits": [
-    { "title": "Experiência no mercado", "desc": "Suas operações estarão sob o cuidado de uma equipe capacitada e muito experiente, que prestará a melhor assistência para a sua empresa." },
-    { "title": "Informações em tempo real", "desc": "Disponibilizamos um dashboard completo para você consultar e administrar suas importações e demandas, reduzindo imprevistos." },
-    { "title": "Alta capilaridade", "desc": "Estamos localizados em 15 estados brasileiros e operamos em 10 terminais portuários para otimizar a importação de combustíveis." }
+    {
+      "title": "Experiência no mercado",
+      "desc": "Suas operações estarão sob o cuidado de uma equipe capacitada e muito experiente, que prestará a melhor assistência para a sua empresa."
+    },
+    {
+      "title": "Informações em tempo real",
+      "desc": "Disponibilizamos um dashboard completo para você consultar e administrar suas importações e demandas, reduzindo imprevistos."
+    },
+    {
+      "title": "Alta capilaridade",
+      "desc": "Estamos localizados em 15 estados brasileiros e operamos em 10 terminais portuários para otimizar a importação de combustíveis."
+    }
   ],
   "sections": [
-    { "heading": "Mais segurança nas suas importações", "text": "Por se tratar de um setor altamente regulamentado pelas Receitas Federal e Estadual, torna-se necessário um alto índice de segurança, conhecimento e padronização nos processos envolvendo esse bem. Manter-se atualizado quanto a cada uma dessas regulamentações e a interação com os demais agentes envolvidos na cadeia é ponto de partida básico para essas operações." },
-    { "heading": "Por que importar com a WM?", "text": "Nossa expertise no setor de combustíveis e derivados de petróleo é incomparável. Possuímos todas as licenças necessárias para essa operação, como a da ANP. Realizamos operações de nacionalização de Norte a Sul do país, com abrangência em 10 diferentes portos. Com 20 anos de mercado e 10 anos de certificação ISO 9001, prezamos pela qualidade e mitigamos os riscos nas operações de importação dos nossos clientes." },
-    { "heading": "Expertise em diversos produtos", "text": "Gasolina Tipo A, Diesel S10, Diesel S500, HVO, entre outros derivados." }
+    {
+      "heading": "Mais segurança nas suas importações",
+      "text": "Por se tratar de um setor altamente regulamentado pelas Receitas Federal e Estadual, torna-se necessário um alto índice de segurança, conhecimento e padronização nos processos envolvendo esse bem. Manter-se atualizado quanto a cada uma dessas regulamentações e a interação com os demais agentes envolvidos na cadeia é ponto de partida básico para essas operações."
+    },
+    {
+      "heading": "Por que importar com a WM?",
+      "text": "Nossa expertise no setor de combustíveis e derivados de petróleo é incomparável. Possuímos todas as licenças necessárias para essa operação, como a da ANP. Realizamos operações de nacionalização de Norte a Sul do país, com abrangência em 10 diferentes portos. Com 20 anos de mercado e 10 anos de certificação ISO 9001, prezamos pela qualidade e mitigamos os riscos nas operações de importação dos nossos clientes."
+    },
+    {
+      "heading": "Expertise em diversos produtos",
+      "text": "Gasolina Tipo A, Diesel S10, Diesel S500, HVO, entre outros derivados."
+    }
   ]
 }

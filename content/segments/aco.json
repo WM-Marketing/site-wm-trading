@@ -3,14 +3,33 @@
   "name": "Aço",
   "heroQuestion": "Quer importar aço com agilidade e segurança?",
   "heroSub": "Entre em contato com a trading mais completa do Brasil para tornar esse sonho realidade.",
+  "cardDesc": "Importação de aço e recursos siderúrgicos com eficiência através do nosso planejamento único para cada projeto",
   "benefits": [
-    { "title": "Acompanhamento em tempo real", "desc": "Disponibilizamos um dashboard completo no qual você consegue acompanhar cada etapa da sua operação, entregando maior controle e transparência sobre o processo de importação para a sua empresa." },
-    { "title": "Cadeia global de fornecedores", "desc": "Mantemos parcerias sólidas com fornecedores externos, possibilitando que você escolha o produto mais adequado para a necessidade e possa negociar condições de compra." },
-    { "title": "Benefícios Fiscais para sua Importação", "desc": "Com uma grande capilaridade nacional e 7 benefícios fiscais que reduzem a alíquota do ICMS incidente na importação do aço, tornamos o nosso planejamento tributário ainda mais assertivo para reduzir os custos incidentes na importação." }
+    {
+      "title": "Acompanhamento em tempo real",
+      "desc": "Disponibilizamos um dashboard completo no qual você consegue acompanhar cada etapa da sua operação, entregando maior controle e transparência sobre o processo de importação para a sua empresa."
+    },
+    {
+      "title": "Cadeia global de fornecedores",
+      "desc": "Mantemos parcerias sólidas com fornecedores externos, possibilitando que você escolha o produto mais adequado para a necessidade e possa negociar condições de compra."
+    },
+    {
+      "title": "Benefícios Fiscais para sua Importação",
+      "desc": "Com uma grande capilaridade nacional e 7 benefícios fiscais que reduzem a alíquota do ICMS incidente na importação do aço, tornamos o nosso planejamento tributário ainda mais assertivo para reduzir os custos incidentes na importação."
+    }
   ],
   "sections": [
-    { "heading": "O setor de aço", "text": "Empregados em chapas, fios, vergalhões ou até mesmo parafusos, a importação desses itens traz inúmeros ganhos às empresas brasileiras. Com um mercado internacional altamente dinâmico e repleto de empresas com diferencial tecnológico em sua produção, ao importar aço sua empresa pode se tornar ainda mais competitiva." },
-    { "heading": "Nossas soluções para importar aço", "text": "Cumprimos todas as exigências dos órgãos reguladores, INMETRO ou ABNT, bem como todo o necessário para emissão da Licença de Importação de forma que a importação dos produtos derivados de aço ocorra nas melhores condições possíveis. Estudamos a característica do produto a ser importado e monitoramos as alíquotas incidentes, otimizando a cadeia logística e tributária do produto e reduzindo custos durante o processo de nacionalização. Além disso, verificamos a disponibilidade de Ex-tarifários que possam reduzir a alíquota do Imposto de Importação." },
-    { "heading": "Aços que temos expertise", "text": "Aço galvanizado, aço galvalume, aço carbono, aço laminado a quente e a frio, arames e telas, fios de solda, tubos de aço, chapas de aço, válvulas de aço, vergalhão e perfilados." }
+    {
+      "heading": "O setor de aço",
+      "text": "Empregados em chapas, fios, vergalhões ou até mesmo parafusos, a importação desses itens traz inúmeros ganhos às empresas brasileiras. Com um mercado internacional altamente dinâmico e repleto de empresas com diferencial tecnológico em sua produção, ao importar aço sua empresa pode se tornar ainda mais competitiva."
+    },
+    {
+      "heading": "Nossas soluções para importar aço",
+      "text": "Cumprimos todas as exigências dos órgãos reguladores, INMETRO ou ABNT, bem como todo o necessário para emissão da Licença de Importação de forma que a importação dos produtos derivados de aço ocorra nas melhores condições possíveis. Estudamos a característica do produto a ser importado e monitoramos as alíquotas incidentes, otimizando a cadeia logística e tributária do produto e reduzindo custos durante o processo de nacionalização. Além disso, verificamos a disponibilidade de Ex-tarifários que possam reduzir a alíquota do Imposto de Importação."
+    },
+    {
+      "heading": "Aços que temos expertise",
+      "text": "Aço galvanizado, aço galvalume, aço carbono, aço laminado a quente e a frio, arames e telas, fios de solda, tubos de aço, chapas de aço, válvulas de aço, vergalhão e perfilados."
+    }
   ]
 }

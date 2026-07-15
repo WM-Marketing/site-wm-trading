@@ -3,14 +3,33 @@
   "name": "Drone",
   "heroQuestion": "Importação de drones",
   "heroSub": "Importamos drones com o melhor custo-benefício e com apoio de parcerias vantajosas para a operação.",
+  "cardDesc": "Importamos drones com o melhor custo-benefício e com apoio de parcerias vantajosas para a operação",
   "benefits": [
-    { "title": "Parametrização", "desc": "Contamos com 100% de parametrização no canal verde, além de benefícios fiscais e assessoria especializada focada na melhor gestão da sua importação." },
-    { "title": "Fornecedores", "desc": "A WM conta com os melhores parceiros do mercado de drones; assim, otimizamos o seu custo e oferecemos agilidade em suas importações." },
-    { "title": "Sucesso comprovado", "desc": "Contratando nossos serviços, você estará confiando suas operações a uma empresa experiente no mercado de nacionalização, com certificações significativas e benefícios fiscais." }
+    {
+      "title": "Parametrização",
+      "desc": "Contamos com 100% de parametrização no canal verde, além de benefícios fiscais e assessoria especializada focada na melhor gestão da sua importação."
+    },
+    {
+      "title": "Fornecedores",
+      "desc": "A WM conta com os melhores parceiros do mercado de drones; assim, otimizamos o seu custo e oferecemos agilidade em suas importações."
+    },
+    {
+      "title": "Sucesso comprovado",
+      "desc": "Contratando nossos serviços, você estará confiando suas operações a uma empresa experiente no mercado de nacionalização, com certificações significativas e benefícios fiscais."
+    }
   ],
   "sections": [
-    { "heading": "A importância dos drones", "text": "Hoje, o drone vem ocupando cada vez mais espaço na área de engenharia para realização de inspeção. A inspeção in loco se mostra uma opção cada vez mais cara e demorada para as empresas que necessitam desse serviço. A importação de drones para inspeção é uma solução para esse gargalo. O mercado internacional fornece oportunidades, como preços competitivos e tecnologias inéditas no país." },
-    { "heading": "Desafios da importação", "text": "A importação de drones exige uma série de regras da Agência Nacional de Aviação Civil (ANAC), complementares aos normativos de outros órgãos públicos, como o Departamento de Controle do Espaço Aéreo (DECEA) e a Agência Nacional de Telecomunicações (ANATEL). A WM atua de modo a resolver os gargalos burocráticos, facilitando a importação e oferecendo os melhores resultados." },
-    { "heading": "Nossos resultados", "text": "A WM possui um forte relacionamento com os principais fornecedores de drones. Obtemos com eles preços, disponibilidade e vantagens exclusivas. Além disso, garantimos os melhores custos de transporte e as melhores condições logísticas para otimizar as operações." }
+    {
+      "heading": "A importância dos drones",
+      "text": "Hoje, o drone vem ocupando cada vez mais espaço na área de engenharia para realização de inspeção. A inspeção in loco se mostra uma opção cada vez mais cara e demorada para as empresas que necessitam desse serviço. A importação de drones para inspeção é uma solução para esse gargalo. O mercado internacional fornece oportunidades, como preços competitivos e tecnologias inéditas no país."
+    },
+    {
+      "heading": "Desafios da importação",
+      "text": "A importação de drones exige uma série de regras da Agência Nacional de Aviação Civil (ANAC), complementares aos normativos de outros órgãos públicos, como o Departamento de Controle do Espaço Aéreo (DECEA) e a Agência Nacional de Telecomunicações (ANATEL). A WM atua de modo a resolver os gargalos burocráticos, facilitando a importação e oferecendo os melhores resultados."
+    },
+    {
+      "heading": "Nossos resultados",
+      "text": "A WM possui um forte relacionamento com os principais fornecedores de drones. Obtemos com eles preços, disponibilidade e vantagens exclusivas. Além disso, garantimos os melhores custos de transporte e as melhores condições logísticas para otimizar as operações."
+    }
   ]
 }

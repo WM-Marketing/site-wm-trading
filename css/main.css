@@ -254,6 +254,16 @@
   font-size: 12.5px !important;
   white-space: normal !important;
 }
+.nav-dropdown__menu--mega { flex-wrap: wrap; }
+.nav-dropdown__menu--mega .nav-mega-all {
+  width: 100%;
+  text-align: center;
+  margin-top: 12px;
+  padding: 12px 8px 4px;
+  border-top: 1px solid #f0f0f0;
+  color: var(--color-primary);
+  font-weight: var(--fw-semibold);
+}
 
 .header-actions {
   display: flex;
@@ -786,12 +796,53 @@
   align-items: flex-start;
   gap: 20px;
 }
-.segmentos-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
+/* Carrossel: trilho rolável com snap, 3 cards visíveis; setas .segmentos-nav */
+.segmentos-carousel {
+  position: relative;
   flex: 1;
+  min-width: 0;
 }
+.segmentos-grid {
+  display: flex;
+  gap: 20px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+.segmentos-grid::-webkit-scrollbar { display: none; }
+.segmentos-grid .segmento-card {
+  flex: 0 0 calc((100% - 40px) / 3);
+  scroll-snap-align: start;
+}
+.segmentos-nav {
+  position: absolute;
+  top: 33%;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+  color: var(--color-primary);
+  border: none;
+  border-radius: 50%;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.18);
+  cursor: pointer;
+  z-index: 5;
+  transition: opacity var(--transition), background var(--transition), color var(--transition);
+}
+.segmentos-nav:hover {
+  background: var(--color-primary);
+  color: var(--color-text-white);
+}
+.segmentos-nav[disabled] {
+  opacity: 0;
+  pointer-events: none;
+}
+.segmentos-nav--prev { left: -14px; }
+.segmentos-nav--next { right: -14px; }
 /* Card — sem fundo, sem sombra */
 .segmento-card {
   background: none;

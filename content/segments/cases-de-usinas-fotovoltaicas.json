@@ -3,17 +3,45 @@
   "name": "Cases de Usinas Fotovoltaicas",
   "heroQuestion": "Conheça os nossos cases de sucesso em usinas fotovoltaicas",
   "heroSub": "A WM Trading apresenta casos reais de importação e logística para projetos de energia solar.",
+  "cardDesc": "Conheça os nossos cases de sucesso na importação de usinas fotovoltaicas e comprove nossa expertise técnica e planejamento",
   "benefits": [
-    { "title": "Checagem documental", "desc": "Verificação completa da documentação necessária para a importação." },
-    { "title": "Gerenciamento de pagamentos", "desc": "Administração eficiente dos pagamentos internacionais e locais." },
-    { "title": "Gestão das cartas de crédito", "desc": "Gerenciamento especializado de instrumentos financeiros de comércio exterior." },
-    { "title": "Divisão dos embarques por mix de potências", "desc": "Organização dos envios respeitando as especificações de potência dos módulos." },
-    { "title": "Control Tower logístico", "desc": "Monitoramento centralizado de toda a operação logística." },
-    { "title": "Gestão da logística nacional", "desc": "Gerenciamento de entrega respeitando prazos e capacidade de recebimento." }
+    {
+      "title": "Checagem documental",
+      "desc": "Verificação completa da documentação necessária para a importação."
+    },
+    {
+      "title": "Gerenciamento de pagamentos",
+      "desc": "Administração eficiente dos pagamentos internacionais e locais."
+    },
+    {
+      "title": "Gestão das cartas de crédito",
+      "desc": "Gerenciamento especializado de instrumentos financeiros de comércio exterior."
+    },
+    {
+      "title": "Divisão dos embarques por mix de potências",
+      "desc": "Organização dos envios respeitando as especificações de potência dos módulos."
+    },
+    {
+      "title": "Control Tower logístico",
+      "desc": "Monitoramento centralizado de toda a operação logística."
+    },
+    {
+      "title": "Gestão da logística nacional",
+      "desc": "Gerenciamento de entrega respeitando prazos e capacidade de recebimento."
+    }
   ],
   "sections": [
-    { "heading": "Complexo Solar de Caldeirão Grande 2", "text": "A usina localizada em Caldeirão Grande do Piauí tem capacidade de 252 MWp — o que representa mais de 280.000 casas brasileiras abastecidas. A WM foi responsável pela gestão da importação e logística de 709 containers, aproximadamente 400 mil módulos fotovoltaicos entregues dentro do cronograma. Inaugurado em abril de 2023 pela Ibitu Energia, o projeto gerou cerca de 1.000 postos de trabalho na região." },
-    { "heading": "Complexo Solar de São Pedro e Paulo", "text": "Resultado da parceria entre Kroma Energias e Elétron Energy, localizado em Flores, Pernambuco. Projeto de Geração Centralizada com 4 usinas, totalizando 101,7 MWp em 189 hectares. A WM coordenou a importação e logística de 154 mil módulos fotovoltaicos em 260 containers. Beneficia 17 municípios do Sertão do Pajeú, fornecendo energia para 112 mil casas." },
-    { "heading": "Complexo UFV Ibimirim", "text": "Projeto de Geração Centralizada com 57,6 MWp idealizado pela Elétron Energy, situado em Ibimirim, Pernambuco. Ocupa 110 hectares e atende 33 mil residências anualmente. A WM atuou na gestão da importação e logística de 87 mil módulos fotovoltaicos em 147 containers para 9 usinas." }
+    {
+      "heading": "Complexo Solar de Caldeirão Grande 2",
+      "text": "A usina localizada em Caldeirão Grande do Piauí tem capacidade de 252 MWp — o que representa mais de 280.000 casas brasileiras abastecidas. A WM foi responsável pela gestão da importação e logística de 709 containers, aproximadamente 400 mil módulos fotovoltaicos entregues dentro do cronograma. Inaugurado em abril de 2023 pela Ibitu Energia, o projeto gerou cerca de 1.000 postos de trabalho na região."
+    },
+    {
+      "heading": "Complexo Solar de São Pedro e Paulo",
+      "text": "Resultado da parceria entre Kroma Energias e Elétron Energy, localizado em Flores, Pernambuco. Projeto de Geração Centralizada com 4 usinas, totalizando 101,7 MWp em 189 hectares. A WM coordenou a importação e logística de 154 mil módulos fotovoltaicos em 260 containers. Beneficia 17 municípios do Sertão do Pajeú, fornecendo energia para 112 mil casas."
+    },
+    {
+      "heading": "Complexo UFV Ibimirim",
+      "text": "Projeto de Geração Centralizada com 57,6 MWp idealizado pela Elétron Energy, situado em Ibimirim, Pernambuco. Ocupa 110 hectares e atende 33 mil residências anualmente. A WM atuou na gestão da importação e logística de 87 mil módulos fotovoltaicos em 147 containers para 9 usinas."
+    }
   ]
 }

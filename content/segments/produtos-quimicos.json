@@ -3,13 +3,29 @@
   "name": "Produtos Químicos",
   "heroQuestion": "Quer importar produtos químicos com agilidade e segurança?",
   "heroSub": "Entre em contato conosco e conheça os benefícios que oferecemos para nacionalizar a sua carga!",
+  "cardDesc": "Possuímos certificações e registros para os diversos produtos químicos, além de grande conhecimento para embarcar os itens de acordo com cada uma das suas particularidades",
   "benefits": [
-    { "title": "Segurança", "desc": "Garantimos a segurança na importação de produtos químicos, sem riscos e com eficiência na operação." },
-    { "title": "Benefícios Fiscais", "desc": "Com nossa experiência no mercado de importação de produtos químicos, temos todo o know-how para importar sem custos adicionais." },
-    { "title": "Parametrização", "desc": "Contamos com 99% de parametrização no canal verde, além de benefícios fiscais e assessoria especializada focada na melhor gestão da sua importação." }
+    {
+      "title": "Segurança",
+      "desc": "Garantimos a segurança na importação de produtos químicos, sem riscos e com eficiência na operação."
+    },
+    {
+      "title": "Benefícios Fiscais",
+      "desc": "Com nossa experiência no mercado de importação de produtos químicos, temos todo o know-how para importar sem custos adicionais."
+    },
+    {
+      "title": "Parametrização",
+      "desc": "Contamos com 99% de parametrização no canal verde, além de benefícios fiscais e assessoria especializada focada na melhor gestão da sua importação."
+    }
   ],
   "sections": [
-    { "heading": "Desafios do setor", "text": "Com o crescimento da importação de produtos químicos, o setor é uma das principais tendências de mercado, atraindo cada vez mais investidores. No Brasil, a produção local não é capaz de suprir todas as necessidades, sendo a importação de grandes quantidades uma forma de suprir esse problema e ainda impulsionar mais um setor econômico." },
-    { "heading": "Soluções para importar produtos químicos", "text": "Com experiência na área, a WM é certificada pelo IBAMA (Autorização Ambiental para Transporte de Produtos Perigosos) e atua na importação em larga escala de produtos químicos. Nossos processos são feitos de modo a obter todas as exigências técnicas requeridas para o condicionamento, embalagem e nacionalização dos produtos. Temos conhecimento das medidas necessárias para o cumprimento de toda a burocracia exigida para que esse tipo de operação aconteça." }
+    {
+      "heading": "Desafios do setor",
+      "text": "Com o crescimento da importação de produtos químicos, o setor é uma das principais tendências de mercado, atraindo cada vez mais investidores. No Brasil, a produção local não é capaz de suprir todas as necessidades, sendo a importação de grandes quantidades uma forma de suprir esse problema e ainda impulsionar mais um setor econômico."
+    },
+    {
+      "heading": "Soluções para importar produtos químicos",
+      "text": "Com experiência na área, a WM é certificada pelo IBAMA (Autorização Ambiental para Transporte de Produtos Perigosos) e atua na importação em larga escala de produtos químicos. Nossos processos são feitos de modo a obter todas as exigências técnicas requeridas para o condicionamento, embalagem e nacionalização dos produtos. Temos conhecimento das medidas necessárias para o cumprimento de toda a burocracia exigida para que esse tipo de operação aconteça."
+    }
   ]
 }

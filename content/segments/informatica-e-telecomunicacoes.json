@@ -3,15 +3,37 @@
   "name": "Informática e Telecomunicações",
   "heroQuestion": "Quer importar informática e telecomunicações com agilidade e segurança?",
   "heroSub": "Entre em contato com a trading mais completa do Brasil para tornar essa operação muito mais otimizada para a sua empresa!",
+  "cardDesc": "Desenhamos a melhor solução logística e tributária, oferecendo ainda soluções de armazenamento e despacho dos itens de informática e telecom",
   "benefits": [
-    { "title": "Acompanhamento em tempo real", "desc": "Disponibilizamos um dashboard completo para você administrar suas importações e demandas." },
-    { "title": "Variedade", "desc": "Importamos diversos produtos relacionados a informática e telecomunicações." },
-    { "title": "Importação de ponta a ponta", "desc": "Suas importações estarão sob a responsabilidade de uma equipe experiente, encarregada de realizar cada etapa com excelência." }
+    {
+      "title": "Acompanhamento em tempo real",
+      "desc": "Disponibilizamos um dashboard completo para você administrar suas importações e demandas."
+    },
+    {
+      "title": "Variedade",
+      "desc": "Importamos diversos produtos relacionados a informática e telecomunicações."
+    },
+    {
+      "title": "Importação de ponta a ponta",
+      "desc": "Suas importações estarão sob a responsabilidade de uma equipe experiente, encarregada de realizar cada etapa com excelência."
+    }
   ],
   "sections": [
-    { "heading": "Importação no setor", "text": "A importação de equipamentos de informática e telecomunicação tem recebido um grande incentivo. Com a isenção do Imposto de Importação de diversos produtos do setor, o importador passa a enfrentar menos burocracia e consegue diminuir os custos das operações. Ao investir em soluções inovadoras, sua empresa conquista um importante diferencial competitivo — uma ótima oportunidade de melhorar os lucros empresariais." },
-    { "heading": "Alguns dos produtos que já importamos", "text": "Cabos de fibra óptica, câmeras de segurança, modems e roteadores, impressoras 3D e componentes de computador." },
-    { "heading": "Benefícios da importação dos equipamentos", "text": "O mercado internacional permite importar equipamentos com qualidade superior aos nacionais. Mesmo com sobretaxas, ele oferece preços mais vantajosos e produtos com tecnologia de ponta, aos quais você tem acesso através das importações." },
-    { "heading": "Solução para a importação no setor", "text": "A WM garante rapidez e segurança no processo de importação. Estudamos e analisamos todas as possibilidades de beneficiar suas encomendas com vantagens como descontos em fretes e redução de impostos sobre a importação, ao importar por estados estratégicos como Santa Catarina." }
+    {
+      "heading": "Importação no setor",
+      "text": "A importação de equipamentos de informática e telecomunicação tem recebido um grande incentivo. Com a isenção do Imposto de Importação de diversos produtos do setor, o importador passa a enfrentar menos burocracia e consegue diminuir os custos das operações. Ao investir em soluções inovadoras, sua empresa conquista um importante diferencial competitivo — uma ótima oportunidade de melhorar os lucros empresariais."
+    },
+    {
+      "heading": "Alguns dos produtos que já importamos",
+      "text": "Cabos de fibra óptica, câmeras de segurança, modems e roteadores, impressoras 3D e componentes de computador."
+    },
+    {
+      "heading": "Benefícios da importação dos equipamentos",
+      "text": "O mercado internacional permite importar equipamentos com qualidade superior aos nacionais. Mesmo com sobretaxas, ele oferece preços mais vantajosos e produtos com tecnologia de ponta, aos quais você tem acesso através das importações."
+    },
+    {
+      "heading": "Solução para a importação no setor",
+      "text": "A WM garante rapidez e segurança no processo de importação. Estudamos e analisamos todas as possibilidades de beneficiar suas encomendas com vantagens como descontos em fretes e redução de impostos sobre a importação, ao importar por estados estratégicos como Santa Catarina."
+    }
   ]
 }

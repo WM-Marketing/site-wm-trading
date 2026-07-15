@@ -204,8 +204,13 @@ html, body { overflow-x: hidden; }
 
   /* --- SECTION 7 — SEGMENTOS --- */
   .segmentos-grid-wrapper { flex-direction: column; }
-  .segmentos-grid { grid-template-columns: 1fr; gap: 24px; }
+  .segmentos-carousel { width: 100%; }
+  .segmentos-grid { gap: 24px; }
+  /* carrossel: 1 card por vez no mobile */
+  .segmentos-grid .segmento-card { flex: 0 0 100%; }
   .segmento-card-img img { aspect-ratio: 16/9; }
+  .segmentos-nav--prev { left: 4px; }
+  .segmentos-nav--next { right: 4px; }
   .segmentos-ver-todos {
     writing-mode: horizontal-tb;
     text-orientation: mixed;

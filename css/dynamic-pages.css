@@ -857,3 +857,24 @@ textarea.input-wm {
   object-fit: contain;
 }
 
+
+/* ---------- SEGMENTOS INDEX (segmentos/index.html) ---------- */
+/* Reusa os cards .segmento-card da home em grade completa;
+   thumbs 400x200 herdados do site antigo, por isso proporção 2:1 */
+.segmentos-index-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 40px 20px;
+}
+.segmentos-index-grid .segmento-card-img a {
+  display: block;
+}
+.segmentos-index-grid .segmento-card-img img {
+  aspect-ratio: 2 / 1;
+}
+@media (max-width: 900px) {
+  .segmentos-index-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 600px) {
+  .segmentos-index-grid { grid-template-columns: 1fr; }
+}

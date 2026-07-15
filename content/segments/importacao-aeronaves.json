@@ -3,13 +3,29 @@
   "name": "Aeronaves",
   "heroQuestion": "Quer importar o seu avião ou helicóptero com agilidade e segurança?",
   "heroSub": "Entre em contato com a trading mais completa do Brasil para tornar esse sonho realidade.",
+  "cardDesc": "Com um benefício exclusivo para o setor, cuidamos de todas as etapas da importação de aviões e helicópteros com agilidade e menor custo",
   "benefits": [
-    { "title": "Condições de uso", "desc": "É possível encontrar uma grande variedade de aeronaves seminovas com poucas horas de voo e em excelente estado." },
-    { "title": "Redução de custos", "desc": "No total, a economia pode chegar a 30% sobre o valor de uma aeronave semelhante que já esteja no Brasil." },
-    { "title": "Oferta no mercado", "desc": "Enquanto no mercado nacional as opções seguem limitadas, no mercado global sobram oportunidades." }
+    {
+      "title": "Condições de uso",
+      "desc": "É possível encontrar uma grande variedade de aeronaves seminovas com poucas horas de voo e em excelente estado."
+    },
+    {
+      "title": "Redução de custos",
+      "desc": "No total, a economia pode chegar a 30% sobre o valor de uma aeronave semelhante que já esteja no Brasil."
+    },
+    {
+      "title": "Oferta no mercado",
+      "desc": "Enquanto no mercado nacional as opções seguem limitadas, no mercado global sobram oportunidades."
+    }
   ],
   "sections": [
-    { "heading": "Importação de aeronaves", "text": "Com 21 anos de experiência no mercado de importações, somos especialistas em planejamento tributário e logístico para otimizar as operações dos nossos clientes. Oferecemos ampla experiência na importação de aeronaves executivas, com domínio total das leis e regulamentos aeronáuticos. A WM tem tempo recorde na liberação de aeronaves importadas e expertise em diferentes modelos executivos." },
-    { "heading": "6 passos para importar sua aeronave", "text": "1) Seleção da aeronave — LOI elaborada, abertura da conta Escrow e depósito do sinal. 2) Assinatura do APA e início da PPI — contrato assinado, inspeção pré-compra, voo de teste e abertura da Trust. 3) Finalização da PPI e closing — relatório técnico, aceitação, depósito do valor restante e obtenção de documentos de exportação, como o COA. 4) Checklist da documentação e exportação — exportação, desregistro, contratação de piloto e seguros, emissão de documentos de importação e agendamento de slot. 5) Chegada da aeronave — validação ANAC, registro da Declaração de Importação, pagamento de impostos de nacionalização e desembaraço. 6) Direcionamento à VTI e entrega ao cliente — Vistoria Técnica Inicial, entrega, endosso do seguro e emissão de CA e CM." }
+    {
+      "heading": "Importação de aeronaves",
+      "text": "Com 21 anos de experiência no mercado de importações, somos especialistas em planejamento tributário e logístico para otimizar as operações dos nossos clientes. Oferecemos ampla experiência na importação de aeronaves executivas, com domínio total das leis e regulamentos aeronáuticos. A WM tem tempo recorde na liberação de aeronaves importadas e expertise em diferentes modelos executivos."
+    },
+    {
+      "heading": "6 passos para importar sua aeronave",
+      "text": "1) Seleção da aeronave — LOI elaborada, abertura da conta Escrow e depósito do sinal. 2) Assinatura do APA e início da PPI — contrato assinado, inspeção pré-compra, voo de teste e abertura da Trust. 3) Finalização da PPI e closing — relatório técnico, aceitação, depósito do valor restante e obtenção de documentos de exportação, como o COA. 4) Checklist da documentação e exportação — exportação, desregistro, contratação de piloto e seguros, emissão de documentos de importação e agendamento de slot. 5) Chegada da aeronave — validação ANAC, registro da Declaração de Importação, pagamento de impostos de nacionalização e desembaraço. 6) Direcionamento à VTI e entrega ao cliente — Vistoria Técnica Inicial, entrega, endosso do seguro e emissão de CA e CM."
+    }
   ]
 }

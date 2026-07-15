@@ -3,14 +3,33 @@
   "name": "Cosméticos",
   "heroQuestion": "Sua empresa deseja importar cosméticos para revenda?",
   "heroSub": "De acordo com a definição da ANVISA, a classe de cosméticos abrange diversos produtos — de perfumes e itens de higiene pessoal a qualquer outro que traga embelezamento sem efeitos terapêuticos, como maquiagens, ácido hialurônico ou produtos de skin care.",
+  "cardDesc": "Facilitamos a importação de cosméticos com redução de custos e planejamento logístico e tributário",
   "benefits": [
-    { "title": "AFE e registros necessários", "desc": "Possuímos a AFE e as notificações de produtos da ANVISA para realizar qualquer uma das modalidades de importação de cosméticos — seja por Encomenda ou Conta e Ordem." },
-    { "title": "Planejamento logístico", "desc": "Realizamos o planejamento minucioso da logística e o estudo da tributação dos produtos, a fim de tornar o desembaraço aduaneiro mais tranquilo e adequado às particularidades exigidas." },
-    { "title": "Organização de documentos", "desc": "Organizamos todos os documentos de importação para que haja o deferimento da Licença de Importação de forma ágil e segura durante o processo." }
+    {
+      "title": "AFE e registros necessários",
+      "desc": "Possuímos a AFE e as notificações de produtos da ANVISA para realizar qualquer uma das modalidades de importação de cosméticos — seja por Encomenda ou Conta e Ordem."
+    },
+    {
+      "title": "Planejamento logístico",
+      "desc": "Realizamos o planejamento minucioso da logística e o estudo da tributação dos produtos, a fim de tornar o desembaraço aduaneiro mais tranquilo e adequado às particularidades exigidas."
+    },
+    {
+      "title": "Organização de documentos",
+      "desc": "Organizamos todos os documentos de importação para que haja o deferimento da Licença de Importação de forma ágil e segura durante o processo."
+    }
   ],
   "sections": [
-    { "heading": "Oportunidades da importação", "text": "O mercado internacional de cosméticos apresenta opções e variedades de produtos ainda não encontrados no Brasil, mesmo com o consumo nacional tendo aumentado drasticamente ao longo dos anos. Divididos em 2 graus de risco para o consumidor final, a nacionalização desses produtos é mais burocrática e apresenta diferentes requisitos, desde a AFE da empresa até a Licença de Importação ou notificações e registros para os produtos." },
-    { "heading": "O que é necessário para importar cosméticos com a WM?", "text": "A empresa deve ter o Alvará Sanitário Municipal ou Estadual — para isso será necessário criar o POP e o Manual de Boas Práticas. Também é preciso a AFE de Importação e Distribuição: a empresa deve contratar o responsável técnico da área da saúde para gerir esse processo junto à ANVISA. Por fim, deve-se registrar o produto junto à ANVISA — dependendo do produto, será uma notificação ou pode ser classificado em grau 1 ou grau 2." },
-    { "heading": "Diferenciais da importação com a WM", "text": "O mercado de cosméticos cresce cada vez mais no Brasil, e importar do exterior traz diversos diferenciais competitivos para a sua empresa — com 100% das operações em canal verde em 2023." }
+    {
+      "heading": "Oportunidades da importação",
+      "text": "O mercado internacional de cosméticos apresenta opções e variedades de produtos ainda não encontrados no Brasil, mesmo com o consumo nacional tendo aumentado drasticamente ao longo dos anos. Divididos em 2 graus de risco para o consumidor final, a nacionalização desses produtos é mais burocrática e apresenta diferentes requisitos, desde a AFE da empresa até a Licença de Importação ou notificações e registros para os produtos."
+    },
+    {
+      "heading": "O que é necessário para importar cosméticos com a WM?",
+      "text": "A empresa deve ter o Alvará Sanitário Municipal ou Estadual — para isso será necessário criar o POP e o Manual de Boas Práticas. Também é preciso a AFE de Importação e Distribuição: a empresa deve contratar o responsável técnico da área da saúde para gerir esse processo junto à ANVISA. Por fim, deve-se registrar o produto junto à ANVISA — dependendo do produto, será uma notificação ou pode ser classificado em grau 1 ou grau 2."
+    },
+    {
+      "heading": "Diferenciais da importação com a WM",
+      "text": "O mercado de cosméticos cresce cada vez mais no Brasil, e importar do exterior traz diversos diferenciais competitivos para a sua empresa — com 100% das operações em canal verde em 2023."
+    }
   ]
 }
