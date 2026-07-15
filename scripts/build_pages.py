@@ -451,6 +451,7 @@ def render_html_page(output_path, title, description, content_body, head_tpl, he
   <meta property="og:site_name" content="WM Trading" />
   <meta property="og:locale" content="{og_locale}" />
   <meta name="twitter:card" content="summary_large_image" />
+  <meta name="robots" content="index, follow, max-image-preview:large" />
   {jsonld_html}"""
 
     # Build complete HTML page
