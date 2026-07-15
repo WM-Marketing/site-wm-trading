@@ -422,9 +422,12 @@ def render_html_page(output_path, title, description, content_body, head_tpl, he
     """Wraps page content in a fully styled, absolute-path templates block and saves it."""
     # SEO: canonical + Open Graph + Twitter Card + JSON-LD, apontando para o dominio final
     rel_path = os.path.relpath(output_path, ROOT_DIR).replace(os.sep, "/")
-    # index.html canoniza para a URL do diretório (/segmentos/, /blog/)
-    if rel_path.endswith("index.html"):
-        rel_path = rel_path[:-len("index.html")]
+    # index.html canoniza para a URL do diretório SEM barra final (/segmentos,
+    # /blog) — vercel.json usa trailingSlash:false e 308-redireciona a forma com barra
+    if rel_path == "index.html":
+        rel_path = ""
+    elif rel_path.endswith("/index.html"):
+        rel_path = rel_path[:-len("/index.html")]
     canonical_url = f"{SITE_URL}/{rel_path}"
     og_img = og_image or DEFAULT_OG_IMAGE
     if og_img.startswith("/"):
@@ -1200,7 +1203,7 @@ def main():
       <div class="container" style="max-width: 800px; margin: 0 auto; text-align: center;">
         <h2 class="section-title-center" style="margin-bottom: 16px;">Confira nosso <span class="text-primary">Blog</span></h2>
         <p class="card-desc" style="font-size: var(--fs-base); line-height: 1.7; color: var(--color-text-dark);">Notícias, artigos e conteúdos sobre importação e comércio exterior para a sua empresa.</p>
-        <a href="/blog/" class="btn btn-lg" style="margin-top: 24px;">Acessar o Blog →</a>
+        <a href="/blog" class="btn btn-lg" style="margin-top: 24px;">Acessar o Blog →</a>
       </div>
     </section>
 
@@ -2041,8 +2044,9 @@ A WM Trading não coleta dados de crianças ou adolescentes menores de 16 anos d
         if rel == "index.html":
             loc = SITE_URL + "/"
         elif rel.endswith("/index.html"):
-            # index.html de subpasta entra como URL do diretório (/segmentos/, /blog/)
-            loc = f"{SITE_URL}/{rel[:-len('index.html')]}"
+            # index.html de subpasta entra como URL do diretório sem barra final
+            # (/segmentos, /blog) — alinhado ao trailingSlash:false da Vercel
+            loc = f"{SITE_URL}/{rel[:-len('/index.html')]}"
         else:
             loc = f"{SITE_URL}/{rel}"
         entries.append(f"  <url>\n    <loc>{loc}</loc>\n    <lastmod>{lastmod}</lastmod>\n  </url>")
