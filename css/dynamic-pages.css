@@ -596,8 +596,17 @@ textarea.input-wm {
   margin-bottom: 24px;
   padding-left: 24px;
 }
+.prose-wm ul {
+  position: relative;
+  list-style: disc !important;
+  padding-left: 28px;
+}
 .prose-wm li {
+  position: relative;
   margin-bottom: 8px;
+}
+.prose-wm li::marker {
+  color: #1a1a1a;
 }
 .prose-wm blockquote {
   border-left: 4px solid var(--color-primary);

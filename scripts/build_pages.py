@@ -529,6 +529,15 @@ def markdown_to_html(text):
                 i += 1
             new_lines.append(f'<ul>{"".join(list_items)}</ul>')
             
+        # Google Sheets published charts
+        elif re.match(r'^https://docs\.google\.com/spreadsheets/d/e/[^\s]+/pubchart\?[^\s]+$', line.strip()):
+            chart_url = line.strip().replace('&', '&amp;')
+            new_lines.append(
+                f'<iframe class="google-sheet-chart" src="{chart_url}" '
+                'title="Gráfico interativo do Google Sheets" loading="lazy"></iframe>'
+            )
+            i += 1
+
         # YouTube Videos
         elif line.strip().startswith('https://youtu.be/') or line.strip().startswith('https://www.youtube.com/embed/') or line.strip().startswith('https://www.youtube.com/watch'):
             yt_url = line.strip()
