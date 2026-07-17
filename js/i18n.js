@@ -15,16 +15,24 @@ const translations = {
     'hero.cta':   'Falar com especialistas →',
 
     // Section 2
-    's2.card1': 'Importação de autopeças com eficiência fiscal e reposição garantida',
-    's2.card2': 'Importação estratégica de aço e metais com planejamento tributário',
-    's2.card3': 'Equipamentos fotovoltaicos importados com agilidade e menor custo',
+    's2.card1': 'Importação de aeronaves com redução tributária e suporte especializado',
+    's2.card2': 'Importação de máquinas com eficiência para o setor agrícola e industrial',
+    's2.card3': 'Importação de aço com eficiência e planejamento único para cada projeto',
     's2.more':  'Saiba mais →',
 
     // Section 3
     's3.title': 'Por que a WM é a sua <span class="text-primary">melhor escolha?</span>',
     's3.sub':   'Estudamos cada operação detalhadamente, oferecendo nossa expertise técnica e planejamento em cada etapa. Entregamos o melhor para o seu projeto, com desenho tributário especializado e gestão da importação inteligente',
-    's3.card.title': 'Programa de Compliance',
-    's3.card.text':  'Sólido Programa de Compliance agregando transparência na operação e sólido planejamento',
+    's3.card1.title': 'Programa de Compliance',
+    's3.card1.text':  'Sólido Programa de Compliance agregando transparência na operação e sólido planejamento',
+    's3.card2.title': 'Otimização de custos',
+    's3.card2.text':  'Planejamento fiscal, tributário e aduaneiro. A WM possui 7 benefícios fiscais em 6 estados que reduzem a alíquota do ICMS',
+    's3.card3.title': 'Time de especialistas',
+    's3.card3.text':  'Equipe altamente qualificada com anos de experiência nos processos de importação',
+    's3.card4.title': 'Tecnologia 360º',
+    's3.card4.text':  'Ferramentas desenvolvidas para monitoramento de todas as etapas e acesso aos documentos em tempo real',
+    's3.card5.title': 'ISO 9001',
+    's3.card5.text':  'Controle de qualidade em todas as etapas do processo e primeira Trading do Brasil a ser certificada com ISO 9001',
 
     // Section 4
     's4.label1': 'Filiais em todo Brasil e 1 no Panamá',
@@ -146,16 +154,24 @@ const translations = {
     'hero.cta':   'Talk to specialists →',
 
     // Section 2
-    's2.card1': 'Auto parts import with tax efficiency and guaranteed supply',
-    's2.card2': 'Strategic steel and metals import with tax planning',
-    's2.card3': 'Photovoltaic equipment imported with agility and lower cost',
+    's2.card1': 'Aircraft import with tax reduction and specialized support',
+    's2.card2': 'Machinery import with efficiency for the agricultural and industrial sectors',
+    's2.card3': 'Steel import with efficiency and a tailored plan for every project',
     's2.more':  'Learn more →',
 
     // Section 3
     's3.title': 'Why is WM your <span class="text-primary">best choice?</span>',
     's3.sub':   'We study each operation in detail, offering our technical expertise and planning at every step. We deliver the best for your project, with specialized tax design and intelligent import management',
-    's3.card.title': 'Compliance Program',
-    's3.card.text':  'Solid Compliance Program adding transparency to operations and solid planning',
+    's3.card1.title': 'Compliance Program',
+    's3.card1.text':  'A robust Compliance Program that brings transparency and sound planning to every operation',
+    's3.card2.title': 'Cost optimization',
+    's3.card2.text':  'Tax, fiscal and customs planning. WM has 7 tax benefits in 6 states that reduce the ICMS rate',
+    's3.card3.title': 'Team of specialists',
+    's3.card3.text':  'Highly qualified professionals with years of experience in import processes',
+    's3.card4.title': '360º technology',
+    's3.card4.text':  'Tools developed to monitor every stage and access documents in real time',
+    's3.card5.title': 'ISO 9001',
+    's3.card5.text':  'Quality control at every stage of the process and the first Brazilian trading company certified with ISO 9001',
 
     // Section 4
     's4.label1': 'Branches across Brazil and 1 in Panama',
