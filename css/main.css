@@ -440,6 +440,9 @@
   position: relative;
   height: 240px;
   background: #222;
+  display: block;
+  color: inherit;
+  text-decoration: none;
 }
 .card-img img {
   width: 100%;
