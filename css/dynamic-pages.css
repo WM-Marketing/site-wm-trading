@@ -635,6 +635,32 @@ textarea.input-wm {
   border: none;
 }
 
+.wm-interactive-chart {
+  margin: 36px 0;
+  padding: 24px;
+  border: 1px solid #e5e5e5;
+  border-radius: var(--radius-lg);
+  background: #fff;
+}
+.wm-interactive-chart figcaption {
+  margin-bottom: 18px;
+  color: var(--color-text-dark);
+  font-size: var(--fs-base);
+  font-weight: 700;
+  text-align: center;
+}
+.wm-interactive-chart__canvas { height: 360px; }
+.wm-interactive-chart__source {
+  margin: 16px 0 0 !important;
+  color: var(--color-text-muted);
+  font-size: 12px;
+  text-align: center;
+}
+@media (max-width: 640px) {
+  .wm-interactive-chart { padding: 16px; }
+  .wm-interactive-chart__canvas { height: 280px; }
+}
+
 /* ---------- POST IMAGES & GALLERY ---------- */
 .prose-wm img {
   max-width: 100%;

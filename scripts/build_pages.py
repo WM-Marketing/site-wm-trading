@@ -538,6 +538,47 @@ def markdown_to_html(text):
             )
             i += 1
 
+        # Gráfico interativo: importação mensal de automóveis de passageiros (SH4 8703)
+        elif line.strip() == '{{wm-chart:autos-8703}}':
+            new_lines.append('''<figure class="wm-interactive-chart">
+  <figcaption>Importação mensal de automóveis de passageiros</figcaption>
+  <div class="wm-interactive-chart__canvas"><canvas id="chart-autos-8703" aria-label="Gráfico de linha da importação mensal de automóveis de passageiros, de julho de 2025 a junho de 2026"></canvas></div>
+  <p class="wm-interactive-chart__source">Valores FOB em US$ milhões. Fonte: MDIC/Comex Stat.</p>
+</figure>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+<script>
+(() => {
+  const canvas = document.getElementById('chart-autos-8703');
+  if (!canvas || !window.Chart) return;
+  new Chart(canvas, {
+    type: 'line',
+    data: {
+      labels: ['jul./25', 'ago./25', 'set./25', 'out./25', 'nov./25', 'dez./25', 'jan./26', 'fev./26', 'mar./26', 'abr./26', 'mai./26', 'jun./26'],
+      datasets: [{
+        label: 'Valor FOB (US$ milhões)',
+        data: [321.38, 405.49, 484.00, 601.14, 785.16, 678.75, 564.20, 559.68, 1125.77, 1249.62, 1873.87, 2416.53],
+        borderColor: '#ff5a1f', backgroundColor: 'rgba(255, 90, 31, 0.18)',
+        borderWidth: 3, fill: true, tension: 0.32, pointRadius: 4,
+        pointHoverRadius: 6, pointBackgroundColor: '#ff5a1f'
+      }]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      interaction: { mode: 'index', intersect: false },
+      plugins: {
+        legend: { display: false },
+        tooltip: { callbacks: { label: ctx => ` US$ ${ctx.parsed.y.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} milhões` } }
+      },
+      scales: {
+        y: { beginAtZero: true, ticks: { callback: value => `US$ ${value.toLocaleString('pt-BR')} mi` }, grid: { color: '#e5e5e5' } },
+        x: { grid: { display: false } }
+      }
+    }
+  });
+})();
+</script>''')
+            i += 1
+
         # YouTube Videos
         elif line.strip().startswith('https://youtu.be/') or line.strip().startswith('https://www.youtube.com/embed/') or line.strip().startswith('https://www.youtube.com/watch'):
             yt_url = line.strip()
