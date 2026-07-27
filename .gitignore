@@ -18,6 +18,23 @@ images/videos/
 # Claude Code
 .claude/
 
+# Documentos internos e de agentes de IA — NUNCA commitar.
+# A Vercel publica qualquer arquivo do repo: se entrarem aqui, viram
+# paginas publicas (ex.: www.wmtrading.com.br/DIAGNOSTICO.md).
+AGENTS.md
+CLAUDE.md
+DIAGNOSTICO.md
+COMPARATIVO-SITE-ANTIGO.md
+RELATORIO-*.md
+docs/03-arquitetura-e-analise-do-site.md
+.agents/
+.cursor/
+.windsurf/
+
+# Python
+__pycache__/
+*.pyc
+
 # Node (se futuramente usar)
 node_modules/
 npm-debug.log*
