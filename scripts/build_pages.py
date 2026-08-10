@@ -1978,16 +1978,16 @@ Guardamos os dados apenas pelo tempo necessário a cada finalidade:
           <table class="legal-table">
             <thead><tr><th>Tipo de registro</th><th>Prazo de guarda</th></tr></thead>
             <tbody>
-              <tr><td>Contato que não evoluiu para uma operação</td><td>24 meses contados do último contato</td></tr>
-              <tr><td>Registro de aceite (formulários e cookies)</td><td>5 anos após o encerramento do tratamento correspondente</td></tr>
+              <tr><td>Contato que não evoluiu para uma operação</td><td>Enquanto houver interesse comercial legítimo no contato, com revisão periódica da base — e antes disso, sempre que você pedir a eliminação</td></tr>
+              <tr><td>Registro de aceite (formulários e cookies)</td><td>No mínimo 5 anos após o encerramento do tratamento correspondente, para comprovação do consentimento</td></tr>
               <tr><td>Dados de clientes, fornecedores e das operações realizadas</td><td>Durante a relação e, depois dela, pelo prazo exigido pela legislação fiscal, aduaneira e contábil, ou pelo prazo de prescrição aplicável</td></tr>
-              <tr><td>Registros de acesso à aplicação</td><td>6 meses (art. 15 do Marco Civil da Internet)</td></tr>
+              <tr><td>Registros de acesso à aplicação</td><td>No mínimo 6 meses (art. 15 do Marco Civil da Internet)</td></tr>
             </tbody>
           </table>
     """
 
     privacy_md_3 = """
-Encerrado o prazo, os dados são eliminados ou anonimizados, salvo quando a lei exigir guarda por período maior.
+Encerrado o prazo, os dados são eliminados ou anonimizados, salvo quando a lei exigir guarda por período maior. Estamos concluindo a revisão dos prazos fixos de cada tipo de registro e publicaremos os prazos definidos aqui assim que ela for finalizada. Independentemente disso, você pode pedir a eliminação dos seus dados a qualquer momento — veja o item 9.
 
 ## 8. Segurança da informação e incidentes
 
