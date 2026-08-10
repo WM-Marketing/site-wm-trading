@@ -1958,7 +1958,7 @@ Usamos cookies próprios e de terceiros para o site funcionar, medir desempenho 
 
 **Não vendemos dados pessoais.** Compartilhamos apenas o necessário, com:
 
-- **Fornecedores de tecnologia que operam o site e o atendimento**, sempre sob contrato e seguindo as nossas instruções: Vercel (hospedagem do site), Zapier (encaminhamento dos formulários), Pipedrive (CRM, onde o seu contato é registrado) e as ferramentas de chat utilizadas no site.
+- **Fornecedores de tecnologia que operam o site e o atendimento**, que tratam os dados a nosso pedido, conforme as nossas instruções e nos limites desta política: Vercel (hospedagem do site), Zapier (encaminhamento dos formulários), Pipedrive (CRM, onde o seu contato é registrado) e as ferramentas de chat utilizadas no site.
 - **Plataformas de análise e publicidade**, quando você aceita os cookies correspondentes: Google (Google Analytics, Google Ads e Google Tag Manager), Microsoft (Clarity e Microsoft Advertising), Meta, LinkedIn e TikTok.
 - **Empresas do grupo WM**, quando necessário à condução da operação.
 - **Parceiros operacionais da importação**, quando a operação exigir: despachantes aduaneiros, transportadores, seguradoras, armazéns e instituições financeiras.
@@ -1967,7 +1967,7 @@ Usamos cookies próprios e de terceiros para o site funcionar, medir desempenho 
 
 ## 6. Transferência internacional de dados
 
-Parte dos fornecedores citados acima processa e armazena dados **fora do Brasil**, principalmente nos Estados Unidos e na União Europeia. Nesses casos, a transferência ocorre com as garantias previstas no art. 33 da LGPD — cláusulas contratuais de proteção de dados firmadas com cada fornecedor ou a necessidade da transferência para a execução do contrato e para o atendimento da sua solicitação. Para saber quais fornecedores tratam os seus dados fora do país, escreva para dpo@wmtrading.com.br.
+Parte dos fornecedores citados acima processa e armazena dados **fora do Brasil**, principalmente nos Estados Unidos e na União Europeia. Essas transferências se apoiam nas hipóteses do art. 33 da LGPD — em especial a necessidade da transferência para a execução de contrato ou de procedimentos preliminares a pedido do titular (inciso IX, alínea "b") e, quando aplicável, as cláusulas de proteção de dados previstas nos contratos firmados com esses fornecedores (inciso II). Para saber quais fornecedores tratam os seus dados fora do país, escreva para dpo@wmtrading.com.br.
 
 ## 7. Por quanto tempo guardamos
 
