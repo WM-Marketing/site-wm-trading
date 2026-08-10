@@ -107,7 +107,11 @@
           '<input type="tel" name="telefone" required placeholder="Telefone * — (DDD) 99999-0000" autocomplete="tel" maxlength="16" />' +
           '<label class="wm-wa-consent">' +
             '<input type="checkbox" name="aceite_privacidade" required value="sim" />' +
-            '<span>Estou de acordo com a <a href="/politica-de-privacidade.html" target="_blank" rel="noopener">pol&iacute;tica de privacidade</a>.</span>' +
+            '<span data-wm-aceite>Li e estou de acordo com a <a href="/politica-de-privacidade.html" target="_blank" rel="noopener">Pol&iacute;tica de Privacidade</a> e autorizo a WM Trading a tratar meus dados para responder a este contato.</span>' +
+          '</label>' +
+          '<label class="wm-wa-consent">' +
+            '<input type="checkbox" name="aceite_marketing" value="sim" />' +
+            '<span>Tamb&eacute;m quero receber conte&uacute;dos e comunica&ccedil;&otilde;es comerciais da WM Trading (opcional).</span>' +
           '</label>' +
           '<button type="submit" class="wm-wa-submit">' + WA_ICON + 'WhatsApp</button>' +
           '<p class="wm-wa-error"></p>' +
@@ -179,14 +183,22 @@
     btn.innerHTML = 'Enviando...';
     errorEl.style.display = 'none';
 
+    var aceiteEl = form.querySelector('[data-wm-aceite]');
+    var versaoEl = document.querySelector('meta[name="wm-politica-versao"]');
+
     var payload = {
       nome: nome,
       email: form.querySelector('[name="email"]').value.trim(),
       telefone: form.querySelector('[name="telefone"]').value.trim(),
-      aceite_privacidade: 'sim',
       formulario: 'whatsapp',
       url: window.location.href,
-      origem: 'site wmtrading.com.br'
+      origem: 'site wmtrading.com.br',
+      // Registro de aceite (LGPD art. 8º, § 2º) — IP e user agent entram no servidor
+      aceite_privacidade: form.querySelector('[name="aceite_privacidade"]:checked') ? 'sim' : 'nao',
+      aceite_marketing: form.querySelector('[name="aceite_marketing"]:checked') ? 'sim' : 'nao',
+      aceite_texto: aceiteEl ? aceiteEl.textContent.replace(/\s+/g, ' ').trim() : '',
+      politica_versao: versaoEl ? versaoEl.getAttribute('content') : '',
+      aceite_em: new Date().toISOString()
     };
 
     // Campos de atribuição (UTMs, gclid, GA client id — js/utm-tracking.js)

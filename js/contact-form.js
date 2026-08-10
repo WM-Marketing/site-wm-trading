@@ -5,6 +5,24 @@
 (function() {
   'use strict';
 
+  /* ---- Registro de aceite (LGPD art. 8º, § 2º — o ônus da prova é do controlador) ----
+     Guardamos o QUE foi aceito, QUAL versão da política estava no ar e QUANDO.
+     A versão vem da meta wm-politica-versao, emitida pelo gerador (build_pages.py).
+     IP e user agent são acrescentados no servidor (api/contato.js). */
+  function politicaVersao() {
+    var m = document.querySelector('meta[name="wm-politica-versao"]');
+    return (m && m.getAttribute('content')) || '';
+  }
+
+  function textoDoAceite(form) {
+    var el = form.querySelector('[data-wm-aceite]');
+    return el ? el.textContent.replace(/\s+/g, ' ').trim() : '';
+  }
+
+  function marcado(form, name) {
+    return form.querySelector('[name="' + name + '"]:checked') ? 'sim' : 'nao';
+  }
+
   // Intercept all submit events at document level
   document.addEventListener('submit', async function(e) {
     const form = e.target;
@@ -42,6 +60,13 @@
     payload.formulario = form.getAttribute('data-form-type') || 'contato';
     payload.url = window.location.href;
     payload.origem = 'site wmtrading.com.br';
+
+    // Prova de consentimento — segue para o Pipedrive junto com o lead
+    payload.aceite_privacidade = marcado(form, 'aceite_privacidade');
+    payload.aceite_marketing = marcado(form, 'aceite_marketing');
+    payload.aceite_texto = textoDoAceite(form);
+    payload.politica_versao = politicaVersao();
+    payload.aceite_em = new Date().toISOString();
 
     // Attribution fields (UTMs, gclid, GA client id — see js/utm-tracking.js)
     if (window.wmTracking) {

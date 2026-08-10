@@ -26,6 +26,15 @@ module.exports = async function handler(req, res) {
       return res.status(200).json({ ok: true });
     }
 
+    // Sem registro de aceite não entra no CRM: o checkbox é obrigatório em todos
+    // os formulários, então isto só barra envios adulterados ou fora do padrão.
+    if (String(data.aceite_privacidade || '').toLowerCase() !== 'sim') {
+      return res.status(400).json({
+        ok: false,
+        error: 'É necessário aceitar a Política de Privacidade para enviar os seus dados.'
+      });
+    }
+
     // Determine form type to look up specific webhook URLs
     // Example: formulario="ebook" -> ZAPIER_WEBHOOK_EBOOK
     const formType = String(data.formulario || '').replace(/[^a-z0-9]+/gi, '_').toUpperCase();
@@ -39,21 +48,37 @@ module.exports = async function handler(req, res) {
       });
     }
 
+    // Prova de consentimento (LGPD art. 8º, § 2º): IP e user agent só podem ser
+    // lidos no servidor. Servem exclusivamente para comprovar o aceite e coibir
+    // envios automatizados — declarados na Política de Privacidade (item 2.3).
+    const ipBruto = req.headers['x-forwarded-for'] || req.headers['x-real-ip'] || '';
+    const ip = String(ipBruto).split(',')[0].trim();
+    const userAgent = String(req.headers['user-agent'] || '').slice(0, 300);
+
     // Standardized payload format for Zapier catch hooks
     const payload = {
       nome: data.nome || '',
       email: data.email || '',
       telefone: data.telefone || '',
       empresa: data.empresa || '',
+      cargo: data.cargo || '',
       estado: data.estado || '',
+      volume: data.volume || '',
       segmento: data.segmento || '',
       forma_resposta: data.forma_resposta || '',
       mensagem: data.mensagem || '',
-      aceite_privacidade: data.aceite_privacidade || '',
       formulario: data.formulario || '',
       url: data.url || '',
       origem: data.origem || 'site wmtrading.com.br',
       enviado_em: new Date().toISOString(),
+      // Registro de aceite — vai para campos próprios no Pipedrive
+      aceite_privacidade: data.aceite_privacidade || '',
+      aceite_marketing: data.aceite_marketing || 'nao',
+      aceite_texto: data.aceite_texto || '',
+      politica_versao: data.politica_versao || '',
+      aceite_em: data.aceite_em || new Date().toISOString(),
+      aceite_ip: ip,
+      aceite_user_agent: userAgent,
       // Atribuição de mídia/orgânico (preenchidos por js/utm-tracking.js)
       utm_source: data.utm_source || '',
       utm_medium: data.utm_medium || '',

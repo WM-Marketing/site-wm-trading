@@ -224,3 +224,8 @@ img { max-width: 100%; display: block; }
   .lp-whats { bottom: 84px; }
   .lp-media { min-height: 300px; }
 }
+
+/* Aceite LGPD no formulario da LP */
+.lp-check{display:flex;align-items:flex-start;gap:9px;font-size:13px;line-height:1.5;color:#666;cursor:pointer;font-weight:400;}
+.lp-check input[type="checkbox"]{margin-top:3px;flex-shrink:0;accent-color:#FC5000;}
+.lp-check a{color:#FC5000;text-decoration:underline;}

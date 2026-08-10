@@ -28,6 +28,9 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js" defer></script>
   <script src="/js/whatsapp-popup.js" defer></script>
   <script src="/js/utm-tracking.js"></script>
+  <script src="/js/contact-form.js" defer></script>
+  <!-- LGPD: manter igual a POLITICA_VERSAO_ID em scripts/build_pages.py -->
+  <meta name="wm-politica-versao" content="2026-08-10" />
   <!-- Consentimento LGPD + Consent Mode v2 + GTM (GTM-K58GFND): tudo em js/consent.js.
        Nenhuma tag carrega antes do aceite; GTM só no domínio oficial
        (teste no vercel.app: localStorage.setItem('wm_gtm_test','1') e recarregar) -->
@@ -626,53 +629,65 @@
       </div>
     </div>
 
-    <!-- Lado direito — formulário placeholder -->
+    <!-- Lado direito — formulário (envia para /api/contato via js/contact-form.js) -->
     <div class="aero-cta__right">
-      <div class="aero-cta__form-card">
+      <form class="aero-cta__form-card contact-form-js" data-form-type="segmentos">
+        <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true" style="display:none;" />
         <div class="aero-cta__form-row aero-cta__form-row--full">
-          <label class="aero-cta__label">Nome</label>
-          <input class="aero-cta__input" type="text" placeholder="">
+          <label class="aero-cta__label" for="aero-nome">Nome *</label>
+          <input class="aero-cta__input" id="aero-nome" name="nome" type="text" required placeholder="">
         </div>
         <div class="aero-cta__form-row aero-cta__form-row--half">
           <div>
-            <label class="aero-cta__label">E-mail</label>
-            <input class="aero-cta__input" type="email" placeholder="">
+            <label class="aero-cta__label" for="aero-email">E-mail *</label>
+            <input class="aero-cta__input" id="aero-email" name="email" type="email" required placeholder="">
           </div>
           <div>
-            <label class="aero-cta__label">Número de Telefone</label>
-            <input class="aero-cta__input" type="tel" placeholder="">
+            <label class="aero-cta__label" for="aero-telefone">Número de Telefone *</label>
+            <input class="aero-cta__input" id="aero-telefone" name="telefone" type="tel" required placeholder="(DDD) 99999-0000">
           </div>
         </div>
         <div class="aero-cta__form-row aero-cta__form-row--thirds">
           <div>
-            <label class="aero-cta__label">Empresa</label>
-            <input class="aero-cta__input" type="text" placeholder="">
+            <label class="aero-cta__label" for="aero-empresa">Empresa</label>
+            <input class="aero-cta__input" id="aero-empresa" name="empresa" type="text" placeholder="">
           </div>
           <div>
-            <label class="aero-cta__label">Estado</label>
-            <input class="aero-cta__input" type="text" placeholder="">
+            <label class="aero-cta__label" for="aero-estado">Estado *</label>
+            <input class="aero-cta__input" id="aero-estado" name="estado" type="text" required placeholder="">
           </div>
           <div>
-            <label class="aero-cta__label">Segmento</label>
-            <input class="aero-cta__input" type="text" placeholder="">
+            <label class="aero-cta__label" for="aero-segmento">Segmento</label>
+            <input class="aero-cta__input" id="aero-segmento" name="segmento" type="text" value="Aeronaves" placeholder="">
           </div>
         </div>
         <div class="aero-cta__form-row aero-cta__form-row--full">
-          <label class="aero-cta__label">Como deseja ser respondido?</label>
-          <input class="aero-cta__input" type="text" placeholder="">
+          <label class="aero-cta__label" for="aero-forma">Como deseja ser respondido? *</label>
+          <select class="aero-cta__input" id="aero-forma" name="forma_resposta" required>
+            <option value="" disabled selected>Selecione</option>
+            <option value="WhatsApp">WhatsApp</option>
+            <option value="Telefone">Telefone</option>
+            <option value="E-mail">E-mail</option>
+          </select>
         </div>
         <div class="aero-cta__form-row aero-cta__form-row--full">
-          <label class="aero-cta__label">Mensagem</label>
-          <input class="aero-cta__input" type="text" placeholder="">
+          <label class="aero-cta__label" for="aero-mensagem">Mensagem *</label>
+          <input class="aero-cta__input" id="aero-mensagem" name="mensagem" type="text" required placeholder="">
         </div>
         <div class="aero-cta__form-row aero-cta__form-row--full">
           <label class="aero-cta__checkbox-label">
-            <input type="checkbox" class="aero-cta__checkbox">
-            <span>Estou de acordo com a política de privacidade</span>
+            <input type="checkbox" class="aero-cta__checkbox" name="aceite_privacidade" required value="sim">
+            <span data-wm-aceite>Li e estou de acordo com a <a href="/politica-de-privacidade.html">Política de Privacidade</a> e autorizo a WM Trading a tratar meus dados para responder a esta solicitação.</span>
           </label>
         </div>
-        <button class="aero-cta__submit btn btn-dark">ENVIAR</button>
-      </div>
+        <div class="aero-cta__form-row aero-cta__form-row--full">
+          <label class="aero-cta__checkbox-label">
+            <input type="checkbox" class="aero-cta__checkbox" name="aceite_marketing" value="sim">
+            <span>Também quero receber conteúdos, materiais e comunicações comerciais da WM Trading (opcional).</span>
+          </label>
+        </div>
+        <button type="submit" class="aero-cta__submit btn btn-dark">ENVIAR</button>
+      </form>
     </div>
 
   </div>
@@ -774,7 +789,7 @@
 ══════════════════════════════════════ -->
 <div class="footer-copy-bar">
   <div class="container">
-    <p class="footer-copy-text">Copyright 2024 - WM Comercial Atacadista LTDA - 06.194.675/0001-03</p>
+    <p class="footer-copy-text">Copyright 2026 - WM Trading LTDA - 06.194.675/0001-03</p>
     <div class="footer-privacy">
       <a href="/politica-de-privacidade.html">Políticas de Privacidade</a>
       <a href="#" data-wm-consent-prefs>Preferências de cookies</a>

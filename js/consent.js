@@ -20,6 +20,20 @@
   var KEY = 'wm_consent';
   var MAX_AGE_DAYS = 180;
 
+  // Versão vigente das políticas (meta emitida pelo gerador). Quando ela muda,
+  // quem aceitou a versão anterior volta a ver o aviso e decide de novo.
+  function politicaVersao() {
+    var m = document.querySelector('meta[name="wm-politica-versao"]');
+    return (m && m.getAttribute('content')) || '';
+  }
+
+  var VERSAO = politicaVersao();
+
+  // Texto exato do aviso — guardado junto com a escolha como registro do aceite.
+  var TEXTO_AVISO = 'Usamos cookies para medir o desempenho do site, entender como você ' +
+    'chegou até nós e melhorar sua experiência. Você pode aceitar ou recusar os cookies de ' +
+    'análise e publicidade — os essenciais ao funcionamento permanecem ativos.';
+
   // ---- Consent Mode v2: default SEMPRE negado, antes de qualquer tag ----
   window.dataLayer = window.dataLayer || [];
   function gtag() { window.dataLayer.push(arguments); }
@@ -39,14 +53,30 @@
       if (!c || !c.status || !c.em) return null;
       var ageDays = (Date.now() - new Date(c.em).getTime()) / 86400000;
       if (ageDays > MAX_AGE_DAYS) { localStorage.removeItem(KEY); return null; }
+      // Política mudou desde o aceite: a escolha antiga não vale para o texto novo.
+      if (VERSAO && c.versao !== VERSAO) { localStorage.removeItem(KEY); return null; }
       return c.status; // 'granted' | 'denied'
     } catch (e) { return null; }
   }
 
   function saveChoice(status) {
+    var registro = {
+      v: 2,
+      status: status,
+      em: new Date().toISOString(),
+      versao: VERSAO,
+      texto: TEXTO_AVISO
+    };
     try {
-      localStorage.setItem(KEY, JSON.stringify({ v: 1, status: status, em: new Date().toISOString() }));
+      localStorage.setItem(KEY, JSON.stringify(registro));
     } catch (e) { /* modo privado */ }
+    // Log da decisão para o GA4/GTM (auditoria da taxa de aceite e da revogação)
+    window.dataLayer.push({
+      event: 'consent_decision',
+      consent_status: status,
+      consent_versao: VERSAO,
+      page: window.location.pathname
+    });
   }
 
   function trackingAllowedHere() {
@@ -78,7 +108,14 @@
       ad_personalization: 'granted',
       analytics_storage: 'granted'
     });
+    // Atribuição de origem passa a valer entre visitas (ver js/utm-tracking.js)
+    if (window.wmTracking && window.wmTracking.persistir) window.wmTracking.persistir();
     loadGtm();
+  }
+
+  function denyConsent() {
+    // Recusou: nenhuma tag carrega e a origem deixa de ser guardada entre visitas.
+    if (window.wmTracking && window.wmTracking.esquecer) window.wmTracking.esquecer();
   }
 
   // ---------------------------- Banner ----------------------------
@@ -117,9 +154,7 @@
     banner.setAttribute('aria-label', 'Preferências de cookies');
     banner.innerHTML =
       '<div class="wm-consent__inner">' +
-        '<p class="wm-consent__text">Usamos cookies para medir o desempenho do site, entender ' +
-        'como você chegou até nós e melhorar sua experiência. Você pode aceitar ou recusar os ' +
-        'cookies de análise e publicidade — os essenciais ao funcionamento permanecem ativos. ' +
+        '<p class="wm-consent__text">' + TEXTO_AVISO + ' ' +
         'Saiba mais na <a href="/politica-de-cookies.html">Política de Cookies</a> e na ' +
         '<a href="/politica-de-privacidade.html">Política de Privacidade</a>.</p>' +
         '<div class="wm-consent__actions">' +
@@ -137,6 +172,7 @@
     banner.querySelector('.wm-consent__btn--reject').addEventListener('click', function () {
       saveChoice('denied');
       banner.classList.remove('is-open');
+      denyConsent();
     });
   }
 
@@ -159,13 +195,18 @@
   if (choice === 'granted') {
     grantConsent(); // GTM carrega já com consentimento concedido
   } else if (choice === null) {
-    openBanner(); // primeira visita: nada carrega até decidir
+    openBanner(); // primeira visita (ou política nova): nada carrega até decidir
   }
   // choice === 'denied': nada a fazer — nenhuma tag carrega
 
   window.wmConsent = {
     open: openBanner,
     reset: function () { try { localStorage.removeItem(KEY); } catch (e) {} openBanner(); },
-    status: function () { return readChoice(); }
+    status: function () { return readChoice(); },
+    versao: function () { return VERSAO; },
+    // Registro do aceite, para consulta/depuração e atendimento a titulares
+    registro: function () {
+      try { return JSON.parse(localStorage.getItem(KEY)); } catch (e) { return null; }
+    }
   };
 })();

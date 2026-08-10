@@ -25,6 +25,17 @@ ORGANIZATION_JSONLD = {
     "logo": SITE_URL + DEFAULT_OG_IMAGE,
     "description": "Trading company especializada em solucoes completas de importacao e comercio exterior para empresas no Brasil.",
 }
+# LGPD: versao vigente das politicas de privacidade/cookies.
+# Alterar SEMPRE que o texto mudar de forma relevante. Efeitos automaticos:
+#   1) o aviso de cookies reaparece para quem aceitou uma versao anterior;
+#   2) os formularios passam a gravar esta versao no registro de aceite (prova
+#      de consentimento que segue para o Pipedrive).
+# Manter em sincronia com a meta wm-politica-versao do index.html e das paginas
+# manuais (importacao-carne-suina/index.html, segmentos-aeronaves.html).
+POLITICA_VERSAO = "2.0"
+POLITICA_VERSAO_ID = "2026-08-10"
+POLITICA_VIGENCIA = "10 de agosto de 2026"
+
 CONTENT_DIR = os.path.join(ROOT_DIR, "content")
 CSS_DIR = os.path.join(ROOT_DIR, "css")
 JS_DIR = os.path.join(ROOT_DIR, "js")
@@ -376,6 +387,13 @@ def load_template_elements():
     # remove linhas em branco deixadas pelas remocoes acima
     head_content = re.sub(r'\n\s*\n+', '\n', head_content)
     
+    # LGPD: a versao das politicas vem sempre do gerador (fonte unica das paginas
+    # geradas). Remove a meta herdada do index.html e reinjeta a partir da constante.
+    # Vai no INICIO do head: js/consent.js roda sem defer e le esta meta na carga.
+    head_content = re.sub(r'<meta\s+name="wm-politica-versao"[^>]*/?>', "", head_content)
+    head_content = re.sub(r'\n\s*\n+', '\n', head_content)
+    head_content = f'\n  <meta name="wm-politica-versao" content="{POLITICA_VERSAO_ID}" />' + head_content
+
     # Inject dynamic-pages styles and contact-form script
     head_content += '\n  <link rel="stylesheet" href="/css/dynamic-pages.css" />'
     head_content += '\n  <script src="/js/contact-form.js" defer></script>'
@@ -716,7 +734,7 @@ def build_contact_form_html(form_type="contato", selected_segment=""):
           
           <input name="nome" required placeholder="Nome *" class="input-wm sm-col-span-2" />
           <input name="email" type="email" required placeholder="E-mail *" class="input-wm" />
-          <input name="telefone" type="tel" required placeholder="Número Telefone * — (DDD) 99999-0000" pattern="[0-9()#&+*\\-=\\.\\s]+" class="input-wm" />
+          <input name="telefone" type="tel" required placeholder="Número Telefone * — (DDD) 99999-0000" pattern="[0-9\\s\\(\\)\\+\\-\\.]+" class="input-wm" />
           <input name="empresa" placeholder="Empresa" class="input-wm" />
           
           <select name="estado" required class="input-wm">
@@ -740,9 +758,14 @@ def build_contact_form_html(form_type="contato", selected_segment=""):
           
           <label class="sm-col-span-2 form-checkbox-label">
             <input type="checkbox" name="aceite_privacidade" required value="sim" />
-            <span>Estou de acordo com a <a href="/politica-de-privacidade.html" class="text-primary underline">política de privacidade</a>.</span>
+            <span data-wm-aceite>Li e estou de acordo com a <a href="/politica-de-privacidade.html" class="text-primary underline">Política de Privacidade</a> e autorizo a WM Trading a tratar meus dados para responder a esta solicitação.</span>
           </label>
-          
+
+          <label class="sm-col-span-2 form-checkbox-label">
+            <input type="checkbox" name="aceite_marketing" value="sim" />
+            <span data-wm-aceite-marketing>Também quero receber conteúdos, materiais e comunicações comerciais da WM Trading (opcional).</span>
+          </label>
+
           <button type="submit" class="btn btn-block sm-col-span-2 btn-lg">Enviar</button>
         </form>
     """
@@ -760,9 +783,14 @@ def build_ebook_form_html(ebook_title, pdf_url):
           
           <label class="form-checkbox-label" style="margin: 8px 0;">
             <input type="checkbox" name="aceite_privacidade" required value="sim" />
-            <span>Estou de acordo com a <a href="/politica-de-privacidade.html" class="text-primary underline">política de privacidade</a>.</span>
+            <span data-wm-aceite>Li e estou de acordo com a <a href="/politica-de-privacidade.html" class="text-primary underline">Política de Privacidade</a> e autorizo a WM Trading a tratar meus dados para enviar este material.</span>
           </label>
-          
+
+          <label class="form-checkbox-label" style="margin: 0 0 8px;">
+            <input type="checkbox" name="aceite_marketing" value="sim" />
+            <span data-wm-aceite-marketing>Também quero receber conteúdos, materiais e comunicações comerciais da WM Trading (opcional).</span>
+          </label>
+
           <button type="submit" class="btn btn-block btn-lg">Quero o material</button>
         </form>
     """
@@ -1756,34 +1784,109 @@ def main():
 
     # 6G. COOKIES POLICY
     print(" - compiling politica-de-cookies.html...")
-    cookies_md = """
-## O que são cookies?
+    cookies_md_intro = """
+## O que são cookies e tecnologias semelhantes
 
-Cookies são pequenos arquivos transferidos para o seu navegador ou dispositivo que nos permitem reconhecer o seu acesso. Eles facilitam a personalização da sua experiência, adequando a apresentação do site às suas preferências.
+Cookies são pequenos arquivos gravados no seu navegador quando você visita um site. Também usamos tecnologias equivalentes, como o armazenamento local do navegador (localStorage e sessionStorage) e pixels de acompanhamento. Nesta política, "cookies" se refere a todas elas.
 
-## Por que usamos cookies?
+## Como funciona o consentimento neste site
 
-A WM Trading utiliza cookies para identificar seus acessos aos serviços oferecidos. Essas tecnologias nos ajudam a exibir as informações corretas e a personalizar sua experiência de acordo com as suas configurações. Dependendo das suas preferências, os cookies também podem direcionar anúncios alinhados aos seus interesses.
+- Na sua primeira visita, um aviso aparece na parte inferior da tela. **Até você decidir, nenhum cookie de análise ou de publicidade é carregado** — nem o Google Tag Manager, nem as ferramentas de medição, nem os pixels de anúncios.
+- Você pode **"Aceitar todos"** ou **"Recusar não essenciais"**. As duas opções têm o mesmo destaque e recusar não limita o uso do site.
+- Aplicamos o Google Consent Mode v2 com todas as permissões negadas por padrão, atualizando-as apenas se você aceitar.
+- Sua escolha fica registrada no seu navegador por **180 dias**. Depois disso, perguntamos de novo. Também perguntamos de novo quando esta política muda de forma relevante.
+- Para mudar de ideia a qualquer momento, use o link **"Preferências de cookies"** no rodapé de qualquer página.
 
-## Tipos de cookies utilizados
+## Categorias de cookies que utilizamos
 
-- **Essenciais:** obrigatórios e necessários para a navegação no site. Não coletam informações para fins de marketing e ficam ativos apenas enquanto a janela do navegador permanece aberta.
-- **Publicitários:** definidos pelos parceiros publicitários, armazenam a origem das campanhas que levaram o usuário ao site. Têm período de armazenamento de 30 dias e podem ser desativados.
+### Essenciais — sempre ativos
 
-## Como remover ou bloquear cookies?
+Necessários para o site funcionar e para registrar as suas próprias escolhas. Não dependem de consentimento.
+    """
 
-Você pode gerenciar os cookies pelas configurações do seu navegador. Lembre-se de que desativar cookies pode comprometer o funcionamento adequado de algumas funcionalidades do site. A WM Trading não é responsável pelos cookies de terceiros instalados durante interações externas.
+    cookies_tbl_essenciais = """
+          <table class="legal-table">
+            <thead><tr><th>Item</th><th>Responsável</th><th>Finalidade</th><th>Duração</th></tr></thead>
+            <tbody>
+              <tr><td><code>wm_consent</code> (localStorage)</td><td>WM Trading</td><td>Guarda a sua decisão sobre cookies e a versão do aviso aceito</td><td>180 dias</td></tr>
+              <tr><td><code>wm_tracking</code> (sessionStorage)</td><td>WM Trading</td><td>Guarda, durante a visita, a origem do acesso (campanha ou site de referência) para identificar de onde veio um contato enviado por formulário</td><td>Até fechar o navegador</td></tr>
+            </tbody>
+          </table>
+    """
+
+    cookies_md_analytics = """
+### Análise e desempenho — só com o seu aceite
+
+Mostram como o site é usado (páginas mais visitadas, origem do acesso, erros e dificuldades de navegação) para melhorarmos a experiência.
+    """
+
+    cookies_tbl_analytics = """
+          <table class="legal-table">
+            <thead><tr><th>Cookie</th><th>Responsável</th><th>Finalidade</th><th>Duração</th></tr></thead>
+            <tbody>
+              <tr><td><code>_ga</code>, <code>_ga_*</code></td><td>Google Analytics 4</td><td>Distingue visitantes e sessões, mede audiência e conversões</td><td>Até 2 anos</td></tr>
+              <tr><td><code>_clck</code>, <code>_clsk</code></td><td>Microsoft Clarity</td><td>Mapas de calor e gravação anônima de navegação para diagnóstico de usabilidade</td><td>1 ano / 1 dia</td></tr>
+              <tr><td><code>wm_tracking</code> (localStorage)</td><td>WM Trading</td><td>Mantém a origem do primeiro acesso entre visitas, para atribuir contatos às campanhas</td><td>Até você limpar o navegador</td></tr>
+            </tbody>
+          </table>
+    """
+
+    cookies_md_ads = """
+### Publicidade e mídia — só com o seu aceite
+
+Permitem medir o resultado dos nossos anúncios e apresentar comunicações mais relevantes nas plataformas em que anunciamos.
+    """
+
+    cookies_tbl_ads = """
+          <table class="legal-table">
+            <thead><tr><th>Cookie</th><th>Responsável</th><th>Finalidade</th><th>Duração</th></tr></thead>
+            <tbody>
+              <tr><td><code>_gcl_au</code>, <code>_gcl_aw</code></td><td>Google Ads</td><td>Atribuição de conversões de anúncios</td><td>Até 90 dias</td></tr>
+              <tr><td><code>_uetsid</code>, <code>_uetvid</code></td><td>Microsoft Advertising</td><td>Atribuição de conversões de anúncios</td><td>1 dia / 13 meses</td></tr>
+              <tr><td><code>_fbp</code></td><td>Meta (Facebook e Instagram)</td><td>Medição de campanhas e públicos</td><td>Até 90 dias</td></tr>
+              <tr><td><code>li_sugr</code>, <code>UserMatchHistory</code></td><td>LinkedIn</td><td>Medição de campanhas e públicos</td><td>Até 30 dias</td></tr>
+              <tr><td><code>_ttp</code>, <code>_tt_enable_cookie</code></td><td>TikTok</td><td>Medição de campanhas</td><td>Até 13 meses</td></tr>
+            </tbody>
+          </table>
+    """
+
+    cookies_md_end = """
+Os cookies acima são carregados por meio do Google Tag Manager (contêiner GTM-K58GFND). A lista pode variar conforme as campanhas ativas; mantemos esta tabela atualizada a cada revisão do contêiner. Os nomes e prazos são definidos por cada fornecedor e podem ser alterados por eles.
+
+## Ferramentas de atendimento
+
+Se você usar o chat ou o botão de WhatsApp do site, os dados que você informar são tratados conforme a nossa Política de Privacidade. O envio pelo botão de WhatsApp leva a conversa para o aplicativo, que é operado pela Meta e tem termos próprios.
+
+## Como remover ou bloquear cookies
+
+- **Neste site:** use o link "Preferências de cookies" no rodapé para rever a sua escolha.
+- **No navegador:** todos os navegadores permitem bloquear ou apagar cookies nas configurações de privacidade. Bloquear cookies essenciais pode comprometer funcionalidades do site.
+- **Nas plataformas de anúncios:** você também pode ajustar as suas preferências de publicidade diretamente no Google, na Meta, na Microsoft, no LinkedIn e no TikTok.
+
+A WM Trading não controla cookies instalados por sites de terceiros que você acesse a partir de links publicados aqui.
 
 ## Alterações nesta política
 
-A política pode sofrer atualizações periódicas. Mudanças relevantes exigirão um novo consentimento dos usuários.
+Podemos atualizar esta política. Mudanças relevantes nas finalidades ou nas ferramentas fazem o aviso de cookies aparecer novamente, para que você possa rever a sua escolha.
+
+## Dúvidas
+
+Fale com o nosso Encarregado pelo Tratamento de Dados Pessoais (DPO): **dpo@wmtrading.com.br**. Veja também a [Política de Privacidade](/politica-de-privacidade.html).
     """
+
     cookies_body = f"""
     <section class="page-section">
       <div class="container legal-container">
         <h1 class="legal-title">Política de Cookies</h1>
+        <p class="legal-version" style="color:var(--color-text-muted); font-size:14px; margin-bottom:28px;">Versão {POLITICA_VERSAO} — em vigor desde {POLITICA_VIGENCIA}.</p>
         <div class="prose-wm">
-          {markdown_to_html(cookies_md)}
+          {markdown_to_html(cookies_md_intro)}
+          {cookies_tbl_essenciais}
+          {markdown_to_html(cookies_md_analytics)}
+          {cookies_tbl_analytics}
+          {markdown_to_html(cookies_md_ads)}
+          {cookies_tbl_ads}
+          {markdown_to_html(cookies_md_end)}
         </div>
       </div>
     </section>
@@ -1792,54 +1895,163 @@ A política pode sofrer atualizações periódicas. Mudanças relevantes exigir�
 
     # 6H. PRIVACY POLICY
     print(" - compiling politica-de-privacidade.html...")
-    privacy_md = """
-## 1. Introdução
+    privacy_md_1 = """
+## 1. Quem somos e o que esta política cobre
 
-A Política de Privacidade e Uso de Dados Pessoais da WM Trading visa demonstrar transparência no compromisso com a proteção de dados fornecidos pelos titulares. A empresa não divulga informações pessoais a terceiros sem autorização, exceto em casos de determinação legal ou medida judicial.
+A WM Trading Ltda. ("WM Trading") é uma trading company de comércio exterior e atua como **controladora** dos dados pessoais tratados em suas atividades.
 
-Esta política abrange o tratamento de informações coletadas diretamente no site, área do cliente, fichas cadastrais, negociações comerciais e integrações de dados, armazenadas em bases eletrônicas. A aceitação ocorre ao acessar ou utilizar os serviços, indicando concordância com o tratamento conforme a Lei Geral de Proteção de Dados Pessoais (LGPD) nº 13.709/2018.
+Esta política explica, em linguagem direta, quais dados pessoais coletamos, por que coletamos, com quem compartilhamos e como você pode exercer os seus direitos. Ela se aplica ao site wmtrading.com.br e às suas landing pages, aos formulários e materiais oferecidos aqui, ao botão de WhatsApp do site e ao relacionamento comercial com clientes, fornecedores e parceiros. Tudo conforme a **Lei Geral de Proteção de Dados Pessoais — Lei nº 13.709/2018 (LGPD)**.
 
-## 2. Direitos dos usuários sobre os dados pessoais
+A Área do Cliente (cliente.wmtrading.com.br) e os sistemas operacionais de importação podem ter termos de uso próprios, que complementam esta política.
 
-- **Revogação:** os titulares podem solicitar a revogação das permissões de uso de dados, uma vez expirado o prazo legal de tratamento.
-- **Divulgação:** a WM Trading não divulga os dados pessoais dos titulares, exceto por determinação legal ou a pedido do próprio titular.
-- **Retificação:** os titulares podem solicitar a retificação de dados, exceto informações em Certificados Digitais, que não podem ser alteradas após a emissão.
-- **Exclusão:** direito à exclusão definitiva dos dados ao término da relação, ressalvadas as hipóteses de guarda obrigatória previstas na LGPD.
-- **Portabilidade:** solicitações são analisadas caso a caso mediante contato com dpo@wmtrading.com.br.
+## 2. Quais dados coletamos
 
-## 3. Responsabilidades dos titulares
+### 2.1 Dados que você nos fornece
 
-Os titulares têm a obrigação de assegurar que os dados fornecidos à WM Trading sejam precisos, completos e atualizados.
+Ao preencher um formulário de contato, solicitar uma cotação, baixar um e-book ou material, ou iniciar uma conversa pelo botão de WhatsApp do site, coletamos: **nome, e-mail, telefone, empresa, cargo, estado, segmento de interesse, forma de contato preferida** e o conteúdo da mensagem que você escrever.
 
-## 4. Tratamento dos seus dados pessoais
+### 2.2 Dados de navegação e origem do acesso
 
-Podem ser coletados, durante o cadastro ou uso de produtos e serviços: nome, CPF e/ou RG, data de nascimento, e-mail, telefone, endereço, usuário/senha, dados biométricos e dados financeiros. As informações são necessárias para adquirir serviços e produtos, receber orçamentos e propostas e acessar as plataformas da WM Trading, em atendimento a obrigações legais e regulatórias.
+Se você aceitar os cookies de análise e publicidade, coletamos dados sobre o uso do site (páginas visitadas, tempo de permanência, dispositivo e navegador) e sobre a origem do acesso: parâmetros de campanha (as chamadas UTMs — origem, mídia, campanha, termo e conteúdo), identificadores de clique de anúncios (gclid, msclkid e fbclid), site de referência, página de entrada e identificador do Google Analytics. Esses dados nos permitem saber por qual caminho você chegou até nós e medir o resultado das nossas campanhas.
 
-A WM Trading não coleta dados de crianças ou adolescentes menores de 16 anos de forma intencional, e não comercializa os dados pessoais sob sua guarda. As informações são armazenadas com padrões rígidos de confidencialidade e segurança, pelo período necessário ao cumprimento das finalidades (no mínimo 7 anos para titulares com certificação digital; no mínimo 5 anos para demais arquivos de auditoria, ou pelo tempo exigido por lei).
+**Antes do seu aceite, nenhuma ferramenta de análise ou publicidade é carregada.** Detalhes na [Política de Cookies](/politica-de-cookies.html).
+
+### 2.3 Registro do seu aceite
+
+Para conseguirmos comprovar o consentimento que você nos deu, registramos, no momento do envio: **data e hora, o texto exato que você aceitou, a versão desta política, a página em que o aceite ocorreu, o endereço IP e o identificador do navegador (user agent)**. Esses dados existem apenas como prova do aceite e para prevenir envios fraudulentos.
+
+### 2.4 Dados do relacionamento comercial
+
+Se a relação avançar para uma operação, tratamos também os dados cadastrais e societários necessários à contratação e à operação de comércio exterior — inclusive documentos exigidos pela legislação aduaneira, fiscal e de prevenção à lavagem de dinheiro, como CNPJ da empresa e dados de identificação de representantes legais e procuradores.
+
+**Não tratamos dados sensíveis nem dados biométricos por meio deste site.**
+
+## 3. Por que tratamos os seus dados e com qual base legal
+
+A LGPD exige que todo tratamento tenha uma base legal. As nossas são:
     """
+
+    privacy_tbl_bases = """
+          <table class="legal-table">
+            <thead><tr><th>Finalidade</th><th>Dados utilizados</th><th>Base legal (LGPD)</th></tr></thead>
+            <tbody>
+              <tr><td>Responder à sua solicitação, elaborar cotação e conduzir o atendimento comercial</td><td>Identificação, contato e mensagem</td><td>Procedimentos preliminares relacionados a contrato, a pedido do titular (art. 7º, V)</td></tr>
+              <tr><td>Enviar o e-book ou material que você solicitou</td><td>Nome, e-mail e empresa</td><td>Procedimentos preliminares a pedido do titular (art. 7º, V)</td></tr>
+              <tr><td>Enviar conteúdos, convites e comunicações comerciais</td><td>Nome, e-mail e telefone</td><td>Consentimento, manifestado em campo próprio e revogável a qualquer momento (art. 7º, I)</td></tr>
+              <tr><td>Contato comercial com profissionais de empresas do nosso mercado</td><td>Dados de contato profissional</td><td>Legítimo interesse (art. 7º, IX)</td></tr>
+              <tr><td>Medir o desempenho do site e das campanhas e atribuir a origem dos contatos</td><td>Cookies, identificadores de campanha e de navegação</td><td>Consentimento, dado no aviso de cookies (art. 7º, I)</td></tr>
+              <tr><td>Segurança do site, prevenção a fraude e a envios automatizados</td><td>IP, user agent e registros de acesso</td><td>Legítimo interesse (art. 7º, IX)</td></tr>
+              <tr><td>Comprovar consentimento e atender pedidos de titulares e de autoridades</td><td>Registro de aceite</td><td>Cumprimento de obrigação legal e regulatória (art. 7º, II) e exercício regular de direitos (art. 7º, VI)</td></tr>
+              <tr><td>Executar o contrato, faturar e cumprir obrigações aduaneiras, fiscais e contábeis</td><td>Dados cadastrais e operacionais</td><td>Execução de contrato (art. 7º, V) e obrigação legal (art. 7º, II)</td></tr>
+            </tbody>
+          </table>
+    """
+
+    privacy_md_2 = """
+Quando o tratamento se apoia em **legítimo interesse**, você pode se opor a ele a qualquer momento, escrevendo para dpo@wmtrading.com.br (art. 18, § 2º). Quando se apoia em **consentimento**, você pode revogá-lo a qualquer momento, sem que isso afete o que já foi feito de forma legítima até então.
+
+## 4. Cookies e tecnologias de rastreamento
+
+Usamos cookies próprios e de terceiros para o site funcionar, medir desempenho e avaliar o resultado das campanhas. Nada que dependa de consentimento é carregado antes do seu aceite, e você pode rever a sua escolha a qualquer momento pelo link **"Preferências de cookies"** no rodapé de qualquer página. A lista completa de cookies, com finalidade e prazo, está na [Política de Cookies](/politica-de-cookies.html).
+
+## 5. Com quem compartilhamos os seus dados
+
+**Não vendemos dados pessoais.** Compartilhamos apenas o necessário, com:
+
+- **Fornecedores de tecnologia que operam o site e o atendimento**, sempre sob contrato e seguindo as nossas instruções: Vercel (hospedagem do site), Zapier (encaminhamento dos formulários), Pipedrive (CRM, onde o seu contato é registrado) e as ferramentas de chat utilizadas no site.
+- **Plataformas de análise e publicidade**, quando você aceita os cookies correspondentes: Google (Google Analytics, Google Ads e Google Tag Manager), Microsoft (Clarity e Microsoft Advertising), Meta, LinkedIn e TikTok.
+- **Empresas do grupo WM**, quando necessário à condução da operação.
+- **Parceiros operacionais da importação**, quando a operação exigir: despachantes aduaneiros, transportadores, seguradoras, armazéns e instituições financeiras.
+- **Autoridades públicas**, quando houver exigência legal, regulatória ou ordem judicial — inclusive Receita Federal e demais órgãos anuentes do comércio exterior.
+- **Auditores e assessores jurídicos e contábeis**, sob dever de confidencialidade.
+
+## 6. Transferência internacional de dados
+
+Parte dos fornecedores citados acima processa e armazena dados **fora do Brasil**, principalmente nos Estados Unidos e na União Europeia. Nesses casos, a transferência ocorre com as garantias previstas no art. 33 da LGPD — cláusulas contratuais de proteção de dados firmadas com cada fornecedor ou a necessidade da transferência para a execução do contrato e para o atendimento da sua solicitação. Para saber quais fornecedores tratam os seus dados fora do país, escreva para dpo@wmtrading.com.br.
+
+## 7. Por quanto tempo guardamos
+
+Guardamos os dados apenas pelo tempo necessário a cada finalidade:
+    """
+
+    privacy_tbl_prazos = """
+          <table class="legal-table">
+            <thead><tr><th>Tipo de registro</th><th>Prazo de guarda</th></tr></thead>
+            <tbody>
+              <tr><td>Contato que não evoluiu para uma operação</td><td>24 meses contados do último contato</td></tr>
+              <tr><td>Registro de aceite (formulários e cookies)</td><td>5 anos após o encerramento do tratamento correspondente</td></tr>
+              <tr><td>Dados de clientes, fornecedores e das operações realizadas</td><td>Durante a relação e, depois dela, pelo prazo exigido pela legislação fiscal, aduaneira e contábil, ou pelo prazo de prescrição aplicável</td></tr>
+              <tr><td>Registros de acesso à aplicação</td><td>6 meses (art. 15 do Marco Civil da Internet)</td></tr>
+            </tbody>
+          </table>
+    """
+
+    privacy_md_3 = """
+Encerrado o prazo, os dados são eliminados ou anonimizados, salvo quando a lei exigir guarda por período maior.
+
+## 8. Segurança da informação e incidentes
+
+Adotamos medidas técnicas e administrativas para proteger os dados: controle de acesso por perfil, tráfego criptografado, uso de fornecedores com contratos de proteção de dados e revisão periódica das permissões. Nenhum sistema é infalível — se ocorrer um incidente de segurança com risco relevante aos seus direitos, comunicaremos você e a Autoridade Nacional de Proteção de Dados (ANPD), conforme o art. 48 da LGPD.
+
+## 9. Os seus direitos
+
+A qualquer momento, você pode nos pedir:
+
+- **Confirmação** de que tratamos dados sobre você e **acesso** a esses dados;
+- **Correção** de dados incompletos, inexatos ou desatualizados;
+- **Anonimização, bloqueio ou eliminação** de dados desnecessários, excessivos ou tratados em desconformidade com a lei;
+- **Portabilidade** dos dados a outro fornecedor, mediante requisição expressa;
+- **Eliminação** dos dados tratados com base no seu consentimento;
+- **Informação sobre com quem compartilhamos** os seus dados;
+- **Informação sobre a possibilidade de não consentir** e sobre as consequências da recusa;
+- **Revogação do consentimento**, a qualquer momento;
+- **Oposição** a tratamentos apoiados em legítimo interesse.
+
+A WM Trading **não toma decisões automatizadas** que produzam efeitos jurídicos sobre você ou afetem os seus interesses.
+
+**Como exercer:** escreva para **dpo@wmtrading.com.br**. Respondemos em até **15 dias**. Podemos pedir informações adicionais para confirmar a sua identidade antes de atender ao pedido — é uma proteção para você. Se preferir, você também pode apresentar reclamação diretamente à **ANPD** (gov.br/anpd).
+
+## 10. Comunicações de marketing
+
+Só enviamos conteúdos e comunicações comerciais a quem manifestou consentimento em campo próprio, separado do aceite desta política. Todo e-mail traz um link de descadastro, e você pode pedir a saída a qualquer momento pelo mesmo canal ou pelo dpo@wmtrading.com.br. O descadastro não interrompe as comunicações necessárias a uma operação já contratada.
+
+## 11. Crianças e adolescentes
+
+Este é um site corporativo, voltado a profissionais e empresas, e não é direcionado a menores de 18 anos. Não coletamos intencionalmente dados de crianças e adolescentes. Se identificarmos um registro nessas condições, ele será eliminado.
+
+## 12. Alterações nesta política
+
+Esta política pode ser atualizada. A versão vigente e a data de início de vigência ficam sempre indicadas no topo desta página. Em caso de mudança relevante, damos aviso no site e, quando o tratamento se apoiar em consentimento, solicitamos um novo aceite.
+    """
+
     privacy_body = f"""
     <section class="page-section">
       <div class="container legal-container">
         <h1 class="legal-title">Política de Privacidade</h1>
+        <p class="legal-version" style="color:var(--color-text-muted); font-size:14px; margin-bottom:28px;">Versão {POLITICA_VERSAO} — em vigor desde {POLITICA_VIGENCIA}.</p>
         <div class="prose-wm">
-          {markdown_to_html(privacy_md)}
-          
-          <h2>5. Controlador de dados</h2>
+          {markdown_to_html(privacy_md_1)}
+          {privacy_tbl_bases}
+          {markdown_to_html(privacy_md_2)}
+          {privacy_tbl_prazos}
+          {markdown_to_html(privacy_md_3)}
+
+          <h2>13. Controlador e Encarregado (DPO)</h2>
           <table class="legal-table">
             <thead>
               <tr><th>Campo</th><th>Informação</th></tr>
             </thead>
             <tbody>
-              <tr><td>Nome</td><td>WM Comercial Atacadista LTDA</td></tr>
+              <tr><td>Controlador</td><td>WM Trading LTDA</td></tr>
               <tr><td>CNPJ</td><td>06.194.675/0001-03</td></tr>
-              <tr><td>Endereço</td><td>Rua Engenheiro Guilherme José Monjardim Varejão, 275 – Enseada do Suá – Vitória/ES – CEP 29050-260</td></tr>
-              <tr><td>E-mail (DPO)</td><td>dpo@wmtrading.com.br</td></tr>
+              <tr><td>Endereço</td><td>Rua Engenheiro Guilherme José Monjardim Varejão, 275 – Salas 201 e 301 – Enseada do Suá – Vitória/ES – CEP 29.050-260</td></tr>
+              <tr><td>Encarregado pelo Tratamento de Dados Pessoais (DPO)</td><td>dpo@wmtrading.com.br</td></tr>
             </tbody>
           </table>
-          
-          <h2>6. Legislação aplicável</h2>
-          <p>Este documento é regido pela legislação brasileira. Fica eleito o Foro da Comarca de Vitória/ES como competente para dirimir questões oriundas deste documento.</p>
-          <p>Para dúvidas sobre esta Política de Privacidade, entre em contato pelo e-mail dpo@wmtrading.com.br.</p>
+
+          <h2>14. Legislação aplicável e foro</h2>
+          <p>Esta política é regida pela legislação brasileira. Fica eleito o Foro da Comarca de Vitória/ES para dirimir questões dela decorrentes.</p>
+          <p>Dúvidas sobre esta Política de Privacidade: <strong>dpo@wmtrading.com.br</strong>.</p>
         </div>
       </div>
     </section>

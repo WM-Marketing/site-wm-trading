@@ -2,25 +2,63 @@
    WM Trading — utm-tracking.js
    Persistência de origem de tráfego (UTMs, gclid/msclkid/fbclid, referrer,
    página de entrada e GA4 client id) para atribuição campanha → lead.
-   - Primeiro toque: gravado uma única vez (localStorage), nunca sobrescrito.
+   - Primeiro toque: gravado uma única vez, nunca sobrescrito.
    - Último toque: atualizado sempre que a visita chega com UTM/click id.
    - window.wmTracking.getFields() devolve os campos prontos para anexar ao
      payload dos formulários (contact-form.js e whatsapp-popup.js).
+
+   LGPD: guardar a origem ENTRE visitas depende do aceite de cookies. Sem aceite,
+   a origem vive só na sessão (sessionStorage) — o suficiente para identificar de
+   onde veio um formulário que a própria pessoa está enviando agora, sem criar
+   histórico persistente. Ao aceitar, consent.js chama persistir(); ao recusar ou
+   revogar, chama esquecer(). O estado do consentimento é lido direto do
+   localStorage porque este script roda antes de consent.js definir window.wmConsent.
    ========================================================================== */
 
 (function () {
   'use strict';
 
   var KEY = 'wm_tracking';
+  var CONSENT_KEY = 'wm_consent';
   var PARAMS = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term',
     'utm_content', 'gclid', 'msclkid', 'fbclid'];
 
+  function consentimentoConcedido() {
+    try {
+      var c = JSON.parse(localStorage.getItem(CONSENT_KEY));
+      return !!(c && c.status === 'granted');
+    } catch (e) { return false; }
+  }
+
+  function destino() {
+    return consentimentoConcedido() ? window.localStorage : window.sessionStorage;
+  }
+
   function read() {
-    try { return JSON.parse(localStorage.getItem(KEY)) || {}; } catch (e) { return {}; }
+    try {
+      var raw = localStorage.getItem(KEY) || sessionStorage.getItem(KEY);
+      return JSON.parse(raw) || {};
+    } catch (e) { return {}; }
   }
 
   function save(d) {
-    try { localStorage.setItem(KEY, JSON.stringify(d)); } catch (e) { /* modo privado */ }
+    try { destino().setItem(KEY, JSON.stringify(d)); } catch (e) { /* modo privado */ }
+  }
+
+  function persistir() {
+    try {
+      var d = read();
+      if (Object.keys(d).length) localStorage.setItem(KEY, JSON.stringify(d));
+      sessionStorage.removeItem(KEY);
+    } catch (e) { /* modo privado */ }
+  }
+
+  function esquecer() {
+    try {
+      var d = read();
+      localStorage.removeItem(KEY);
+      if (Object.keys(d).length) sessionStorage.setItem(KEY, JSON.stringify(d));
+    } catch (e) { /* modo privado */ }
   }
 
   function capture() {
@@ -75,5 +113,5 @@
   }
 
   capture();
-  window.wmTracking = { getFields: getFields };
+  window.wmTracking = { getFields: getFields, persistir: persistir, esquecer: esquecer };
 })();
