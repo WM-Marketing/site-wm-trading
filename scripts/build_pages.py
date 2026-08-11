@@ -75,6 +75,17 @@ SEGMENTS_LIST = [
     "Setor Automotivo", "Outros"
 ]
 
+# Segmentos servidos por uma pagina MANUAL, fora do gerador. Para estes:
+#   1) nao geramos segmentos/<slug>.html (a pagina manual e a versao oficial);
+#   2) o card do indice /segmentos/ aponta para a URL manual, e nao para
+#      /segmentos/<slug>.html — que deixaria de existir.
+# O JSON em content/segments/ continua sendo lido, porque e de la que vem o
+# nome, a descricao do card e a lista do <select> dos formularios.
+# Ao remover um slug daqui, o gerador volta a criar a pagina normalmente.
+SEGMENT_URL_OVERRIDES = {
+    "importacao-aeronaves": "/segmentos-aeronaves.html",
+}
+
 # Card thumbnails for the segments index page (segmentos/index.html).
 # Order here = display order on the page (aviação → energia/indústria → consumo/tech).
 # 400x200 thumbs herdados da página /segmentos/ do site antigo; banners como fallback.
@@ -1010,6 +1021,9 @@ def main():
             s = json.load(f)
             
         slug = s["slug"]
+        if slug in SEGMENT_URL_OVERRIDES:
+            print(f" - skipping segments/{slug} (pagina manual: {SEGMENT_URL_OVERRIDES[slug]})")
+            continue
         print(f" - compiling segments/{slug}...")
         
         # Build cover background image
@@ -1233,10 +1247,13 @@ def main():
         name = s["name"]
         # cardDesc = texto do card na página /segmentos/ do site antigo
         desc = s.get("cardDesc") or s.get("heroQuestion") or f"Importação de {name} com agilidade e segurança."
+        # Segmentos com pagina manual nao tem /segmentos/<slug>.html — o card
+        # precisa apontar para a URL de verdade, senao gera link morto.
+        url = SEGMENT_URL_OVERRIDES.get(slug, f"/segmentos/{slug}.html")
         return f"""
         <div class="segmento-card">
           <div class="segmento-card-img">
-            <a href="/segmentos/{slug}.html" aria-label="Importação de {_esc_attr(name)}">
+            <a href="{url}" aria-label="Importação de {_esc_attr(name)}">
               <img src="{thumb}" alt="Importação de {_esc_attr(name)}" loading="lazy" />
             </a>
             <div class="segmento-badge-area">
@@ -1245,7 +1262,7 @@ def main():
           </div>
           <div class="segmento-content">
             <p class="segmento-card-desc">{desc}</p>
-            <a href="/segmentos/{slug}.html" class="link-arrow">Confira →</a>
+            <a href="{url}" class="link-arrow">Confira →</a>
           </div>
         </div>"""
 

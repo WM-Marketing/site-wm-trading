@@ -318,6 +318,16 @@
       "permanent": true
     },
     {
+      "source": "/segmentos/importacao-aeronaves.html",
+      "destination": "/segmentos-aeronaves.html",
+      "permanent": true
+    },
+    {
+      "source": "/segmentos/importacao-aeronaves",
+      "destination": "/segmentos-aeronaves.html",
+      "permanent": true
+    },
+    {
       "source": "/segmentos/:slug",
       "destination": "/segmentos/:slug.html",
       "permanent": true
