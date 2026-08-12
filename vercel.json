@@ -308,7 +308,7 @@
       "permanent": true
     },
     {
-      "source": "/blog/:slug",
+      "source": "/blog/:slug([^/.]+)",
       "destination": "/blog/:slug.html",
       "permanent": true
     },
@@ -328,7 +328,7 @@
       "permanent": true
     },
     {
-      "source": "/segmentos/:slug",
+      "source": "/segmentos/:slug([^/.]+)",
       "destination": "/segmentos/:slug.html",
       "permanent": true
     },
