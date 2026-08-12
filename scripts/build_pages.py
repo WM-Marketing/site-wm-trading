@@ -507,8 +507,29 @@ def render_html_page(output_path, title, description, content_body, head_tpl, he
 </body>
 </html>
 """
-    with open(output_path, "w", encoding="utf-8") as f:
-        f.write(html)
+    escrever_se_mudou(output_path, html)
+
+def escrever_se_mudou(output_path, conteudo):
+    """Grava so quando o conteudo mudou de verdade.
+
+    O lastmod do sitemap vem do mtime do arquivo (os.path.getmtime). Se o
+    gerador reescreve tudo a cada execucao, todo mtime vira "agora" e o sitemap
+    passa a declarar as 258 paginas como modificadas hoje — falso, e o Google
+    desprioriza lastmod que nao merece confianca. De quebra, cada build sujava
+    o diff com 254 linhas de data.
+
+    Preservar o mtime das paginas inalteradas faz o lastmod voltar a significar
+    algo e deixa o build idempotente: rodar duas vezes nao produz diff.
+    """
+    try:
+        with open(output_path, "r", encoding="utf-8", newline="") as f:
+            if f.read() == conteudo:
+                return False
+    except FileNotFoundError:
+        pass
+    with open(output_path, "w", encoding="utf-8", newline="") as f:
+        f.write(conteudo)
+    return True
 
 def markdown_to_html(text):
     """A clean, lightweight, dependency-free Markdown to HTML parser in Python. Prevents infinite loops."""
@@ -2353,8 +2374,7 @@ Se você tiver alguma pergunta sobre esta Política de Privacidade ou as prátic
     sitemap_xml = ('<?xml version="1.0" encoding="UTF-8"?>\n'
                    '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
                    + "\n".join(entries) + "\n</urlset>\n")
-    with open(os.path.join(ROOT_DIR, "sitemap.xml"), "w", encoding="utf-8") as f:
-        f.write(sitemap_xml)
+    escrever_se_mudou(os.path.join(ROOT_DIR, "sitemap.xml"), sitemap_xml)
     print(f" - sitemap.xml com {len(sitemap_pages)} paginas")
 
     print("\n[OK] Static site pages successfully generated!")
