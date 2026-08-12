@@ -398,11 +398,18 @@ html, body { overflow-x: hidden; }
     display: block;
     width: 100%;
     max-width: 100%;
-    overflow-x: visible;
+    /* overflow inteiro, não só o -x: com overflow-y herdando hidden do
+       desktop, o navegador promovia overflow-x:visible para auto (combinação
+       inválida) e o container seguia sendo área de rolagem. */
+    overflow: visible;
     padding: 0;
     background: none;
     border: none;
     border-radius: 0;
+    /* O .tabs do desktop desenha um anel de 1,5px + sombra difusa. No acordeão
+       cada seção tem a sua borda, então o anel do container virava uma moldura
+       cinza sobrando em volta da pilha. */
+    box-shadow: none;
   }
   .modo-acordeao .tab-radio {
     display: block;

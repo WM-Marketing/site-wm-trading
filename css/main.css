@@ -990,6 +990,11 @@
   opacity: 0.04;
   pointer-events: none;
   z-index: 0;
+  /* Desce a marca d'agua 25% da propria altura. Em translate, a porcentagem se
+     refere ao tamanho do elemento — nao ao da secao — entao o deslocamento
+     acompanha a marca em qualquer largura de tela. A secao tem
+     overflow:hidden, e o excedente e recortado sem criar rolagem. */
+  transform: translateY(25%);
 }
 .section-modalidade > .container {
   position: relative;
