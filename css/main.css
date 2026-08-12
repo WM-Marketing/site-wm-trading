@@ -814,11 +814,24 @@
   display: flex;
   gap: 20px;
   overflow-x: auto;
+  /* overflow-y explicito. Declarar so o -x deixa o -y em visible, e essa
+     combinacao e invalida: o navegador promove o -y para auto e o trilho passa
+     a rolar na vertical tambem. Com o translateY(18px) do .reveal nos cards,
+     isso criava 18px de curso vertical dentro do carrossel — a roda do mouse
+     movia esses 18px (animados, por causa do scroll-behavior abaixo) em vez de
+     rolar a pagina, e quando o reveal zerava o transform o curso desaparecia e
+     a posicao voltava com um salto para cima. */
+  overflow-y: hidden;
+  /* Nao encadeia a rolagem do carrossel para a pagina ao chegar nas pontas */
+  overscroll-behavior-x: contain;
   scroll-snap-type: x mandatory;
   scroll-behavior: smooth;
   -webkit-overflow-scrolling: touch;
   scrollbar-width: none;
 }
+/* Dentro do carrossel o reveal e so opacidade: o translate criaria curso
+   vertical de novo, e com overflow-y:hidden ficaria recortado na animacao. */
+.segmentos-grid .reveal { transform: none; }
 .segmentos-grid::-webkit-scrollbar { display: none; }
 .segmentos-grid .segmento-card {
   flex: 0 0 calc((100% - 40px) / 3);

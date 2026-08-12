@@ -302,10 +302,16 @@ html, body { overflow-x: hidden; }
   /* --- SECTION 8 — MODALIDADES --- */
   .modalidade-title { font-size: 22px; }
   .section-modalidade { overflow: hidden; }
+  /* Rede de seguranca: hoje o JS converte estas abas em acordeao e o bloco
+     .tabs.modo-acordeao zera o overflow. Se o JS falhar, cai aqui — e aqui o
+     -y precisa ser explicito, senao o navegador o promove para auto e a faixa
+     rola na vertical junto com a horizontal. */
   .tabs {
     width: calc(100vw - 40px);
     max-width: 100%;
     overflow-x: auto;
+    overflow-y: hidden;
+    overscroll-behavior-x: contain;
     -webkit-overflow-scrolling: touch;
     flex-wrap: nowrap;
     justify-content: flex-start;

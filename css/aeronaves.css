@@ -1704,6 +1704,12 @@ body.loaded .aero-hero__bg-img {
   ───────────────────────────────────── */
   .aero-diff__cards {
     overflow-x: auto;
+    /* overflow-y explicito: so com o -x declarado, o navegador promove o -y
+       para auto e a faixa passa a rolar na vertical junto. Seguro aqui porque
+       o mobile zera os transforms dos cards (transform:none logo abaixo). */
+    overflow-y: hidden;
+    /* Nao encadeia a rolagem da faixa para a pagina ao chegar nas pontas */
+    overscroll-behavior-x: contain;
     justify-content: flex-start;
     padding: 8px var(--container-px, 20px) 16px;
     -webkit-overflow-scrolling: touch;
