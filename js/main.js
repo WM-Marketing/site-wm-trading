@@ -111,6 +111,73 @@
   });
 })();
 
+// Mega-menu no mobile — 2º nível em acordeão.
+// O mega-menu tem 22 links de segmento em 3 colunas. No desktop as 3 colunas
+// aparecem lado a lado; no mobile empilham (responsive.css) e o rótulo de cada
+// uma abre/fecha os seus links, uma seção por vez. Assim o 1º nível da gaveta
+// mostra 5 itens em vez de 41, e nada exige rolagem horizontal.
+(function () {
+  const BP_MOBILE = 768;
+  const rotulos = document.querySelectorAll('.nav-mega-label');
+  if (!rotulos.length) return;
+
+  const ehMobile = () => window.innerWidth <= BP_MOBILE;
+
+  function fecharTodas(exceto) {
+    document.querySelectorAll('.nav-mega-col.open').forEach(col => {
+      if (col === exceto) return;
+      col.classList.remove('open');
+      col.querySelector('.nav-mega-label')?.setAttribute('aria-expanded', 'false');
+    });
+  }
+
+  function alternar(rotulo) {
+    if (!ehMobile()) return;
+    const col = rotulo.closest('.nav-mega-col');
+    if (!col) return;
+    const jaAberta = col.classList.contains('open');
+    fecharTodas(col);
+    col.classList.toggle('open', !jaAberta);
+    rotulo.setAttribute('aria-expanded', String(!jaAberta));
+  }
+
+  // No desktop os links ficam sempre visíveis, então o rótulo nao e um
+  // controle — sem role/tabindex/aria, que ali seriam mentira para o leitor
+  // de tela. Ressincroniza ao girar o aparelho ou redimensionar.
+  function sincronizar() {
+    const mobile = ehMobile();
+    rotulos.forEach(rotulo => {
+      const col = rotulo.closest('.nav-mega-col');
+      if (mobile) {
+        rotulo.setAttribute('role', 'button');
+        rotulo.setAttribute('tabindex', '0');
+        rotulo.setAttribute('aria-expanded', col?.classList.contains('open') ? 'true' : 'false');
+      } else {
+        rotulo.removeAttribute('role');
+        rotulo.removeAttribute('tabindex');
+        rotulo.removeAttribute('aria-expanded');
+        col?.classList.remove('open');
+      }
+    });
+  }
+
+  rotulos.forEach(rotulo => {
+    rotulo.addEventListener('click', e => {
+      e.stopPropagation();
+      alternar(rotulo);
+    });
+    rotulo.addEventListener('keydown', e => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        alternar(rotulo);
+      }
+    });
+  });
+
+  sincronizar();
+  window.addEventListener('resize', sincronizar);
+})();
+
 // Segmentos carousel — setas avançam 1 card; snap do CSS alinha o trilho
 (function () {
   const track = document.querySelector('.segmentos-carousel .segmentos-grid');
@@ -221,11 +288,21 @@ document.querySelectorAll('.motivo-card').forEach(card => {
 });
 
 // VER TODOS bar — match height to card image (Section 7)
+// Só no desktop, onde a barra é uma faixa VERTICAL ao lado do carrossel. No
+// mobile ela vira uma faixa horizontal de largura total (responsive.css manda
+// height:48px) — e como aqui o valor ia por estilo inline, ele vencia o CSS e
+// esticava o botão para os 188px de altura da imagem do card.
 (function () {
+  const BP_DESKTOP = 769;
   const syncBar = () => {
-    const img = document.querySelector('.segmento-card-img');
     const bar = document.querySelector('.segmentos-ver-todos');
-    if (!img || !bar) return;
+    if (!bar) return;
+    if (window.innerWidth < BP_DESKTOP) {
+      bar.style.removeProperty('height');   // devolve o controle ao CSS
+      return;
+    }
+    const img = document.querySelector('.segmento-card-img');
+    if (!img) return;
     bar.style.height = img.offsetHeight + 'px';
   };
   syncBar();
@@ -239,3 +316,76 @@ document.querySelectorAll('.tab-radio input[type="radio"]').forEach(input => {
     document.getElementById('tab-' + input.value)?.classList.add('active');
   });
 });
+
+
+// Seção 8 — modalidades como acordeão no mobile.
+// Move cada .tab-panel para logo depois do seu rótulo, empilhando as 4
+// modalidades. No desktop devolve os painéis ao container original, para as
+// abas seguirem intactas.
+(function () {
+  const BP_MOBILE = 768;
+  const FOLGA = 12;
+  const tabs = document.querySelector('.tabs');
+  const wrap = document.querySelector('.tab-panels');
+  if (!tabs || !wrap) return;
+
+  const pares = [...tabs.querySelectorAll('.tab-radio')].map(label => {
+    const valor = label.querySelector('input')?.value;
+    return { label, painel: valor ? document.getElementById('tab-' + valor) : null };
+  }).filter(p => p.painel);
+  if (!pares.length) return;
+
+  let modo = null;
+
+  function sincronizar() {
+    const querAcordeao = window.innerWidth <= BP_MOBILE;
+    if (querAcordeao && modo !== 'acordeao') {
+      pares.forEach(({ label, painel }) => label.insertAdjacentElement('afterend', painel));
+      tabs.classList.add('modo-acordeao');
+      modo = 'acordeao';
+    } else if (!querAcordeao && modo !== 'abas') {
+      pares.forEach(({ painel }) => wrap.appendChild(painel));
+      tabs.classList.remove('modo-acordeao');
+      modo = 'abas';
+    }
+  }
+
+  // Ao abrir uma seção, traz o conjunto (rótulo + painel) para o campo de
+  // visão, sem exigir rolagem manual. Centraliza quando ele CABE na tela;
+  // quando é mais alto que a tela, encosta o rótulo abaixo do header — nesse
+  // caso centralizar jogaria metade do painel abaixo da dobra, que é o
+  // problema que se queria evitar. O header é sticky, então desconta a altura
+  // dele, senão ele cobriria o rótulo.
+  function trazerParaVista(label, painel) {
+    const header = document.querySelector('.header');
+    const topoFixo = (header ? header.offsetHeight : 64) + FOLGA;
+    const caixaLabel = label.getBoundingClientRect();
+    const topoDoc = caixaLabel.top + window.scrollY;
+    const altura = painel.getBoundingClientRect().bottom - caixaLabel.top;
+    const disponivel = window.innerHeight - topoFixo - FOLGA;
+
+    const destino = altura <= disponivel
+      ? topoDoc - topoFixo - (disponivel - altura) / 2
+      : topoDoc - topoFixo;
+
+    const suave = !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    window.scrollTo({ top: Math.max(0, Math.round(destino)), behavior: suave ? 'smooth' : 'auto' });
+  }
+
+  pares.forEach(({ label, painel }) => {
+    const input = label.querySelector('input');
+    if (!input) return;
+    input.addEventListener('change', () => {
+      if (modo !== 'acordeao' || !input.checked) return;
+      // Síncrono de propósito: o handler das abas já trocou .active (está
+      // registrado antes deste no arquivo), e ler getBoundingClientRect força
+      // o reflow, então a altura medida já é a do painel expandido. Evita
+      // depender de requestAnimationFrame, que fica congelado quando a aba
+      // não está visível.
+      trazerParaVista(label, painel);
+    });
+  });
+
+  sincronizar();
+  window.addEventListener('resize', sincronizar);
+})();

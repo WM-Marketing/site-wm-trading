@@ -91,6 +91,84 @@ html, body { overflow-x: hidden; }
     padding: 12px 36px;
     font-size: 14px;
     border-bottom: 1px solid #f0f0f0;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+  }
+
+  /* Mega-menu no mobile — as 3 colunas do desktop viram seções empilhadas.
+     Sem estas regras o min-width:680px do desktop sobrevive e transborda
+     305px numa tela de 375px, forçando rolagem horizontal para ver
+     "Energia & Indústria" e "Consumo & Tech". */
+  .nav-dropdown__menu--mega {
+    min-width: 0;
+    width: 100%;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    padding: 0;
+  }
+  .nav-mega-col {
+    flex: none;
+    width: 100%;
+    padding: 0;
+    border-right: none;
+  }
+
+  /* O rótulo da coluna passa a ser o cabeçalho tocável do 2º nível.
+     No desktop segue sendo só um rótulo — nada aqui vaza para lá. */
+  .nav-mega-label {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    width: 100%;
+    min-height: 44px;
+    margin: 0;
+    padding: 0 30px;
+    font-size: 12px;
+    color: #888;
+    background: #f4f4f4;
+    border-bottom: 1px solid #ececec;
+    cursor: pointer;
+    user-select: none;
+  }
+  .nav-mega-label::after {
+    content: "";
+    flex-shrink: 0;
+    width: 7px;
+    height: 7px;
+    border-right: 2px solid currentColor;
+    border-bottom: 2px solid currentColor;
+    transform: rotate(45deg) translateY(-2px);
+    transition: transform var(--transition);
+  }
+  .nav-mega-col.open .nav-mega-label {
+    color: var(--color-primary);
+    background: #fff;
+  }
+  .nav-mega-col.open .nav-mega-label::after {
+    transform: rotate(-135deg) translateY(-2px);
+  }
+
+  /* 3º nível: os links da coluna só aparecem com a seção aberta */
+  .nav-mega-col > a { display: none; }
+  .nav-mega-col.open > a { display: flex; }
+
+  .nav-dropdown__menu--mega .nav-mega-all {
+    width: 100%;
+    min-height: 44px;
+    text-align: left;
+    justify-content: flex-start;
+  }
+
+  /* A gaveta precisa rolar na VERTICAL quando uma seção abre, senão os
+     últimos itens ficam fora da tela e inalcançáveis. */
+  .header-nav {
+    max-height: calc(100vh - 64px);
+    max-height: calc(100dvh - 64px);
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior: contain;
   }
 
   .header-actions .btn { display: none; }
@@ -304,4 +382,70 @@ html, body { overflow-x: hidden; }
 /* --- HAMBURGER ALWAYS HIDDEN ON DESKTOP --- */
 @media (min-width: 769px) {
   .menu-toggle { display: none; }
+}
+
+
+/* ══════════════════════════════════════════════════
+   SEÇÃO 8 — MODALIDADES COMO ACORDEÃO NO MOBILE
+   As 4 abas tinham 756px de largura em 335px visíveis: 421px de opções
+   fora da tela, sem nenhuma pista de que existiam. Com rótulos longos
+   ("Operação por Conta e Ordem") nenhum ajuste de fonte caberia as
+   quatro em 375px, então viram seções empilhadas.
+   .modo-acordeao vem do JS, que move cada painel para depois do rótulo.
+   ══════════════════════════════════════════════════ */
+@media (max-width: 768px) {
+  .tabs.modo-acordeao {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    overflow-x: visible;
+    padding: 0;
+    background: none;
+    border: none;
+    border-radius: 0;
+  }
+  .modo-acordeao .tab-radio {
+    display: block;
+    width: 100%;
+    margin: 0 0 8px;
+  }
+  .modo-acordeao .tab-radio-name {
+    justify-content: space-between;
+    width: 100%;
+    min-height: 48px;
+    padding: 0 16px;
+    text-align: left;
+    white-space: normal;
+    border: 1px solid #ececec;
+    border-radius: 8px;
+    background: #fafafa;
+  }
+  .modo-acordeao .tab-radio-name::after {
+    content: "";
+    flex-shrink: 0;
+    width: 7px;
+    height: 7px;
+    margin-left: 12px;
+    border-right: 2px solid currentColor;
+    border-bottom: 2px solid currentColor;
+    transform: rotate(45deg) translateY(-2px);
+    transition: transform var(--transition);
+  }
+  .modo-acordeao .tab-radio input:checked + .tab-radio-name {
+    border-color: var(--color-primary);
+    border-radius: 8px 8px 0 0;
+  }
+  .modo-acordeao .tab-radio input:checked + .tab-radio-name::after {
+    transform: rotate(-135deg) translateY(-2px);
+  }
+  .modo-acordeao .tab-panel { display: none; margin: 0 0 8px; }
+  .modo-acordeao .tab-panel.active { display: block; }
+  .modo-acordeao .tab-panel .modalidade-content {
+    padding: 24px;
+    border: 1px solid #ececec;
+    border-top: none;
+    border-radius: 0 0 8px 8px;
+  }
+  /* O container original fica vazio no modo acordeão */
+  .tabs.modo-acordeao ~ .tab-panels { display: none; }
 }
