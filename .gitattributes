@@ -1,0 +1,29 @@
+# Finais de linha — normalizados em LF.
+#
+# Por que: scripts/build_pages.py escreve LF, mas os arquivos gerados estavam
+# versionados em CRLF (236 dos 257 HTML, o resto em LF — o repo estava
+# misturado). Rodar o gerador em macOS/Linux convertia ~235 arquivos e produzia
+# ~89 mil linhas de diff sem uma unica mudanca de conteudo, escondendo a
+# alteracao real. Em Windows, o proximo commit revertia tudo de volta.
+#
+# text=auto deixa o git detectar binario pelo conteudo; eol=lf fixa o final de
+# linha no checkout, em qualquer sistema operacional.
+* text=auto eol=lf
+
+# Binarios — nunca converter (marcados explicitamente por seguranca)
+*.webp  binary
+*.png   binary
+*.jpg   binary
+*.JPG   binary
+*.jpeg  binary
+*.gif   binary
+*.ico   binary
+*.pdf   binary
+*.psd   binary
+*.woff  binary
+*.woff2 binary
+*.ttf   binary
+*.otf   binary
+*.eot   binary
+*.mp4   binary
+*.mp3   binary
