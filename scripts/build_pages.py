@@ -1687,7 +1687,9 @@ def main():
             episodes = json.load(f)
             
         episodes_count = len(episodes)
-        # Sort episodes by date descending
+        # Sort episodes by date descending, desempatando por titulo (mesmo
+        # motivo do listing do blog: sem desempate a ordem nao e reproduzivel)
+        episodes.sort(key=lambda x: x.get("title", ""))
         episodes.sort(key=lambda x: x.get("date", ""), reverse=True)
         
         for ep in episodes:
@@ -2176,7 +2178,13 @@ Se você tiver alguma pergunta sobre esta Política de Privacidade ou as prátic
         render_html_page(post_out_path, title, excerpt[:155], post_detail_html, head_tpl, header_tpl, footer_tpl,
                          lang=post_lang, og_type="article", og_image=cover or None, jsonld=post_jsonld)
 
-    # Sort listing data by date descending
+    # Sort listing data by date descending, desempatando por slug.
+    # Sem o desempate a ordem vinha do glob.glob() (ordem do sistema de
+    # arquivos), e posts com data identica trocavam de lugar entre maquinas —
+    # mudando o post em destaque do blog sozinho, a cada regeracao.
+    # Dois sorts encadeados: o sort do Python e estavel, entao o resultado e
+    # data DESC com slug ASC (ordenar pela tupla inverteria o slug tambem).
+    posts_data.sort(key=lambda x: x["slug"])
     posts_data.sort(key=lambda x: x["date"], reverse=True)
     
     # 8. GENERATE BLOG LISTING PAGE (blog/index.html)
