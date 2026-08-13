@@ -934,7 +934,7 @@ body.loaded .aero-hero__bg-img {
 ───────────────────────────────────── */
 .aero-diff {
   background-color: #F0F0F0;
-  background-image: url('../images/assets/background nuvem2.png');
+  background-image: url('../images/aeronaves/nuvem-fundo.webp');
   background-repeat: no-repeat;
   background-position: center bottom;
   background-size: auto 120%;
