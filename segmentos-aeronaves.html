@@ -182,12 +182,63 @@
 
     <!-- Wrapper: centering + efeito 3D (mouse). A img cuida só da entrada -->
     <div class="aero-hero__bg-wrap">
-      <img
-        src="images/assets/background_hero_aeronaves.svg"
-        alt=""
-        aria-hidden="true"
-        class="aero-hero__bg-img"
-      />
+      <!-- ══ MOSAICO — DESKTOP ══
+           Coordenadas em % do viewBox 2005 x 626 do SVG que isto substitui.
+           O retangulo branco 2005x626 daquele arquivo era o <clipPath>, nao um
+           fundo, e nao entra aqui: a .aero-hero ja tem background #fff.
+           Tambem ficaram de fora os dois retangulos #E0E0E0 que existiam SOB
+           as fotos — a propria <img> carrega esse cinza como background. -->
+      <div class="aero-hero__mosaico aero-hero__mosaico--desktop" aria-hidden="true">
+        <span class="aero-hero__bloco" style="--x:70.025%; --y:50%;     --w:20%;     --h:50%;     --cor:#F0F0F0"></span>
+        <img class="aero-hero__foto"
+             src="images/aeronaves-hero/helicoptero-1200.webp"
+             srcset="images/aeronaves-hero/helicoptero-600.webp 600w, images/aeronaves-hero/helicoptero-1200.webp 1200w"
+             sizes="(max-width: 768px) 38vw, (max-width: 1440px) 28vw, 403px"
+             alt="" width="1200" height="1490" decoding="async"
+             style="--x:70.025%; --y:0%;      --w:20%;     --h:50%" />
+        <img class="aero-hero__foto"
+             src="images/aeronaves-hero/turbina-1200.webp"
+             srcset="images/aeronaves-hero/turbina-600.webp 600w, images/aeronaves-hero/turbina-1200.webp 1200w"
+             sizes="(max-width: 768px) 38vw, (max-width: 1440px) 28vw, 403px"
+             alt="" width="1200" height="1200" decoding="async"
+             style="--x:50.025%; --y:50%;     --w:20%;     --h:50%" />
+        <span class="aero-hero__bloco" style="--x:90.025%; --y:50%;     --w:9.975%;  --h:25.08%;  --cor:#F0F0F0"></span>
+        <span class="aero-hero__bloco" style="--x:0.798%;  --y:50%;     --w:10.025%; --h:25.08%;  --cor:#F5F5F5"></span>
+        <span class="aero-hero__bloco" style="--x:0.798%;  --y:0%;      --w:10.025%; --h:25.08%;  --cor:#F2F2F2"></span>
+        <span class="aero-hero__bloco" style="--x:59.999%; --y:24.92%;  --w:10.025%; --h:25.08%;  --cor:#F2F2F2"></span>
+        <span class="aero-hero__bloco" style="--x:10.025%; --y:74.92%;  --w:9.975%;  --h:25.08%;  --cor:#F2F2F2"></span>
+        <span class="aero-hero__bloco" style="--x:90.025%; --y:25.08%;  --w:9.975%;  --h:25.08%;  --cor:#F5F5F5"></span>
+      </div>
+    </div>
+
+    <!-- ══ MOSAICO DE FUNDO — SOMENTE MOBILE ══
+         Reconstroi em HTML/CSS a composicao que antes vinha do SVG de 13 MB
+         (background_hero_mobile_aeronaves.svg). Aquele arquivo era 100% duas
+         fotos em base64 e apenas 1,5 KB de vetor, entao o formato SVG so
+         acrescentava 33% de overhead do base64, sem cache proprio nem
+         possibilidade de servir resolucoes diferentes.
+
+         Coordenadas em % do viewBox original (1254 x 1657), o que mantem a
+         composicao fiel em qualquer largura. --x/--y/--w/--h alimentam o CSS. -->
+    <div class="aero-hero__mosaico aero-hero__mosaico--mobile" aria-hidden="true">
+      <span class="aero-hero__bloco" style="--x:1.276%;  --y:0%;      --w:13.876%; --h:18.648%; --cor:#F0F0F0"></span>
+      <img class="aero-hero__foto"
+           src="images/aeronaves-hero/turbina-600.webp"
+           srcset="images/aeronaves-hero/turbina-600.webp 600w, images/aeronaves-hero/turbina-1200.webp 1200w"
+           sizes="(max-width: 768px) 38vw, (max-width: 1440px) 28vw, 403px"
+           alt="" width="600" height="600" decoding="async"
+           style="--x:28.549%; --y:81.352%; --w:31.738%; --h:18.648%" />
+      <span class="aero-hero__bloco" style="--x:60.526%; --y:81.231%; --w:31.579%; --h:18.648%; --cor:#F0F0F0"></span>
+      <img class="aero-hero__foto"
+           src="images/aeronaves-hero/helicoptero-600.webp"
+           srcset="images/aeronaves-hero/helicoptero-600.webp 600w, images/aeronaves-hero/helicoptero-1200.webp 1200w"
+           sizes="(max-width: 768px) 38vw, (max-width: 1440px) 28vw, 403px"
+           alt="" width="600" height="745" decoding="async"
+           style="--x:60.287%; --y:62.583%; --w:31.738%; --h:18.769%" />
+      <span class="aero-hero__bloco" style="--x:13.876%; --y:18.648%; --w:15.789%; --h:9.354%;  --cor:#F0F0F0"></span>
+      <span class="aero-hero__bloco" style="--x:44.498%; --y:71.998%; --w:15.789%; --h:9.354%;  --cor:#F0F0F0"></span>
+      <span class="aero-hero__bloco" style="--x:84.211%; --y:18.648%; --w:15.789%; --h:9.354%;  --cor:#F0F0F0"></span>
+      <span class="aero-hero__bloco" style="--x:12.759%; --y:90.586%; --w:15.789%; --h:9.415%;  --cor:#F5F5F5"></span>
     </div>
 
     <!-- Conteúdo sobreposto à esquerda -->

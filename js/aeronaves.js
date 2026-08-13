@@ -15,10 +15,14 @@
 
   function updateScale() {
     const hero   = document.querySelector('.aero-hero');
-    const bgImg  = document.querySelector('.aero-hero__bg-img');
+    /* Era .aero-hero__bg-img, o SVG de 13 MB. Ele saiu e a composicao virou o
+       mosaico HTML — sem trocar este seletor, bgImg ficaria null, a medida
+       cairia no innerWidth e a escala do desktop desabaria de 1 para ~0.89,
+       encolhendo todo o texto do hero. */
+    const bgImg  = document.querySelector('.aero-hero__mosaico--desktop');
     if (!hero) return;
 
-    /* Usa a largura renderizada do SVG se disponível,
+    /* Usa a largura renderizada da composição se disponível,
        caso contrário cai para window.innerWidth */
     const refW = bgImg ? bgImg.offsetWidth : window.innerWidth;
     const raw   = refW / SVG_DESIGN_W;
@@ -31,11 +35,11 @@
   updateScale();
   window.addEventListener('resize', updateScale);
 
-  /* Garante recálculo após o SVG carregar (pode mudar o layout) */
-  const bgImg = document.querySelector('.aero-hero__bg-img');
-  if (bgImg) {
-    bgImg.addEventListener('load', updateScale);
-  }
+  /* Antes era o evento load do SVG, que definia a altura do hero ao chegar.
+     O mosaico tem aspect-ratio no CSS, então já ocupa o espaço certo antes das
+     fotos carregarem — não há reflow para esperar. Mantido só o recálculo pós
+     load da página, para o caso de a fonte mudar a métrica do texto. */
+  window.addEventListener('load', updateScale);
 })();
 
 /* ─────────────────────────────────────

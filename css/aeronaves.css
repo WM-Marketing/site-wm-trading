@@ -44,6 +44,11 @@
 }
 
 /* ── SVG: apenas a imagem, sem centering próprio ── */
+/* <picture> e inline por padrao e criaria uma folga de linha-base sob o SVG */
+.aero-hero__bg-picture {
+  display: block;
+  width: 100%;
+}
 .aero-hero__bg-img {
   display: block;
   width: 100%;
@@ -51,6 +56,42 @@
   height: auto;
   pointer-events: none;
   user-select: none;
+}
+
+/* ── Mosaico de fundo: reconstrucao em HTML/CSS das composicoes que antes
+   vinham de dois SVG de 13 MB. Cada um era 100% duas fotos em base64 e ~1,5 KB
+   de vetor, entao o formato so acrescentava 33% de overhead, sem cache proprio
+   nem possibilidade de servir resolucoes diferentes por dispositivo.
+   Ha duas variantes porque as composicoes sao diferentes, nao so reescaladas. */
+.aero-hero__mosaico {
+  position: relative;
+}
+.aero-hero__mosaico--desktop {
+  width: 100%;
+  aspect-ratio: 2005 / 626;   /* proporcao do viewBox original */
+}
+.aero-hero__mosaico--mobile {
+  display: none;
+}
+
+/* Posicoes vem de --x/--y/--w/--h no HTML, em % do viewBox de origem: a
+   composicao acompanha qualquer largura sem numero fixo no CSS. */
+.aero-hero__bloco,
+.aero-hero__foto {
+  position: absolute;
+  left: var(--x);
+  top: var(--y);
+  width: var(--w);
+  height: var(--h);
+  border-radius: 14px;   /* rx=16 do viewBox ≈ 14px na largura tipica */
+}
+.aero-hero__bloco {
+  background: var(--cor);
+}
+.aero-hero__foto {
+  display: block;
+  object-fit: cover;
+  background: #E0E0E0;   /* o cinza que ficava sob a foto no SVG */
 }
 
 /* ── Overlay de conteúdo: absoluto sobre o SVG ── */
@@ -1069,25 +1110,75 @@ body.loaded .aero-hero__bg-img {
 @media (max-width: 768px) {
   .aero-hero {
     flex-direction: column;
-    padding: 32px var(--container-px, 20px) 0;
+    /* Sem padding vertical: a arte encosta no cabecalho e na secao seguinte.
+       O padding lateral continua, para o texto respeitar a margem da pagina. */
+    padding: 0 var(--container-px, 20px);
   }
 
+  /* O SVG e FUNDO: fica atras e o texto por cima, como no desktop. Antes este
+     bloco empilhava os dois (flex column), o que jogava a arte para depois do
+     texto em vez de atras dele. */
   .aero-hero__inner {
-    position: static;
-    display: flex;
-    flex-direction: column;
-    gap: 24px;
+    position: relative;
+    display: block;
   }
 
-  .aero-hero__bg-img {
-    order: 2;
-    border-radius: 12px;
+  /* A composicao do desktop nao entra no mobile — e outra arte, nao a mesma
+     reescalada. As duas variantes usam os MESMOS arquivos .webp, entao esconder
+     uma nao custa download nenhum. */
+  .aero-hero__bg-wrap {
+    display: none;
   }
 
+  .aero-hero__mosaico--mobile {
+    display: block;
+    /* Mesma proporcao do viewBox que originou a composicao */
+    aspect-ratio: 1254 / 1657;
+    /* 20% maior que a tela, sempre centralizado. (100% + 2x o padding lateral)
+       e exatamente a largura do viewport; o *1.2 cresce sobre isso, e a dupla
+       margin-left:50% + translateX(-50%) centraliza — a sangria fica simetrica,
+       10% para cada lado, em qualquer largura de tela. */
+    width: calc((100% + var(--container-px, 20px) * 2) * 1.2);
+    margin-left: 50%;
+    transform: translateX(-50%);
+    /* Sobe o mosaico para cortar 70% do retangulo de cima e trazer o conteudo
+       junto. Em vw de proposito: margin-top em % se resolve pela LARGURA do
+       contentor, nao pela altura, e daria um valor errado.
+         mosaico     = 1.2 x 100vw x (1657/1254) = 158,56vw de altura
+         ret. do topo = 18,648% disso            =  29,57vw
+         70% dele                                =  20,70vw
+       Como o .aero-hero tem overflow:hidden, o excedente e recortado. */
+    margin-top: -20.7vw;
+    z-index: 0;
+  }
+
+  /* O posicionamento em si vem da regra base. So o raio muda: o viewBox mobile
+     e mais estreito (1254 contra 2005), entao os mesmos rx=16 dao ~5,7px aqui
+     contra ~14px no desktop. */
+  .aero-hero__bloco,
+  .aero-hero__foto {
+    border-radius: 6px;
+  }
+
+  /* Texto POR CIMA do fundo. padding:0 de proposito — o padding lateral ja vem
+     do .aero-hero; repetir aqui estreitaria o texto e forcaria uma quebra a
+     mais no titulo. */
   .aero-hero__overlay {
-    position: static;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
     padding: 0;
-    order: 1;
+    z-index: 2;
+    display: flex;
+    /* Ancorado pela BASE, nao centralizado. A altura de 55% termina logo acima
+       da primeira foto (que comeca em ~57% da altura do hero), entao o texto
+       para de invadir a foto — antes a sobreposicao era de 80px.
+       flex-end e deliberado: se o texto crescer (titulo quebrando em mais uma
+       linha numa tela estreita), ele cresce para CIMA, onde ha area vazia, em
+       vez de descer sobre as fotos. */
+    align-items: flex-end;
+    height: 64%;
   }
 
   .aero-hero__content {
@@ -1650,7 +1741,8 @@ body.loaded .aero-hero__bg-img {
   /* ─────────────────────────────────────
      S1 — HERO (complemento)
   ───────────────────────────────────── */
-  .aero-hero { padding-bottom: 40px; }
+  /* padding-bottom removido: o hero mobile encosta na secao seguinte. Estava
+     aqui, num segundo bloco @media, e sobrescrevia o padding definido acima. */
   .aero-hero__cta { gap: 8px; }
   .aero-hero__cta-text { font-size: 11px; line-height: 1.3; }
 
