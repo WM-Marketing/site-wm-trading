@@ -24,6 +24,106 @@
   ],
   "redirects": [
     {
+      "source": "/en/contact-us/",
+      "destination": "/fale-conosco/",
+      "permanent": true
+    },
+    {
+      "source": "/en/contact/",
+      "destination": "/fale-conosco/",
+      "permanent": true
+    },
+    {
+      "source": "/en/unidades/",
+      "destination": "/unidades/",
+      "permanent": true
+    },
+    {
+      "source": "/en/solutions/",
+      "destination": "/en/solutions-wm/",
+      "permanent": true
+    },
+    {
+      "source": "/en/account-order-import-2/",
+      "destination": "/en/account-order-import/",
+      "permanent": true
+    },
+    {
+      "source": "/en/materiais/",
+      "destination": "/materiais/",
+      "permanent": true
+    },
+    {
+      "source": "/en/podcast/",
+      "destination": "/podcast/",
+      "permanent": true
+    },
+    {
+      "source": "/en/cookies-policy/",
+      "destination": "/politica-de-cookies/",
+      "permanent": true
+    },
+    {
+      "source": "/en/main-import-taxes/",
+      "destination": "/materiais/",
+      "permanent": true
+    },
+    {
+      "source": "/en/blog/",
+      "destination": "/blog/",
+      "permanent": true
+    },
+    {
+      "source": "/en/infograficos/leasing-de-aeronaves/",
+      "destination": "/blog/leasing-aeronaves/",
+      "permanent": true
+    },
+    {
+      "source": "/en/infograficos/lei-14-300-2022/",
+      "destination": "/blog/",
+      "permanent": true
+    },
+    {
+      "source": "/en/e-book-main-import-taxes/",
+      "destination": "/materiais/",
+      "permanent": true
+    },
+    {
+      "source": "/en/new-brand/",
+      "destination": "/about/",
+      "permanent": true
+    },
+    {
+      "source": "/en/blog/category/importacao-en/",
+      "destination": "/blog/",
+      "permanent": true
+    },
+    {
+      "source": "/en/blog/category/international-tade/",
+      "destination": "/blog/",
+      "permanent": true
+    },
+    {
+      "source": "/en/blog/category/nao-categorizado/",
+      "destination": "/blog/",
+      "permanent": true
+    },
+    {
+      "source": "/en/blog/category/veiculos-autopecas-en/",
+      "destination": "/blog/",
+      "permanent": true
+    },
+    {
+      "source": "/en/blog/author/wmtrading/",
+      "destination": "/blog/",
+      "permanent": true
+    },
+    {
+      "source": "/en/blog/author/maine-pinheiro/",
+      "destination": "/blog/",
+      "permanent": true
+    },
+    {
       "source": "/wp-content/uploads/2024/11/EBOOK-IMPORTACAO-DE-AERONAVES-2024.pdf",
       "destination": "/ebooks/aeronaves-e-helicopteros/",
       "permanent": true
@@ -372,11 +472,6 @@
       "source": "/podcast/:path(.+)",
       "destination": "/podcast/",
       "permanent": true
-    },
-    {
-      "source": "/en/:path(.*)",
-      "destination": "/",
-      "permanent": false
     }
   ]
 }

@@ -22,6 +22,8 @@ Ver ROTINA-ATUALIZACAO-SITE.md.
 
 import argparse
 import json
+
+SITE_URL = "https://www.wmtrading.com.br"
 import os
 import re
 import subprocess
@@ -308,6 +310,71 @@ def checar_links_mortos(rel):
             rel.erro("    a home esta entre elas — sintoma classico de copia local antiga")
     else:
         rel.ok("nenhum link sem destino (fora o de preferencias de cookies, que e por JS)")
+
+
+def checar_ingles(rel):
+    """A arvore /en/ existe e esta pareada com o portugues?
+
+    O build_pages reescreve as paginas PT e APAGA o hreflang que o build_en
+    injetou nelas. Se alguem regenerar e esquecer de rodar o build_en, o par
+    quebra e o Google volta a ignorar a versao em ingles — sem sintoma visivel.
+    Este bloco existe para isso nao passar batido.
+    """
+    titulo("H. Arvore em ingles e hreflang")
+
+    fonte = os.path.join(ROOT_DIR, "content", "en", "paginas.json")
+    if not os.path.exists(fonte):
+        rel.ok("sem arvore /en/ configurada")
+        return
+
+    with open(fonte, encoding="utf-8") as f:
+        paginas = json.load(f)
+
+    sem_arquivo, sem_par, sem_lang = [], [], []
+    for p in paginas:
+        rel_en = p["en"].strip("/")
+        arq_en = "en/index.html" if rel_en == "en" else rel_en + ".html"
+        caminho_en = os.path.join(ROOT_DIR, arq_en.replace("/", os.sep))
+        if not os.path.exists(caminho_en):
+            sem_arquivo.append(p["en"])
+            continue
+        html_en = ler(arq_en)
+        if 'lang="en"' not in html_en:
+            sem_lang.append(p["en"])
+        if f'hreflang="pt-BR" href="{SITE_URL}{p["pt"]}"' not in html_en:
+            sem_par.append(f'{p["en"]} (falta o par no lado EN)')
+
+        # lado portugues
+        alvo = _alvo(p["pt"])
+        if alvo and f'hreflang="en" href="{SITE_URL}{p["en"]}"' not in ler(alvo):
+            sem_par.append(f'{p["pt"]} (falta o par no lado PT — rode build_en.py)')
+
+    if sem_arquivo:
+        rel.erro(f"{len(sem_arquivo)} pagina(s) /en/ no conteudo mas sem arquivo gerado: "
+                 f"{', '.join(sem_arquivo[:5])}")
+    if sem_lang:
+        rel.erro(f"{len(sem_lang)} pagina(s) /en/ sem lang=\"en\": {', '.join(sem_lang[:5])}")
+    if sem_par:
+        rel.erro(f"{len(sem_par)} hreflang incompleto — o Google so aceita o par nos DOIS "
+                 f"sentidos:")
+        for s in sem_par[:6]:
+            rel.erro(f"    {s}")
+    if not (sem_arquivo or sem_lang or sem_par):
+        rel.ok(f"{len(paginas)} paginas /en/ com lang=en e hreflang pareado nos dois lados")
+
+    # nenhum redirect pode interceptar uma pagina /en/ que existe
+    cfg = json.loads(ler("vercel.json"))
+    existentes = {p["en"] for p in paginas}
+    capturadas = [r for r in cfg.get("redirects", [])
+                  if r["source"] in existentes
+                  or (r["source"].startswith("/en/:") or r["source"] == "/en/:path(.*)")]
+    if capturadas:
+        rel.erro(f"{len(capturadas)} redirect(s) interceptam paginas /en/ que existem — "
+                 f"na Vercel o redirect vem ANTES do arquivo:")
+        for r in capturadas[:5]:
+            rel.erro(f"    {r['source']} -> {r['destination']}")
+    else:
+        rel.ok("nenhum redirect intercepta as paginas /en/")
 
 
 def checar_caminhos_relativos(rel):
@@ -609,6 +676,7 @@ def main():
     checar_vercel(rel)
     checar_robots(rel)
     checar_caminhos_relativos(rel)
+    checar_ingles(rel)
     if args.producao:
         checar_producao(rel, args.url.rstrip("/"))
 
