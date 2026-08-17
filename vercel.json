@@ -24,6 +24,116 @@
   ],
   "redirects": [
     {
+      "source": "/wp-content/uploads/2024/11/EBOOK-IMPORTACAO-DE-AERONAVES-2024.pdf",
+      "destination": "/ebooks/aeronaves-e-helicopteros/",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2024/07/EBOOK-Main-Import-Taxes.pdf",
+      "destination": "/ebooks/principais-impostos-incidentes/",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2025/06/preco_coque.pdf",
+      "destination": "/segmentos/derivados-petroleo/",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2026/03/Preco_Lista_Fev_26.pdf",
+      "destination": "/segmentos/derivados-petroleo/",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2025/09/PRECO-LISTA-WM-TRADING.pdf",
+      "destination": "/segmentos/derivados-petroleo/",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2025/05/Preco-Lista-WM-1.pdf",
+      "destination": "/segmentos/derivados-petroleo/",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2025/12/Preco-Lista-WM-12_25.pdf",
+      "destination": "/segmentos/derivados-petroleo/",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2025/10/Preco-Lista-WM-301125.pdf",
+      "destination": "/segmentos/derivados-petroleo/",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2026/02/Preco-Lista-WM-Trading_Jan-2026.pdf",
+      "destination": "/segmentos/derivados-petroleo/",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2025/08/PRECO-LISTA-WM-TRADING-8.pdf",
+      "destination": "/segmentos/derivados-petroleo/",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2026/04/PrecoListaWMTrading.pdf",
+      "destination": "/segmentos/derivados-petroleo/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/page/2/",
+      "destination": "/blog/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/page/3/",
+      "destination": "/blog/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/page/4/",
+      "destination": "/blog/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/page/5/",
+      "destination": "/blog/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/page/6/",
+      "destination": "/blog/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/page/7/",
+      "destination": "/blog/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/page/8/",
+      "destination": "/blog/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/page/9/",
+      "destination": "/blog/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/page/10/",
+      "destination": "/blog/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/page/11/",
+      "destination": "/blog/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/page/13/",
+      "destination": "/blog/",
+      "permanent": true
+    },
+    {
       "source": "/aeronaves-e-helicopteros/",
       "destination": "/ebooks/aeronaves-e-helicopteros/",
       "permanent": true

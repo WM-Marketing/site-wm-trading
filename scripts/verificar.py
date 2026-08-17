@@ -310,6 +310,64 @@ def checar_links_mortos(rel):
         rel.ok("nenhum link sem destino (fora o de preferencias de cookies, que e por JS)")
 
 
+def checar_caminhos_relativos(rel):
+    """Com trailingSlash:true, /x.html e servida em /x/ — e isso muda a base dos
+    caminhos relativos: 'images/a.webp' vira '/x/images/a.webp' e da 404.
+
+    As paginas geradas sao imunes (make_paths_absolute). As MANUAIS nao, e ja
+    custaram caro duas vezes em 17/08: a de aeronaves ficou 3 dias sem CSS pelos
+    src/href, e depois as 4 imagens do hero continuaram quebradas porque a
+    primeira correcao passou pelos src e nao pelos srcset — que sao os que o
+    navegador de fato usa quando existem.
+    """
+    titulo("G. Caminhos relativos em pagina manual")
+
+    cfg = json.loads(ler("vercel.json"))
+    if cfg.get("trailingSlash") is not True:
+        rel.ok("trailingSlash desligado — caminho relativo nao muda de base")
+        return
+
+    # So ASSET: e o que quebra o visual da pagina. href de <a> e link de conteudo,
+    # tratado no bloco D e na varredura de content/**.
+    padrao = re.compile(r'\b(src|srcset|imagesrcset)="([^"]+)"', re.IGNORECASE)
+    padrao_link = re.compile(r'<link\b[^>]*href="([^"]+)"', re.IGNORECASE)
+    achados = {}
+
+    for pagina in paginas_html():
+        # A home e a unica servida na raiz do dominio: nela relativo e absoluto
+        # apontam para o mesmo lugar. Nas demais, /x.html vira /x/ e a base muda.
+        if pagina == "index.html":
+            continue
+
+        html = sem_comentarios(ler(pagina))
+        ruins = []
+
+        def _relativo(alvo):
+            return bool(alvo) and not alvo.startswith(
+                ("/", "#", "http", "data:", "mailto:", "tel:", "javascript:", "?"))
+
+        for atributo, valor in padrao.findall(html):
+            for item in valor.split(","):
+                alvo = item.strip().split(" ")[0]
+                if _relativo(alvo):
+                    ruins.append(f'{atributo}="{alvo}"')
+        for alvo in padrao_link.findall(html):
+            if _relativo(alvo):
+                ruins.append(f'link href="{alvo}"')
+
+        if ruins:
+            achados[pagina] = ruins
+
+    if achados:
+        total = sum(len(v) for v in achados.values())
+        rel.erro(f"{total} caminho(s) relativo(s) em {len(achados)} pagina(s) — "
+                 f"com trailingSlash:true resolvem contra /pagina/ e dao 404:")
+        for pagina, ruins in sorted(achados.items(), key=lambda x: -len(x[1]))[:8]:
+            rel.erro(f"    {pagina}: {len(ruins)}x  ex.: {ruins[0][:70]}")
+    else:
+        rel.ok("nenhum caminho relativo (src, href, srcset e imagesrcset conferidos)")
+
+
 # --------------------------------------------------------------------------
 # E. vercel.json — tabela de redirects
 # --------------------------------------------------------------------------
@@ -377,11 +435,28 @@ def checar_vercel(rel):
             rel.erro(f"{r['source']} -> {r['destination']} : origem igual ao destino, "
                      f"a Vercel entraria em laco infinito")
 
-        sem_barra = [r for r in estaticas if not r["source"].endswith("/")]
+        # A regra da barra vale para PAGINA, nao para arquivo. Medido em producao
+        # em 17/08: /x.pdf responde 200 direto, e /x.pdf/ leva 308 REMOVENDO a barra
+        # (o inverso de /about, que ganha barra). Exigir barra em origem de arquivo
+        # seria o erro contrario — por isso caminho com extensao fica de fora.
+        def _e_arquivo(caminho):
+            ultimo = caminho.rstrip("/").rsplit("/", 1)[-1]
+            return "." in ultimo and not ultimo.startswith(".")
+
+        sem_barra = [r for r in estaticas
+                     if not r["source"].endswith("/") and not _e_arquivo(r["source"])]
         for r in sem_barra:
             rel.erro(f"{r['source']} -> {r['destination']} : com trailingSlash:true a "
                      f"origem precisa terminar em barra, senao a URL antiga do WordPress "
                      f"(/{r['source'].strip('/')}/) cai em 404")
+
+        # Espelho da regra acima: origem de ARQUIVO nao pode ter barra.
+        arquivo_com_barra = [r for r in estaticas
+                             if r["source"].endswith("/") and _e_arquivo(r["source"])]
+        for r in arquivo_com_barra:
+            rel.erro(f"{r['source']} -> {r['destination']} : origem e arquivo e nao pode "
+                     f"terminar em barra — a Vercel remove a barra antes de consultar a "
+                     f"tabela, entao a regra nunca casaria")
 
         # :path* nao consome a barra final; :path(.*) consome.
         frageis = [r for r in dinamicas if ":path*" in r["source"] or ":path+" in r["source"]]
@@ -533,6 +608,7 @@ def main():
     checar_links_mortos(rel)
     checar_vercel(rel)
     checar_robots(rel)
+    checar_caminhos_relativos(rel)
     if args.producao:
         checar_producao(rel, args.url.rstrip("/"))
 
