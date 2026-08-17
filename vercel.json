@@ -6,319 +6,265 @@
     {
       "source": "/images/(.*)",
       "headers": [
-        { "key": "Cache-Control", "value": "public, max-age=2592000, stale-while-revalidate=604800" }
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=2592000, stale-while-revalidate=604800"
+        }
       ]
     },
     {
       "source": "/wp-content/(.*)",
       "headers": [
-        { "key": "Cache-Control", "value": "public, max-age=2592000, stale-while-revalidate=604800" }
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=2592000, stale-while-revalidate=604800"
+        }
       ]
     }
   ],
   "redirects": [
     {
-      "source": "/about",
-      "destination": "/about/",
-      "permanent": true
-    },
-    {
-      "source": "/aeronaves-e-helicopteros",
+      "source": "/aeronaves-e-helicopteros/",
       "destination": "/ebooks/aeronaves-e-helicopteros/",
       "permanent": true
     },
     {
-      "source": "/agrishow",
+      "source": "/agrishow/",
       "destination": "/segmentos/maquinas/",
       "permanent": true
     },
     {
-      "source": "/assessoria-aduaneira-2",
+      "source": "/assessoria-aduaneira-2/",
       "destination": "/assessoria-aduaneira/",
       "permanent": true
     },
     {
-      "source": "/bonded-warehouse",
-      "destination": "/bonded-warehouse/",
-      "permanent": true
-    },
-    {
-      "source": "/carreiras",
-      "destination": "/carreiras/",
-      "permanent": true
-    },
-    {
-      "source": "/compliance",
-      "destination": "/compliance/",
-      "permanent": true
-    },
-    {
-      "source": "/contato-1",
+      "source": "/contato-1/",
       "destination": "/fale-conosco/",
       "permanent": true
     },
     {
-      "source": "/duimp",
+      "source": "/duimp/",
       "destination": "/ebooks/duimp/",
       "permanent": true
     },
     {
-      "source": "/elementor-pagina-de-destino-5099",
+      "source": "/elementor-pagina-de-destino-5099/",
       "destination": "/",
       "permanent": true
     },
     {
-      "source": "/en/blog/anvisa-authorization-importing-brazil",
+      "source": "/en/blog/anvisa-authorization-importing-brazil/",
       "destination": "/blog/anvisa-authorization-importing-brazil/",
       "permanent": true
     },
     {
-      "source": "/en/blog/bonded-warehouse-benefits",
+      "source": "/en/blog/bonded-warehouse-benefits/",
       "destination": "/blog/bonded-warehouse-benefits/",
       "permanent": true
     },
     {
-      "source": "/en/blog/brazil-demand-for-bess-you-need-a-local-partner",
+      "source": "/en/blog/brazil-demand-for-bess-you-need-a-local-partner/",
       "destination": "/blog/brazil-demand-for-bess-you-need-a-local-partner/",
       "permanent": true
     },
     {
-      "source": "/en/blog/challenges-and-solutions-for-cosmetic-imports-in-brazil-2",
+      "source": "/en/blog/challenges-and-solutions-for-cosmetic-imports-in-brazil-2/",
       "destination": "/blog/challenges-and-solutions-for-cosmetic-imports-in-brazil-2/",
       "permanent": true
     },
     {
-      "source": "/en/blog/customs-warehouse",
+      "source": "/en/blog/customs-warehouse/",
       "destination": "/blog/customs-warehouse/",
       "permanent": true
     },
     {
-      "source": "/falcon-6x",
+      "source": "/falcon-6x/",
       "destination": "/aeronaves/falcon-6x/",
       "permanent": true
     },
     {
-      "source": "/falcon-8x",
+      "source": "/falcon-8x/",
       "destination": "/aeronaves/falcon-8x/",
       "permanent": true
     },
     {
-      "source": "/fale-conosco",
-      "destination": "/fale-conosco/",
-      "permanent": true
-    },
-    {
-      "source": "/gestao-logistica-da-wm",
+      "source": "/gestao-logistica-da-wm/",
       "destination": "/ebooks/gestao-logistica-da-wm/",
       "permanent": true
     },
     {
-      "source": "/global-sourcing-2",
+      "source": "/global-sourcing-2/",
       "destination": "/global-sourcing/",
       "permanent": true
     },
     {
-      "source": "/importacao-por-conta-e-ordem-2",
+      "source": "/importacao-por-conta-e-ordem-2/",
       "destination": "/importacao-por-conta-e-ordem/",
       "permanent": true
     },
     {
-      "source": "/importacao-por-encomenda-2",
+      "source": "/importacao-por-encomenda-2/",
       "destination": "/importacao-por-encomenda/",
       "permanent": true
     },
     {
-      "source": "/infograficos/entreposto-aduaneiro",
+      "source": "/infograficos/entreposto-aduaneiro/",
       "destination": "/blog/entreposto-aduaneiro/",
       "permanent": true
     },
     {
-      "source": "/infograficos/leasing-de-aeronaves",
+      "source": "/infograficos/leasing-de-aeronaves/",
       "destination": "/blog/leasing-aeronaves/",
       "permanent": true
     },
     {
-      "source": "/m500",
+      "source": "/m500/",
       "destination": "/aeronaves/m500/",
       "permanent": true
     },
     {
-      "source": "/maquinas-usadas",
+      "source": "/maquinas-usadas/",
       "destination": "/segmentos/maquinas/",
       "permanent": true
     },
     {
-      "source": "/materiais",
-      "destination": "/materiais/",
-      "permanent": true
-    },
-    {
-      "source": "/phenom-100",
+      "source": "/phenom-100/",
       "destination": "/aeronaves/phenom-100/",
       "permanent": true
     },
     {
-      "source": "/phenom-300",
+      "source": "/phenom-300/",
       "destination": "/aeronaves/phenom-300/",
       "permanent": true
     },
     {
-      "source": "/pilatus-24",
+      "source": "/pilatus-24/",
       "destination": "/aeronaves/pilatus-24/",
       "permanent": true
     },
     {
-      "source": "/podcast",
-      "destination": "/podcast/",
-      "permanent": true
-    },
-    {
-      "source": "/politica-de-cookies",
-      "destination": "/politica-de-cookies/",
-      "permanent": true
-    },
-    {
-      "source": "/politica-de-privacidade",
-      "destination": "/politica-de-privacidade/",
-      "permanent": true
-    },
-    {
-      "source": "/principais-impostos-incidentes",
+      "source": "/principais-impostos-incidentes/",
       "destination": "/ebooks/principais-impostos-incidentes/",
       "permanent": true
     },
     {
-      "source": "/regime-de-cotas-modulos-fotovoltaicos",
+      "source": "/regime-de-cotas-modulos-fotovoltaicos/",
       "destination": "/ebooks/regime-de-cotas-modulos-fotovoltaicos/",
       "permanent": true
     },
     {
-      "source": "/solucoes-4pl",
-      "destination": "/solucoes-4pl/",
-      "permanent": true
-    },
-    {
-      "source": "/solucoes-wm",
+      "source": "/solucoes/",
       "destination": "/solucoes-wm/",
       "permanent": true
     },
     {
-      "source": "/solucoes",
-      "destination": "/solucoes-wm/",
-      "permanent": true
-    },
-    {
-      "source": "/unidades",
-      "destination": "/unidades/",
-      "permanent": true
-    },
-    {
-      "source": "/wm-cast",
+      "source": "/wm-cast/",
       "destination": "/podcast/",
       "permanent": true
     },
     {
-      "source": "/como-funcionara-o-regime-de-cotas-para-modulos-fotovoltaicos",
+      "source": "/como-funcionara-o-regime-de-cotas-para-modulos-fotovoltaicos/",
       "destination": "/ebooks/regime-de-cotas-modulos-fotovoltaicos/",
       "permanent": true
     },
     {
-      "source": "/e-book-4pl",
+      "source": "/e-book-4pl/",
       "destination": "/ebooks/4pl-ebook/",
       "permanent": true
     },
     {
-      "source": "/4pl",
+      "source": "/4pl/",
       "destination": "/ebooks/4pl-ebook/",
       "permanent": true
     },
     {
-      "source": "/principais-impostos-incidentes-na-importacao",
+      "source": "/principais-impostos-incidentes-na-importacao/",
       "destination": "/ebooks/principais-impostos-incidentes/",
       "permanent": true
     },
     {
-      "source": "/gestao-logistica",
+      "source": "/gestao-logistica/",
       "destination": "/ebooks/gestao-logistica-da-wm/",
       "permanent": true
     },
     {
-      "source": "/importacao-de-aeronaves-e-helicopteros",
+      "source": "/importacao-de-aeronaves-e-helicopteros/",
       "destination": "/ebooks/aeronaves-e-helicopteros/",
       "permanent": true
     },
     {
-      "source": "/contato",
+      "source": "/contato/",
       "destination": "/fale-conosco/",
       "permanent": true
     },
     {
-      "source": "/sobre",
+      "source": "/sobre/",
       "destination": "/about/",
       "permanent": true
     },
     {
-      "source": "/quem-somos",
+      "source": "/quem-somos/",
       "destination": "/about/",
       "permanent": true
     },
     {
-      "source": "/trabalhe-conosco",
+      "source": "/trabalhe-conosco/",
       "destination": "/carreiras/",
       "permanent": true
     },
     {
-      "source": "/blog/category/:path*",
+      "source": "/blog/category/:path(.*)",
       "destination": "/blog/",
       "permanent": true
     },
     {
-      "source": "/blog/tag/:path*",
+      "source": "/blog/tag/:path(.*)",
       "destination": "/blog/",
       "permanent": true
     },
     {
-      "source": "/blog/author/:path*",
+      "source": "/blog/author/:path(.*)",
       "destination": "/blog/",
       "permanent": true
     },
     {
-      "source": "/category/:path*",
+      "source": "/category/:path(.*)",
       "destination": "/blog/",
       "permanent": true
     },
     {
-      "source": "/tag/:path*",
+      "source": "/tag/:path(.*)",
       "destination": "/blog/",
       "permanent": true
     },
     {
-      "source": "/author/:path*",
+      "source": "/author/:path(.*)",
       "destination": "/blog/",
       "permanent": true
     },
     {
-      "source": "/blog/ex-tarifario-energia-solar",
+      "source": "/blog/ex-tarifario-energia-solar/",
       "destination": "/blog/ex-tarifario-importacoes-fotovoltaico/",
       "permanent": true
     },
     {
-      "source": "/segmentos/aeronaves",
+      "source": "/segmentos/aeronaves/",
       "destination": "/segmentos-aeronaves/",
       "permanent": true
     },
     {
-      "source": "/segmentos/importacao-aeronaves",
+      "source": "/segmentos/importacao-aeronaves/",
       "destination": "/segmentos-aeronaves/",
       "permanent": true
     },
     {
-      "source": "/podcast/:path+",
+      "source": "/podcast/:path(.+)",
       "destination": "/podcast/",
       "permanent": true
     },
     {
-      "source": "/en/:path*",
+      "source": "/en/:path(.*)",
       "destination": "/",
       "permanent": false
     }

@@ -362,6 +362,28 @@ def checar_vercel(rel):
     for r in mortos:
         rel.erro(f"{r['source']} -> {r['destination']} (destino nao existe)")
 
+    # Com trailingSlash:true a Vercel normaliza o caminho ANTES de consultar a tabela.
+    # Consequencias que este bloco pega, ambas descobertas em 17/08:
+    #   1) origem sem barra nunca casa com a URL antiga do WP (que tem barra) -> 404;
+    #   2) se a origem ganhar barra e o destino for ela mesma, vira laco infinito.
+    if cfg.get("trailingSlash") is True:
+        lacos = [r for r in estaticas if r["source"] == r["destination"]]
+        for r in lacos:
+            rel.erro(f"{r['source']} -> {r['destination']} : origem igual ao destino, "
+                     f"a Vercel entraria em laco infinito")
+
+        sem_barra = [r for r in estaticas if not r["source"].endswith("/")]
+        for r in sem_barra:
+            rel.erro(f"{r['source']} -> {r['destination']} : com trailingSlash:true a "
+                     f"origem precisa terminar em barra, senao a URL antiga do WordPress "
+                     f"(/{r['source'].strip('/')}/) cai em 404")
+
+        # :path* nao consome a barra final; :path(.*) consome.
+        frageis = [r for r in dinamicas if ":path*" in r["source"] or ":path+" in r["source"]]
+        for r in frageis:
+            rel.erro(f"{r['source']} -> {r['destination']} : com trailingSlash:true use "
+                     f":path(.*) — o :path*/:path+ nao casa com a barra final")
+
     # Sequestro = a origem JA e uma pagina real E aponta para OUTRO arquivo.
     # Com cleanUrls+trailingSlash, /about e /about/ resolvem para o mesmo about.html:
     # esse redirect e redundante (a Vercel ja faz), nao um sequestro. O caso real foi
