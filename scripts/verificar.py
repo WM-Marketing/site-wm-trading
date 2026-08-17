@@ -52,24 +52,48 @@ SEM_TRACKING_OK = {
 # Cada item aqui foi perdido no incidente de 24/07 — a lista e a lista de sintomas.
 #
 # ATENCAO: tudo aqui e conferido com os comentarios HTML REMOVIDOS. A index.html
-# tem um comentario que cita "js/consent.js" e "GTM-K58GFND"; uma busca ingenua por
+# tem um comentario que cita "js/consent.js" e "GTM-52WHRQN"; uma busca ingenua por
 # texto acha o comentario e aprova uma home que perdeu o <script> de verdade.
 SCRIPTS_DO_MOLDE = [
-    ("js/consent.js", "banner LGPD + Consent Mode + carregamento do GTM"),
+    ("js/consent.js", "Consent Mode default negado + wm_ambiente + carga do GTM"),
     ("js/utm-tracking.js", "atribuicao de origem dos leads (UTM/gclid -> Pipedrive)"),
     ("js/whatsapp-popup.js", "botao flutuante + popup de captura de WhatsApp"),
 ]
+
+# CMP AdOpt: dono do consentimento de cookies desde a migracao do banner proprio.
+# Sao DUAS tags e as duas importam — o injector sozinho nao sabe de qual site e, e
+# a meta sozinha nao carrega nada. Se uma cair, o site fica sem banner de cookies
+# em producao e ninguem percebe olhando a tela.
+# tem_script() nao serve aqui: o src tem query string depois do .js, entao a
+# checagem e por padrao de texto.
+ADOPT_WEBSITE_ID = "e7ae093c-b92e-4ceb-9c53-ac44c0b811f8"
 
 TAGS_DO_MOLDE = [
     (r'rel="canonical"', "URL canonica (evita conteudo duplicado)"),
     (r'property="og:', "Open Graph (previa ao compartilhar o link)"),
     (r'type="application/ld\+json"', "dados estruturados JSON-LD (Organization)"),
     (r"max-image-preview:large", "libera imagem grande em resultados/IA do Google"),
+    (r'class="adopt-injector"', "CMP AdOpt: script do banner de cookies"),
+    (r'name="adopt-website-id"', "CMP AdOpt: meta com o ID do site"),
+    (r"website_code=" + re.escape(ADOPT_WEBSITE_ID), "CMP AdOpt: ID do site correto"),
+    (r"tag\.goadopt\.io", "CMP AdOpt: dominio do injector"),
 ]
 
-# O ID do container do GTM nao fica na index.html — mora dentro do consent.js,
-# que so o dispara apos o aceite do banner. Conferido no arquivo, nao no HTML.
-GTM_ID = "GTM-K58GFND"
+# Marcadores do CMP conferidos PAGINA POR PAGINA, nao so no molde: TAGS_DO_MOLDE
+# olha apenas a index.html, e DUAS paginas do site nao saem do gerador
+# (segmentos-aeronaves.html e importacao-carne-suina/index.html). Foi exatamente
+# assim que elas entraram na migracao do AdOpt sem banner de cookies.
+ADOPT_POR_PAGINA = [
+    (r'class="adopt-injector"', "script do CMP AdOpt"),
+    (r"website_code=" + re.escape(ADOPT_WEBSITE_ID), "ID do site no AdOpt"),
+]
+
+# O ID do container do GTM nao fica na index.html — mora dentro do consent.js.
+# Conferido no arquivo, nao no HTML.
+# GTM-52WHRQN e o container EXCLUSIVO do site novo. O GTM-K58GFND ficou com o
+# WordPress: ele servia os dois sites, e por isso qualquer publicacao nele
+# alterava o site que estava no ar.
+GTM_ID = "GTM-52WHRQN"
 GTM_ARQUIVO = os.path.join("js", "consent.js")
 
 # Scripts que TODA pagina publica precisa ter (propagados pelo gerador).
@@ -267,6 +291,7 @@ def checar_propagacao(rel):
 
     todas = paginas_html()
     sem_scripts = []
+    sem_adopt = []
 
     for pagina in todas:
         if pagina in SEM_TRACKING_OK:
@@ -275,6 +300,12 @@ def checar_propagacao(rel):
         ausentes = [s for s in SCRIPTS_OBRIGATORIOS if not tem_script(conteudo, s)]
         if ausentes:
             sem_scripts.append((pagina, ausentes))
+        # O CMP e conferido PAGINA POR PAGINA, e nao so na index.html: duas
+        # paginas do site nao saem do gerador e ja ficaram sem banner de cookies
+        # exatamente por isso.
+        faltando_cmp = [d for p, d in ADOPT_POR_PAGINA if not re.search(p, conteudo)]
+        if faltando_cmp:
+            sem_adopt.append((pagina, faltando_cmp))
 
     if sem_scripts:
         for pagina, ausentes in sem_scripts[:15]:
@@ -285,6 +316,16 @@ def checar_propagacao(rel):
     else:
         rel.ok(f"{len(todas) - len(SEM_TRACKING_OK)} paginas com consent + UTM + "
                f"WhatsApp ({len(SEM_TRACKING_OK)} excecoes conhecidas)")
+
+    if sem_adopt:
+        for pagina, faltando in sem_adopt[:15]:
+            rel.erro(f"{pagina} sem CMP: {', '.join(faltando)}")
+        if len(sem_adopt) > 15:
+            rel.erro(f"...e mais {len(sem_adopt) - 15} pagina(s) sem o AdOpt. "
+                     f"Se for pagina fora do gerador, espelhe o <head> a mao.")
+    else:
+        rel.ok(f"{len(todas) - len(SEM_TRACKING_OK)} paginas com o CMP AdOpt "
+               f"(conferido pagina por pagina, nao so no molde)")
 
 
 # --------------------------------------------------------------------------
