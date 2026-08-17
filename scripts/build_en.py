@@ -42,6 +42,30 @@ def caminho_saida(url_en):
     return os.path.join(ROOT, rel.replace("/", os.sep) + ".html")
 
 
+def capa_da_pagina_pt(url_pt):
+    """Le a imagem de hero que a pagina em portugues ja usa.
+
+    Reaproveitar em vez de escolher outra mantem as duas versoes visualmente
+    iguais e nao adiciona peso: o arquivo ja esta no site e no cache de quem
+    navegou pela versao PT.
+    """
+    rel = url_pt.strip("/")
+    for tentativa in ([f"{rel}.html", f"{rel}/index.html"] if rel else ["index.html"]):
+        caminho = os.path.join(ROOT, tentativa.replace("/", os.sep))
+        if not os.path.exists(caminho):
+            continue
+        with open(caminho, encoding="utf-8") as f:
+            html = f.read()
+        m = re.search(r'<img[^>]+class="dynamic-hero__bg"[^>]*src="([^"]+)"', html)
+        if not m:
+            m = re.search(r'class="dynamic-hero__bg"[^>]*src="([^"]+)"', html)
+        if not m:
+            m = re.search(r'<img[^>]+src="([^"]+)"[^>]*class="dynamic-hero__bg"', html)
+        if m:
+            return m.group(1)
+    return ""
+
+
 def corpo_html(pagina):
     """Monta o miolo com as mesmas classes do site, para o visual bater."""
     blocos = pagina["blocos"]
@@ -52,9 +76,16 @@ def corpo_html(pagina):
     titulo_hero = pagina["h1"]
     sub_hero = pagina["sub"]
 
+    # A capa vem da pagina PT equivalente: e a mesma imagem que o site ja usa
+    # para aquele assunto, entao a versao em ingles nao fica com hero vazio.
+    capa = capa_da_pagina_pt(pagina["pt"])
+    img = (f'<img src="{capa}" alt="{html_mod.escape(titulo_hero)}" '
+           f'class="dynamic-hero__bg" />' if capa else "")
+
     partes = [f"""
     <section class="dynamic-hero">
-      <div class="container">
+      {img}
+      <div class="container dynamic-hero__container">
         <h1 class="dynamic-hero__title">{html_mod.escape(titulo_hero)}</h1>
         {f'<p class="dynamic-hero__subtitle">{html_mod.escape(sub_hero)}</p>' if sub_hero else ''}
       </div>
@@ -84,16 +115,90 @@ def corpo_html(pagina):
     </section>""")
         idx += 1
 
-    # CTA final, apontando para o formulario em portugues (unico que existe)
-    partes.append("""
-    <section class="page-section page-section--alternate">
-      <div class="container intro-container" style="text-align:center;">
-        <h2 class="card-title" style="font-size: var(--fs-lg); font-weight: var(--fw-semibold); margin-bottom: 18px;">Talk to our specialists</h2>
-        <p class="card-desc" style="margin-bottom: 22px;">Tell us about your operation and our team will get back to you.</p>
-        <a href="/fale-conosco/" class="btn btn-primary">Get in touch</a>
-      </div>
-    </section>""")
+    partes.append(formulario_en(pagina))
     return "\n".join(partes)
+
+
+# Segmentos como aparecem no formulario PT — o Zap espera exatamente estes
+# valores, entao o rotulo em ingles e so visual: o value enviado continua o
+# mesmo. Trocar o value quebraria a classificacao do lead no Pipedrive.
+SEGMENTOS_EN = [
+    ("Aeronaves", "Aircraft"),
+    ("Equipamentos Fotovoltaicos", "Photovoltaic Equipment"),
+    ("Produtos Químicos", "Chemicals"),
+    ("Cosméticos", "Cosmetics"),
+    ("Informática e Telecomunicações", "IT and Telecommunications"),
+    ("Partes e Peças Geral", "Auto Parts and Components"),
+    ("Aço", "Steel"),
+    ("Máquinas", "Machines"),
+    ("Varejo", "Retail"),
+    ("Vinho", "Wine"),
+    ("Drone", "Drone"),
+    ("Rebocadores", "Aircraft Tugs"),
+    ("Combustível e Derivados de Petróleo", "Fuels and Petroleum Products"),
+    ("Outros", "Other"),
+]
+
+
+def formulario_en(pagina):
+    """Formulario em ingles para as paginas /en/.
+
+    Tres diferencas em relacao ao formulario PT, todas de proposito:
+      - telefone aceita formato internacional, nao a mascara (DDD) brasileira;
+      - o campo Estado sai: quem chega pelo ingles em geral nao e do Brasil, e
+        um obrigatorio impossivel de responder derruba a conversao;
+      - o VALUE do segmento continua em portugues, porque e o que o Zap espera
+        para classificar o lead no Pipedrive. So o rotulo e traduzido.
+
+    data-form-type="contato-en" faz o handler procurar ZAPIER_WEBHOOK_CONTATO_EN;
+    sem essa variavel ele cai no ZAPIER_WEBHOOK_URL padrao — ou seja, o lead
+    CHEGA de qualquer jeito, so entra com a etiqueta generica ate o ramo em
+    ingles do Zap ser reativado.
+    """
+    opcoes = "".join(
+        f'\n            <option value="{valor}">{rotulo}</option>'
+        for valor, rotulo in SEGMENTOS_EN)
+
+    return f"""
+    <section class="page-section page-section--alternate" id="contact">
+      <div class="container intro-container">
+        <h2 class="card-title" style="font-size: var(--fs-lg); font-weight: var(--fw-semibold); margin-bottom: 10px;">Talk to our specialists</h2>
+        <p class="card-desc" style="margin-bottom: 26px;">Tell us about your operation and our team will get back to you shortly.</p>
+        <form class="contact-form-js grid gap-4 form-grid-wm form-grid-wm--2col" data-form-type="contato-en">
+          <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" class="hidden" aria-hidden="true" style="display:none;" />
+
+          <input name="nome" required placeholder="Full name *" class="input-wm sm-col-span-2" />
+          <input name="email" type="email" required placeholder="E-mail *" class="input-wm" />
+          <input name="telefone" type="tel" required placeholder="Phone (with country code) *" pattern="[0-9\\s\\(\\)\\+\\-\\.]+" class="input-wm" />
+          <input name="empresa" placeholder="Company" class="input-wm sm-col-span-2" />
+
+          <select name="segmento" required class="input-wm sm-col-span-2">
+            <option value="" disabled selected>Segment *</option>{opcoes}
+          </select>
+
+          <select name="forma_resposta" required class="input-wm sm-col-span-2">
+            <option value="" disabled selected>How would you like to be contacted? *</option>
+            <option value="E-mail">E-mail</option>
+            <option value="WhatsApp">WhatsApp</option>
+            <option value="Telefone">Phone</option>
+          </select>
+
+          <textarea name="mensagem" required rows="4" placeholder="How can we help? *" class="input-wm sm-col-span-2 resize-y"></textarea>
+
+          <label class="sm-col-span-2 form-checkbox-label">
+            <input type="checkbox" name="aceite_privacidade" required value="sim" />
+            <span>I have read and agree to the <a href="/politica-de-privacidade/" class="text-primary underline">Privacy Policy</a> and authorise WM Trading to process my data in order to respond to this request.</span>
+          </label>
+
+          <label class="sm-col-span-2 form-checkbox-label">
+            <input type="checkbox" name="aceite_marketing" value="sim" />
+            <span>I would also like to receive content, materials and commercial communications from WM Trading (optional).</span>
+          </label>
+
+          <button type="submit" class="btn btn-block sm-col-span-2 btn-lg">Send</button>
+        </form>
+      </div>
+    </section>"""
 
 
 def injeta_hreflang(caminho_arquivo, url_pt, url_en):

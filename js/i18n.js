@@ -284,11 +284,24 @@ const translations = {
   }
 };
 
-let currentLang = localStorage.getItem('wm-lang') || 'pt';
+/* A arvore /en/ e servida em ingles pelo servidor: menu, rodape e banner tem
+   que nascer em ingles, sem o visitante precisar clicar em nada. Antes daqui, o
+   idioma saia so do localStorage (padrao 'pt') e o setLang ainda SOBRESCREVIA o
+   lang="en" do HTML por pt-BR — a pagina se anunciava em ingles e se convertia
+   em portugues no load. */
+function paginaEmIngles() {
+  var p = location.pathname;
+  return p === '/en' || p.indexOf('/en/') === 0;
+}
 
-function setLang(lang) {
+var IDIOMA_FIXO = paginaEmIngles();
+let currentLang = IDIOMA_FIXO ? 'en' : (localStorage.getItem('wm-lang') || 'pt');
+
+function setLang(lang, persistir) {
   currentLang = lang;
-  localStorage.setItem('wm-lang', lang);
+  /* Nao gravamos a preferencia quando ela veio da URL: senao quem passa por uma
+     pagina /en/ continua vendo o site em ingles nas paginas em portugues. */
+  if (persistir !== false) localStorage.setItem('wm-lang', lang);
   document.documentElement.lang = lang === 'pt' ? 'pt-BR' : 'en';
 
   // Update textContent elements
@@ -321,5 +334,5 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 
   // Apply saved/default language on load
-  setLang(currentLang);
+  setLang(currentLang, IDIOMA_FIXO ? false : undefined);
 });

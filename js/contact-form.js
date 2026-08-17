@@ -5,6 +5,30 @@
 (function() {
   'use strict';
 
+  /* ---- Textos por idioma ----------------------------------------------------
+     As paginas em /en/ declaram lang="en" no <html>. Sem isto, um visitante que
+     preenche o formulario em ingles recebe "Mensagem enviada!" em portugues.
+     O padrao continua sendo o portugues: so muda quando a pagina diz que e EN. */
+  var EN = (document.documentElement.getAttribute('lang') || '').toLowerCase().indexOf('en') === 0;
+
+  var T = EN ? {
+    erroGenerico:  'Something went wrong. Please try again.',
+    erroEnvio:     'We could not submit the form. Please try again.',
+    sucessoTitulo: 'Message sent! ✅',
+    sucessoTexto:  'We have received your message. A WM Trading specialist will contact you shortly.',
+    ebookTitulo:   'Your material is ready! ✅',
+    ebookTexto:    'The download of <strong>"{TITULO}"</strong> should start automatically.',
+    ebookBotao:    'Download manually'
+  } : {
+    erroGenerico:  'Ocorreu um erro. Tente novamente.',
+    erroEnvio:     'Não foi possível enviar o formulário. Tente novamente.',
+    sucessoTitulo: 'Mensagem enviada! ✅',
+    sucessoTexto:  'Recebemos o seu contato. Um especialista da WM falará com você em breve.',
+    ebookTitulo:   'Material liberado! ✅',
+    ebookTexto:    'O download do e-book <strong>"{TITULO}"</strong> deve começar automaticamente.',
+    ebookBotao:    'Baixar e-book manualmente'
+  };
+
   /* ---- Registro de aceite (LGPD art. 8º, § 2º — o ônus da prova é do controlador) ----
      Guardamos o QUE foi aceito, QUAL versão da política estava no ar e QUANDO.
      A versão vem da meta wm-politica-versao, emitida pelo gerador (build_pages.py).
@@ -74,7 +98,7 @@
     }
 
     try {
-      const response = await fetch('/api/contato', {
+      const response = await fetch('/api/contato/', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -90,7 +114,7 @@
       }
 
       if (!response.ok || !result.ok) {
-        throw new Error(result.error || 'Não foi possível enviar o formulário. Tente novamente.');
+        throw new Error(result.error || T.erroEnvio);
       }
 
       // Conversion events for GTM/GA4 (real lead — fires only after server accepts)
@@ -124,7 +148,7 @@
         errorMsgEl.className = 'form-error-msg';
         form.appendChild(errorMsgEl);
       }
-      errorMsgEl.textContent = err.message || 'Ocorreu um erro. Tente novamente.';
+      errorMsgEl.textContent = err.message || T.erroGenerico;
       errorMsgEl.style.display = 'block';
     }
   });
@@ -140,10 +164,10 @@
 
     if (isEbook) {
       successBox.innerHTML = `
-        <h3 class="form-success-box__title">Material liberado! ✅</h3>
-        <p class="form-success-box__text">O download do e-book <strong>"${formTitle}"</strong> deve começar automaticamente.</p>
+        <h3 class="form-success-box__title">${T.ebookTitulo}</h3>
+        <p class="form-success-box__text">${T.ebookTexto.replace('{TITULO}', formTitle)}</p>
         <a href="${pdfUrl}" target="_blank" rel="noopener noreferrer" class="btn mt-4" style="display: inline-flex;">
-          Baixar e-book manualmente
+          ${T.ebookBotao}
         </a>
       `;
       // Open PDF in new tab
@@ -152,8 +176,8 @@
       }
     } else {
       successBox.innerHTML = `
-        <h3 class="form-success-box__title">Mensagem enviada! ✅</h3>
-        <p class="form-success-box__text">Recebemos o seu contato. Um especialista da WM falará com você em breve.</p>
+        <h3 class="form-success-box__title">${T.sucessoTitulo}</h3>
+        <p class="form-success-box__text">${T.sucessoTexto}</p>
       `;
     }
 

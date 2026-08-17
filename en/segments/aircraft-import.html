@@ -179,7 +179,8 @@
 <main>
 
     <section class="dynamic-hero">
-      <div class="container">
+      
+      <div class="container dynamic-hero__container">
         <h1 class="dynamic-hero__title">Do you want to import your plane or helicopter with agility and security?</h1>
         <p class="dynamic-hero__subtitle">Get in touch with the most complete trading company in Brazil to make this dream come true. Click the button below to speak to one of our aircraft import specialists!</p>
       </div>
@@ -220,11 +221,57 @@ These are jets, helicopters or turboprops for private use, used for commercial o
       </div>
     </section>
 
-    <section class="page-section page-section--alternate">
-      <div class="container intro-container" style="text-align:center;">
-        <h2 class="card-title" style="font-size: var(--fs-lg); font-weight: var(--fw-semibold); margin-bottom: 18px;">Talk to our specialists</h2>
-        <p class="card-desc" style="margin-bottom: 22px;">Tell us about your operation and our team will get back to you.</p>
-        <a href="/fale-conosco/" class="btn btn-primary">Get in touch</a>
+    <section class="page-section page-section--alternate" id="contact">
+      <div class="container intro-container">
+        <h2 class="card-title" style="font-size: var(--fs-lg); font-weight: var(--fw-semibold); margin-bottom: 10px;">Talk to our specialists</h2>
+        <p class="card-desc" style="margin-bottom: 26px;">Tell us about your operation and our team will get back to you shortly.</p>
+        <form class="contact-form-js grid gap-4 form-grid-wm form-grid-wm--2col" data-form-type="contato-en">
+          <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" class="hidden" aria-hidden="true" style="display:none;" />
+
+          <input name="nome" required placeholder="Full name *" class="input-wm sm-col-span-2" />
+          <input name="email" type="email" required placeholder="E-mail *" class="input-wm" />
+          <input name="telefone" type="tel" required placeholder="Phone (with country code) *" pattern="[0-9\s\(\)\+\-\.]+" class="input-wm" />
+          <input name="empresa" placeholder="Company" class="input-wm sm-col-span-2" />
+
+          <select name="segmento" required class="input-wm sm-col-span-2">
+            <option value="" disabled selected>Segment *</option>
+            <option value="Aeronaves">Aircraft</option>
+            <option value="Equipamentos Fotovoltaicos">Photovoltaic Equipment</option>
+            <option value="Produtos Químicos">Chemicals</option>
+            <option value="Cosméticos">Cosmetics</option>
+            <option value="Informática e Telecomunicações">IT and Telecommunications</option>
+            <option value="Partes e Peças Geral">Auto Parts and Components</option>
+            <option value="Aço">Steel</option>
+            <option value="Máquinas">Machines</option>
+            <option value="Varejo">Retail</option>
+            <option value="Vinho">Wine</option>
+            <option value="Drone">Drone</option>
+            <option value="Rebocadores">Aircraft Tugs</option>
+            <option value="Combustível e Derivados de Petróleo">Fuels and Petroleum Products</option>
+            <option value="Outros">Other</option>
+          </select>
+
+          <select name="forma_resposta" required class="input-wm sm-col-span-2">
+            <option value="" disabled selected>How would you like to be contacted? *</option>
+            <option value="E-mail">E-mail</option>
+            <option value="WhatsApp">WhatsApp</option>
+            <option value="Telefone">Phone</option>
+          </select>
+
+          <textarea name="mensagem" required rows="4" placeholder="How can we help? *" class="input-wm sm-col-span-2 resize-y"></textarea>
+
+          <label class="sm-col-span-2 form-checkbox-label">
+            <input type="checkbox" name="aceite_privacidade" required value="sim" />
+            <span>I have read and agree to the <a href="/politica-de-privacidade/" class="text-primary underline">Privacy Policy</a> and authorise WM Trading to process my data in order to respond to this request.</span>
+          </label>
+
+          <label class="sm-col-span-2 form-checkbox-label">
+            <input type="checkbox" name="aceite_marketing" value="sim" />
+            <span>I would also like to receive content, materials and commercial communications from WM Trading (optional).</span>
+          </label>
+
+          <button type="submit" class="btn btn-block sm-col-span-2 btn-lg">Send</button>
+        </form>
       </div>
     </section>
 </main>
