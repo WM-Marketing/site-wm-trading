@@ -1,4 +1,3 @@
-# Projeto pausado. Nao indexar nem rastrear.
-
+# Permite que mecanismos de busca e rastreadores de mídia acessem o site público.
 User-agent: *
-Disallow: /
+Allow: /
