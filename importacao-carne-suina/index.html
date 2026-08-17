@@ -111,10 +111,16 @@
 <script src="/js/utm-tracking.js"></script>
 <!-- LGPD: manter igual a POLITICA_VERSAO_ID em scripts/build_pages.py -->
 <meta name="wm-politica-versao" content="2026-08-11" />
-<!-- Consentimento LGPD + Consent Mode v2 + GTM (GTM-K58GFND): tudo em js/consent.js.
-     Nenhuma tag carrega antes do aceite; GTM só no domínio oficial
-     (teste no vercel.app: localStorage.setItem('wm_gtm_test','1') e recarregar) -->
+<!-- Consent Mode v2 (default negado) + wm_ambiente + carregamento do GTM
+     (GTM-52WHRQN): js/consent.js. PRECISA vir ANTES do AdOpt.
+     ATENCAO: esta pagina NAO sai do scripts/build_pages.py — toda alteracao no
+     <head> do molde tem de ser espelhada aqui a mao. Ela tambem tem handler de
+     formulario proprio (leadForm, mais abaixo), separado do js/contact-form.js. -->
 <script src="/js/consent.js"></script>
+<!-- CMP: o AdOpt e o dono do consentimento de cookies. DEPOIS do consent.js. -->
+<meta name="adopt-website-id" content="e7ae093c-b92e-4ceb-9c53-ac44c0b811f8" />
+<script src="https://tag.goadopt.io/injector.js?website_code=e7ae093c-b92e-4ceb-9c53-ac44c0b811f8"
+        class="adopt-injector"></script>
 </head>
 <body>
 
@@ -545,10 +551,13 @@ form.addEventListener('submit', async e => {
   payload.politica_versao = versaoEl ? versaoEl.getAttribute('content') : '';
   payload.aceite_em = new Date().toISOString();
 
-  if (window.wmTracking) Object.assign(payload, window.wmTracking.getFields());
+  // Aguarda wm_vid + IDs do GA4. getFields() sincrono devolvia vazio em visitante
+  // novo, quando o cookie _ga ainda nao existe. getFieldsAsync tem timeout curto e
+  // nunca rejeita, entao o envio do lead nunca fica preso.
+  if (window.wmTracking) Object.assign(payload, await window.wmTracking.getFieldsAsync());
 
   try {
-    const res = await fetch('/api/contato', {
+    const res = await fetch('/api/contato/', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(payload)

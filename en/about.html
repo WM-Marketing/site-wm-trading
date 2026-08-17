@@ -33,10 +33,18 @@
   <!-- LGPD: versão vigente das políticas. Muda quando o texto muda de forma relevante —
        o aviso de cookies reaparece e os formulários gravam esta versão no registro de
        aceite. Manter igual a POLITICA_VERSAO_ID em scripts/build_pages.py. -->
-  <!-- Consentimento LGPD + Consent Mode v2 + GTM (GTM-K58GFND): tudo em js/consent.js.
-       Nenhuma tag carrega antes do aceite; GTM só no domínio oficial
-       (teste no vercel.app: localStorage.setItem('wm_gtm_test','1') e recarregar) -->
+  <!-- Consent Mode v2 (default negado) + wm_ambiente + carregamento do GTM
+       (GTM-52WHRQN): js/consent.js. PRECISA vir ANTES do AdOpt — declara o
+       default como negado, então se o CMP for bloqueado por adblock o estado
+       permanece negado em vez de liberar tudo. -->
   <script src="/js/consent.js"></script>
+  <!-- CMP: o AdOpt é o dono do consentimento de cookies — banner, painel
+       granular, opt-out, registro de aceite e os sinais de Consent Mode.
+       Substituiu o banner próprio que vivia no js/consent.js.
+       DEPOIS do consent.js, nunca antes. -->
+  <meta name="adopt-website-id" content="e7ae093c-b92e-4ceb-9c53-ac44c0b811f8" />
+  <script src="https://tag.goadopt.io/injector.js?website_code=e7ae093c-b92e-4ceb-9c53-ac44c0b811f8"
+          class="adopt-injector"></script>
 
   <link rel="stylesheet" href="/css/dynamic-pages.css" />
   <script src="/js/contact-form.js" defer></script>
