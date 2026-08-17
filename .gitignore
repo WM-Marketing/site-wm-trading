@@ -42,3 +42,25 @@ npm-debug.log*
 # Logs
 *.log
 .vercel
+
+# Segredos — o repo e PUBLICO e a Vercel publica qualquer arquivo dele.
+# Um .env commitado aqui vira https://www.wmtrading.com.br/.env
+# Precisa existir ANTES de qualquer `vercel env pull`.
+.env
+.env.*
+*.env
+!.env.example
+
+# Chave de conta de servico do Google (GA4, GTM, BigQuery)
+*service-account*.json
+*-service-account.json
+gcp-*.json
+client_secret*.json
+
+# Export de conteiner do GTM — expoe IDs de pixel e a configuracao inteira
+GTM-*.json
+
+# Ferramentas locais de desenvolvimento
+dev-server.py
+testar-*
+payloads_capturados.jsonl
