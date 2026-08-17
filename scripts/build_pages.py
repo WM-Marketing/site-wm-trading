@@ -110,7 +110,7 @@ SEGMENTS_LIST = [
 # nome, a descricao do card e a lista do <select> dos formularios.
 # Ao remover um slug daqui, o gerador volta a criar a pagina normalmente.
 SEGMENT_URL_OVERRIDES = {
-    "importacao-aeronaves": "/segmentos-aeronaves.html",
+    "importacao-aeronaves": "/segmentos-aeronaves/",
 }
 
 # Card thumbnails for the segments index page (segmentos/index.html).
@@ -820,7 +820,7 @@ def build_contact_form_html(form_type="contato", selected_segment=""):
           
           <label class="sm-col-span-2 form-checkbox-label">
             <input type="checkbox" name="aceite_privacidade" required value="sim" />
-            <span data-wm-aceite>Li e estou de acordo com a <a href="/politica-de-privacidade.html" class="text-primary underline">Política de Privacidade</a> e autorizo a WM Trading a tratar meus dados para responder a esta solicitação.</span>
+            <span data-wm-aceite>Li e estou de acordo com a <a href="/politica-de-privacidade/" class="text-primary underline">Política de Privacidade</a> e autorizo a WM Trading a tratar meus dados para responder a esta solicitação.</span>
           </label>
 
           <label class="sm-col-span-2 form-checkbox-label">
@@ -845,7 +845,7 @@ def build_ebook_form_html(ebook_title, pdf_url):
           
           <label class="form-checkbox-label" style="margin: 8px 0;">
             <input type="checkbox" name="aceite_privacidade" required value="sim" />
-            <span data-wm-aceite>Li e estou de acordo com a <a href="/politica-de-privacidade.html" class="text-primary underline">Política de Privacidade</a> e autorizo a WM Trading a tratar meus dados para enviar este material.</span>
+            <span data-wm-aceite>Li e estou de acordo com a <a href="/politica-de-privacidade/" class="text-primary underline">Política de Privacidade</a> e autorizo a WM Trading a tratar meus dados para enviar este material.</span>
           </label>
 
           <label class="form-checkbox-label" style="margin: 0 0 8px;">
@@ -886,7 +886,7 @@ def main():
             <p class="dynamic-hero__eyebrow">Soluções WM</p>
             <h1 class="dynamic-hero__title">{s["title"]}</h1>
             {f'<p class="dynamic-hero__subtitle">{s["subtitle"]}</p>' if s.get("subtitle") else ''}
-            <a href="/fale-conosco.html" class="btn btn-lg">Falar com um especialista</a>
+            <a href="/fale-conosco/" class="btn btn-lg">Falar com um especialista</a>
           </div>
         </section>
         """
@@ -945,7 +945,7 @@ def main():
           <div class="container">
             <h2 class="t-display" style="margin-bottom: 16px;">Vamos desenhar a sua operation?</h2>
             <p class="t-lead" style="margin-bottom: 24px;">Fale com a trading mais completa do Brasil.</p>
-            <a href="/fale-conosco.html" class="btn btn-white btn-lg">Fale com a WM</a>
+            <a href="/fale-conosco/" class="btn btn-white btn-lg">Fale com a WM</a>
           </div>
         </section>
         """
@@ -993,7 +993,7 @@ def main():
                     <li style="color:var(--color-text-muted);">Equipe altamente capacitada e sempre atualizada das regulamentações</li>
                   </ul>
                 </div>
-                <a href="/importacao-por-encomenda.html" class="btn btn-block btn-lg" style="margin-top:24px;">SAIBA MAIS</a>
+                <a href="/importacao-por-encomenda/" class="btn btn-block btn-lg" style="margin-top:24px;">SAIBA MAIS</a>
               </div>
               
               <!-- Operação por Conta e Ordem -->
@@ -1008,7 +1008,7 @@ def main():
                     <li style="color:var(--color-text-muted);">Planejamentos detalhados elaborados com inteligência fiscal</li>
                   </ul>
                 </div>
-                <a href="/importacao-por-conta-e-ordem.html" class="btn btn-block btn-lg" style="margin-top:24px;">SAIBA MAIS</a>
+                <a href="/importacao-por-conta-e-ordem/" class="btn btn-block btn-lg" style="margin-top:24px;">SAIBA MAIS</a>
               </div>
               
               <!-- Assessoria Aduaneira -->
@@ -1023,7 +1023,7 @@ def main():
                     <li style="color:var(--color-text-muted);">Assessoria aduaneira completa: logística, fiscal e tributária</li>
                   </ul>
                 </div>
-                <a href="/assessoria-aduaneira.html" class="btn btn-block btn-lg" style="margin-top:24px;">SAIBA MAIS</a>
+                <a href="/assessoria-aduaneira/" class="btn btn-block btn-lg" style="margin-top:24px;">SAIBA MAIS</a>
               </div>
             </div>
           </div>
@@ -1036,7 +1036,7 @@ def main():
               <p class="intro-text" style="color:var(--color-text-muted);">Oferecemos o serviço de Global Sourcing a todos os nossos clientes.</p>
               <p class="intro-text" style="color:var(--color-text-muted); margin-top:12px;">Através de parcerias estratégicas e pesquisas eficazes, seguindo regulamentações internas para definir os fornecedores, nós da WM realizamos esse processo com inteligência.</p>
               <p class="intro-text" style="color:var(--color-text-muted); margin-top:12px;">Buscamos o melhor custo-benefício de fornecedores do mercado internacional.</p>
-              <a href="/global-sourcing.html" class="btn btn-lg" style="margin-top:24px;">SAIBA MAIS</a>
+              <a href="/global-sourcing/" class="btn btn-lg" style="margin-top:24px;">SAIBA MAIS</a>
             </div>
             <div>
               <ul class="ebook-info__bullets" style="list-style:none; padding:0;">
@@ -1301,7 +1301,7 @@ def main():
         desc = s.get("cardDesc") or s.get("heroQuestion") or f"Importação de {name} com agilidade e segurança."
         # Segmentos com pagina manual nao tem /segmentos/<slug>.html — o card
         # precisa apontar para a URL de verdade, senao gera link morto.
-        url = SEGMENT_URL_OVERRIDES.get(slug, f"/segmentos/{slug}.html")
+        url = SEGMENT_URL_OVERRIDES.get(slug, f"/segmentos/{slug}/")
         return f"""
         <div class="segmento-card">
           <div class="segmento-card-img">
@@ -1394,7 +1394,7 @@ def main():
             <p class="dynamic-hero__eyebrow">{a["maker"]} · Importação de aeronaves</p>
             <h1 class="dynamic-hero__title">{a["heroTitle"]}</h1>
             {f'<p class="dynamic-hero__subtitle">{a["intro"]}</p>' if a.get("intro") else ''}
-            <a href="/fale-conosco.html" class="btn btn-lg">Importar o meu {a["name"]}</a>
+            <a href="/fale-conosco/" class="btn btn-lg">Importar o meu {a["name"]}</a>
           </div>
         </section>
         """
@@ -1449,7 +1449,7 @@ def main():
           <div class="container">
             <h2 class="t-display" style="margin-bottom: 16px;">Importe o seu {a["name"]} com a WM</h2>
             <p class="t-lead" style="margin-bottom: 24px;">Tempo recorde na liberação e expertise total nas leis aeronáuticas.</p>
-            <a href="/fale-conosco.html" class="btn btn-white btn-lg">Falar com um especialista</a>
+            <a href="/fale-conosco/" class="btn btn-white btn-lg">Falar com um especialista</a>
           </div>
         </section>
         """
@@ -1608,7 +1608,7 @@ def main():
       <div class="container">
         <h2 class="t-display" style="margin-bottom: 16px;">Tem um projeto em mente?</h2>
         <p class="t-lead" style="margin-bottom: 24px;">Fale com nossos especialistas e garanta a melhor operação para a sua empresa.</p>
-        <a href="/fale-conosco.html" class="btn btn-white btn-lg">Quero saber mais</a>
+        <a href="/fale-conosco/" class="btn btn-white btn-lg">Quero saber mais</a>
       </div>
     </section>
     """
@@ -1649,7 +1649,7 @@ def main():
       <div class="container intro-container">
         <h2 class="t-h2" style="margin-bottom:16px;">Vagas abertas</h2>
         <p class="intro-text" style="color:var(--color-text-muted);">Confira as oportunidades disponíveis e candidate-se. Estamos sempre em busca de novos talentos.</p>
-        <a href="/fale-conosco.html" class="btn btn-lg" style="margin-top:24px;">Quero me candidatar</a>
+        <a href="/fale-conosco/" class="btn btn-lg" style="margin-top:24px;">Quero me candidatar</a>
         <p class="card-desc" style="margin-top:20px; font-size:12px;">Ao se inscrever no processo seletivo, você concorda com o tratamento dos seus dados pessoais nos termos da nossa Declaração de Privacidade para Recrutamento e Seleção.</p>
       </div>
     </section>
@@ -1681,7 +1681,7 @@ def main():
         </div>
         
         <div style="margin-top:60px; text-align:center;">
-          <a href="/fale-conosco.html" class="btn btn-lg">Falar com um especialista</a>
+          <a href="/fale-conosco/" class="btn btn-lg">Falar com um especialista</a>
         </div>
       </div>
     </section>
@@ -1825,7 +1825,7 @@ def main():
         <div class="blog-card" style="padding:24px;">
           <span class="blog-card__category" style="font-size:11px;">INFOGRÁFICO</span>
           <h3 class="blog-card__title" style="margin-top:8px; margin-bottom:20px; flex-grow:1;">{info}</h3>
-          <a href="/fale-conosco.html" class="text-primary" style="font-weight:var(--fw-semibold); font-size:13px; text-decoration:none; margin-top:auto;">Baixar material →</a>
+          <a href="/fale-conosco/" class="text-primary" style="font-weight:var(--fw-semibold); font-size:13px; text-decoration:none; margin-top:auto;">Baixar material →</a>
         </div>
         """
         
@@ -1917,7 +1917,7 @@ Como buscamos melhorar continuamente os nossos serviços, esta Política de Cook
 
 ## Dúvidas
 
-Em caso de dúvidas sobre esta Política de Cookies, entre em contato pelo e-mail **dpo@wmtrading.com.br**. Veja também a [Política de Privacidade](/politica-de-privacidade.html).
+Em caso de dúvidas sobre esta Política de Cookies, entre em contato pelo e-mail **dpo@wmtrading.com.br**. Veja também a [Política de Privacidade](/politica-de-privacidade/).
     """
 
     cookies_body = f"""
@@ -2197,7 +2197,7 @@ Se você tiver alguma pergunta sobre esta Política de Privacidade ou as prátic
                 <span>Por {author}</span>
               </div>
               <h1 class="post-title">{title}</h1>
-              <a href="/blog/index.html" class="link-arrow" style="margin-top:10px;">← Voltar ao Blog</a>
+              <a href="/blog/" class="link-arrow" style="margin-top:10px;">← Voltar ao Blog</a>
             </header>
             
             {cover_html}
@@ -2207,7 +2207,7 @@ Se você tiver alguma pergunta sobre esta Política de Privacidade ou as prátic
                 {markdown_to_html(body)}
               </div>
               <div style="margin-top: 60px; padding-top: 30px; border-top: 1px solid #efefef;">
-                <a href="/blog/index.html" class="link-arrow">← Voltar ao Blog</a>
+                <a href="/blog/" class="link-arrow">← Voltar ao Blog</a>
               </div>
             </div>
           </div>

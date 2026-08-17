@@ -107,7 +107,7 @@
           '<input type="tel" name="telefone" required placeholder="Telefone * — (DDD) 99999-0000" autocomplete="tel" maxlength="16" />' +
           '<label class="wm-wa-consent">' +
             '<input type="checkbox" name="aceite_privacidade" required value="sim" />' +
-            '<span data-wm-aceite>Li e estou de acordo com a <a href="/politica-de-privacidade.html" target="_blank" rel="noopener">Pol&iacute;tica de Privacidade</a> e autorizo a WM Trading a tratar meus dados para responder a este contato.</span>' +
+            '<span data-wm-aceite>Li e estou de acordo com a <a href="/politica-de-privacidade/" target="_blank" rel="noopener">Pol&iacute;tica de Privacidade</a> e autorizo a WM Trading a tratar meus dados para responder a este contato.</span>' +
           '</label>' +
           '<label class="wm-wa-consent">' +
             '<input type="checkbox" name="aceite_marketing" value="sim" />' +

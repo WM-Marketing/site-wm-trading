@@ -155,8 +155,8 @@
     banner.innerHTML =
       '<div class="wm-consent__inner">' +
         '<p class="wm-consent__text">' + TEXTO_AVISO + ' ' +
-        'Saiba mais na <a href="/politica-de-cookies.html">Política de Cookies</a> e na ' +
-        '<a href="/politica-de-privacidade.html">Política de Privacidade</a>.</p>' +
+        'Saiba mais na <a href="/politica-de-cookies/">Política de Cookies</a> e na ' +
+        '<a href="/politica-de-privacidade/">Política de Privacidade</a>.</p>' +
         '<div class="wm-consent__actions">' +
           '<button type="button" class="wm-consent__btn wm-consent__btn--reject">Recusar não essenciais</button>' +
           '<button type="button" class="wm-consent__btn wm-consent__btn--accept">Aceitar todos</button>' +
