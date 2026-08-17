@@ -77,17 +77,30 @@ SCRIPTS_OBRIGATORIOS = [nome for nome, _ in SCRIPTS_DO_MOLDE]
 LINK_VAZIO_OK = "data-wm-consent-prefs"
 
 # Amostra para o smoke test em producao: uma URL por classe de regra.
+# Desde 14/08 (cleanUrls + trailingSlash no vercel.json) o destino final NAO tem .html
+# e termina com barra: /about/ em vez de /about.html.
 AMOSTRA_REDIRECTS = [
-    ("/about", "/about.html"),
-    ("/contato", "/fale-conosco.html"),
-    ("/wm-cast", "/podcast.html"),
-    ("/blog/tag/importacao", "/blog/index.html"),
-    ("/segmentos/aeronaves", "/segmentos-aeronaves.html"),
-    ("/blog/ex-tarifario-energia-solar", "/blog/ex-tarifario-importacoes-fotovoltaico.html"),
+    ("/about", "/about/"),
+    ("/contato", "/fale-conosco/"),
+    ("/wm-cast", "/podcast/"),
+    ("/blog/tag/importacao", "/blog/"),
+    ("/segmentos/aeronaves", "/segmentos-aeronaves/"),
+    ("/blog/ex-tarifario-energia-solar", "/blog/ex-tarifario-importacoes-fotovoltaico/"),
+]
+
+# URLs antigas do WordPress que agora tem que responder 200 DIRETO, sem redirect —
+# e a prova de que a mudanca de 14/08 preservou os enderecos que o Google indexou.
+AMOSTRA_PARIDADE_WP = [
+    "/",
+    "/assessoria-aduaneira/",
+    "/blog/aco-sucesso/",
+    "/segmentos/maquinas/",
+    "/aeronaves/falcon-8x/",
+    "/ebooks/duimp/",
 ]
 
 # Paginas que precisam responder 200 direto, sem redirect.
-AMOSTRA_DIRETAS = ["/", "/segmentos", "/blog"]
+AMOSTRA_DIRETAS = ["/", "/segmentos/", "/blog/"]
 
 
 class Relatorio:
@@ -295,12 +308,27 @@ def checar_links_mortos(rel):
 # --------------------------------------------------------------------------
 # E. vercel.json — tabela de redirects
 # --------------------------------------------------------------------------
-def _resolve(caminho_url):
+def _alvo(caminho_url):
+    """Arquivo que a Vercel serve para uma URL, ou None se nao existe.
+
+    Desde 14/08 o vercel.json usa cleanUrls:true + trailingSlash:true, entao a URL
+    publica NAO tem .html: /about/ e servida por about.html e /segmentos/ por
+    segmentos/index.html. Sem a tentativa com .html, os 52 redirects estaticos
+    aparecem todos como 'destino nao existe'.
+    """
     p = caminho_url.split("?")[0].split("#")[0].strip("/")
     if p == "":
-        return os.path.isfile(os.path.join(ROOT_DIR, "index.html"))
-    alvo = os.path.join(ROOT_DIR, *p.split("/"))
-    return os.path.isfile(alvo) or os.path.isfile(os.path.join(alvo, "index.html"))
+        raiz = os.path.join(ROOT_DIR, "index.html")
+        return raiz if os.path.isfile(raiz) else None
+    base = os.path.join(ROOT_DIR, *p.split("/"))
+    for tentativa in (base, base + ".html", os.path.join(base, "index.html")):
+        if os.path.isfile(tentativa):
+            return tentativa
+    return None
+
+
+def _resolve(caminho_url):
+    return _alvo(caminho_url) is not None
 
 
 def checar_vercel(rel):
@@ -334,10 +362,18 @@ def checar_vercel(rel):
     for r in mortos:
         rel.erro(f"{r['source']} -> {r['destination']} (destino nao existe)")
 
-    sombras = [r for r in estaticas if r["source"] != "/" and _resolve(r["source"])]
+    # Sequestro = a origem JA e uma pagina real E aponta para OUTRO arquivo.
+    # Com cleanUrls+trailingSlash, /about e /about/ resolvem para o mesmo about.html:
+    # esse redirect e redundante (a Vercel ja faz), nao um sequestro. O caso real foi
+    # /segmentos -> / em 06/08, que matava a pagina /segmentos criada em 15/07.
+    sombras = [r for r in estaticas
+               if r["source"] != "/"
+               and _alvo(r["source"]) is not None
+               and _alvo(r["source"]) != _alvo(r["destination"])]
     for r in sombras:
         rel.erro(f"{r['source']} -> {r['destination']} : '{r['source']}' JA e uma pagina "
-                 f"real do site novo; este redirect a sequestraria")
+                 f"real do site novo (serve {os.path.basename(_alvo(r['source']))}); "
+                 f"este redirect a sequestraria")
 
     # Regra especifica precisa vir ANTES da dinamica que a cobriria (a Vercel usa a 1a que casar).
     ordem = [r["source"] for r in redirects]
@@ -416,6 +452,20 @@ def checar_producao(rel, base):
             rel.erro(f"a home NO AR esta sem: {', '.join(m for m, _ in faltando)}")
         else:
             rel.ok("a home no ar tem o <head> completo (LGPD, GTM, UTM, WhatsApp, SEO)")
+
+    # A prova da mudanca de 14/08: as URLs que o Google indexou no WordPress precisam
+    # responder 200 DIRETO, sem redirect. Qualquer 301/308 aqui significa que o endereco
+    # mudou e o Google vai ter que reprocessar aquela pagina.
+    titulo("G2. Paridade com as URLs do WordPress (200 direto, sem redirect)")
+    for caminho in AMOSTRA_PARIDADE_WP:
+        status, destino, _ = _buscar(base + caminho, seguir=False)
+        if status == 200:
+            rel.ok(f"{caminho} -> 200 (endereco preservado)")
+        elif status in (301, 302, 307, 308):
+            rel.erro(f"{caminho} -> {status} {destino or ''} : o endereco que o Google "
+                     f"indexou MUDOU; era para responder 200 direto")
+        else:
+            rel.erro(f"{caminho} -> {status} {destino or ''} (esperado 200 direto)")
 
     titulo("H. Site no ar — redirects e paginas diretas")
 

@@ -17,6 +17,33 @@ ROOT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # para consolidar indexacao no dominio oficial antes e depois da virada.
 SITE_URL = "https://www.wmtrading.com.br"
 DEFAULT_OG_IMAGE = "/images/logo/fechado_logo_wm_trading_ajustada_logo_laranja.png"
+
+
+def url_publica(caminho_relativo):
+    """URL publica de uma pagina, a partir do caminho do arquivo dentro do repo.
+
+    Desde 14/08/2026 o vercel.json usa cleanUrls:true + trailingSlash:true, entao a
+    URL publica NAO tem .html e termina com barra — exatamente a forma que o
+    WordPress publicava e que o Google tem indexada:
+
+        index.html               ->  /
+        about.html               ->  /about/
+        blog/aco-sucesso.html    ->  /blog/aco-sucesso/
+        segmentos/index.html     ->  /segmentos/
+
+    canonical, og:url, sitemap.xml e mainEntityOfPage TEM que sair todos daqui.
+    Quando divergem, o servidor entrega um endereco e a pagina declara outro — era
+    o defeito no ar em 17/08 (servidor em /about/, canonical em /about.html), e o
+    Google recebe duas respostas para a mesma pergunta.
+    """
+    rel = caminho_relativo.replace(os.sep, "/").lstrip("/")
+    if rel == "index.html":
+        return SITE_URL + "/"
+    if rel.endswith("/index.html"):
+        return f"{SITE_URL}/{rel[:-len('/index.html')]}/"
+    if rel.endswith(".html"):
+        return f"{SITE_URL}/{rel[:-len('.html')]}/"
+    return f"{SITE_URL}/{rel}"
 ORGANIZATION_JSONLD = {
     "@context": "https://schema.org",
     "@type": "Organization",
@@ -394,6 +421,14 @@ def load_template_elements():
     head_content = re.sub(r'<meta\s+(?:property="(?:og|article):[^"]*"|name="twitter:[^"]*")[^>]*/?>', "", head_content)
     head_content = re.sub(r'<meta\s+name="robots"[^>]*/?>', "", head_content)
     head_content = re.sub(r'<script\s+type="application/ld\+json">.*?</script>', "", head_content, flags=re.S)
+    # Preload de IMAGEM e sempre especifico de uma pagina (o hero daquela pagina).
+    # O preload do hero da home entrou no index.html em 13/08 para corrigir o LCP; sem
+    # esta remocao, a primeira regeneracao o propagaria para as 256 outras paginas, que
+    # passariam a baixar o navio da home com prioridade alta sem nunca exibi-lo —
+    # piorando o LCP justamente nas paginas de entrada organica (blog e segmentos).
+    # Preload de fonte ou CSS, se um dia entrar, e global e NAO deve ser removido aqui.
+    head_content = re.sub(r'<!--[^>]*?Hero:.*?-->', "", head_content, flags=re.S)
+    head_content = re.sub(r'<link\s+rel="preload"[^>]*as="image"[^>]*/?>', "", head_content)
     # remove linhas em branco deixadas pelas remocoes acima
     head_content = re.sub(r'\n\s*\n+', '\n', head_content)
     
@@ -451,13 +486,9 @@ def render_html_page(output_path, title, description, content_body, head_tpl, he
     """Wraps page content in a fully styled, absolute-path templates block and saves it."""
     # SEO: canonical + Open Graph + Twitter Card + JSON-LD, apontando para o dominio final
     rel_path = os.path.relpath(output_path, ROOT_DIR).replace(os.sep, "/")
-    # index.html canoniza para a URL do diretório SEM barra final (/segmentos,
-    # /blog) — vercel.json usa trailingSlash:false e 308-redireciona a forma com barra
-    if rel_path == "index.html":
-        rel_path = ""
-    elif rel_path.endswith("/index.html"):
-        rel_path = rel_path[:-len("/index.html")]
-    canonical_url = f"{SITE_URL}/{rel_path}"
+    # A URL publica sai de url_publica(): sem .html e com barra final, alinhada ao
+    # cleanUrls+trailingSlash do vercel.json e identica a que o WordPress indexou.
+    canonical_url = url_publica(rel_path)
     og_img = og_image or DEFAULT_OG_IMAGE
     if og_img.startswith("/"):
         og_img = SITE_URL + og_img
@@ -2194,7 +2225,7 @@ Se você tiver alguma pergunta sobre esta Política de Privacidade ou as prátic
             "author": {"@type": "Person", "name": author},
             "publisher": {"@type": "Organization", "name": "WM Trading", "logo": {"@type": "ImageObject", "url": SITE_URL + DEFAULT_OG_IMAGE}},
             "image": (SITE_URL + cover) if cover else (SITE_URL + DEFAULT_OG_IMAGE),
-            "mainEntityOfPage": f"{SITE_URL}/blog/{slug}.html",
+            "mainEntityOfPage": url_publica(f"blog/{slug}.html"),
         }
         render_html_page(post_out_path, title, excerpt[:155], post_detail_html, head_tpl, header_tpl, footer_tpl,
                          lang=post_lang, og_type="article", og_image=cover or None, jsonld=post_jsonld)
@@ -2362,14 +2393,9 @@ Se você tiver alguma pergunta sobre esta Política de Privacidade ou as prátic
     sitemap_pages.sort()
     entries = []
     for rel, lastmod in sitemap_pages:
-        if rel == "index.html":
-            loc = SITE_URL + "/"
-        elif rel.endswith("/index.html"):
-            # index.html de subpasta entra como URL do diretório sem barra final
-            # (/segmentos, /blog) — alinhado ao trailingSlash:false da Vercel
-            loc = f"{SITE_URL}/{rel[:-len('/index.html')]}"
-        else:
-            loc = f"{SITE_URL}/{rel}"
+        # Mesma funcao do canonical — se divergirem, o sitemap manda o Google para um
+        # endereco e a pagina declara outro.
+        loc = url_publica(rel)
         entries.append(f"  <url>\n    <loc>{loc}</loc>\n    <lastmod>{lastmod}</lastmod>\n  </url>")
     sitemap_xml = ('<?xml version="1.0" encoding="UTF-8"?>\n'
                    '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
