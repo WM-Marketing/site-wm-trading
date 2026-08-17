@@ -79,6 +79,26 @@ module.exports = async function handler(req, res) {
       aceite_em: data.aceite_em || new Date().toISOString(),
       aceite_ip: ip,
       aceite_user_agent: userAgent,
+      // Identidade do visitante para o join CRM x GA4 (js/utm-tracking.js).
+      // wm_vid é ID de primeira parte, gerado pelo site: SEMPRE vem preenchido e
+      // é a chave de join exata (sem truncar dígito, sem heurística de formato).
+      // clientid e ga_session_id vêm do GA4 e podem faltar — bloqueador, cookie
+      // ainda não gravado ou consentimento negado. Quando faltam, ga_status diz o
+      // motivo: ok | ok_cookie | sem_cookie | sem_consentimento | sem_gtag | timeout.
+      // Ausência é string VAZIA. A tag antiga do GTM gravava a string "false" e o
+      // BI descartava em silêncio, sem distinguir recusa de falha técnica.
+      wm_vid: data.wm_vid || '',
+      ga_session_id: data.ga_session_id || '',
+      ga_status: data.ga_status || '',
+      // Jornada acumulada no navegador e enviada com o lead. Responde "o que este
+      // cliente olhou antes de pedir contato" sem depender de GA4 nem de join —
+      // o comercial le direto no negocio. paginas_vistas vem truncada nas ultimas
+      // 12 (prefixo "..." quando houve corte); total_paginas conta tudo.
+      paginas_vistas: data.paginas_vistas || '',
+      total_paginas: data.total_paginas || '',
+      total_sessoes: data.total_sessoes || '',
+      dias_ate_lead: data.dias_ate_lead || '',
+      primeira_visita_em: data.primeira_visita_em || '',
       // Atribuição de mídia/orgânico (preenchidos por js/utm-tracking.js)
       utm_source: data.utm_source || '',
       utm_medium: data.utm_medium || '',
