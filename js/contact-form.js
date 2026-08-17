@@ -93,8 +93,13 @@
     payload.aceite_em = new Date().toISOString();
 
     // Attribution fields (UTMs, gclid, GA client id — see js/utm-tracking.js)
+    // Aguarda os IDs do GA4 (client_id/session_id): eles chegam por callback do
+    // gtag('get'), nao estao prontos na hora. A versao sincrona getFields()
+    // devolvia vazio em visitante novo — o cookie _ga ainda nao existia.
+    // getFieldsAsync tem timeout curto e NUNCA rejeita, entao o envio do lead
+    // nunca fica preso: se estourar, vai com o campo vazio e ga_status='timeout'.
     if (window.wmTracking) {
-      Object.assign(payload, window.wmTracking.getFields());
+      Object.assign(payload, await window.wmTracking.getFieldsAsync());
     }
 
     try {

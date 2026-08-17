@@ -202,15 +202,24 @@
     };
 
     // Campos de atribuição (UTMs, gclid, GA client id — js/utm-tracking.js)
-    if (window.wmTracking) {
-      Object.assign(payload, window.wmTracking.getFields());
-    }
+    // getFieldsAsync pergunta client_id/session_id ao proprio GA4 e espera o
+    // callback, com timeout curto. A versao sincrona getFields() devolvia vazio
+    // em visitante novo, quando o cookie _ga ainda nao existe — origem da string
+    // "false" nos registros historicos. Nunca rejeita: se estourar o tempo, o
+    // lead vai igual, com campo vazio e ga_status='timeout'.
+    var atribuicao = (window.wmTracking && window.wmTracking.getFieldsAsync)
+      ? window.wmTracking.getFieldsAsync()
+      : Promise.resolve({});
 
-    fetch('/api/contato/', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(payload)
-    })
+    atribuicao
+      .then(function (campos) {
+        Object.assign(payload, campos);
+        return fetch('/api/contato/', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+      })
       .then(function (res) { return res.json().then(function (j) { return { ok: res.ok && j.ok }; }); })
       .then(function (r) {
         if (!r.ok) throw new Error('fail');
