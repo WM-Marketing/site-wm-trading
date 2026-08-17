@@ -125,7 +125,7 @@
       // Conversion events for GTM/GA4 (real lead — fires only after server accepts)
       window.dataLayer = window.dataLayer || [];
       window.dataLayer.push({
-        event: 'form_submit',
+        event: 'wm_form_submit',
         form_type: payload.formulario,
         page: window.location.pathname
       });

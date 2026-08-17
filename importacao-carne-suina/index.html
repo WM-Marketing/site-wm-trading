@@ -566,7 +566,7 @@ form.addEventListener('submit', async e => {
     if (!res.ok || !json.ok) throw new Error(json.error || 'Falha no envio.');
 
     window.dataLayer = window.dataLayer || [];
-    window.dataLayer.push({ event: 'form_submit', form_type: 'carne-suina', page: window.location.pathname });
+    window.dataLayer.push({ event: 'wm_form_submit', form_type: 'carne-suina', page: window.location.pathname });
 
     form.style.display = 'none';
     document.getElementById('formSuccess').classList.add('show');

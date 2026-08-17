@@ -223,7 +223,7 @@
       .then(function (res) { return res.json().then(function (j) { return { ok: res.ok && j.ok }; }); })
       .then(function (r) {
         if (!r.ok) throw new Error('fail');
-        pushDataLayer('form_submit', { form_type: 'whatsapp' });
+        pushDataLayer('wm_form_submit', { form_type: 'whatsapp' });
         pushDataLayer('whatsapp_click', {});
         window.open(waUrl, '_blank', 'noopener');
         // Mantém o modal com um botão-âncora: se o navegador bloquear o
