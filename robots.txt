@@ -1,3 +1,9 @@
-# Permite que mecanismos de busca e rastreadores de mídia acessem o site público.
+# NAO INDEXAR. O site vive em site-wm-trading.vercel.app enquanto o dominio
+# wmtrading.com.br ainda aponta para o WordPress. Liberar aqui faz o vercel.app
+# virar DUPLICATA do site oficial: os dois competem pelas mesmas palavras, o
+# Google escolhe um canonical sozinho e pode escolher o preview.
+#
+# Liberar SOMENTE depois que wmtrading.com.br apontar para a Vercel.
+# O scripts/verificar.py avisa nos dois sentidos.
 User-agent: *
-Allow: /
+Disallow: /
