@@ -77,15 +77,20 @@ SCRIPTS_OBRIGATORIOS = [nome for nome, _ in SCRIPTS_DO_MOLDE]
 LINK_VAZIO_OK = "data-wm-consent-prefs"
 
 # Amostra para o smoke test em producao: uma URL por classe de regra.
-# Desde 14/08 (cleanUrls + trailingSlash no vercel.json) o destino final NAO tem .html
-# e termina com barra: /about/ em vez de /about.html.
+# A origem tem que ser testada NA FORMA QUE O WORDPRESS PUBLICAVA — com barra no fim.
+# E a forma que o Google tem indexada, e com trailingSlash:true e a unica que casa com
+# a tabela em um salto so. A forma sem barra funciona tambem, mas em dois saltos
+# (/contato -> /contato/ -> /fale-conosco/), entao nao serve como amostra.
 AMOSTRA_REDIRECTS = [
-    ("/about", "/about/"),
-    ("/contato", "/fale-conosco/"),
-    ("/wm-cast", "/podcast/"),
-    ("/blog/tag/importacao", "/blog/"),
-    ("/segmentos/aeronaves", "/segmentos-aeronaves/"),
-    ("/blog/ex-tarifario-energia-solar", "/blog/ex-tarifario-importacoes-fotovoltaico/"),
+    ("/contato/", "/fale-conosco/"),
+    ("/wm-cast/", "/podcast/"),
+    ("/sobre/", "/about/"),
+    ("/falcon-8x/", "/aeronaves/falcon-8x/"),
+    ("/duimp/", "/ebooks/duimp/"),
+    ("/blog/tag/importacao/", "/blog/"),
+    ("/podcast/episodio-10/", "/podcast/"),
+    ("/segmentos/aeronaves/", "/segmentos-aeronaves/"),
+    ("/blog/ex-tarifario-energia-solar/", "/blog/ex-tarifario-importacoes-fotovoltaico/"),
 ]
 
 # URLs antigas do WordPress que agora tem que responder 200 DIRETO, sem redirect —
