@@ -76,7 +76,16 @@ module.exports = async function handler(req, res) {
       aceite_marketing: data.aceite_marketing || 'nao',
       aceite_texto: data.aceite_texto || '',
       politica_versao: data.politica_versao || '',
-      aceite_em: data.aceite_em || new Date().toISOString(),
+      // Horario do SERVIDOR, nao do navegador. O cliente ainda manda um
+      // data.aceite_em, mas ele e IGNORADO de proposito: e a prova legal do
+      // consentimento (LGPD art. 8, par. 2) e relogio de visitante nao e fonte
+      // confiavel. Medido em 17/08: a maquina de teste estava 110 segundos
+      // adiantada, e o aceite aparecia no CRM DEPOIS do proprio envio — o que e
+      // logicamente impossivel e destroi a credibilidade do registro.
+      // Diferenca para enviado_em: os dois passam a ser do servidor e ficam a
+      // milissegundos um do outro. Isso e esperado — o aceite e o envio sao o
+      // mesmo ato, e o que importa e serem verificaveis, nao distintos.
+      aceite_em: new Date().toISOString(),
       aceite_ip: ip,
       aceite_user_agent: userAgent,
       // Identidade do visitante para o join CRM x GA4 (js/utm-tracking.js).
