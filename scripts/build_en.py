@@ -468,7 +468,9 @@ def menu_para_ingles(caminho_arquivo, pares):
                        _marcado, bloco, flags=re.S)
         return bloco
 
-    for abre, fecha in (("<header", "</header>"), ("<footer", "</footer>")):
+    # O rodape nao usa a tag semantica <footer> (e uma div .footer-links), so o
+    # marcador de comentario do build_pages.py serve como inicio confiavel.
+    for abre, fecha in (("<header", "</header>"), ('<div class="footer-links">', "</body>")):
         i = html.find(abre)
         j = html.find(fecha, i)
         if i == -1 or j == -1:
