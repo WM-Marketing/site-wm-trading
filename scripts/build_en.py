@@ -68,8 +68,11 @@ def capa_da_pagina_pt(url_pt):
 
 def corpo_html(pagina):
     """Monta o miolo com as mesmas classes do site, para o visual bater."""
-    blocos = pagina["blocos"]
-    if not blocos:
+    # `blocos` e o conteudo BRUTO raspado do site antigo, guardado so para conferencia:
+    # quem vira HTML e `secoes`. A guarda olhava o campo errado, entao uma pagina escrita
+    # a mao (a de contato em ingles) era descartada por "falta de conteudo" mesmo tendo
+    # secoes preenchidas. Agora olha o que de fato e renderizado.
+    if not pagina.get("secoes"):
         return ""
 
     # hero: primeiro cabecalho + primeiro paragrafo depois dele
@@ -150,10 +153,18 @@ def formulario_en(pagina):
       - o VALUE do segmento continua em portugues, porque e o que o Zap espera
         para classificar o lead no Pipedrive. So o rotulo e traduzido.
 
-    data-form-type="contato-en" faz o handler procurar ZAPIER_WEBHOOK_CONTATO_EN;
-    sem essa variavel ele cai no ZAPIER_WEBHOOK_URL padrao — ou seja, o lead
-    CHEGA de qualquer jeito, so entra com a etiqueta generica ate o ramo em
-    ingles do Zap ser reativado.
+    data-form-type="contato" DE PROPOSITO, e nao "contato-en".
+
+    O handler encontra a URL do webhook por qualquer um dos dois (sem uma variavel
+    ZAPIER_WEBHOOK_CONTATO_EN ele cai no padrao), entao ate ai tanto faz. O risco
+    esta DENTRO do Zap: os 4 ramos em ingles estao adormecidos desde 09/07, e um
+    envio que nao casa com ramo nenhum e descartado em silencio — o lead some sem
+    erro na tela. Como a pagina /en/contact-us/ e o destino de contato de toda a
+    arvore em ingles, o custo de errar aqui e perder o lead justamente de quem veio
+    de fora. "contato" cai no ramo validado em producao desde 09/07.
+
+    O que se perde: a etiqueta especifica de ingles no Pipedrive. Quando os ramos EN
+    forem reativados (BLOCO C), voltar para "contato-en" e uma linha.
     """
     opcoes = "".join(
         f'\n            <option value="{valor}">{rotulo}</option>'
@@ -164,7 +175,7 @@ def formulario_en(pagina):
       <div class="container intro-container">
         <h2 class="card-title" style="font-size: var(--fs-lg); font-weight: var(--fw-semibold); margin-bottom: 10px;">Talk to our specialists</h2>
         <p class="card-desc" style="margin-bottom: 26px;">Tell us about your operation and our team will get back to you shortly.</p>
-        <form class="contact-form-js grid gap-4 form-grid-wm form-grid-wm--2col" data-form-type="contato-en">
+        <form class="contact-form-js grid gap-4 form-grid-wm form-grid-wm--2col" data-form-type="contato">
           <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" class="hidden" aria-hidden="true" style="display:none;" />
 
           <input name="nome" required placeholder="Full name *" class="input-wm sm-col-span-2" />
@@ -201,6 +212,52 @@ def formulario_en(pagina):
     </section>"""
 
 
+def menu_para_ingles(caminho_arquivo, pares):
+    """Faz o menu e o rodape das paginas /en/ apontarem para as paginas /en/.
+
+    O molde de menu vem do index.html, entao nasce apontando para os enderecos em
+    portugues. Sem esta troca, quem chega do Google numa pagina em ingles — 10% do
+    organico — volta para o portugues no primeiro clique do menu.
+
+    So troca o que TEM par. Aeronaves, blog, podcast e materiais nao tem versao em
+    ingles: continuam apontando para o portugues, que e honesto — melhor levar ao
+    conteudo certo em outra lingua do que a lugar nenhum.
+
+    Limitado ao cabecalho e ao rodape de proposito: o corpo da pagina vem do
+    content/en/paginas.json e nao deve ser reescrito por busca e troca.
+    """
+    with open(caminho_arquivo, encoding="utf-8") as f:
+        html = f.read()
+
+    trocas = 0
+
+    def troca_bloco(bloco):
+        nonlocal trocas
+        for pt, en in pares.items():
+            if pt == "/":
+                continue  # o logo aponta para a home; tratado a parte
+            for forma in (pt, pt.rstrip("/")):
+                antes = bloco
+                bloco = bloco.replace(f'href="{forma}"', f'href="{en}"')
+                if bloco != antes:
+                    trocas += 1
+        # o logo e o "voltar para o inicio" vao para a home em ingles
+        bloco = bloco.replace('href="/"', 'href="/en/"')
+        return bloco
+
+    for abre, fecha in (("<header", "</header>"), ("<footer", "</footer>")):
+        i = html.find(abre)
+        j = html.find(fecha, i)
+        if i == -1 or j == -1:
+            continue
+        html = html[:i] + troca_bloco(html[i:j]) + html[j:]
+
+    if trocas:
+        with open(caminho_arquivo, "w", encoding="utf-8", newline="\n") as f:
+            f.write(html)
+    return trocas
+
+
 def injeta_hreflang(caminho_arquivo, url_pt, url_en):
     """Coloca o par hreflang no <head>. Idempotente."""
     if not os.path.exists(caminho_arquivo):
@@ -227,7 +284,8 @@ def main():
     paginas = json.load(open(CONTEUDO, encoding="utf-8"))
     head_tpl, header_tpl, footer_tpl = bp.load_template_elements()
 
-    gerados, com_par = 0, 0
+    gerados, com_par, links_en = 0, 0, 0
+    pares = {p["pt"]: p["en"] for p in paginas}
     print(f"gerando {len(paginas)} paginas em /en/\n")
 
     for p in paginas:
@@ -241,6 +299,9 @@ def main():
         bp.render_html_page(
             saida, p["titulo"], p["description"], corpo,
             head_tpl, header_tpl, footer_tpl, lang="en")
+
+        # menu e rodape apontando para as paginas /en/ que existem
+        links_en += menu_para_ingles(saida, pares)
 
         # hreflang dos dois lados
         injeta_hreflang(saida, p["pt"], p["en"])
@@ -262,6 +323,7 @@ def main():
 
     print(f"\n{'=' * 70}")
     print(f"paginas /en/ geradas      : {gerados}")
+    print(f"links de menu levados p/ EN: {links_en}")
     print(f"pares hreflang completos  : {com_par}")
     print(f"URLs /en/ no sitemap      : {n_sitemap}")
     print("lembrete: rode SEMPRE depois do build_pages.py")

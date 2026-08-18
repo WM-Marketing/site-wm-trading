@@ -24,13 +24,8 @@
   ],
   "redirects": [
     {
-      "source": "/en/contact-us/",
-      "destination": "/fale-conosco/",
-      "permanent": true
-    },
-    {
       "source": "/en/contact/",
-      "destination": "/fale-conosco/",
+      "destination": "/en/contact-us/",
       "permanent": true
     },
     {
@@ -300,7 +295,7 @@
     },
     {
       "source": "/en/contato/",
-      "destination": "/fale-conosco/",
+      "destination": "/en/contact-us/",
       "permanent": true
     },
     {

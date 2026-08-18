@@ -13,7 +13,10 @@
       renderer: 'svg',
       loop: true,
       autoplay: true,
-      path: 'images/assets/cargo-ship.json'
+      // caminho ABSOLUTO: relativo resolve contra a pasta da pagina, entao em
+      // /en/about/ virava /en/about/images/... e dava 404 em 291 das 292 paginas.
+      // Mesma armadilha que deixou a pagina de aeronaves sem CSS em 14-17/08.
+      path: '/images/assets/cargo-ship.json'
     });
   };
 

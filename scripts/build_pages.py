@@ -420,6 +420,11 @@ def load_template_elements():
     head_content = re.sub(r'<link\s+rel="canonical"[^>]*/?>', "", head_content)
     head_content = re.sub(r'<meta\s+(?:property="(?:og|article):[^"]*"|name="twitter:[^"]*")[^>]*/?>', "", head_content)
     head_content = re.sub(r'<meta\s+name="robots"[^>]*/?>', "", head_content)
+    # hreflang e um par ENTRE DUAS PAGINAS especificas: dizer que a versao em ingles
+    # de /blog/radar-siscomex/ e a home em ingles e falso. Vindo do molde, o par da
+    # home vazava para as 239 paginas sem versao em ingles. Quem tem par de verdade
+    # recebe o hreflang do build_en.py, depois; quem nao tem fica sem, que e o correto.
+    head_content = re.sub(r'<link\s+rel="alternate"\s+hreflang="[^"]*"[^>]*/?>', "", head_content)
     head_content = re.sub(r'<script\s+type="application/ld\+json">.*?</script>', "", head_content, flags=re.S)
     # Preload de IMAGEM e sempre especifico de uma pagina (o hero daquela pagina).
     # O preload do hero da home entrou no index.html em 13/08 para corrigir o LCP; sem

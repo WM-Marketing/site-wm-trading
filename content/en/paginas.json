@@ -210,6 +210,25 @@
     ]
   },
   {
+    "en": "/en/contact-us/",
+    "pt": "/fale-conosco/",
+    "titulo": "Get in Touch",
+    "description": "Reach out to us and see how we can provide efficient solutions for your operation! Talk to our specialists.",
+    "h1": "Please fill out our form",
+    "sub": "And one of our specialists will contact you shortly to address your needs",
+    "secoes": [
+      {
+        "titulo": "Exclusive Ombudsman",
+        "paragrafos": [
+          "We have a dedicated ombudsman service designed to provide you with the best assistance.",
+          "Contact us through the details below: compliance@wmtrading.com.br"
+        ],
+        "lista": []
+      }
+    ],
+    "cliques": 30
+  },
+  {
     "en": "/en/segments/auto-parts-imports/",
     "pt": "/segmentos/autopecas/",
     "titulo": "Auto Parts Import Solutions",

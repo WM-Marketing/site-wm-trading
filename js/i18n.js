@@ -325,14 +325,68 @@ function setLang(lang, persistir) {
   if (code) code.textContent = lang === 'pt' ? 'PT' : 'EN';
 }
 
+/* O botao LEVA para a pagina no outro idioma, em vez de traduzir no lugar.
+
+   O site tem duas arvores de verdade: as paginas em portugues e a arvore /en/. O par
+   de cada pagina esta declarado no proprio <head>, em <link rel="alternate">, e e o
+   mesmo par que o Google usa — uma fonte so, sem lista paralela para desencontrar.
+
+   Por que trocar: traduzir no lugar so funciona na home, a unica pagina com o texto
+   todo marcado com data-i18n. Nas outras, so o menu e o rodape trocam e o corpo fica
+   em portugues — o visitante clica e parece que nada aconteceu. O site antigo navega,
+   entao isto tambem e paridade com ele.
+
+   Sem par (aeronaves, posts do blog, podcast), NAO navega: mantem o comportamento
+   antigo e fica na pagina. Levar a pessoa para a home em ingles seria pior que nada,
+   porque ela perde o lugar onde estava. */
+function paginaNoOutroIdioma(lang) {
+  var alvo = lang === 'pt' ? 'pt-br' : 'en';
+  var links = document.querySelectorAll('link[rel="alternate"][hreflang]');
+  var atual = location.pathname.replace(/\/$/, '');
+  for (var i = 0; i < links.length; i++) {
+    if ((links[i].getAttribute('hreflang') || '').toLowerCase() !== alvo) continue;
+    var href = links[i].getAttribute('href');
+    if (!href) continue;
+    // SO O CAMINHO, nunca a URL inteira. O hreflang declara o dominio final
+    // (https://www.wmtrading.com.br/...), que e o certo para o Google — mas usar
+    // aquilo para navegar tiraria o visitante do site onde ele esta: no
+    // site-wm-trading.vercel.app o botao o mandaria para o site ANTIGO. Pego no
+    // teste local, onde o clique saltou para producao.
+    var caminho;
+    try { caminho = new URL(href, location.origin).pathname; } catch (e) { continue; }
+    // hreflang tambem aponta para a propria pagina; nao e destino de troca
+    if (caminho.replace(/\/$/, '') === atual) return null;
+    return caminho;
+  }
+  return null;
+}
+
 document.addEventListener('DOMContentLoaded', function() {
+  /* Numa pagina que TEM irma no outro idioma, quem manda e a pagina, nao a
+     preferencia guardada no navegador. Sem isto: o visitante clica EN em /about/,
+     vai para /en/about/ (e 'en' fica guardado), depois cai numa pagina em portugues
+     e o botao passa a oferecer "voltar para PT" — ele precisaria de DOIS cliques
+     (EN -> PT -> EN) para chegar na versao em ingles. Pego no teste local.
+     Depois da correcao do hreflang, so pagina com irma declara <link alternate>,
+     entao a propria presenca da tag ja responde "esta pagina tem par?". */
+  var temIrma = !!document.querySelector('link[rel="alternate"][hreflang]');
+  if (temIrma) currentLang = paginaEmIngles() ? 'en' : 'pt';
+
   var toggle = document.getElementById('lang-toggle');
   if (toggle) {
     toggle.addEventListener('click', function() {
-      setLang(currentLang === 'pt' ? 'en' : 'pt');
+      var novoIdioma = currentLang === 'pt' ? 'en' : 'pt';
+      var destino = paginaNoOutroIdioma(novoIdioma);
+      if (destino) {
+        try { localStorage.setItem('wm-lang', novoIdioma); } catch (e) {}
+        window.location.href = destino;
+        return;
+      }
+      setLang(novoIdioma);
     });
   }
 
   // Apply saved/default language on load
-  setLang(currentLang, IDIOMA_FIXO ? false : undefined);
+  // pagina com irma nao grava preferencia: o idioma dela e o da propria pagina
+  setLang(currentLang, (IDIOMA_FIXO || temIrma) ? false : undefined);
 });
