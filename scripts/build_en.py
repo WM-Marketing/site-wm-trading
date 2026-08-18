@@ -255,6 +255,47 @@ ROTULOS_MENU_EN = {
 }
 
 
+# Itens que somem do menu das paginas /en/ porque nao existem em ingles.
+#
+# A REGRA, e por que ela nao e "esconder tudo que nao tem ingles":
+# esconder um item so faz sentido quando existe OUTRO caminho para aquele assunto.
+# Os 8 modelos de aeronave sao detalhe da pagina "Aircraft Import", que continua no
+# menu; o 4PL e detalhe de "Solutions". Ja Blog, WM Cast, E-Books e Unidades sao a
+# UNICA porta para aquele conteudo — esconde-los deixaria a coluna "Content" vazia e
+# cortaria conteudo que existe. Melhor levar a conteudo real em outra lingua do que
+# a lugar nenhum. E o mesmo criterio do site atual, que tambem esconde as aeronaves
+# e o 4PL e mantem Blog, Podcast, E-Books e Units.
+#
+# Efeito medido: zero cliques vindos do ingles para as paginas de aeronave em 16 meses.
+OCULTAR_NO_MENU_EN = [
+    "/aeronaves/citation-jet/",
+    "/aeronaves/pilatus-24/",
+    "/aeronaves/phenom-300/",
+    "/aeronaves/phenom-100/",
+    "/aeronaves/m500/",
+    "/aeronaves/falcon-6x/",
+    "/aeronaves/falcon-8x/",
+    "/aeronaves/falcon-900lx/",
+    "/solucoes-4pl/",
+]
+
+
+def oculta_sem_ingles(bloco):
+    """Remove do bloco os <a> cujo destino nao tem versao em ingles.
+
+    Sem isto o menu em ingles promete o que nao entrega: o visitante clica em
+    "Citation Jet", cai numa pagina em portugues e o menu muda embaixo dele.
+    """
+    removidos = 0
+    for destino in OCULTAR_NO_MENU_EN:
+        for forma in (destino, destino.rstrip("/")):
+            padrao = re.compile(
+                r'\s*<a\b[^>]*href="' + re.escape(forma) + r'"[^>]*>.*?</a>', re.S)
+            bloco, n = padrao.subn("", bloco)
+            removidos += n
+    return bloco, removidos
+
+
 def rotulos_em_ingles(bloco):
     """Troca o TEXTO dos itens de menu que nao tem data-i18n.
 
@@ -407,6 +448,8 @@ def menu_para_ingles(caminho_arquivo, pares):
                     trocas += 1
         # o logo e o "voltar para o inicio" vao para a home em ingles
         bloco = bloco.replace('href="/"', 'href="/en/"')
+        bloco, n = oculta_sem_ingles(bloco)
+        trocas += n
         bloco, n = rotulos_em_ingles(bloco)
         trocas += n
         # Os 5 titulos de primeiro nivel e os 22 do rodape TEM data-i18n, entao o

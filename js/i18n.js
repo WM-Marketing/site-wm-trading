@@ -297,6 +297,11 @@ function paginaEmIngles() {
 var IDIOMA_FIXO = paginaEmIngles();
 let currentLang = IDIOMA_FIXO ? 'en' : (localStorage.getItem('wm-lang') || 'pt');
 
+/* Esta pagina tem irma no outro idioma? Depois da correcao do hreflang, so quem
+   tem par declara <link rel="alternate">, entao a presenca da tag ja responde.
+   Definido de verdade no DOMContentLoaded, quando o <head> ja foi lido. */
+var TEM_IRMA = false;
+
 function setLang(lang, persistir) {
   currentLang = lang;
   /* Nao gravamos a preferencia quando ela veio da URL: senao quem passa por uma
@@ -304,9 +309,23 @@ function setLang(lang, persistir) {
   if (persistir !== false) localStorage.setItem('wm-lang', lang);
   document.documentElement.lang = lang === 'pt' ? 'pt-BR' : 'en';
 
+  /* O MENU SEGUE O IDIOMA DA PAGINA, nao a preferencia guardada.
+
+     Numa pagina que so existe em portugues (aeronaves, posts do blog, podcast),
+     traduzir o menu produzia um cabecalho pela metade: os 5 titulos de primeiro
+     nivel viravam ingles porque tem data-i18n, e os 43 itens do menu suspenso
+     ficavam em portugues porque nao tem. O visitante clicava num item em ingles,
+     caia numa pagina em portugues e via o menu mudar embaixo dele.
+
+     Inteiro em portugues e melhor que meio a meio: deixa claro na hora que aquela
+     pagina nao existe em ingles. O rodape continua traduzindo — ele nao leva a
+     lugar nenhum, entao nao cria expectativa falsa. */
+  var soPortugues = !TEM_IRMA && !IDIOMA_FIXO;
+
   // Update textContent elements
   document.querySelectorAll('[data-i18n]').forEach(function(el) {
     var key = el.dataset.i18n;
+    if (soPortugues && key.indexOf('nav.') === 0) return;
     var text = translations[lang][key];
     if (text !== undefined) el.textContent = text;
   });
@@ -369,8 +388,8 @@ document.addEventListener('DOMContentLoaded', function() {
      (EN -> PT -> EN) para chegar na versao em ingles. Pego no teste local.
      Depois da correcao do hreflang, so pagina com irma declara <link alternate>,
      entao a propria presenca da tag ja responde "esta pagina tem par?". */
-  var temIrma = !!document.querySelector('link[rel="alternate"][hreflang]');
-  if (temIrma) currentLang = paginaEmIngles() ? 'en' : 'pt';
+  TEM_IRMA = !!document.querySelector('link[rel="alternate"][hreflang]');
+  if (TEM_IRMA) currentLang = paginaEmIngles() ? 'en' : 'pt';
 
   var toggle = document.getElementById('lang-toggle');
   if (toggle) {
@@ -388,5 +407,5 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // Apply saved/default language on load
   // pagina com irma nao grava preferencia: o idioma dela e o da propria pagina
-  setLang(currentLang, (IDIOMA_FIXO || temIrma) ? false : undefined);
+  setLang(currentLang, (IDIOMA_FIXO || TEM_IRMA) ? false : undefined);
 });
