@@ -1485,7 +1485,22 @@ def main():
             bullets_html = f'<ul class="ebook-info__bullets">{li_html}</ul>'
             
         form_html = build_ebook_form_html(e["title"], e["pdfUrl"])
-        
+
+        # "corpo": o conteudo do e-book por extenso, em markdown (GEO — pagina
+        # legivel por humano e por IA, sem exigir o formulario para ler).
+        # O formulario continua existindo, mas passa a ser conveniencia (PDF
+        # para levar/consultar depois), nao portao de acesso ao conteudo.
+        tem_corpo = bool(e.get("corpo"))
+        titulo_painel = ("Leve este guia com você — baixe em PDF"
+                         if tem_corpo else
+                         "Preencha os dados abaixo para receber o material")
+        corpo_html = (f'''
+        <div class="post-content-container">
+          <div class="prose-wm">
+            {markdown_to_html(e["corpo"])}
+          </div>
+        </div>''' if tem_corpo else "")
+
         ebook_content = f"""
         <section class="ebook-layout">
           <div class="container">
@@ -1499,15 +1514,16 @@ def main():
               </div>
               <div>
                 <div class="ebook-form-panel">
-                  <h3 class="ebook-form-panel__title">Preencha os dados abaixo para receber o material</h3>
+                  <h3 class="ebook-form-panel__title">{titulo_painel}</h3>
                   {form_html}
                 </div>
               </div>
             </div>
           </div>
         </section>
+        {corpo_html}
         """
-        
+
         output_path = os.path.join(EBOOKS_OUT_DIR, f"{slug}.html")
         render_html_page(output_path, e["title"], e["description"][:160], ebook_content, head_tpl, header_tpl, footer_tpl)
 
