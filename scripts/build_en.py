@@ -212,6 +212,170 @@ def formulario_en(pagina):
     </section>"""
 
 
+# Rotulos do menu em ingles. Sao os que o SITE ATUAL ja publica em /en/ — copiados
+# de la, nao traduzidos por mim: e paridade, e evita inventar termo comercial.
+# Os itens de primeiro nivel (Segmentos, Solucoes...) nao entram aqui: ja tem
+# data-i18n e o i18n.js os traduz. Nome de aeronave e nome proprio, nao se traduz.
+ROTULOS_MENU_EN = {
+    # rotulos de categoria do mega-menu
+    "Aeronaves": "Aircraft",
+    "Energia &amp; Ind\u00fastria": "Energy &amp; Industry",
+    "Consumo &amp; Tech": "Consumer &amp; Tech",
+    # segmentos
+    "Importa\u00e7\u00e3o de Aeronaves": "Aircraft Import",
+    "Equipamentos Fotovoltaicos": "Photovoltaic Equipment Import",
+    "Cases de Usinas Fotovoltaicas": "Photovoltaic Plant Cases",
+    "Produtos Qu\u00edmicos": "Chemicals Import",
+    "Combust\u00edveis e Derivados": "Fuels Import",
+    "M\u00e1quinas e Equipamentos": "Machines Import",
+    "A\u00e7o": "Steel Import",
+    "Rebocadores": "Aircraft Tugs Import",
+    "Cosm\u00e9ticos": "Cosmetics Import",
+    "Inform\u00e1tica e Telecom.": "IT and Telecom Import",
+    "Autope\u00e7as": "Auto Parts Import",
+    "Varejo": "Retail Import",
+    "Vinho": "Wines Import",
+    "Drone": "Drone Import",
+    "Ver todos os segmentos \u2192": "View all segments \u2192",
+    # solucoes
+    "Solu\u00e7\u00f5es WM": "WM Solutions",
+    "Solu\u00e7\u00f5es Log\u00edsticas 4PL": "4PL Logistics Solutions",
+    "Importa\u00e7\u00e3o por Encomenda": "Custom Import",
+    "Importa\u00e7\u00e3o por Conta e Ordem": "Import by Account and Order",
+    "Assessoria Aduaneira": "Customs Advisory",
+    # conteudo
+    "E-Books": "E-Books",
+    "Materiais e Infogr\u00e1ficos": "Materials and Infographics",
+    # quem somos / contato
+    "Sobre n\u00f3s": "About Us",
+    "Trabalhe conosco": "Careers",
+    "Fale conosco": "Contact Us",
+    "Unidades": "Units",
+    "Ouvidoria \u2197": "Ombudsman \u2197",
+}
+
+
+def rotulos_em_ingles(bloco):
+    """Troca o TEXTO dos itens de menu que nao tem data-i18n.
+
+    Sao 43 dos 48 itens do menu: os 5 de primeiro nivel foram marcados em 17/08,
+    o resto nunca foi. Sem isto, uma pagina /en/ mostra "Segments" no topo e
+    "Importacao de Aeronaves" ao passar o mouse.
+
+    Trocado AQUI, na geracao, e nao no navegador: assim o ingles fica escrito no
+    arquivo e o Google le o menu em ingles junto com a pagina.
+    """
+    trocados = 0
+    for pt, en in ROTULOS_MENU_EN.items():
+        for abre, fecha in ((">", "<"),):
+            antes = bloco
+            bloco = bloco.replace(abre + pt + fecha, abre + en + fecha)
+            if bloco != antes:
+                trocados += 1
+    return bloco, trocados
+
+
+_CACHE_EN = {}
+
+
+def traducoes_en():
+    """Le o dicionario ingles de js/i18n.js.
+
+    FONTE UNICA de proposito: as 115 frases da home ja estao traduzidas la, e sao
+    as mesmas que o botao de idioma usa desde sempre. Copiar para um JSON criaria
+    duas verdades que divergem na primeira vez que alguem editar so uma.
+
+    Le os dois formatos que o arquivo usa: valor entre aspas simples e, quando o
+    texto tem apostrofo (company's), entre aspas duplas.
+    """
+    if _CACHE_EN:
+        return _CACHE_EN
+    js = open(os.path.join(ROOT, "js", "i18n.js"), encoding="utf-8").read()
+    ini = js.find("  en: {")
+    fim = js.find("\n  }\n};", ini)
+    if ini == -1 or fim == -1:
+        return {}
+    d = {}
+    for linha in js[ini:fim].split("\n"):
+        m = re.match(r"\s*'([^']+)':\s*'(.*)'\s*,?\s*$", linha)
+        if not m:
+            m = re.match(r"\s*'([^']+)':\s*\"(.*)\"\s*,?\s*$", linha)
+        if m:
+            d[m.group(1)] = m.group(2)
+    _CACHE_EN.update(d)
+    return d
+
+
+def home_em_ingles(pagina):
+    """Gera /en/ com o DESENHO da home em portugues e o texto em ingles.
+
+    POR QUE NAO USAR O MOLDE GENERICO
+    A home tem 9 secoes proprias (hero com navio, cards, numeros, o carrossel dos
+    15 segmentos, modalidades, CTA). Gerada pelo molde de pagina de texto — hero +
+    paragrafos + formulario — /en/ virava OUTRA pagina, com 8 secoes genericas e
+    sem carrossel. E ela e a 3a pagina mais clicada do site inteiro: 1.262 cliques
+    em 16 meses. O site atual serve a home em ingles com o mesmo desenho da em
+    portugues, entao isto e paridade, nao novidade.
+
+    POR QUE TRADUZIR AQUI E NAO NO NAVEGADOR
+    Se o ingles so aparecesse depois de o JS rodar, o arquivo entregue ao Google
+    estaria em portugues — e /en/ seria lida como copia da home PT. Traduzido na
+    geracao, o ingles fica escrito no arquivo.
+
+    Cobertura conferida: 134 de 134 elementos marcados, 0 sem traducao.
+    """
+    tr = traducoes_en()
+    if not tr:
+        print("  AVISO: dicionario ingles vazio — /en/ nao foi gerada")
+        return None
+
+    html = open(os.path.join(ROOT, "index.html"), encoding="utf-8").read()
+    faltando = []
+
+    def troca(m):
+        tag, attrs, _ehhtml, chave, inner = m.groups()
+        # elemento com filho do mesmo tipo quebraria o casamento nao-guloso
+        if re.search(r"<" + tag + r"[\s>]", inner):
+            return m.group(0)
+        if chave not in tr:
+            faltando.append(chave)
+            return m.group(0)
+        return "<%s%s>%s</%s>" % (tag, attrs, tr[chave], tag)
+
+    html = re.sub(r"<(\w+)([^>]*\bdata-i18n(-html)?=\"([^\"]+)\"[^>]*)>(.*?)</\1>",
+                  troca, html, flags=re.S)
+    if faltando:
+        print("  AVISO: sem traducao em ingles: %s" % sorted(set(faltando)))
+
+    # cabecalho: o que e especifico da home em portugues
+    titulo = "WM Trading \u2014 %s" % pagina["titulo"]
+    html = re.sub(r"<title>.*?</title>", "<title>%s</title>" % titulo, html, flags=re.S)
+    html = re.sub(r'(<meta\s+name="description"\s+content=")[^"]*(")',
+                  lambda m: m.group(1) + pagina["description"] + m.group(2), html)
+    html = re.sub(r'(<link\s+rel="canonical"\s+href=")[^"]*(")',
+                  lambda m: m.group(1) + SITE + "/en/" + m.group(2), html)
+    html = re.sub(r'(<meta\s+property="og:url"\s+content=")[^"]*(")',
+                  lambda m: m.group(1) + SITE + "/en/" + m.group(2), html)
+    html = re.sub(r'(<meta\s+property="og:title"\s+content=")[^"]*(")',
+                  lambda m: m.group(1) + titulo + m.group(2), html)
+    html = re.sub(r'(<meta\s+property="og:description"\s+content=")[^"]*(")',
+                  lambda m: m.group(1) + pagina["description"] + m.group(2), html)
+    html = re.sub(r'<html[^>]*\blang="[^"]*"', '<html lang="en"', html, count=1)
+
+    # CAMINHO ABSOLUTO — obrigatorio. A home e servida na raiz, onde relativo e
+    # absoluto coincidem, entao ela pode ter src="images/...". Copiada para /en/,
+    # o mesmo caminho passa a resolver contra /en/ e da 404 em tudo: CSS, logo,
+    # imagens. Foi o que deixou a pagina de aeronaves sem CSS de 14 a 17/08, e a
+    # secao G do verificar.py pegou de novo aqui, antes de publicar.
+    html = bp.make_paths_absolute(html)
+
+    saida = os.path.join(ROOT, "en", "index.html")
+    os.makedirs(os.path.dirname(saida), exist_ok=True)
+    with open(saida, "w", encoding="utf-8", newline="\n") as f:
+        f.write(html)
+    return saida
+
+
 def menu_para_ingles(caminho_arquivo, pares):
     """Faz o menu e o rodape das paginas /en/ apontarem para as paginas /en/.
 
@@ -243,6 +407,22 @@ def menu_para_ingles(caminho_arquivo, pares):
                     trocas += 1
         # o logo e o "voltar para o inicio" vao para a home em ingles
         bloco = bloco.replace('href="/"', 'href="/en/"')
+        bloco, n = rotulos_em_ingles(bloco)
+        trocas += n
+        # Os 5 titulos de primeiro nivel e os 22 do rodape TEM data-i18n, entao o
+        # navegador ja os mostrava em ingles. Mas no ARQUIVO continuavam em
+        # portugues — e e o arquivo que o Google le. Embutido aqui, a pagina /en/
+        # fica inteira em ingles na origem, sem depender do JS rodar.
+        tr = traducoes_en()
+
+        def _marcado(m):
+            tag, attrs, _eh, chave, inner = m.groups()
+            if re.search(r"<" + tag + r"[\s>]", inner) or chave not in tr:
+                return m.group(0)
+            return "<%s%s>%s</%s>" % (tag, attrs, tr[chave], tag)
+
+        bloco = re.sub(r'<(\w+)([^>]*\bdata-i18n(-html)?="([^"]+)"[^>]*)>(.*?)</\1>',
+                       _marcado, bloco, flags=re.S)
         return bloco
 
     for abre, fecha in (("<header", "</header>"), ("<footer", "</footer>")):
@@ -291,14 +471,20 @@ def main():
     for p in paginas:
         saida = caminho_saida(p["en"])
         os.makedirs(os.path.dirname(saida), exist_ok=True)
-        corpo = corpo_html(p)
-        if not corpo:
-            print(f"  pulada (sem conteudo): {p['en']}")
-            continue
 
-        bp.render_html_page(
-            saida, p["titulo"], p["description"], corpo,
-            head_tpl, header_tpl, footer_tpl, lang="en")
+        # A HOME NAO USA O MOLDE GENERICO: ela tem 9 secoes proprias e e a 3a
+        # pagina mais clicada do site. Ver home_em_ingles().
+        if p["en"] == "/en/":
+            if home_em_ingles(p) is None:
+                continue
+        else:
+            corpo = corpo_html(p)
+            if not corpo:
+                print(f"  pulada (sem conteudo): {p['en']}")
+                continue
+            bp.render_html_page(
+                saida, p["titulo"], p["description"], corpo,
+                head_tpl, header_tpl, footer_tpl, lang="en")
 
         # menu e rodape apontando para as paginas /en/ que existem
         links_en += menu_para_ingles(saida, pares)

@@ -12,12 +12,11 @@
   <meta property="og:type" content="website" />
   <meta property="og:image" content="https://www.wmtrading.com.br/images/logo/fechado_logo_wm_trading_ajustada_logo_laranja.png" />
   <meta property="og:site_name" content="WM Trading" />
-  <meta property="og:locale" content="en_US" />
+  <meta property="og:locale" content="pt_BR" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="robots" content="index, follow, max-image-preview:large" />
-  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Organization", "name": "WM Trading", "url": "https://www.wmtrading.com.br", "logo": "https://www.wmtrading.com.br/images/logo/fechado_logo_wm_trading_ajustada_logo_laranja.png", "description": "Trading company especializada em solucoes completas de importacao e comercio exterior para empresas no Brasil."}</script>
-  
-  <meta name="wm-politica-versao" content="2026-08-11" />
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Organization", "name": "WM Trading", "url": "https://www.wmtrading.com.br", "logo": "https://www.wmtrading.com.br/images/logo/fechado_logo_wm_trading_ajustada_logo_laranja.png", "description": "Trading company especializada em soluções completas de importação e comércio exterior para empresas no Brasil."}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebSite", "name": "WM Trading", "url": "https://www.wmtrading.com.br"}</script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Nunito+Sans:wght@800&display=swap" rel="stylesheet" />
@@ -25,12 +24,20 @@
   <link rel="stylesheet" href="/css/reset.css" />
   <link rel="stylesheet" href="/css/main.css" />
   <link rel="stylesheet" href="/css/responsive.css" />
+  <!-- Hero: LCP da home. O preload usa o mesmo srcset/sizes da <img> para o
+       navegador escolher a mesma largura e nao baixar duas versoes. -->
+  <link rel="preload" as="image"
+        href="/images/home/hero-navio-1920.webp"
+        imagesrcset="/images/home/hero-navio-960.webp 960w, /images/home/hero-navio-1920.webp 1920w"
+        imagesizes="100vw"
+        fetchpriority="high" />
   <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js" defer></script>
   <script src="/js/whatsapp-popup.js" defer></script>
   <script src="/js/utm-tracking.js"></script>
   <!-- LGPD: versão vigente das políticas. Muda quando o texto muda de forma relevante —
        o aviso de cookies reaparece e os formulários gravam esta versão no registro de
        aceite. Manter igual a POLITICA_VERSAO_ID em scripts/build_pages.py. -->
+  <meta name="wm-politica-versao" content="2026-08-11" />
   <!-- Consent Mode v2 (default negado) + wm_ambiente + carregamento do GTM
        (GTM-52WHRQN): js/consent.js. PRECISA vir ANTES do AdOpt — declara o
        default como negado, então se o CMP for bloqueado por adblock o estado
@@ -44,16 +51,15 @@
   <script src="https://tag.goadopt.io/injector.js?website_code=e7ae093c-b92e-4ceb-9c53-ac44c0b811f8"
           class="adopt-injector"></script>
 
-  <link rel="stylesheet" href="/css/dynamic-pages.css" />
-  <script src="/js/contact-form.js" defer></script>
-  <script src="/js/lightbox.js" defer></script>
-
   <link rel="alternate" hreflang="pt-BR" href="https://www.wmtrading.com.br/" />
   <link rel="alternate" hreflang="en" href="https://www.wmtrading.com.br/en/" />
   <link rel="alternate" hreflang="x-default" href="https://www.wmtrading.com.br/" />
 </head>
 <body>
 
+<!-- ══════════════════════════════════════
+     PAGE LOADER
+══════════════════════════════════════ -->
 <div id="page-loader" aria-hidden="true">
   <div id="loader-lottie"></div>
 </div>
@@ -72,13 +78,13 @@
       <!-- SEGMENTOS -->
       <div class="nav-dropdown">
         <a href="/en/segments/" class="nav-dropdown__trigger" aria-haspopup="true" aria-expanded="false">
-          <span data-i18n="nav.segments">Segmentos</span>
+          <span data-i18n="nav.segments">Segments</span>
           <svg width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </a>
         <div class="nav-dropdown__menu nav-dropdown__menu--mega" role="menu">
           <div class="nav-mega-col">
-            <span class="nav-mega-label">Aeronaves</span>
-            <a href="/en/segments/aircraft-import/" role="menuitem">Importação de Aeronaves</a>
+            <span class="nav-mega-label">Aircraft</span>
+            <a href="/en/segments/aircraft-import/" role="menuitem">Aircraft Import</a>
             <a href="/aeronaves/citation-jet/" role="menuitem">Citation Jet</a>
             <a href="/aeronaves/pilatus-24/" role="menuitem">Pilatus 24</a>
             <a href="/aeronaves/phenom-300/" role="menuitem">Phenom 300</a>
@@ -89,41 +95,41 @@
             <a href="/aeronaves/falcon-900lx/" role="menuitem">Falcon 900LX</a>
           </div>
           <div class="nav-mega-col">
-            <span class="nav-mega-label">Energia &amp; Indústria</span>
-            <a href="/en/segments/photovoltaic-equipment/" role="menuitem">Equipamentos Fotovoltaicos</a>
-            <a href="/en/segments/photovoltaic-plant-cases/" role="menuitem">Cases de Usinas Fotovoltaicas</a>
-            <a href="/en/segments/chemicals/" role="menuitem">Produtos Químicos</a>
-            <a href="/en/segments/fuels/" role="menuitem">Combustíveis e Derivados</a>
-            <a href="/en/segments/machines/" role="menuitem">Máquinas e Equipamentos</a>
-            <a href="/en/segments/steel/" role="menuitem">Aço</a>
-            <a href="/en/segments/aircraft-tugs/" role="menuitem">Rebocadores</a>
+            <span class="nav-mega-label">Energy &amp; Industry</span>
+            <a href="/en/segments/photovoltaic-equipment/" role="menuitem">Photovoltaic Equipment Import</a>
+            <a href="/en/segments/photovoltaic-plant-cases/" role="menuitem">Photovoltaic Plant Cases</a>
+            <a href="/en/segments/chemicals/" role="menuitem">Chemicals Import</a>
+            <a href="/en/segments/fuels/" role="menuitem">Fuels Import</a>
+            <a href="/en/segments/machines/" role="menuitem">Machines Import</a>
+            <a href="/en/segments/steel/" role="menuitem">Steel Import</a>
+            <a href="/en/segments/aircraft-tugs/" role="menuitem">Aircraft Tugs Import</a>
           </div>
           <div class="nav-mega-col">
-            <span class="nav-mega-label">Consumo &amp; Tech</span>
-            <a href="/en/segments/cosmetics/" role="menuitem">Cosméticos</a>
-            <a href="/en/segments/information-technology-telecommunications/" role="menuitem">Informática e Telecom.</a>
-            <a href="/en/segments/auto-parts-imports/" role="menuitem">Autopeças</a>
-            <a href="/en/segments/retail/" role="menuitem">Varejo</a>
-            <a href="/en/segments/wines/" role="menuitem">Vinho</a>
-            <a href="/en/segments/drone/" role="menuitem">Drone</a>
+            <span class="nav-mega-label">Consumer &amp; Tech</span>
+            <a href="/en/segments/cosmetics/" role="menuitem">Cosmetics Import</a>
+            <a href="/en/segments/information-technology-telecommunications/" role="menuitem">IT and Telecom Import</a>
+            <a href="/en/segments/auto-parts-imports/" role="menuitem">Auto Parts Import</a>
+            <a href="/en/segments/retail/" role="menuitem">Retail Import</a>
+            <a href="/en/segments/wines/" role="menuitem">Wines Import</a>
+            <a href="/en/segments/drone/" role="menuitem">Drone Import</a>
           </div>
-          <a href="/en/segments/" class="nav-mega-all" role="menuitem">Ver todos os segmentos →</a>
+          <a href="/en/segments/" class="nav-mega-all" role="menuitem">View all segments →</a>
         </div>
       </div>
 
       <!-- SOLUÇÕES -->
       <div class="nav-dropdown">
         <button class="nav-dropdown__trigger" aria-haspopup="true" aria-expanded="false">
-          <span data-i18n="nav.solutions">Soluções</span>
+          <span data-i18n="nav.solutions">Solutions</span>
           <svg width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </button>
         <div class="nav-dropdown__menu" role="menu">
-          <a href="/en/solutions-wm/" role="menuitem">Soluções WM</a>
-          <a href="/solucoes-4pl/" role="menuitem">Soluções Logísticas 4PL</a>
-          <a href="/en/custom-import/" role="menuitem">Importação por Encomenda</a>
-          <a href="/en/account-order-import/" role="menuitem">Importação por Conta e Ordem</a>
+          <a href="/en/solutions-wm/" role="menuitem">WM Solutions</a>
+          <a href="/solucoes-4pl/" role="menuitem">4PL Logistics Solutions</a>
+          <a href="/en/custom-import/" role="menuitem">Custom Import</a>
+          <a href="/en/account-order-import/" role="menuitem">Import by Account and Order</a>
           <a href="/en/global-sourcing/" role="menuitem">Global Sourcing</a>
-          <a href="/en/customs-advisory/" role="menuitem">Assessoria Aduaneira</a>
+          <a href="/en/customs-advisory/" role="menuitem">Customs Advisory</a>
           <a href="/en/bonded-warehouse/" role="menuitem">Bonded Warehouse</a>
         </div>
       </div>
@@ -131,13 +137,13 @@
       <!-- CONTEÚDO -->
       <div class="nav-dropdown">
         <button class="nav-dropdown__trigger" aria-haspopup="true" aria-expanded="false">
-          <span data-i18n="nav.content">Conteúdo</span>
+          <span data-i18n="nav.content">Content</span>
           <svg width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </button>
         <div class="nav-dropdown__menu" role="menu">
           <a href="/blog/" role="menuitem">Blog</a>
           <a href="/materiais/" role="menuitem">E-Books</a>
-          <a href="/materiais/" role="menuitem">Materiais e Infográficos</a>
+          <a href="/materiais/" role="menuitem">Materials and Infographics</a>
           <a href="/podcast/" role="menuitem">WM Cast</a>
         </div>
       </div>
@@ -145,33 +151,33 @@
       <!-- QUEM SOMOS -->
       <div class="nav-dropdown">
         <button class="nav-dropdown__trigger" aria-haspopup="true" aria-expanded="false">
-          <span data-i18n="nav.about">Quem somos</span>
+          <span data-i18n="nav.about">About us</span>
           <svg width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </button>
         <div class="nav-dropdown__menu" role="menu">
-          <a href="/en/about/" role="menuitem">Sobre nós</a>
+          <a href="/en/about/" role="menuitem">About Us</a>
           <a href="/en/compliance/" role="menuitem">Compliance</a>
-          <a href="/en/careers/" role="menuitem">Trabalhe conosco</a>
+          <a href="/en/careers/" role="menuitem">Careers</a>
         </div>
       </div>
 
       <!-- CONTATO -->
       <div class="nav-dropdown">
         <button class="nav-dropdown__trigger" aria-haspopup="true" aria-expanded="false">
-          <span data-i18n="nav.contact">Contato</span>
+          <span data-i18n="nav.contact">Contact</span>
           <svg width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </button>
         <div class="nav-dropdown__menu" role="menu">
-          <a href="/en/contact-us/" role="menuitem">Fale conosco</a>
-          <a href="/unidades/" role="menuitem">Unidades</a>
-          <a href="https://www.contatoseguro.com.br/wmtrading" target="_blank" rel="noopener" role="menuitem">Ouvidoria ↗</a>
+          <a href="/en/contact-us/" role="menuitem">Contact Us</a>
+          <a href="/unidades/" role="menuitem">Units</a>
+          <a href="https://www.contatoseguro.com.br/wmtrading" target="_blank" rel="noopener" role="menuitem">Ombudsman ↗</a>
         </div>
       </div>
 
     </nav>
 
     <div class="header-actions">
-      <a href="https://cliente.wmtrading.com.br/" target="_blank" rel="noopener" class="btn btn-dark" data-i18n="nav.client">Área do cliente</a>
+      <a href="https://cliente.wmtrading.com.br/" target="_blank" rel="noopener" class="btn btn-dark" data-i18n="nav.client">Client area</a>
       <button class="header-flag" id="lang-toggle" aria-label="Switch language">
         <span id="lang-flag">🇧🇷</span>
         <span id="lang-code">PT</span>
@@ -184,119 +190,519 @@
   </div>
 </header>
 
-<main>
 
-    <section class="dynamic-hero">
-      
-      <div class="container dynamic-hero__container">
-        <h1 class="dynamic-hero__title">Your best choice in imports</h1>
-        <p class="dynamic-hero__subtitle">20 years of being a reference in tax solutions,
- logistics and customs for your company’s imports</p>
+<!-- ══════════════════════════════════════
+     HERO
+══════════════════════════════════════ -->
+<section class="hero">
+  <div class="hero-bg">
+    <img src="/images/home/hero-navio-1920.webp"
+         srcset="/images/home/hero-navio-960.webp 960w, /images/home/hero-navio-1920.webp 1920w"
+         sizes="100vw"
+         width="1920" height="1279"
+         fetchpriority="high" decoding="async"
+         alt="Navio porta-contêineres em operação de comércio exterior" />
+  </div>
+
+  <!-- Decoração esquerda — WM letras -->
+  <div class="hero-deco" aria-hidden="true">
+    <img src="/images/logo/WM.svg" alt="" />
+  </div>
+
+  <div class="container">
+    <div class="hero-inner">
+      <h1 class="hero-title" data-i18n-html="hero.title">Your best<br>choice for<br><span class="text-primary">importing</span></h1>
+      <div class="hero-right">
+        <p class="hero-description" data-i18n="hero.desc">Since 2004 we have been a reference in tax, logistics and customs solutions for your company's imports</p>
+        <a href="#contato" class="link-arrow" data-i18n="hero.cta">Talk to specialists →</a>
       </div>
-    </section>
+    </div>
+  </div>
 
-    <section class="page-section ">
-      <div class="container intro-container">
-        <h2 class="card-title" style="font-size: var(--fs-lg); font-weight: var(--fw-semibold); color: var(--color-primary); margin-bottom: 18px;">Why is WM your best choice?</h2>
-        <p class="card-desc" style="font-size: var(--fs-base); line-height: 1.7; margin-bottom: 14px;">We study each operation in detail, offering our technical expertise and planning at each stage. We deliver the best for your project, with specialized tax design and intelligent import management</p><p class="card-desc" style="font-size: var(--fs-base); line-height: 1.7; margin-bottom: 14px;">Parameterization in green channel</p>
-        
+</section>
+
+
+<!-- ══════════════════════════════════════
+     SECTION 2 — CARDS (sobrepostos ao hero)
+══════════════════════════════════════ -->
+<section class="section-cards">
+  <div class="container">
+    <div class="section-cards-grid">
+      <a href="/segmentos-aeronaves/" class="card-img" aria-label="Conheça as soluções para importação de aeronaves">
+        <img src="/images/home/aeronave-executiva.webp" width="2400" height="480" decoding="async" alt="Aeronave executiva em voo" />
+        <div class="card-img-content">
+          <p class="card-img-title" data-i18n="s2.card1">Aircraft import with tax reduction and specialized support</p>
+          <span class="link-arrow" data-i18n="s2.more">Learn more →</span>
+        </div>
+      </a>
+      <a href="/segmentos/maquinas/" class="card-img" aria-label="Conheça as soluções para importação de máquinas">
+        <img src="/images/home/seg-maquinas.webp" width="1049" height="700" decoding="async" alt="Máquinas agrícolas e industriais" />
+        <div class="card-img-content">
+          <p class="card-img-title" data-i18n="s2.card2">Machinery import with efficiency for the agricultural and industrial sectors</p>
+          <span class="link-arrow" data-i18n="s2.more">Learn more →</span>
+        </div>
+      </a>
+      <a href="/segmentos/aco/" class="card-img" aria-label="Conheça as soluções para importação de aço e metais">
+        <img src="/images/home/seg-acos.webp" width="933" height="700" decoding="async" alt="Bobinas de aço e metais" />
+        <div class="card-img-content">
+          <p class="card-img-title" data-i18n="s2.card3">Steel import with efficiency and a tailored plan for every project</p>
+          <span class="link-arrow" data-i18n="s2.more">Learn more →</span>
+        </div>
+      </a>
+    </div>
+
+    <!-- Badge circular abaixo dos cards -->
+    <div class="hero-badge" aria-hidden="true">
+      <svg viewBox="0 0 100 100" width="180" height="180">
+        <defs>
+          <path id="circle-path" d="M 50,50 m -32,0 a 32,32 0 1,1 64,0 a 32,32 0 1,1 -64,0"/>
+        </defs>
+        <text font-size="7.7" font-family="Poppins, sans-serif" font-weight="600" fill="#FC5000" letter-spacing="1">
+          <textPath href="#circle-path">WE MAKE IT BETTER • WE MAKE IT BETTER •</textPath>
+        </text>
+      </svg>
+      <div class="hero-badge-center"></div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════
+     SECTION 3 — POR QUE A WM
+══════════════════════════════════════ -->
+<section class="section-motivo">
+  <div class="container">
+    <div class="motivo-header">
+      <h2 class="motivo-title" data-i18n-html="s3.title">Why is WM your <span class="text-primary">best choice?</span></h2>
+      <p class="motivo-subtitle" data-i18n="s3.sub">We study each operation in detail, offering our technical expertise and planning at every step. We deliver the best for your project, with specialized tax design and intelligent import management</p>
+    </div>
+    <hr class="motivo-divider" />
+    <div class="motivo-grid-top">
+      <div class="motivo-card">
+        <div class="motivo-card-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 3 5 6v5c0 5 3 8.5 7 10 4-1.5 7-5 7-10V6l-7-3Z"/><path d="M12 3v18"/></svg></div>
+        <h3 class="motivo-card-title" data-i18n="s3.card1.title">Compliance Program</h3>
+        <p class="motivo-card-text" data-i18n="s3.card1.text">A robust Compliance Program that brings transparency and sound planning to every operation</p>
       </div>
-    </section>
-
-    <section class="page-section page-section--alternate">
-      <div class="container intro-container">
-        <h2 class="card-title" style="font-size: var(--fs-lg); font-weight: var(--fw-semibold); color: var(--color-primary); margin-bottom: 18px;">7 tax benefits to optimize your imports</h2>
-        <p class="card-desc" style="font-size: var(--fs-base); line-height: 1.7; margin-bottom: 14px;">Present in 15 Brazilian states and Panama, we optimize imports and reduce costs for our customers with unique planning, always committed to seeking the best nationalization opportunities.</p><p class="card-desc" style="font-size: var(--fs-base); line-height: 1.7; margin-bottom: 14px;">Through Operation by Order or Account and Order, we optimize the logistics chain and reduce the import tax burden by nationalizing your cargo in states that have ICMS reduction incentives, such as ES and SC.</p>
-        
+      <div class="motivo-card">
+        <div class="motivo-card-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="M14.5 8.8c-.5-.7-1.3-1.1-2.5-1.1-1.5 0-2.5.8-2.5 2 0 2.9 5 1.2 5 4 0 1.2-1 2-2.6 2-1.2 0-2.2-.4-2.8-1.2M12 6.2v11.6"/></svg></div>
+        <h3 class="motivo-card-title" data-i18n="s3.card2.title">Cost optimization</h3>
+        <p class="motivo-card-text" data-i18n="s3.card2.text">Tax, fiscal and customs planning. WM has 7 tax benefits in 6 states that reduce the ICMS rate</p>
       </div>
-    </section>
-
-    <section class="page-section ">
-      <div class="container intro-container">
-        <h2 class="card-title" style="font-size: var(--fs-lg); font-weight: var(--fw-semibold); color: var(--color-primary); margin-bottom: 18px;">Experience and Transparency</h2>
-        <p class="card-desc" style="font-size: var(--fs-base); line-height: 1.7; margin-bottom: 14px;">Our extensive know-how, transparency at all stages of importing and import planning are the main factors that make our processes a success.</p><p class="card-desc" style="font-size: var(--fs-base); line-height: 1.7; margin-bottom: 14px;">We operate on different import fronts. We work in import modalities by Order or Account and Order, in addition to providing Customs Advice for large projects and searching for international suppliers through Global Sourcing.</p><p class="card-desc" style="font-size: var(--fs-base); line-height: 1.7; margin-bottom: 14px;">With an exclusive benefit for the sector, we take care of all stages of importing planes and helicopters with agility and lower cost</p><p class="card-desc" style="font-size: var(--fs-base); line-height: 1.7; margin-bottom: 14px;">We are a national reference in the import of photovoltaic equipment, whether Modules, Inverters or Trackers.</p><p class="card-desc" style="font-size: var(--fs-base); line-height: 1.7; margin-bottom: 14px;">With WM, the agricultural and industrial sector has more agile operations and the best machines on the market</p>
-        
+      <div class="motivo-card">
+        <div class="motivo-card-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="7" r="3"/><path d="M6 21v-2.5c0-2.5 2.7-4.5 6-4.5s6 2 6 4.5V21M4 11h3M17 11h3"/></svg></div>
+        <h3 class="motivo-card-title" data-i18n="s3.card3.title">Team of specialists</h3>
+        <p class="motivo-card-text" data-i18n="s3.card3.text">Highly qualified professionals with years of experience in import processes</p>
       </div>
-    </section>
-
-    <section class="page-section page-section--alternate">
-      <div class="container intro-container">
-        <h2 class="card-title" style="font-size: var(--fs-lg); font-weight: var(--fw-semibold); color: var(--color-primary); margin-bottom: 18px;">IT and telecommunications</h2>
-        <p class="card-desc" style="font-size: var(--fs-base); line-height: 1.7; margin-bottom: 14px;">We design the best logistics and tax solution, also offering storage and dispatch solutions for IT and telecom items</p><p class="card-desc" style="font-size: var(--fs-base); line-height: 1.7; margin-bottom: 14px;">Through MAPA certification, we take care of the import of wines from end to end</p><p class="card-desc" style="font-size: var(--fs-base); line-height: 1.7; margin-bottom: 14px;">We import drones with the best cost-benefit and with the support of advantageous partnerships for the operation</p><p class="card-desc" style="font-size: var(--fs-base); line-height: 1.7; margin-bottom: 14px;">Certified by the ANP, WM is a reference company in fuel imports, with a history of rapid port clearance</p><p class="card-desc" style="font-size: var(--fs-base); line-height: 1.7; margin-bottom: 14px;">Import of auto parts adding security and agility to the process, mapping benefits such as single-phase PIS and COFINS in the Order operation</p><p class="card-desc" style="font-size: var(--fs-base); line-height: 1.7; margin-bottom: 14px;">Import steel and steel resources efficiently through our unique planning for each project</p><p class="card-desc" style="font-size: var(--fs-base); line-height: 1.7; margin-bottom: 14px;">We have certifications and registrations for the various chemical products, as well as great knowledge to ship items according to each of their particularities.</p><p class="card-desc" style="font-size: var(--fs-base); line-height: 1.7; margin-bottom: 14px;">We facilitate the import of cosmetics with cost reduction and logistical and tax planning</p><p class="card-desc" style="font-size: var(--fs-base); line-height: 1.7; margin-bottom: 14px;">We import aircraft tugs with the best suppliers on the market, tax benefits and personalized planning</p><p class="card-desc" style="font-size: var(--fs-base); line-height: 1.7; margin-bottom: 14px;">We help your company with the best choices and conditions on the market</p>
-        
+    </div>
+    <div class="motivo-grid-bottom">
+      <div class="motivo-card">
+        <div class="motivo-card-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="4" width="18" height="13" rx="1.5"/><path d="M8 21h8M12 17v4"/></svg></div>
+        <h3 class="motivo-card-title" data-i18n="s3.card4.title">360º technology</h3>
+        <p class="motivo-card-text" data-i18n="s3.card4.text">Tools developed to monitor every stage and access documents in real time</p>
       </div>
-    </section>
-
-    <section class="page-section ">
-      <div class="container intro-container">
-        <h2 class="card-title" style="font-size: var(--fs-lg); font-weight: var(--fw-semibold); color: var(--color-primary); margin-bottom: 18px;">Which import modality best suits your project?</h2>
-        <p class="card-desc" style="font-size: var(--fs-base); line-height: 1.7; margin-bottom: 14px;">Understand better about our tax benefits and avoid opening branches in states with incentives to reduce the ICMS rate, such as ES and SC!</p>
-        
+      <div class="motivo-card">
+        <div class="motivo-card-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="10" r="5"/><path d="m8.5 14-1.5 6 5-2 5 2-1.5-6"/><path d="m10 10 1.3 1.3L14 8.7"/></svg></div>
+        <h3 class="motivo-card-title" data-i18n="s3.card5.title">ISO 9001</h3>
+        <p class="motivo-card-text" data-i18n="s3.card5.text">Quality control at every stage of the process and the first Brazilian trading company certified with ISO 9001</p>
       </div>
-    </section>
+    </div>
+  </div>
+</section>
 
-    <section class="page-section page-section--alternate">
-      <div class="container intro-container">
-        <h2 class="card-title" style="font-size: var(--fs-lg); font-weight: var(--fw-semibold); color: var(--color-primary); margin-bottom: 18px;">Account and Order Operation</h2>
-        <p class="card-desc" style="font-size: var(--fs-base); line-height: 1.7; margin-bottom: 14px;">In Account and Order, WM acts as consignee of the cargo and manages the import at all stages. Tax benefits can be taken advantage of if your company has a branch in the states of SC, ES or PE!</p><p class="card-desc" style="font-size: var(--fs-base); line-height: 1.7; margin-bottom: 14px;">We take care of all imports and advise on customs clearance at any port in Brazil.</p><p class="card-desc" style="font-size: var(--fs-base); line-height: 1.7; margin-bottom: 14px;">Find international suppliers for your project!</p><p class="card-desc" style="font-size: var(--fs-base); line-height: 1.7; margin-bottom: 14px;">Talk to our experts and have the best operation for your company!</p><p class="card-desc" style="font-size: var(--fs-base); line-height: 1.7; margin-bottom: 14px;">Discover our branches and contact the one closest to you!</p>
-        
+
+<!-- ══════════════════════════════════════
+     SECTION 4 — NÚMEROS
+══════════════════════════════════════ -->
+<section class="section-numeros">
+  <div class="container">
+    <div class="numero-item">
+      <p class="numero-value" data-count="15">0</p>
+      <p class="numero-label" data-i18n="s4.label1">Branches across Brazil and 1 in Panama</p>
+    </div>
+    <div class="numero-item">
+      <p class="numero-value" data-count="7">0</p>
+      <p class="numero-label" data-i18n="s4.label2">Tax benefits</p>
+    </div>
+    <div class="numero-item">
+      <p class="numero-value" data-count="20">0</p>
+      <p class="numero-label" data-i18n="s4.label3">Years in the market</p>
+    </div>
+    <div class="numero-item">
+      <p class="numero-value" data-count="98" data-suffix="%">0%</p>
+      <p class="numero-label" data-i18n="s4.label4">Green channel clearance rate</p>
+    </div>
+  </div>
+  <!-- Decoração hexágonos -->
+  <div class="numeros-deco" aria-hidden="true"></div>
+</section>
+
+
+<!-- ══════════════════════════════════════
+     SECTION 5 — BENEFÍCIOS
+══════════════════════════════════════ -->
+<section class="section-beneficios">
+  <div class="container">
+    <div class="beneficios-left">
+      <div class="beneficios-title-row">
+        <div class="beneficios-num-wrap">
+          <div class="beneficios-num">7</div>
+        </div>
+        <h2 class="beneficios-title" data-i18n-html="s5.title">tax benefits<br>to <span class="text-primary">optimize your imports</span></h2>
       </div>
-    </section>
+      <p class="beneficios-text" data-i18n-html="s5.text1">Present in <strong>14 Brazilian states</strong> and <strong>Panama</strong>, we optimize imports and reduce our clients\' costs with unique planning, always committed to finding the best nationalization opportunities.</p>
+      <p class="beneficios-text" data-i18n-html="s5.text2">Through the Order Operation or Commission Operation, we optimize the logistics chain and reduce the tax burden of imports by nationalizing your cargo in states with ICMS reduction incentives, such as ES and SC.</p>
+    </div>
+    <div class="beneficios-map">
+      <iframe src="/mapa-brasil/mapa_colombia_panama.html" title="Mapa do Brasil — WM Trading" loading="lazy"></iframe>
+    </div>
+  </div>
+</section>
 
-    <section class="page-section page-section--alternate" id="contact">
-      <div class="container intro-container">
-        <h2 class="card-title" style="font-size: var(--fs-lg); font-weight: var(--fw-semibold); margin-bottom: 10px;">Talk to our specialists</h2>
-        <p class="card-desc" style="margin-bottom: 26px;">Tell us about your operation and our team will get back to you shortly.</p>
-        <form class="contact-form-js grid gap-4 form-grid-wm form-grid-wm--2col" data-form-type="contato">
-          <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" class="hidden" aria-hidden="true" style="display:none;" />
 
-          <input name="nome" required placeholder="Full name *" class="input-wm sm-col-span-2" />
-          <input name="email" type="email" required placeholder="E-mail *" class="input-wm" />
-          <input name="telefone" type="tel" required placeholder="Phone (with country code) *" pattern="[0-9\s\(\)\+\-\.]+" class="input-wm" />
-          <input name="empresa" placeholder="Company" class="input-wm sm-col-span-2" />
+<!-- ══════════════════════════════════════
+     SECTION 6 — EXPERIÊNCIA
+══════════════════════════════════════ -->
+<section class="section-experiencia">
+  <div class="container">
+    <div class="experiencia-media">
+      <img src="/images/home/sede-wm-wendy.webp" alt="Sede WM Trading e CEO Wendy Verjovsky" class="experiencia-img-full" width="1000" height="827" loading="lazy" decoding="async" />
+      <p class="experiencia-caption" data-i18n="s6.caption">Wendy Verjovsky - WM CEO</p>
+    </div>
+    <div class="experiencia-content">
+      <h2 class="experiencia-label" data-i18n-html="s6.title">Experience and<br>Transparency</h2>
+      <p class="experiencia-text" data-i18n="s6.text1">Our extensive know-how, transparency in every step of the import process and import planning are the main factors that make our processes a success.</p>
+      <p class="experiencia-text" data-i18n="s6.text2">We operate in different fronts of importing. We work in Order and Commission import modalities, as well as providing Customs Advisory for large projects and sourcing international suppliers through Global Sourcing.</p>
+      <a href="/solucoes-wm/" class="btn-solucoes" data-i18n="s6.btn">Our solutions →</a>
+    </div>
+  </div>
+</section>
 
-          <select name="segmento" required class="input-wm sm-col-span-2">
-            <option value="" disabled selected>Segment *</option>
-            <option value="Aeronaves">Aircraft</option>
-            <option value="Equipamentos Fotovoltaicos">Photovoltaic Equipment</option>
-            <option value="Produtos Químicos">Chemicals</option>
-            <option value="Cosméticos">Cosmetics</option>
-            <option value="Informática e Telecomunicações">IT and Telecommunications</option>
-            <option value="Partes e Peças Geral">Auto Parts and Components</option>
-            <option value="Aço">Steel</option>
-            <option value="Máquinas">Machines</option>
-            <option value="Varejo">Retail</option>
-            <option value="Vinho">Wine</option>
-            <option value="Drone">Drone</option>
-            <option value="Rebocadores">Aircraft Tugs</option>
-            <option value="Combustível e Derivados de Petróleo">Fuels and Petroleum Products</option>
-            <option value="Outros">Other</option>
-          </select>
 
-          <select name="forma_resposta" required class="input-wm sm-col-span-2">
-            <option value="" disabled selected>How would you like to be contacted? *</option>
-            <option value="E-mail">E-mail</option>
-            <option value="WhatsApp">WhatsApp</option>
-            <option value="Telefone">Phone</option>
-          </select>
-
-          <textarea name="mensagem" required rows="4" placeholder="How can we help? *" class="input-wm sm-col-span-2 resize-y"></textarea>
-
-          <label class="sm-col-span-2 form-checkbox-label">
-            <input type="checkbox" name="aceite_privacidade" required value="sim" />
-            <span>I have read and agree to the <a href="/politica-de-privacidade/" class="text-primary underline">Privacy Policy</a> and authorise WM Trading to process my data in order to respond to this request.</span>
-          </label>
-
-          <label class="sm-col-span-2 form-checkbox-label">
-            <input type="checkbox" name="aceite_marketing" value="sim" />
-            <span>I would also like to receive content, materials and commercial communications from WM Trading (optional).</span>
-          </label>
-
-          <button type="submit" class="btn btn-block sm-col-span-2 btn-lg">Send</button>
-        </form>
+<!-- ══════════════════════════════════════
+     SECTION 7 — SEGMENTOS
+══════════════════════════════════════ -->
+<section class="section-segmentos">
+  <div class="container">
+    <div class="segmentos-header">
+      <h2 class="segmentos-title" data-i18n-html="s7.title">We are specialists in importing across <span class="text-primary">diverse sectors</span></h2>
+      <p class="segmentos-subtitle" data-i18n="s7.sub">Explore our success cases and learn more about how we provide the best results for our clients through our solid import expertise</p>
+    </div>
+    <div class="segmentos-grid-wrapper">
+      <div class="segmentos-carousel">
+      <div class="segmentos-grid">
+        <div class="segmento-card">
+          <div class="segmento-card-img">
+            <img src="/images/home/autopecas.webp" alt="Autopeças" width="1050" height="700" loading="lazy" decoding="async" />
+            <div class="segmento-badge-area">
+              <span class="segmento-tag" data-i18n="s7.tag1">Auto Parts</span>
+            </div>
+          </div>
+          <div class="segmento-content">
+            <p class="segmento-card-desc" data-i18n="s7.desc1">We import automotive parts with tax precision and logistical agility, reducing costs and ensuring timely supply.</p>
+            <a href="/segmentos/autopecas/" class="link-arrow" data-i18n="s7.check">Check it out →</a>
+          </div>
+        </div>
+        <div class="segmento-card">
+          <div class="segmento-card-img">
+            <img src="/images/home/aco-e-metais.webp" alt="Aço e metais" width="1100" height="617" loading="lazy" decoding="async" />
+            <div class="segmento-badge-area">
+              <span class="segmento-tag" data-i18n="s7.tag2">Steel & Metals</span>
+            </div>
+          </div>
+          <div class="segmento-content">
+            <p class="segmento-card-desc" data-i18n="s7.desc2">We structure steel and metals imports with efficient tax planning and full compliance for the industrial sector.</p>
+            <a href="/segmentos/aco/" class="link-arrow" data-i18n="s7.check">Check it out →</a>
+          </div>
+        </div>
+        <div class="segmento-card">
+          <div class="segmento-card-img">
+            <img src="/images/home/equipamentos-fotovoltaicos.webp" alt="Energia Solar" width="1051" height="700" loading="lazy" decoding="async" />
+            <div class="segmento-badge-area">
+              <span class="segmento-tag" data-i18n="s7.tag3">Solar Energy</span>
+            </div>
+          </div>
+          <div class="segmento-content">
+            <p class="segmento-card-desc" data-i18n="s7.desc3">We import photovoltaic equipment with agile customs clearance and reduced tax burden to expand your solar operation.</p>
+            <a href="/segmentos/equipamentos-fotovoltaicos/" class="link-arrow" data-i18n="s7.check">Check it out →</a>
+          </div>
+        </div>
+        <div class="segmento-card">
+          <div class="segmento-card-img">
+            <img src="/images/home/phenom-300e.webp" alt="Aeronaves" width="1050" height="700" loading="lazy" decoding="async" />
+            <div class="segmento-badge-area">
+              <span class="segmento-tag" data-i18n="s7.tag4">Aircraft</span>
+            </div>
+          </div>
+          <div class="segmento-content">
+            <p class="segmento-card-desc" data-i18n="s7.desc4">With an exclusive tax benefit for the sector, we handle every stage of aircraft and helicopter imports with agility and lower costs.</p>
+            <a href="/segmentos-aeronaves/" class="link-arrow" data-i18n="s7.check">Check it out →</a>
+          </div>
+        </div>
+        <div class="segmento-card">
+          <div class="segmento-card-img">
+            <img src="/images/home/rebocadores.webp" alt="Rebocadores de aeronaves" width="1061" height="700" loading="lazy" decoding="async" />
+            <div class="segmento-badge-area">
+              <span class="segmento-tag" data-i18n="s7.tag5">Aircraft Tugs</span>
+            </div>
+          </div>
+          <div class="segmento-content">
+            <p class="segmento-card-desc" data-i18n="s7.desc5">We import aircraft tugs from the market\'s best suppliers, with tax benefits and tailored planning.</p>
+            <a href="/segmentos/rebocadores/" class="link-arrow" data-i18n="s7.check">Check it out →</a>
+          </div>
+        </div>
+        <div class="segmento-card">
+          <div class="segmento-card-img">
+            <img src="/images/home/drone.webp" alt="Drone" width="625" height="519" loading="lazy" decoding="async" />
+            <div class="segmento-badge-area">
+              <span class="segmento-tag" data-i18n="s7.tag6">Drones</span>
+            </div>
+          </div>
+          <div class="segmento-content">
+            <p class="segmento-card-desc" data-i18n="s7.desc6">We import drones with the best cost-benefit, backed by advantageous partnerships for your operation.</p>
+            <a href="/segmentos/drone/" class="link-arrow" data-i18n="s7.check">Check it out →</a>
+          </div>
+        </div>
+        <div class="segmento-card">
+          <div class="segmento-card-img">
+            <img src="/images/home/usinas-fotovoltaicas.webp" alt="Usinas Fotovoltaicas" width="698" height="507" loading="lazy" decoding="async" />
+            <div class="segmento-badge-area">
+              <span class="segmento-tag" data-i18n="s7.tag7">Solar Power Plants</span>
+            </div>
+          </div>
+          <div class="segmento-content">
+            <p class="segmento-card-desc" data-i18n="s7.desc7">Explore our success cases in importing photovoltaic power plants and see our technical expertise and planning at work.</p>
+            <a href="/segmentos/cases-de-usinas-fotovoltaicas/" class="link-arrow" data-i18n="s7.check">Check it out →</a>
+          </div>
+        </div>
+        <div class="segmento-card">
+          <div class="segmento-card-img">
+            <img src="/images/home/produtos-quimicos.webp" alt="Produtos Químicos" width="625" height="519" loading="lazy" decoding="async" />
+            <div class="segmento-badge-area">
+              <span class="segmento-tag" data-i18n="s7.tag8">Chemicals</span>
+            </div>
+          </div>
+          <div class="segmento-content">
+            <p class="segmento-card-desc" data-i18n="s7.desc8">We hold certifications and registrations for a wide range of chemical products, shipping each item according to its particularities.</p>
+            <a href="/segmentos/produtos-quimicos/" class="link-arrow" data-i18n="s7.check">Check it out →</a>
+          </div>
+        </div>
+        <div class="segmento-card">
+          <div class="segmento-card-img">
+            <img src="/images/home/combustivel.webp" alt="Combustível" width="625" height="519" loading="lazy" decoding="async" />
+            <div class="segmento-badge-area">
+              <span class="segmento-tag" data-i18n="s7.tag9">Fuel</span>
+            </div>
+          </div>
+          <div class="segmento-content">
+            <p class="segmento-card-desc" data-i18n="s7.desc9">ANP-certified, we are a reference in fuel imports, with a track record of fast port clearance.</p>
+            <a href="/segmentos/combustivel/" class="link-arrow" data-i18n="s7.check">Check it out →</a>
+          </div>
+        </div>
+        <div class="segmento-card">
+          <div class="segmento-card-img">
+            <img src="/images/home/derivados-petroleo.webp" alt="Derivados de Petróleo" width="561" height="308" loading="lazy" decoding="async" />
+            <div class="segmento-badge-area">
+              <span class="segmento-tag" data-i18n="s7.tag10">Petroleum Products</span>
+            </div>
+          </div>
+          <div class="segmento-content">
+            <p class="segmento-card-desc" data-i18n="s7.desc10">We import fuels and petroleum products with ANP certification, agility and safety throughout the operation.</p>
+            <a href="/segmentos/derivados-petroleo/" class="link-arrow" data-i18n="s7.check">Check it out →</a>
+          </div>
+        </div>
+        <div class="segmento-card">
+          <div class="segmento-card-img">
+            <img src="/images/home/seg-maquinas.webp" alt="Máquinas" width="1049" height="700" loading="lazy" decoding="async" />
+            <div class="segmento-badge-area">
+              <span class="segmento-tag" data-i18n="s7.tag11">Machinery</span>
+            </div>
+          </div>
+          <div class="segmento-content">
+            <p class="segmento-card-desc" data-i18n="s7.desc11">With WM, the agricultural and industrial sectors count on more agile operations and the market\'s best machinery.</p>
+            <a href="/segmentos/maquinas/" class="link-arrow" data-i18n="s7.check">Check it out →</a>
+          </div>
+        </div>
+        <div class="segmento-card">
+          <div class="segmento-card-img">
+            <img src="/wp-content/uploads/2024/06/cosmeticos-thumb-3.webp" alt="Cosméticos" width="614" height="469" loading="lazy" decoding="async" />
+            <div class="segmento-badge-area">
+              <span class="segmento-tag" data-i18n="s7.tag12">Cosmetics</span>
+            </div>
+          </div>
+          <div class="segmento-content">
+            <p class="segmento-card-desc" data-i18n="s7.desc12">We make cosmetics imports easier, with cost reduction and logistics and tax planning.</p>
+            <a href="/segmentos/cosmeticos/" class="link-arrow" data-i18n="s7.check">Check it out →</a>
+          </div>
+        </div>
+        <div class="segmento-card">
+          <div class="segmento-card-img">
+            <img src="/wp-content/uploads/2024/06/Grupo29.webp" alt="Informática e Telecomunicações" width="625" height="487" loading="lazy" decoding="async" />
+            <div class="segmento-badge-area">
+              <span class="segmento-tag" data-i18n="s7.tag13">IT & Telecom</span>
+            </div>
+          </div>
+          <div class="segmento-content">
+            <p class="segmento-card-desc" data-i18n="s7.desc13">We design the best logistics and tax solution, including storage and dispatch of IT and telecom items.</p>
+            <a href="/segmentos/informatica-e-telecomunicacoes/" class="link-arrow" data-i18n="s7.check">Check it out →</a>
+          </div>
+        </div>
+        <div class="segmento-card">
+          <div class="segmento-card-img">
+            <img src="/images/home/varejo.webp" alt="Varejo" width="625" height="519" loading="lazy" decoding="async" />
+            <div class="segmento-badge-area">
+              <span class="segmento-tag" data-i18n="s7.tag14">Retail</span>
+            </div>
+          </div>
+          <div class="segmento-content">
+            <p class="segmento-card-desc" data-i18n="s7.desc14">We help your company with the market\'s best choices and conditions to supply your retail operation.</p>
+            <a href="/segmentos/varejo/" class="link-arrow" data-i18n="s7.check">Check it out →</a>
+          </div>
+        </div>
+        <div class="segmento-card">
+          <div class="segmento-card-img">
+            <img src="/wp-content/uploads/2024/06/thumb-vinho.webp" alt="Vinho" width="426" height="281" loading="lazy" decoding="async" />
+            <div class="segmento-badge-area">
+              <span class="segmento-tag" data-i18n="s7.tag15">Wine</span>
+            </div>
+          </div>
+          <div class="segmento-content">
+            <p class="segmento-card-desc" data-i18n="s7.desc15">Through MAPA certification, we handle wine imports end to end.</p>
+            <a href="/segmentos/vinho/" class="link-arrow" data-i18n="s7.check">Check it out →</a>
+          </div>
+        </div>
       </div>
-    </section>
-</main>
+      <button class="segmentos-nav segmentos-nav--prev" type="button" aria-label="Segmentos anteriores" disabled>
+        <svg width="9" height="16" viewBox="0 0 9 16" fill="none"><path d="M8 1L1 8l7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <button class="segmentos-nav segmentos-nav--next" type="button" aria-label="Próximos segmentos">
+        <svg width="9" height="16" viewBox="0 0 9 16" fill="none"><path d="M1 1l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      </div>
+      <a href="/segmentos" class="segmentos-ver-todos" aria-label="Ver todos os segmentos" data-i18n="s7.all">VIEW ALL</a>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════
+     SECTION 8 — MODALIDADES (TABS)
+══════════════════════════════════════ -->
+<section class="section-modalidade">
+  <div class="container">
+    <div class="modalidade-header">
+      <h2 class="modalidade-title" data-i18n-html="s8.title">Which <span class="text-primary">import modality</span> best suits your project?</h2>
+      <p class="modalidade-sub" data-i18n="s8.sub">Explore our modalities</p>
+    </div>
+
+    <div class="tabs" role="tablist">
+      <label class="tab-radio">
+        <input type="radio" name="modalidade" value="encomenda" checked>
+        <span class="tab-radio-name" data-i18n="s8.tab1">Order Operation</span>
+      </label>
+      <label class="tab-radio">
+        <input type="radio" name="modalidade" value="conta-ordem">
+        <span class="tab-radio-name" data-i18n="s8.tab2">Commission Operation</span>
+      </label>
+      <label class="tab-radio">
+        <input type="radio" name="modalidade" value="assessoria">
+        <span class="tab-radio-name" data-i18n="s8.tab3">Customs Advisory</span>
+      </label>
+      <label class="tab-radio">
+        <input type="radio" name="modalidade" value="sourcing">
+        <span class="tab-radio-name" data-i18n="s8.tab4">Global Sourcing</span>
+      </label>
+    </div>
+
+    <div class="tab-panels">
+    <div id="tab-encomenda" class="tab-panel active" role="tabpanel">
+      <div class="modalidade-content">
+        <div class="modalidade-text">
+          <h3 class="modalidade-content-title" data-i18n="s8.panel1.title">Order Operation</h3>
+          <p class="modalidade-content-text" data-i18n="s8.panel1.text">Understand our tax benefits and avoid opening branches in states that offer reduced ICMS rates, such as Espírito Santo and Santa Catarina!</p>
+          <p class="modalidade-content-text" data-i18n="s8.panel1.text2">We organize all documents, international and domestic logistics, and handle customs clearance with tax optimization for your company.</p>
+          <a href="/importacao-por-encomenda/" class="link-arrow" style="margin-top:8px" data-i18n="s8.learn">LEARN MORE →</a>
+        </div>
+        <div class="modalidade-content-img">
+          <img src="/images/modalidades/encomenda.webp" alt="Especialistas da WM Trading analisando uma operação de importação por encomenda" width="800" height="800" loading="lazy" />
+        </div>
+      </div>
+    </div>
+
+    <div id="tab-conta-ordem" class="tab-panel" role="tabpanel">
+      <div class="modalidade-content">
+        <div class="modalidade-text">
+          <h3 class="modalidade-content-title" data-i18n="s8.panel2.title">Commission Operation</h3>
+          <p class="modalidade-content-text" data-i18n="s8.panel2.text">In the Commission Operation, WM acts as cargo consignee and manages the import process at every stage. Tax benefits can be used if your company has a branch in SC, ES or PE!</p>
+          <p class="modalidade-content-text" data-i18n="s8.panel2.text2">We organize all documents, international and domestic logistics, and handle customs clearance with tax optimization for your company.</p>
+          <a href="/importacao-por-conta-e-ordem/" class="link-arrow" style="margin-top:8px" data-i18n="s8.learn">LEARN MORE →</a>
+        </div>
+        <div class="modalidade-content-img">
+          <img src="/images/modalidades/conta-e-ordem.webp" alt="Cálculo de custos e conferência de documentos numa importação por conta e ordem" width="800" height="800" loading="lazy" />
+        </div>
+      </div>
+    </div>
+
+    <div id="tab-assessoria" class="tab-panel" role="tabpanel">
+      <div class="modalidade-content">
+        <div class="modalidade-text">
+          <h3 class="modalidade-content-title" data-i18n="s8.panel3.title">Customs Advisory</h3>
+          <p class="modalidade-content-text" data-i18n="s8.panel3.text">We handle the entire import process and advise on customs clearance at any port in Brazil.</p>
+          <p class="modalidade-content-text" data-i18n="s8.panel3.text2">This option is used mainly when your company holds a federal tax benefit, such as REIDI or Suframa. We also provide advisory for centralized generation photovoltaic projects across the country.</p>
+          <a href="/assessoria-aduaneira/" class="link-arrow" style="margin-top:8px" data-i18n="s8.learn">LEARN MORE →</a>
+        </div>
+        <div class="modalidade-content-img">
+          <img src="/images/modalidades/assessoria-aduaneira.webp" class="foco-alto" alt="Consultor da WM Trading acompanhando um processo de assessoria aduaneira" width="800" height="800" loading="lazy" />
+        </div>
+      </div>
+    </div>
+
+    <div id="tab-sourcing" class="tab-panel" role="tabpanel">
+      <div class="modalidade-content">
+        <div class="modalidade-text">
+          <h3 class="modalidade-content-title" data-i18n="s8.panel4.title">Global Sourcing</h3>
+          <p class="modalidade-content-text" data-i18n="s8.panel4.text">Find international suppliers for your project!</p>
+          <p class="modalidade-content-text" data-i18n="s8.panel4.text2">We have the right partners to help you map international suppliers that meet your technical requirements. In Global Sourcing we work only on large-scale projects.</p>
+          <a href="/global-sourcing/" class="link-arrow" style="margin-top:8px" data-i18n="s8.learn">LEARN MORE →</a>
+        </div>
+        <div class="modalidade-content-img">
+          <img src="/images/modalidades/global-sourcing.webp" alt="Profissional de comércio exterior responsável por global sourcing" width="800" height="800" loading="lazy" />
+        </div>
+      </div>
+    </div>
+    </div><!-- /.tab-panels -->
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════
+     SECTION 9 — CTA
+══════════════════════════════════════ -->
+<section class="section-cta" id="contato">
+  <!-- Decoração WM shapes -->
+  <div class="cta-deco" aria-hidden="true">
+    <svg width="100%" height="100%" viewBox="0 0 1920 304" preserveAspectRatio="xMidYMid slice">
+      <g fill="none" stroke="white" stroke-width="1.5" opacity="0.2">
+        <!-- "W" shapes repetidos -->
+        <polyline points="0,260 48,200 96,260 144,200 192,260"/>
+        <polyline points="192,260 240,200 288,260 336,200 384,260"/>
+        <polyline points="384,260 432,200 480,260 528,200 576,260"/>
+        <polyline points="576,260 624,200 672,260 720,200 768,260"/>
+        <polyline points="768,260 816,200 864,260 912,200 960,260"/>
+        <polyline points="960,260 1008,200 1056,260 1104,200 1152,260"/>
+        <polyline points="1152,260 1200,200 1248,260 1296,200 1344,260"/>
+        <polyline points="1344,260 1392,200 1440,260 1488,200 1536,260"/>
+        <polyline points="1536,260 1584,200 1632,260 1680,200 1728,260"/>
+        <polyline points="1728,260 1776,200 1824,260 1872,200 1920,260"/>
+      </g>
+    </svg>
+  </div>
+  <div class="container">
+    <h2 class="cta-title" data-i18n="s9.title">Have a project in mind?</h2>
+    <p class="cta-text" data-i18n="s9.text">Talk to our specialists and get the best operation for your company!</p>
+    <a href="/solucoes-wm/" class="btn btn-outline-white" data-i18n="s9.btn">Our solutions →</a>
+  </div>
+</section>
+
 
 <!-- ══════════════════════════════════════
      FOOTER — FAIXA 1: Links + CTA
@@ -304,48 +710,48 @@
 <div class="footer-links">
   <div class="container">
     <div class="footer-col">
-      <p class="footer-col-title" data-i18n="f.solutions">Soluções</p>
+      <p class="footer-col-title" data-i18n="f.solutions">Solutions</p>
       <ul>
-        <li><a href="/importacao-por-encomenda/" data-i18n="f.sol1">Importação por Encomenda</a></li>
-        <li><a href="/importacao-por-conta-e-ordem/" data-i18n="f.sol2">Importação Por Conta e Ordem</a></li>
+        <li><a href="/importacao-por-encomenda/" data-i18n="f.sol1">Order Import</a></li>
+        <li><a href="/importacao-por-conta-e-ordem/" data-i18n="f.sol2">Commission Import</a></li>
         <li><a href="/global-sourcing/" data-i18n="f.sol3">Global Sourcing</a></li>
-        <li><a href="/assessoria-aduaneira/" data-i18n="f.sol4">Assessoria Aduaneira</a></li>
+        <li><a href="/assessoria-aduaneira/" data-i18n="f.sol4">Customs Advisory</a></li>
       </ul>
     </div>
     <div class="footer-col">
-      <p class="footer-col-title" data-i18n="f.wm">A WM</p>
+      <p class="footer-col-title" data-i18n="f.wm">WM</p>
       <ul>
-        <li><a href="/carreiras/" data-i18n="f.wm1">Carreiras</a></li>
-        <li><a href="/about/" data-i18n="f.wm2">Sobre nós</a></li>
+        <li><a href="/carreiras/" data-i18n="f.wm1">Careers</a></li>
+        <li><a href="/about/" data-i18n="f.wm2">About us</a></li>
         <li><a href="/compliance/" data-i18n="f.wm3">Compliance</a></li>
       </ul>
       <br>
-      <p class="footer-col-title" data-i18n="f.segments">Segmentos</p>
+      <p class="footer-col-title" data-i18n="f.segments">Segments</p>
     </div>
     <div class="footer-col">
-      <p class="footer-col-title" data-i18n="f.content">Conteúdos</p>
+      <p class="footer-col-title" data-i18n="f.content">Content</p>
       <ul>
         <li><a href="/blog/" data-i18n="f.c1">Blog</a></li>
-        <li><a href="/materiais/" data-i18n="f.c2">Materiais</a></li>
+        <li><a href="/materiais/" data-i18n="f.c2">Materials</a></li>
         <li><a href="/podcast/" data-i18n="f.c3">WM Cast</a></li>
       </ul>
     </div>
     <div class="footer-col">
-      <p class="footer-col-title" data-i18n="f.contact">Contato</p>
+      <p class="footer-col-title" data-i18n="f.contact">Contact</p>
       <ul>
-        <li><a href="/fale-conosco/" data-i18n="f.ct1">Fale Conosco</a></li>
-        <li><a href="https://www.contatoseguro.com.br/wmtrading" target="_blank" rel="noopener" data-i18n="f.ct2">Ouvidoria</a></li>
-        <li><a href="/unidades/" data-i18n="f.ct3">Unidades</a></li>
+        <li><a href="/fale-conosco/" data-i18n="f.ct1">Contact Us</a></li>
+        <li><a href="https://www.contatoseguro.com.br/wmtrading" target="_blank" rel="noopener" data-i18n="f.ct2">Ombudsman</a></li>
+        <li><a href="/unidades/" data-i18n="f.ct3">Offices</a></li>
       </ul>
       <br>
-      <p class="footer-col-title" data-i18n="f.access">Acesso</p>
+      <p class="footer-col-title" data-i18n="f.access">Access</p>
       <ul>
-        <li><a href="https://cliente.wmtrading.com.br/" target="_blank" rel="noopener" data-i18n="f.ac1">Área do cliente</a></li>
+        <li><a href="https://cliente.wmtrading.com.br/" target="_blank" rel="noopener" data-i18n="f.ac1">Client area</a></li>
       </ul>
     </div>
     <div class="footer-cta-col">
-      <p class="footer-cta-text" data-i18n-html="f.cta">Simplifique<br>suas importações<br>aqui.</p>
-      <a href="#contato" class="btn btn-outline-orange" data-i18n="f.ctabtn">Falar com especialista →</a>
+      <p class="footer-cta-text" data-i18n-html="f.cta">Simplify<br>your imports<br>here.</p>
+      <a href="#contato" class="btn btn-outline-orange" data-i18n="f.ctabtn">Talk to a specialist →</a>
     </div>
   </div>
 </div>
@@ -410,7 +816,5 @@
 
 <script src="/js/main.js"></script>
 <script src="/js/i18n.js" defer></script>
-
-
 </body>
 </html>
