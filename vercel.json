@@ -289,6 +289,106 @@
       "permanent": true
     },
     {
+      "source": "/en/blog/importing-auto-parts-brazil/",
+      "destination": "/blog/importing-auto-parts-brazil/",
+      "permanent": true
+    },
+    {
+      "source": "/en/carreiras/",
+      "destination": "/en/careers/",
+      "permanent": true
+    },
+    {
+      "source": "/en/contato/",
+      "destination": "/fale-conosco/",
+      "permanent": true
+    },
+    {
+      "source": "/en/politica-de-privacidade/",
+      "destination": "/en/privacy-policy/",
+      "permanent": true
+    },
+    {
+      "source": "/en/custom-import-2/",
+      "destination": "/en/custom-import/",
+      "permanent": true
+    },
+    {
+      "source": "/en/customs-advisory-1/",
+      "destination": "/en/customs-advisory/",
+      "permanent": true
+    },
+    {
+      "source": "/en/global-sourcing-2/",
+      "destination": "/en/global-sourcing/",
+      "permanent": true
+    },
+    {
+      "source": "/en/segments/aircraft/",
+      "destination": "/en/segments/aircraft-import/",
+      "permanent": true
+    },
+    {
+      "source": "/en/segments/autoparts/",
+      "destination": "/en/segments/auto-parts-imports/",
+      "permanent": true
+    },
+    {
+      "source": "/en/aircraft-falcon-8x/",
+      "destination": "/aeronaves/falcon-8x/",
+      "permanent": true
+    },
+    {
+      "source": "/en/ebooks/brazilian-main-import-taxes/",
+      "destination": "/ebooks/principais-impostos-incidentes/",
+      "permanent": true
+    },
+    {
+      "source": "/en/ebooks/como-funcionara-o-regime-de-cotas-para-modulos-fotovoltaicos/",
+      "destination": "/ebooks/regime-de-cotas-modulos-fotovoltaicos/",
+      "permanent": true
+    },
+    {
+      "source": "/en/ebooks/implantacao-da-duimp/",
+      "destination": "/ebooks/duimp/",
+      "permanent": true
+    },
+    {
+      "source": "/en/ebooks/importacao-de-avioes-e-helicopteros/",
+      "destination": "/ebooks/aeronaves-e-helicopteros/",
+      "permanent": true
+    },
+    {
+      "source": "/en/ebooks/importacao-de-vinhos/",
+      "destination": "/ebooks/importacao-de-vinhos/",
+      "permanent": true
+    },
+    {
+      "source": "/en/ebooks/importando-equipamentos-de-energia-solar/",
+      "destination": "/ebooks/e-book-equipamentos-fotovoltaicos/",
+      "permanent": true
+    },
+    {
+      "source": "/en/ebooks/reduzindo-custos-de-importacao-com-a-gestao-logistica-da-wm/",
+      "destination": "/ebooks/gestao-logistica-da-wm/",
+      "permanent": true
+    },
+    {
+      "source": "/en/infograficos/entreposto-aduaneiro/",
+      "destination": "/blog/entreposto-aduaneiro/",
+      "permanent": true
+    },
+    {
+      "source": "/en/infograficos/incoterms/",
+      "destination": "/blog/como-incoterm-afeta-importacoes/",
+      "permanent": true
+    },
+    {
+      "source": "/en/infograficos/leasing-de-maquinas/",
+      "destination": "/segmentos/maquinas/",
+      "permanent": true
+    },
+    {
       "source": "/falcon-6x/",
       "destination": "/aeronaves/falcon-6x/",
       "permanent": true
