@@ -1614,12 +1614,6 @@ def main():
     <section class="qs-bento">
       <div class="container qs-bento__grid">
 
-        <!-- Células vazias: são os blocos cinza soltos da grade -->
-        <div class="qs-bento__cell qs-bento__cell--decor qs-bento__cell--d1" aria-hidden="true"></div>
-        <div class="qs-bento__cell qs-bento__cell--decor qs-bento__cell--d2" aria-hidden="true"></div>
-        <div class="qs-bento__cell qs-bento__cell--decor qs-bento__cell--d3" aria-hidden="true"></div>
-        <div class="qs-bento__cell qs-bento__cell--decor qs-bento__cell--d4" aria-hidden="true"></div>
-
         <!-- Célula mesclada do texto -->
         <div class="qs-bento__cell qs-bento__cell--texto">
           <h2 class="qs-about__title">Sobre a <span>WM Trading</span></h2>
@@ -1697,12 +1691,13 @@ def main():
           <!-- Fachada do vídeo. Nada do YouTube carrega na abertura da página:
                sem cookie de terceiro antes do aceite (o CMP é o dono do
                consentimento) e sem o iframe pesando no LCP. O clique troca a
-               fachada por um iframe do youtube-nocookie, já com autoplay. -->
+               fachada por um iframe do youtube-nocookie, já com autoplay. A capa é a
+               thumb do próprio vídeo, servida daqui — não do i.ytimg.com. -->
           <div class="qs-video">
             <button type="button" class="qs-video__fachada" data-qs-video="GgkjgZ3x8N8">
-              <span class="qs-video__padrao" aria-hidden="true"></span>
-              <span class="qs-video__play" aria-hidden="true"></span>
-              <span class="qs-video__rotulo">Assistir ao vídeo institucional da WM Trading</span>
+              <img class="qs-video__thumb" src="/images/quem-somos/video-valores-thumb.webp"
+                   alt="" width="1120" height="630" loading="lazy" />
+              <span class="qs-video__rotulo">Assistir ao vídeo Nossos Valores da WM Trading</span>
             </button>
           </div>
         </div>
