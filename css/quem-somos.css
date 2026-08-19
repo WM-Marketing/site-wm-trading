@@ -29,10 +29,13 @@
      o título nascer na mesma vertical de todas as outras seções da página. */
   --qs-hero-recuo: calc((100vw - min(var(--container-width), 100vw)) / 2 + var(--container-px));
   --qs-hero-recuo-y: 55px;
-  /* Quanto o bloco do título recua da base. Abaixo de 1024 vale a altura da
-     forma, para o texto ficar inteiro acima dela; no desktop o branco está mais
-     à direita e o título pode descer, então o valor é menor. */
-  --qs-hero-recuo-baixo: 110px;
+  /* Quanto o bloco do título recua da base. No desktop o único branco sob o
+     título é a tarja de 14px da forma (o resto está mais à direita, atrás da
+     diagonal, e nenhuma linha do título chega lá), então o recuo é exatamente a
+     altura dela: a última linha encosta na tarja e não sobra vão.
+     Abaixo de 1024 vale a altura inteira da forma, porque ali ela cresce e passa
+     por baixo do texto — o título precisa ficar todo acima. */
+  --qs-hero-recuo-baixo: var(--qs-forma-faixa);
   --qs-hero-tarja: 16px;
   /* O arquivo entregue usava 48px sobre uma coluna de 600px. Aqui a coluna tem
      520px e o tamanho pedido é 32px. */
