@@ -1710,22 +1710,22 @@ def main():
 
         <div class="qs-valores">
         <article class="qs-valor qs-valor--inovacao">
-          <img class="qs-valor__icone" src="/images/quem-somos/icones/valores/inovacao.svg" alt="" width="64" height="64" loading="lazy" />
+          <img class="qs-valor__icone" src="/images/quem-somos/icones/valores/inovacao.png" alt="" width="64" height="64" loading="lazy" />
           <h3 class="qs-valor__nome">Inovação e melhoria contínua</h3>
           <span class="qs-valor__risco" aria-hidden="true"></span>
         </article>
         <article class="qs-valor qs-valor--agilidade">
-          <img class="qs-valor__icone" src="/images/quem-somos/icones/valores/agilidade.svg" alt="" width="64" height="64" loading="lazy" />
+          <img class="qs-valor__icone" src="/images/quem-somos/icones/valores/agilidade.png" alt="" width="64" height="64" loading="lazy" />
           <h3 class="qs-valor__nome">Agilidade</h3>
           <span class="qs-valor__risco" aria-hidden="true"></span>
         </article>
         <article class="qs-valor qs-valor--etica">
-          <img class="qs-valor__icone" src="/images/quem-somos/icones/valores/etica-transparencia.svg" alt="" width="64" height="64" loading="lazy" />
+          <img class="qs-valor__icone" src="/images/quem-somos/icones/valores/etica-transparencia.png" alt="" width="64" height="64" loading="lazy" />
           <h3 class="qs-valor__nome">Ética e transparência</h3>
           <span class="qs-valor__risco" aria-hidden="true"></span>
         </article>
         <article class="qs-valor qs-valor--conectividade">
-          <img class="qs-valor__icone" src="/images/quem-somos/icones/valores/conectividade.svg" alt="" width="64" height="64" loading="lazy" />
+          <img class="qs-valor__icone" src="/images/quem-somos/icones/valores/conectividade.png" alt="" width="64" height="64" loading="lazy" />
           <h3 class="qs-valor__nome">Conectividade</h3>
           <span class="qs-valor__risco" aria-hidden="true"></span>
         </article>
@@ -1734,17 +1734,17 @@ def main():
         <div class="qs-valores__regua" aria-hidden="true"></div>
 
         <article class="qs-valor qs-valor--desenvolvimento">
-          <img class="qs-valor__icone" src="/images/quem-somos/icones/valores/desenvolvimento.svg" alt="" width="64" height="64" loading="lazy" />
+          <img class="qs-valor__icone" src="/images/quem-somos/icones/valores/desenvolvimento.png" alt="" width="64" height="64" loading="lazy" />
           <h3 class="qs-valor__nome">Desenvolvimento da empresa <br />e das pessoas</h3>
           <span class="qs-valor__risco" aria-hidden="true"></span>
         </article>
         <article class="qs-valor qs-valor--cliente">
-          <img class="qs-valor__icone" src="/images/quem-somos/icones/valores/cliente-no-centro.svg" alt="" width="64" height="64" loading="lazy" />
+          <img class="qs-valor__icone" src="/images/quem-somos/icones/valores/cliente-no-centro.png" alt="" width="64" height="64" loading="lazy" />
           <h3 class="qs-valor__nome">Cliente no centro do negócio</h3>
           <span class="qs-valor__risco" aria-hidden="true"></span>
         </article>
         <article class="qs-valor qs-valor--excelencia">
-          <img class="qs-valor__icone" src="/images/quem-somos/icones/valores/excelencia.svg" alt="" width="64" height="64" loading="lazy" />
+          <img class="qs-valor__icone" src="/images/quem-somos/icones/valores/excelencia.png" alt="" width="64" height="64" loading="lazy" />
           <h3 class="qs-valor__nome">Excelência</h3>
           <span class="qs-valor__risco" aria-hidden="true"></span>
         </article>
@@ -1764,29 +1764,27 @@ def main():
         <div class="qs-atuacoes__grid">
 
           <article class="qs-atuacao">
-            <!-- PLACEHOLDER: recorte do print. Trocar pela foto original. -->
-            <img src="/images/quem-somos/PLACEHOLDER-atuacao-1-recepcao.jpg" alt="Recepção da WM Trading com o letreiro We Make it better" />
+            <img src="/images/quem-somos/atuacao-1-atendimento.webp" alt="Dois executivos frente a frente durante uma reunião de negócios" width="1100" height="275" loading="lazy" />
             <h3 class="qs-atuacao__title">Atendimento Personalizado</h3>
             <p class="qs-atuacao__desc">A atenção que prestamos aos nossos clientes é incomparável. Tratamos todos com prioridade e estamos sempre à disposição para oferecer o melhor serviço.</p>
           </article>
 
           <article class="qs-atuacao">
-            <!-- PLACEHOLDER: recorte do print. Trocar pela foto original. -->
-            <img src="/images/quem-somos/PLACEHOLDER-atuacao-2-fornecedores.jpg" alt="Equipe comercial da WM Trading em operação" />
+            <!-- PENDENTE: a foto do armazém (motion blur) não chegou junto com as outras
+                 três. Salvar como atuacao-2-fornecedores.webp em 1100x275 e trocar aqui. -->
+            <img src="/images/quem-somos/PLACEHOLDER-atuacao-2-fornecedores.jpg" alt="Interior de um armazém logístico com mercadorias estocadas" />
             <h3 class="qs-atuacao__title">Ampla Gama de Fornecedores</h3>
             <p class="qs-atuacao__desc">Possuímos uma enorme rede de fornecedores com vantagens exclusivas para otimizar o seu processo de importação.</p>
           </article>
 
           <article class="qs-atuacao">
-            <!-- PLACEHOLDER: recorte do print. Trocar pela foto original. -->
-            <img src="/images/quem-somos/PLACEHOLDER-atuacao-3-planejamento.jpg" alt="Usina fotovoltaica ao amanhecer" />
+            <img src="/images/quem-somos/atuacao-3-planejamento.webp" alt="Profissional conferindo planilhas com calculadora e laptop" width="1100" height="275" loading="lazy" />
             <h3 class="qs-atuacao__title">Planejamento e Gestão</h3>
             <p class="qs-atuacao__desc">O planejamento é fundamental para enquadrar a operação na modalidade correta e evitar complicações no processo de importação.</p>
           </article>
 
           <article class="qs-atuacao">
-            <!-- PLACEHOLDER: recorte do print. Trocar pela foto original. -->
-            <img src="/images/quem-somos/PLACEHOLDER-atuacao-4-localizacao.jpg" alt="Armazém logístico com mercadorias paletizadas" />
+            <img src="/images/quem-somos/atuacao-4-localizacao.webp" alt="Navio porta-contêineres atracado ao lado de um caminhão no pátio do porto" width="1100" height="275" loading="lazy" />
             <h3 class="qs-atuacao__title">Localização Estratégica</h3>
             <p class="qs-atuacao__desc">Pensando na otimização da cadeia logística e tributária, estamos estrategicamente localizados em 15 estados brasileiros e no Panamá.</p>
           </article>

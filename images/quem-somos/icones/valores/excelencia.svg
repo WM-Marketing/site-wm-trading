@@ -1,7 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" role="img" aria-hidden="true">
-  <!-- Excelência: triângulo fatiado -->
-  <g stroke-width="9" stroke-linejoin="round">
-    <path d="M32 11 L45 33 L19 33 Z" fill="#9A639F" stroke="#9A639F" />
-    <path d="M21 45 L43 45 L49 54 L15 54 Z" fill="#5F3D69" stroke="#5F3D69" />
-  </g>
-</svg>

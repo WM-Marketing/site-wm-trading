@@ -1,5 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" role="img" aria-hidden="true">
-  <!-- Ética e transparência: quadrado recortado + quadrado vazado -->
-  <path d="M12 8 H38 a4 4 0 0 1 4 4 V24 a4 4 0 0 1 -4 4 H30 a4 4 0 0 0 -4 4 V38 a4 4 0 0 1 -4 4 H12 a4 4 0 0 1 -4 -4 V12 a4 4 0 0 1 4 -4 Z" fill="#5964AB" />
-  <path fill="#3C4275" fill-rule="evenodd" d="M34 30 H52 a4 4 0 0 1 4 4 V52 a4 4 0 0 1 -4 4 H34 a4 4 0 0 1 -4 -4 V34 a4 4 0 0 1 4 -4 Z M38 38 H48 V48 H38 Z" />
-</svg>
