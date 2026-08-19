@@ -34,11 +34,9 @@
      à direita e o título pode descer, então o valor é menor. */
   --qs-hero-recuo-baixo: 110px;
   --qs-hero-tarja: 16px;
-  /* AJUSTE: o arquivo usava 48px sobre uma coluna de 600px (recuo de 120). Com o
-     recuo do site a coluna fica em 520px, e 48px quebraria o título em 7 linhas.
-     44px devolve as mesmas 5 linhas do arquivo original — é o menor ajuste que
-     preserva a diagramação. */
-  --qs-hero-titulo: 44px;
+  /* O arquivo entregue usava 48px sobre uma coluna de 600px. Aqui a coluna tem
+     520px e o tamanho pedido é 32px. */
+  --qs-hero-titulo: 32px;
   --qs-hero-titulo-peso: var(--fw-light);
   --qs-hero-titulo-entrelinha: 1.45;
 
@@ -169,7 +167,10 @@
    quebra do site (1024 e 768), para o hero mudar junto com as outras seções. */
 @media (max-width: 1024px) {
   :root {
-    --qs-hero-titulo: 40px;
+    /* --qs-hero-titulo sai daqui: os 40px vinham de uma base de 44px e, com a
+       base agora em 32px, deixariam o título MAIOR no tablet que no desktop.
+       Nesta faixa a coluna é mais larga (a nota sai do canto), então os 32px
+       da base cabem sem quebrar mais linhas. */
     --qs-forma-diagonal: 300px;
     /* recuo aqui é 40, então o branco fecha nos 520px do arquivo */
     --qs-forma-branco: 480px;
