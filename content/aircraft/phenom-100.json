@@ -7,15 +7,40 @@
   "metaDescription": "Importação do Embraer Phenom 100 com a WM Trading: jato leve ideal para voos regionais, com processo de importação completo e eficiência tributária.",
   "intro": "Aeronave executiva projetada para bem-estar, eficiência e segurança avançada.",
   "specs": [
-    { "label": "Alcance máximo", "value": "1.044 nm" },
-    { "label": "Vel. máx. de cruzeiro", "value": "722 km/h" },
-    { "label": "Assentos", "value": "7" },
-    { "label": "Mach máximo", "value": "0,7M" }
+    {
+      "label": "Alcance máximo",
+      "value": "1.044 nm"
+    },
+    {
+      "label": "Vel. máx. de cruzeiro",
+      "value": "722 km/h"
+    },
+    {
+      "label": "Assentos",
+      "value": "7"
+    },
+    {
+      "label": "Mach máximo",
+      "value": "0,7M"
+    }
   ],
   "sections": [
-    { "heading": "Projetado para o bem-estar", "text": "A cabine oferece um ambiente sofisticado, espaçoso e ergonômico, garantindo uma experiência agradável aos passageiros." },
-    { "heading": "Eficiência necessária", "text": "Os dois motores Pratt & Whitney Canada PW617-F combinam desempenho e economia de combustível." },
-    { "heading": "Tecnologia aliada à segurança", "text": "O sistema de aviônicos Garmin G1000 Prodigy proporciona uma interface intuitiva para os pilotos, aumentando a segurança e a eficiência operacional." },
-    { "heading": "Conforto e elegância a bordo", "text": "Grandes janelas iluminam naturalmente o interior, proporcionando uma sensação de amplitude e viagens revigorantes." }
-  ]
+    {
+      "heading": "Projetado para o bem-estar",
+      "text": "A cabine oferece um ambiente sofisticado, espaçoso e ergonômico, garantindo uma experiência agradável aos passageiros."
+    },
+    {
+      "heading": "Eficiência necessária",
+      "text": "Os dois motores Pratt & Whitney Canada PW617-F combinam desempenho e economia de combustível."
+    },
+    {
+      "heading": "Tecnologia aliada à segurança",
+      "text": "O sistema de aviônicos Garmin G1000 Prodigy proporciona uma interface intuitiva para os pilotos, aumentando a segurança e a eficiência operacional."
+    },
+    {
+      "heading": "Conforto e elegância a bordo",
+      "text": "Grandes janelas iluminam naturalmente o interior, proporcionando uma sensação de amplitude e viagens revigorantes."
+    }
+  ],
+  "cover": "/images/heros/jato-executivo.webp"
 }

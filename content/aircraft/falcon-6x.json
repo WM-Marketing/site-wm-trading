@@ -7,16 +7,44 @@
   "metaDescription": "Importação do Dassault Falcon 6X com a WM Trading: processo completo, da vistoria no exterior à nacionalização, com inteligência tributária e logística.",
   "intro": "Uma aeronave com sistemas digitais inovadores e aerodinâmica quase perfeita, criando uma experiência de voo inigualável — suave, precisa e segura.",
   "specs": [
-    { "label": "Alcance máximo", "value": "5.500 nm" },
-    { "label": "Vel. máx. de cruzeiro", "value": "955 km/h" },
-    { "label": "Assentos", "value": "12 a 16" },
-    { "label": "Mach máximo", "value": "0,9M" },
-    { "label": "Consumo", "value": "419 GPH" }
+    {
+      "label": "Alcance máximo",
+      "value": "5.500 nm"
+    },
+    {
+      "label": "Vel. máx. de cruzeiro",
+      "value": "955 km/h"
+    },
+    {
+      "label": "Assentos",
+      "value": "12 a 16"
+    },
+    {
+      "label": "Mach máximo",
+      "value": "0,9M"
+    },
+    {
+      "label": "Consumo",
+      "value": "419 GPH"
+    }
   ],
   "sections": [
-    { "heading": "Cabine espaçosa e flexível", "text": "Liberdade para se movimentar, com mais espaço e flexibilidade para trabalhar ou relaxar em ambientes apropriados a cada necessidade." },
-    { "heading": "Tecnologia de ponta", "text": "Sistemas digitais inovadores e aerodinâmica quase perfeita, que criam uma experiência de voo suave, precisa e segura." },
-    { "heading": "Voe para mais lugares", "text": "Capaz de operar em pistas curtas e realizar aproximações íngremes, dando acesso a uma ampla gama de aeroportos e evitando escalas." },
-    { "heading": "Conforto e eficiência", "text": "A cabine espaçosa, aliada ao desempenho de longo alcance e à eficiência dos motores modernos (419 GPH), combina luxo e praticidade." }
-  ]
+    {
+      "heading": "Cabine espaçosa e flexível",
+      "text": "Liberdade para se movimentar, com mais espaço e flexibilidade para trabalhar ou relaxar em ambientes apropriados a cada necessidade."
+    },
+    {
+      "heading": "Tecnologia de ponta",
+      "text": "Sistemas digitais inovadores e aerodinâmica quase perfeita, que criam uma experiência de voo suave, precisa e segura."
+    },
+    {
+      "heading": "Voe para mais lugares",
+      "text": "Capaz de operar em pistas curtas e realizar aproximações íngremes, dando acesso a uma ampla gama de aeroportos e evitando escalas."
+    },
+    {
+      "heading": "Conforto e eficiência",
+      "text": "A cabine espaçosa, aliada ao desempenho de longo alcance e à eficiência dos motores modernos (419 GPH), combina luxo e praticidade."
+    }
+  ],
+  "cover": "/images/heros/jato-executivo.webp"
 }

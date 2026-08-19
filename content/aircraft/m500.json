@@ -7,15 +7,40 @@
   "metaDescription": "Importe o Piper M500 com a WM Trading: turboélice single pilot com processo de importação completo, otimização tributária e entrega pronta para voo.",
   "intro": "Aterrisse onde precisar. A operação em pistas não pavimentadas amplia suas opções de pouso e dá mais flexibilidade às suas viagens.",
   "specs": [
-    { "label": "Alcance máximo", "value": "1.000 nm" },
-    { "label": "Vel. máx. de cruzeiro", "value": "482 km/h" },
-    { "label": "Assentos", "value": "6" },
-    { "label": "Altitude máxima", "value": "9.144 m" },
-    { "label": "Pistas", "value": "Grama e terra" }
+    {
+      "label": "Alcance máximo",
+      "value": "1.000 nm"
+    },
+    {
+      "label": "Vel. máx. de cruzeiro",
+      "value": "482 km/h"
+    },
+    {
+      "label": "Assentos",
+      "value": "6"
+    },
+    {
+      "label": "Altitude máxima",
+      "value": "9.144 m"
+    },
+    {
+      "label": "Pistas",
+      "value": "Grama e terra"
+    }
   ],
   "sections": [
-    { "heading": "Conectividade", "text": "Iluminação individual, portas de carregamento USB, mesa de trabalho e controles de assento para manter a produtividade e o conforto durante a viagem." },
-    { "heading": "Custo-benefício sem igual", "text": "Conforto e eficiência com alta economia de combustível e redução de custos de operação e manutenção." },
-    { "heading": "Voe com mais segurança", "text": "Equipado com aviônicos Garmin G1000 NXi, controle de estabilidade e proteção contra subvelocidade, simplificando procedimentos de pré-voo e em voo." }
-  ]
+    {
+      "heading": "Conectividade",
+      "text": "Iluminação individual, portas de carregamento USB, mesa de trabalho e controles de assento para manter a produtividade e o conforto durante a viagem."
+    },
+    {
+      "heading": "Custo-benefício sem igual",
+      "text": "Conforto e eficiência com alta economia de combustível e redução de custos de operação e manutenção."
+    },
+    {
+      "heading": "Voe com mais segurança",
+      "text": "Equipado com aviônicos Garmin G1000 NXi, controle de estabilidade e proteção contra subvelocidade, simplificando procedimentos de pré-voo e em voo."
+    }
+  ],
+  "cover": "/images/heros/jato-executivo.webp"
 }

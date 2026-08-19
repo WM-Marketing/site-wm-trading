@@ -1893,6 +1893,7 @@ def main():
     print(" - compiling carreiras.html...")
     carreiras_body = f"""
     <section class="dynamic-hero">
+      <img src="/images/heros/time-wm.webp" alt="" class="dynamic-hero__bg" />
       <div class="container dynamic-hero__container">
         <p class="dynamic-hero__eyebrow">Carreiras</p>
         <h1 class="dynamic-hero__title">Faça parte de uma das maiores tradings do Brasil</h1>

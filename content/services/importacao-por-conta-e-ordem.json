@@ -5,14 +5,36 @@
   "subtitle": "Sua empresa precisa de gestão para realizar uma importação? Conheça como a nossa operação funciona e como auxiliamos o seu negócio.",
   "intro": "Nas operações de importação por Conta e Ordem, as despesas da nacionalização e do produto podem ser pagas pela WM ou pela empresa importadora. A WM atua como consignatária da operação, e você aproveita benefícios fiscais e capilaridade nacional para receber produtos com as melhores condições logísticas e tributárias.",
   "benefits": [
-    { "title": "7 benefícios fiscais", "desc": "Acesso a benefícios fiscais que otimizam a cadeia logística e tributária." },
-    { "title": "Parametrização em Canal Verde", "desc": "98% de parametrização em Canal Verde, agilizando a liberação da carga." },
-    { "title": "Certificação ISO 9001", "desc": "Primeira trading certificada com a ISO 9001 — desde 2010." },
-    { "title": "Capilaridade nacional", "desc": "Localização estratégica em 15 estados para garantir capilaridade nas importações." }
+    {
+      "title": "7 benefícios fiscais",
+      "desc": "Acesso a benefícios fiscais que otimizam a cadeia logística e tributária."
+    },
+    {
+      "title": "Parametrização em Canal Verde",
+      "desc": "98% de parametrização em Canal Verde, agilizando a liberação da carga."
+    },
+    {
+      "title": "Certificação ISO 9001",
+      "desc": "Primeira trading certificada com a ISO 9001 — desde 2010."
+    },
+    {
+      "title": "Capilaridade nacional",
+      "desc": "Localização estratégica em 15 estados para garantir capilaridade nas importações."
+    }
   ],
   "sections": [
-    { "heading": "Como funciona o pagamento da operação?", "text": "As despesas podem ser pagas pela WM ou pela empresa importadora, ficando a critério desta. O importador deve estar habilitado no RADAR, com limite correspondente ao tamanho da compra." },
-    { "heading": "6 etapas do processo", "text": "1) Conferência minuciosa de documentos e das exigências das NCMs importadas. 2) Pagamento de todas as despesas da operação, inclusive da mercadoria. 3) Organização do embarque da carga, independentemente do modal. 4) Nacionalização e desembaraço no local escolhido. 5) Emissão da nota fiscal nacional com característica de remessa. 6) Entrega ao cliente no local estipulado." },
-    { "heading": "Sucesso comprovado e planejamento inteligente", "text": "A WM possui mais de 20 anos de experiência e as certificações necessárias para a importação de diversos produtos (ANVISA, MAPA, Inmetro, Polícia Federal, entre outros). Nossa equipe altamente qualificada otimiza a cadeia logística e tributária por meio de estudos e planejamentos detalhados, usufruindo dos 7 benefícios fiscais que a WM possui. Estamos estrategicamente localizados em 15 estados brasileiros e no Panamá." }
-  ]
+    {
+      "heading": "Como funciona o pagamento da operação?",
+      "text": "As despesas podem ser pagas pela WM ou pela empresa importadora, ficando a critério desta. O importador deve estar habilitado no RADAR, com limite correspondente ao tamanho da compra."
+    },
+    {
+      "heading": "6 etapas do processo",
+      "text": "1) Conferência minuciosa de documentos e das exigências das NCMs importadas. 2) Pagamento de todas as despesas da operação, inclusive da mercadoria. 3) Organização do embarque da carga, independentemente do modal. 4) Nacionalização e desembaraço no local escolhido. 5) Emissão da nota fiscal nacional com característica de remessa. 6) Entrega ao cliente no local estipulado."
+    },
+    {
+      "heading": "Sucesso comprovado e planejamento inteligente",
+      "text": "A WM possui mais de 20 anos de experiência e as certificações necessárias para a importação de diversos produtos (ANVISA, MAPA, Inmetro, Polícia Federal, entre outros). Nossa equipe altamente qualificada otimiza a cadeia logística e tributária por meio de estudos e planejamentos detalhados, usufruindo dos 7 benefícios fiscais que a WM possui. Estamos estrategicamente localizados em 15 estados brasileiros e no Panamá."
+    }
+  ],
+  "cover": "/images/heros/navio-aereo.webp"
 }

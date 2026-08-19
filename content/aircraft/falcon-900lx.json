@@ -7,15 +7,40 @@
   "metaDescription": "Importação do Dassault Falcon 900LX com a WM Trading: assessoria completa de importação, redução de custos tributários e nacionalização segura.",
   "intro": "Desempenho de longo alcance com eficiência excepcional, importado com agilidade pela WM Trading.",
   "specs": [
-    { "label": "Alcance máximo", "value": "4.650 nm" },
-    { "label": "Vel. máx. de cruzeiro", "value": "878 km/h" },
-    { "label": "Assentos", "value": "12 a 14" },
-    { "label": "Mach máximo", "value": "0,87M" }
+    {
+      "label": "Alcance máximo",
+      "value": "4.650 nm"
+    },
+    {
+      "label": "Vel. máx. de cruzeiro",
+      "value": "878 km/h"
+    },
+    {
+      "label": "Assentos",
+      "value": "12 a 14"
+    },
+    {
+      "label": "Mach máximo",
+      "value": "0,87M"
+    }
   ],
   "sections": [
-    { "heading": "Gerenciamento na ponta dos dedos", "text": "Controle total da cabine, com comandos posicionados de forma inteligente nos apoios de braço, proporcionando praticidade e conforto durante o voo." },
-    { "heading": "Visão ampliada com tecnologia", "text": "O FalconEye potencializa o sistema de aviônicos EASy II, combinando sensores térmicos, câmeras e mapeamento sintético para garantir total visibilidade." },
-    { "heading": "Silêncio para sua viagem", "text": "Isolamento acústico que reduz o ruído da cabine a níveis próximos ao silêncio de uma biblioteca, garantindo um ambiente tranquilo e confortável." },
-    { "heading": "Eficiência e economia", "text": "Voa com quase um terço a menos de combustível do que os concorrentes e realiza saltos transoceânicos sem reabastecimento, reduzindo paradas." }
-  ]
+    {
+      "heading": "Gerenciamento na ponta dos dedos",
+      "text": "Controle total da cabine, com comandos posicionados de forma inteligente nos apoios de braço, proporcionando praticidade e conforto durante o voo."
+    },
+    {
+      "heading": "Visão ampliada com tecnologia",
+      "text": "O FalconEye potencializa o sistema de aviônicos EASy II, combinando sensores térmicos, câmeras e mapeamento sintético para garantir total visibilidade."
+    },
+    {
+      "heading": "Silêncio para sua viagem",
+      "text": "Isolamento acústico que reduz o ruído da cabine a níveis próximos ao silêncio de uma biblioteca, garantindo um ambiente tranquilo e confortável."
+    },
+    {
+      "heading": "Eficiência e economia",
+      "text": "Voa com quase um terço a menos de combustível do que os concorrentes e realiza saltos transoceânicos sem reabastecimento, reduzindo paradas."
+    }
+  ],
+  "cover": "/images/heros/jato-executivo.webp"
 }

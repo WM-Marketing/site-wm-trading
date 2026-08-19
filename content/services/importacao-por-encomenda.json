@@ -5,14 +5,36 @@
   "subtitle": "Precisa importar mercadorias e quer aproveitar benefícios fiscais mesmo sem ter filial no estado de nacionalização?",
   "intro": "Nessa operação, a WM atua como importadora e emite nota fiscal de venda para o encomendante, realizando o pagamento de todos os custos da importação, inclusive do bem importado. Através dessa modalidade, aproveita-se um dos 7 benefícios fiscais e a capilaridade da trading especialista em importação.",
   "benefits": [
-    { "title": "Fornecedores e parceiros", "desc": "Fornecedores e parceiros estratégicos previamente homologados pelo Programa de Compliance." },
-    { "title": "Visão completa", "desc": "Visão completa de todas as etapas da importação através de ferramentas exclusivas." },
-    { "title": "Certificação ISO 9001", "desc": "Primeira trading certificada com a ISO 9001 — desde 2010." },
-    { "title": "Capilaridade nacional", "desc": "Localização estratégica em 15 estados para garantir capilaridade nas importações." }
+    {
+      "title": "Fornecedores e parceiros",
+      "desc": "Fornecedores e parceiros estratégicos previamente homologados pelo Programa de Compliance."
+    },
+    {
+      "title": "Visão completa",
+      "desc": "Visão completa de todas as etapas da importação através de ferramentas exclusivas."
+    },
+    {
+      "title": "Certificação ISO 9001",
+      "desc": "Primeira trading certificada com a ISO 9001 — desde 2010."
+    },
+    {
+      "title": "Capilaridade nacional",
+      "desc": "Localização estratégica em 15 estados para garantir capilaridade nas importações."
+    }
   ],
   "sections": [
-    { "heading": "Como funciona a Importação por Encomenda com a WM?", "text": "Planejamento personalizado da operação conforme a demanda. Cotação com diferentes players do mercado para custos otimizados. Conferência minuciosa de documentos e exigências. Pagamento de todas as despesas da operação, inclusive da mercadoria. Cuidamos de toda a nacionalização e desembaraço da carga. Emissão de nota fiscal com característica de venda. Contratação de frete nacional com entrega no local estipulado." },
-    { "heading": "Fluxo da operação", "text": "Negociação: pedido de compra via e-mail ou WhatsApp, negociação com o exportador, envio de planilha de custos e aprovação. Pagamento: depósito do valor à WM e fechamento de câmbio. Transporte: organização do embarque, acompanhamento e previsão de custos. Nacionalização e entrega: depósito de impostos e despesas, registro de DI, emissão de NF, cotação e envio do frete." },
-    { "heading": "Sucesso comprovado e planejamento inteligente", "text": "Mais de 20 anos de experiência e certificações necessárias para importação diversa (ANVISA, MAPA, Inmetro, Polícia Federal). Equipe altamente qualificada que otimiza a cadeia logística e tributária por meio de estudos detalhados, usufruindo dos 7 benefícios fiscais. Estamos estrategicamente localizados em 15 estados brasileiros e no Panamá." }
-  ]
+    {
+      "heading": "Como funciona a Importação por Encomenda com a WM?",
+      "text": "Planejamento personalizado da operação conforme a demanda. Cotação com diferentes players do mercado para custos otimizados. Conferência minuciosa de documentos e exigências. Pagamento de todas as despesas da operação, inclusive da mercadoria. Cuidamos de toda a nacionalização e desembaraço da carga. Emissão de nota fiscal com característica de venda. Contratação de frete nacional com entrega no local estipulado."
+    },
+    {
+      "heading": "Fluxo da operação",
+      "text": "Negociação: pedido de compra via e-mail ou WhatsApp, negociação com o exportador, envio de planilha de custos e aprovação. Pagamento: depósito do valor à WM e fechamento de câmbio. Transporte: organização do embarque, acompanhamento e previsão de custos. Nacionalização e entrega: depósito de impostos e despesas, registro de DI, emissão de NF, cotação e envio do frete."
+    },
+    {
+      "heading": "Sucesso comprovado e planejamento inteligente",
+      "text": "Mais de 20 anos de experiência e certificações necessárias para importação diversa (ANVISA, MAPA, Inmetro, Polícia Federal). Equipe altamente qualificada que otimiza a cadeia logística e tributária por meio de estudos detalhados, usufruindo dos 7 benefícios fiscais. Estamos estrategicamente localizados em 15 estados brasileiros e no Panamá."
+    }
+  ],
+  "cover": "/images/heros/navio-conteineres.webp"
 }

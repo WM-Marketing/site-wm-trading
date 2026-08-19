@@ -42,6 +42,15 @@ def caminho_saida(url_en):
     return os.path.join(ROOT, rel.replace("/", os.sep) + ".html")
 
 
+# Capa para paginas /en/ cuja irma PT tem hero de DESENHO PROPRIO, de onde
+# capa_da_pagina_pt() nao consegue extrair nada. Hoje e so a de aeronaves: a
+# /segmentos-aeronaves/ usa um mosaico de fotos em fundo branco (.aero-hero), e nao
+# um hero escuro com imagem de fundo, entao nao ha "a mesma imagem" para reusar.
+CAPAS_PROPRIAS_EN = {
+    "/en/segments/aircraft-import/": "/images/heros/jato-executivo.webp",
+}
+
+
 def capa_da_pagina_pt(url_pt):
     """Le a imagem de hero que a pagina em portugues ja usa.
 
@@ -81,7 +90,7 @@ def corpo_html(pagina):
 
     # A capa vem da pagina PT equivalente: e a mesma imagem que o site ja usa
     # para aquele assunto, entao a versao em ingles nao fica com hero vazio.
-    capa = capa_da_pagina_pt(pagina["pt"])
+    capa = CAPAS_PROPRIAS_EN.get(pagina["en"]) or capa_da_pagina_pt(pagina["pt"])
     img = (f'<img src="{capa}" alt="{html_mod.escape(titulo_hero)}" '
            f'class="dynamic-hero__bg" />' if capa else "")
 
