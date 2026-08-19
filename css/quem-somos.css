@@ -40,12 +40,6 @@
   --qs-hero-titulo-peso: var(--fw-light);
   --qs-hero-titulo-entrelinha: 1.45;
 
-  /* ---- gradiente sobre a foto ---- */
-  --qs-grad-angulo: 45deg;
-  --qs-grad-forte: 0%;
-  --qs-grad-meio: 35%;
-  --qs-grad-fim: 70%;
-
   /* ---- seção 2: a forma + o texto ---- */
   --qs-forma-altura: 160px;
   --qs-forma-faixa: 14px;
@@ -66,12 +60,7 @@
 
 .qs-hero {
   padding: 0 var(--qs-hero-recuo);
-  background:
-    linear-gradient(var(--qs-grad-angulo),
-      #000 var(--qs-grad-forte),
-      rgba(0, 0, 0, .75) var(--qs-grad-meio),
-      rgba(0, 0, 0, 0) var(--qs-grad-fim)) no-repeat,
-    var(--qs-hero-imagem) center / cover no-repeat;
+  background: var(--qs-hero-imagem) center / cover no-repeat;
 }
 .qs-hero__row {
   display: flex;
