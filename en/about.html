@@ -49,6 +49,11 @@
   <link rel="stylesheet" href="/css/dynamic-pages.css" />
   <script src="/js/contact-form.js" defer></script>
   <script src="/js/lightbox.js" defer></script>
+  <!-- Diagramação exclusiva desta página (layout aprovado no Figma) -->
+  <link rel="stylesheet" href="/css/quem-somos.css" />
+  <link rel="preload" as="image" href="/images/quem-somos/hero-sede.webp" />
+  <!-- Mantém "22 anos de experiência" correto a cada virada de ano -->
+  <script src="/js/anos-experiencia.js" defer></script>
 
   <link rel="alternate" hreflang="pt-BR" href="https://www.wmtrading.com.br/about/" />
   <link rel="alternate" hreflang="en" href="https://www.wmtrading.com.br/en/about/" />
@@ -179,92 +184,326 @@
 
 <main>
 
-    <section class="dynamic-hero">
-      
-      <div class="container dynamic-hero__container">
-        <h1 class="dynamic-hero__title">Understand our commitment to the nationalization market</h1>
-        <p class="dynamic-hero__subtitle">Understand our mission, vision and value that we add to the import market.</p>
+    <!-- ══════════════════════════════════════
+         1. HERO — do hero-wm.html entregue em código
+    ══════════════════════════════════════ -->
+    <section class="qs-hero">
+      <div class="qs-hero__row">
+        <div class="qs-hero__col">
+          <p class="qs-hero__eyebrow" data-i18n="qs.eyebrow">Get to know our story</p>
+          <h1 class="qs-hero__title" data-i18n="qs.h1">Since 2004 connecting markets, moving business forward and bringing people closer.</h1>
+        </div>
+        <div class="qs-hero__col" aria-hidden="true"></div>
       </div>
     </section>
 
-    <section class="page-section ">
-      <div class="container intro-container">
-        
-        <p class="card-desc" style="font-size: var(--fs-base); line-height: 1.7; margin-bottom: 14px;">Find out about our entire trajectory and everything
- we’ve done to reach our current achievements.</p><p class="card-desc" style="font-size: var(--fs-base); line-height: 1.7; margin-bottom: 14px;">Since 2004, connecting markets, moving businesses and bringing people together.</p><p class="card-desc" style="font-size: var(--fs-base); line-height: 1.7; margin-bottom: 14px;">WM carries at the center of its DNA the incessant search for excellence and agility in all deliveries. It is from this perspective that we have guided all our actions since our foundation. Our strategic location and high knowledge of the legislation applicable to different segments have added experience and know-how to our experience.</p><p class="card-desc" style="font-size: var(--fs-base); line-height: 1.7; margin-bottom: 14px;">With the customer at the center of our business, we quickly expanded our activity by increasing the number of branches, gaining new tax benefits and thus gaining ground in the international market. More than obsessed with delivering the best logistical and tax project, we strive daily to cultivate our clients.</p><p class="card-desc" style="font-size: var(--fs-base); line-height: 1.7; margin-bottom: 14px;">Today WM is one of the largest trading companies in Brazil, willing to deliver personalized projects for various companies and segments.</p><p class="card-desc" style="font-size: var(--fs-base); line-height: 1.7; margin-bottom: 14px;">Our 20 years of experience in successful operations reflect the intensity of our desire to fulfill our main mission: to be the most complete solution in foreign trade.</p><p class="card-desc" style="font-size: var(--fs-base); line-height: 1.7; margin-bottom: 14px;">Check out how we contribute to the nationalization market with our solutions</p>
-        
+    <!-- A forma branca que sobrepõe a base do hero. Os dois Q do path são os
+         cantos arredondados (raio ~28 em cima, ~26 embaixo). -->
+    <section class="qs-forma-secao">
+      <div class="qs-forma">
+        <div class="qs-forma__camadas">
+          <div class="qs-forma__esq"><div class="qs-forma__faixa"></div></div>
+          <svg class="qs-forma__svg" viewBox="0 0 460 160" width="460" height="160"
+               preserveAspectRatio="none" aria-hidden="true">
+            <path d="M0 160 H460 V0 H330 Q302 0 286 16 L166 132 Q150 146 124 146 H0 Z" fill="#fff"></path>
+          </svg>
+          <div class="qs-forma__dir"></div>
+        </div>
+        <div class="qs-forma__texto">
+          <p class="qs-claim" data-i18n-html="qs.claim"><strong>WM</strong> carries at the core of its DNA<br> the relentless pursuit of <strong>excellence</strong> and<br> <strong>agility in every delivery.</strong></p>
+        </div>
       </div>
     </section>
 
-    <section class="page-section page-section--alternate">
-      <div class="container intro-container">
-        <h2 class="card-title" style="font-size: var(--fs-lg); font-weight: var(--fw-semibold); color: var(--color-primary); margin-bottom: 18px;">Differentiators that make us your best choice</h2>
-        <p class="card-desc" style="font-size: var(--fs-base); line-height: 1.7; margin-bottom: 14px;">With our exclusive benefits, we are always providing the best tax and logistics solutions to our clients.</p><p class="card-desc" style="font-size: var(--fs-base); line-height: 1.7; margin-bottom: 14px;">he attention we pay to our customers is unparalleled. We treat all our customers as a priority and are always on hand to offer the best service.</p><p class="card-desc" style="font-size: var(--fs-base); line-height: 1.7; margin-bottom: 14px;">We have a huge range of suppliers with exclusive advantages to optimize your import process</p><p class="card-desc" style="font-size: var(--fs-base); line-height: 1.7; margin-bottom: 14px;">Planning is extremely important to avoid inserting the import process into a modality that does not fit and causing complications in the operation.</p><p class="card-desc" style="font-size: var(--fs-base); line-height: 1.7; margin-bottom: 14px;">Thinking about optimizing the logistics and tax chain, we are strategically located in 15 Brazilian states and internationally in Panama.</p><p class="card-desc" style="font-size: var(--fs-base); line-height: 1.7; margin-bottom: 14px;">“Working in International Trade Management, bringing companies together, adding control in the stages of the merchandise import process in general with commitment and effectiveness in meeting customer needs, with continuous improvement of results and the training of our employees.”</p><p class="card-desc" style="font-size: var(--fs-base); line-height: 1.7; margin-bottom: 14px;">Quality is our priority to ensure your satisfaction. We maintain a Quality Management System, which allows us to understand customer opinions and improve our services.</p><p class="card-desc" style="font-size: var(--fs-base); line-height: 1.7; margin-bottom: 14px;">We also work with the ISO 9001 certificate, within international quality standards. We maintain programs to constantly improve our performance and service.</p>
-        
+    <!-- ══════════════════════════════════════
+         2. MARCAS DO GRUPO
+    ══════════════════════════════════════ -->
+    <section class="qs-brands" aria-label="WM group brands">
+      <div class="container">
+        <div class="qs-brands__list">
+          <img class="qs-brands__logo qs-brands__logo--trading" src="/images/quem-somos/logos/wm-trading.svg" alt="WM Trading" width="131" height="46" />
+          <img class="qs-brands__logo qs-brands__logo--hubi" src="/images/quem-somos/logos/simple-hubi.svg" alt="simple hubi" width="200" height="36" />
+          <img class="qs-brands__logo qs-brands__logo--energy" src="/images/quem-somos/logos/wm-energy.svg" alt="WM Energy" width="151" height="46" />
+          <img class="qs-brands__logo qs-brands__logo--logistics" src="/images/quem-somos/logos/wm-logistics.svg" alt="WM Logistics" width="204" height="29" />
+        </div>
       </div>
     </section>
 
-    <section class="page-section ">
-      <div class="container intro-container">
-        <h2 class="card-title" style="font-size: var(--fs-lg); font-weight: var(--fw-semibold); color: var(--color-primary); margin-bottom: 18px;">Our customer satisfaction index</h2>
-        <p class="card-desc" style="font-size: var(--fs-base); line-height: 1.7; margin-bottom: 14px;">Expertise, ethics and transparency are essential values in our operations. We offer solutions for your imports from end to end. We have a highly specialized team ready to assist you at any time. The customer is at the center of our business, and we make a point of serving them in the best possible way. We provide real-time monitoring of all stages of your imports in order to guarantee greater security and agility in decision-making.</p><p class="card-desc" style="font-size: var(--fs-base); line-height: 1.7; margin-bottom: 14px;">To understand how we can implement improvements in operations and measure our customers&#x27; satisfaction, every 6 months we carry out a Satisfaction Survey. We have a team of engineers specialized in maintaining the WM Quality Management System, reviewing the company&#x27;s Instructions and Regulations.</p><p class="card-desc" style="font-size: var(--fs-base); line-height: 1.7; margin-bottom: 14px;">In the last survey carried out, in the first half of 2023, we reached high levels of satisfaction: 90%. And we keep looking for more!</p><p class="card-desc" style="font-size: var(--fs-base); line-height: 1.7; margin-bottom: 14px;">Be part of one of the largest Tradings in Brazil.</p><p class="card-desc" style="font-size: var(--fs-base); line-height: 1.7; margin-bottom: 14px;">Check out our job openings and see if any match your profile!</p><p class="card-desc" style="font-size: var(--fs-base); line-height: 1.7; margin-bottom: 14px;">Contact our specialists and ensure the best operation for your company!</p>
-        
+    <!-- ══════════════════════════════════════
+         3. SOBRE A WM — grade modular de 12 colunas, mesma lógica do
+            bento de feiras da página de aeronaves
+    ══════════════════════════════════════ -->
+    <section class="qs-bento">
+      <div class="container qs-bento__grid">
+
+        <!-- Célula mesclada do texto -->
+        <div class="qs-bento__cell qs-bento__cell--texto">
+          <h2 class="qs-about__title" data-i18n-html="qs.about.title">About <span>WM Trading</span></h2>
+          <div class="qs-about__text">
+            <p data-i18n="qs.about.p1">With the client at the center of our business, we expanded quickly: more branches, new tax benefits and a growing presence in the international market. More than obsessed with delivering the best logistics and tax project, we work every day to cultivate our clients.</p>
+            <p data-i18n-html="qs.about.p2">Today WM is one of the largest trading companies in Brazil, ready to deliver tailored projects for companies across many segments. Our <span data-wm-anos-desde="2004">22</span> years of experience in successful operations reflect how strongly we pursue our main mission: to be the most complete solution in foreign trade.</p>
+          </div>
+        </div>
+
+        <!-- Células mescladas das fotos -->
+        <div class="qs-bento__cell qs-bento__cell--foto qs-bento__cell--f1">
+          <img src="/images/quem-somos/mosaico-1-fachada.webp" alt="WM Trading headquarters in Vitória, Brazil" width="660" height="500" loading="lazy" />
+        </div>
+        <div class="qs-bento__cell qs-bento__cell--foto qs-bento__cell--f2">
+          <img src="/images/quem-somos/mosaico-2-openspace.webp" alt="WM Trading team at the headquarters open space" width="660" height="500" loading="lazy" />
+        </div>
+        <div class="qs-bento__cell qs-bento__cell--foto qs-bento__cell--f3">
+          <img src="/images/quem-somos/mosaico-3-openspace.webp" alt="WM Trading team working in the open space office" width="660" height="500" loading="lazy" />
+        </div>
+        <div class="qs-bento__cell qs-bento__cell--foto qs-bento__cell--f4">
+          <img src="/images/quem-somos/mosaico-4-lounge.webp" alt="Lounge area at the WM Trading headquarters" width="660" height="500" loading="lazy" />
+        </div>
+
       </div>
     </section>
 
-    <section class="page-section page-section--alternate" id="contact">
-      <div class="container intro-container">
-        <h2 class="card-title" style="font-size: var(--fs-lg); font-weight: var(--fw-semibold); margin-bottom: 10px;">Talk to our specialists</h2>
-        <p class="card-desc" style="margin-bottom: 26px;">Tell us about your operation and our team will get back to you shortly.</p>
-        <form class="contact-form-js grid gap-4 form-grid-wm form-grid-wm--2col" data-form-type="contato">
-          <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" class="hidden" aria-hidden="true" style="display:none;" />
+    <!-- ══════════════════════════════════════
+         4. NÚMEROS — ícones da identidade, aplicados como máscara CSS
+    ══════════════════════════════════════ -->
+    <section class="qs-kpis" aria-label="WM in numbers">
+      <div class="container qs-kpis__grid">
 
-          <input name="nome" required placeholder="Full name *" class="input-wm sm-col-span-2" />
-          <input name="email" type="email" required placeholder="E-mail *" class="input-wm" />
-          <input name="telefone" type="tel" required placeholder="Phone (with country code) *" pattern="[0-9\s\(\)\+\-\.]+" class="input-wm" />
-          <input name="empresa" placeholder="Company" class="input-wm sm-col-span-2" />
+        <div class="qs-kpi">
+          <span class="qs-kpi__icon qs-kpi__icon--anos" aria-hidden="true"><i class="qs-kpi__glifo"></i></span>
+          <p class="qs-kpi__value" data-i18n-html="qs.kpi1.v"><span data-wm-anos-desde="2004">22</span> years</p>
+          <p class="qs-kpi__label" data-i18n="qs.kpi1.l">of experience</p>
+        </div>
 
-          <select name="segmento" required class="input-wm sm-col-span-2">
-            <option value="" disabled selected>Segment *</option>
-            <option value="Aeronaves">Aircraft</option>
-            <option value="Equipamentos Fotovoltaicos">Photovoltaic Equipment</option>
-            <option value="Produtos Químicos">Chemicals</option>
-            <option value="Cosméticos">Cosmetics</option>
-            <option value="Informática e Telecomunicações">IT and Telecommunications</option>
-            <option value="Partes e Peças Geral">Auto Parts and Components</option>
-            <option value="Aço">Steel</option>
-            <option value="Máquinas">Machines</option>
-            <option value="Varejo">Retail</option>
-            <option value="Vinho">Wine</option>
-            <option value="Drone">Drone</option>
-            <option value="Rebocadores">Aircraft Tugs</option>
-            <option value="Combustível e Derivados de Petróleo">Fuels and Petroleum Products</option>
-            <option value="Outros">Other</option>
-          </select>
+        <div class="qs-kpi">
+          <span class="qs-kpi__icon qs-kpi__icon--filiais" aria-hidden="true"><i class="qs-kpi__glifo"></i></span>
+          <p class="qs-kpi__value" data-i18n="qs.kpi2.v">15 branches</p>
+          <p class="qs-kpi__label" data-i18n="qs.kpi2.l">Brazil + Panama</p>
+        </div>
 
-          <select name="forma_resposta" required class="input-wm sm-col-span-2">
-            <option value="" disabled selected>How would you like to be contacted? *</option>
-            <option value="E-mail">E-mail</option>
-            <option value="WhatsApp">WhatsApp</option>
-            <option value="Telefone">Phone</option>
-          </select>
+        <div class="qs-kpi">
+          <span class="qs-kpi__icon qs-kpi__icon--iso" aria-hidden="true"><i class="qs-kpi__glifo"></i></span>
+          <p class="qs-kpi__value" data-i18n="qs.kpi3.v">ISO 9001</p>
+          <p class="qs-kpi__label" data-i18n="qs.kpi3.l">certification</p>
+        </div>
 
-          <textarea name="mensagem" required rows="4" placeholder="How can we help? *" class="input-wm sm-col-span-2 resize-y"></textarea>
+        <div class="qs-kpi">
+          <span class="qs-kpi__icon qs-kpi__icon--satisfacao" aria-hidden="true"><i class="qs-kpi__glifo"></i></span>
+          <p class="qs-kpi__value" data-i18n="qs.kpi4.v">90%</p>
+          <p class="qs-kpi__label" data-i18n="qs.kpi4.l">customer satisfaction</p>
+        </div>
 
-          <label class="sm-col-span-2 form-checkbox-label">
-            <input type="checkbox" name="aceite_privacidade" required value="sim" />
-            <span>I have read and agree to the <a href="/politica-de-privacidade/" class="text-primary underline">Privacy Policy</a> and authorise WM Trading to process my data in order to respond to this request.</span>
-          </label>
-
-          <label class="sm-col-span-2 form-checkbox-label">
-            <input type="checkbox" name="aceite_marketing" value="sim" />
-            <span>I would also like to receive content, materials and commercial communications from WM Trading (optional).</span>
-          </label>
-
-          <button type="submit" class="btn btn-block sm-col-span-2 btn-lg">Send</button>
-        </form>
       </div>
     </section>
+
+    <!-- ══════════════════════════════════════
+         5. COMPROMISSO — missão, visão e valores
+    ══════════════════════════════════════ -->
+    <section class="qs-commitment">
+      <div class="container">
+
+        <div class="qs-commitment__top">
+          <div class="qs-commitment__head">
+            <h2 class="qs-commitment__title" data-i18n-html="qs.commit.title">Understand our <span class="text-primary">commitment</span> to the <span class="text-primary">import market</span></h2>
+            <p class="qs-commitment__sub" data-i18n="qs.commit.sub">Get to know our mission, vision and the value we add to the import market.</p>
+          </div>
+
+          <!-- Fachada do vídeo. Nada do YouTube carrega na abertura da página:
+               sem cookie de terceiro antes do aceite (o CMP é o dono do
+               consentimento) e sem o iframe pesando no LCP. O clique troca a
+               fachada por um iframe do youtube-nocookie, já com autoplay. A capa é a
+               thumb do próprio vídeo, servida daqui — não do i.ytimg.com. -->
+          <div class="qs-video">
+            <button type="button" class="qs-video__fachada" data-qs-video="GgkjgZ3x8N8">
+              <img class="qs-video__thumb" src="/images/quem-somos/video-valores-thumb.webp"
+                   alt="" width="1120" height="630" loading="lazy" />
+              <span class="qs-video__rotulo" data-i18n="qs.video.label">Watch the WM Trading Our Values video</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="qs-valores">
+        <article class="qs-valor qs-valor--inovacao">
+          <img class="qs-valor__icone" src="/images/quem-somos/icones/valores/inovacao.png" alt="" width="64" height="64" loading="lazy" />
+          <h3 class="qs-valor__nome" data-i18n-html="qs.val.inovacao">Innovation and continuous improvement</h3>
+          <span class="qs-valor__risco" aria-hidden="true"></span>
+        </article>
+        <article class="qs-valor qs-valor--agilidade">
+          <img class="qs-valor__icone" src="/images/quem-somos/icones/valores/agilidade.png" alt="" width="64" height="64" loading="lazy" />
+          <h3 class="qs-valor__nome" data-i18n-html="qs.val.agilidade">Agility</h3>
+          <span class="qs-valor__risco" aria-hidden="true"></span>
+        </article>
+        <article class="qs-valor qs-valor--etica">
+          <img class="qs-valor__icone" src="/images/quem-somos/icones/valores/etica-transparencia.png" alt="" width="64" height="64" loading="lazy" />
+          <h3 class="qs-valor__nome" data-i18n-html="qs.val.etica">Ethics and transparency</h3>
+          <span class="qs-valor__risco" aria-hidden="true"></span>
+        </article>
+        <article class="qs-valor qs-valor--conectividade">
+          <img class="qs-valor__icone" src="/images/quem-somos/icones/valores/conectividade.png" alt="" width="64" height="64" loading="lazy" />
+          <h3 class="qs-valor__nome" data-i18n-html="qs.val.conectividade">Connectivity</h3>
+          <span class="qs-valor__risco" aria-hidden="true"></span>
+        </article>
+
+        <!-- A régua entre as duas fileiras: célula que atravessa as 4 colunas. -->
+        <div class="qs-valores__regua" aria-hidden="true"></div>
+
+        <article class="qs-valor qs-valor--desenvolvimento">
+          <img class="qs-valor__icone" src="/images/quem-somos/icones/valores/desenvolvimento.png" alt="" width="64" height="64" loading="lazy" />
+          <h3 class="qs-valor__nome" data-i18n-html="qs.val.desenvolvimento">Development of the company <br />and of its people</h3>
+          <span class="qs-valor__risco" aria-hidden="true"></span>
+        </article>
+        <article class="qs-valor qs-valor--cliente">
+          <img class="qs-valor__icone" src="/images/quem-somos/icones/valores/cliente-no-centro.png" alt="" width="64" height="64" loading="lazy" />
+          <h3 class="qs-valor__nome" data-i18n-html="qs.val.cliente">The client at the center of the business</h3>
+          <span class="qs-valor__risco" aria-hidden="true"></span>
+        </article>
+        <article class="qs-valor qs-valor--excelencia">
+          <img class="qs-valor__icone" src="/images/quem-somos/icones/valores/excelencia.png" alt="" width="64" height="64" loading="lazy" />
+          <h3 class="qs-valor__nome" data-i18n-html="qs.val.excelencia">Excellence</h3>
+          <span class="qs-valor__risco" aria-hidden="true"></span>
+        </article>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════
+         6. NOSSAS ATUAÇÕES
+    ══════════════════════════════════════ -->
+    <section class="qs-atuacoes">
+      <div class="container">
+        <h2 class="qs-atuacoes__title" data-i18n="qs.acts.title">What We Do</h2>
+        <p class="qs-atuacoes__sub" data-i18n="qs.acts.sub">See how we contribute to the import market with our solutions. Here are some of them:</p>
+
+        <div class="qs-atuacoes__grid">
+
+          <article class="qs-atuacao">
+            <img src="/images/quem-somos/atuacao-1-atendimento.webp" alt="Two executives face to face during a business meeting" width="1100" height="275" loading="lazy" />
+            <h3 class="qs-atuacao__title" data-i18n="qs.act.atendimento.t">Personalized Service</h3>
+            <p class="qs-atuacao__desc" data-i18n="qs.act.atendimento.d">The attention we give our clients is unmatched. We treat everyone as a priority and are always available to deliver the best service.</p>
+          </article>
+
+          <article class="qs-atuacao">
+            <img src="/images/quem-somos/atuacao-2-fornecedores.webp" alt="Aisle of a logistics warehouse with shelves full of goods" width="1100" height="275" loading="lazy" />
+            <h3 class="qs-atuacao__title" data-i18n="qs.act.fornecedores.t">Wide Range of Suppliers</h3>
+            <p class="qs-atuacao__desc" data-i18n="qs.act.fornecedores.d">We have a vast supplier network with exclusive advantages to optimize your import process.</p>
+          </article>
+
+          <article class="qs-atuacao">
+            <img src="/images/quem-somos/atuacao-3-planejamento.webp" alt="Professional reviewing spreadsheets with a calculator and a laptop" width="1100" height="275" loading="lazy" />
+            <h3 class="qs-atuacao__title" data-i18n="qs.act.planejamento.t">Planning and Management</h3>
+            <p class="qs-atuacao__desc" data-i18n="qs.act.planejamento.d">Planning is essential to frame the operation under the right import modality and to avoid complications in the process.</p>
+          </article>
+
+          <article class="qs-atuacao">
+            <img src="/images/quem-somos/atuacao-4-localizacao.webp" alt="Container ship docked next to a truck in the port yard" width="1100" height="275" loading="lazy" />
+            <h3 class="qs-atuacao__title" data-i18n="qs.act.localizacao.t">Strategic Location</h3>
+            <p class="qs-atuacao__desc" data-i18n="qs.act.localizacao.d">To optimize the logistics and tax chain, we are strategically located in 15 Brazilian states and in Panama.</p>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════
+         7. POLÍTICA DE QUALIDADE
+    ══════════════════════════════════════ -->
+    <section class="qs-quality">
+      <div class="container qs-split">
+        <div>
+          <h2 class="qs-split__title" data-i18n-html="qs.quality.title">Our <span class="text-primary">quality policy</span> is:</h2>
+          <span class="qs-quality__seal">
+            <img src="/images/quem-somos/selo-iso-9001.png" alt="ISO 9001 certification issued by Bureau Veritas" />
+          </span>
+        </div>
+
+        <div class="qs-split__body">
+          <blockquote class="qs-quality__quote" data-i18n-html="qs.quality.quote">“At WM Trading, quality means delivering uncomplicated, agile and reliable foreign trade solutions, exceeding our clients expectations in every operation. Our leadership and our team are committed to acting with ethics and transparency, promoting innovation and pursuing the continuous improvement of the people and processes behind that result.” <br /><span class="qs-quality__rev">(Rev.01 – 08/11/2026)</span></blockquote>
+          <p data-i18n="qs.quality.p1">Quality is our priority to ensure your satisfaction. We maintain a Quality Management System that lets us hear what our clients think and refine our services.</p>
+          <p data-i18n="qs.quality.p2">We also hold the ISO 9001 certificate, within international quality standards. We run programs to continuously improve our performance and our service.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════
+         8. ÍNDICE DE SATISFAÇÃO
+    ══════════════════════════════════════ -->
+    <section class="qs-satisfacao">
+      <div class="container qs-split">
+        <div>
+          <h2 class="qs-split__title" data-i18n-html="qs.sat.title">Our clients <span class="text-primary">satisfaction</span><br /> index</h2>
+
+          <!-- Medidor principal: circunferência de r=80 → 502.65.
+               Traço preenchido = 502.65 × percentual. -->
+          <div class="qs-gauge-main qs-gauge" data-qs-pct="92" style="--qs-vazio:462.4; --qs-cheio:0">
+            <svg viewBox="0 0 200 200" role="img" aria-label="92% satisfaction in the first half of 2024">
+              <g transform="rotate(-90 100 100)" fill="none" stroke-width="16" stroke-linecap="round">
+                <circle class="qs-gauge__track" cx="100" cy="100" r="80" />
+                <circle class="qs-gauge__fill" cx="100" cy="100" r="80"
+                        stroke-dasharray="462.4 502.7" />
+              </g>
+              <text class="qs-gauge__pct" x="100" y="102" text-anchor="middle" data-qs-num>92%</text>
+              <text class="qs-gauge__period" x="100" y="126" text-anchor="middle">2024/1</text>
+            </svg>
+          </div>
+
+          <!-- Histórico: arco de meia-volta, r=44 → comprimento 138.2. -->
+          <div class="qs-gauge-row">
+            <div class="qs-gauge-mini qs-gauge" data-qs-pct="92" style="--qs-vazio:127.2; --qs-cheio:0">
+              <svg viewBox="0 0 108 66" role="img" aria-label="92% satisfaction in the second half of 2023">
+                <g fill="none" stroke-width="7" stroke-linecap="round">
+                  <path class="qs-gauge__track" d="M10 56 A 44 44 0 0 1 98 56" />
+                  <path class="qs-gauge__fill" d="M10 56 A 44 44 0 0 1 98 56" stroke-dasharray="127.2 138.2" />
+                </g>
+                <text class="qs-gauge__pct" x="54" y="52" text-anchor="middle" data-qs-num>92%</text>
+                <text class="qs-gauge__period" x="54" y="63" text-anchor="middle">2023/2</text>
+              </svg>
+            </div>
+            <div class="qs-gauge-mini qs-gauge" data-qs-pct="90" style="--qs-vazio:124.4; --qs-cheio:0">
+              <svg viewBox="0 0 108 66" role="img" aria-label="90% satisfaction in the first half of 2023">
+                <g fill="none" stroke-width="7" stroke-linecap="round">
+                  <path class="qs-gauge__track" d="M10 56 A 44 44 0 0 1 98 56" />
+                  <path class="qs-gauge__fill" d="M10 56 A 44 44 0 0 1 98 56" stroke-dasharray="124.4 138.2" />
+                </g>
+                <text class="qs-gauge__pct" x="54" y="52" text-anchor="middle" data-qs-num>90%</text>
+                <text class="qs-gauge__period" x="54" y="63" text-anchor="middle">2023/1</text>
+              </svg>
+            </div>
+            <div class="qs-gauge-mini qs-gauge" data-qs-pct="89" style="--qs-vazio:123.0; --qs-cheio:0">
+              <svg viewBox="0 0 108 66" role="img" aria-label="89% satisfaction in the second half of 2022">
+                <g fill="none" stroke-width="7" stroke-linecap="round">
+                  <path class="qs-gauge__track" d="M10 56 A 44 44 0 0 1 98 56" />
+                  <path class="qs-gauge__fill" d="M10 56 A 44 44 0 0 1 98 56" stroke-dasharray="123.0 138.2" />
+                </g>
+                <text class="qs-gauge__pct" x="54" y="52" text-anchor="middle" data-qs-num>89%</text>
+                <text class="qs-gauge__period" x="54" y="63" text-anchor="middle">2022/2</text>
+              </svg>
+            </div>
+          </div>
+        </div>
+
+        <div class="qs-split__body">
+          <p data-i18n="qs.sat.p1">Expertise, ethics and transparency are essential values in our operations. We offer end-to-end solutions for your imports. Our team is highly specialized and ready to assist you at any moment. The client is at the center of our business, and we make a point of serving them in the best possible way.</p>
+          <p data-i18n="qs.sat.p2">We provide real-time tracking of every stage of your imports, to ensure more security and agility in decision-making.</p>
+          <p data-i18n="qs.sat.p3">To understand how we can improve our operations and to measure client satisfaction, we run a Satisfaction Survey every 6 months. We have a team of engineers dedicated to maintaining WM quality management system, reviewing the company instructions and standards.</p>
+          <p data-i18n="qs.sat.p4">In the latest survey, in the first half of 2023, we reached high satisfaction levels: 90%. And we keep pushing for more.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════
+         9. CARREIRAS
+    ══════════════════════════════════════ -->
+    <section class="qs-carreiras">
+      <div class="container qs-carreiras__grid">
+        <div>
+          <h2 class="qs-carreiras__title" data-i18n="qs.careers.title">Careers</h2>
+          <p class="qs-carreiras__text" data-i18n="qs.careers.text">Be part of one of the largest trading companies in Brazil. Check our openings and see if any matches your profile!</p>
+          <a href="/en/careers/" class="btn" data-i18n="qs.careers.cta">See openings →</a>
+        </div>
+        <img src="/images/quem-somos/time-carreiras.webp" alt="WM Trading team together at the end-of-year celebration" width="1200" height="675" loading="lazy" />
+      </div>
+    </section>
+    
 </main>
 
 <!-- ══════════════════════════════════════
@@ -380,6 +619,8 @@
 <script src="/js/main.js"></script>
 <script src="/js/i18n.js" defer></script>
 
+
+<script src="/js/quem-somos.js" defer></script>
 
 </body>
 </html>

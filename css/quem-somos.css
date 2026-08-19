@@ -43,6 +43,9 @@
   --qs-hero-titulo-entrelinha: 1.45;
 
   /* ---- seção 2: a forma + o texto ---- */
+  /* Escala dos logos do grupo — ver .qs-brands__logo--* */
+  --qs-brands-escala: 1.1;
+
   --qs-forma-altura: 160px;
   --qs-forma-faixa: 14px;
   --qs-forma-diagonal: 460px;
@@ -212,20 +215,24 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  flex-wrap: wrap;
   gap: 32px;
 }
+/* Os quatro logos saíram do mesmo export, então a relação de tamanho ENTRE eles
+   já vem certa no arquivo — o que a lâmina precisa é de um fator comum, não de
+   uma altura comum. Com altura igual, o WM Logistics (204x29) ficaria 2,5x mais
+   largo que o WM Trading (131x46) e a fileira desmontava. Daí um único token de
+   escala e a altura de cada um calculada sobre a sua altura intrínseca: mexer no
+   token reescala os quatro de uma vez, em qualquer breakpoint. */
 .qs-brands__list img {
-  flex: 1 1 0;
-  min-width: 0;
-  height: 54px;
+  flex: 0 0 auto;
   width: auto;
   max-width: 100%;
-  object-fit: contain;
-  opacity: 0.55;
-  filter: grayscale(1);
-  transition: opacity var(--transition), filter var(--transition);
 }
-.qs-brands__list img:hover { opacity: 1; filter: grayscale(0); }
+.qs-brands__logo--trading   { height: calc(var(--qs-brands-escala) * 46px); }
+.qs-brands__logo--hubi      { height: calc(var(--qs-brands-escala) * 36px); }
+.qs-brands__logo--energy    { height: calc(var(--qs-brands-escala) * 46px); }
+.qs-brands__logo--logistics { height: calc(var(--qs-brands-escala) * 29px); }
 
 /* ==========================================================================
    3. SOBRE A WM — grade modular, mesma lógica do bento de feiras da página
@@ -777,7 +784,7 @@
      nota sai do canto e fecha a lâmina como faixa de largura inteira — o mesmo
      tratamento do mobile. Assim o título usa o container todo e respira. */
   .qs-brands__list { flex-wrap: wrap; justify-content: center; gap: 32px 48px; }
-  .qs-brands__list img { flex: 0 0 auto; height: 42px; }
+  :root { --qs-brands-escala: 0.9; }
 
   /* A grade cai para 6 colunas: texto em cima, fotos embaixo */
   .qs-bento__grid {
@@ -814,7 +821,7 @@
      zerado por um shorthand, senão o título encosta na borda da tela. */
   .qs-brands { padding: 40px 0; }
   .qs-brands__list { gap: 24px 36px; }
-  .qs-brands__list img { height: 32px; }
+  :root { --qs-brands-escala: 0.72; }
 
   /* Grade some no mobile: texto e fotos empilhados */
   .qs-bento { padding-top: 8px; }

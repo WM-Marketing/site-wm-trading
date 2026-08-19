@@ -1563,8 +1563,8 @@ def main():
     <section class="qs-hero">
       <div class="qs-hero__row">
         <div class="qs-hero__col">
-          <p class="qs-hero__eyebrow">Conheça nossa história</p>
-          <h1 class="qs-hero__title">Desde 2004 conectando mercados, movimentando negócios e aproximando pessoas.</h1>
+          <p class="qs-hero__eyebrow" data-i18n="qs.eyebrow">Conheça nossa história</p>
+          <h1 class="qs-hero__title" data-i18n="qs.h1">Desde 2004 conectando mercados, movimentando negócios e aproximando pessoas.</h1>
         </div>
         <div class="qs-hero__col" aria-hidden="true"></div>
       </div>
@@ -1583,7 +1583,7 @@ def main():
           <div class="qs-forma__dir"></div>
         </div>
         <div class="qs-forma__texto">
-          <p class="qs-claim">
+          <p class="qs-claim" data-i18n-html="qs.claim">
             A <strong>WM</strong> carrega no centro do seu DNA<br>
             a busca incessante pela <strong>excelência</strong> e<br>
             <strong>agilidade em todas as entregas.</strong>
@@ -1598,11 +1598,10 @@ def main():
     <section class="qs-brands" aria-label="Marcas do grupo WM">
       <div class="container">
         <div class="qs-brands__list">
-          <!-- PLACEHOLDER: recortes do print. Trocar pelos logos vetoriais (SVG). -->
-          <img src="/images/quem-somos/PLACEHOLDER-logo-wm-trading.png" alt="WM Trading" />
-          <img src="/images/quem-somos/PLACEHOLDER-logo-simple-hubi.png" alt="simple hubi" />
-          <img src="/images/quem-somos/PLACEHOLDER-logo-wm-energy.png" alt="WM Energy" />
-          <img src="/images/quem-somos/PLACEHOLDER-logo-wm-logistics.png" alt="WM Logistics" />
+          <img class="qs-brands__logo qs-brands__logo--trading" src="/images/quem-somos/logos/wm-trading.svg" alt="WM Trading" width="131" height="46" />
+          <img class="qs-brands__logo qs-brands__logo--hubi" src="/images/quem-somos/logos/simple-hubi.svg" alt="simple hubi" width="200" height="36" />
+          <img class="qs-brands__logo qs-brands__logo--energy" src="/images/quem-somos/logos/wm-energy.svg" alt="WM Energy" width="151" height="46" />
+          <img class="qs-brands__logo qs-brands__logo--logistics" src="/images/quem-somos/logos/wm-logistics.svg" alt="WM Logistics" width="204" height="29" />
         </div>
       </div>
     </section>
@@ -1616,10 +1615,10 @@ def main():
 
         <!-- Célula mesclada do texto -->
         <div class="qs-bento__cell qs-bento__cell--texto">
-          <h2 class="qs-about__title">Sobre a <span>WM Trading</span></h2>
+          <h2 class="qs-about__title" data-i18n-html="qs.about.title">Sobre a <span>WM Trading</span></h2>
           <div class="qs-about__text">
-            <p>Tendo o cliente como centro do nosso negócio, rapidamente expandimos nossa atividade, ampliando o número de filiais, conquistando novos benefícios fiscais e ganhando espaço no mercado internacional. Mais do que obcecados por entregar o melhor projeto logístico e tributário, lutamos diariamente para cultivar nossos clientes.</p>
-            <p>Hoje a WM é uma das maiores tradings do Brasil, disposta a entregar projetos personalizados para diversas empresas e segmentos. Os <span data-wm-anos-desde="2004">{anos_wm}</span> anos de experiência em operações bem-sucedidas traduzem a intensidade do desejo de cumprir nossa principal missão: ser a mais completa solução em comércio exterior.</p>
+            <p data-i18n="qs.about.p1">Tendo o cliente como centro do nosso negócio, rapidamente expandimos nossa atividade, ampliando o número de filiais, conquistando novos benefícios fiscais e ganhando espaço no mercado internacional. Mais do que obcecados por entregar o melhor projeto logístico e tributário, lutamos diariamente para cultivar nossos clientes.</p>
+            <p data-i18n-html="qs.about.p2">Hoje a WM é uma das maiores tradings do Brasil, disposta a entregar projetos personalizados para diversas empresas e segmentos. Os <span data-wm-anos-desde="2004">{anos_wm}</span> anos de experiência em operações bem-sucedidas traduzem a intensidade do desejo de cumprir nossa principal missão: ser a mais completa solução em comércio exterior.</p>
           </div>
         </div>
 
@@ -1648,26 +1647,26 @@ def main():
 
         <div class="qs-kpi">
           <span class="qs-kpi__icon qs-kpi__icon--anos" aria-hidden="true"><i class="qs-kpi__glifo"></i></span>
-          <p class="qs-kpi__value"><span data-wm-anos-desde="2004">{anos_wm}</span> anos</p>
-          <p class="qs-kpi__label">de experiência</p>
+          <p class="qs-kpi__value" data-i18n-html="qs.kpi1.v"><span data-wm-anos-desde="2004">{anos_wm}</span> anos</p>
+          <p class="qs-kpi__label" data-i18n="qs.kpi1.l">de experiência</p>
         </div>
 
         <div class="qs-kpi">
           <span class="qs-kpi__icon qs-kpi__icon--filiais" aria-hidden="true"><i class="qs-kpi__glifo"></i></span>
-          <p class="qs-kpi__value">15 filiais</p>
-          <p class="qs-kpi__label">Brasil + Panamá</p>
+          <p class="qs-kpi__value" data-i18n="qs.kpi2.v">15 filiais</p>
+          <p class="qs-kpi__label" data-i18n="qs.kpi2.l">Brasil + Panamá</p>
         </div>
 
         <div class="qs-kpi">
           <span class="qs-kpi__icon qs-kpi__icon--iso" aria-hidden="true"><i class="qs-kpi__glifo"></i></span>
-          <p class="qs-kpi__value">ISO 9001</p>
-          <p class="qs-kpi__label">certificação</p>
+          <p class="qs-kpi__value" data-i18n="qs.kpi3.v">ISO 9001</p>
+          <p class="qs-kpi__label" data-i18n="qs.kpi3.l">certificação</p>
         </div>
 
         <div class="qs-kpi">
           <span class="qs-kpi__icon qs-kpi__icon--satisfacao" aria-hidden="true"><i class="qs-kpi__glifo"></i></span>
-          <p class="qs-kpi__value">90%</p>
-          <p class="qs-kpi__label">satisfação dos clientes</p>
+          <p class="qs-kpi__value" data-i18n="qs.kpi4.v">90%</p>
+          <p class="qs-kpi__label" data-i18n="qs.kpi4.l">satisfação dos clientes</p>
         </div>
 
       </div>
@@ -1681,11 +1680,11 @@ def main():
 
         <div class="qs-commitment__top">
           <div class="qs-commitment__head">
-            <h2 class="qs-commitment__title">
+            <h2 class="qs-commitment__title" data-i18n-html="qs.commit.title">
               Entenda o nosso <span class="text-primary">compromisso</span> com
               o <span class="text-primary">mercado de nacionalização</span>
             </h2>
-            <p class="qs-commitment__sub">Compreenda nossa missão, visão e valor que agregamos ao mercado de importação.</p>
+            <p class="qs-commitment__sub" data-i18n="qs.commit.sub">Compreenda nossa missão, visão e valor que agregamos ao mercado de importação.</p>
           </div>
 
           <!-- Fachada do vídeo. Nada do YouTube carrega na abertura da página:
@@ -1697,7 +1696,7 @@ def main():
             <button type="button" class="qs-video__fachada" data-qs-video="GgkjgZ3x8N8">
               <img class="qs-video__thumb" src="/images/quem-somos/video-valores-thumb.webp"
                    alt="" width="1120" height="630" loading="lazy" />
-              <span class="qs-video__rotulo">Assistir ao vídeo Nossos Valores da WM Trading</span>
+              <span class="qs-video__rotulo" data-i18n="qs.video.label">Assistir ao vídeo Nossos Valores da WM Trading</span>
             </button>
           </div>
         </div>
@@ -1705,22 +1704,22 @@ def main():
         <div class="qs-valores">
         <article class="qs-valor qs-valor--inovacao">
           <img class="qs-valor__icone" src="/images/quem-somos/icones/valores/inovacao.png" alt="" width="64" height="64" loading="lazy" />
-          <h3 class="qs-valor__nome">Inovação e melhoria contínua</h3>
+          <h3 class="qs-valor__nome" data-i18n-html="qs.val.inovacao">Inovação e melhoria contínua</h3>
           <span class="qs-valor__risco" aria-hidden="true"></span>
         </article>
         <article class="qs-valor qs-valor--agilidade">
           <img class="qs-valor__icone" src="/images/quem-somos/icones/valores/agilidade.png" alt="" width="64" height="64" loading="lazy" />
-          <h3 class="qs-valor__nome">Agilidade</h3>
+          <h3 class="qs-valor__nome" data-i18n-html="qs.val.agilidade">Agilidade</h3>
           <span class="qs-valor__risco" aria-hidden="true"></span>
         </article>
         <article class="qs-valor qs-valor--etica">
           <img class="qs-valor__icone" src="/images/quem-somos/icones/valores/etica-transparencia.png" alt="" width="64" height="64" loading="lazy" />
-          <h3 class="qs-valor__nome">Ética e transparência</h3>
+          <h3 class="qs-valor__nome" data-i18n-html="qs.val.etica">Ética e transparência</h3>
           <span class="qs-valor__risco" aria-hidden="true"></span>
         </article>
         <article class="qs-valor qs-valor--conectividade">
           <img class="qs-valor__icone" src="/images/quem-somos/icones/valores/conectividade.png" alt="" width="64" height="64" loading="lazy" />
-          <h3 class="qs-valor__nome">Conectividade</h3>
+          <h3 class="qs-valor__nome" data-i18n-html="qs.val.conectividade">Conectividade</h3>
           <span class="qs-valor__risco" aria-hidden="true"></span>
         </article>
 
@@ -1729,17 +1728,17 @@ def main():
 
         <article class="qs-valor qs-valor--desenvolvimento">
           <img class="qs-valor__icone" src="/images/quem-somos/icones/valores/desenvolvimento.png" alt="" width="64" height="64" loading="lazy" />
-          <h3 class="qs-valor__nome">Desenvolvimento da empresa <br />e das pessoas</h3>
+          <h3 class="qs-valor__nome" data-i18n-html="qs.val.desenvolvimento">Desenvolvimento da empresa <br />e das pessoas</h3>
           <span class="qs-valor__risco" aria-hidden="true"></span>
         </article>
         <article class="qs-valor qs-valor--cliente">
           <img class="qs-valor__icone" src="/images/quem-somos/icones/valores/cliente-no-centro.png" alt="" width="64" height="64" loading="lazy" />
-          <h3 class="qs-valor__nome">Cliente no centro do negócio</h3>
+          <h3 class="qs-valor__nome" data-i18n-html="qs.val.cliente">Cliente no centro do negócio</h3>
           <span class="qs-valor__risco" aria-hidden="true"></span>
         </article>
         <article class="qs-valor qs-valor--excelencia">
           <img class="qs-valor__icone" src="/images/quem-somos/icones/valores/excelencia.png" alt="" width="64" height="64" loading="lazy" />
-          <h3 class="qs-valor__nome">Excelência</h3>
+          <h3 class="qs-valor__nome" data-i18n-html="qs.val.excelencia">Excelência</h3>
           <span class="qs-valor__risco" aria-hidden="true"></span>
         </article>
         </div>
@@ -1752,33 +1751,33 @@ def main():
     ══════════════════════════════════════ -->
     <section class="qs-atuacoes">
       <div class="container">
-        <h2 class="qs-atuacoes__title">Nossas Atuações</h2>
-        <p class="qs-atuacoes__sub">Confira como contribuímos para o mercado de nacionalização com nossas soluções. Confira alguns deles:</p>
+        <h2 class="qs-atuacoes__title" data-i18n="qs.acts.title">Nossas Atuações</h2>
+        <p class="qs-atuacoes__sub" data-i18n="qs.acts.sub">Confira como contribuímos para o mercado de nacionalização com nossas soluções. Confira alguns deles:</p>
 
         <div class="qs-atuacoes__grid">
 
           <article class="qs-atuacao">
             <img src="/images/quem-somos/atuacao-1-atendimento.webp" alt="Dois executivos frente a frente durante uma reunião de negócios" width="1100" height="275" loading="lazy" />
-            <h3 class="qs-atuacao__title">Atendimento Personalizado</h3>
-            <p class="qs-atuacao__desc">A atenção que prestamos aos nossos clientes é incomparável. Tratamos todos com prioridade e estamos sempre à disposição para oferecer o melhor serviço.</p>
+            <h3 class="qs-atuacao__title" data-i18n="qs.act.atendimento.t">Atendimento Personalizado</h3>
+            <p class="qs-atuacao__desc" data-i18n="qs.act.atendimento.d">A atenção que prestamos aos nossos clientes é incomparável. Tratamos todos com prioridade e estamos sempre à disposição para oferecer o melhor serviço.</p>
           </article>
 
           <article class="qs-atuacao">
             <img src="/images/quem-somos/atuacao-2-fornecedores.webp" alt="Corredor de um armazém logístico com prateleiras cheias de mercadorias" width="1100" height="275" loading="lazy" />
-            <h3 class="qs-atuacao__title">Ampla Gama de Fornecedores</h3>
-            <p class="qs-atuacao__desc">Possuímos uma enorme rede de fornecedores com vantagens exclusivas para otimizar o seu processo de importação.</p>
+            <h3 class="qs-atuacao__title" data-i18n="qs.act.fornecedores.t">Ampla Gama de Fornecedores</h3>
+            <p class="qs-atuacao__desc" data-i18n="qs.act.fornecedores.d">Possuímos uma enorme rede de fornecedores com vantagens exclusivas para otimizar o seu processo de importação.</p>
           </article>
 
           <article class="qs-atuacao">
             <img src="/images/quem-somos/atuacao-3-planejamento.webp" alt="Profissional conferindo planilhas com calculadora e laptop" width="1100" height="275" loading="lazy" />
-            <h3 class="qs-atuacao__title">Planejamento e Gestão</h3>
-            <p class="qs-atuacao__desc">O planejamento é fundamental para enquadrar a operação na modalidade correta e evitar complicações no processo de importação.</p>
+            <h3 class="qs-atuacao__title" data-i18n="qs.act.planejamento.t">Planejamento e Gestão</h3>
+            <p class="qs-atuacao__desc" data-i18n="qs.act.planejamento.d">O planejamento é fundamental para enquadrar a operação na modalidade correta e evitar complicações no processo de importação.</p>
           </article>
 
           <article class="qs-atuacao">
             <img src="/images/quem-somos/atuacao-4-localizacao.webp" alt="Navio porta-contêineres atracado ao lado de um caminhão no pátio do porto" width="1100" height="275" loading="lazy" />
-            <h3 class="qs-atuacao__title">Localização Estratégica</h3>
-            <p class="qs-atuacao__desc">Pensando na otimização da cadeia logística e tributária, estamos estrategicamente localizados em 15 estados brasileiros e no Panamá.</p>
+            <h3 class="qs-atuacao__title" data-i18n="qs.act.localizacao.t">Localização Estratégica</h3>
+            <p class="qs-atuacao__desc" data-i18n="qs.act.localizacao.d">Pensando na otimização da cadeia logística e tributária, estamos estrategicamente localizados em 15 estados brasileiros e no Panamá.</p>
           </article>
 
         </div>
@@ -1791,19 +1790,19 @@ def main():
     <section class="qs-quality">
       <div class="container qs-split">
         <div>
-          <h2 class="qs-split__title">Nossa <span class="text-primary">política de qualidade</span> é:</h2>
+          <h2 class="qs-split__title" data-i18n-html="qs.quality.title">Nossa <span class="text-primary">política de qualidade</span> é:</h2>
           <span class="qs-quality__seal">
             <img src="/images/quem-somos/selo-iso-9001.png" alt="Certificação ISO 9001 emitida pela Bureau Veritas" />
           </span>
         </div>
 
         <div class="qs-split__body">
-          <blockquote class="qs-quality__quote">
+          <blockquote class="qs-quality__quote" data-i18n-html="qs.quality.quote">
             “Na WM Trading, qualidade é entregar soluções descomplicadas, ágeis e confiáveis em comércio exterior, superando as expectativas dos nossos clientes a cada operação. Nossa liderança e equipe se comprometem a agir com ética e transparência, a promover a inovação e a buscar a melhoria contínua das pessoas e dos processos que sustentam esse resultado.”
             <br /><span class="qs-quality__rev">(Rev.01 – 11/08/2026)</span>
           </blockquote>
-          <p>A qualidade é nossa prioridade para garantir a sua satisfação. Mantemos um Sistema de Gestão da Qualidade, que nos permite conhecer a opinião dos clientes e aperfeiçoar nossos serviços.</p>
-          <p>Também trabalhamos com o certificado ISO 9001, dentro de padrões internacionais de qualidade. Mantemos programas para melhorar constantemente nosso desempenho e atendimento.</p>
+          <p data-i18n="qs.quality.p1">A qualidade é nossa prioridade para garantir a sua satisfação. Mantemos um Sistema de Gestão da Qualidade, que nos permite conhecer a opinião dos clientes e aperfeiçoar nossos serviços.</p>
+          <p data-i18n="qs.quality.p2">Também trabalhamos com o certificado ISO 9001, dentro de padrões internacionais de qualidade. Mantemos programas para melhorar constantemente nosso desempenho e atendimento.</p>
         </div>
       </div>
     </section>
@@ -1814,7 +1813,7 @@ def main():
     <section class="qs-satisfacao">
       <div class="container qs-split">
         <div>
-          <h2 class="qs-split__title">Índice de <span class="text-primary">satisfação</span><br />dos nossos clientes</h2>
+          <h2 class="qs-split__title" data-i18n-html="qs.sat.title">Índice de <span class="text-primary">satisfação</span><br />dos nossos clientes</h2>
 
           <!-- Medidor principal: circunferência de r=80 → 502.65.
                Traço preenchido = 502.65 × percentual. -->
@@ -1866,10 +1865,10 @@ def main():
         </div>
 
         <div class="qs-split__body">
-          <p>Expertise, ética e transparência são valores essenciais nas nossas operações. Oferecemos soluções para as suas importações de ponta a ponta. Temos uma equipe altamente especializada e pronta para te atender a qualquer momento. O cliente está no centro do nosso negócio, e fazemos questão de atendê-lo da melhor maneira possível.</p>
-          <p>Disponibilizamos o acompanhamento em tempo real de todas as etapas das suas importações a fim de garantir mais segurança e agilidade na tomada de decisões.</p>
-          <p>Para entender como podemos implementar melhorias nas operações e medir a satisfação dos nossos clientes, a cada 6 meses realizamos uma Pesquisa de Satisfação. Temos uma equipe de engenheiros especializados na manutenção do Sistema de Gestão da Qualidade da WM, revisando Instruções e Normativas da empresa.</p>
-          <p>Na última pesquisa realizada, no primeiro semestre de 2023, atingimos altos níveis de satisfação: 90%. E seguimos em busca de mais.</p>
+          <p data-i18n="qs.sat.p1">Expertise, ética e transparência são valores essenciais nas nossas operações. Oferecemos soluções para as suas importações de ponta a ponta. Temos uma equipe altamente especializada e pronta para te atender a qualquer momento. O cliente está no centro do nosso negócio, e fazemos questão de atendê-lo da melhor maneira possível.</p>
+          <p data-i18n="qs.sat.p2">Disponibilizamos o acompanhamento em tempo real de todas as etapas das suas importações a fim de garantir mais segurança e agilidade na tomada de decisões.</p>
+          <p data-i18n="qs.sat.p3">Para entender como podemos implementar melhorias nas operações e medir a satisfação dos nossos clientes, a cada 6 meses realizamos uma Pesquisa de Satisfação. Temos uma equipe de engenheiros especializados na manutenção do Sistema de Gestão da Qualidade da WM, revisando Instruções e Normativas da empresa.</p>
+          <p data-i18n="qs.sat.p4">Na última pesquisa realizada, no primeiro semestre de 2023, atingimos altos níveis de satisfação: 90%. E seguimos em busca de mais.</p>
         </div>
       </div>
     </section>
@@ -1880,9 +1879,9 @@ def main():
     <section class="qs-carreiras">
       <div class="container qs-carreiras__grid">
         <div>
-          <h2 class="qs-carreiras__title">Carreiras</h2>
-          <p class="qs-carreiras__text">Faça parte de uma das maiores tradings do Brasil. Confira nossas vagas e veja se alguma combina com o seu perfil!</p>
-          <a href="/carreiras/" class="btn">Ver vagas →</a>
+          <h2 class="qs-carreiras__title" data-i18n="qs.careers.title">Carreiras</h2>
+          <p class="qs-carreiras__text" data-i18n="qs.careers.text">Faça parte de uma das maiores tradings do Brasil. Confira nossas vagas e veja se alguma combina com o seu perfil!</p>
+          <a href="/carreiras/" class="btn" data-i18n="qs.careers.cta">Ver vagas →</a>
         </div>
         <img src="/images/quem-somos/time-carreiras.webp" alt="Equipe da WM Trading reunida na confraternização de fim de ano" width="1200" height="675" loading="lazy" />
       </div>

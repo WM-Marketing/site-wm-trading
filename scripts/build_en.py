@@ -417,6 +417,107 @@ def home_em_ingles(pagina):
     return saida
 
 
+
+# Textos que NAO sao conteudo de elemento e por isso escapam do data-i18n: alt de
+# imagem, aria-label e title de iframe. Um alt em portugues numa pagina lang="en" e
+# um defeito de acessibilidade silencioso — o leitor de tela troca de voz no meio.
+ATRIBUTOS_QS_EN = [
+    ("Fachada da sede da WM Trading em Vitória", "WM Trading headquarters in Vitória, Brazil"),
+    ("Time da WM Trading no escritório em open space da matriz", "WM Trading team at the headquarters open space"),
+    ("Time da WM Trading trabalhando no escritório em open space", "WM Trading team working in the open space office"),
+    ("Área de convivência da sede da WM Trading", "Lounge area at the WM Trading headquarters"),
+    ("Dois executivos frente a frente durante uma reunião de negócios",
+     "Two executives face to face during a business meeting"),
+    ("Corredor de um armazém logístico com prateleiras cheias de mercadorias",
+     "Aisle of a logistics warehouse with shelves full of goods"),
+    ("Profissional conferindo planilhas com calculadora e laptop",
+     "Professional reviewing spreadsheets with a calculator and a laptop"),
+    ("Navio porta-contêineres atracado ao lado de um caminhão no pátio do porto",
+     "Container ship docked next to a truck in the port yard"),
+    ("Certificação ISO 9001 emitida pela Bureau Veritas", "ISO 9001 certification issued by Bureau Veritas"),
+    ("Equipe da WM Trading reunida na confraternização de fim de ano",
+     "WM Trading team together at the end-of-year celebration"),
+    ("Vídeo institucional da WM Trading", "WM Trading institutional video"),
+    ("Marcas do grupo WM", "WM group brands"),
+    ("A WM em números", "WM in numbers"),
+    ("% de satisfação no primeiro semestre de", "% satisfaction in the first half of"),
+    ("% de satisfação no segundo semestre de", "% satisfaction in the second half of"),
+]
+
+
+def quem_somos_em_ingles(pagina):
+    """Gera /en/about/ com o DESENHO da /about/ em portugues e o texto em ingles.
+
+    Mesma razao da home (ver home_em_ingles): a /about/ tem 10 secoes proprias —
+    hero com a sede, mosaico, KPIs, os 7 valores, medidores de satisfacao. Pelo
+    molde generico de pagina de texto ela virava outra pagina, sem nada disso.
+
+    O texto sai do mesmo dicionario de js/i18n.js que o botao de idioma usa, e e
+    escrito NO ARQUIVO: se dependesse do JS, o que o Google le seria portugues e
+    /en/about/ passaria por copia da versao PT.
+
+    Alem do que o data-i18n cobre, aqui tambem trocamos alt/aria-label (ver
+    ATRIBUTOS_QS_EN) e o link do botao de vagas, que aponta para /carreiras/ e na
+    arvore em ingles tem par proprio.
+    """
+    tr = traducoes_en()
+    if not tr:
+        print("  AVISO: dicionario ingles vazio — /en/about/ nao foi gerada")
+        return None
+
+    origem = os.path.join(ROOT, "about.html")
+    if not os.path.exists(origem):
+        print("  AVISO: about.html nao existe — rode o build_pages.py antes")
+        return None
+    html = open(origem, encoding="utf-8").read()
+
+    faltando = []
+
+    def troca(m):
+        tag, attrs, _ehhtml, chave, inner = m.groups()
+        if re.search(r"<" + tag + r"[\s>]", inner):
+            return m.group(0)
+        if chave not in tr:
+            if chave.startswith("qs."):
+                faltando.append(chave)
+            return m.group(0)
+        return "<%s%s>%s</%s>" % (tag, attrs, tr[chave], tag)
+
+    html = re.sub(r"<(\w+)([^>]*\bdata-i18n(-html)?=\"([^\"]+)\"[^>]*)>(.*?)</\1>",
+                  troca, html, flags=re.S)
+    if faltando:
+        print("  AVISO: sem traducao em ingles: %s" % sorted(set(faltando)))
+
+    for ptxt, entxt in ATRIBUTOS_QS_EN:
+        html = html.replace(ptxt, entxt)
+
+    # o botao de vagas tem par em ingles
+    html = html.replace('href="/carreiras/" class="btn"', 'href="/en/careers/" class="btn"')
+
+    titulo = "WM Trading \u2014 %s" % pagina["titulo"]
+    html = re.sub(r"<title>.*?</title>", "<title>%s</title>" % titulo, html, flags=re.S)
+    for prop, valor in (('name="description"', pagina["description"]),
+                        ('property="og:description"', pagina["description"]),
+                        ('property="og:title"', titulo)):
+        html = re.sub(r'(<meta\s+' + prop + r'\s+content=")[^"]*(")',
+                      lambda m, v=valor: m.group(1) + v + m.group(2), html)
+    for tag in (r'<link\s+rel="canonical"\s+href="', r'<meta\s+property="og:url"\s+content="'):
+        html = re.sub(r'(' + tag + r')[^"]*(")',
+                      lambda m: m.group(1) + SITE + pagina["en"] + m.group(2), html)
+    html = re.sub(r'<meta\s+property="og:locale"\s+content="[^"]*"',
+                  '<meta property="og:locale" content="en_US"', html, count=1)
+    html = re.sub(r'<html[^>]*\blang="[^"]*"', '<html lang="en"', html, count=1)
+
+    # mesmo motivo da home: caminho relativo copiado para /en/ resolve contra /en/
+    html = bp.make_paths_absolute(html)
+
+    saida = caminho_saida(pagina["en"])
+    os.makedirs(os.path.dirname(saida), exist_ok=True)
+    with open(saida, "w", encoding="utf-8", newline="\n") as f:
+        f.write(html)
+    return saida
+
+
 def menu_para_ingles(caminho_arquivo, pares):
     """Faz o menu e o rodape das paginas /en/ apontarem para as paginas /en/.
 
@@ -521,6 +622,11 @@ def main():
         # pagina mais clicada do site. Ver home_em_ingles().
         if p["en"] == "/en/":
             if home_em_ingles(p) is None:
+                continue
+        # A /about/ TAMBEM nao usa o molde generico: 10 secoes proprias. Ver
+        # quem_somos_em_ingles().
+        elif p["en"].rstrip("/") == "/en/about":
+            if quem_somos_em_ingles(p) is None:
                 continue
         else:
             corpo = corpo_html(p)
