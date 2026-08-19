@@ -1884,7 +1884,7 @@ def main():
           <p class="qs-carreiras__text">Faça parte de uma das maiores tradings do Brasil. Confira nossas vagas e veja se alguma combina com o seu perfil!</p>
           <a href="/carreiras/" class="btn">Ver vagas →</a>
         </div>
-        <img src="/images/quem-somos/time-carreiras.webp" alt="Equipe da WM Trading reunida na entrada da sede em confraternização de fim de ano" width="1200" height="675" loading="lazy" />
+        <img src="/images/quem-somos/time-carreiras.webp" alt="Equipe da WM Trading reunida na confraternização de fim de ano" width="1200" height="675" loading="lazy" />
       </div>
     </section>
     """
