@@ -1685,22 +1685,71 @@ def main():
     ══════════════════════════════════════ -->
     <section class="qs-commitment">
       <div class="container">
-        <div class="qs-commitment__head">
-          <h2 class="qs-commitment__title">
-            Entenda o nosso <span class="text-primary">compromisso</span> com
-            o <span class="text-primary">mercado de nacionalização</span>
-          </h2>
-          <p class="qs-commitment__sub">Compreenda nossa missão, visão e valor que agregamos ao mercado de importação.</p>
+
+        <div class="qs-commitment__top">
+          <div class="qs-commitment__head">
+            <h2 class="qs-commitment__title">
+              Entenda o nosso <span class="text-primary">compromisso</span> com
+              o <span class="text-primary">mercado de nacionalização</span>
+            </h2>
+            <p class="qs-commitment__sub">Compreenda nossa missão, visão e valor que agregamos ao mercado de importação.</p>
+          </div>
+
+          <!-- Fachada do vídeo. Nada do YouTube carrega na abertura da página:
+               sem cookie de terceiro antes do aceite (o CMP é o dono do
+               consentimento) e sem o iframe pesando no LCP. O clique troca a
+               fachada por um iframe do youtube-nocookie, já com autoplay. -->
+          <div class="qs-video">
+            <button type="button" class="qs-video__fachada" data-qs-video="GgkjgZ3x8N8">
+              <span class="qs-video__padrao" aria-hidden="true"></span>
+              <span class="qs-video__play" aria-hidden="true"></span>
+              <span class="qs-video__rotulo">Assistir ao vídeo institucional da WM Trading</span>
+            </button>
+          </div>
         </div>
 
-        <!-- ┌──────────────────────────────────────────────────────────────┐
-             │ SLOT AGUARDANDO CONTEÚDO                                     │
-             │ Missão, visão e valores. O layout do Figma traz apenas o      │
-             │ título e o subtítulo acima — o conteúdo desta seção ainda     │
-             │ não foi definido. Enquanto estiver vazio, o slot não ocupa   │
-             │ espaço na página (regra .qs-commitment__slot:empty).          │
-             └──────────────────────────────────────────────────────────────┘ -->
-        <div class="qs-commitment__slot"></div>
+        <div class="qs-valores">
+        <article class="qs-valor qs-valor--inovacao">
+          <img class="qs-valor__icone" src="/images/quem-somos/icones/valores/inovacao.svg" alt="" width="64" height="64" loading="lazy" />
+          <h3 class="qs-valor__nome">Inovação e melhoria contínua</h3>
+          <span class="qs-valor__risco" aria-hidden="true"></span>
+        </article>
+        <article class="qs-valor qs-valor--agilidade">
+          <img class="qs-valor__icone" src="/images/quem-somos/icones/valores/agilidade.svg" alt="" width="64" height="64" loading="lazy" />
+          <h3 class="qs-valor__nome">Agilidade</h3>
+          <span class="qs-valor__risco" aria-hidden="true"></span>
+        </article>
+        <article class="qs-valor qs-valor--etica">
+          <img class="qs-valor__icone" src="/images/quem-somos/icones/valores/etica-transparencia.svg" alt="" width="64" height="64" loading="lazy" />
+          <h3 class="qs-valor__nome">Ética e transparência</h3>
+          <span class="qs-valor__risco" aria-hidden="true"></span>
+        </article>
+        <article class="qs-valor qs-valor--conectividade">
+          <img class="qs-valor__icone" src="/images/quem-somos/icones/valores/conectividade.svg" alt="" width="64" height="64" loading="lazy" />
+          <h3 class="qs-valor__nome">Conectividade</h3>
+          <span class="qs-valor__risco" aria-hidden="true"></span>
+        </article>
+
+        <!-- A régua entre as duas fileiras: célula que atravessa as 4 colunas. -->
+        <div class="qs-valores__regua" aria-hidden="true"></div>
+
+        <article class="qs-valor qs-valor--desenvolvimento">
+          <img class="qs-valor__icone" src="/images/quem-somos/icones/valores/desenvolvimento.svg" alt="" width="64" height="64" loading="lazy" />
+          <h3 class="qs-valor__nome">Desenvolvimento da empresa <br />e das pessoas</h3>
+          <span class="qs-valor__risco" aria-hidden="true"></span>
+        </article>
+        <article class="qs-valor qs-valor--cliente">
+          <img class="qs-valor__icone" src="/images/quem-somos/icones/valores/cliente-no-centro.svg" alt="" width="64" height="64" loading="lazy" />
+          <h3 class="qs-valor__nome">Cliente no centro do negócio</h3>
+          <span class="qs-valor__risco" aria-hidden="true"></span>
+        </article>
+        <article class="qs-valor qs-valor--excelencia">
+          <img class="qs-valor__icone" src="/images/quem-somos/icones/valores/excelencia.svg" alt="" width="64" height="64" loading="lazy" />
+          <h3 class="qs-valor__nome">Excelência</h3>
+          <span class="qs-valor__risco" aria-hidden="true"></span>
+        </article>
+        </div>
+
       </div>
     </section>
 

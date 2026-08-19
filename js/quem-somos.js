@@ -20,6 +20,8 @@
     { sel: '.qs-bento__cell--texto, .qs-bento__cell--foto', delay: 0.20, passo: 0.10 },
     { sel: '.qs-kpi',                                     delay: 0.20, passo: 0.10 },
     { sel: '.qs-commitment__head',                        delay: 0.20, passo: 0    },
+    { sel: '.qs-video',                                   delay: 0.25, passo: 0    },
+    { sel: '.qs-valor',                                   delay: 0.20, passo: 0.08 },
     { sel: '.qs-atuacoes__title, .qs-atuacoes__sub',      delay: 0.20, passo: 0.10 },
     { sel: '.qs-atuacao',                                 delay: 0.20, passo: 0.12 },
     { sel: '.qs-quality .qs-split > *',                   delay: 0.20, passo: 0.15 },
@@ -40,6 +42,36 @@
     });
 
     return alvos;
+  }
+
+  /* ----------------------------------------------------------------- VÍDEO */
+  /* A fachada do vídeo é um botão. No clique ela sai e entra o iframe do
+     youtube-nocookie, já tocando — é o mesmo gesto de um play normal, com a
+     diferença de que nada do YouTube foi baixado antes de o visitante pedir.
+     Sem JS o botão simplesmente não faz nada, e por isso a legenda do rótulo
+     descreve o que ele é: a página não perde conteúdo, só o vídeo. */
+  function prepararVideo() {
+    var fachadas = document.querySelectorAll('[data-qs-video]');
+
+    Array.prototype.forEach.call(fachadas, function (botao) {
+      botao.addEventListener('click', function () {
+        var id = botao.getAttribute('data-qs-video');
+        if (!id) return;
+
+        var iframe = document.createElement('iframe');
+        iframe.className = 'qs-video__player';
+        iframe.src = 'https://www.youtube-nocookie.com/embed/' + id +
+                     '?autoplay=1&rel=0&modestbranding=1';
+        iframe.title = 'Vídeo institucional da WM Trading';
+        iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; ' +
+                       'gyroscope; picture-in-picture; web-share';
+        iframe.allowFullscreen = true;
+        iframe.setAttribute('referrerpolicy', 'strict-origin-when-cross-origin');
+
+        botao.replaceWith(iframe);
+        iframe.focus();
+      });
+    });
   }
 
   /* ------------------------------------------------------------- GRÁFICOS */
@@ -85,6 +117,9 @@
 
   /* ---------------------------------------------------------------- INÍCIO */
   function iniciar() {
+    /* Antes de qualquer coisa: o vídeo não depende de reveal nem de observer. */
+    prepararVideo();
+
     var reveals = prepararReveal();
     var gauges = prepararGraficos();
     var alvos = reveals.concat(gauges);

@@ -417,8 +417,140 @@
   color: var(--color-text-muted);
   max-width: 480px;
 }
-/* Slot reservado: recebe missão, visão e valores quando o conteúdo chegar. */
-.qs-commitment__slot:empty { display: none; }
+/* ---- topo: texto à esquerda, vídeo à direita -------------------------- */
+/* A coluna do vídeo é a maior das duas: no layout aprovado o retângulo do
+   player passa da metade da largura, e o texto ocupa pouco mais de um terço. */
+.qs-commitment__top {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr);
+  gap: 56px;
+  align-items: start;
+  margin-bottom: 76px;
+}
+
+/* ---- fachada do vídeo ------------------------------------------------- */
+/* Um <button> com proporção 16/9. Enquanto ninguém clica, o que existe é um
+   cartão grafite com o padrão WM e o play — zero requisição a terceiro. */
+.qs-video__fachada {
+  position: relative;
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  padding: 0;
+  border: 0;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  cursor: pointer;
+  background: var(--color-bg-dark);
+  transition: box-shadow .3s ease, transform .3s ease;
+}
+.qs-video__fachada:hover,
+.qs-video__fachada:focus-visible {
+  transform: translateY(-2px);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, .18);
+}
+.qs-video__padrao {
+  position: absolute;
+  inset: 0;
+  background: url('/images/quem-somos/padrao-wm-background.svg') center / auto 118% no-repeat;
+  opacity: .5;
+}
+.qs-video__play {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 76px;
+  height: 76px;
+  transform: translate(-50%, -50%);
+  border-radius: var(--radius-full);
+  background: var(--color-primary);
+  transition: transform .3s ease;
+}
+/* O triângulo do play: borda esquerda cheia, as de cima e de baixo transparentes. */
+.qs-video__play::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 54%;
+  transform: translate(-50%, -50%);
+  border-style: solid;
+  border-width: 13px 0 13px 22px;
+  border-color: transparent transparent transparent var(--color-text-white);
+}
+.qs-video__fachada:hover .qs-video__play,
+.qs-video__fachada:focus-visible .qs-video__play { transform: translate(-50%, -50%) scale(1.08); }
+/* O rótulo existe para o leitor de tela e para quem navega por teclado; no
+   visual quem comunica é o play. */
+.qs-video__rotulo {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+/* Depois do clique o iframe assume o lugar, com a mesma moldura. */
+.qs-video__player {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border: 0;
+  border-radius: var(--radius-lg);
+}
+
+/* ---- os 7 valores ---------------------------------------------------- */
+/* Quatro colunas fixas: a primeira fileira ocupa as quatro, a régua atravessa
+   todas e a segunda fileira cai nas três primeiras — o desenho do layout. */
+.qs-valores {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 40px 24px;
+  justify-items: center;
+}
+.qs-valores__regua {
+  grid-column: 1 / -1;
+  /* justify-self anula o justify-items: center da grade — sem ele a régua
+     encolhe para a largura do conteúdo, que é zero, e não aparece. */
+  justify-self: stretch;
+  height: 1px;
+  background: #E6E6E6;
+}
+/* O bloco de cada valor é alinhado à esquerda e centrado na própria coluna. */
+.qs-valor {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 14px;
+  max-width: 240px;
+}
+.qs-valor__icone {
+  width: 30px;
+  height: 30px;
+}
+.qs-valor__nome {
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-bold);
+  line-height: 1.5;
+  color: var(--color-text-dark);
+  transition: color .25s ease;
+}
+/* O risco embaixo é a cor do valor; é ele que faz a fileira ler como um sistema. */
+.qs-valor__risco {
+  width: 56px;
+  height: 3px;
+  border-radius: var(--radius-full);
+  background: var(--qs-valor-cor);
+}
+/* No hover o nome assume a cor do próprio valor, como no layout. */
+.qs-valor:hover .qs-valor__nome { color: var(--qs-valor-cor); }
+
+.qs-valor--inovacao        { --qs-valor-cor: #E8756F; }
+.qs-valor--agilidade       { --qs-valor-cor: #6D91CF; }
+.qs-valor--etica           { --qs-valor-cor: #4A5296; }
+.qs-valor--conectividade   { --qs-valor-cor: #63BE96; }
+.qs-valor--desenvolvimento { --qs-valor-cor: #F0A9CF; }
+.qs-valor--cliente         { --qs-valor-cor: #F5A623; }
+.qs-valor--excelencia      { --qs-valor-cor: #8E5BA0; }
 
 /* ==========================================================================
    6. NOSSAS ATUAÇÕES
@@ -665,6 +797,19 @@
   .qs-carreiras__grid { grid-template-columns: minmax(0, 1fr); gap: 40px; }
   .qs-kpis__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .qs-split__title { margin-bottom: 24px; }
+
+  /* Compromisso: o vídeo desce para baixo do texto e os valores passam a 2
+     colunas. A régua continua atravessando a grade, agora entre a 2ª e a 3ª
+     dupla — deixa de marcar a divisão do layout de 4 colunas e vira só um
+     respiro, então sai. */
+  .qs-commitment__top { grid-template-columns: minmax(0, 1fr); gap: 40px; margin-bottom: 56px; }
+  /* justify-items passa a start: com 2 colunas os blocos têm larguras muito
+     diferentes e, centrados, cada um nasce numa vertical diferente. Alinhados
+     à esquerda da própria coluna, a fileira volta a ler como fileira. */
+  .qs-valores { grid-template-columns: repeat(2, 1fr); gap: 36px 24px; justify-items: start; }
+  .qs-valores__regua { display: none; }
+  .qs-video__play { width: 64px; height: 64px; }
+  .qs-video__play::after { border-width: 11px 0 11px 18px; }
 }
 
 @media (max-width: 768px) {
@@ -703,4 +848,9 @@
   .qs-split__body { text-align: left; }
   .qs-carreiras { padding: 64px 0; border-radius: 0; }
   .qs-carreiras::before { width: 100%; opacity: 0.5; }
+
+  /* Os valores empilham. Com um por linha o risco colorido passa a ser a única
+     separação entre eles, e é suficiente. */
+  .qs-valores { grid-template-columns: minmax(0, 1fr); gap: 32px; }
+  .qs-valor { max-width: none; }
 }
