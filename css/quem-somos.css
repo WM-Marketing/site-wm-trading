@@ -1,0 +1,706 @@
+/* ==========================================================================
+   WM Trading — Quem somos (/about/)
+   --------------------------------------------------------------------------
+   Diagramação exclusiva desta página, conforme o layout aprovado no Figma.
+   Herda os tokens de variables.css e o header/footer de main.css; tudo aqui
+   é prefixado com .qs- para não colidir com dynamic-pages.css.
+   ========================================================================== */
+
+/* ==========================================================================
+   1. HERO — a partir do hero-wm.html entregue em código
+   --------------------------------------------------------------------------
+   Estrutura e medidas vêm do arquivo entregue; o que eu ajustei para casar com
+   o site está marcado com "AJUSTE" abaixo. As classes ganharam o prefixo qs-
+   porque `.hero`, `.hero-title` e companhia já existem no main.css — são o hero
+   da home, com `height: 720px`, e herdariam por cima deste.
+   ========================================================================== */
+/* Os parâmetros ficam no :root, como no arquivo entregue, e NÃO em .qs-hero:
+   a forma branca é uma seção irmã do hero, e custom property não herda de lado —
+   com as variáveis presas ao hero, --qs-forma-altura não resolvia e a forma
+   deixava de subir para sobrepor a base. */
+:root {
+  /* ---- cores: AJUSTE. O arquivo trazia #F25822 e #3C3C3C, que são um terceiro
+     laranja e um cinza fora do sistema. Passam a vir dos tokens do site. ---- */
+
+  /* ---- seção 1 ---- */
+  --qs-hero-imagem: url('/images/quem-somos/hero-sede.webp');
+  --qs-hero-altura: 80vh;
+  /* AJUSTE: o arquivo fixava 120px. Aqui o recuo é o do container do site, para
+     o título nascer na mesma vertical de todas as outras seções da página. */
+  --qs-hero-recuo: calc((100vw - min(var(--container-width), 100vw)) / 2 + var(--container-px));
+  --qs-hero-recuo-y: 55px;
+  /* Quanto o bloco do título recua da base. Abaixo de 1024 vale a altura da
+     forma, para o texto ficar inteiro acima dela; no desktop o branco está mais
+     à direita e o título pode descer, então o valor é menor. */
+  --qs-hero-recuo-baixo: 110px;
+  --qs-hero-tarja: 16px;
+  /* AJUSTE: o arquivo usava 48px sobre uma coluna de 600px (recuo de 120). Com o
+     recuo do site a coluna fica em 520px, e 48px quebraria o título em 7 linhas.
+     44px devolve as mesmas 5 linhas do arquivo original — é o menor ajuste que
+     preserva a diagramação. */
+  --qs-hero-titulo: 44px;
+  --qs-hero-titulo-peso: var(--fw-light);
+  --qs-hero-titulo-entrelinha: 1.45;
+
+  /* ---- gradiente sobre a foto ---- */
+  --qs-grad-angulo: 45deg;
+  --qs-grad-forte: 0%;
+  --qs-grad-meio: 35%;
+  --qs-grad-fim: 70%;
+
+  /* ---- seção 2: a forma + o texto ---- */
+  --qs-forma-altura: 160px;
+  --qs-forma-faixa: 14px;
+  --qs-forma-diagonal: 460px;
+  /* AJUSTE: no arquivo o bloco branco tinha largura fixa (560px) e ficava colado
+     na borda da TELA. Em tela larga o container recua mais que ele, e o texto do
+     claim — que é ancorado no container — sobrava para a esquerda do branco, caindo
+     sobre a foto (a 2000px sobrava 335px).
+
+     Agora a medida é a distância entre o começo do branco e a borda direita do
+     CONTEÚDO; a largura vem dessa distância mais o recuo até a borda da tela.
+     Resultado: o branco fica parado em relação ao conteúdo e o excesso vira
+     branco até a borda direita, nunca vazio. */
+  --qs-forma-branco: 300px;
+  --qs-claim: 22px;
+  --qs-claim-entrelinha: 2;
+}
+
+.qs-hero {
+  padding: 0 var(--qs-hero-recuo);
+  background:
+    linear-gradient(var(--qs-grad-angulo),
+      #000 var(--qs-grad-forte),
+      rgba(0, 0, 0, .75) var(--qs-grad-meio),
+      rgba(0, 0, 0, 0) var(--qs-grad-fim)) no-repeat,
+    var(--qs-hero-imagem) center / cover no-repeat;
+}
+.qs-hero__row {
+  display: flex;
+  align-items: stretch;
+  justify-content: flex-start;
+  min-height: var(--qs-hero-altura);
+}
+.qs-hero__col {
+  flex: 1 1 0;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  /* AJUSTE: no arquivo os dois recuos eram 55px, e a última linha do título caía
+     dentro da forma branca — lá funcionava porque a quebra deixava uma palavra
+     curta no fim; com a coluna mais estreita do site a linha final é longa e
+     desaparecia sob o branco. O recuo de baixo passa a acompanhar a altura da
+     forma, então o texto termina sempre acima dela, qualquer que seja a quebra. */
+  padding-top: var(--qs-hero-recuo-y);
+  padding-bottom: var(--qs-hero-recuo-baixo);
+}
+.qs-hero__eyebrow {
+  font-weight: var(--fw-semibold);
+  font-size: var(--qs-hero-tarja);
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--color-primary);
+}
+.qs-hero__title {
+  margin: 0;
+  font-weight: var(--qs-hero-titulo-peso);
+  font-size: var(--qs-hero-titulo);
+  line-height: var(--qs-hero-titulo-entrelinha);
+  color: var(--color-text-white);
+  text-wrap: pretty;
+}
+
+/* ---------- seção 2: a forma sobreposta ---------- */
+.qs-forma-secao {
+  position: relative;
+  z-index: 1;
+  /* sobe a própria altura, então sobrepõe a base do hero sem ocupar espaço */
+  margin-top: calc(var(--qs-forma-altura) * -1);
+}
+.qs-forma {
+  position: relative;
+  min-height: var(--qs-forma-altura);
+  overflow: hidden;
+}
+.qs-forma__camadas { position: absolute; inset: 0; display: flex; align-items: stretch; }
+.qs-forma__esq { flex: 1 1 0; position: relative; }
+.qs-forma__faixa {
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  height: var(--qs-forma-faixa);
+  background: var(--color-bg-white);
+}
+.qs-forma__svg {
+  flex: 0 1 var(--qs-forma-diagonal);
+  min-width: 160px;
+  height: 100%;
+  display: block;
+}
+.qs-forma__dir {
+  flex: 0 0 calc(var(--qs-hero-recuo) + var(--qs-forma-branco));
+  background: var(--color-bg-white);
+}
+.qs-forma__texto {
+  position: relative;
+  z-index: 1;
+  min-height: var(--qs-forma-altura);
+  display: flex;
+  /* AJUSTE: era `center` com 14px de padding em cima e embaixo, o que deixava 21px
+     de folga sob a última linha. Agora o texto encosta na base do bloco. */
+  align-items: flex-end;
+  justify-content: flex-end;
+  padding: 14px var(--qs-hero-recuo) 0 0;
+}
+.qs-claim {
+  margin: 0;
+  /* No desktop a largura vem das quebras manuais do <br>; amarrá-la a
+     --qs-forma-branco fazia o texto re-quebrar e a forma crescer quando o bloco
+     branco andava de lugar. No mobile, onde os <br> somem, há um limite próprio. */
+  max-width: none;
+  font-weight: var(--fw-light);
+  font-size: var(--qs-claim);
+  line-height: var(--qs-claim-entrelinha);
+  color: var(--color-text-dark);
+}
+.qs-claim strong { color: var(--color-primary); font-weight: var(--fw-semibold); }
+
+/* AJUSTE: o arquivo quebrava em 1150px e 900px. Passa a usar os pontos de
+   quebra do site (1024 e 768), para o hero mudar junto com as outras seções. */
+@media (max-width: 1024px) {
+  :root {
+    --qs-hero-titulo: 40px;
+    --qs-forma-diagonal: 300px;
+    /* recuo aqui é 40, então o branco fecha nos 520px do arquivo */
+    --qs-forma-branco: 480px;
+    --qs-hero-recuo-baixo: calc(var(--qs-forma-altura) + 16px);
+    --qs-claim: 17px;
+  }
+}
+@media (max-width: 768px) {
+  :root {
+    /* AJUSTE: medido a 375px numa coluna de 335 — 30px quebrava em 7 linhas,
+       28px em 5 e 26px em 4. Fica 26. */
+    --qs-hero-titulo: 26px;
+    --qs-forma-altura: 200px;
+    --qs-forma-diagonal: 200px;
+    --qs-forma-branco: 280px;
+    --qs-claim: 16px;
+    --qs-hero-tarja: 13px;
+  }
+  /* AJUSTE: as quebras de linha manuais do claim não caberiam aqui. */
+  .qs-claim br { display: none; }
+  /* AJUSTE: a linha do hero continuava em duas colunas, e a do título ficava com
+     167px — o título quebrava em 8 linhas. A segunda coluna é só espaçador, então
+     sai de cena e o título passa a usar a largura inteira do container. */
+  .qs-hero__col[aria-hidden] { display: none; }
+
+  /* AJUSTE: os min-width do arquivo (160 na diagonal + 240 no bloco branco)
+     somam 400px numa tela de 375 — a forma estourava e o `overflow: hidden`
+     cortava o lado esquerdo, deixando uma emenda visível. Aqui as três partes
+     passam a ser proporcionais e fecham em 100%. */
+  .qs-forma__esq { flex: 0 0 14%; }
+  .qs-forma__svg { flex: 0 0 22%; min-width: 0; }
+  .qs-forma__dir { flex: 1 1 auto; min-width: 0; }
+  /* O claim tem de caber DENTRO do bloco branco, que aqui vale 100% − 14% − 22%
+     = 64% da forma. Sem esse limite ele cresce para a largura toda e o texto
+     vaza para a esquerda da diagonal, sobre a foto. */
+  .qs-claim { max-width: calc(64% - 24px); }
+}
+
+/* ==========================================================================
+   2. FAIXA DE LOGOS DO GRUPO — preenchem o bloco, espaçamento igual
+   ========================================================================== */
+.qs-brands {
+  padding: 64px 0;
+  background: var(--color-bg-white);
+}
+.qs-brands__list {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 32px;
+}
+.qs-brands__list img {
+  flex: 1 1 0;
+  min-width: 0;
+  height: 54px;
+  width: auto;
+  max-width: 100%;
+  object-fit: contain;
+  opacity: 0.55;
+  filter: grayscale(1);
+  transition: opacity var(--transition), filter var(--transition);
+}
+.qs-brands__list img:hover { opacity: 1; filter: grayscale(0); }
+
+/* ==========================================================================
+   3. SOBRE A WM — grade modular, mesma lógica do bento de feiras da página
+      de aeronaves, mas dentro do container do site.
+
+      A grade é um .container: respeita --container-px e o teto de 1200px,
+      igual a todas as outras seções. Isso também resolve a deriva no zoom —
+      antes ela era full-bleed (100vw), então ao afastar a tela ela continuava
+      alargando enquanto o resto da página parava nos 1200px, e a seção
+      "descolava" das vizinhas. Preso ao container, o grid escala junto.
+
+      Geometria: 12 colunas de 1fr; as células de uma coluna carregam
+      aspect-ratio 201/157 (a proporção do bento de aeronaves) e é isso que
+      define a altura das linhas — tudo derivado da largura do container, sem
+      nenhuma medida fixa. Mexer em --qs-bento-celula reescala a grade inteira.
+   ========================================================================== */
+.qs-bento {
+  /* ---- Os parâmetros da grade ----
+     Tudo abaixo deriva da largura do container, então a grade acompanha
+     qualquer mudança de zoom ou de tela em vez de ficar presa a medidas fixas.
+
+       --qs-bento-colunas .... quantas colunas a grade tem
+       --qs-bento-celula ..... proporção largura/altura da célula de 1 coluna
+                               (201/157 é a do bento de feiras das aeronaves)
+       --qs-bento-col ........ largura calculada de 1 coluna
+       --qs-bento-linha ...... altura calculada de 1 linha
+
+     Mexer em --qs-bento-celula reescala a grade inteira sem tocar em mais nada. */
+  --qs-bento-colunas: 12;
+  --qs-bento-celula: 201 / 157;
+  --qs-bento-col: calc(
+    (min(var(--container-width), 100vw) - var(--container-px) * 2) / var(--qs-bento-colunas)
+  );
+  --qs-bento-linha: calc(var(--qs-bento-col) * 157 / 201);
+
+  padding: 48px 0 var(--section-py);
+}
+.qs-bento__grid {
+  display: grid;
+  grid-template-columns: repeat(var(--qs-bento-colunas), minmax(0, 1fr));
+  /* Altura de linha explícita: se ela viesse do conteúdo, o bloco de texto —
+     que é mais alto que as linhas que ocupa — esticaria as linhas e as fotos
+     perderiam a proporção do layout. */
+  grid-auto-rows: var(--qs-bento-linha);
+  gap: 0;
+}
+.qs-bento__cell {
+  width: 100%;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-sizing: border-box;
+}
+/* Blocos decorativos — o cinza que aparece "solto" na grade. Dentro do
+   container não há mais margem para eles sangrarem, então ocupam as células
+   livres acima e abaixo do conteúdo. */
+.qs-bento__cell--decor { background: #f2f2f2; }
+.qs-bento__cell--d1 { grid-column: 7;  grid-row: 7; }
+.qs-bento__cell--d2 { grid-column: 12; grid-row: 7; }
+.qs-bento__cell--d3,
+.qs-bento__cell--d4 { display: none; }
+
+/* Célula mesclada do texto — metade da grade */
+.qs-bento__cell--texto {
+  grid-column: 1 / 7;
+  /* 7 linhas: o texto precisa de ~450px e cada linha tem ~68px. Dar folga aqui
+     é o que impede o texto de esticar as linhas e achatar as fotos. */
+  grid-row: 1 / 8;
+  aspect-ratio: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-right: 40px;
+}
+.qs-about__title {
+  font-size: var(--fs-xl);
+  font-weight: var(--fw-light);
+  line-height: 1.25;
+  margin-bottom: 28px;
+}
+.qs-about__title span { display: block; color: var(--color-primary); }
+.qs-about__text {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  color: var(--color-text-muted);
+  font-size: var(--fs-sm);
+  line-height: 1.9;
+}
+
+/* Células mescladas das fotos — 2 colunas × 2 linhas cada */
+.qs-bento__cell--foto { background: #f2f2f2; }
+.qs-bento__cell--foto img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.qs-bento__cell--foto:hover img { transform: scale(1.05); }
+/* 3 colunas × 3 linhas cada: 260×203 num container de 1040, ou seja 1,28 —
+   a mesma proporção das fotos do print. */
+.qs-bento__cell--f1 { grid-column: 7 / 10;  grid-row: 1 / 4; aspect-ratio: auto; }
+.qs-bento__cell--f2 { grid-column: 10 / 13; grid-row: 1 / 4; aspect-ratio: auto; }
+.qs-bento__cell--f3 { grid-column: 7 / 10;  grid-row: 4 / 7; aspect-ratio: auto; }
+.qs-bento__cell--f4 { grid-column: 10 / 13; grid-row: 4 / 7; aspect-ratio: auto; }
+/* Respiro entre as fotos sem usar gap (que afastaria os decorativos também) */
+.qs-bento__cell--f1 { margin: 0 6px 6px 0; }
+.qs-bento__cell--f2 { margin: 0 0 6px 6px; }
+.qs-bento__cell--f3 { margin: 6px 6px 0 0; }
+.qs-bento__cell--f4 { margin: 6px 0 0 6px; }
+
+/* ==========================================================================
+   4. NÚMEROS — cards com os ícones da identidade
+   ========================================================================== */
+.qs-kpis { padding: 24px 0 var(--section-py); }
+.qs-kpis__grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+}
+.qs-kpi {
+  background: var(--color-bg-light);
+  border-radius: var(--radius-lg);
+  padding: 36px 32px 40px;
+}
+.qs-kpi__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 58px;
+  height: 58px;
+  border-radius: var(--radius-md);
+  background: #e6e6e6;
+  color: var(--color-text-dark);
+  margin-bottom: 34px;
+}
+/* Os ícones entram como máscara: o SVG define a forma, o CSS define a cor —
+   é o que permite o mesmo arquivo virar branco no selo laranja. */
+.qs-kpi__glifo {
+  width: 32px;
+  height: 32px;
+  background-color: currentColor;
+  -webkit-mask: var(--qs-ico) center / contain no-repeat;
+          mask: var(--qs-ico) center / contain no-repeat;
+}
+.qs-kpi__icon--anos      { --qs-ico: url('/images/quem-somos/icones/aperto-de-mao.svg'); }
+.qs-kpi__icon--filiais   { --qs-ico: url('/images/quem-somos/icones/filiais.svg'); }
+.qs-kpi__icon--iso       { --qs-ico: url('/images/quem-somos/icones/certificado.svg'); }
+.qs-kpi__icon--satisfacao{ --qs-ico: url('/images/quem-somos/icones/satisfacao.svg'); }
+/* O selo do certificado é mais alto que largo — ganha um pouco mais de altura */
+.qs-kpi__icon--iso .qs-kpi__glifo { width: 28px; height: 34px; }
+
+/* O primeiro selo é laranja — dá o acento de marca na faixa */
+.qs-kpi:first-child .qs-kpi__icon { background: var(--color-primary); color: #fff; }
+.qs-kpi__value {
+  font-size: var(--fs-lg);
+  font-weight: var(--fw-light);
+  line-height: 1.1;
+  color: var(--color-primary);
+}
+.qs-kpi__label {
+  margin-top: 6px;
+  font-size: var(--fs-base);
+  color: var(--color-text-dark);
+}
+
+/* ==========================================================================
+   5. COMPROMISSO (missão, visão e valores)
+   ========================================================================== */
+.qs-commitment { padding: 24px 0 var(--section-py); }
+.qs-commitment__head { max-width: 640px; }
+.qs-commitment__title {
+  font-size: var(--fs-xl);
+  font-weight: var(--fw-light);
+  line-height: 1.35;
+  margin-bottom: 16px;
+}
+.qs-commitment__title .text-primary { color: var(--color-primary); }
+.qs-commitment__sub {
+  font-size: var(--fs-sm);
+  line-height: 1.8;
+  color: var(--color-text-muted);
+  max-width: 480px;
+}
+/* Slot reservado: recebe missão, visão e valores quando o conteúdo chegar. */
+.qs-commitment__slot:empty { display: none; }
+
+/* ==========================================================================
+   6. NOSSAS ATUAÇÕES
+   ========================================================================== */
+.qs-atuacoes {
+  background: var(--color-bg-light);
+  padding: var(--section-py) 0;
+  border-radius: var(--radius-xl);
+}
+.qs-atuacoes__title {
+  text-align: center;
+  font-size: var(--fs-xl);
+  font-weight: var(--fw-light);
+  color: var(--color-primary);
+  margin-bottom: 14px;
+}
+.qs-atuacoes__sub {
+  text-align: center;
+  font-size: var(--fs-sm);
+  line-height: 1.8;
+  color: var(--color-text-dark);
+  max-width: 620px;
+  margin: 0 auto 48px;
+}
+.qs-atuacoes__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+.qs-atuacao {
+  background: var(--color-bg-white);
+  border-radius: var(--radius-lg);
+  padding: 12px 12px 30px;
+  box-shadow: var(--shadow-card);
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+.qs-atuacao:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 28px rgba(0,0,0,0.10);
+}
+.qs-atuacao img {
+  width: 100%;
+  aspect-ratio: 4 / 1;
+  object-fit: cover;
+  border-radius: var(--radius-md);
+  margin-bottom: 22px;
+}
+.qs-atuacao__title {
+  font-size: var(--fs-lg);
+  font-weight: var(--fw-light);
+  color: var(--color-primary);
+  margin: 0 26px 12px;
+}
+.qs-atuacao__desc {
+  margin: 0 26px;
+  font-size: var(--fs-sm);
+  line-height: 1.8;
+  color: var(--color-text-dark);
+}
+
+/* ==========================================================================
+   7. POLÍTICA DE QUALIDADE
+   ========================================================================== */
+.qs-quality { padding: var(--section-py) 0; }
+.qs-split {
+  display: grid;
+  grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+  gap: 72px;
+}
+.qs-split__title {
+  font-size: var(--fs-xl);
+  font-weight: var(--fw-light);
+  line-height: 1.35;
+  margin-bottom: 40px;
+}
+.qs-split__title .text-primary { color: var(--color-primary); }
+.qs-split__body {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  font-size: var(--fs-sm);
+  line-height: 1.85;
+  color: var(--color-text-dark);
+  text-align: justify;
+}
+.qs-quality__quote { font-style: normal; margin: 0; }
+.qs-quality__rev { display: inline-block; color: var(--color-text-muted); }
+/* O certificado preenche o bloco inteiro da coluna */
+.qs-quality__seal {
+  display: block;
+  border: 1.5px solid #e3e3e3;
+  border-radius: var(--radius-lg);
+  padding: 28px 32px;
+  background: #fff;
+}
+.qs-quality__seal img { width: 100%; height: auto; display: block; }
+
+/* ==========================================================================
+   8. ÍNDICE DE SATISFAÇÃO — gráficos animados
+   --------------------------------------------------------------------------
+   O traço nasce vazio (dashoffset = comprimento total) e corre até a marca
+   quando a seção entra na tela. A classe .is-animado é posta pelo JS, então
+   sem JS o gráfico aparece já preenchido em vez de vazio.
+   ========================================================================== */
+.qs-satisfacao { padding: 0 0 var(--section-py); }
+
+.qs-gauge-main {
+  background: var(--color-bg-light);
+  border-radius: var(--radius-lg);
+  padding: 34px;
+  display: flex;
+  justify-content: center;
+  transition: background var(--transition);
+}
+.qs-gauge-main svg { width: 200px; max-width: 100%; height: auto; overflow: visible; }
+.qs-gauge__track { stroke: #dcdcdc; }
+.qs-gauge__fill {
+  stroke: var(--color-primary);
+  transition: stroke-dashoffset 1.6s cubic-bezier(0.25, 1, 0.35, 1),
+              stroke-width var(--transition);
+}
+.qs-gauge.is-animado .qs-gauge__fill { stroke-dashoffset: var(--qs-vazio); }
+.qs-gauge.is-animado.is-cheio .qs-gauge__fill { stroke-dashoffset: var(--qs-cheio); }
+
+.qs-gauge-main .qs-gauge__pct {
+  font-size: 40px;
+  font-weight: var(--fw-light);
+  fill: var(--color-primary);
+}
+.qs-gauge-main .qs-gauge__period { font-size: 13px; fill: var(--color-text-dark); }
+
+/* Interação com o mouse: o anel engrossa e o card acende */
+.qs-gauge-main:hover { background: #efefef; }
+.qs-gauge-main:hover .qs-gauge__fill { stroke-width: 20; }
+
+.qs-gauge-row {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 12px;
+}
+.qs-gauge-mini {
+  background: var(--color-bg-light);
+  border-radius: var(--radius-lg);
+  padding: 20px 10px 14px;
+  display: flex;
+  justify-content: center;
+  cursor: default;
+  transition: background var(--transition), transform var(--transition);
+}
+.qs-gauge-mini svg { width: 100%; max-width: 108px; height: auto; overflow: visible; }
+.qs-gauge-mini .qs-gauge__track { stroke: #dcdcdc; }
+.qs-gauge-mini .qs-gauge__fill { stroke: #7d7d7d; transition: stroke-dashoffset 1.4s cubic-bezier(0.25, 1, 0.35, 1), stroke var(--transition); }
+.qs-gauge-mini .qs-gauge__pct { font-size: 17px; fill: var(--color-text-dark); font-weight: var(--fw-regular); transition: fill var(--transition); }
+.qs-gauge-mini .qs-gauge__period { font-size: 9px; fill: var(--color-text-muted); }
+/* Ao passar o mouse, o semestre vira laranja — deixa comparar com o atual */
+.qs-gauge-mini:hover { background: #efefef; transform: translateY(-3px); }
+.qs-gauge-mini:hover .qs-gauge__fill { stroke: var(--color-primary); }
+.qs-gauge-mini:hover .qs-gauge__pct { fill: var(--color-primary); }
+
+/* Quem pediu menos animação no sistema não recebe animação nenhuma */
+@media (prefers-reduced-motion: reduce) {
+  .qs-gauge.is-animado .qs-gauge__fill { stroke-dashoffset: var(--qs-cheio); }
+  .qs-gauge__fill { transition: none; }
+  .qs-gauge-mini { transition: background var(--transition); }
+  .qs-gauge-mini:hover { transform: none; }
+}
+
+/* ==========================================================================
+   9. CARREIRAS — padrão WM no fundo, à direita
+   ========================================================================== */
+.qs-carreiras {
+  position: relative;
+  background: #2F2F2F;
+  color: var(--color-text-white);
+  border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+  padding: 96px 0;
+  overflow: hidden;
+}
+.qs-carreiras::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 46%;
+  background: url('/images/quem-somos/padrao-wm-background.svg') right center / auto 100% no-repeat;
+  pointer-events: none;
+}
+.qs-carreiras__grid {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+  gap: 64px;
+  align-items: center;
+}
+.qs-carreiras__title {
+  font-size: var(--fs-xl);
+  font-weight: var(--fw-light);
+  color: var(--color-text-white);
+  margin-bottom: 20px;
+}
+.qs-carreiras__text {
+  font-size: var(--fs-sm);
+  line-height: 1.9;
+  color: rgba(255,255,255,0.82);
+  margin-bottom: 30px;
+  max-width: 420px;
+}
+.qs-carreiras img {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  border-radius: var(--radius-lg);
+}
+
+/* ==========================================================================
+   RESPONSIVO
+   ========================================================================== */
+@media (max-width: 1024px) {
+  /* Nesta faixa não cabem título e nota lado a lado: a nota comia as últimas
+     linhas do título. Em vez de estrangular o texto numa coluna de ~420px, a
+     nota sai do canto e fecha a lâmina como faixa de largura inteira — o mesmo
+     tratamento do mobile. Assim o título usa o container todo e respira. */
+  .qs-brands__list { flex-wrap: wrap; justify-content: center; gap: 32px 48px; }
+  .qs-brands__list img { flex: 0 0 auto; height: 42px; }
+
+  /* A grade cai para 6 colunas: texto em cima, fotos embaixo */
+  .qs-bento__grid {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    --qs-bento-colunas: 6;
+  }
+  .qs-bento__cell--texto { grid-column: 1 / 7; grid-row: 1; padding: 0 0 40px; }
+  .qs-bento__cell--f1 { grid-column: 2 / 4; grid-row: 2 / 4; }
+  .qs-bento__cell--f2 { grid-column: 4 / 6; grid-row: 2 / 4; }
+  .qs-bento__cell--f3 { grid-column: 2 / 4; grid-row: 4 / 6; }
+  .qs-bento__cell--f4 { grid-column: 4 / 6; grid-row: 4 / 6; }
+  .qs-bento__cell--d1 { grid-column: 1; grid-row: 2; }
+  .qs-bento__cell--d2 { grid-column: 6; grid-row: 3; }
+  .qs-bento__cell--d3,
+  .qs-bento__cell--d4 { display: none; }
+
+  .qs-split,
+  .qs-carreiras__grid { grid-template-columns: minmax(0, 1fr); gap: 40px; }
+  .qs-kpis__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .qs-split__title { margin-bottom: 24px; }
+}
+
+@media (max-width: 768px) {
+  /* No mobile a lâmina é mais alta que larga: o corte já é horizontal e o
+     deslocamento do desktop só jogaria a fachada para fora do quadro. */
+  /* Só as verticais: o padding horizontal é o do .container e não pode ser
+     zerado por um shorthand, senão o título encosta na borda da tela. */
+  .qs-brands { padding: 40px 0; }
+  .qs-brands__list { gap: 24px 36px; }
+  .qs-brands__list img { height: 32px; }
+
+  /* Grade some no mobile: texto e fotos empilhados, decorativos fora */
+  .qs-bento { padding-top: 8px; }
+  .qs-bento__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-auto-rows: auto;   /* empilhado: a altura volta a vir do conteúdo */
+  }
+  .qs-bento__cell--texto { grid-column: 1 / 3; grid-row: 1; padding: 0 0 32px; }
+  .qs-bento__cell--f1 { grid-column: 1; grid-row: 2; margin: 0 4px 8px 0; }
+  .qs-bento__cell--f2 { grid-column: 2; grid-row: 2; margin: 0 0 8px 4px; }
+  .qs-bento__cell--f3 { grid-column: 1; grid-row: 3; margin: 0 4px 0 0; }
+  .qs-bento__cell--f4 { grid-column: 2; grid-row: 3; margin: 0 0 0 4px; }
+  .qs-bento__cell--decor { display: none; }
+
+  .qs-kpis__grid { grid-template-columns: minmax(0, 1fr); }
+  .qs-kpi { padding: 26px 24px 28px; }
+  .qs-kpi__icon { margin-bottom: 20px; }
+  .qs-atuacoes { border-radius: 0; }
+  .qs-atuacoes__grid { grid-template-columns: minmax(0, 1fr); }
+  .qs-gauge-main { padding: 22px; }
+  .qs-gauge-mini { padding: 16px 6px 12px; }
+  .qs-atuacao img { aspect-ratio: 16 / 7; }
+  .qs-atuacao__title,
+  .qs-atuacao__desc { margin-left: 18px; margin-right: 18px; }
+  .qs-quality__seal { padding: 20px; }
+  .qs-split__body { text-align: left; }
+  .qs-carreiras { padding: 64px 0; border-radius: 0; }
+  .qs-carreiras::before { width: 100%; opacity: 0.5; }
+}

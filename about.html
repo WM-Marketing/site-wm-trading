@@ -47,6 +47,11 @@
   <link rel="stylesheet" href="/css/dynamic-pages.css" />
   <script src="/js/contact-form.js" defer></script>
   <script src="/js/lightbox.js" defer></script>
+  <!-- Diagramação exclusiva desta página (layout aprovado no Figma) -->
+  <link rel="stylesheet" href="/css/quem-somos.css" />
+  <link rel="preload" as="image" href="/images/quem-somos/hero-sede.webp" />
+  <!-- Mantém "22 anos de experiência" correto a cada virada de ano -->
+  <script src="/js/anos-experiencia.js" defer></script>
 
   <link rel="alternate" hreflang="pt-BR" href="https://www.wmtrading.com.br/about/" />
   <link rel="alternate" hreflang="en" href="https://www.wmtrading.com.br/en/about/" />
@@ -186,109 +191,296 @@
 
 <main>
 
-    <section class="dynamic-hero">
-      <div class="container dynamic-hero__container">
-        <p class="dynamic-hero__eyebrow">Conheça nossa história</p>
-        <h1 class="dynamic-hero__title">Desde 2004 conectando mercados, movimentando negócios e aproximando pessoas.</h1>
-        <p class="dynamic-hero__subtitle">A WM carrega no centro do seu DNA a busca incessante pela excelência e agilidade em todas as entregas.</p>
+    <!-- ══════════════════════════════════════
+         1. HERO — do hero-wm.html entregue em código
+    ══════════════════════════════════════ -->
+    <section class="qs-hero">
+      <div class="qs-hero__row">
+        <div class="qs-hero__col">
+          <p class="qs-hero__eyebrow">Conheça nossa história</p>
+          <h1 class="qs-hero__title">Desde 2004 conectando mercados, movimentando negócios e aproximando pessoas.</h1>
+        </div>
+        <div class="qs-hero__col" aria-hidden="true"></div>
       </div>
     </section>
-    
-    <section class="page-section">
-      <div class="container intro-container">
-        <h2 class="t-h2" style="margin-bottom:20px;">Sobre a WM</h2>
-        <div class="intro-text" style="color:var(--color-text-muted); display:flex; flex-direction:column; gap:16px;">
-          <p>Tendo o cliente como centro do nosso negócio, rapidamente expandimos nossa atividade, ampliando o número de filiais, conquistando novos benefícios fiscais e ganhando espaço no mercado internacional. Mais do que obcecados por entregar o melhor projeto logístico e tributário, lutamos diariamente para cultivar nossos clientes.</p>
-          <p>Hoje a WM é uma das maiores tradings do Brasil, disposta a entregar projetos personalizados para diversas empresas e segmentos. Os 21 anos de experiência em operações bem-sucedidas traduzem a intensidade do desejo de cumprir nossa principal missão: ser a mais completa solução em comércio exterior.</p>
+
+    <!-- A forma branca que sobrepõe a base do hero. Os dois Q do path são os
+         cantos arredondados (raio ~28 em cima, ~26 embaixo). -->
+    <section class="qs-forma-secao">
+      <div class="qs-forma">
+        <div class="qs-forma__camadas">
+          <div class="qs-forma__esq"><div class="qs-forma__faixa"></div></div>
+          <svg class="qs-forma__svg" viewBox="0 0 460 160" width="460" height="160"
+               preserveAspectRatio="none" aria-hidden="true">
+            <path d="M0 160 H460 V0 H330 Q302 0 286 16 L166 132 Q150 146 124 146 H0 Z" fill="#fff"></path>
+          </svg>
+          <div class="qs-forma__dir"></div>
         </div>
-      </div>
-    </section>
-    
-    <section class="specifications-section" style="background:var(--color-bg-light);">
-      <div class="container specs-grid" style="grid-template-columns: repeat(2, 1fr);">
-        <div class="spec-card">
-          <p class="spec-card__value">21 anos</p>
-          <p class="spec-card__label">de experiência</p>
-        </div>
-        <div class="spec-card">
-          <p class="spec-card__value">15 filiais</p>
-          <p class="spec-card__label">Brasil + Panamá</p>
-        </div>
-        <div class="spec-card">
-          <p class="spec-card__value">ISO 9001</p>
-          <p class="spec-card__label">certificação</p>
-        </div>
-        <div class="spec-card">
-          <p class="spec-card__value">90%</p>
-          <p class="spec-card__label">satisfação dos clientes</p>
+        <div class="qs-forma__texto">
+          <p class="qs-claim">
+            A <strong>WM</strong> carrega no centro do seu DNA<br>
+            a busca incessante pela <strong>excelência</strong> e<br>
+            <strong>agilidade em todas as entregas.</strong>
+          </p>
         </div>
       </div>
     </section>
-    
-    <section class="page-section">
+
+    <!-- ══════════════════════════════════════
+         2. MARCAS DO GRUPO
+    ══════════════════════════════════════ -->
+    <section class="qs-brands" aria-label="Marcas do grupo WM">
       <div class="container">
-        <h2 class="section-title-center">Nossos valores</h2>
-        <div class="values-wrap">
-          <span class="value-pill">Inovação e melhoria contínua</span>
-<span class="value-pill">Agilidade</span>
-<span class="value-pill">Ética e transparência</span>
-<span class="value-pill">Conectividade</span>
-<span class="value-pill">Desenvolvimento da empresa e das pessoas</span>
-<span class="value-pill">Cliente no centro do negócio</span>
-<span class="value-pill">Excelência</span>
+        <div class="qs-brands__list">
+          <!-- PLACEHOLDER: recortes do print. Trocar pelos logos vetoriais (SVG). -->
+          <img src="/images/quem-somos/PLACEHOLDER-logo-wm-trading.png" alt="WM Trading" />
+          <img src="/images/quem-somos/PLACEHOLDER-logo-simple-hubi.png" alt="simple hubi" />
+          <img src="/images/quem-somos/PLACEHOLDER-logo-wm-energy.png" alt="WM Energy" />
+          <img src="/images/quem-somos/PLACEHOLDER-logo-wm-logistics.png" alt="WM Logistics" />
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════
+         3. SOBRE A WM — grade modular de 12 colunas, mesma lógica do
+            bento de feiras da página de aeronaves
+    ══════════════════════════════════════ -->
+    <section class="qs-bento">
+      <div class="container qs-bento__grid">
+
+        <!-- Células vazias: são os blocos cinza soltos da grade -->
+        <div class="qs-bento__cell qs-bento__cell--decor qs-bento__cell--d1" aria-hidden="true"></div>
+        <div class="qs-bento__cell qs-bento__cell--decor qs-bento__cell--d2" aria-hidden="true"></div>
+        <div class="qs-bento__cell qs-bento__cell--decor qs-bento__cell--d3" aria-hidden="true"></div>
+        <div class="qs-bento__cell qs-bento__cell--decor qs-bento__cell--d4" aria-hidden="true"></div>
+
+        <!-- Célula mesclada do texto -->
+        <div class="qs-bento__cell qs-bento__cell--texto">
+          <h2 class="qs-about__title">Sobre a <span>WM Trading</span></h2>
+          <div class="qs-about__text">
+            <p>Tendo o cliente como centro do nosso negócio, rapidamente expandimos nossa atividade, ampliando o número de filiais, conquistando novos benefícios fiscais e ganhando espaço no mercado internacional. Mais do que obcecados por entregar o melhor projeto logístico e tributário, lutamos diariamente para cultivar nossos clientes.</p>
+            <p>Hoje a WM é uma das maiores tradings do Brasil, disposta a entregar projetos personalizados para diversas empresas e segmentos. Os <span data-wm-anos-desde="2004">22</span> anos de experiência em operações bem-sucedidas traduzem a intensidade do desejo de cumprir nossa principal missão: ser a mais completa solução em comércio exterior.</p>
+          </div>
+        </div>
+
+        <!-- Células mescladas das fotos -->
+        <!-- PLACEHOLDER: recortes do print. Trocar pelas fotos originais. -->
+        <div class="qs-bento__cell qs-bento__cell--foto qs-bento__cell--f1">
+          <img src="/images/quem-somos/PLACEHOLDER-mosaico-1-fachada.jpg" alt="Fachada da sede da WM Trading" />
+        </div>
+        <div class="qs-bento__cell qs-bento__cell--foto qs-bento__cell--f2">
+          <img src="/images/quem-somos/PLACEHOLDER-mosaico-2-reuniao.jpg" alt="Equipe da WM Trading em reunião" />
+        </div>
+        <div class="qs-bento__cell qs-bento__cell--foto qs-bento__cell--f3">
+          <img src="/images/quem-somos/PLACEHOLDER-mosaico-3-openspace.jpg" alt="Escritório da WM Trading em open space" />
+        </div>
+        <div class="qs-bento__cell qs-bento__cell--foto qs-bento__cell--f4">
+          <img src="/images/quem-somos/PLACEHOLDER-mosaico-4-lounge.jpg" alt="Área de convivência da sede da WM Trading" />
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════
+         4. NÚMEROS — ícones da identidade, aplicados como máscara CSS
+    ══════════════════════════════════════ -->
+    <section class="qs-kpis" aria-label="A WM em números">
+      <div class="container qs-kpis__grid">
+
+        <div class="qs-kpi">
+          <span class="qs-kpi__icon qs-kpi__icon--anos" aria-hidden="true"><i class="qs-kpi__glifo"></i></span>
+          <p class="qs-kpi__value"><span data-wm-anos-desde="2004">22</span> anos</p>
+          <p class="qs-kpi__label">de experiência</p>
+        </div>
+
+        <div class="qs-kpi">
+          <span class="qs-kpi__icon qs-kpi__icon--filiais" aria-hidden="true"><i class="qs-kpi__glifo"></i></span>
+          <p class="qs-kpi__value">15 filiais</p>
+          <p class="qs-kpi__label">Brasil + Panamá</p>
+        </div>
+
+        <div class="qs-kpi">
+          <span class="qs-kpi__icon qs-kpi__icon--iso" aria-hidden="true"><i class="qs-kpi__glifo"></i></span>
+          <p class="qs-kpi__value">ISO 9001</p>
+          <p class="qs-kpi__label">certificação</p>
+        </div>
+
+        <div class="qs-kpi">
+          <span class="qs-kpi__icon qs-kpi__icon--satisfacao" aria-hidden="true"><i class="qs-kpi__glifo"></i></span>
+          <p class="qs-kpi__value">90%</p>
+          <p class="qs-kpi__label">satisfação dos clientes</p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════
+         5. COMPROMISSO — missão, visão e valores
+    ══════════════════════════════════════ -->
+    <section class="qs-commitment">
+      <div class="container">
+        <div class="qs-commitment__head">
+          <h2 class="qs-commitment__title">
+            Entenda o nosso <span class="text-primary">compromisso</span> com
+            o <span class="text-primary">mercado de nacionalização</span>
+          </h2>
+          <p class="qs-commitment__sub">Compreenda nossa missão, visão e valor que agregamos ao mercado de importação.</p>
+        </div>
+
+        <!-- ┌──────────────────────────────────────────────────────────────┐
+             │ SLOT AGUARDANDO CONTEÚDO                                     │
+             │ Missão, visão e valores. O layout do Figma traz apenas o      │
+             │ título e o subtítulo acima — o conteúdo desta seção ainda     │
+             │ não foi definido. Enquanto estiver vazio, o slot não ocupa   │
+             │ espaço na página (regra .qs-commitment__slot:empty).          │
+             └──────────────────────────────────────────────────────────────┘ -->
+        <div class="qs-commitment__slot"></div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════
+         6. NOSSAS ATUAÇÕES
+    ══════════════════════════════════════ -->
+    <section class="qs-atuacoes">
+      <div class="container">
+        <h2 class="qs-atuacoes__title">Nossas Atuações</h2>
+        <p class="qs-atuacoes__sub">Confira como contribuímos para o mercado de nacionalização com nossas soluções. Confira alguns deles:</p>
+
+        <div class="qs-atuacoes__grid">
+
+          <article class="qs-atuacao">
+            <!-- PLACEHOLDER: recorte do print. Trocar pela foto original. -->
+            <img src="/images/quem-somos/PLACEHOLDER-atuacao-1-recepcao.jpg" alt="Recepção da WM Trading com o letreiro We Make it better" />
+            <h3 class="qs-atuacao__title">Atendimento Personalizado</h3>
+            <p class="qs-atuacao__desc">A atenção que prestamos aos nossos clientes é incomparável. Tratamos todos com prioridade e estamos sempre à disposição para oferecer o melhor serviço.</p>
+          </article>
+
+          <article class="qs-atuacao">
+            <!-- PLACEHOLDER: recorte do print. Trocar pela foto original. -->
+            <img src="/images/quem-somos/PLACEHOLDER-atuacao-2-fornecedores.jpg" alt="Equipe comercial da WM Trading em operação" />
+            <h3 class="qs-atuacao__title">Ampla Gama de Fornecedores</h3>
+            <p class="qs-atuacao__desc">Possuímos uma enorme rede de fornecedores com vantagens exclusivas para otimizar o seu processo de importação.</p>
+          </article>
+
+          <article class="qs-atuacao">
+            <!-- PLACEHOLDER: recorte do print. Trocar pela foto original. -->
+            <img src="/images/quem-somos/PLACEHOLDER-atuacao-3-planejamento.jpg" alt="Usina fotovoltaica ao amanhecer" />
+            <h3 class="qs-atuacao__title">Planejamento e Gestão</h3>
+            <p class="qs-atuacao__desc">O planejamento é fundamental para enquadrar a operação na modalidade correta e evitar complicações no processo de importação.</p>
+          </article>
+
+          <article class="qs-atuacao">
+            <!-- PLACEHOLDER: recorte do print. Trocar pela foto original. -->
+            <img src="/images/quem-somos/PLACEHOLDER-atuacao-4-localizacao.jpg" alt="Armazém logístico com mercadorias paletizadas" />
+            <h3 class="qs-atuacao__title">Localização Estratégica</h3>
+            <p class="qs-atuacao__desc">Pensando na otimização da cadeia logística e tributária, estamos estrategicamente localizados em 15 estados brasileiros e no Panamá.</p>
+          </article>
 
         </div>
       </div>
     </section>
-    
-    <section class="page-section page-section--alternate">
-      <div class="container">
-        <h2 class="section-title-center">Diferenciais que fazem de nós a sua melhor escolha</h2>
-        <div class="cards-grid">
-          
-        <div class="benefit-card">
-          <span class="card-number-badge">1</span>
-          <h3 class="card-title">Atendimento Personalizado</h3>
-          <p class="card-desc">A atenção que prestamos aos nossos clientes é incomparável. Tratamos todos com prioridade e estamos sempre à disposição para oferecer o melhor serviço.</p>
+
+    <!-- ══════════════════════════════════════
+         7. POLÍTICA DE QUALIDADE
+    ══════════════════════════════════════ -->
+    <section class="qs-quality">
+      <div class="container qs-split">
+        <div>
+          <h2 class="qs-split__title">Nossa <span class="text-primary">política de qualidade</span> é:</h2>
+          <span class="qs-quality__seal">
+            <img src="/images/quem-somos/selo-iso-9001.png" alt="Certificação ISO 9001 emitida pela Bureau Veritas" />
+          </span>
         </div>
-        
-        <div class="benefit-card">
-          <span class="card-number-badge">2</span>
-          <h3 class="card-title">Ampla Gama de Fornecedores</h3>
-          <p class="card-desc">Possuímos uma enorme rede de fornecedores com vantagens exclusivas para otimizar o seu processo de importação.</p>
-        </div>
-        
-        <div class="benefit-card">
-          <span class="card-number-badge">3</span>
-          <h3 class="card-title">Planejamento e Gestão</h3>
-          <p class="card-desc">O planejamento é fundamental para enquadrar a operação na modalidade correta e evitar complicações no processo de importação.</p>
-        </div>
-        
-        <div class="benefit-card">
-          <span class="card-number-badge">4</span>
-          <h3 class="card-title">Localização Estratégica</h3>
-          <p class="card-desc">Pensando na otimização da cadeia logística e tributária, estamos estrategicamente localizados em 15 estados brasileiros e no Panamá.</p>
-        </div>
-        
+
+        <div class="qs-split__body">
+          <blockquote class="qs-quality__quote">
+            “Na WM Trading, qualidade é entregar soluções descomplicadas, ágeis e confiáveis em comércio exterior, superando as expectativas dos nossos clientes a cada operação. Nossa liderança e equipe se comprometem a agir com ética e transparência, a promover a inovação e a buscar a melhoria contínua das pessoas e dos processos que sustentam esse resultado.”
+            <br /><span class="qs-quality__rev">(Rev.01 – 11/08/2026)</span>
+          </blockquote>
+          <p>A qualidade é nossa prioridade para garantir a sua satisfação. Mantemos um Sistema de Gestão da Qualidade, que nos permite conhecer a opinião dos clientes e aperfeiçoar nossos serviços.</p>
+          <p>Também trabalhamos com o certificado ISO 9001, dentro de padrões internacionais de qualidade. Mantemos programas para melhorar constantemente nosso desempenho e atendimento.</p>
         </div>
       </div>
     </section>
-    
-    <section class="page-section">
-      <div class="container intro-container">
-        <h2 class="t-h2" style="margin-bottom:20px;">Nossa política de qualidade</h2>
-        <blockquote style="border-left: 4px solid var(--color-primary); padding-left: 20px; font-style: italic; color: var(--color-text-muted); font-size: var(--fs-md); margin-bottom: 24px;">
-          “Atuar na Gestão de Comércio Internacional, aproximando empresas, agregando controle nas etapas do processo de importação de mercadorias em geral, com comprometimento e eficácia no atendimento das necessidades dos clientes, com melhoria contínua dos resultados e a capacitação dos nossos colaboradores.”
-        </blockquote>
-        <p class="intro-text" style="color:var(--color-text-muted);">Trabalhamos com o certificado ISO 9001, dentro de padrões internacionais de qualidade, e mantemos um Sistema de Gestão da Qualidade que nos permite conhecer a opinião dos clientes e aperfeiçoar nossos serviços. Na última Pesquisa de Satisfação, atingimos <strong>90% de satisfação</strong> — e seguimos em busca de mais.</p>
+
+    <!-- ══════════════════════════════════════
+         8. ÍNDICE DE SATISFAÇÃO
+    ══════════════════════════════════════ -->
+    <section class="qs-satisfacao">
+      <div class="container qs-split">
+        <div>
+          <h2 class="qs-split__title">Índice de <span class="text-primary">satisfação</span><br />dos nossos clientes</h2>
+
+          <!-- Medidor principal: circunferência de r=80 → 502.65.
+               Traço preenchido = 502.65 × percentual. -->
+          <div class="qs-gauge-main qs-gauge" data-qs-pct="92" style="--qs-vazio:462.4; --qs-cheio:0">
+            <svg viewBox="0 0 200 200" role="img" aria-label="92% de satisfação no primeiro semestre de 2024">
+              <g transform="rotate(-90 100 100)" fill="none" stroke-width="16" stroke-linecap="round">
+                <circle class="qs-gauge__track" cx="100" cy="100" r="80" />
+                <circle class="qs-gauge__fill" cx="100" cy="100" r="80"
+                        stroke-dasharray="462.4 502.7" />
+              </g>
+              <text class="qs-gauge__pct" x="100" y="102" text-anchor="middle" data-qs-num>92%</text>
+              <text class="qs-gauge__period" x="100" y="126" text-anchor="middle">2024/1</text>
+            </svg>
+          </div>
+
+          <!-- Histórico: arco de meia-volta, r=44 → comprimento 138.2. -->
+          <div class="qs-gauge-row">
+            <div class="qs-gauge-mini qs-gauge" data-qs-pct="92" style="--qs-vazio:127.2; --qs-cheio:0">
+              <svg viewBox="0 0 108 66" role="img" aria-label="92% de satisfação no segundo semestre de 2023">
+                <g fill="none" stroke-width="7" stroke-linecap="round">
+                  <path class="qs-gauge__track" d="M10 56 A 44 44 0 0 1 98 56" />
+                  <path class="qs-gauge__fill" d="M10 56 A 44 44 0 0 1 98 56" stroke-dasharray="127.2 138.2" />
+                </g>
+                <text class="qs-gauge__pct" x="54" y="52" text-anchor="middle" data-qs-num>92%</text>
+                <text class="qs-gauge__period" x="54" y="63" text-anchor="middle">2023/2</text>
+              </svg>
+            </div>
+            <div class="qs-gauge-mini qs-gauge" data-qs-pct="90" style="--qs-vazio:124.4; --qs-cheio:0">
+              <svg viewBox="0 0 108 66" role="img" aria-label="90% de satisfação no primeiro semestre de 2023">
+                <g fill="none" stroke-width="7" stroke-linecap="round">
+                  <path class="qs-gauge__track" d="M10 56 A 44 44 0 0 1 98 56" />
+                  <path class="qs-gauge__fill" d="M10 56 A 44 44 0 0 1 98 56" stroke-dasharray="124.4 138.2" />
+                </g>
+                <text class="qs-gauge__pct" x="54" y="52" text-anchor="middle" data-qs-num>90%</text>
+                <text class="qs-gauge__period" x="54" y="63" text-anchor="middle">2023/1</text>
+              </svg>
+            </div>
+            <div class="qs-gauge-mini qs-gauge" data-qs-pct="89" style="--qs-vazio:123.0; --qs-cheio:0">
+              <svg viewBox="0 0 108 66" role="img" aria-label="89% de satisfação no segundo semestre de 2022">
+                <g fill="none" stroke-width="7" stroke-linecap="round">
+                  <path class="qs-gauge__track" d="M10 56 A 44 44 0 0 1 98 56" />
+                  <path class="qs-gauge__fill" d="M10 56 A 44 44 0 0 1 98 56" stroke-dasharray="123.0 138.2" />
+                </g>
+                <text class="qs-gauge__pct" x="54" y="52" text-anchor="middle" data-qs-num>89%</text>
+                <text class="qs-gauge__period" x="54" y="63" text-anchor="middle">2022/2</text>
+              </svg>
+            </div>
+          </div>
+        </div>
+
+        <div class="qs-split__body">
+          <p>Expertise, ética e transparência são valores essenciais nas nossas operações. Oferecemos soluções para as suas importações de ponta a ponta. Temos uma equipe altamente especializada e pronta para te atender a qualquer momento. O cliente está no centro do nosso negócio, e fazemos questão de atendê-lo da melhor maneira possível.</p>
+          <p>Disponibilizamos o acompanhamento em tempo real de todas as etapas das suas importações a fim de garantir mais segurança e agilidade na tomada de decisões.</p>
+          <p>Para entender como podemos implementar melhorias nas operações e medir a satisfação dos nossos clientes, a cada 6 meses realizamos uma Pesquisa de Satisfação. Temos uma equipe de engenheiros especializados na manutenção do Sistema de Gestão da Qualidade da WM, revisando Instruções e Normativas da empresa.</p>
+          <p>Na última pesquisa realizada, no primeiro semestre de 2023, atingimos altos níveis de satisfação: 90%. E seguimos em busca de mais.</p>
+        </div>
       </div>
     </section>
-    
-    <section class="page-section" style="background: var(--color-primary); color: var(--color-text-white); text-align: center;">
-      <div class="container">
-        <h2 class="t-display" style="margin-bottom: 16px;">Tem um projeto em mente?</h2>
-        <p class="t-lead" style="margin-bottom: 24px;">Fale com nossos especialistas e garanta a melhor operação para a sua empresa.</p>
-        <a href="/fale-conosco/" class="btn btn-white btn-lg">Quero saber mais</a>
+
+    <!-- ══════════════════════════════════════
+         9. CARREIRAS
+    ══════════════════════════════════════ -->
+    <section class="qs-carreiras">
+      <div class="container qs-carreiras__grid">
+        <div>
+          <h2 class="qs-carreiras__title">Carreiras</h2>
+          <p class="qs-carreiras__text">Faça parte de uma das maiores tradings do Brasil. Confira nossas vagas e veja se alguma combina com o seu perfil!</p>
+          <a href="/carreiras/" class="btn">Ver vagas →</a>
+        </div>
+        <!-- PLACEHOLDER: recorte do print. Trocar pela foto original do time. -->
+        <img src="/images/quem-somos/PLACEHOLDER-time-carreiras.jpg" alt="Equipe da WM Trading reunida em confraternização" />
       </div>
     </section>
     
@@ -407,6 +599,8 @@
 <script src="/js/main.js"></script>
 <script src="/js/i18n.js" defer></script>
 
+
+<script src="/js/quem-somos.js" defer></script>
 
 </body>
 </html>
