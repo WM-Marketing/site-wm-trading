@@ -62,7 +62,7 @@
      Resultado: o branco fica parado em relação ao conteúdo e o excesso vira
      branco até a borda direita, nunca vazio. */
   --qs-forma-branco: 300px;
-  --qs-claim: 18px;
+  --qs-claim: 16px;
   --qs-claim-entrelinha: 2;
 }
 
@@ -174,7 +174,8 @@
     /* recuo aqui é 40, então o branco fecha nos 520px do arquivo */
     --qs-forma-branco: 480px;
     --qs-hero-recuo-baixo: calc(var(--qs-forma-altura) + 16px);
-    --qs-claim: 17px;
+    /* --qs-claim sai daqui: com a base em 16px, os 17px do tablet deixariam o
+       texto MAIOR do que no desktop. Os 16px valem em todas as larguras. */
   }
 }
 @media (max-width: 768px) {
@@ -185,7 +186,6 @@
     --qs-forma-altura: 200px;
     --qs-forma-diagonal: 200px;
     --qs-forma-branco: 280px;
-    --qs-claim: 16px;
     --qs-hero-tarja: 13px;
   }
   /* AJUSTE: as quebras de linha manuais do claim não caberiam aqui. */
