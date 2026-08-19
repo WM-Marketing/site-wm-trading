@@ -144,11 +144,12 @@
   z-index: 1;
   min-height: var(--qs-forma-altura);
   display: flex;
-  /* AJUSTE: era `center` com 14px de padding em cima e embaixo, o que deixava 21px
-     de folga sob a última linha. Agora o texto encosta na base do bloco. */
-  align-items: flex-end;
+  /* Centrado na vertical do bloco branco. O padding vertical tem de ficar
+     simétrico (zero nos dois lados): com 14px só em cima, o `center` mediria a
+     partir de uma caixa deslocada e o texto desceria 7px do meio real. */
+  align-items: center;
   justify-content: flex-end;
-  padding: 14px var(--qs-hero-recuo) 0 0;
+  padding: 0 var(--qs-hero-recuo) 0 0;
 }
 .qs-claim {
   margin: 0;
@@ -749,8 +750,11 @@
 .qs-carreiras__grid {
   position: relative;
   display: grid;
-  grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
-  gap: 64px;
+  /* A foto leva mais da linha do que o texto: 0.68/1.32 com 56px de intervalo
+     dá ~650px de foto contra os ~547px de antes, e sobram ~334px para o texto —
+     largura suficiente para o parágrafo em 4 linhas e o botão inteiro. */
+  grid-template-columns: minmax(0, 0.68fr) minmax(0, 1.32fr);
+  gap: 56px;
   align-items: center;
 }
 .qs-carreiras__title {
