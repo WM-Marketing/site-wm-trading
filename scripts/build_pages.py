@@ -488,7 +488,8 @@ def _esc_attr(s):
 
 def render_html_page(output_path, title, description, content_body, head_tpl, header_tpl, footer_tpl,
                      lang="pt-BR", og_type="website", og_image=None, jsonld=None,
-                     extra_head="", extra_scripts=""):
+                     extra_head="", extra_scripts="",
+                     robots="index, follow, max-image-preview:large"):
     """Wraps page content in a fully styled, absolute-path templates block and saves it.
 
     extra_head    -> CSS/preload/script exclusivos de UMA pagina, no fim do <head>.
@@ -528,7 +529,7 @@ def render_html_page(output_path, title, description, content_body, head_tpl, he
   <meta property="og:site_name" content="WM Trading" />
   <meta property="og:locale" content="{og_locale}" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="robots" content="index, follow, max-image-preview:large" />
+  <meta name="robots" content="{robots}" />
   {jsonld_html}"""
 
     # Build complete HTML page
@@ -2654,15 +2655,75 @@ Se você tiver alguma pergunta sobre esta Política de Privacidade ou as prátic
     render_html_page(os.path.join(ROOT_DIR, "blog", "index.html"), "Blog da WM Trading", "Confira as notícias e artigos da WM Trading.", blog_listing_html, head_tpl, header_tpl, footer_tpl)
 
     # 9. SITEMAP.XML — todas as paginas .html do site, apontando para o dominio final
+    # 6Z. PAGINA 404 — a Vercel serve este arquivo em qualquer rota que nao casar.
+    # Sem ele o visitante recebe o texto cru "NOT_FOUND" da Vercel, sem menu nem
+    # caminho de volta. Sai do mesmo molde das outras paginas, entao herda cabecalho,
+    # rodape, LGPD e tracking. noindex porque o cleanUrls tambem serve o arquivo em
+    # /404/ com status 200, e pagina de erro indexada e soft-404 aos olhos do Google.
+    print(" - compiling 404.html...")
+    nao_encontrada_body = """
+    <section class="page-section" style="text-align:center;">
+      <div class="container intro-container">
+        <p class="dynamic-hero__eyebrow" style="color:var(--color-primary);">Erro 404</p>
+        <h1 class="t-h1" style="margin-bottom:16px;">Esta página não existe mais</h1>
+        <p class="intro-text" style="color:var(--color-text-muted);">O endereço pode ter mudado, ou o link que te trouxe até aqui está desatualizado. Abaixo estão os caminhos mais procurados do site.</p>
+        <div style="display:flex; flex-wrap:wrap; gap:12px; justify-content:center; margin-top:32px;">
+          <a href="/" class="btn btn-lg">Ir para a página inicial</a>
+          <a href="/fale-conosco/" class="btn btn-outline-orange btn-lg">Falar com um especialista</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="page-section page-section--alternate">
+      <div class="container">
+        <h2 class="section-title-center">Talvez você procure por</h2>
+        <div class="cards-grid">
+          <div class="benefit-card">
+            <h3 class="card-title"><a href="/segmentos/">Segmentos</a></h3>
+            <p class="card-desc">Os 15 setores em que a WM importa — de aço e autopeças a aeronaves, vinhos e equipamentos fotovoltaicos.</p>
+          </div>
+          <div class="benefit-card">
+            <h3 class="card-title"><a href="/solucoes-wm/">Soluções</a></h3>
+            <p class="card-desc">Importação por conta e ordem, por encomenda, assessoria aduaneira, global sourcing e armazém alfandegado.</p>
+          </div>
+          <div class="benefit-card">
+            <h3 class="card-title"><a href="/blog/">Blog</a></h3>
+            <p class="card-desc">Artigos sobre tributação, logística e regras de comércio exterior, escritos pelo time da WM.</p>
+          </div>
+          <div class="benefit-card">
+            <h3 class="card-title"><a href="/materiais/">Materiais gratuitos</a></h3>
+            <p class="card-desc">E-books e infográficos sobre DUIMP, regime de cotas, impostos de importação e mais.</p>
+          </div>
+          <div class="benefit-card">
+            <h3 class="card-title"><a href="/about/">Quem somos</a></h3>
+            <p class="card-desc">A história da WM Trading, os números da operação e a certificação ISO 9001.</p>
+          </div>
+          <div class="benefit-card">
+            <h3 class="card-title"><a href="/unidades/">Unidades</a></h3>
+            <p class="card-desc">As 13 filiais da WM no Brasil, com telefone de cada uma.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+    """
+    render_html_page(os.path.join(ROOT_DIR, "404.html"), "Página não encontrada",
+                     "A página que você procura não existe ou mudou de endereço. Veja os caminhos principais do site da WM Trading.",
+                     nao_encontrada_body, head_tpl, header_tpl, footer_tpl,
+                     robots="noindex, follow")
+
     print("\nGenerating sitemap.xml...")
     skip_dirs = {".git", ".claude", ".agents", ".cursor", ".windsurf", "node_modules",
                  "scripts", "content", "docs", "brand", "api", "js", "css", "images",
                  "wp-content", "mapa-brasil"}
+    # Pagina que responde 404 ou que e noindex nao entra no mapa — declarar uma
+    # dessas manda o Google para um endereco que ele nao pode indexar (era o caso do
+    # /offline/, herdado da pausa de julho).
+    skip_files = {"404.html", "offline.html"}
     sitemap_pages = []
     for walk_root, walk_dirs, walk_files in os.walk(ROOT_DIR):
         walk_dirs[:] = [d for d in walk_dirs if d not in skip_dirs and not d.startswith(".")]
         for fn in walk_files:
-            if fn.endswith(".html"):
+            if fn.endswith(".html") and fn not in skip_files:
                 rel = os.path.relpath(os.path.join(walk_root, fn), ROOT_DIR).replace(os.sep, "/")
                 mtime = datetime.fromtimestamp(os.path.getmtime(os.path.join(walk_root, fn)))
                 sitemap_pages.append((rel, mtime.strftime("%Y-%m-%d")))
