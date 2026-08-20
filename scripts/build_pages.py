@@ -149,9 +149,9 @@ SEGMENT_IMAGES_MAP = {
         "cover": "/wp-content/uploads/2024/06/banner-aco.webp",
         "video": "",
         "intro_image": "",
-        "form_image": "/wp-content/uploads/2024/06/thumb-1co2.png",
+        "form_image": "/wp-content/uploads/2024/06/thumb-1co2-v2.webp",
         "section_images": [
-            "/wp-content/uploads/2024/06/thumb-aco.png",
+            "/wp-content/uploads/2024/06/thumb-aco-v2.webp",
             "",
             "/wp-content/uploads/2024/06/98.png"
         ],
@@ -183,9 +183,9 @@ SEGMENT_IMAGES_MAP = {
         "intro_image": "",
         "form_image": "",
         "section_images": [
-            "/wp-content/uploads/2024/06/Grupo10.png",
-            "/wp-content/uploads/2024/06/Grupo91.png",
-            "/wp-content/uploads/2024/06/Grupo12.png"
+            "/wp-content/uploads/2024/06/Grupo10-v2.webp",
+            "/wp-content/uploads/2024/06/Grupo91-v2.webp",
+            "/wp-content/uploads/2024/06/Grupo12-v2.webp"
         ],
         "icons": [
             "/wp-content/uploads/2024/06/icoo.png",
@@ -197,11 +197,11 @@ SEGMENT_IMAGES_MAP = {
         "cover": "/wp-content/uploads/2024/06/banner-combustivel.webp",
         "video": "https://youtu.be/RTGZirDu90A",
         "intro_image": "",
-        "form_image": "/wp-content/uploads/2024/06/thumb-form.png",
+        "form_image": "/wp-content/uploads/2024/06/thumb-form-v2.webp",
         "section_images": [
-            "/wp-content/uploads/2024/06/seguranca-1.png",
+            "/wp-content/uploads/2024/06/seguranca-1-v2.webp",
             "/wp-content/uploads/2024/06/banner-site-combustiveis.webp",
-            "/wp-content/uploads/2024/06/expertise.png"
+            "/wp-content/uploads/2024/06/expertise-v2.webp"
         ],
         "icons": [
             "/wp-content/uploads/2024/06/icon-1.png",
@@ -210,7 +210,7 @@ SEGMENT_IMAGES_MAP = {
         ]
     },
     "cosmeticos": {
-        "cover": "/wp-content/uploads/2024/06/banner-header-cosmeticos.webp",
+        "cover": "/wp-content/uploads/2024/06/banner-header-cosmeticos-v2.webp",
         "video": "",
         "intro_image": "/wp-content/uploads/2024/06/cosmeticos-thumb-1.webp",
         "form_image": "",
@@ -229,11 +229,11 @@ SEGMENT_IMAGES_MAP = {
         "cover": "/wp-content/uploads/2024/06/banner-combustivel.webp",
         "video": "https://youtu.be/RTGZirDu90A",
         "intro_image": "",
-        "form_image": "/wp-content/uploads/2024/06/thumb-form.png",
+        "form_image": "/wp-content/uploads/2024/06/thumb-form-v2.webp",
         "section_images": [
-            "/wp-content/uploads/2024/06/seguranca-1.png",
+            "/wp-content/uploads/2024/06/seguranca-1-v2.webp",
             "/wp-content/uploads/2024/06/banner-site-combustiveis.webp",
-            "/wp-content/uploads/2024/06/expertise.png"
+            "/wp-content/uploads/2024/06/expertise-v2.webp"
         ],
         "icons": [
             "/wp-content/uploads/2024/06/icon-1.png",
@@ -263,8 +263,8 @@ SEGMENT_IMAGES_MAP = {
         "intro_image": "",
         "form_image": "",
         "section_images": [
-            "/wp-content/uploads/2024/06/thumb-20-anos.png",
-            "/wp-content/uploads/2024/06/porcentagem.png",
+            "/wp-content/uploads/2024/06/thumb-20-anos-v2.webp",
+            "/wp-content/uploads/2024/06/porcentagem-v2.webp",
             "/wp-content/uploads/2024/06/selo.png"
         ],
         "icons": [
@@ -306,12 +306,12 @@ SEGMENT_IMAGES_MAP = {
         ]
     },
     "maquinas": {
-        "cover": "/wp-content/uploads/2024/06/banner-header-site-maquinas-1920x405-1.png",
+        "cover": "/wp-content/uploads/2024/06/banner-header-site-maquinas-1920x405-1-v2.webp",
         "video": "https://youtu.be/LUHSCxojw9A",
         "intro_image": "",
         "form_image": "",
         "section_images": [
-            "/wp-content/uploads/2024/06/thumb-maquinas.png",
+            "/wp-content/uploads/2024/06/thumb-maquinas-v2.webp",
             "",
             "/wp-content/uploads/2024/06/thumb2-maquinas.webp"
         ],
@@ -325,7 +325,7 @@ SEGMENT_IMAGES_MAP = {
         "cover": "/wp-content/uploads/2024/06/banner-produtos.webp",
         "video": "https://youtu.be/Tp6RgSWexfw",
         "intro_image": "",
-        "form_image": "/wp-content/uploads/2024/06/quimico-2.png",
+        "form_image": "/wp-content/uploads/2024/06/quimico-2-v2.webp",
         "section_images": [
             "/wp-content/uploads/2024/06/quimico.png",
             ""
@@ -342,8 +342,8 @@ SEGMENT_IMAGES_MAP = {
         "intro_image": "",
         "form_image": "",
         "section_images": [
-            "/wp-content/uploads/2024/06/banner-rebocadores-2.webp",
-            "/wp-content/uploads/2024/06/thumb2-rebocadores.png"
+            "/wp-content/uploads/2024/06/banner-rebocadores-2-v2.webp",
+            "/wp-content/uploads/2024/06/thumb2-rebocadores-v2.webp"
         ],
         "icons": [
             "/wp-content/uploads/2024/06/lampada.png",
@@ -355,11 +355,11 @@ SEGMENT_IMAGES_MAP = {
         "cover": "/wp-content/uploads/2024/06/banner-varejo.webp",
         "video": "https://youtu.be/9wt3YYmW_nc",
         "intro_image": "",
-        "form_image": "/wp-content/uploads/2024/06/thumb1-varejo.png",
+        "form_image": "/wp-content/uploads/2024/06/thumb1-varejo-v2.webp",
         "section_images": [
-            "/wp-content/uploads/2024/06/thumb-varejo.png",
+            "/wp-content/uploads/2024/06/thumb-varejo-v2.webp",
             "",
-            "/wp-content/uploads/2024/06/thumb-varejo-porcento.png"
+            "/wp-content/uploads/2024/06/thumb-varejo-porcento-v2.webp"
         ],
         "icons": [
             "/wp-content/uploads/2024/06/ico2.png",
@@ -375,7 +375,7 @@ SEGMENT_IMAGES_MAP = {
         "section_images": [
             "/wp-content/uploads/2024/06/thumb-vinho.webp",
             "",
-            "/wp-content/uploads/2024/06/thumb-95porcento.png"
+            "/wp-content/uploads/2024/06/thumb-95porcento-v2.webp"
         ],
         "icons": [
             "/wp-content/uploads/2024/06/arrow.png",
