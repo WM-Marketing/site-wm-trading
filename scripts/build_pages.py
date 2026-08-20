@@ -993,7 +993,7 @@ def main():
           <div class="container">
             <div class="intro-container" style="margin-bottom: 50px;">
               <h2 class="t-h2" style="margin-bottom:16px;">Conheça as nossas soluções para importação</h2>
-              <p class="intro-text" style="color:var(--color-text-muted);">Com 20 anos de história e experiência, a WM Trading procura solucionar as dores e entregar oportunidades aos clientes em um processo de importação.</p>
+              <p class="intro-text" style="color:var(--color-text-muted);">Com história e experiência desde 2004, a WM Trading procura solucionar as dores e entregar oportunidades aos clientes em um processo de importação.</p>
               <p class="intro-text" style="color:var(--color-text-muted); margin-top:12px;">Para isso, contamos com uma equipe altamente qualificada e experiente, sempre dedicada a proporcionar o melhor desenho logístico e tributário para sua operação.</p>
             </div>
             
