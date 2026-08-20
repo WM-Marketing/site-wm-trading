@@ -584,6 +584,21 @@
       "source": "/sitemap_index.xml",
       "destination": "/sitemap.xml",
       "permanent": true
+    },
+    {
+      "source": "/ebooks/4pl/",
+      "destination": "/ebooks/4pl-ebook/",
+      "permanent": true
+    },
+    {
+      "source": "/coque-de-petroleo/",
+      "destination": "/segmentos/derivados-petroleo/",
+      "permanent": true
+    },
+    {
+      "source": "/coque-de-petroleo-2/",
+      "destination": "/segmentos/derivados-petroleo/",
+      "permanent": true
     }
   ]
 }
