@@ -78,19 +78,33 @@ os.makedirs(EBOOKS_OUT_DIR, exist_ok=True)
 
 # List of branches for footer/contact listing
 BRANCHES = [
-    {"city": "Vitória", "state": "ES", "phone": "+55 (27) 3022-9700"},
-    {"city": "Rio de Janeiro", "state": "RJ", "phone": "+55 (21) 3952-5204"},
-    {"city": "São Paulo", "state": "SP", "phone": "+55 (11) 4063-9640"},
-    {"city": "Itajaí", "state": "SC", "phone": "+55 (47) 4054-9640"},
-    {"city": "Belém", "state": "PA", "phone": "+55 (91) 4042-2072"},
-    {"city": "Camaragibe", "state": "PE", "phone": "+55 (81) 3771-0277"},
-    {"city": "Fortaleza", "state": "CE", "phone": "+55 (85) 3771-4677"},
-    {"city": "Ipanema", "state": "AL", "phone": "+55 (82) 3021-9069"},
-    {"city": "Lauro de Freitas", "state": "BA", "phone": "+55 (71) 3512-6603"},
-    {"city": "Manaus", "state": "AM", "phone": "+55 (92) 3042-2018"},
-    {"city": "Paranaguá", "state": "PR", "phone": "+55 (41) 3514-5914"},
-    {"city": "Porto Velho", "state": "RO", "phone": "+55 (69) 3026-0640"},
-    {"city": "São Luís", "state": "MA", "phone": "+55 (98) 3042-2212"}
+    # Endereco conforme contrato social consolidado (CNPJ 06.194.675/0001-03).
+    # Cariacica/ES (Filial 15, armazem) fica FORA de proposito: nao e ponto de
+    # atendimento. Ver 00_BRIEFING.md, sessao de 20/08/2026.
+    {"city": "Vitória", "state": "ES", "phone": "+55 (27) 3022-9700", "hq": True,
+     "address": "Rua Engenheiro Guilherme José Monjardim Varejão, 275 — Salas 201 e 301, Enseada do Suá — CEP 29050-260"},
+    {"city": "Rio de Janeiro", "state": "RJ", "phone": "+55 (21) 3952-5204",
+     "address": "Av. Presidente Vargas, 529 — Conj. 03, Sala 411, Centro — CEP 20071-003"},
+    {"city": "São Paulo", "state": "SP", "phone": "+55 (11) 4063-9640",
+     "address": "Rua Pedroso Alvarenga, 691 — Cj. 701, 702 e 703, Ed. Time Offices, Itaim Bibi — CEP 04531-011"},
+    {"city": "Navegantes", "state": "SC", "phone": "+55 (47) 4054-9640",
+     "address": "Rodovia BR-470, 1601 — Galpão 04, Sala 80, São Domingos — CEP 88375-000"},
+    {"city": "Belém", "state": "PA", "phone": "+55 (91) 4042-2072",
+     "address": "Av. José Bonifácio, 2.372 — Casa 1A, Guamá — CEP 66065-108"},
+    {"city": "Camaragibe", "state": "PE", "phone": "+55 (81) 3771-0277",
+     "address": "Av. Pernambuco, 1.412 — Bairro dos Estados — CEP 54762-845"},
+    {"city": "Santana do Ipanema", "state": "AL", "phone": "+55 (82) 3021-9069",
+     "address": "Av. Presidente Eurico Dutra, 1.026 — Sala C, Monumento — CEP 57500-000"},
+    {"city": "Lauro de Freitas", "state": "BA", "phone": "+55 (71) 3512-6603",
+     "address": "Rua Itagi, 599 — Sala 511, Ed. Med. Trade & Medical, Pitangueiras — CEP 42701-370"},
+    {"city": "Manaus", "state": "AM", "phone": "+55 (92) 3042-2018",
+     "address": "Rua Saldanha Marinho, 606 — Sala 754, Ed. Alfredo Cunha, Centro — CEP 69010-040"},
+    {"city": "Paranaguá", "state": "PR", "phone": "+55 (41) 3514-5914",
+     "address": "Av. Bento Munhoz da Rocha Neto, 2000 — Sala 01, Aeroporto — CEP 83209-000"},
+    {"city": "Porto Velho", "state": "RO", "phone": "+55 (69) 3026-0640",
+     "address": "Av. Calama, 1118 — 2º andar, Sala 210, Olaria — CEP 76801-308"},
+    {"city": "São Luís", "state": "MA", "phone": "+55 (98) 3042-2212",
+     "address": "Av. São Luís Rei de França, 325 — Sala 211, Cond. Dom Center, Jardim Eldorado — CEP 65067-205"}
 ]
 
 # Segment categories for contact form select
@@ -1778,7 +1792,7 @@ def main():
           <article class="qs-atuacao">
             <img src="/images/quem-somos/atuacao-4-localizacao.webp" alt="Navio porta-contêineres atracado ao lado de um caminhão no pátio do porto" width="1100" height="275" loading="lazy" />
             <h3 class="qs-atuacao__title" data-i18n="qs.act.localizacao.t">Localização Estratégica</h3>
-            <p class="qs-atuacao__desc" data-i18n="qs.act.localizacao.d">Pensando na otimização da cadeia logística e tributária, estamos estrategicamente localizados em 15 estados brasileiros e no Panamá.</p>
+            <p class="qs-atuacao__desc" data-i18n="qs.act.localizacao.d">Pensando na otimização da cadeia logística e tributária, estamos estrategicamente localizados em 12 estados brasileiros e no Panamá.</p>
           </article>
 
         </div>
@@ -1950,7 +1964,7 @@ def main():
         <div style="margin-bottom:40px;">
           <p class="dynamic-hero__eyebrow" style="margin-bottom:8px;">Unidades</p>
           <h1 class="t-display" style="font-weight:var(--fw-semibold); font-size:var(--fs-2xl); line-height:1.2;">Presença em todo o Brasil</h1>
-          <p class="intro-text" style="color:var(--color-text-muted); max-width:650px; margin-top:12px;">Estamos estrategicamente localizados em diversos estados — e também no Panamá — para otimizar a logística e a tributação das suas importações. Fale com a filial mais próxima.</p>
+          <p class="intro-text" style="color:var(--color-text-muted); max-width:650px; margin-top:12px;">Estamos em 12 estados brasileiros — e também no Panamá — para otimizar a logística e a tributação das suas importações. Fale com a unidade mais próxima.</p>
         </div>
         
         <div class="branches-grid">
@@ -1971,11 +1985,13 @@ def main():
     
     # Pre-render list of branches for form page without backslash issues
     branches_li_html = ""
-    for b in BRANCHES[:8]:
+    for b in BRANCHES:
         clean_phone = get_clean_phone(b["phone"])
+        selo = ' <span style="font-size:10px; text-transform:uppercase; letter-spacing:.04em; color:var(--color-primary); font-weight:var(--fw-semibold);">Matriz</span>' if b.get("hq") else ""
         branches_li_html += f"""
-        <li style="border-bottom:1px solid #efefef; padding-bottom:10px;">
-          <p style="font-weight:var(--fw-semibold); font-size:var(--fs-sm);">{b["city"]} <span style="font-weight:normal; color:var(--color-text-muted);">/ {b["state"]}</span></p>
+        <li style="border-bottom:1px solid #efefef; padding-bottom:12px; margin-bottom:12px;">
+          <p style="font-weight:var(--fw-semibold); font-size:var(--fs-sm);">{b["city"]} <span style="font-weight:normal; color:var(--color-text-muted);">/ {b["state"]}</span>{selo}</p>
+          <p style="font-size:12px; line-height:1.5; color:var(--color-text-muted); margin:3px 0 5px;">{b["address"]}</p>
           <a href="tel:{clean_phone}" class="text-primary" style="font-size:12px; text-decoration:none; font-weight:var(--fw-semibold);">{b["phone"]}</a>
         </li>
         """
@@ -1996,7 +2012,7 @@ def main():
           <div>
             <h2 class="t-h3" style="margin-bottom:16px;">Nossas filiais</h2>
             <p class="intro-text" style="color:var(--color-text-muted); font-size:var(--fs-sm); margin-bottom:24px;">15 filiais no Brasil + Panamá. Fale com a unidade mais próxima de você.</p>
-            <ul style="list-style:none; padding:0; display:grid; grid-template-columns:1fr 1fr; gap:16px;">
+            <ul style="list-style:none; padding:0; display:grid; grid-template-columns:repeat(auto-fit, minmax(240px, 1fr)); gap:16px;">
               {branches_li_html}
             </ul>
           </div>

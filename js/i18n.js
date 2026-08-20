@@ -42,7 +42,7 @@ const translations = {
 
     // Section 5
     's5.title': 'benefícios fiscais<br>para <span class="text-primary">otimizar as suas importações</span>',
-    's5.text1': 'Presente em <strong>14 estados brasileiros</strong> e no <strong>Panamá</strong>, otimizamos as importações e reduzimos os custos dos nossos clientes com planejamento único, sempre comprometidos a buscar as melhores oportunidades de nacionalização.',
+    's5.text1': 'Presente em <strong>12 estados brasileiros</strong> e no <strong>Panamá</strong>, otimizamos as importações e reduzimos os custos dos nossos clientes com planejamento único, sempre comprometidos a buscar as melhores oportunidades de nacionalização.',
     's5.text2': 'Através da Operação por Encomenda ou por Conta e Ordem, otimizamos a cadeia logística e reduzimos a carga tributária da importação nacionalizando a sua carga em estados que possuam incentivos de redução do ICMS, como o ES e SC.',
 
     // Section 6
@@ -174,7 +174,7 @@ const translations = {
     'qs.act.planejamento.t': 'Planejamento e Gestão',
     'qs.act.planejamento.d': 'O planejamento é fundamental para enquadrar a operação na modalidade correta e evitar complicações no processo de importação.',
     'qs.act.localizacao.t': 'Localização Estratégica',
-    'qs.act.localizacao.d': 'Pensando na otimização da cadeia logística e tributária, estamos estrategicamente localizados em 15 estados brasileiros e no Panamá.',
+    'qs.act.localizacao.d': 'Pensando na otimização da cadeia logística e tributária, estamos estrategicamente localizados em 12 estados brasileiros e no Panamá.',
     'qs.quality.title': 'Nossa <span class="text-primary">política de qualidade</span> é:',
     'qs.quality.quote': '“Na WM Trading, qualidade é entregar soluções descomplicadas, ágeis e confiáveis em comércio exterior, superando as expectativas dos nossos clientes a cada operação. Nossa liderança e equipe se comprometem a agir com ética e transparência, a promover a inovação e a buscar a melhoria contínua das pessoas e dos processos que sustentam esse resultado.” <br /><span class="qs-quality__rev">(Rev.01 – 11/08/2026)</span>',
     'qs.quality.p1': 'A qualidade é nossa prioridade para garantir a sua satisfação. Mantemos um Sistema de Gestão da Qualidade, que nos permite conhecer a opinião dos clientes e aperfeiçoar nossos serviços.',
