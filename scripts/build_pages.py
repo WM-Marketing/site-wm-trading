@@ -289,7 +289,7 @@ SEGMENT_IMAGES_MAP = {
     },
     "importacao-aeronaves": {
         "cover": "/wp-content/uploads/2025/03/IMPORTACAO-DE-AERONAVES-1.webp",
-        "video": "https://youtu.be/FOQEa2Xtqjs",
+        "video": "https://youtu.be/5fPci1shmpw",
         "intro_image": "/wp-content/uploads/2025/03/importar-o-seu-aviao-com-agilidade-e-seguranca.webp",
         "form_image": "",
         "section_images": [

@@ -48,8 +48,8 @@
    fecha ao clicar fora, no X ou ESC.
 ───────────────────────────────────── */
 (function () {
-  const VIDEO_ID  = 'FOQEa2Xtqjs';
-  const VIDEO_T   = 2;               /* start time em segundos */
+  const VIDEO_ID  = '5fPci1shmpw';
+  const VIDEO_T   = 0;               /* start time em segundos */
 
   const modal     = document.getElementById('aero-video-modal');
   const frame     = document.getElementById('aero-video-frame');

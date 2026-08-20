@@ -596,6 +596,11 @@
       "permanent": true
     },
     {
+      "source": "/blog/por-que-empresas-escolhem-a-wm-trading-para-importar/",
+      "destination": "/blog/por-que-escolher-wm-trading-para-importar/",
+      "permanent": true
+    },
+    {
       "source": "/coque-de-petroleo-2/",
       "destination": "/segmentos/derivados-petroleo/",
       "permanent": true
