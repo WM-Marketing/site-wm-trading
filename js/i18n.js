@@ -35,7 +35,7 @@ const translations = {
     's3.card5.text':  'Controle de qualidade em todas as etapas do processo e primeira Trading do Brasil a ser certificada com ISO 9001',
 
     // Section 4
-    's4.label1': 'Filiais em todo Brasil e 1 no Panamá',
+    's4.label1': 'Estados com unidade, e presença no Panamá',
     's4.label2': 'Benefícios fiscais',
     's4.label3': 'Anos de mercado',
     's4.label4': 'Índice de parametrização em canal verde',
@@ -149,8 +149,8 @@ const translations = {
     'qs.about.p2': 'Hoje a WM é uma das maiores tradings do Brasil, disposta a entregar projetos personalizados para diversas empresas e segmentos. Os <span data-wm-anos-desde="2004">22</span> anos de experiência em operações bem-sucedidas traduzem a intensidade do desejo de cumprir nossa principal missão: ser a mais completa solução em comércio exterior.',
     'qs.kpi1.v': '<span data-wm-anos-desde="2004">22</span> anos',
     'qs.kpi1.l': 'de experiência',
-    'qs.kpi2.v': '15 filiais',
-    'qs.kpi2.l': 'Brasil + Panamá',
+    'qs.kpi2.v': '12 estados',
+    'qs.kpi2.l': 'no Brasil, além do Panamá',
     'qs.kpi3.v': 'ISO 9001',
     'qs.kpi3.l': 'certificação',
     'qs.kpi4.v': '90%',
@@ -225,7 +225,7 @@ const translations = {
     's3.card5.text':  'Quality control at every stage of the process and the first Brazilian trading company certified with ISO 9001',
 
     // Section 4
-    's4.label1': 'Branches across Brazil and 1 in Panama',
+    's4.label1': 'States with a unit, plus a presence in Panama',
     's4.label2': 'Tax benefits',
     's4.label3': 'Years in the market',
     's4.label4': 'Green channel clearance rate',
@@ -339,8 +339,8 @@ const translations = {
     'qs.about.p2': 'Today WM is one of the largest trading companies in Brazil, ready to deliver tailored projects for companies across many segments. Our <span data-wm-anos-desde="2004">22</span> years of experience in successful operations reflect how strongly we pursue our main mission: to be the most complete solution in foreign trade.',
     'qs.kpi1.v': '<span data-wm-anos-desde="2004">22</span> years',
     'qs.kpi1.l': 'of experience',
-    'qs.kpi2.v': '15 branches',
-    'qs.kpi2.l': 'Brazil + Panama',
+    'qs.kpi2.v': '12 states',
+    'qs.kpi2.l': 'in Brazil, plus Panama',
     'qs.kpi3.v': 'ISO 9001',
     'qs.kpi3.l': 'certification',
     'qs.kpi4.v': '90%',

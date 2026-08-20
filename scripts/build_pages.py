@@ -1668,8 +1668,8 @@ def main():
 
         <div class="qs-kpi">
           <span class="qs-kpi__icon qs-kpi__icon--filiais" aria-hidden="true"><i class="qs-kpi__glifo"></i></span>
-          <p class="qs-kpi__value" data-i18n="qs.kpi2.v">15 filiais</p>
-          <p class="qs-kpi__label" data-i18n="qs.kpi2.l">Brasil + Panamá</p>
+          <p class="qs-kpi__value" data-i18n="qs.kpi2.v">12 estados</p>
+          <p class="qs-kpi__label" data-i18n="qs.kpi2.l">no Brasil, além do Panamá</p>
         </div>
 
         <div class="qs-kpi">
@@ -1952,9 +1952,11 @@ def main():
     branches_cards = ""
     for b in BRANCHES:
         clean_phone = get_clean_phone(b["phone"])
+        selo = ' <span class="branch-card__hq">Matriz</span>' if b.get("hq") else ""
         branches_cards += f"""
         <div class="branch-card">
-          <h3 class="branch-card__title">{b["city"]} <span class="branch-card__state">/ {b["state"]}</span></h3>
+          <h3 class="branch-card__title">{b["city"]} <span class="branch-card__state">/ {b["state"]}</span>{selo}</h3>
+          <p class="branch-card__address">{b["address"]}</p>
           <a href="tel:{clean_phone}" class="branch-card__phone">{b["phone"]}</a>
         </div>
         """
@@ -2011,7 +2013,7 @@ def main():
           </div>
           <div>
             <h2 class="t-h3" style="margin-bottom:16px;">Nossas filiais</h2>
-            <p class="intro-text" style="color:var(--color-text-muted); font-size:var(--fs-sm); margin-bottom:24px;">15 filiais no Brasil + Panamá. Fale com a unidade mais próxima de você.</p>
+            <p class="intro-text" style="color:var(--color-text-muted); font-size:var(--fs-sm); margin-bottom:24px;">Unidades em 12 estados brasileiros, além do Panamá. Fale com a unidade mais próxima de você.</p>
             <ul style="list-style:none; padding:0; display:grid; grid-template-columns:repeat(auto-fit, minmax(240px, 1fr)); gap:16px;">
               {branches_li_html}
             </ul>
@@ -2716,7 +2718,7 @@ Se você tiver alguma pergunta sobre esta Política de Privacidade ou as prátic
           </div>
           <div class="benefit-card">
             <h3 class="card-title"><a href="/unidades/">Unidades</a></h3>
-            <p class="card-desc">As 13 filiais da WM no Brasil, com telefone de cada uma.</p>
+            <p class="card-desc">As unidades da WM no Brasil, com endereço e telefone de cada uma.</p>
           </div>
         </div>
       </div>

@@ -821,6 +821,22 @@ textarea.input-wm {
   font-weight: var(--fw-regular);
   color: var(--color-text-muted);
 }
+.branch-card__hq {
+  display: inline-block;
+  margin-left: 6px;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  font-weight: var(--fw-semibold);
+  color: var(--color-primary);
+  vertical-align: middle;
+}
+.branch-card__address {
+  margin-top: 8px;
+  font-size: var(--fs-sm);
+  line-height: 1.55;
+  color: var(--color-text-muted);
+}
 .branch-card__phone {
   display: inline-block;
   margin-top: 8px;

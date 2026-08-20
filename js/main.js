@@ -38,11 +38,15 @@
 
 // Counter animation — Section 4
 (function () {
-  const counters = document.querySelectorAll('.numero-value[data-count]');
+  const counters = document.querySelectorAll('.numero-value[data-count], .numero-value[data-count-desde]');
   if (!counters.length) return;
 
   const animate = (el) => {
-    const target = +el.dataset.count;
+    // data-count-desde="2004" calcula o alvo a cada carregamento, para o numero
+    // de anos nunca envelhecer (o mesmo motivo do js/anos-experiencia.js).
+    const target = el.dataset.countDesde
+      ? new Date().getFullYear() - +el.dataset.countDesde
+      : +el.dataset.count;
     const suffix = el.dataset.suffix || '';
     const duration = 1600;
     const start = performance.now();
