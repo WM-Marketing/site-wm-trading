@@ -1,9 +1,14 @@
-# NAO INDEXAR. O site vive em site-wm-trading.vercel.app enquanto o dominio
-# wmtrading.com.br ainda aponta para o WordPress. Liberar aqui faz o vercel.app
-# virar DUPLICATA do site oficial: os dois competem pelas mesmas palavras, o
-# Google escolhe um canonical sozinho e pode escolher o preview.
+# LIBERADO em 20/08/2026, depois que wmtrading.com.br passou a apontar para a Vercel.
+# O endereco temporario site-wm-trading.vercel.app nao vira duplicata porque responde
+# X-Robots-Tag: noindex por regra de host no vercel.json — nao mexer nisso.
 #
-# Liberar SOMENTE depois que wmtrading.com.br apontar para a Vercel.
-# O scripts/verificar.py avisa nos dois sentidos.
+# Se por qualquer motivo o DNS recuar para o WordPress, voltar este arquivo para
+# "Disallow: /" (ver GATILHO-RECUO-20-08.md, item 3 do procedimento de recuo).
+
 User-agent: *
-Disallow: /
+Allow: /
+
+Disallow: /api/
+Disallow: /scripts/
+
+Sitemap: https://www.wmtrading.com.br/sitemap.xml
