@@ -21,6 +21,7 @@ Ver ROTINA-ATUALIZACAO-SITE.md.
 """
 
 import argparse
+import glob
 import json
 
 SITE_URL = "https://www.wmtrading.com.br"
@@ -28,6 +29,7 @@ import os
 import re
 import subprocess
 import sys
+import unicodedata
 import urllib.error
 import urllib.request
 
@@ -418,6 +420,93 @@ def checar_ingles(rel):
         rel.ok("nenhum redirect intercepta as paginas /en/")
 
 
+EXT_ASSET = ("webp", "jpg", "jpeg", "png", "svg", "gif", "avif", "mp4",
+              "webm", "json", "css", "js", "woff", "woff2", "ico", "pdf")
+
+_ASSET_JS = re.compile(
+    r"""['"`]([^'"`\n]*?/[^'"`\n]*?\.(?:""" + "|".join(EXT_ASSET) + r"""))(?:\?[^'"`\n]*)?['"`]""",
+    re.IGNORECASE)
+
+
+def _asset_em_js(codigo):
+    """Caminhos de asset RELATIVOS escritos como string dentro de JavaScript.
+
+    Exige a barra: 'images/x.webp' entra, 'main.js' solto nao — sem isso qualquer
+    nome de arquivo usado como rotulo viraria falso positivo. Query string e
+    ignorada. Template literal com ${} tambem e pego, porque o prefixo relativo
+    quebra do mesmo jeito.
+    """
+    achados = []
+    for alvo in _ASSET_JS.findall(codigo):
+        if alvo.startswith(("/", "http", "data:", "blob:", "//")):
+            continue
+        if alvo not in achados:
+            achados.append(alvo)
+    return achados
+
+
+def slugificar(texto):
+    """Mesma regra que um CMS usa para virar titulo em endereco."""
+    t = unicodedata.normalize("NFKD", texto).encode("ascii", "ignore").decode().lower()
+    return re.sub(r"[^a-z0-9]+", "-", t).strip("-")
+
+
+def checar_slug_dos_posts(rel):
+    """Post criado no site novo cujo endereco nao e o que o titulo sugere.
+
+    Post MIGRADO tem originalUrl no frontmatter: ali o slug veio do WordPress e e
+    a URL que o Google indexou — divergir do titulo e normal e nao se mexe. O
+    risco esta no post criado aqui: ninguem de fora sabe o slug encurtado, e quem
+    deduz o endereco pelo titulo toma 404. Foi o caso de
+    /blog/por-que-empresas-escolhem-a-wm-trading-para-importar/ em 20/08/2026.
+    """
+    titulo("I. Slug dos posts criados no site novo")
+
+    fontes = sorted(glob.glob(os.path.join(ROOT_DIR, "content", "blog", "*.mdx")))
+    if not fontes:
+        rel.ok("nenhum post em content/blog — nada a conferir")
+        return
+
+    try:
+        redirects = json.loads(ler("vercel.json")).get("redirects", [])
+    except Exception:
+        redirects = []
+    origens = {r.get("source", "").rstrip("/") for r in redirects}
+
+    novos = 0
+    sem_rede = []
+    for caminho in fontes:
+        with open(caminho, encoding="utf-8", errors="replace") as fh:
+            texto = fh.read()
+        if re.search(r"^originalUrl:", texto, re.M):
+            continue          # migrado: o slug do WordPress e o correto
+        m_t = re.search(r'^title:\s*"(.*?)"\s*$', texto, re.M)
+        m_s = re.search(r'^slug:\s*"(.*?)"\s*$', texto, re.M)
+        if not (m_t and m_s):
+            continue
+        novos += 1
+        esperado, real = slugificar(m_t.group(1)), m_s.group(1)
+        if esperado == real:
+            continue
+        url = f"/blog/{esperado}"
+        if url in origens:
+            continue          # ja existe 301 cobrindo o endereco previsivel
+        sem_rede.append((real, esperado))
+
+    if sem_rede:
+        rel.aviso(f"{len(sem_rede)} post(s) criado(s) aqui com slug diferente do "
+                  f"titulo e SEM 301 do endereco que o titulo sugere:")
+        for real, esperado in sem_rede:
+            rel.aviso(f"    /blog/{real}/  <-  falta 301 de  /blog/{esperado}/")
+        rel.aviso("    para resolver, em vercel.json:")
+        real, esperado = sem_rede[0]
+        rel.aviso(f'      {{"source": "/blog/{esperado}/", '
+                  f'"destination": "/blog/{real}/", "permanent": true}}')
+    else:
+        rel.ok(f"{novos} post(s) criado(s) no site novo: endereco previsivel "
+               f"pelo titulo, ou 301 ja existente")
+
+
 def checar_caminhos_relativos(rel):
     """Com trailingSlash:true, /x.html e servida em /x/ — e isso muda a base dos
     caminhos relativos: 'images/a.webp' vira '/x/images/a.webp' e da 404.
@@ -463,17 +552,35 @@ def checar_caminhos_relativos(rel):
             if _relativo(alvo):
                 ruins.append(f'link href="{alvo}"')
 
+        # Caminho relativo dentro de STRING JS tambem quebra, e nao aparece em
+        # nenhum atributo: foi o defeito das 8 fotos da galeria de feiras em
+        # 20/08/2026 ('images/aeronaves/feira-*.webp' num objeto JS inline).
+        for trecho in re.findall(r"<script\b[^>]*>(.*?)</script>", html,
+                                 re.IGNORECASE | re.DOTALL):
+            for alvo in _asset_em_js(trecho):
+                ruins.append(f'string JS "{alvo}"')
+
         if ruins:
             achados[pagina] = ruins
 
+    # Arquivo .js externo e carregado por MUITAS paginas, e o caminho resolve
+    # contra a URL DA PAGINA, nao contra a pasta do .js. Aqui nao ha excecao de
+    # index.html: basta uma pagina fora da raiz para quebrar.
+    for arquivo in sorted(glob.glob(os.path.join(ROOT_DIR, "js", "*.js"))):
+        rel_js = os.path.relpath(arquivo, ROOT_DIR).replace(os.sep, "/")
+        alvos = _asset_em_js(ler(rel_js))
+        if alvos:
+            achados[rel_js] = [f'string JS "{a}"' for a in alvos]
+
     if achados:
         total = sum(len(v) for v in achados.values())
-        rel.erro(f"{total} caminho(s) relativo(s) em {len(achados)} pagina(s) — "
+        rel.erro(f"{total} caminho(s) relativo(s) em {len(achados)} arquivo(s) — "
                  f"com trailingSlash:true resolvem contra /pagina/ e dao 404:")
         for pagina, ruins in sorted(achados.items(), key=lambda x: -len(x[1]))[:8]:
             rel.erro(f"    {pagina}: {len(ruins)}x  ex.: {ruins[0][:70]}")
     else:
-        rel.ok("nenhum caminho relativo (src, href, srcset e imagesrcset conferidos)")
+        rel.ok("nenhum caminho relativo (src, href, srcset, imagesrcset "
+               "e string JS conferidos)")
 
 
 # --------------------------------------------------------------------------
@@ -717,6 +824,7 @@ def main():
     checar_vercel(rel)
     checar_robots(rel)
     checar_caminhos_relativos(rel)
+    checar_slug_dos_posts(rel)
     checar_ingles(rel)
     if args.producao:
         checar_producao(rel, args.url.rstrip("/"))
