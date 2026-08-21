@@ -218,12 +218,16 @@
   flex-wrap: wrap;
   gap: 32px;
 }
-/* Os quatro logos saíram do mesmo export, então a relação de tamanho ENTRE eles
+/* Três dos logos saíram do mesmo export, então a relação de tamanho ENTRE eles
    já vem certa no arquivo — o que a lâmina precisa é de um fator comum, não de
-   uma altura comum. Com altura igual, o WM Logistics (204x29) ficaria 2,5x mais
-   largo que o WM Trading (131x46) e a fileira desmontava. Daí um único token de
+   uma altura comum. Com altura igual, a fileira desmontava. Daí um único token de
    escala e a altura de cada um calculada sobre a sua altura intrínseca: mexer no
-   token reescala os quatro de uma vez, em qualquer breakpoint. */
+   token reescala os quatro de uma vez, em qualquer breakpoint.
+   O WM Logistics é a exceção: em 21/08 entrou o arquivo oficial da marca, que é
+   empilhado (WM em cima, LOGISTICS embaixo, 189,3x111,3) e veio de outro export.
+   Os 62px não são a altura intrínseca dele — são a altura que deixa o "WM" do
+   sinal com a mesma altura óptica do "WM" dos vizinhos, que é o que casa a
+   fileira. Trocar o arquivo de novo? Recalcular esse número, não copiar. */
 .qs-brands__list img {
   flex: 0 0 auto;
   width: auto;
@@ -232,7 +236,7 @@
 .qs-brands__logo--trading   { height: calc(var(--qs-brands-escala) * 46px); }
 .qs-brands__logo--hubi      { height: calc(var(--qs-brands-escala) * 36px); }
 .qs-brands__logo--energy    { height: calc(var(--qs-brands-escala) * 46px); }
-.qs-brands__logo--logistics { height: calc(var(--qs-brands-escala) * 29px); }
+.qs-brands__logo--logistics { height: calc(var(--qs-brands-escala) * 62px); }
 
 /* ==========================================================================
    3. SOBRE A WM — grade modular, mesma lógica do bento de feiras da página
