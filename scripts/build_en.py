@@ -46,6 +46,19 @@ def caminho_saida(url_en):
 # capa_da_pagina_pt() nao consegue extrair nada. Hoje e so a de aeronaves: a
 # /segmentos-aeronaves/ usa um mosaico de fotos em fundo branco (.aero-hero), e nao
 # um hero escuro com imagem de fundo, entao nao ha "a mesma imagem" para reusar.
+# Paginas PT sem versao PROPRIA em ingles, mas cujo assunto ja existe em /en/.
+# Nao entram no paginas.json de proposito: la cada par vira pagina gerada MAIS
+# hreflang, e /en/segments/fuels/ ja e o par declarado da
+# /segmentos/derivados-petroleo/. Uma URL nao pode ser o par canonico de duas.
+# Aqui e so DESTINO DE LINK, que e outra coisa: o card "Fuel" do carrossel da
+# home em ingles apontava para portugues porque /segmentos/combustivel/ nao tem
+# irma em ingles. Mas o site em ingles resolve combustivel e derivados de
+# petroleo na MESMA pagina, entao mandar o visitante para la e o certo — em vez
+# de joga-lo no portugues por falta de destino.
+DESTINO_SEM_PAR = {
+    "/segmentos/combustivel/": "/en/segments/fuels/",
+}
+
 CAPAS_PROPRIAS_EN = {
     "/en/segments/aircraft-import/": "/images/heros/jato-executivo.webp",
 }
@@ -207,7 +220,7 @@ def formulario_en(pagina):
 
           <label class="sm-col-span-2 form-checkbox-label">
             <input type="checkbox" name="aceite_privacidade" required value="sim" />
-            <span>I have read and agree to the <a href="/politica-de-privacidade/" class="text-primary underline">Privacy Policy</a> and authorise WM Trading to process my data in order to respond to this request.</span>
+            <span>I have read and agree to the <a href="/en/privacy-policy/" class="text-primary underline">Privacy Policy</a> and authorise WM Trading to process my data in order to respond to this request.</span>
           </label>
 
           <label class="sm-col-span-2 form-checkbox-label">
@@ -593,6 +606,56 @@ def menu_para_ingles(caminho_arquivo, pares):
     return trocas
 
 
+def corpo_para_ingles(caminho_arquivo, pares):
+    """Faz os links DO CORPO apontarem para /en/. So para paginas de corpo copiado.
+
+    O menu_para_ingles se limita a cabecalho e rodape de proposito: nas paginas de
+    molde generico o corpo vem do content/en/paginas.json e nao pode ser reescrito
+    por busca e troca. Mas a home e a /about/ nao usam molde nenhum — o corpo delas
+    e o corpo da pagina em PORTUGUES copiado, com os data-i18n traduzidos. Os links
+    vieram junto, apontando para portugues, e nada os corrigia.
+
+    O buraco era grande: 24 links so na home — os 15 cards do carrossel de
+    segmentos, o "ver todos", as 4 modalidades e o solucoes-wm. Quem chegava do
+    Google na home em ingles (10% do organico) caia em portugues no primeiro
+    clique de CONTEUDO, nao so no menu, que ja estava resolvido desde 18/08.
+
+    Troca o que tem par no paginas.json MAIS o DESTINO_SEM_PAR, para os casos em
+    que a pagina PT nao tem irma em ingles mas o assunto dela ja existe em /en/.
+    O que nao esta em nenhum dos dois continua apontando para o portugues: levar
+    ao conteudo certo em outra lingua e melhor do que a lugar nenhum.
+
+    A troca casa o atributo href INTEIRO, com as aspas. E o que impede
+    href="/segmentos" de comer o comeco de href="/segmentos/autopecas/".
+    """
+    with open(caminho_arquivo, encoding="utf-8") as f:
+        html = f.read()
+
+    # o corpo e o que sobra entre o fim do cabecalho e o inicio do rodape; os dois
+    # extremos sao do menu_para_ingles e nao devem ser mexidos aqui
+    i = html.find("</header>")
+    j = html.find('<div class="footer-links">', i)
+    if i == -1 or j == -1:
+        return 0
+
+    corpo, trocas = html[i:j], 0
+    for pt, en in dict(pares, **DESTINO_SEM_PAR).items():
+        formas = (pt,) if pt == "/" else (pt, pt.rstrip("/"))
+        for forma in formas:
+            if not forma:
+                continue
+            alvo = 'href="%s"' % forma
+            n = corpo.count(alvo)
+            if n:
+                corpo = corpo.replace(alvo, 'href="%s"' % en)
+                trocas += n
+
+    if trocas:
+        with open(caminho_arquivo, "w", encoding="utf-8", newline="\n") as f:
+            f.write(html[:i] + corpo + html[j:])
+    return trocas
+
+
 def injeta_hreflang(caminho_arquivo, url_pt, url_en):
     """Coloca o par hreflang no <head>. Idempotente."""
     if not os.path.exists(caminho_arquivo):
@@ -619,7 +682,7 @@ def main():
     paginas = json.load(open(CONTEUDO, encoding="utf-8"))
     head_tpl, header_tpl, footer_tpl = bp.load_template_elements()
 
-    gerados, com_par, links_en = 0, 0, 0
+    gerados, com_par, links_en, links_corpo = 0, 0, 0, 0
     pares = {p["pt"]: p["en"] for p in paginas}
     print(f"gerando {len(paginas)} paginas em /en/\n")
 
@@ -629,14 +692,17 @@ def main():
 
         # A HOME NAO USA O MOLDE GENERICO: ela tem 9 secoes proprias e e a 3a
         # pagina mais clicada do site. Ver home_em_ingles().
+        corpo_copiado = False
         if p["en"] == "/en/":
             if home_em_ingles(p) is None:
                 continue
+            corpo_copiado = True
         # A /about/ TAMBEM nao usa o molde generico: 10 secoes proprias. Ver
         # quem_somos_em_ingles().
         elif p["en"].rstrip("/") == "/en/about":
             if quem_somos_em_ingles(p) is None:
                 continue
+            corpo_copiado = True
         else:
             corpo = corpo_html(p)
             if not corpo:
@@ -648,6 +714,12 @@ def main():
 
         # menu e rodape apontando para as paginas /en/ que existem
         links_en += menu_para_ingles(saida, pares)
+
+        # nas duas de corpo copiado da versao PT, os links do CONTEUDO tambem
+        # nasciam em portugues; nas de molde generico o corpo vem do JSON em
+        # ingles e nao pode ser reescrito. Ver corpo_para_ingles().
+        if corpo_copiado:
+            links_corpo += corpo_para_ingles(saida, pares)
 
         # hreflang dos dois lados
         injeta_hreflang(saida, p["pt"], p["en"])
@@ -670,6 +742,7 @@ def main():
     print(f"\n{'=' * 70}")
     print(f"paginas /en/ geradas      : {gerados}")
     print(f"links de menu levados p/ EN: {links_en}")
+    print(f"links de CORPO levados p/ EN: {links_corpo}")
     print(f"pares hreflang completos  : {com_par}")
     print(f"URLs /en/ no sitemap      : {n_sitemap}")
     print("lembrete: rode SEMPRE depois do build_pages.py")

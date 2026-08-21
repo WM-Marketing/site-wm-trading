@@ -419,6 +419,46 @@ def checar_ingles(rel):
     else:
         rel.ok("nenhum redirect intercepta as paginas /en/")
 
+    # ---------------------------------------------------------------- trava
+    # Vazamento de idioma: pagina /en/ mandando o visitante para o portugues
+    # quando a versao em ingles EXISTE. O menu ja era tratado desde 18/08, mas o
+    # CORPO da home nao: 24 links (os 15 cards do carrossel, o "ver todos", as 4
+    # modalidades, o solucoes-wm) nasciam apontando para PT, porque o corpo dela e
+    # uma copia da home em portugues. Ninguem viu por 3 dias — nada checava.
+    # Link para pagina SEM versao em ingles nao e erro: e o fallback honesto.
+    # o mesmo mapa que o build_en usa, incluindo os destinos das paginas PT sem
+    # irma em ingles (DESTINO_SEM_PAR) — senao a trava aprovaria justo o link que
+    # foi corrigido a mao. Import tardio: os dois geradores so definem coisas, o
+    # main() de ambos esta atras de __main__.
+    sys.path.insert(0, os.path.join(ROOT_DIR, "scripts"))
+    import build_en  # noqa: E402  (import tardio de proposito, ver acima)
+    pares = {q["pt"]: q["en"] for q in paginas}
+    pares.update(build_en.DESTINO_SEM_PAR)
+    vazando = []
+    for p in paginas:
+        rel_en = p["en"].strip("/")
+        arq_en = "en/index.html" if rel_en == "en" else rel_en + ".html"
+        if not os.path.exists(os.path.join(ROOT_DIR, arq_en.replace("/", os.sep))):
+            continue
+        html_en = ler(arq_en)
+        for pt, en in pares.items():
+            if pt == "/":
+                continue
+            for forma in (pt, pt.rstrip("/")):
+                if 'href="%s"' % forma in html_en:
+                    vazando.append("%s -> %s (existe %s)" % (p["en"], forma, en))
+                    break
+
+    if vazando:
+        rel.erro("%d link(s) em paginas /en/ levando ao portugues, tendo versao em "
+                 "ingles:" % len(vazando))
+        for v in vazando[:8]:
+            rel.erro("    %s" % v)
+        if len(vazando) > 8:
+            rel.erro("    ... e mais %d" % (len(vazando) - 8))
+    else:
+        rel.ok("nenhuma pagina /en/ manda o visitante para o portugues a toa")
+
 
 EXT_ASSET = ("webp", "jpg", "jpeg", "png", "svg", "gif", "avif", "mp4",
               "webm", "json", "css", "js", "woff", "woff2", "ico", "pdf")
