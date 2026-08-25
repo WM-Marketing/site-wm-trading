@@ -604,6 +604,71 @@
       "source": "/coque-de-petroleo-2/",
       "destination": "/segmentos/derivados-petroleo/",
       "permanent": true
+    },
+    {
+      "source": "/careers/",
+      "destination": "/en/careers/",
+      "permanent": true
+    },
+    {
+      "source": "/open-positions/",
+      "destination": "/en/careers/",
+      "permanent": true
+    },
+    {
+      "source": "/radar-siscomex/",
+      "destination": "/blog/radar-siscomex/",
+      "permanent": true
+    },
+    {
+      "source": "/contact-us/",
+      "destination": "/en/contact-us/",
+      "permanent": true
+    },
+    {
+      "source": "/contact/",
+      "destination": "/en/contact-us/",
+      "permanent": true
+    },
+    {
+      "source": "/about-us/",
+      "destination": "/en/about/",
+      "permanent": true
+    },
+    {
+      "source": "/cases/aeronaves/",
+      "destination": "/segmentos-aeronaves/",
+      "permanent": true
+    },
+    {
+      "source": "/cases/",
+      "destination": "/segmentos/",
+      "permanent": true
+    },
+    {
+      "source": "/segmentos/derivados-petroleo/en/",
+      "destination": "/en/segments/fuels/",
+      "permanent": true
+    },
+    {
+      "source": "/segmentos/en/derivados-petroleo/",
+      "destination": "/en/segments/fuels/",
+      "permanent": true
+    },
+    {
+      "source": "/en/segments/auto-parts-imports/about/",
+      "destination": "/en/segments/auto-parts-imports/",
+      "permanent": true
+    },
+    {
+      "source": "/pt-BR/solucoes/global-sourcing/",
+      "destination": "/global-sourcing/",
+      "permanent": true
+    },
+    {
+      "source": "/pt-BR/:path(.*)",
+      "destination": "/",
+      "permanent": true
     }
   ]
 }
