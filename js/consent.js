@@ -79,7 +79,40 @@
   } catch (e) {}
 
   // ---- Consent Mode v2: fail-closed antes do CMP ------------------------
+  //
+  // DUAS CAMADAS, e a ordem importa: o especifico de regiao vem PRIMEIRO, o
+  // global depois. E o padrao documentado pelo Google e o mesmo que o site
+  // antigo (WordPress) emite — la sao dois `consent default`, e o de `region`
+  // vence por ESPECIFICIDADE, nao por ordem de chamada.
+  //
+  // POR QUE ISSO PRECISA ESTAR AQUI, E NAO NO PAINEL DO ADOPT:
+  // medido em 25/08 no preview — o AdOpt carrega DEPOIS deste arquivo (ordem
+  // deliberada: utm-tracking -> consent.js -> AdOpt). No Consent Mode o
+  // primeiro `default` de cada sinal vence, entao o AdOpt nunca consegue
+  // definir padrao neste site; ele so consegue mandar `update`, e `update` so
+  // sai DEPOIS que a pessoa interage com o banner. Resultado: marcar o GA como
+  // "Necessario" no painel do AdOpt nao tem efeito nenhum sobre quem nao
+  // interage. A concessao por padrao tem que nascer aqui.
   function gtag() { window.dataLayer.push(arguments); }
+
+  // 1) BRASIL — analytics concedido por padrao (interesse legitimo, LGPD).
+  //    Fora do Brasil NAO recebe esta regra: conceder sem escopo exporia
+  //    visitante europeu ao GDPR, onde interesse legitimo nao sustenta.
+  //    Marketing continua negado aqui tambem — quem libera pixel e o aceite.
+  gtag('consent', 'default', {
+    region: ['BR'],
+    ad_storage: 'denied',
+    ad_user_data: 'denied',
+    ad_personalization: 'denied',
+    analytics_storage: 'granted',
+    functionality_storage: 'granted',
+    security_storage: 'granted',
+    wait_for_update: 2000
+  });
+
+  // 2) GLOBAL — nega tudo que nao e essencial. Continua sendo a rede de
+  //    seguranca: se o AdOpt cair ou for bloqueado por adblock, o estado
+  //    permanece negado para todo mundo que nao esta no Brasil. Falha fechado.
   gtag('consent', 'default', {
     ad_storage: 'denied',
     ad_user_data: 'denied',
