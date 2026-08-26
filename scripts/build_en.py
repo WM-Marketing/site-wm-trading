@@ -61,6 +61,12 @@ DESTINO_SEM_PAR = {
 
 CAPAS_PROPRIAS_EN = {
     "/en/segments/aircraft-import/": "/images/heros/jato-executivo.webp",
+    # Mesmo caso desde 26/08/2026: a /segmentos/equipamentos-fotovoltaicos/
+    # trocou o hero escuro pelo mosaico .fv-hero, entao nao tem mais
+    # .dynamic-hero__bg para a capa_da_pagina_pt() ler. Sem esta linha a
+    # pagina em ingles saia do build sem imagem de capa. O arquivo e o que a
+    # versao PT usava ate a virada.
+    "/en/segments/photovoltaic-equipment/": "/wp-content/uploads/2024/06/banner-fotovolaticos.webp",
 }
 
 

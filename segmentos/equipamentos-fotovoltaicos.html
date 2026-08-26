@@ -48,9 +48,8 @@
   <script src="https://tag.goadopt.io/injector.js?website_code=e7ae093c-b92e-4ceb-9c53-ac44c0b811f8"
           class="adopt-injector"></script>
 
-  <link rel="stylesheet" href="/css/dynamic-pages.css" />
+  <link rel="stylesheet" href="/css/fotovoltaico.css" />
   <script src="/js/contact-form.js" defer></script>
-  <script src="/js/lightbox.js" defer></script>
 
   <link rel="alternate" hreflang="pt-BR" href="https://www.wmtrading.com.br/segmentos/equipamentos-fotovoltaicos/" />
   <link rel="alternate" hreflang="en" href="https://www.wmtrading.com.br/en/segments/photovoltaic-equipment/" />
@@ -190,227 +189,860 @@
 
 <main>
 
-        <section class="dynamic-hero">
-          <img src="/wp-content/uploads/2024/06/banner-fotovolaticos.webp" alt="Equipamentos Fotovoltaicos" class="dynamic-hero__bg" />
-          <div class="container dynamic-hero__container">
-            <p class="dynamic-hero__eyebrow">Segmento</p>
-            <h1 class="dynamic-hero__title" style="font-weight: var(--fw-light);">IMPORTAÇÃO DE<br><b><span class="text-primary" style="font-weight: var(--fw-extrabold);">EQUIPAMENTOS FOTOVOLTAICOS</span></b></h1>
-            <a href="#contato-form" class="btn btn-lg" style="margin-top: 24px;">Falar com um especialista</a>
+<!-- ══════════════════════════════════════
+     SEÇÃO 1 — HERO
+     Estrutura clonada de segmentos-aeronaves.html (.aero-hero), com prefixo
+     próprio .fv-* para que ajustes aqui não alterem a página de aeronaves.
+══════════════════════════════════════ -->
+<section class="fv-hero">
+
+  <!-- Wrapper centralizado: controla tamanho e responsividade ao zoom -->
+  <div class="fv-hero__inner">
+
+    <div class="fv-hero__bg-wrap">
+      <!-- ══ MOSAICO — DESKTOP ══
+           Coordenadas em % do viewBox 2005 x 626 — mesma grade do hero de
+           aeronaves (colunas de 10%, linhas de 25%). Só as fotos mudam. -->
+      <div class="fv-hero__mosaico fv-hero__mosaico--desktop" aria-hidden="true">
+        <span class="fv-hero__bloco" style="--x:70.025%; --y:50%;     --w:20%;     --h:50%;     --cor:#F0F0F0"></span>
+        <img class="fv-hero__foto"
+             src="/images/fotovoltaico/hero-usina.jpg"
+             sizes="(max-width: 768px) 38vw, (max-width: 1440px) 28vw, 403px"
+             alt="" width="820" height="640" decoding="async"
+             style="--x:70.025%; --y:0%;      --w:20%;     --h:50%" />
+        <img class="fv-hero__foto"
+             src="/images/fotovoltaico/hero-modulo.jpg"
+             sizes="(max-width: 768px) 38vw, (max-width: 1440px) 28vw, 403px"
+             alt="" width="820" height="640" decoding="async"
+             style="--x:50.025%; --y:50%;     --w:20%;     --h:50%" />
+        <span class="fv-hero__bloco" style="--x:90.025%; --y:50%;     --w:9.975%;  --h:25.08%;  --cor:#F0F0F0"></span>
+        <span class="fv-hero__bloco" style="--x:0.798%;  --y:50%;     --w:10.025%; --h:25.08%;  --cor:#F5F5F5"></span>
+        <span class="fv-hero__bloco" style="--x:0.798%;  --y:0%;      --w:10.025%; --h:25.08%;  --cor:#F2F2F2"></span>
+        <span class="fv-hero__bloco" style="--x:59.999%; --y:24.92%;  --w:10.025%; --h:25.08%;  --cor:#F2F2F2"></span>
+        <span class="fv-hero__bloco" style="--x:10.025%; --y:74.92%;  --w:9.975%;  --h:25.08%;  --cor:#F2F2F2"></span>
+        <span class="fv-hero__bloco" style="--x:90.025%; --y:25.08%;  --w:9.975%;  --h:25.08%;  --cor:#F5F5F5"></span>
+      </div>
+    </div>
+
+    <!-- ══ MOSAICO — SOMENTE MOBILE ══
+         Composição vertical, em % do viewBox 1254 x 1657. Mesmas duas fotos. -->
+    <div class="fv-hero__mosaico fv-hero__mosaico--mobile" aria-hidden="true">
+      <span class="fv-hero__bloco" style="--x:1.276%;  --y:0%;      --w:13.876%; --h:18.648%; --cor:#F0F0F0"></span>
+      <img class="fv-hero__foto"
+           src="/images/fotovoltaico/hero-modulo.jpg"
+           alt="" width="820" height="640" decoding="async"
+           style="--x:28.549%; --y:81.352%; --w:31.738%; --h:18.648%" />
+      <span class="fv-hero__bloco" style="--x:60.526%; --y:81.231%; --w:31.579%; --h:18.648%; --cor:#F0F0F0"></span>
+      <img class="fv-hero__foto"
+           src="/images/fotovoltaico/hero-usina.jpg"
+           alt="" width="820" height="640" decoding="async"
+           style="--x:60.287%; --y:62.583%; --w:31.738%; --h:18.769%" />
+      <span class="fv-hero__bloco" style="--x:13.876%; --y:18.648%; --w:15.789%; --h:9.354%;  --cor:#F0F0F0"></span>
+      <span class="fv-hero__bloco" style="--x:44.498%; --y:71.998%; --w:15.789%; --h:9.354%;  --cor:#F0F0F0"></span>
+      <span class="fv-hero__bloco" style="--x:84.211%; --y:18.648%; --w:15.789%; --h:9.354%;  --cor:#F0F0F0"></span>
+      <span class="fv-hero__bloco" style="--x:12.759%; --y:90.586%; --w:15.789%; --h:9.415%;  --cor:#F5F5F5"></span>
+    </div>
+
+    <!-- Conteúdo sobreposto à esquerda -->
+    <div class="fv-hero__overlay container">
+      <div class="fv-hero__content">
+        <h1 class="fv-hero__title">
+          Importe equipamentos<br>
+          fotovoltaicos com<br>
+          <span class="fv-hero__title-highlight">agilidade e segurança</span>
+        </h1>
+        <p class="fv-hero__text">
+          Planejamento tributário, logística e nacionalização para tornar sua operação
+          mais eficiente, da compra no exterior à entrega do projeto.
+        </p>
+        <a href="#contato" class="fv-hero__cta">
+          <img src="/images/fotovoltaico/icone-botao-seta.svg" alt="" class="fv-hero__cta-icon" />
+          <span class="fv-hero__cta-text">Falar com um<br>especialista</span>
+        </a>
+      </div>
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- ══════════════════════════════════════
+     SEÇÃO 2 — IMAGEM FULL-WIDTH (USINA)
+══════════════════════════════════════ -->
+<section class="fv-usina">
+  <img
+    src="/images/fotovoltaico/faixa-usina.jpg"
+    alt="Usina fotovoltaica ao pôr do sol"
+    class="fv-usina__img"
+    width="3840" height="640"
+    loading="lazy" decoding="async"
+  />
+</section>
+
+
+<!-- ══════════════════════════════════════
+     SEÇÃO 3 — INTRO: título + texto + vídeo
+══════════════════════════════════════ -->
+<section class="fv-intro">
+  <div class="container">
+
+    <!-- Linha 1: título esquerda + texto direita -->
+    <div class="fv-intro__header reveal">
+      <div class="fv-intro__left">
+        <h2 class="fv-intro__title">
+          Importação de<br>
+          <span class="fv-intro__title-hl">Equipamentos<br>Fotovoltaicos</span>
+        </h2>
+        <a href="/solucoes-wm/" class="btn fv-intro__btn">Nossas soluções →</a>
+      </div>
+      <div class="fv-intro__right">
+        <p class="fv-intro__text">
+          Com experiência em comércio exterior desde 2004, a WM Trading oferece soluções
+          completas para a importação de equipamentos fotovoltaicos, cuidando do
+          planejamento, logística e nacionalização da operação com
+          <strong>agilidade e segurança.</strong>
+        </p>
+      </div>
+    </div>
+
+    <!-- Linha 2: card de vídeo -->
+    <div class="fv-intro__video-wrap reveal">
+      <div class="fv-intro__video-card">
+        <img
+          src="/images/fotovoltaico/video-poster.jpg"
+          alt="Usina fotovoltaica ao pôr do sol"
+          class="fv-intro__video-img"
+          width="2080" height="770"
+          loading="lazy" decoding="async"
+        />
+        <button class="fv-intro__play" aria-label="Reproduzir vídeo">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <polygon points="6,3 20,12 6,21" fill="#FC5000"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Linha 3: legenda centralizada -->
+    <p class="fv-intro__caption reveal">
+      Experiência em operações fotovoltaicas, com gestão completa da importação
+      até a entrega do projeto.
+    </p>
+
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════
+     SEÇÃO 4 — BENEFÍCIOS (LISTA EXPANSÍVEL)
+     Substitui o carrossel. O comportamento é o do protocolo enviado: no
+     desktop o item abre ao passar o mouse, no toque abre no clique, e o
+     teclado abre no foco — sempre um único item aberto.
+     A pele é a do site: Poppins, tokens de cor, container de 1200 e o botão
+     padrão .btn.
+══════════════════════════════════════ -->
+<section class="fv-benef" aria-labelledby="fv-benef-title">
+  <div class="container fv-benef__inner">
+
+    <header class="fv-benef__header reveal">
+      <p class="fv-benef__eyebrow">Nossos diferenciais</p>
+
+      <h2 class="fv-benef__title" id="fv-benef-title">
+        Benefícios de importar equipamentos
+        <span class="fv-benef__title-hl">fotovoltaicos com a WM</span>
+      </h2>
+
+      <span class="fv-benef__header-arrow" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+             stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg>
+      </span>
+    </header>
+
+    <div class="fv-benef__list">
+
+      <article class="fv-benef__item is-open" tabindex="0">
+        <div class="fv-benef__thumb">
+          <img width="360" height="380" src="/images/fotovoltaico/benef-01.jpg" alt="Painéis fotovoltaicos em detalhe" loading="lazy" decoding="async">
+        </div>
+
+        <div class="fv-benef__num">01.</div>
+
+        <div class="fv-benef__content">
+          <div class="fv-benef__head">
+            <h3 class="fv-benef__item-title">Importação de painéis solares</h3>
+            <span class="fv-benef__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                     stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            </span>
           </div>
-        </section>
-        
-            <section class="page-section">
-              <div class="container split-section" style="align-items: center; gap: 40px;">
-                <div class="split-section__text">
-                  <h2 class="card-title" style="font-size: var(--fs-lg); font-weight: var(--fw-semibold); color: var(--color-primary); margin-bottom: 18px;">Quer importar equipamentos fotovoltaicos com agilidade e segurança?</h2>
-                  <p class="card-desc" style="font-size: var(--fs-base); line-height: 1.7; color: var(--color-text-dark); margin-bottom: 24px;">Entre em contato com a trading mais completa do Brasil para tornar esse sonho realidade.</p>
-                  <a href="#contato-form" class="btn btn-lg">Falar com um especialista</a>
-                </div>
-                
-                <div class="split-section__image-wrap">
-                  <iframe src="https://www.youtube.com/embed/IqGdtPnWhyY" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="width:100%; height:315px; border-radius:var(--radius-lg); box-shadow: 0 10px 30px rgba(0,0,0,0.15);"></iframe>
-                </div>
-                
-              </div>
-            </section>
-            
-                    <section class="page-section ">
-                      <div class="container split-section" style="align-items: center; gap: 40px;">
-                        
-                    <div class="split-section__text">
-                      <h2 class="card-title" style="font-size: var(--fs-lg); font-weight: var(--fw-semibold); color: var(--color-primary); margin-bottom: 18px;">No mercado desde 2004, somos a Trading Company da Energia Solar</h2>
-                      <p class="card-desc" style="font-size: var(--fs-base); line-height: 1.7; white-space: pre-line; color: var(--color-text-dark);">A importação de equipamentos de energia solar exige um know-how e um diferencial competitivo que apenas uma trading especializada pode alcançar. Com a WM, o importador consegue destacar-se nesse setor, obtendo mais lucros e vantagens. Para quem deseja investir nessa área tão promissora, a melhor opção é importar de países como a China, um dos principais fornecedores do setor. A alta tecnologia dos produtos chineses aliada aos incentivos tributários brasileiros permite que o importador cresça dentro desse mercado.</p>
-                    </div>
-                    
-                    <div class="split-section__image-wrap">
-                      <img src="/wp-content/uploads/2024/06/thumb-20-anos-v2.webp" alt="No mercado desde 2004, somos a Trading Company da Energia Solar" class="split-section__image" />
-                    </div>
-                    
-                      </div>
-                    </section>
-                    
-                    <section class="page-section page-section--alternate">
-                      <div class="container split-section" style="align-items: center; gap: 40px;">
-                        
-                    <div class="split-section__image-wrap">
-                      <img src="/wp-content/uploads/2024/06/porcentagem-v2.webp" alt="Por que importar com a WM?" class="split-section__image" />
-                    </div>
-                    
-                    <div class="split-section__text">
-                      <h2 class="card-title" style="font-size: var(--fs-lg); font-weight: var(--fw-semibold); color: var(--color-primary); margin-bottom: 18px;">Por que importar com a WM?</h2>
-                      <p class="card-desc" style="font-size: var(--fs-base); line-height: 1.7; white-space: pre-line; color: var(--color-text-dark);">A WM possui um forte relacionamento com os principais fornecedores de painéis, inversores e acessórios para a instalação de um sistema fotovoltaico. Garantimos os melhores custos de transporte e as melhores condições logísticas para otimizar as operações. Atuamos também no processo de nacionalização dos equipamentos e possuímos a certificação Inmetro para garantir maior agilidade no desembaraço.</p>
-                    </div>
-                    
-                      </div>
-                    </section>
-                    
-                    <section class="page-section ">
-                      <div class="container split-section" style="align-items: center; gap: 40px;">
-                        
-                    <div class="split-section__text">
-                      <h2 class="card-title" style="font-size: var(--fs-lg); font-weight: var(--fw-semibold); color: var(--color-primary); margin-bottom: 18px;">Somos associados à ABSOLAR!</h2>
-                      <p class="card-desc" style="font-size: var(--fs-base); line-height: 1.7; white-space: pre-line; color: var(--color-text-dark);">Nossos especialistas estão sempre muito bem-informados em relação a dicas e soluções técnicas e legais sobre importação fotovoltaica e demais temas do setor de energia solar. Esse é um selo que atesta uma parceria que amplia a qualidade das nossas entregas e beneficia nossos clientes.</p>
-                    </div>
-                    
-                    <div class="split-section__image-wrap">
-                      <img src="/wp-content/uploads/2024/06/selo.png" alt="Somos associados à ABSOLAR!" class="split-section__image" />
-                    </div>
-                    
-                      </div>
-                    </section>
-                    
-            <section class="page-section page-section--alternate">
-              <div class="container">
-                <h2 class="section-title-center" style="font-size: var(--fs-xl); font-weight: var(--fw-semibold); color: var(--color-primary); margin-bottom: 8px;">Benefícios de importar Equipamentos Fotovoltaicos com a WM</h2>
-                <p class="text-center" style="color: var(--color-text-muted); font-size: var(--fs-sm); margin-bottom: 40px;">Confira os diferenciais de importar Equipamentos Fotovoltaicos com a WM</p>
-                <div class="cards-grid">
-                  
-                <div class="benefit-card benefit-card-centered">
-                  
-                    <div class="benefit-card__icon-container">
-                      <img src="/wp-content/uploads/2024/06/1.svg" alt="Importação de painéis solares" class="benefit-card__icon" />
-                    </div>
-                    
-                  <h3 class="card-title">Importação de painéis solares</h3>
-                  <p class="card-desc">Especialização na importação de painéis fotovoltaicos, com relacionamento consolidado com os principais fornecedores.</p>
-                </div>
-                
-                <div class="benefit-card benefit-card-centered">
-                  
-                    <div class="benefit-card__icon-container">
-                      <img src="/wp-content/uploads/2024/06/2.svg" alt="Importação de inversores" class="benefit-card__icon" />
-                    </div>
-                    
-                  <h3 class="card-title">Importação de inversores</h3>
-                  <p class="card-desc">Soluções completas para importação de inversores, com certificação Inmetro para um desembaraço ágil.</p>
-                </div>
-                
-                <div class="benefit-card benefit-card-centered">
-                  
-                    <div class="benefit-card__icon-container">
-                      <img src="/wp-content/uploads/2024/06/3.svg" alt="Direto do fabricante" class="benefit-card__icon" />
-                    </div>
-                    
-                  <h3 class="card-title">Direto do fabricante</h3>
-                  <p class="card-desc">Capacidade de importação direta de fabricantes, com garantia dos melhores custos de transporte.</p>
-                </div>
-                
-                <div class="benefit-card benefit-card-centered">
-                  <span class="card-number-badge">4</span>
-                  <h3 class="card-title">Benefícios fiscais para kits</h3>
-                  <p class="card-desc">Acesso a incentivos tributários brasileiros que permitem crescimento no mercado de energia solar.</p>
-                </div>
-                
-                <div class="benefit-card benefit-card-centered">
-                  <span class="card-number-badge">5</span>
-                  <h3 class="card-title">ICMS reduzido em inversores</h3>
-                  <p class="card-desc">Planejamento tributário especializado para redução de impostos nas operações de importação.</p>
-                </div>
-                
-                <div class="benefit-card benefit-card-centered">
-                  <span class="card-number-badge">6</span>
-                  <h3 class="card-title">Nacionalização ágil dos módulos</h3>
-                  <p class="card-desc">Processo eficiente de nacionalização, com expertise em regulamentações aduaneiras específicas.</p>
-                </div>
-                
-                </div>
-              </div>
-            </section>
-            
-            <section class="page-section" id="contato-form" style="background: var(--color-bg-dark); color: var(--color-text-white);">
-              <div class="container" style="max-width:800px;">
-                <h2 class="section-title-center" style="color:var(--color-text-white); font-weight:var(--fw-semibold);">Solucione sua importação de Equipamentos Fotovoltaicos com a WM</h2>
-                <p class="text-center" style="color:rgba(255,255,255,0.7); margin-bottom:30px;">Preencha o formulário e um dos nossos especialistas entrará em contato com você.</p>
-                <div style="background:#fff; color:var(--color-text-dark); padding: 40px; border-radius: var(--radius-xl); box-shadow: 0 10px 30px rgba(0,0,0,0.25);">
-                  
-        <form class="contact-form-js grid gap-4 form-grid-wm form-grid-wm--2col" data-form-type="segmentos">
-          <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" class="hidden" aria-hidden="true" style="display:none;" />
-          
-          <input name="nome" required placeholder="Nome *" class="input-wm sm-col-span-2" />
-          <input name="email" type="email" required placeholder="E-mail *" class="input-wm" />
-          <input name="telefone" type="tel" required placeholder="Número Telefone * — (DDD) 99999-0000" pattern="[0-9\s\(\)\+\-\.]+" class="input-wm" />
-          <input name="empresa" placeholder="Empresa" class="input-wm" />
-          
-          <select name="estado" required class="input-wm">
-            <option value="" disabled selected>Estado *</option>
-            
-          <option value="Acre">Acre</option>
-          <option value="Amapá">Amapá</option>
-          <option value="Amazonas">Amazonas</option>
-          <option value="Pará">Pará</option>
-          <option value="Rondônia">Rondônia</option>
-          <option value="Roraima">Roraima</option>
-          <option value="Tocantins">Tocantins</option>
-          <option value="Alagoas">Alagoas</option>
-          <option value="Bahia">Bahia</option>
-          <option value="Ceará">Ceará</option>
-          <option value="Maranhão">Maranhão</option>
-          <option value="Paraíba">Paraíba</option>
-          <option value="Pernambuco">Pernambuco</option>
-          <option value="Piauí">Piauí</option>
-          <option value="Rio Grande do Norte">Rio Grande do Norte</option>
-          <option value="Sergipe">Sergipe</option>
-          <option value="Distrito Federal">Distrito Federal</option>
-          <option value="Goiás">Goiás</option>
-          <option value="Mato Grosso">Mato Grosso</option>
-          <option value="Mato Grosso do Sul">Mato Grosso do Sul</option>
-          <option value="Espírito Santo">Espírito Santo</option>
-          <option value="Minas Gerais">Minas Gerais</option>
-          <option value="Rio de Janeiro">Rio de Janeiro</option>
-          <option value="São Paulo">São Paulo</option>
-          <option value="Paraná">Paraná</option>
-          <option value="Rio Grande do Sul">Rio Grande do Sul</option>
-          <option value="Santa Catarina">Santa Catarina</option>
-          <option value="Exterior">Exterior</option>
-          </select>
-          
-          <select name="segmento" required class="input-wm sm-col-span-2">
-            <option value="" disabled>Segmento *</option>
-            
-          <option value="Aeronaves" >Aeronaves</option>
-          <option value="Energia Renovável" selected>Energia Renovável</option>
-          <option value="Alimentos e Bebidas" >Alimentos e Bebidas</option>
-          <option value="Vestuário/Têxtil" >Vestuário/Têxtil</option>
-          <option value="Informática e Eletrônicos" >Informática e Eletrônicos</option>
-          <option value="Metais & Derivados" >Metais & Derivados</option>
-          <option value="Partes e Peças Automotivas" >Partes e Peças Automotivas</option>
-          <option value="Produtos Químicos" >Produtos Químicos</option>
-          <option value="Partes e Peças Geral" >Partes e Peças Geral</option>
-          <option value="Cosméticos e Healthcare" >Cosméticos e Healthcare</option>
-          <option value="Insumos e Matéria Prima" >Insumos e Matéria Prima</option>
-          <option value="Medicamentos" >Medicamentos</option>
-          <option value="Combustível" >Combustível</option>
-          <option value="Máquinas e Equipamentos" >Máquinas e Equipamentos</option>
-          <option value="Setor Automotivo" >Setor Automotivo</option>
-          <option value="Outros" >Outros</option>
-          </select>
-          
-          <select name="forma_resposta" required class="input-wm sm-col-span-2">
-            <option value="" disabled selected>Como deseja ser respondido? *</option>
+
+          <div class="fv-benef__details">
+            <div class="fv-benef__details-inner">
+              <p class="fv-benef__desc">Especialização na importação de módulos fotovoltaicos, com relacionamento consolidado com fornecedores estratégicos e acompanhamento de toda a operação.</p>
+              <a class="btn fv-benef__btn" href="/solucoes-wm/">
+                Saiba mais
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                     stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+              </a>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <article class="fv-benef__item" tabindex="0">
+        <div class="fv-benef__thumb">
+          <img width="360" height="380" src="/images/fotovoltaico/benef-02.jpg" alt="Inversores solares instalados" loading="lazy" decoding="async">
+        </div>
+
+        <div class="fv-benef__num">02.</div>
+
+        <div class="fv-benef__content">
+          <div class="fv-benef__head">
+            <h3 class="fv-benef__item-title">Importação de inversores</h3>
+            <span class="fv-benef__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                     stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            </span>
+          </div>
+
+          <div class="fv-benef__details">
+            <div class="fv-benef__details-inner">
+              <p class="fv-benef__desc">Soluções completas para importação de inversores, incluindo suporte técnico, certificação Inmetro e condução do processo para um desembaraço mais ágil.</p>
+              <a class="btn fv-benef__btn" href="/solucoes-wm/">
+                Saiba mais
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                     stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+              </a>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <article class="fv-benef__item" tabindex="0">
+        <div class="fv-benef__thumb">
+          <img width="360" height="380" src="/images/fotovoltaico/benef-03.jpg" alt="Linha de produção de módulos" loading="lazy" decoding="async">
+        </div>
+
+        <div class="fv-benef__num">03.</div>
+
+        <div class="fv-benef__content">
+          <div class="fv-benef__head">
+            <h3 class="fv-benef__item-title">Direto do fabricante</h3>
+            <span class="fv-benef__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                     stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            </span>
+          </div>
+
+          <div class="fv-benef__details">
+            <div class="fv-benef__details-inner">
+              <p class="fv-benef__desc">Capacidade de importar diretamente de fabricantes, reduzindo intermediários e buscando melhores condições comerciais e custos logísticos.</p>
+              <a class="btn fv-benef__btn" href="/solucoes-wm/">
+                Saiba mais
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                     stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+              </a>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <article class="fv-benef__item" tabindex="0">
+        <div class="fv-benef__thumb">
+          <img width="360" height="380" src="/images/fotovoltaico/benef-04.jpg" alt="Usina fotovoltaica vista de cima" loading="lazy" decoding="async">
+        </div>
+
+        <div class="fv-benef__num">04.</div>
+
+        <div class="fv-benef__content">
+          <div class="fv-benef__head">
+            <h3 class="fv-benef__item-title">Benefícios fiscais para kits</h3>
+            <span class="fv-benef__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                     stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            </span>
+          </div>
+
+          <div class="fv-benef__details">
+            <div class="fv-benef__details-inner">
+              <p class="fv-benef__desc">Acesso a incentivos tributários brasileiros aplicáveis ao setor, contribuindo para maior competitividade das operações de energia solar.</p>
+              <a class="btn fv-benef__btn" href="/solucoes-wm/">
+                Saiba mais
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                     stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+              </a>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <article class="fv-benef__item" tabindex="0">
+        <div class="fv-benef__thumb">
+          <img width="360" height="380" src="/images/fotovoltaico/benef-05.jpg" alt="Fileira de inversores em usina" loading="lazy" decoding="async">
+        </div>
+
+        <div class="fv-benef__num">05.</div>
+
+        <div class="fv-benef__content">
+          <div class="fv-benef__head">
+            <h3 class="fv-benef__item-title">ICMS reduzido em inversores</h3>
+            <span class="fv-benef__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                     stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            </span>
+          </div>
+
+          <div class="fv-benef__details">
+            <div class="fv-benef__details-inner">
+              <p class="fv-benef__desc">Planejamento tributário especializado para aproveitar oportunidades de redução da carga tributária nas operações de importação.</p>
+              <a class="btn fv-benef__btn" href="/solucoes-wm/">
+                Saiba mais
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                     stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+              </a>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <article class="fv-benef__item" tabindex="0">
+        <div class="fv-benef__thumb">
+          <img width="360" height="380" src="/images/fotovoltaico/benef-06.jpg" alt="Contêineres de módulos em obra" loading="lazy" decoding="async">
+        </div>
+
+        <div class="fv-benef__num">06.</div>
+
+        <div class="fv-benef__content">
+          <div class="fv-benef__head">
+            <h3 class="fv-benef__item-title">Nacionalização ágil dos módulos</h3>
+            <span class="fv-benef__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                     stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            </span>
+          </div>
+
+          <div class="fv-benef__details">
+            <div class="fv-benef__details-inner">
+              <p class="fv-benef__desc">Processo eficiente de nacionalização, com domínio de regulamentações aduaneiras específicas para equipamentos fotovoltaicos.</p>
+              <a class="btn fv-benef__btn" href="/solucoes-wm/">
+                Saiba mais
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                     stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+              </a>
+            </div>
+          </div>
+        </div>
+      </article>
+
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════
+     SEÇÃO 5 — GESTÃO DA OPERAÇÃO
+     Grade escalonada full-bleed: a faixa de cima ocupa a metade DIREITA da
+     viewport (37,5% → 87,5%) e a de baixo a metade ESQUERDA (12,5% → 62,5%),
+     com o texto encaixado no vão de cada uma. Os cards usam o mesmo efeito
+     dos .motivo-card da home (holofote radial + borda em gradiente).
+══════════════════════════════════════ -->
+<section class="fv-gestao">
+
+  <!-- Faixa 1: texto à esquerda, três cards à direita -->
+  <div class="fv-gestao__band fv-gestao__band--1">
+    <div class="fv-gestao__aside fv-gestao__aside--left reveal">
+      <h2 class="fv-gestao__title">
+        Gestão completa<br>
+        da operação.<br>
+        Da <span class="fv-gestao__hl">documentação</span><br>
+        à <span class="fv-gestao__hl">entrega na obra</span>
+      </h2>
+    </div>
+
+    <div class="fv-gestao__cards">
+        <article class="fv-gestao__card">
+          <div class="fv-gestao__card-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"
+                 stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8l-5-5Z"/><path d="M14 3v5h5"/><path d="m8.8 14.2 2 2 3.6-3.6"/></svg>
+          </div>
+          <h3 class="fv-gestao__card-title">Documentação<br>sob controle</h3>
+          <p class="fv-gestao__card-text">Acompanhamento documental para reduzir inconsistências e atrasos.</p>
+        </article>
+
+        <article class="fv-gestao__card">
+          <div class="fv-gestao__card-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"
+                 stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="6" width="19" height="12" rx="2"/><circle cx="12" cy="12" r="2.4"/><path d="M6 9.6v4.8M18 9.6v4.8"/></svg>
+          </div>
+          <h3 class="fv-gestao__card-title">Pagamentos<br>coordenados</h3>
+          <p class="fv-gestao__card-text">Gestão dos pagamentos conforme as etapas e condições da operação.</p>
+        </article>
+
+        <article class="fv-gestao__card">
+          <div class="fv-gestao__card-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"
+                 stroke-linecap="round" stroke-linejoin="round"><path d="M3 10 12 4.5 21 10"/><path d="M5.5 10v8.5M10 10v8.5M14 10v8.5M18.5 10v8.5"/><path d="M3 21h18"/></svg>
+          </div>
+          <h3 class="fv-gestao__card-title">Gestão financeira<br>da operação</h3>
+          <p class="fv-gestao__card-text">Acompanhamento de cartas de crédito e instrumentos da negociação internacional.</p>
+        </article>
+    </div>
+  </div>
+
+  <!-- Faixa 2: três cards à esquerda, texto à direita -->
+  <div class="fv-gestao__band fv-gestao__band--2">
+    <div class="fv-gestao__cards">
+        <article class="fv-gestao__card">
+          <div class="fv-gestao__card-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"
+                 stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 3 7.5v9L12 21l9-4.5v-9L12 3Z"/><path d="M3 7.5 12 12l9-4.5M12 12v9"/></svg>
+          </div>
+          <h3 class="fv-gestao__card-title">Embarques<br>sob medida</h3>
+          <p class="fv-gestao__card-text">Organização de volumes, equipamentos e prioridades conforme o cronograma.</p>
+        </article>
+
+        <article class="fv-gestao__card">
+          <div class="fv-gestao__card-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"
+                 stroke-linecap="round" stroke-linejoin="round"><path d="M6 13.5s3-2.9 3-5.2A3 3 0 1 0 3 8.3c0 2.3 3 5.2 3 5.2Z"/><circle cx="6" cy="8.2" r="1"/><path d="M18 21s3-2.9 3-5.2a3 3 0 1 0-6 0c0 2.3 3 5.2 3 5.2Z"/><circle cx="18" cy="15.8" r="1"/><path d="M9 11.2c3 0 3 4.2 6 4.2" stroke-dasharray="2 2.2"/></svg>
+          </div>
+          <h3 class="fv-gestao__card-title">Visibilidade<br>ponta a ponta</h3>
+          <p class="fv-gestao__card-text">Monitoramento dos embarques e dos principais marcos da operação.</p>
+        </article>
+
+        <article class="fv-gestao__card">
+          <div class="fv-gestao__card-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"
+                 stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 7h10.5v9H2.5z"/><path d="M13 10.2h3.9l3.1 3.1V16H13z"/><circle cx="6.6" cy="18.4" r="1.8"/><circle cx="16.8" cy="18.4" r="1.8"/></svg>
+          </div>
+          <h3 class="fv-gestao__card-title">Da chegada ao<br>destino final</h3>
+          <p class="fv-gestao__card-text">Coordenação da logística nacional até o destino final dos equipamentos.</p>
+        </article>
+    </div>
+
+    <div class="fv-gestao__aside fv-gestao__aside--right reveal">
+      <p class="fv-gestao__text">
+        Coordenamos diferentes etapas da importação para dar mais
+        <strong>previsibilidade, controle e eficiência</strong>
+        aos projetos fotovoltaicos.
+      </p>
+      <a href="/segmentos/cases-de-usinas-fotovoltaicas/" class="btn fv-gestao__btn">Conheça nossos cases →</a>
+    </div>
+  </div>
+
+  <!-- Padrão WM em zig-zag fechando a seção (equivale ao .numeros-deco do
+       site, que repete o WM.svg no rodapé de uma seção) -->
+  <div class="fv-deco-wm" aria-hidden="true"></div>
+
+</section>
+
+
+<!-- ══════════════════════════════════════
+     SEÇÃO 6 — E-BOOK CTA
+     Clone de .aero-ebook. Diferenças do layout: capa maior (estoura a faixa
+     em cima E embaixo), rótulo e botão em grafite no lugar do branco.
+══════════════════════════════════════ -->
+<section class="fv-ebook">
+
+  <!-- Faixa laranja de ponta a ponta -->
+  <div class="fv-ebook__banner">
+    <div class="fv-ebook__banner-inner container">
+
+      <!-- Capa: estoura a faixa pelo topo e pela base -->
+      <div class="fv-ebook__cover-wrap">
+        <img
+          src="/images/fotovoltaico/ebook-capa.webp"
+          alt="E-book: Importando equipamentos de energia solar"
+          class="fv-ebook__cover"
+          width="640" height="1000"
+          loading="lazy" decoding="async"
+        >
+      </div>
+
+      <div class="fv-ebook__text">
+        <span class="fv-ebook__label">E-book</span>
+        <h2 class="fv-ebook__title">
+          Entenda o que é necessário<br>
+          para importar e reduzir custos<br>
+          na operação!
+        </h2>
+      </div>
+
+      <a href="/ebooks/e-book-equipamentos-fotovoltaicos/" class="fv-ebook__btn">
+        Baixar e-book
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+             stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+          <polyline points="7 10 12 15 17 10"/>
+          <line x1="12" y1="15" x2="12" y2="3"/>
+        </svg>
+      </a>
+
+    </div>
+  </div>
+
+</section>
+
+
+<!-- ══════════════════════════════════════
+     SEÇÃO 7 — DIFERENCIAIS DA WM
+     Clone de .aero-diff: mesmos cards em arco (01/05 na base, 02/04 a -20px,
+     03 destacado a -40px e mais largo), mesma sobreposição e o mesmo swoosh.
+     O rodapé muda: em vez do "100% canal verde", entra o bloco da ABSOLAR.
+══════════════════════════════════════ -->
+<section class="fv-diff">
+  <div class="container">
+
+    <h2 class="fv-diff__title">
+      <span class="fv-diff__title-hl">Diferenciais da WM</span> na importação equipamentos fotovoltaicos
+    </h2>
+
+    <div class="fv-diff__cards">
+
+      <div class="fv-diff__card fv-diff__card--outer">
+        <span class="fv-diff__num">01</span>
+        <p class="fv-diff__text">Relacionamento e suporte junto a fornecedores internacionais.</p>
+      </div>
+
+      <div class="fv-diff__card fv-diff__card--mid">
+        <span class="fv-diff__num">02</span>
+        <p class="fv-diff__text">Planejamento de embarques, volumes e cronogramas.</p>
+      </div>
+
+      <div class="fv-diff__card fv-diff__card--featured">
+        <span class="fv-diff__num">03</span>
+        <p class="fv-diff__text">Gestão documental e acompanhamento da entrada no Brasil.</p>
+      </div>
+
+      <div class="fv-diff__card fv-diff__card--mid">
+        <span class="fv-diff__num">04</span>
+        <p class="fv-diff__text">Análise de alternativas aplicáveis a cada operação.</p>
+      </div>
+
+      <div class="fv-diff__card fv-diff__card--outer">
+        <span class="fv-diff__num">05</span>
+        <p class="fv-diff__text">Estruturação da compra e importação internacional.</p>
+      </div>
+
+    </div><!-- /.fv-diff__cards -->
+
+    <!-- Swoosh: o mesmo elemento do aeronaves, sem o avião -->
+    <div class="fv-diff__swoosh" aria-hidden="true">
+      <img src="/images/fotovoltaico/swoosh.svg" alt="" class="fv-diff__swoosh-img">
+    </div>
+
+    <!-- Rodapé: ABSOLAR -->
+    <div class="fv-diff__footer">
+      <div class="fv-diff__absolar-text">
+        <p class="fv-diff__absolar-title">Somos associados à ABSOLAR!</p>
+        <p class="fv-diff__absolar-desc">
+          Nossa associação à ABSOLAR mantém nossos especialistas atualizados sobre
+          soluções técnicas, legais e de mercado do setor fotovoltaico, contribuindo
+          para operações mais qualificadas e seguras para nossos clientes.
+        </p>
+      </div>
+      <div class="fv-diff__divider"></div>
+      <div class="fv-diff__absolar">
+        <img src="/images/fotovoltaico/selo-absolar.png"
+             alt="ABSOLAR — Associação Brasileira de Energia Solar Fotovoltaica: empresa associada"
+             class="fv-diff__absolar-logo" width="401" height="400"
+             loading="lazy" decoding="async">
+      </div>
+    </div>
+
+  </div><!-- /.container -->
+</section>
+
+
+<!-- ══════════════════════════════════════
+     SEÇÃO 8 — CASES
+     Texto à esquerda alinhado ao container; a trilha de cards ocupa todo o
+     resto até a borda direita da viewport. Dentro do card, a foto desbota
+     para branco por uma máscara — o texto fica na parte clara.
+══════════════════════════════════════ -->
+<section class="fv-cases">
+  <div class="fv-cases__inner">
+
+    <div class="fv-cases__aside reveal">
+      <h2 class="fv-cases__title">
+        Experiência<br>
+        comprovada<br>
+        em <span class="fv-cases__title-hl">grandes<br>projetos</span>
+      </h2>
+      <p class="fv-cases__text">
+        Nossa atuação em projetos fotovoltaicos envolve a gestão de operações
+        complexas, com grandes volumes de equipamentos e acompanhamento
+        logístico de ponta a ponta.
+      </p>
+      <a href="/segmentos/cases-de-usinas-fotovoltaicas/" class="fv-cases__btn">Conheça nossos cases</a>
+    </div>
+
+    <div class="fv-cases__track">
+
+      <article class="fv-cases__card">
+        <div class="fv-cases__media">
+          <img src="/images/fotovoltaico/case-01.jpg" alt="Caldeirão Grande II" width="700" height="940" loading="lazy" decoding="async">
+          <span class="fv-cases__tag"><i aria-hidden="true"></i>Case 01</span>
+        </div>
+        <div class="fv-cases__body">
+          <h3 class="fv-cases__name">Caldeirão Grande II</h3>
+          <ul class="fv-cases__stats">
+            <li class="fv-cases__stat">
+              <svg class="fv-cases__stat-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                   stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 2 4.5 13.5H11l-1 8.5 8.5-11.5H12l1-8.5Z"/></svg>
+              <span><strong>252</strong> MWp</span>
+            </li>
+            <li class="fv-cases__stat">
+              <svg class="fv-cases__stat-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                   stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="13" rx="1"/><path d="M3 8.3h18M3 12.6h18M9 4v13M15 4v13M12 17v3M9 20h6"/></svg>
+              <span><strong>400 mil</strong> módulos<br>fotovoltaicos</span>
+            </li>
+            <li class="fv-cases__stat">
+              <svg class="fv-cases__stat-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                   stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="6.5" width="19" height="11" rx="1"/><path d="M6.5 6.5v11M10 6.5v11M14 6.5v11M17.5 6.5v11"/></svg>
+              <span><strong>709</strong> containers.</span>
+            </li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="fv-cases__card">
+        <div class="fv-cases__media">
+          <img src="/images/fotovoltaico/case-02.jpg" alt="São Pedro e Paulo" width="700" height="940" loading="lazy" decoding="async">
+          <span class="fv-cases__tag"><i aria-hidden="true"></i>Case 02</span>
+        </div>
+        <div class="fv-cases__body">
+          <h3 class="fv-cases__name">São Pedro e Paulo</h3>
+          <ul class="fv-cases__stats">
+            <li class="fv-cases__stat">
+              <svg class="fv-cases__stat-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                   stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 2 4.5 13.5H11l-1 8.5 8.5-11.5H12l1-8.5Z"/></svg>
+              <span><strong>101,7</strong> MWp</span>
+            </li>
+            <li class="fv-cases__stat">
+              <svg class="fv-cases__stat-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                   stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="13" rx="1"/><path d="M3 8.3h18M3 12.6h18M9 4v13M15 4v13M12 17v3M9 20h6"/></svg>
+              <span><strong>154 mil</strong> módulos<br>fotovoltaicos</span>
+            </li>
+            <li class="fv-cases__stat">
+              <svg class="fv-cases__stat-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                   stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="6.5" width="19" height="11" rx="1"/><path d="M6.5 6.5v11M10 6.5v11M14 6.5v11M17.5 6.5v11"/></svg>
+              <span><strong>260</strong> containers.</span>
+            </li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="fv-cases__card">
+        <div class="fv-cases__media">
+          <img src="/images/fotovoltaico/case-03.jpg" alt="Ibimirim" width="700" height="940" loading="lazy" decoding="async">
+          <span class="fv-cases__tag"><i aria-hidden="true"></i>Case 03</span>
+        </div>
+        <div class="fv-cases__body">
+          <h3 class="fv-cases__name">Ibimirim</h3>
+          <ul class="fv-cases__stats">
+            <li class="fv-cases__stat">
+              <svg class="fv-cases__stat-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                   stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 2 4.5 13.5H11l-1 8.5 8.5-11.5H12l1-8.5Z"/></svg>
+              <span><strong>57,6</strong> MWp</span>
+            </li>
+            <li class="fv-cases__stat">
+              <svg class="fv-cases__stat-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                   stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="13" rx="1"/><path d="M3 8.3h18M3 12.6h18M9 4v13M15 4v13M12 17v3M9 20h6"/></svg>
+              <span><strong>87 mil</strong> módulos<br>fotovoltaicos</span>
+            </li>
+            <li class="fv-cases__stat">
+              <svg class="fv-cases__stat-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                   stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="6.5" width="19" height="11" rx="1"/><path d="M6.5 6.5v11M10 6.5v11M14 6.5v11M17.5 6.5v11"/></svg>
+              <span><strong>147</strong> containers.</span>
+            </li>
+          </ul>
+        </div>
+      </article>
+
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════
+     SEÇÃO 9 — CTA + FORMULÁRIO
+     Clone de .aero-cta. O formulário mantém as classes que o js/contact-form.js
+     do site procura (.contact-form-js + data-form-type), então ao integrar ele
+     passa a enviar para /api/contato sem alteração.
+══════════════════════════════════════ -->
+<section class="fv-cta" id="contato">
+  <div class="fv-cta__bg" aria-hidden="true"></div>
+
+  <div class="fv-cta__inner">
+
+    <!-- Lado esquerdo -->
+    <div class="fv-cta__left">
+      <span class="fv-cta__icon" aria-hidden="true">
+        <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2"
+             stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="24" cy="7.5" r="3.5"/>
+          <path d="M24 0.5v2M24 12.5v2M31 7.5h2M15 7.5h2M28.9 2.6l1.4-1.4M17.7 13.8l1.4-1.4M28.9 12.4l1.4 1.4M17.7 1.2l1.4 1.4"/>
+          <path d="M11 20h26l4 16H7l4-16Z"/>
+          <path d="M9.6 26h28.8M13.2 36l2.4-16M22 36V20M30.8 36l-2.4-16"/>
+          <path d="M24 36v6M17 43h14"/>
+        </svg>
+      </span>
+
+      <h2 class="fv-cta__title">
+        Importe equipamentos fotovoltaicos<br>
+        com <span class="fv-cta__hl">agilidade e segurança</span>
+      </h2>
+
+      <p class="fv-cta__text">
+        Conte com planejamento tributário, gestão logística e
+        acompanhamento da operação de ponta a ponta.
+      </p>
+
+      <p class="fv-cta__label">Fale com um especialista e tire suas dúvidas.</p>
+
+      <div class="fv-cta__actions">
+        <a href="https://wa.me/5527981610055" class="fv-cta__btn" target="_blank" rel="noopener">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          WhatsApp
+        </a>
+        <a href="tel:+552730229700" class="fv-cta__btn">(27) 3022-9700</a>
+      </div>
+    </div>
+
+    <!-- Lado direito — formulário -->
+    <div class="fv-cta__right">
+      <form class="fv-cta__form contact-form-js" data-form-type="segmentos">
+        <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true" style="display:none;">
+
+        <div class="fv-cta__row">
+          <label class="fv-cta__field-label" for="fv-nome">Nome *</label>
+          <input class="fv-cta__input" id="fv-nome" name="nome" type="text" required>
+        </div>
+
+        <div class="fv-cta__row fv-cta__row--2">
+          <div>
+            <label class="fv-cta__field-label" for="fv-email">E-mail *</label>
+            <input class="fv-cta__input" id="fv-email" name="email" type="email" required>
+          </div>
+          <div>
+            <label class="fv-cta__field-label" for="fv-tel">Número de Telefone *</label>
+            <input class="fv-cta__input" id="fv-tel" name="telefone" type="tel" required placeholder="(DDD) 99999-0000">
+          </div>
+        </div>
+
+        <div class="fv-cta__row fv-cta__row--3">
+          <div>
+            <label class="fv-cta__field-label" for="fv-empresa">Empresa</label>
+            <input class="fv-cta__input" id="fv-empresa" name="empresa" type="text">
+          </div>
+          <div>
+            <label class="fv-cta__field-label" for="fv-estado">Estado *</label>
+            <select class="fv-cta__input" id="fv-estado" name="estado" required>
+              <option value="" disabled selected>Selecione</option>
+              <option value="Acre">Acre</option>
+              <option value="Amapá">Amapá</option>
+              <option value="Amazonas">Amazonas</option>
+              <option value="Pará">Pará</option>
+              <option value="Rondônia">Rondônia</option>
+              <option value="Roraima">Roraima</option>
+              <option value="Tocantins">Tocantins</option>
+              <option value="Alagoas">Alagoas</option>
+              <option value="Bahia">Bahia</option>
+              <option value="Ceará">Ceará</option>
+              <option value="Maranhão">Maranhão</option>
+              <option value="Paraíba">Paraíba</option>
+              <option value="Pernambuco">Pernambuco</option>
+              <option value="Piauí">Piauí</option>
+              <option value="Rio Grande do Norte">Rio Grande do Norte</option>
+              <option value="Sergipe">Sergipe</option>
+              <option value="Distrito Federal">Distrito Federal</option>
+              <option value="Goiás">Goiás</option>
+              <option value="Mato Grosso">Mato Grosso</option>
+              <option value="Mato Grosso do Sul">Mato Grosso do Sul</option>
+              <option value="Espírito Santo">Espírito Santo</option>
+              <option value="Minas Gerais">Minas Gerais</option>
+              <option value="Rio de Janeiro">Rio de Janeiro</option>
+              <option value="São Paulo">São Paulo</option>
+              <option value="Paraná">Paraná</option>
+              <option value="Rio Grande do Sul">Rio Grande do Sul</option>
+              <option value="Santa Catarina">Santa Catarina</option>
+              <option value="Exterior">Exterior</option>
+            </select>
+          </div>
+          <div>
+            <label class="fv-cta__field-label" for="fv-segmento">Segmento</label>
+            <select class="fv-cta__input" id="fv-segmento" name="segmento" required>
+              <option value="Aeronaves">Aeronaves</option>
+              <option value="Energia Renovável" selected>Energia Renovável</option>
+              <option value="Alimentos e Bebidas">Alimentos e Bebidas</option>
+              <option value="Vestuário/Têxtil">Vestuário/Têxtil</option>
+              <option value="Informática e Eletrônicos">Informática e Eletrônicos</option>
+              <option value="Metais & Derivados">Metais & Derivados</option>
+              <option value="Partes e Peças Automotivas">Partes e Peças Automotivas</option>
+              <option value="Produtos Químicos">Produtos Químicos</option>
+              <option value="Partes e Peças Geral">Partes e Peças Geral</option>
+              <option value="Cosméticos e Healthcare">Cosméticos e Healthcare</option>
+              <option value="Insumos e Matéria Prima">Insumos e Matéria Prima</option>
+              <option value="Medicamentos">Medicamentos</option>
+              <option value="Combustível">Combustível</option>
+              <option value="Máquinas e Equipamentos">Máquinas e Equipamentos</option>
+              <option value="Setor Automotivo">Setor Automotivo</option>
+              <option value="Outros">Outros</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="fv-cta__row">
+          <label class="fv-cta__field-label" for="fv-forma">Como deseja ser respondido? *</label>
+          <select class="fv-cta__input" id="fv-forma" name="forma_resposta" required>
+            <option value="" disabled selected>Selecione</option>
             <option value="WhatsApp">WhatsApp</option>
             <option value="Telefone">Telefone</option>
             <option value="E-mail">E-mail</option>
           </select>
-          
-          <textarea name="mensagem" required rows="4" placeholder="Mensagem *" class="input-wm sm-col-span-2 resize-y"></textarea>
-          
-          <label class="sm-col-span-2 form-checkbox-label">
-            <input type="checkbox" name="aceite_privacidade" required value="sim" />
-            <span data-wm-aceite>Li e estou de acordo com a <a href="/politica-de-privacidade/" class="text-primary underline">Política de Privacidade</a> e autorizo a WM Trading a tratar meus dados para responder a esta solicitação.</span>
-          </label>
+        </div>
 
-          <label class="sm-col-span-2 form-checkbox-label">
-            <input type="checkbox" name="aceite_marketing" value="sim" />
-            <span data-wm-aceite-marketing>Também quero receber conteúdos, materiais e comunicações comerciais da WM Trading (opcional).</span>
-          </label>
+        <div class="fv-cta__row">
+          <label class="fv-cta__field-label" for="fv-mensagem">Mensagem *</label>
+          <textarea class="fv-cta__input fv-cta__textarea" id="fv-mensagem" name="mensagem" rows="4" required></textarea>
+        </div>
 
-          <button type="submit" class="btn btn-block sm-col-span-2 btn-lg">Enviar</button>
-        </form>
-    
-                </div>
-              </div>
-            </section>
-            
+        <label class="fv-cta__check">
+          <input type="checkbox" name="aceite_privacidade" required value="sim">
+          <span data-wm-aceite>Li e estou de acordo com a <a href="/politica-de-privacidade/">Política de Privacidade</a> e autorizo a WM Trading a tratar meus dados para responder a esta solicitação.</span>
+        </label>
+
+        <label class="fv-cta__check">
+          <input type="checkbox" name="aceite_marketing" value="sim">
+          <span data-wm-aceite-marketing>Também quero receber conteúdos, materiais e comunicações comerciais da WM Trading (opcional).</span>
+        </label>
+
+        <button type="submit" class="fv-cta__submit">ENVIAR</button>
+      </form>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     MODAL — Vídeo YouTube
+══════════════════════════════════════ -->
+<div id="fv-video-modal" class="fv-video-modal" role="dialog" aria-modal="true" aria-label="Vídeo institucional" hidden>
+  <div class="fv-video-modal__backdrop"></div>
+  <div class="fv-video-modal__inner">
+    <button class="fv-video-modal__close" aria-label="Fechar vídeo">
+      <svg viewBox="0 0 24 24" fill="none">
+        <path d="M18 6L6 18M6 6l12 12" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+      </svg>
+    </button>
+    <div class="fv-video-modal__frame" id="fv-video-frame"></div>
+  </div>
+</div>
+
 </main>
 
 <!-- ══════════════════════════════════════
@@ -524,6 +1156,7 @@
 
 
 <script src="/js/main.js"></script>
+<script src="/js/fotovoltaico.js"></script>
 <script src="/js/i18n.js" defer></script>
 
 

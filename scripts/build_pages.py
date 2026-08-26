@@ -125,6 +125,11 @@ SEGMENTS_LIST = [
 # Ao remover um slug daqui, o gerador volta a criar a pagina normalmente.
 SEGMENT_URL_OVERRIDES = {
     "importacao-aeronaves": "/segmentos-aeronaves/",
+    # A URL aqui e a MESMA que o gerador criaria. Nao e redirecionamento: o
+    # arquivo segmentos/equipamentos-fotovoltaicos.html continua existindo, so
+    # que escrito a mao (layout proprio de 9 secoes, 26/08/2026). Entrar neste
+    # dicionario e o que impede o gerador de sobrescreve-lo no proximo build.
+    "equipamentos-fotovoltaicos": "/segmentos/equipamentos-fotovoltaicos/",
 }
 
 # Card thumbnails for the segments index page (segmentos/index.html).

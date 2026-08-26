@@ -1,0 +1,1764 @@
+/* =============================================
+   WM Trading — Segmento Fotovoltaico
+   Estrutura clonada de css/aeronaves.css, com prefixo .fv-*.
+
+   Integrado ao site em 26/08/2026. O que era duplicata de main.css e
+   responsive.css (.container, tokens por breakpoint, overflow-x, heroFadeUp,
+   .reveal/.reveal-fade, .fv-btn→.btn) foi removido daqui — o site já carrega tudo
+   antes deste arquivo. Só sobrou o que é exclusivo da página.
+   ============================================= */
+
+/* Distância da borda da viewport até a borda ESQUERDA do container.
+   Usada por seções que sangram para um lado só (S8). */
+:root {
+  --gutter-esq: max(
+    var(--container-px),
+    calc((100vw - var(--container-width)) / 2 + var(--container-px))
+  );
+}
+
+/* ─────────────────────────────────────
+   SEÇÃO 1 — HERO
+───────────────────────────────────── */
+.fv-hero {
+  --fv-scale: 1;    /* sobrescrito pelo JS */
+
+  background: #fff;
+  overflow: hidden;   /* oculta o sangramento do mosaico nas bordas */
+  padding: 0;
+
+  display: flex;
+  justify-content: center;
+}
+
+/* ── Wrapper interno: centraliza e dimensiona a composição ── */
+.fv-hero__inner {
+  position: relative;
+  width: 100%;
+  max-width: 1440px;
+}
+
+/* ── Wrapper: a composição é 40% mais larga que o inner e sangra dos dois lados ── */
+.fv-hero__bg-wrap {
+  display: block;
+  width: 140%;
+  max-width: none;
+  margin-left: 50%;
+  transform: translateX(-50%);
+  will-change: transform;
+}
+
+/* ── Mosaico: blocos e fotos posicionados em % do viewBox de origem ── */
+.fv-hero__mosaico {
+  position: relative;
+}
+.fv-hero__mosaico--desktop {
+  width: 100%;
+  aspect-ratio: 2005 / 626;   /* proporção do viewBox original */
+}
+.fv-hero__mosaico--mobile {
+  display: none;
+}
+
+/* Posições vêm de --x/--y/--w/--h no HTML: a composição acompanha qualquer
+   largura sem número fixo no CSS. */
+.fv-hero__bloco,
+.fv-hero__foto {
+  position: absolute;
+  left: var(--x);
+  top: var(--y);
+  width: var(--w);
+  height: var(--h);
+  border-radius: 14px;   /* rx=16 do viewBox ≈ 14px na largura típica */
+}
+.fv-hero__bloco {
+  background: var(--cor);
+}
+.fv-hero__foto {
+  display: block;
+  object-fit: cover;
+  background: #E0E0E0;
+}
+
+/* ── Overlay de conteúdo: absoluto sobre o mosaico ── */
+.fv-hero__overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  z-index: 2;
+}
+
+/* ── Coluna esquerda — ocupa o espaço vazio da composição ──
+   No hero de aeronaves são 44%; aqui vai a 46% porque "Importe equipamentos"
+   mede 463px em Poppins 40px e não caberia nos 458px que 44% dão. */
+.fv-hero__content {
+  flex: 0 0 46%;
+  max-width: 46%;
+}
+
+.fv-hero__title {
+  font-family: 'Poppins', sans-serif;
+  /* 40px é o tamanho do design. O teto em vw entra em telas intermediárias
+     (769–1250px), onde a coluna de 46% fica menor que os 463px que a linha
+     "Importe equipamentos" mede em Poppins 40px — sem ele o título quebraria
+     em 5 linhas e invadiria as fotos. */
+  font-size: min(calc(40px * var(--fv-scale)), 3.2vw);
+  font-weight: 400;
+  line-height: 1.22;
+  color: var(--color-text-dark, #3A3A3A);
+  margin-bottom: calc(20px * var(--fv-scale));
+}
+
+.fv-hero__title-highlight {
+  color: var(--color-primary, #FC5000);
+}
+
+.fv-hero__text {
+  font-family: 'Poppins', sans-serif;
+  font-size: clamp(11px, calc(14px * var(--fv-scale)), 15px);
+  font-weight: 400;
+  line-height: 1.7;
+  color: #666;
+  /* nunca ultrapassa a coluna, senão passa por baixo da foto em telas médias */
+  max-width: min(360px, 100%);
+  margin-bottom: calc(32px * var(--fv-scale));
+}
+
+/* CTA */
+.fv-hero__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+}
+
+.fv-hero__cta-icon {
+  display: block;
+  flex-shrink: 0;
+  width:  calc(46px * var(--fv-scale));
+  height: calc(46px * var(--fv-scale));
+}
+
+.fv-hero__cta-text {
+  font-family: 'Poppins', sans-serif;
+  font-size: calc(15px * var(--fv-scale));
+  font-weight: 500;
+  line-height: 1.3;
+  color: var(--color-text-dark, #3A3A3A);
+}
+
+
+/* ─────────────────────────────────────
+   SEÇÃO 2 — IMAGEM FULL-WIDTH (USINA)
+   Clone de .aero-jet. object-fit: cover → preenche 100% da largura, altura
+   fixa menor que a natural, imagem cortada e centralizada.
+───────────────────────────────────── */
+.fv-usina {
+  width: 100%;
+  /* 16.35vw é a proporção do layout (314px de altura a 1920px de largura).
+     O teto de 320px evita que a faixa engorde em telas ultrawide. */
+  height: clamp(110px, 16.35vw, 320px);
+  overflow: hidden;
+  line-height: 0;   /* elimina o espaço fantasma do inline */
+}
+
+.fv-usina__img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center center;
+}
+
+
+/* ─────────────────────────────────────
+   HERO — ANIMAÇÕES DE ENTRADA
+   Mesmos keyframes do heroFadeUp da home
+───────────────────────────────────── */
+/* O estado inicial escondido só entra quando o JS marca .fv-anim no <html>.
+   Sem JS (ou se o script falhar) o conteúdo aparece normalmente — no site,
+   quem dispara o body.loaded é o js/main.js junto com o loader. */
+.fv-anim .fv-hero__title,
+.fv-anim .fv-hero__text,
+.fv-anim .fv-hero__cta {
+  opacity: 0;
+  transform: translateY(28px);
+}
+
+body.loaded .fv-hero__title {
+  animation: heroFadeUp 0.7s ease 0.2s forwards;
+}
+body.loaded .fv-hero__text {
+  animation: heroFadeUp 0.7s ease 0.4s forwards;
+}
+body.loaded .fv-hero__cta {
+  animation: heroFadeUp 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) 0.65s forwards;
+}
+
+
+
+
+/* ─────────────────────────────────────
+   SEÇÃO 3 — INTRO: título + texto + vídeo
+   Clone de .aero-intro. Tokens alinhados com a home:
+   --fs-xl (32px) títulos de seção · --fs-base (16px) texto
+   --fs-sm (14px) legendas/botões · --radius-xl (24px) cards
+───────────────────────────────────── */
+.fv-intro {
+  background: var(--color-bg-white, #fff);
+  padding: var(--section-py, 80px) 0;
+}
+
+/* Linha 1: duas colunas.
+   1fr/1.7fr em vez do 1fr/1.5fr do aeronaves — no layout a coluna de texto
+   é quase o dobro da do título (684px contra 341px). */
+.fv-intro__header {
+  display: grid;
+  grid-template-columns: 1fr 1.7fr;
+  gap: clamp(32px, 5vw, 80px);
+  align-items: center;
+  margin-bottom: clamp(36px, 4vw, 64px);
+}
+
+.fv-intro__title {
+  font-family: var(--font-primary, 'Poppins', sans-serif);
+  font-size: var(--fs-xl, 32px);
+  font-weight: var(--fw-light, 300);
+  line-height: 1.2;
+  color: var(--color-text-dark, #3A3A3A);
+  margin-bottom: 24px;
+}
+
+.fv-intro__title-hl {
+  color: var(--color-primary, #FC5000);
+}
+
+.fv-intro__btn {
+  text-decoration: none;
+}
+
+/* Texto corrido — justificado como no layout */
+.fv-intro__text {
+  font-family: var(--font-primary, 'Poppins', sans-serif);
+  font-size: var(--fs-base, 16px);
+  font-weight: var(--fw-regular, 400);
+  line-height: 1.75;
+  color: var(--color-text-muted, #888);
+  text-align: justify;
+}
+.fv-intro__text strong {
+  font-weight: var(--fw-semibold, 600);
+  color: var(--color-text-dark, #3A3A3A);
+}
+
+/* Linha 2: card de vídeo.
+   Sem a borda laranja e sem a vinheta radial branca do aeronaves — no layout
+   do fotovoltaico o card é a foto limpa, só com os cantos arredondados. */
+.fv-intro__video-wrap {
+  margin-bottom: clamp(20px, 2.5vw, 36px);
+}
+
+.fv-intro__video-card {
+  position: relative;
+  border-radius: var(--radius-xl, 24px);
+  overflow: hidden;
+  cursor: pointer;
+}
+
+/* 20vw é a proporção do layout (384px de altura a 1920px de largura) */
+.fv-intro__video-img {
+  display: block;
+  width: 100%;
+  height: clamp(200px, 20vw, 384px);
+  object-fit: cover;
+  object-position: center 55%;
+}
+
+/* Botão play */
+.fv-intro__play {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  cursor: pointer;
+  z-index: 2;
+}
+
+.fv-intro__play svg {
+  /* O padding tem de ser calc() sobre o próprio tamanho: em % ele resolveria
+     contra a largura do card (760px+) e o círculo explodiria. */
+  --play: clamp(56px, 6.8vw, 130px);
+  width:  var(--play);
+  height: var(--play);
+  background: rgba(255, 255, 255, 0.88);
+  border-radius: 50%;
+  padding:
+    calc(var(--play) * 0.32) calc(var(--play) * 0.30)
+    calc(var(--play) * 0.32) calc(var(--play) * 0.36);
+  box-shadow: 0 4px 24px rgba(0,0,0,0.15);
+  transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.fv-intro__play:hover svg {
+  transform: scale(1.06);
+  background: #fff;
+  box-shadow: 0 6px 32px rgba(252,80,0,0.3);
+}
+
+/* Linha 3: legenda */
+.fv-intro__caption {
+  font-family: var(--font-primary, 'Poppins', sans-serif);
+  font-size: var(--fs-sm, 14px);
+  font-weight: var(--fw-regular, 400);
+  color: var(--color-text-muted, #888);
+  text-align: center;
+  max-width: 760px;
+  margin: 0 auto;
+  line-height: 1.7;
+}
+
+
+/* ─────────────────────────────────────
+   SEÇÃO 4 — BENEFÍCIOS (LISTA EXPANSÍVEL)
+   Estrutura e animação do protótipo enviado, com a pele do site:
+   Poppins, --color-*, container de 1200 e botão .btn.
+───────────────────────────────────── */
+.fv-benef {
+  background: var(--color-bg-white, #fff);
+  /* Um pouco menos que o --section-py padrão: é o que faz a seção inteira
+     caber numa tela de 1440×900 sem rolagem. */
+  padding: clamp(48px, 4.4vw, 64px) 0;
+
+  /* Colunas mais estreitas que no protótipo: com o título ao lado, a lista
+     tem ~2/3 da largura e as linhas precisam encolher para a seção caber na
+     tela sem rolagem. */
+  --benef-thumb: 120px;   /* largura da miniatura */
+  --benef-num:    44px;   /* coluna do número */
+  --benef-gap:    28px;
+  --benef-aside: 300px;   /* coluna do título */
+  --benef-linha: #E4E4E4;
+  --benef-ease:  cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+/* Duas colunas: título à esquerda, lista à direita */
+.fv-benef__inner {
+  display: grid;
+  grid-template-columns: var(--benef-aside) minmax(0, 1fr);
+  gap: clamp(32px, 5vw, 80px);
+  align-items: start;
+}
+
+/* ── Cabeçalho ── */
+.fv-benef__header {
+  /* Acompanha a rolagem: em telas baixas a lista passa da dobra e o título
+     continua visível ao lado dela. */
+  position: sticky;
+  top: 96px;
+}
+
+.fv-benef__eyebrow {
+  margin: 4px 0 0;
+  font-family: var(--font-primary, 'Poppins', sans-serif);
+  font-size: 11px;
+  font-weight: var(--fw-semibold, 600);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-primary, #FC5000);
+}
+
+/* Título de seção no padrão do site (--fs-xl + peso light), não o display
+   pesado e apertado do protótipo. */
+.fv-benef__title {
+  margin: 14px 0 0;
+  max-width: 16ch;
+  font-family: var(--font-primary, 'Poppins', sans-serif);
+  font-size: var(--fs-xl, 32px);
+  font-weight: var(--fw-light, 300);
+  line-height: 1.22;
+  color: var(--color-text-dark, #3A3A3A);
+}
+.fv-benef__title-hl { color: var(--color-primary, #FC5000); }
+
+.fv-benef__header-arrow {
+  display: block;
+  margin-top: 28px;
+  color: var(--color-primary, #FC5000);
+}
+.fv-benef__header-arrow svg { width: 30px; height: 30px; display: block; }
+
+/* ── Lista ── */
+.fv-benef__list { display: flex; flex-direction: column; }
+
+.fv-benef__item {
+  display: grid;
+  grid-template-columns: var(--benef-thumb) var(--benef-num) minmax(0, 1fr);
+  gap: var(--benef-gap);
+  align-items: start;
+  min-height: 88px;
+  padding: 16px 0;
+  border-top: 1px solid var(--benef-linha);
+  cursor: pointer;
+  outline: none;
+  transition: padding 0.35s var(--benef-ease);
+}
+.fv-benef__item:last-child { border-bottom: 1px solid var(--benef-linha); }
+
+.fv-benef__thumb {
+  height: 56px;
+  overflow: hidden;
+  background: var(--color-bg-light, #F5F5F5);
+  border-radius: var(--radius-sm, 4px);
+  transition: height 0.45s var(--benef-ease);
+}
+.fv-benef__thumb img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  transform: scale(1.01);
+  filter: saturate(0.75);
+  transition: transform 0.5s var(--benef-ease), filter 0.4s ease;
+}
+
+.fv-benef__num {
+  padding-top: 3px;
+  font-family: var(--font-primary, 'Poppins', sans-serif);
+  font-size: 14px;
+  font-weight: var(--fw-semibold, 600);
+  letter-spacing: 0.03em;
+  color: var(--color-text-dark, #3A3A3A);
+}
+
+.fv-benef__content { min-width: 0; }
+
+.fv-benef__head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.fv-benef__item-title {
+  margin: 0;
+  font-family: var(--font-primary, 'Poppins', sans-serif);
+  font-size: clamp(16px, 1.3vw, 20px);
+  font-weight: var(--fw-medium, 500);
+  line-height: 1.3;
+  color: var(--color-text-dark, #3A3A3A);
+  transition: color var(--transition);
+}
+
+.fv-benef__icon {
+  flex: 0 0 auto;
+  width: 34px;
+  height: 34px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  color: #9a9a9a;
+  transition: color 0.3s ease, background 0.3s ease, transform 0.4s var(--benef-ease);
+}
+.fv-benef__icon svg { width: 18px; height: 18px; }
+
+/* Sanfona: grid-template-rows de 0fr para 1fr anima a altura sem px fixo */
+.fv-benef__details {
+  display: grid;
+  grid-template-rows: 0fr;
+  opacity: 0;
+  transition: grid-template-rows 0.42s var(--benef-ease),
+              opacity 0.3s ease,
+              margin-top 0.42s var(--benef-ease);
+}
+.fv-benef__details-inner { overflow: hidden; }
+
+.fv-benef__desc {
+  max-width: 760px;
+  margin: 0;
+  font-family: var(--font-primary, 'Poppins', sans-serif);
+  font-size: var(--fs-sm, 14px);
+  font-weight: var(--fw-light, 300);
+  line-height: 1.8;
+  color: var(--color-text-muted, #888);
+}
+
+.fv-benef__btn {
+  margin-top: 16px;
+  text-decoration: none;
+}
+.fv-benef__btn svg { width: 15px; height: 15px; }
+
+/* ── Estado aberto ── */
+.fv-benef__item.is-open { padding-top: 26px; padding-bottom: 26px; }
+.fv-benef__item.is-open .fv-benef__thumb { height: 150px; }
+.fv-benef__item.is-open .fv-benef__thumb img {
+  transform: scale(1.05);
+  filter: saturate(1);
+}
+.fv-benef__item.is-open .fv-benef__details {
+  grid-template-rows: 1fr;
+  opacity: 1;
+  margin-top: 14px;
+}
+.fv-benef__item.is-open .fv-benef__icon {
+  color: #fff;
+  background: var(--color-primary, #FC5000);
+  transform: rotate(45deg);
+}
+.fv-benef__item:not(.is-open):hover .fv-benef__item-title {
+  color: var(--color-primary, #FC5000);
+}
+.fv-benef__item:focus-visible {
+  outline: 2px solid rgba(252, 80, 0, 0.35);
+  outline-offset: 6px;
+}
+
+@media (hover: none) {
+  .fv-benef__item { cursor: default; }
+}
+
+
+/* ── S4 · TABLET (≤ 900px) ── */
+@media (max-width: 1000px) {
+  .fv-benef {
+    --benef-thumb: 105px;
+    --benef-num: 44px;
+    --benef-gap: 24px;
+  }
+  /* Abaixo disso não há largura para as duas colunas: o título volta para cima */
+  .fv-benef__inner { grid-template-columns: 1fr; gap: 32px; }
+  .fv-benef__header { position: static; }
+  .fv-benef__title { max-width: 100%; }
+  .fv-benef__header-arrow { display: none; }
+}
+
+
+/* ─────────────────────────────────────
+   SEÇÃO 5 — GESTÃO DA OPERAÇÃO
+   Continua no mesmo cinza da S4 (no layout as duas dividem o mesmo fundo).
+───────────────────────────────────── */
+.fv-gestao {
+  position: relative;
+  background: var(--color-bg-light, #F5F5F5);
+  /* O padding de baixo soma a altura da faixa do padrão WM, que é absoluta e
+     ficaria por cima dos cards se o respiro fosse só o --section-py. */
+  padding: var(--section-py, 80px) 0 calc(var(--section-py, 80px) + var(--gestao-deco-h));
+  overflow: hidden;
+
+  --gestao-gap: 8px;   /* respiro entre os cards, como no layout */
+  --gestao-deco-h: clamp(70px, 7.7vw, 148px);   /* altura da faixa do padrão WM */
+
+  /* Largura de um card, calculada a partir do container. Serve para dar ao
+     card uma ALTURA MÍNIMA na proporção do layout (314 × 354) sem travar a
+     altura: assim a linha toda estica junto com o card mais alto.
+     A conta acompanha as colunas da faixa: 34% de texto + o resto de cards. */
+  --gestao-band: calc(min(var(--container-width), 100vw) - 2 * var(--container-px));
+  --gestao-card-w: calc((var(--gestao-band) * 0.66 - 3 * var(--gestao-gap)) / 3);
+}
+
+/* Faixas dentro do container — mesma régua do vídeo da S3 e do resto da
+   página. No layout elas sangram além do container; aqui a borda externa de
+   cada faixa fica alinhada com as outras seções, que é o que mantém a página
+   coerente. O escalonamento vem de inverter a ordem das colunas: na faixa 1
+   os cards encostam à direita, na faixa 2 à esquerda. */
+.fv-gestao__band {
+  display: grid;
+  align-items: center;
+  gap: var(--gestao-gap);
+  width: 100%;
+  max-width: var(--container-width);
+  margin-inline: auto;
+  padding-inline: var(--container-px);
+}
+.fv-gestao__band--1 { grid-template-columns: 34% 1fr; }
+.fv-gestao__band--2 {
+  grid-template-columns: 1fr 34%;
+  margin-top: var(--gestao-gap);
+}
+
+.fv-gestao__cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--gestao-gap);
+  min-width: 0;   /* deixa a coluna 1fr encolher (ver nota no card) */
+}
+
+/* ── Textos laterais ── */
+.fv-gestao__aside--left {
+  justify-self: end;
+  padding-right: clamp(16px, 2vw, 40px);
+}
+.fv-gestao__aside--right {
+  padding-left: clamp(16px, 2vw, 40px);
+}
+
+.fv-gestao__title {
+  font-family: var(--font-primary, 'Poppins', sans-serif);
+  /* Teto no --fs-xl do site, mas encolhe junto com a coluna: as quebras vêm
+     dos <br> (nowrap abaixo), então a 32px fixos a linha mais longa vazaria
+     para fora do container em telas menores que ~1400px. */
+  font-size: clamp(22px, 2.6vw, var(--fs-xl, 32px));
+  font-weight: var(--fw-light, 300);
+  line-height: 1.25;
+  color: var(--color-text-dark, #3A3A3A);
+  white-space: nowrap;   /* as quebras vêm dos <br>, não do wrap */
+}
+.fv-gestao__hl { color: var(--color-primary, #FC5000); }
+
+.fv-gestao__text {
+  font-family: var(--font-primary, 'Poppins', sans-serif);
+  font-size: var(--fs-base, 16px);
+  font-weight: var(--fw-regular, 400);
+  line-height: 1.7;
+  color: #666;
+}
+.fv-gestao__text strong {
+  font-weight: var(--fw-semibold, 600);
+  color: var(--color-text-dark, #3A3A3A);
+}
+.fv-gestao__btn {
+  margin-top: 24px;
+  text-decoration: none;
+}
+
+/* ── Card ──
+   Proporção 314 × 354 do layout. O conteúdo fica ancorado embaixo: no layout
+   o topo do card é área livre. */
+.fv-gestao__card {
+  position: relative;
+  /* SEM overflow:hidden de propósito: ele zera o tamanho mínimo automático do
+     item de grid, e aí um título de 3 linhas ("Gestão financeira da operação")
+     transborda para cima e é cortado em vez de esticar o card. Sem ele, a
+     proporção abaixo funciona como altura preferida — se o conteúdo pedir
+     mais, o card cresce e os vizinhos da linha acompanham.
+     Em troca, é preciso zerar o mínimo do eixo HORIZONTAL na mão: sem isso o
+     card não encolhe abaixo do próprio min-content e a faixa fura o
+     container. O mínimo vertical continua automático, que é o que permite o
+     card crescer.
+     A proporção do layout entra como min-height, não como aspect-ratio: com
+     aspect-ratio a altura fica resolvida e o align-items:stretch do grid não
+     age, então um card de 3 linhas ficava mais alto que os vizinhos. */
+  min-width: 0;
+  min-height: calc(var(--gestao-card-w) * 354 / 314);
+  background: #fff;
+  border-radius: var(--radius-lg, 16px);
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.05);
+  /* O padding-top só entra em cena quando o conteúdo cresce além da
+     proporção — com o texto ancorado embaixo, ele é invisível no repouso e
+     evita que um título de 3 linhas encoste na borda de cima. */
+  padding: 24px clamp(18px, 1.4vw, 26px) 19%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Ícone — mesma linguagem dos .motivo-card da home: SVG inline de traço,
+   herdando o laranja por currentColor. O margin-bottom:auto empurra o ícone
+   para o topo do card enquanto o texto continua ancorado embaixo, ocupando a
+   área livre que o layout deixa lá em cima. */
+.fv-gestao__card-icon {
+  width:  min(48px, calc(var(--gestao-card-w) * 0.2));
+  height: min(48px, calc(var(--gestao-card-w) * 0.2));
+  margin-bottom: auto;
+  color: var(--color-primary, #FC5000);
+}
+.fv-gestao__card-icon svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.fv-gestao__card-title {
+  font-family: var(--font-primary, 'Poppins', sans-serif);
+  /* Proporcional à LARGURA DO CARD, não à viewport: o card trava junto com o
+     container em 1200px, então um vw solto continuava crescendo depois disso
+     e o texto ficava grande demais dentro de um card parado. */
+  font-size: clamp(14px, calc(var(--gestao-card-w) * 0.077), 20px);
+  font-weight: var(--fw-medium, 500);
+  line-height: 1.35;
+  color: var(--color-text-dark, #3A3A3A);
+  margin-bottom: 18px;
+}
+.fv-gestao__card-text {
+  font-family: var(--font-primary, 'Poppins', sans-serif);
+  font-size: clamp(11px, calc(var(--gestao-card-w) * 0.055), 14px);
+  font-weight: var(--fw-light, 300);
+  line-height: 1.75;
+  color: var(--color-text-muted, #888);
+}
+
+/* ══ Efeito dos cards — mesmo dos .motivo-card da home (main.css) ══
+   Escala + holofote radial que segue o mouse + borda em gradiente que acende
+   perto do cursor. Diferença: lá a borda laranja é permanente; aqui ela só
+   aparece no hover, para o estado de repouso continuar igual ao layout.
+   Quem alimenta --mouse-x/--mouse-y é o fotovoltaico.js. */
+.fv-gestao__card:hover {
+  transform: scale(1.025);
+  box-shadow: 0 14px 40px rgba(0, 0, 0, 0.09);
+}
+
+/* Luz de fundo */
+.fv-gestao__card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(
+    700px circle at var(--mouse-x) var(--mouse-y),
+    rgba(252, 80, 0, 0.08),
+    rgba(252, 80, 0, 0.03) 25%,
+    transparent 60%
+  );
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Borda gradiente */
+.fv-gestao__card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: radial-gradient(
+    400px circle at var(--mouse-x) var(--mouse-y),
+    rgba(252, 80, 0, 1),
+    rgba(252, 80, 0, 0.85) 18%,
+    rgba(252, 80, 0, 0.35) 38%,
+    transparent 65%
+  );
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  pointer-events: none;
+  z-index: 2;
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+          mask-composite: exclude;
+}
+
+.fv-gestao__card:hover::before,
+.fv-gestao__card:hover::after {
+  opacity: 1;
+}
+
+/* Conteúdo à frente dos pseudo-elementos */
+.fv-gestao__card-icon,
+.fv-gestao__card-title,
+.fv-gestao__card-text {
+  position: relative;
+  z-index: 3;
+}
+
+
+/* ── S5 · TABLET (≤ 1100px) ──
+   O escalonamento exige que os cards caibam em ~2/3 do container. Abaixo
+   disso eles ficariam com ~150px de largura e o texto estouraria o card, que
+   tem altura fixa pela proporção. Aqui as faixas viram largura total: texto
+   em cima, três cards embaixo, altura livre. */
+@media (max-width: 1100px) {
+  .fv-gestao__band--1,
+  .fv-gestao__band--2 {
+    grid-template-columns: 1fr;
+  }
+  /* Na faixa 2 os cards vêm antes do texto no HTML — o flex mantém essa ordem */
+  .fv-gestao__band--2 { display: flex; flex-direction: column; }
+
+  .fv-gestao__cards { gap: 12px; }
+
+  .fv-gestao__card {
+    min-height: 0;
+    justify-content: flex-start;
+    padding: 26px 22px;
+  }
+  /* No tablet o card ocupa 1/3 do container inteiro, não os 66% da faixa —
+     a --gestao-card-w subestima, então a tipografia volta a ser fixa. */
+  .fv-gestao__card-icon { width: 40px; height: 40px; margin-bottom: 18px; }
+  .fv-gestao__card-title { font-size: clamp(16px, 2vw, 19px); }
+  .fv-gestao__card-text  { font-size: clamp(12px, 1.5vw, 14px); }
+
+  .fv-gestao__aside--left {
+    justify-self: start;
+    padding-right: 0;
+    margin-bottom: 28px;
+  }
+  .fv-gestao__aside--right {
+    padding-left: 0;
+    margin-top: 28px;
+    max-width: 620px;
+  }
+}
+
+
+/* ── Faixa do padrão WM fechando a S5 ──
+   Mesma ideia do .numeros-deco do main.css (WM.svg repetido no rodapé da
+   seção), mas com o padrão em zig-zag da marca. O filtro transforma o traço
+   laranja do SVG em branco, que é como o layout mostra sobre o cinza. */
+.fv-deco-wm {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: var(--gestao-deco-h);
+  background-image: url('/images/fotovoltaico/padrao-wm.svg');
+  background-repeat: repeat-x;
+  background-size: auto 100%;
+  background-position: center bottom;
+  filter: brightness(0) invert(1);
+  pointer-events: none;
+}
+
+
+/* ─────────────────────────────────────
+   SEÇÃO 6 — E-BOOK CTA
+   Clone de .aero-ebook.
+───────────────────────────────────── */
+.fv-ebook {
+  background: transparent;
+  padding: 0;
+  position: relative;
+  z-index: 2;   /* a capa passa por cima das seções vizinhas */
+}
+
+/* Faixa laranja — ponta a ponta */
+.fv-ebook__banner {
+  background: var(--color-primary, #FC5000);
+  overflow: visible;
+}
+
+/* A capa é ABSOLUTA (como no aeronaves): se entrasse no fluxo, os ~440px
+   dela definiriam a altura da faixa, que no layout tem ~310. O padding-left
+   reserva o espaço dela. Percentuais medidos no layout, sobre o container. */
+/* Mesma disposição do .aero-ebook: capa absoluta à esquerda, texto no meio,
+   botão à direita. O padding-left reserva o vão da capa. */
+.fv-ebook__banner-inner {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 40px;
+  padding: 40px 56px 40px 348px;
+  min-height: 160px;
+}
+.fv-ebook__text {
+  flex: 1;
+  min-width: 0;
+}
+
+/* Capa: mais alta que a faixa, estoura em cima e embaixo */
+.fv-ebook__cover-wrap {
+  position: absolute;
+  left: 48px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 200px;
+}
+.fv-ebook__cover {
+  width: 100%;
+  height: auto;
+  display: block;
+  filter: drop-shadow(0 16px 48px rgba(0, 0, 0, 0.35));
+}
+
+/* Texto */
+.fv-ebook__label {
+  display: block;
+  font-family: var(--font-primary, 'Poppins', sans-serif);
+  font-size: 11px;
+  font-weight: var(--fw-semibold, 600);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-text-dark, #3A3A3A);
+  margin-bottom: 14px;
+}
+
+.fv-ebook__title {
+  font-family: var(--font-primary, 'Poppins', sans-serif);
+  font-size: clamp(17px, 1.5vw, 25px);
+  font-weight: var(--fw-light, 300);
+  color: #fff;
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* Pílula branca à direita — igual à do .aero-ebook */
+.fv-ebook__btn {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #fff;
+  color: var(--color-primary, #FC5000);
+  font-family: var(--font-primary, 'Poppins', sans-serif);
+  font-size: 14px;
+  font-weight: var(--fw-semibold, 600);
+  padding: 14px 28px;
+  border-radius: 50px;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background 0.2s, box-shadow 0.2s;
+}
+.fv-ebook__btn:hover {
+  background: #fff3ee;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.18);
+}
+
+
+/* ─────────────────────────────────────
+   SEÇÃO 7 — DIFERENCIAIS DA WM
+   Clone de .aero-diff. Só o rodapé muda (ABSOLAR no lugar da estatística).
+───────────────────────────────────── */
+.fv-diff {
+  background-color: #F0F0F0;
+  background-image: url('/images/fotovoltaico/nuvem-fundo.webp');
+  background-repeat: no-repeat;
+  background-position: center bottom;
+  background-size: auto 120%;
+  padding: 160px 0;
+  overflow: hidden;
+}
+
+.fv-diff__title {
+  text-align: center;
+  font-size: clamp(22px, 2vw, 32px);
+  font-weight: var(--fw-light, 300);
+  color: var(--color-text-dark, #3A3A3A);
+  margin-bottom: clamp(20px, 2.5vw, 32px);
+  line-height: 1.3;
+}
+.fv-diff__title-hl {
+  color: var(--color-primary, #FC5000);
+  font-weight: var(--fw-light, 300);
+}
+
+/* Fileira de cards — centralizada, sobreposição por z-index */
+.fv-diff__cards {
+  display: flex;
+  align-items: flex-end;   /* âncora na base para as elevações subirem */
+  justify-content: center;
+  gap: 0;                  /* a sobreposição vem de margin negativa */
+  padding-top: 50px;       /* espaço para os cards elevados não cortarem o título */
+}
+
+.fv-diff__card {
+  width: 240px;
+  min-width: 240px;
+  height: 218px;
+  flex-shrink: 0;
+  background: #fff;
+  border-radius: 20px;
+  padding: 26px;
+  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.07);
+  cursor: default;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  margin-left: -12px;      /* sobreposição */
+  transition: transform 0.28s cubic-bezier(0.4, 0, 0.2, 1),
+              box-shadow 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform;
+}
+.fv-diff__card:first-child { margin-left: 0; }
+
+/* 01 e 05 — nível base */
+.fv-diff__card--outer {
+  z-index: 1;
+  transform: translateY(0);
+}
+.fv-diff__card--outer:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 60px rgba(252, 80, 0, 0.18);
+}
+
+/* 02 e 04 — nível médio */
+.fv-diff__card--mid {
+  z-index: 2;
+  transform: translateY(-20px);
+}
+.fv-diff__card--mid:hover {
+  transform: translateY(-28px);
+  box-shadow: 0 20px 60px rgba(252, 80, 0, 0.18);
+}
+
+/* 03 — à frente de todos, mais largo.
+   280px em vez dos 308px do aeronaves: é a largura do layout e, de quebra,
+   a fileira inteira passa a caber nos 1200px do container (240×4 + 280 − 12×4
+   = 1192) em vez de vazar 10px de cada lado. */
+.fv-diff__card--featured {
+  width: 280px;
+  min-width: 280px;
+  z-index: 3;
+  transform: translateY(-40px);
+  box-shadow: 0 12px 48px rgba(0, 0, 0, 0.14);
+}
+.fv-diff__card--featured:hover {
+  transform: translateY(-48px);
+  box-shadow: 0 20px 60px rgba(252, 80, 0, 0.18);
+}
+
+.fv-diff__num {
+  display: block;
+  font-size: clamp(26px, 2.4vw, 38px);
+  font-weight: var(--fw-light, 300);
+  color: var(--color-primary, #FC5000);
+  line-height: 1;
+  margin-bottom: 16px;
+}
+
+.fv-diff__text {
+  font-size: clamp(12px, 0.88vw, 13px);
+  font-weight: var(--fw-light, 300);
+  color: #666;
+  line-height: 1.75;
+  margin: 0;
+  text-align: left;
+}
+
+/* Swoosh */
+.fv-diff__swoosh {
+  margin-top: 24px;
+  width: 100%;
+}
+.fv-diff__swoosh-img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Rodapé: texto + divisória + selo ABSOLAR */
+.fv-diff__footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 40px;
+  margin-top: 40px;
+}
+
+.fv-diff__absolar-text {
+  max-width: 620px;
+}
+.fv-diff__absolar-title {
+  font-size: var(--fs-sm, 14px);
+  font-weight: var(--fw-semibold, 600);
+  color: var(--color-text-dark, #3A3A3A);
+  margin-bottom: 10px;
+}
+.fv-diff__absolar-desc {
+  font-size: 13px;
+  font-weight: var(--fw-light, 300);
+  color: #666;
+  line-height: 1.85;
+  margin: 0;
+}
+
+.fv-diff__divider {
+  width: 1px;
+  height: 84px;
+  background: #ccc;
+  flex-shrink: 0;
+}
+
+.fv-diff__absolar-logo {
+  width: 136px;
+  height: auto;
+  display: block;
+}
+
+
+/* ─────────────────────────────────────
+   SEÇÃO 8 — CASES
+───────────────────────────────────── */
+.fv-cases {
+  background: var(--color-bg-white, #fff);
+  padding: var(--section-py, 80px) 0;
+  overflow: hidden;
+}
+
+/* Tudo dentro do container — mesma régua das outras seções. No layout a
+   trilha sangrava até a borda da viewport, o que desequilibrava o lado
+   direito da página. */
+.fv-cases__inner {
+  --cases-gap: clamp(16px, 1.6vw, 26px);
+
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: var(--cases-gap);
+  align-items: center;
+  width: 100%;
+  max-width: var(--container-width);
+  margin-inline: auto;
+  padding-inline: var(--container-px);
+}
+
+/* ── Coluna de texto ── */
+.fv-cases__title {
+  font-family: var(--font-primary, 'Poppins', sans-serif);
+  font-size: var(--fs-xl, 32px);
+  font-weight: var(--fw-light, 300);
+  line-height: 1.25;
+  color: var(--color-text-dark, #3A3A3A);
+}
+.fv-cases__title-hl { color: var(--color-primary, #FC5000); }
+
+.fv-cases__text {
+  margin-top: 26px;
+  font-family: var(--font-primary, 'Poppins', sans-serif);
+  font-size: 13px;
+  font-weight: var(--fw-light, 300);
+  line-height: 1.85;
+  color: var(--color-text-muted, #888);
+}
+
+/* Botão largo, texto à esquerda — é assim no layout, não a pílula compacta.
+   A margem negativa à direita faz ele atravessar o gap e encostar na borda
+   esquerda do primeiro card, como no layout. */
+.fv-cases__btn {
+  display: block;
+  margin-top: 44px;
+  margin-right: calc(-1 * var(--cases-gap));
+  padding: 17px 22px;
+  border-radius: 4px;
+  background: var(--color-primary, #FC5000);
+  color: #fff;
+  font-family: var(--font-primary, 'Poppins', sans-serif);
+  font-size: var(--fs-sm, 14px);
+  font-weight: var(--fw-semibold, 600);
+  text-decoration: none;
+  transition: background var(--transition), box-shadow var(--transition);
+}
+.fv-cases__btn:hover {
+  background: #e04700;
+  box-shadow: 0 8px 26px rgba(252, 80, 0, 0.28);
+}
+
+/* ── Trilha de cards ── */
+.fv-cases__track {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 1fr;
+  gap: 4px;
+  min-width: 0;
+}
+
+.fv-cases__card {
+  position: relative;
+  min-width: 0;
+  /* Um pouco mais alto que a proporção do layout (417×808): dentro do
+     container o card fica mais estreito, e o corpo precisa de altura para as
+     três estatísticas sem apertar. */
+  aspect-ratio: 417 / 860;
+  border-radius: 16px;
+  background: #fff;
+  overflow: hidden;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Foto: vai do topo até onde o gradiente termina (66% do card), e não até a
+   base. Nessa faixa a proporção fica quase igual à da foto (700×940), então
+   com object-position:center aparece o centro da imagem inteiro — antes ela
+   cobria o card todo ancorada no topo e o miolo ficava fora de vista.
+   A máscara é a mesma curva de antes, recalculada sobre a nova altura:
+   opaca até 72% dela (= 48% do card) e transparente no fim (= 66% do card). */
+.fv-cases__media {
+  position: absolute;
+  inset: 0 0 auto;
+  height: 66%;
+  -webkit-mask-image: linear-gradient(to bottom, #000 0 72%, rgba(0,0,0,0.28) 87%, transparent 100%);
+          mask-image: linear-gradient(to bottom, #000 0 72%, rgba(0,0,0,0.28) 87%, transparent 100%);
+}
+.fv-cases__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center center;
+  display: block;
+  transition: transform 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Véu escuro no topo: sem ele a etiqueta branca some nas fotos de céu claro
+   (cards 01 e 02). Fica dentro da máscara, na parte totalmente opaca. */
+.fv-cases__media::after {
+  content: '';
+  position: absolute;
+  inset: 0 0 auto;
+  height: 52%;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.32), transparent);
+  pointer-events: none;
+}
+
+/* Etiqueta "● Case 01" sobre a foto */
+.fv-cases__tag {
+  position: absolute;
+  top: 26px;
+  left: 26px;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-primary, 'Poppins', sans-serif);
+  font-size: 15px;
+  font-weight: var(--fw-medium, 500);
+  color: #fff;
+  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.25);
+}
+.fv-cases__tag i {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #fff;
+  flex-shrink: 0;
+}
+
+/* ── Corpo do card: ancorado na base, sobre a parte clara ── */
+.fv-cases__body {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 0 26px 30px;
+}
+
+.fv-cases__name {
+  font-family: var(--font-primary, 'Poppins', sans-serif);
+  font-size: clamp(15px, 1.15vw, 17px);
+  font-weight: var(--fw-medium, 500);
+  color: var(--color-text-dark, #3A3A3A);
+  margin-bottom: 18px;
+  transition: color var(--transition);
+}
+
+.fv-cases__stats {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.fv-cases__stat {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  font-family: var(--font-primary, 'Poppins', sans-serif);
+  font-size: 13px;
+  font-weight: var(--fw-light, 300);
+  line-height: 1.45;
+  color: var(--color-text-muted, #888);
+}
+.fv-cases__stat strong {
+  font-weight: var(--fw-semibold, 600);
+  color: var(--color-text-dark, #3A3A3A);
+  transition: color var(--transition);
+}
+.fv-cases__stat-ico {
+  width: 17px;
+  height: 17px;
+  flex-shrink: 0;
+  margin-top: 1px;
+  color: #9a9a9a;
+  transition: color var(--transition);
+}
+
+/* ── Hover do card ──
+   Sobe um pouco, a foto dá um leve zoom e os ícones + números em destaque
+   ficam laranja. Sem sombra: os cards do layout não têm. */
+.fv-cases__card:hover { transform: translateY(-6px); }
+.fv-cases__card:hover .fv-cases__media img { transform: scale(1.06); }
+.fv-cases__card:hover .fv-cases__stat-ico { color: var(--color-primary, #FC5000); }
+.fv-cases__card:hover .fv-cases__stat strong { color: var(--color-primary, #FC5000); }
+.fv-cases__card:hover .fv-cases__name { color: var(--color-primary, #FC5000); }
+
+
+/* ── S8 · TABLET (≤ 1100px) ──
+   Precisa quebrar antes do breakpoint de 768: com a coluna de texto fixa em
+   380px, a trilha fica com menos de 140px por card já perto de 900px de tela.
+   O texto sobe para cima e os cards viram faixa rolável.
+   Fica DEPOIS das regras de desktop de propósito — mesma especificidade. */
+@media (max-width: 1100px) {
+  .fv-cases__inner {
+    grid-template-columns: 1fr;
+    padding-inline: 0;
+    gap: 32px;
+  }
+  .fv-cases__aside { padding-inline: var(--container-px, 20px); }
+  .fv-cases__btn { margin-right: 0; }
+  .fv-cases__track {
+    grid-auto-columns: min(360px, 72%);
+    gap: 12px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding-inline: var(--container-px, 20px);
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+  }
+  .fv-cases__card { scroll-snap-align: center; }
+  .fv-cases__btn { text-align: center; }
+}
+
+@media (max-width: 768px) {
+  .fv-cases__track { grid-auto-columns: 78%; }
+}
+
+
+/* ─────────────────────────────────────
+   SEÇÃO 9 — CTA + FORMULÁRIO
+   Clone de .aero-cta. Diferenças do layout: fundo grafite (#3A3A3A, não o
+   #1A1A1A do aeronaves), os dois botões laranja, e o card do formulário em
+   #F5F5F5 com campos de borda laranja.
+───────────────────────────────────── */
+.fv-cta {
+  position: relative;
+  background: #3A3A3A;
+  overflow: hidden;
+  padding: clamp(48px, 5vw, 80px) 0;
+}
+
+.fv-cta__bg {
+  position: absolute;
+  inset: 0;
+  background-image: url('/images/fotovoltaico/padrao-wm-fundo.svg');
+  background-repeat: no-repeat;
+  background-position: right center;
+  background-size: auto 100%;
+  opacity: 0.35;
+  pointer-events: none;
+}
+
+.fv-cta__inner {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(32px, 4vw, 64px);
+  align-items: center;
+  width: 100%;
+  max-width: var(--container-width);
+  margin-inline: auto;
+  padding-inline: var(--container-px);
+}
+
+/* ── Lado esquerdo ── */
+.fv-cta__left {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: clamp(14px, 1.6vw, 24px);
+}
+
+.fv-cta__icon {
+  width: clamp(44px, 3.4vw, 58px);
+  height: clamp(44px, 3.4vw, 58px);
+  color: #fff;
+}
+.fv-cta__icon svg { width: 100%; height: 100%; display: block; }
+
+.fv-cta__title {
+  font-family: var(--font-primary, 'Poppins', sans-serif);
+  font-size: clamp(21px, 1.9vw, 30px);
+  font-weight: var(--fw-light, 300);
+  line-height: 1.3;
+  color: #fff;
+  margin: 0;
+}
+.fv-cta__hl { color: var(--color-primary, #FC5000); }
+
+.fv-cta__text {
+  font-family: var(--font-primary, 'Poppins', sans-serif);
+  font-size: clamp(13px, 1vw, 15px);
+  font-weight: var(--fw-light, 300);
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.7);
+  margin: 0;
+  max-width: 42ch;
+}
+
+.fv-cta__label {
+  font-family: var(--font-primary, 'Poppins', sans-serif);
+  font-size: clamp(13px, 1vw, 15px);
+  font-weight: var(--fw-regular, 400);
+  color: rgba(255, 255, 255, 0.9);
+  margin: 0;
+  margin-top: clamp(8px, 1.4vw, 22px);
+}
+
+.fv-cta__actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+/* No layout os dois botões são laranja (no aeronaves o do telefone é vazado) */
+.fv-cta__btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  padding: 12px 22px;
+  border-radius: 6px;
+  background: var(--color-primary, #FC5000);
+  color: #fff;
+  font-family: var(--font-primary, 'Poppins', sans-serif);
+  font-size: var(--fs-sm, 14px);
+  font-weight: var(--fw-medium, 500);
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background var(--transition), box-shadow var(--transition);
+}
+.fv-cta__btn:hover {
+  background: #e04700;
+  box-shadow: 0 6px 22px rgba(252, 80, 0, 0.35);
+}
+
+/* ── Card do formulário ── */
+.fv-cta__right { display: flex; justify-content: flex-end; }
+
+.fv-cta__form {
+  width: 100%;
+  background: var(--color-bg-light, #F5F5F5);
+  border-radius: 20px;
+  padding: clamp(24px, 2.4vw, 38px);
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.25);
+}
+
+.fv-cta__row { display: flex; flex-direction: column; gap: 6px; }
+.fv-cta__row--2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.fv-cta__row--3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; }
+.fv-cta__row--2 > div,
+.fv-cta__row--3 > div { display: flex; flex-direction: column; gap: 6px; }
+
+.fv-cta__field-label {
+  font-family: var(--font-primary, 'Poppins', sans-serif);
+  font-size: 11px;
+  font-weight: var(--fw-regular, 400);
+  color: #666;
+}
+
+/* Campos: fundo do próprio card e borda laranja de 1px, como no layout */
+.fv-cta__input {
+  width: 100%;
+  height: 38px;
+  border: 1px solid var(--color-primary, #FC5000);
+  border-radius: 6px;
+  padding: 0 10px;
+  background: transparent;
+  font-family: var(--font-primary, 'Poppins', sans-serif);
+  font-size: 13px;
+  color: var(--color-text-dark, #3A3A3A);
+  outline: none;
+  box-sizing: border-box;
+  transition: box-shadow var(--transition), border-color var(--transition);
+}
+.fv-cta__input:focus {
+  border-color: #e04700;
+  box-shadow: 0 0 0 3px rgba(252, 80, 0, 0.15);
+}
+select.fv-cta__input { cursor: pointer; }
+
+/* A mensagem e textarea, como nos demais formularios do site: a altura
+   fixa de 38px e o padding zerado do .fv-cta__input achatariam o campo. */
+.fv-cta__textarea {
+  height: auto;
+  min-height: 96px;
+  padding: 10px;
+  line-height: 1.5;
+  resize: vertical;
+}
+
+.fv-cta__check {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  font-family: var(--font-primary, 'Poppins', sans-serif);
+  font-size: 11px;
+  line-height: 1.5;
+  color: #888;
+  cursor: pointer;
+}
+.fv-cta__check input {
+  margin-top: 2px;
+  accent-color: var(--color-primary, #FC5000);
+  flex-shrink: 0;
+}
+.fv-cta__check a { color: var(--color-primary, #FC5000); text-decoration: underline; }
+
+.fv-cta__submit {
+  width: 100%;
+  margin-top: 4px;
+  padding: 13px;
+  border: none;
+  border-radius: 6px;
+  background: var(--color-primary, #FC5000);
+  color: #fff;
+  font-family: var(--font-primary, 'Poppins', sans-serif);
+  font-size: 13px;
+  font-weight: var(--fw-semibold, 600);
+  letter-spacing: 0.08em;
+  cursor: pointer;
+  transition: background var(--transition), box-shadow var(--transition);
+}
+.fv-cta__submit:hover {
+  background: #e04700;
+  box-shadow: 0 6px 22px rgba(252, 80, 0, 0.3);
+}
+
+
+/* ── S9 · TABLET E MOBILE ── */
+@media (max-width: 1000px) {
+  .fv-cta__inner { grid-template-columns: 1fr; gap: 36px; }
+  .fv-cta__bg { background-size: auto 70%; background-position: right top; }
+}
+@media (max-width: 560px) {
+  .fv-cta__row--3 { grid-template-columns: 1fr; }
+  .fv-cta__actions { width: 100%; }
+  .fv-cta__btn { flex: 1; justify-content: center; }
+}
+
+
+/* ─────────────────────────────────────
+   MODAL — Vídeo YouTube (clone de .aero-video-modal)
+───────────────────────────────────── */
+.fv-video-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+.fv-video-modal[hidden] { display: none; }
+
+.fv-video-modal__backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.88);
+  cursor: pointer;
+  animation: modalFadeIn 0.3s ease;
+}
+
+.fv-video-modal__inner {
+  position: relative;
+  width: 100%;
+  max-width: 920px;
+  z-index: 1;
+  animation: modalScaleIn 0.3s ease;
+}
+
+.fv-video-modal__close {
+  position: absolute;
+  top: -48px;
+  right: 0;
+  background: none;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  padding: 8px;
+  opacity: 0.85;
+  transition: opacity 0.2s;
+}
+.fv-video-modal__close:hover { opacity: 1; }
+.fv-video-modal__close svg { width: 28px; height: 28px; display: block; }
+
+/* Iframe 16:9 */
+.fv-video-modal__frame {
+  position: relative;
+  padding-bottom: 56.25%;
+  height: 0;
+  background: #000;
+  border-radius: var(--radius-lg, 16px);
+  overflow: hidden;
+  box-shadow: 0 24px 80px rgba(0,0,0,0.6);
+}
+.fv-video-modal__frame iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+@keyframes modalFadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes modalScaleIn {
+  from { opacity: 0; transform: scale(0.93); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+
+/* ══════════════════════════════════════
+   MOBILE (≤ 768px)
+   Fica no FIM do arquivo de propósito: as regras têm a mesma
+   especificidade das de desktop, então precisam vir depois para
+   vencer. Antes este bloco estava no meio e as seções 3 a 6 caíam
+   no layout de desktop dentro do celular.
+══════════════════════════════════════ */
+@media (max-width: 768px) {
+  .fv-hero {
+    flex-direction: column;
+    /* Sem padding vertical: a arte encosta no cabeçalho e na seção seguinte.
+       O padding lateral continua, para o texto respeitar a margem da página. */
+    padding: 0 var(--container-px, 20px);
+  }
+
+  .fv-hero__inner {
+    position: relative;
+    display: block;
+  }
+
+  /* A composição do desktop não entra no mobile — é outra arte, não a mesma
+     reescalada. As duas usam os MESMOS arquivos, então esconder uma não custa
+     download nenhum. */
+  .fv-hero__bg-wrap {
+    display: none;
+  }
+
+  .fv-hero__mosaico--mobile {
+    display: block;
+    aspect-ratio: 1254 / 1657;
+    /* 20% maior que a tela, sempre centralizado. */
+    width: calc((100% + var(--container-px, 20px) * 2) * 1.2);
+    margin-left: 50%;
+    transform: translateX(-50%);
+    /* Sobe o mosaico para cortar 70% do retângulo de cima. Em vw de propósito:
+       margin-top em % se resolveria pela LARGURA do contentor, não pela altura. */
+    margin-top: -20.7vw;
+    z-index: 0;
+  }
+
+  /* O posicionamento vem da regra base; só o raio muda: o viewBox mobile é mais
+     estreito (1254 contra 2005), então os mesmos rx=16 dão ~5,7px aqui. */
+  .fv-hero__bloco,
+  .fv-hero__foto {
+    border-radius: 6px;
+  }
+
+  /* Texto POR CIMA do fundo. padding:0 de propósito — o padding lateral já vem
+     do .fv-hero. */
+  .fv-hero__overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    padding: 0;
+    z-index: 2;
+    display: flex;
+    /* Ancorado pela BASE: se o título quebrar em mais uma linha, ele cresce
+       para CIMA, onde há área vazia, em vez de descer sobre as fotos. */
+    align-items: flex-end;
+    height: 64%;
+  }
+
+  .fv-hero__content {
+    flex: none;
+    max-width: 100%;
+    width: 100%;
+  }
+
+  .fv-hero__title {
+    font-size: clamp(24px, 7vw, 32px);
+  }
+
+  .fv-hero__cta { gap: 8px; }
+  .fv-hero__cta-text { font-size: 11px; line-height: 1.3; }
+
+  /* ── S3 — INTRO ── */
+  .fv-intro__header {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  .fv-intro__title {
+    font-size: clamp(22px, 6vw, 28px);
+    margin-bottom: 16px;
+  }
+  .fv-intro__text { text-align: left; }
+  .fv-intro__video-img { height: clamp(180px, 42vw, 240px); }
+
+  /* ── S4 — BENEFÍCIOS ──
+     A miniatura vira coluna estreita e o número sobe para o lado do título. */
+  .fv-benef__header-main { display: block; }
+  .fv-benef__header-arrow { display: none; }
+  .fv-benef__item {
+    grid-template-columns: 72px minmax(0, 1fr);
+    grid-template-areas:
+      "thumb num"
+      "thumb content";
+    gap: 8px 18px;
+    padding: 22px 0;
+    min-height: auto;
+  }
+  .fv-benef__thumb { grid-area: thumb; width: 72px; height: 88px; }
+  .fv-benef__num {
+    grid-area: num;
+    padding-top: 0;
+    color: var(--color-primary, #FC5000);
+  }
+  .fv-benef__content { grid-area: content; }
+  .fv-benef__item.is-open { padding-top: 26px; padding-bottom: 26px; }
+  .fv-benef__item.is-open .fv-benef__thumb { height: 130px; }
+
+  /* ── S5 — GESTÃO ──
+     O grosso do empilhamento já vem do bloco de tablet (≤1100px); aqui os
+     cards passam de três colunas para uma. */
+  .fv-gestao__cards { grid-template-columns: 1fr; }
+  .fv-gestao__title { font-size: clamp(22px, 6vw, 28px); }
+  .fv-gestao__aside--right { max-width: 100%; }
+
+  /* ── S7 — DIFERENCIAIS ──
+     Mesma saída do aeronaves: os cards viram uma faixa que rola na horizontal
+     e o arco é desfeito (todos no mesmo nível). */
+  .fv-diff { padding: 80px 0; }
+  .fv-diff__cards {
+    overflow-x: auto;
+    overflow-y: hidden;
+    justify-content: flex-start;
+    padding: 20px var(--container-px, 20px) 24px;
+    margin-inline: calc(-1 * var(--container-px, 20px));
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+  }
+  .fv-diff__card,
+  .fv-diff__card--featured {
+    width: 220px;
+    min-width: 220px;
+    height: 200px;
+    transform: none;
+    margin-left: 12px;
+    scroll-snap-align: center;
+  }
+  .fv-diff__card:hover,
+  .fv-diff__card--mid:hover,
+  .fv-diff__card--featured:hover,
+  .fv-diff__card--outer:hover { transform: none; }
+  .fv-diff__footer {
+    flex-direction: column;
+    gap: 24px;
+    text-align: center;
+  }
+  .fv-diff__divider { width: 84px; height: 1px; }
+
+  /* ── S6 — E-BOOK ── */
+  .fv-ebook { padding-top: 70px; }   /* espaço para a capa, que sobe */
+  .fv-ebook__banner-inner {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+    padding: 24px var(--container-px, 20px) 32px;
+    min-height: 0;
+  }
+  .fv-ebook__cover-wrap {
+    left: 50%;
+    top: 0;
+    width: 120px;
+    transform: translate(-50%, -55%);
+  }
+  .fv-ebook__text { margin-top: 34px; }
+  .fv-ebook__title { font-size: clamp(15px, 4.5vw, 18px); }
+  .fv-ebook__btn { align-self: stretch; justify-content: center; }
+}
