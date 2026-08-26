@@ -35,7 +35,7 @@ const translations = {
     's3.card5.text':  'Controle de qualidade em todas as etapas do processo e primeira Trading do Brasil a ser certificada com ISO 9001',
 
     // Section 4
-    's4.label1': 'Estados com unidade, e presença no Panamá',
+    's4.label1': 'Filiais no Brasil e presença no Panamá',
     's4.label2': 'Benefícios fiscais',
     's4.label3': 'Anos de mercado',
     's4.label4': 'Índice de parametrização em canal verde',
@@ -225,7 +225,7 @@ const translations = {
     's3.card5.text':  'Quality control at every stage of the process and the first Brazilian trading company certified with ISO 9001',
 
     // Section 4
-    's4.label1': 'States with a unit, plus a presence in Panama',
+    's4.label1': 'Branches in Brazil, plus a presence in Panama',
     's4.label2': 'Tax benefits',
     's4.label3': 'Years in the market',
     's4.label4': 'Green channel clearance rate',
