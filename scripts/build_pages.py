@@ -130,6 +130,11 @@ SEGMENT_URL_OVERRIDES = {
     # que escrito a mao (layout proprio de 9 secoes, 26/08/2026). Entrar neste
     # dicionario e o que impede o gerador de sobrescreve-lo no proximo build.
     "equipamentos-fotovoltaicos": "/segmentos/equipamentos-fotovoltaicos/",
+    # Mesmo caso (27/08/2026): segmentos/maquinas.html passou a ser escrita a
+    # mao, clonando o layout de 9 secoes da fotovoltaico com namespace .mq- em
+    # css/maquinas.css e js/maquinas.js. A URL nao muda; esta entrada so
+    # impede o gerador de sobrescrever o arquivo.
+    "maquinas": "/segmentos/maquinas/",
 }
 
 # Card thumbnails for the segments index page (segmentos/index.html).
@@ -814,6 +819,82 @@ def parse_mdx(file_path):
             frontmatter["category"] = "Geral"
 
     return frontmatter, body
+
+VITRINES_DE_BLOG = {
+    # arquivo publicado  : (categorias aceitas, palavras no titulo/slug, rotulo)
+    # O rotulo e usado quando o post nao tem categoria util — ver rotulo_do_post.
+    "blog/posts-maquinas.json": (
+        {"máquinas", "maquinas", "equipamentos"},
+        ("maquina", "máquina", "equipamento", "trator", "colheitadeira",
+         "industrial", "agricola", "agrícola"),
+        "Máquinas",
+    ),
+}
+VITRINE_QTD = 6
+
+# Categorias que existem no frontmatter mas nao servem como rotulo na vitrine:
+# sao restos da migracao do WordPress e apareceriam no card como "NOT
+# CATEGORIZED", que e pior do que nao ter categoria nenhuma.
+CATEGORIAS_VAZIAS = {"not categorized", "sem categoria", "uncategorized", "geral", ""}
+
+
+def escrever_vitrines_de_blog(posts_data):
+    """Publica um JSON com os ultimos posts de cada tema, ja em ordem de data.
+
+    posts_data chega ordenado por data DESC, entao o primeiro que casar com o
+    filtro e o mais recente — nao ha reordenacao aqui.
+    """
+    for destino, (categorias, palavras, rotulo) in VITRINES_DE_BLOG.items():
+        escolhidos = []
+        for post in posts_data:
+            alvo = (post["title"] + " " + post["slug"]).lower()
+            todas = categorias_do_post(post["slug"])
+            cats = {c.lower() for c in todas}
+            if cats & categorias or any(w in alvo for w in palavras):
+                escolhidos.append({
+                    "title": post["title"],
+                    "url": f'/blog/{post["slug"]}/',
+                    "cover": post["cover"],
+                    "date": post["date"],
+                    "displayDate": post["display_date"],
+                    "category": rotulo_do_post(todas, rotulo),
+                    "excerpt": post["excerpt"],
+                })
+            if len(escolhidos) == VITRINE_QTD:
+                break
+
+        caminho = os.path.join(ROOT_DIR, destino.replace("/", os.sep))
+        os.makedirs(os.path.dirname(caminho), exist_ok=True)
+        with open(caminho, "w", encoding="utf-8") as f:
+            json.dump(escolhidos, f, ensure_ascii=False, indent=2)
+        print(f" - vitrine {destino}: {len(escolhidos)} posts")
+
+
+def rotulo_do_post(categorias, padrao):
+    """Primeira categoria que sirva de rotulo; se nenhuma servir, usa o padrao.
+
+    Preferimos uma categoria real do post a carimbar o tema da vitrine em todo
+    mundo — mas um card escrito "NOT CATEGORIZED" nao vai para o ar.
+    """
+    for c in categorias:
+        if c.strip().lower() not in CATEGORIAS_VAZIAS:
+            return c.strip()
+    return padrao
+
+
+def categorias_do_post(slug):
+    """Todas as categorias do frontmatter — nao so a primeira, como o parse_mdx."""
+    caminho = os.path.join(CONTENT_DIR, "blog", f"{slug}.mdx")
+    if not os.path.exists(caminho):
+        return []
+    with open(caminho, encoding="utf-8") as f:
+        texto = f.read()
+    bloco = re.search(r"categories:\s*\n((?:\s*-\s*.*\n)+)", texto)
+    if not bloco:
+        return []
+    return [c.strip().strip('"').strip("'")
+            for c in re.findall(r"-\s*(.+)", bloco.group(1))]
+
 
 def build_contact_form_html(form_type="contato", selected_segment=""):
     """Generates standard responsive contact form HTML styled with Brand system."""
@@ -2538,6 +2619,20 @@ Se você tiver alguma pergunta sobre esta Política de Privacidade ou as prátic
     # data DESC com slug ASC (ordenar pela tupla inverteria o slug tambem).
     posts_data.sort(key=lambda x: x["slug"])
     posts_data.sort(key=lambda x: x["date"], reverse=True)
+
+    # ── VITRINES DE BLOG DAS PAGINAS MANUAIS ───────────────────────────────
+    # As paginas escritas a mao (ver SEGMENT_URL_OVERRIDES) nao passam pelo
+    # gerador, entao nao tem como receber uma lista de posts no HTML. Em vez
+    # disso o build publica um JSON por segmento e a pagina o consulta no
+    # navegador — assim um post novo aparece na vitrine sem ninguem reeditar
+    # a pagina; basta rodar o build, que ja e obrigatorio para publicar o post.
+    #
+    # Por que nao filtrar por posts_data["category"]: o parse_mdx guarda so a
+    # PRIMEIRA categoria do frontmatter. "Importação de Máquinas por Santa
+    # Catarina" e ["Importação", "Máquinas"] e viraria "Importação", ficando de
+    # fora. Aqui a lista inteira e relida do .mdx, e o titulo/slug tambem valem
+    # como criterio — varios posts de maquina nunca receberam a categoria.
+    escrever_vitrines_de_blog(posts_data)
     
     # 8. GENERATE BLOG LISTING PAGE (blog/index.html)
     print("Generating Blog Listing page (blog/index.html)...")

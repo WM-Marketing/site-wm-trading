@@ -3,11 +3,11 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>WM Trading — Importação de Máquinas</title>
-  <meta name="description" content="Quer importar máquinas com agilidade e segurança?" />
+  <title>WM Trading — Importação de Máquinas e Equipamentos</title>
+  <meta name="description" content="Quer importar máquinas e equipamentos industriais ou agrícolas com agilidade e segurança? Planejamento tributário, licenciamento e logística com a WM Trading." />
   <link rel="canonical" href="https://www.wmtrading.com.br/segmentos/maquinas/" />
-  <meta property="og:title" content="WM Trading — Importação de Máquinas" />
-  <meta property="og:description" content="Quer importar máquinas com agilidade e segurança?" />
+  <meta property="og:title" content="WM Trading — Importação de Máquinas e Equipamentos" />
+  <meta property="og:description" content="Quer importar máquinas e equipamentos industriais ou agrícolas com agilidade e segurança? Planejamento tributário, licenciamento e logística com a WM Trading." />
   <meta property="og:url" content="https://www.wmtrading.com.br/segmentos/maquinas/" />
   <meta property="og:type" content="website" />
   <meta property="og:image" content="https://www.wmtrading.com.br/images/logo/fechado_logo_wm_trading_ajustada_logo_laranja.png" />
@@ -48,9 +48,8 @@
   <script src="https://tag.goadopt.io/injector.js?website_code=e7ae093c-b92e-4ceb-9c53-ac44c0b811f8"
           class="adopt-injector"></script>
 
-  <link rel="stylesheet" href="/css/dynamic-pages.css" />
+  <link rel="stylesheet" href="/css/maquinas.css" />
   <script src="/js/contact-form.js" defer></script>
-  <script src="/js/lightbox.js" defer></script>
 
   <link rel="alternate" hreflang="pt-BR" href="https://www.wmtrading.com.br/segmentos/maquinas/" />
   <link rel="alternate" hreflang="en" href="https://www.wmtrading.com.br/en/segments/machines/" />
@@ -190,201 +189,809 @@
 
 <main>
 
-        <section class="dynamic-hero">
-          <img src="/wp-content/uploads/2024/06/banner-header-site-maquinas-1920x405-1-v2.webp" alt="Máquinas" class="dynamic-hero__bg" />
-          <div class="container dynamic-hero__container">
-            <p class="dynamic-hero__eyebrow">Segmento</p>
-            <h1 class="dynamic-hero__title" style="font-weight: var(--fw-light);">IMPORTAÇÃO DE<br><b><span class="text-primary" style="font-weight: var(--fw-extrabold);">MÁQUINAS</span></b></h1>
-            <a href="#contato-form" class="btn btn-lg" style="margin-top: 24px;">Falar com um especialista</a>
+<!-- ══════════════════════════════════════
+     SEÇÃO 1 — HERO
+     Estrutura clonada de segmentos-aeronaves.html (.aero-hero), com prefixo
+     próprio .mq-* para que ajustes aqui não alterem a página de aeronaves.
+══════════════════════════════════════ -->
+<section class="mq-hero">
+
+  <!-- Wrapper centralizado: controla tamanho e responsividade ao zoom -->
+  <div class="mq-hero__inner">
+
+    <div class="mq-hero__bg-wrap">
+      <!-- ══ MOSAICO — DESKTOP ══
+           Coordenadas em % do viewBox 2005 x 626 — mesma grade do hero de
+           aeronaves (colunas de 10%, linhas de 25%). Só as fotos mudam. -->
+      <div class="mq-hero__mosaico mq-hero__mosaico--desktop" aria-hidden="true">
+        <span class="mq-hero__bloco" style="--x:70.025%; --y:50%;     --w:20%;     --h:50%;     --cor:#F0F0F0"></span>
+        <img class="mq-hero__foto"
+             src="/images/maquinas/hero-porto.jpg"
+             sizes="(max-width: 768px) 38vw, (max-width: 1440px) 28vw, 403px"
+             alt="" width="820" height="640" decoding="async"
+             style="--x:70.025%; --y:0%;      --w:20%;     --h:50%" />
+        <img class="mq-hero__foto"
+             src="/images/maquinas/hero-industrial.jpg"
+             sizes="(max-width: 768px) 38vw, (max-width: 1440px) 28vw, 403px"
+             alt="" width="820" height="640" decoding="async"
+             style="--x:50.025%; --y:50%;     --w:20%;     --h:50%" />
+        <span class="mq-hero__bloco" style="--x:90.025%; --y:50%;     --w:9.975%;  --h:25.08%;  --cor:#F0F0F0"></span>
+        <span class="mq-hero__bloco" style="--x:0.798%;  --y:50%;     --w:10.025%; --h:25.08%;  --cor:#F5F5F5"></span>
+        <span class="mq-hero__bloco" style="--x:0.798%;  --y:0%;      --w:10.025%; --h:25.08%;  --cor:#F2F2F2"></span>
+        <span class="mq-hero__bloco" style="--x:59.999%; --y:24.92%;  --w:10.025%; --h:25.08%;  --cor:#F2F2F2"></span>
+        <span class="mq-hero__bloco" style="--x:10.025%; --y:74.92%;  --w:9.975%;  --h:25.08%;  --cor:#F2F2F2"></span>
+        <span class="mq-hero__bloco" style="--x:90.025%; --y:25.08%;  --w:9.975%;  --h:25.08%;  --cor:#F5F5F5"></span>
+      </div>
+    </div>
+
+    <!-- ══ MOSAICO — SOMENTE MOBILE ══
+         Composição vertical, em % do viewBox 1254 x 1657. Mesmas duas fotos. -->
+    <div class="mq-hero__mosaico mq-hero__mosaico--mobile" aria-hidden="true">
+      <span class="mq-hero__bloco" style="--x:1.276%;  --y:0%;      --w:13.876%; --h:18.648%; --cor:#F0F0F0"></span>
+      <img class="mq-hero__foto"
+           src="/images/maquinas/hero-industrial.jpg"
+           alt="" width="820" height="640" decoding="async"
+           style="--x:28.549%; --y:81.352%; --w:31.738%; --h:18.648%" />
+      <span class="mq-hero__bloco" style="--x:60.526%; --y:81.231%; --w:31.579%; --h:18.648%; --cor:#F0F0F0"></span>
+      <img class="mq-hero__foto"
+           src="/images/maquinas/hero-porto.jpg"
+           alt="" width="820" height="640" decoding="async"
+           style="--x:60.287%; --y:62.583%; --w:31.738%; --h:18.769%" />
+      <span class="mq-hero__bloco" style="--x:13.876%; --y:18.648%; --w:15.789%; --h:9.354%;  --cor:#F0F0F0"></span>
+      <span class="mq-hero__bloco" style="--x:44.498%; --y:71.998%; --w:15.789%; --h:9.354%;  --cor:#F0F0F0"></span>
+      <span class="mq-hero__bloco" style="--x:84.211%; --y:18.648%; --w:15.789%; --h:9.354%;  --cor:#F0F0F0"></span>
+      <span class="mq-hero__bloco" style="--x:12.759%; --y:90.586%; --w:15.789%; --h:9.415%;  --cor:#F5F5F5"></span>
+    </div>
+
+    <!-- Conteúdo sobreposto à esquerda -->
+    <div class="mq-hero__overlay container">
+      <div class="mq-hero__content">
+        <h1 class="mq-hero__title">
+          Importe máquinas e<br>
+          equipamentos com<br>
+          <span class="mq-hero__title-highlight">agilidade e segurança</span>
+        </h1>
+        <p class="mq-hero__text">
+          Planejamento tributário, licenciamento e logística para tornar sua operação
+          mais eficiente, da compra no exterior à entrega na sua planta.
+        </p>
+        <a href="#contato" class="mq-hero__cta">
+          <img src="/images/maquinas/icone-botao-seta.svg" alt="" class="mq-hero__cta-icon" />
+          <span class="mq-hero__cta-text">Falar com um<br>especialista</span>
+        </a>
+      </div>
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- ══════════════════════════════════════
+     SEÇÃO 2 — IMAGEM FULL-WIDTH (FAIXA)
+══════════════════════════════════════ -->
+<section class="mq-faixa">
+  <img
+    src="/images/maquinas/faixa-tratores.jpg"
+    alt="Frota de tratores em operação no campo ao pôr do sol"
+    class="mq-faixa__img"
+    width="3840" height="640"
+    loading="lazy" decoding="async"
+  />
+</section>
+
+
+<!-- ══════════════════════════════════════
+     SEÇÃO 3 — INTRO: título + texto + vídeo
+══════════════════════════════════════ -->
+<section class="mq-intro">
+  <div class="container mq-intro__inner">
+
+    <!-- Coluna esquerda: título, texto e CTA -->
+    <div class="mq-intro__col reveal">
+      <h2 class="mq-intro__title">
+        Importação de <span class="mq-intro__title-hl">Máquinas<br>
+        e Equipamentos</span>
+      </h2>
+
+      <p class="mq-intro__text">
+        Máquinas com tecnologia avançada podem representar um investimento
+        relevante para a indústria e o agronegócio. A WM estrutura a operação
+        desde a análise fiscal até a nacionalização, avaliando classificação,
+        licenciamento e requisitos aplicáveis à carga.
+      </p>
+
+      <p class="mq-intro__text">
+        Quando necessário, o processo inclui suporte para Licença de Importação
+        e análise de exigências como LCVM junto ao IBAMA, reduzindo riscos antes
+        do embarque.
+      </p>
+
+      <a href="/solucoes-wm/" class="btn mq-intro__btn">Nossas soluções →</a>
+    </div>
+
+    <!-- Coluna direita: card de vídeo -->
+    <div class="mq-intro__video-wrap reveal">
+      <div class="mq-intro__video-card">
+        <img
+          src="/images/maquinas/video-poster.jpg"
+          alt="Colheitadeira e trator em operação no campo"
+          class="mq-intro__video-img"
+          width="2080" height="770"
+          loading="lazy" decoding="async"
+        />
+        <button class="mq-intro__play" aria-label="Reproduzir vídeo">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <polygon points="6,3 20,12 6,21" fill="#FC5000"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════
+     SEÇÃO 4 — BENEFÍCIOS (LISTA EXPANSÍVEL)
+     Substitui o carrossel. O comportamento é o do protocolo enviado: no
+     desktop o item abre ao passar o mouse, no toque abre no clique, e o
+     teclado abre no foco — sempre um único item aberto.
+     A pele é a do site: Poppins, tokens de cor, container de 1200 e o botão
+     padrão .btn.
+══════════════════════════════════════ -->
+<section class="mq-benef" aria-labelledby="mq-benef-title">
+  <div class="container mq-benef__inner">
+
+    <header class="mq-benef__header reveal">
+      <p class="mq-benef__eyebrow">Nossos diferenciais</p>
+
+      <h2 class="mq-benef__title" id="mq-benef-title">
+        Benefícios de importar máquinas e
+        <span class="mq-benef__title-hl">equipamentos com a WM</span>
+      </h2>
+
+      <span class="mq-benef__header-arrow" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+             stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg>
+      </span>
+    </header>
+
+    <div class="mq-benef__list">
+
+      <article class="mq-benef__item is-open" tabindex="0">
+        <div class="mq-benef__thumb">
+          <img width="720" height="760" src="/images/maquinas/benef-01.jpg" alt="Colheitadeira embarcada em prancha no porto" loading="lazy" decoding="async">
+        </div>
+
+        <div class="mq-benef__num">01.</div>
+
+        <div class="mq-benef__content">
+          <div class="mq-benef__head">
+            <h3 class="mq-benef__item-title">Máquinas agrícolas</h3>
+            <span class="mq-benef__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                     stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            </span>
           </div>
-        </section>
-        
-            <section class="page-section">
-              <div class="container split-section" style="align-items: center; gap: 40px;">
-                <div class="split-section__text">
-                  <h2 class="card-title" style="font-size: var(--fs-lg); font-weight: var(--fw-semibold); color: var(--color-primary); margin-bottom: 18px;">Quer importar máquinas com agilidade e segurança?</h2>
-                  <p class="card-desc" style="font-size: var(--fs-base); line-height: 1.7; color: var(--color-text-dark); margin-bottom: 24px;">Entre em contato com a trading mais completa do Brasil para tornar esse sonho realidade.</p>
-                  <a href="#contato-form" class="btn btn-lg">Falar com um especialista</a>
-                </div>
-                
-                <div class="split-section__image-wrap">
-                  <iframe src="https://www.youtube.com/embed/LUHSCxojw9A" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="width:100%; height:315px; border-radius:var(--radius-lg); box-shadow: 0 10px 30px rgba(0,0,0,0.15);"></iframe>
-                </div>
-                
-              </div>
-            </section>
-            
-                    <section class="page-section ">
-                      <div class="container split-section" style="align-items: center; gap: 40px;">
-                        
-                    <div class="split-section__text">
-                      <h2 class="card-title" style="font-size: var(--fs-lg); font-weight: var(--fw-semibold); color: var(--color-primary); margin-bottom: 18px;">Desafios do setor</h2>
-                      <p class="card-desc" style="font-size: var(--fs-base); line-height: 1.7; white-space: pre-line; color: var(--color-text-dark);">No Brasil, investir em máquinas com tecnologia avançada pode ter altos custos. Além da dificuldade de encontrar opções com melhores valores e bom desempenho, a variedade de máquinas para indústrias como têxtil, alimentícia e agrícola ainda é limitada. A Licença de Importação é um processo crucial e, se não for feita corretamente, pode gerar problemas na operação — principalmente em máquinas usadas. A WM auxilia na análise da classificação fiscal mais adequada; verifica a necessidade de licenciamento ou sua dispensa; assessora junto ao IBAMA a emissão do LCVM nos casos aplicáveis; e cumpre todas as etapas para o deferimento da Licença de Importação.</p>
-                    </div>
-                    
-                    <div class="split-section__image-wrap">
-                      <img src="/wp-content/uploads/2024/06/thumb-maquinas-v2.webp" alt="Desafios do setor" class="split-section__image" />
-                    </div>
-                    
-                      </div>
-                    </section>
-                    
-                    <section class="page-section page-section--alternate">
-                      <div class="container intro-container">
-                        <h2 class="card-title" style="font-size: var(--fs-lg); font-weight: var(--fw-semibold); color: var(--color-primary); margin-bottom: 18px;">Oportunidades e soluções para o setor</h2>
-                        <p class="card-desc" style="font-size: var(--fs-base); line-height: 1.7; white-space: pre-line; color: var(--color-text-dark);">É no mercado internacional que estão as melhores e mais avançadas máquinas, capazes de potencializar o volume de produção das grandes empresas. Com a redução do Imposto de Importação para determinados bens de produção, o empresário tem a oportunidade de importar com preços menores e mais competitivos. Estamos estrategicamente localizados em 12 estados para garantir maior otimização de custos logísticos. Expanda seu negócio através de um planejamento inteligente e de reduções de custos.</p>
-                      </div>
-                    </section>
-                    
-                    <section class="page-section ">
-                      <div class="container split-section" style="align-items: center; gap: 40px;">
-                        
-                    <div class="split-section__image-wrap">
-                      <img src="/wp-content/uploads/2024/06/thumb2-maquinas.webp" alt="Nossos resultados" class="split-section__image" />
-                    </div>
-                    
-                    <div class="split-section__text">
-                      <h2 class="card-title" style="font-size: var(--fs-lg); font-weight: var(--fw-semibold); color: var(--color-primary); margin-bottom: 18px;">Nossos resultados</h2>
-                      <p class="card-desc" style="font-size: var(--fs-base); line-height: 1.7; white-space: pre-line; color: var(--color-text-dark);">Como resultado do desejo de importar máquinas com as condições mais vantajosas do mercado, conquistamos o índice de 92% de parametrização em canal verde, agregando mais segurança e agilidade às operações. Isso significa que o tempo de nacionalização e liberação da carga no porto com a WM é muito mais rápido. Conte com o know-how da WM para importar máquinas através das melhores oportunidades do comércio internacional.</p>
-                    </div>
-                    
-                      </div>
-                    </section>
-                    
-            <section class="page-section page-section--alternate">
-              <div class="container">
-                <h2 class="section-title-center" style="font-size: var(--fs-xl); font-weight: var(--fw-semibold); color: var(--color-primary); margin-bottom: 8px;">Benefícios de importar Máquinas com a WM</h2>
-                <p class="text-center" style="color: var(--color-text-muted); font-size: var(--fs-sm); margin-bottom: 40px;">Confira os diferenciais de importar Máquinas com a WM</p>
-                <div class="cards-grid">
-                  
-                <div class="benefit-card benefit-card-centered">
-                  
-                    <div class="benefit-card__icon-container">
-                      <img src="/wp-content/uploads/2024/06/parametrizacao.png" alt="Parametrização" class="benefit-card__icon" />
-                    </div>
-                    
-                  <h3 class="card-title">Parametrização</h3>
-                  <p class="card-desc">Contamos com 92% de parametrização no canal verde, e apenas 5% das operações são retidas em canal amarelo.</p>
-                </div>
-                
-                <div class="benefit-card benefit-card-centered">
-                  
-                    <div class="benefit-card__icon-container">
-                      <img src="/wp-content/uploads/2024/06/beneficios.png" alt="Benefícios Fiscais" class="benefit-card__icon" />
-                    </div>
-                    
-                  <h3 class="card-title">Benefícios Fiscais</h3>
-                  <p class="card-desc">Nossos benefícios fiscais e assessoria especializada são focados na melhor gestão da sua importação.</p>
-                </div>
-                
-                <div class="benefit-card benefit-card-centered">
-                  
-                    <div class="benefit-card__icon-container">
-                      <img src="/wp-content/uploads/2024/06/lampada.png" alt="Planejamento Inteligente" class="benefit-card__icon" />
-                    </div>
-                    
-                  <h3 class="card-title">Planejamento Inteligente</h3>
-                  <p class="card-desc">Sua operação é desenhada para o melhor modelo de importação, sempre pensando na otimização e na eficiência.</p>
-                </div>
-                
-                </div>
-              </div>
-            </section>
-            
-            <section class="page-section" id="contato-form" style="background: var(--color-bg-dark); color: var(--color-text-white);">
-              <div class="container" style="max-width:800px;">
-                <h2 class="section-title-center" style="color:var(--color-text-white); font-weight:var(--fw-semibold);">Solucione sua importação de Máquinas com a WM</h2>
-                <p class="text-center" style="color:rgba(255,255,255,0.7); margin-bottom:30px;">Preencha o formulário e um dos nossos especialistas entrará em contato com você.</p>
-                <div style="background:#fff; color:var(--color-text-dark); padding: 40px; border-radius: var(--radius-xl); box-shadow: 0 10px 30px rgba(0,0,0,0.25);">
-                  
-        <form class="contact-form-js grid gap-4 form-grid-wm form-grid-wm--2col" data-form-type="segmentos">
-          <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" class="hidden" aria-hidden="true" style="display:none;" />
-          
-          <input name="nome" required placeholder="Nome *" class="input-wm sm-col-span-2" />
-          <input name="email" type="email" required placeholder="E-mail *" class="input-wm" />
-          <input name="telefone" type="tel" required placeholder="Número Telefone * — (DDD) 99999-0000" pattern="[0-9\s\(\)\+\-\.]+" class="input-wm" />
-          <input name="empresa" placeholder="Empresa" class="input-wm" />
-          
-          <select name="estado" required class="input-wm">
-            <option value="" disabled selected>Estado *</option>
-            
-          <option value="Acre">Acre</option>
-          <option value="Amapá">Amapá</option>
-          <option value="Amazonas">Amazonas</option>
-          <option value="Pará">Pará</option>
-          <option value="Rondônia">Rondônia</option>
-          <option value="Roraima">Roraima</option>
-          <option value="Tocantins">Tocantins</option>
-          <option value="Alagoas">Alagoas</option>
-          <option value="Bahia">Bahia</option>
-          <option value="Ceará">Ceará</option>
-          <option value="Maranhão">Maranhão</option>
-          <option value="Paraíba">Paraíba</option>
-          <option value="Pernambuco">Pernambuco</option>
-          <option value="Piauí">Piauí</option>
-          <option value="Rio Grande do Norte">Rio Grande do Norte</option>
-          <option value="Sergipe">Sergipe</option>
-          <option value="Distrito Federal">Distrito Federal</option>
-          <option value="Goiás">Goiás</option>
-          <option value="Mato Grosso">Mato Grosso</option>
-          <option value="Mato Grosso do Sul">Mato Grosso do Sul</option>
-          <option value="Espírito Santo">Espírito Santo</option>
-          <option value="Minas Gerais">Minas Gerais</option>
-          <option value="Rio de Janeiro">Rio de Janeiro</option>
-          <option value="São Paulo">São Paulo</option>
-          <option value="Paraná">Paraná</option>
-          <option value="Rio Grande do Sul">Rio Grande do Sul</option>
-          <option value="Santa Catarina">Santa Catarina</option>
-          <option value="Exterior">Exterior</option>
-          </select>
-          
-          <select name="segmento" required class="input-wm sm-col-span-2">
-            <option value="" disabled>Segmento *</option>
-            
-          <option value="Aeronaves" >Aeronaves</option>
-          <option value="Energia Renovável" >Energia Renovável</option>
-          <option value="Alimentos e Bebidas" >Alimentos e Bebidas</option>
-          <option value="Vestuário/Têxtil" >Vestuário/Têxtil</option>
-          <option value="Informática e Eletrônicos" >Informática e Eletrônicos</option>
-          <option value="Metais & Derivados" >Metais & Derivados</option>
-          <option value="Partes e Peças Automotivas" >Partes e Peças Automotivas</option>
-          <option value="Produtos Químicos" >Produtos Químicos</option>
-          <option value="Partes e Peças Geral" >Partes e Peças Geral</option>
-          <option value="Cosméticos e Healthcare" >Cosméticos e Healthcare</option>
-          <option value="Insumos e Matéria Prima" >Insumos e Matéria Prima</option>
-          <option value="Medicamentos" >Medicamentos</option>
-          <option value="Combustível" >Combustível</option>
-          <option value="Máquinas e Equipamentos" selected>Máquinas e Equipamentos</option>
-          <option value="Setor Automotivo" >Setor Automotivo</option>
-          <option value="Outros" >Outros</option>
-          </select>
-          
-          <select name="forma_resposta" required class="input-wm sm-col-span-2">
-            <option value="" disabled selected>Como deseja ser respondido? *</option>
+
+          <div class="mq-benef__details">
+            <div class="mq-benef__details-inner">
+              <p class="mq-benef__desc">Tratores, colheitadeiras, pulverizadores e implementos, com acompanhamento da operação do embarque à entrega na propriedade.</p>
+              <a class="btn mq-benef__btn" href="/solucoes-wm/">
+                Saiba mais
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                     stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+              </a>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <article class="mq-benef__item" tabindex="0">
+        <div class="mq-benef__thumb">
+          <img width="720" height="760" src="/images/maquinas/benef-02.jpg" alt="Trator sendo transportado em terminal portuário" loading="lazy" decoding="async">
+        </div>
+
+        <div class="mq-benef__num">02.</div>
+
+        <div class="mq-benef__content">
+          <div class="mq-benef__head">
+            <h3 class="mq-benef__item-title">Máquinas industriais</h3>
+            <span class="mq-benef__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                     stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            </span>
+          </div>
+
+          <div class="mq-benef__details">
+            <div class="mq-benef__details-inner">
+              <p class="mq-benef__desc">Equipamentos para as indústrias têxtil, alimentícia, plástica e metalmecânica, com apoio na certificação e no desembaraço.</p>
+              <a class="btn mq-benef__btn" href="/solucoes-wm/">
+                Saiba mais
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                     stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+              </a>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <article class="mq-benef__item" tabindex="0">
+        <div class="mq-benef__thumb">
+          <img width="720" height="760" src="/images/maquinas/benef-03.jpg" alt="Caminhão-prancha transportando trator" loading="lazy" decoding="async">
+        </div>
+
+        <div class="mq-benef__num">03.</div>
+
+        <div class="mq-benef__content">
+          <div class="mq-benef__head">
+            <h3 class="mq-benef__item-title">Direto do fabricante</h3>
+            <span class="mq-benef__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                     stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            </span>
+          </div>
+
+          <div class="mq-benef__details">
+            <div class="mq-benef__details-inner">
+              <p class="mq-benef__desc">Capacidade de importar diretamente de fabricantes, reduzindo intermediários e buscando melhores condições comerciais e custos logísticos.</p>
+              <a class="btn mq-benef__btn" href="/solucoes-wm/">
+                Saiba mais
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                     stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+              </a>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <article class="mq-benef__item" tabindex="0">
+        <div class="mq-benef__thumb">
+          <img width="720" height="760" src="/images/maquinas/benef-04.jpg" alt="Carreta com carga superdimensionada e escolta em rodovia" loading="lazy" decoding="async">
+        </div>
+
+        <div class="mq-benef__num">04.</div>
+
+        <div class="mq-benef__content">
+          <div class="mq-benef__head">
+            <h3 class="mq-benef__item-title">Licença de Importação e LCVM</h3>
+            <span class="mq-benef__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                     stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            </span>
+          </div>
+
+          <div class="mq-benef__details">
+            <div class="mq-benef__details-inner">
+              <p class="mq-benef__desc">Análise da classificação fiscal, verificação da necessidade de licenciamento e assessoria junto ao IBAMA para a emissão do LCVM quando aplicável.</p>
+              <a class="btn mq-benef__btn" href="/solucoes-wm/">
+                Saiba mais
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                     stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+              </a>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <article class="mq-benef__item" tabindex="0">
+        <div class="mq-benef__thumb">
+          <img width="720" height="760" src="/images/maquinas/benef-05.jpg" alt="Máquina industrial em operação" loading="lazy" decoding="async">
+        </div>
+
+        <div class="mq-benef__num">05.</div>
+
+        <div class="mq-benef__content">
+          <div class="mq-benef__head">
+            <h3 class="mq-benef__item-title">Ex-tarifário e benefícios fiscais</h3>
+            <span class="mq-benef__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                     stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            </span>
+          </div>
+
+          <div class="mq-benef__details">
+            <div class="mq-benef__details-inner">
+              <p class="mq-benef__desc">Planejamento tributário para aproveitar a redução do Imposto de Importação sobre bens de capital sem produção nacional equivalente.</p>
+              <a class="btn mq-benef__btn" href="/solucoes-wm/">
+                Saiba mais
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                     stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+              </a>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <article class="mq-benef__item" tabindex="0">
+        <div class="mq-benef__thumb">
+          <img width="720" height="760" src="/images/maquinas/benef-06.jpg" alt="Máquinas agrícolas prontas para embarque" loading="lazy" decoding="async">
+        </div>
+
+        <div class="mq-benef__num">06.</div>
+
+        <div class="mq-benef__content">
+          <div class="mq-benef__head">
+            <h3 class="mq-benef__item-title">Máquinas usadas</h3>
+            <span class="mq-benef__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                     stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            </span>
+          </div>
+
+          <div class="mq-benef__details">
+            <div class="mq-benef__details-inner">
+              <p class="mq-benef__desc">Condução das etapas específicas exigidas para máquinas usadas, onde a Licença de Importação costuma travar a operação.</p>
+              <a class="btn mq-benef__btn" href="/solucoes-wm/">
+                Saiba mais
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                     stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+              </a>
+            </div>
+          </div>
+        </div>
+      </article>
+
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════
+     SEÇÃO 5 — GESTÃO DA OPERAÇÃO
+     Grade escalonada full-bleed: a faixa de cima ocupa a metade DIREITA da
+     viewport (37,5% → 87,5%) e a de baixo a metade ESQUERDA (12,5% → 62,5%),
+     com o texto encaixado no vão de cada uma. Os cards usam o mesmo efeito
+     dos .motivo-card da home (holofote radial + borda em gradiente).
+══════════════════════════════════════ -->
+<section class="mq-gestao">
+
+  <!-- Faixa 1: texto à esquerda, três cards à direita -->
+  <div class="mq-gestao__band mq-gestao__band--1">
+    <div class="mq-gestao__aside mq-gestao__aside--left reveal">
+      <h2 class="mq-gestao__title">
+        Gestão completa<br>
+        da operação.<br>
+        Da <span class="mq-gestao__hl">documentação</span><br>
+        à <span class="mq-gestao__hl">entrega na planta</span>
+      </h2>
+    </div>
+
+    <div class="mq-gestao__cards">
+        <article class="mq-gestao__card">
+          <div class="mq-gestao__card-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"
+                 stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8l-5-5Z"/><path d="M14 3v5h5"/><path d="m8.8 14.2 2 2 3.6-3.6"/></svg>
+          </div>
+          <h3 class="mq-gestao__card-title">Documentação<br>sob controle</h3>
+          <p class="mq-gestao__card-text">Acompanhamento documental para reduzir inconsistências e atrasos.</p>
+        </article>
+
+        <article class="mq-gestao__card">
+          <div class="mq-gestao__card-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"
+                 stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="6" width="19" height="12" rx="2"/><circle cx="12" cy="12" r="2.4"/><path d="M6 9.6v4.8M18 9.6v4.8"/></svg>
+          </div>
+          <h3 class="mq-gestao__card-title">Pagamentos<br>coordenados</h3>
+          <p class="mq-gestao__card-text">Gestão dos pagamentos conforme as etapas e condições da operação.</p>
+        </article>
+
+        <article class="mq-gestao__card">
+          <div class="mq-gestao__card-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"
+                 stroke-linecap="round" stroke-linejoin="round"><path d="M3 10 12 4.5 21 10"/><path d="M5.5 10v8.5M10 10v8.5M14 10v8.5M18.5 10v8.5"/><path d="M3 21h18"/></svg>
+          </div>
+          <h3 class="mq-gestao__card-title">Gestão financeira<br>da operação</h3>
+          <p class="mq-gestao__card-text">Acompanhamento de cartas de crédito e instrumentos da negociação internacional.</p>
+        </article>
+    </div>
+  </div>
+
+  <!-- Faixa 2: três cards à esquerda, texto à direita -->
+  <div class="mq-gestao__band mq-gestao__band--2">
+    <div class="mq-gestao__cards">
+        <article class="mq-gestao__card">
+          <div class="mq-gestao__card-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"
+                 stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 3 7.5v9L12 21l9-4.5v-9L12 3Z"/><path d="M3 7.5 12 12l9-4.5M12 12v9"/></svg>
+          </div>
+          <h3 class="mq-gestao__card-title">Embarques<br>sob medida</h3>
+          <p class="mq-gestao__card-text">Organização de volumes, máquinas e prioridades conforme o cronograma de produção.</p>
+        </article>
+
+        <article class="mq-gestao__card">
+          <div class="mq-gestao__card-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"
+                 stroke-linecap="round" stroke-linejoin="round"><path d="M6 13.5s3-2.9 3-5.2A3 3 0 1 0 3 8.3c0 2.3 3 5.2 3 5.2Z"/><circle cx="6" cy="8.2" r="1"/><path d="M18 21s3-2.9 3-5.2a3 3 0 1 0-6 0c0 2.3 3 5.2 3 5.2Z"/><circle cx="18" cy="15.8" r="1"/><path d="M9 11.2c3 0 3 4.2 6 4.2" stroke-dasharray="2 2.2"/></svg>
+          </div>
+          <h3 class="mq-gestao__card-title">Visibilidade<br>ponta a ponta</h3>
+          <p class="mq-gestao__card-text">Monitoramento dos embarques e dos principais marcos da operação.</p>
+        </article>
+
+        <article class="mq-gestao__card">
+          <div class="mq-gestao__card-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"
+                 stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 7h10.5v9H2.5z"/><path d="M13 10.2h3.9l3.1 3.1V16H13z"/><circle cx="6.6" cy="18.4" r="1.8"/><circle cx="16.8" cy="18.4" r="1.8"/></svg>
+          </div>
+          <h3 class="mq-gestao__card-title">Da chegada ao<br>destino final</h3>
+          <p class="mq-gestao__card-text">Coordenação da logística nacional, inclusive de cargas superdimensionadas, até a planta.</p>
+        </article>
+    </div>
+
+    <div class="mq-gestao__aside mq-gestao__aside--right reveal">
+      <p class="mq-gestao__text">
+        Coordenamos diferentes etapas da importação para dar mais
+        <strong>previsibilidade, controle e eficiência</strong>
+        à aquisição de máquinas e equipamentos.
+      </p>
+      <a href="/solucoes-wm/" class="btn mq-gestao__btn">Conheça nossas soluções →</a>
+    </div>
+  </div>
+
+  <!-- Padrão WM em zig-zag fechando a seção (equivale ao .numeros-deco do
+       site, que repete o WM.svg no rodapé de uma seção) -->
+  <div class="mq-deco-wm" aria-hidden="true"></div>
+
+</section>
+
+
+<!-- ══════════════════════════════════════
+     SEÇÃO 6 — CONTEÚDOS DO BLOG
+     Substitui o e-book: não existe material rico de máquinas.
+     Os 3 cards abaixo são o estado no último build. O maquinas.js relê
+     /blog/posts-maquinas.json e reescreve a lista no navegador, então um post
+     novo entra sozinho. Se o fetch falhar, fica o que está aqui — por isso o
+     HTML já vem preenchido em vez de vazio.
+     O JSON é publicado pelo build_pages.py (ver VITRINES_DE_BLOG).
+══════════════════════════════════════ -->
+<section class="mq-blog" aria-labelledby="mq-blog-title">
+  <div class="container">
+
+    <header class="mq-blog__header reveal">
+      <div>
+        <p class="mq-blog__eyebrow">Conteúdos</p>
+        <h2 class="mq-blog__title" id="mq-blog-title">
+          Últimos artigos sobre<br>
+          <span class="mq-blog__title-hl">máquinas e equipamentos</span>
+        </h2>
+      </div>
+      <a href="/blog/" class="btn mq-blog__btn">Ver todos os artigos →</a>
+    </header>
+
+    <div class="mq-blog__grid" data-mq-blog-feed>
+      <a class="mq-blog__card" href="/blog/importacao-de-maquinas-agricolas-e-pecas-cresce-no-brasil/">
+        <div class="mq-blog__media">
+          <img src="/images/assets/importacao-de-maquinas-agricolas-e-pecas-v2.webp" alt="" width="640" height="420" loading="lazy" decoding="async">
+        </div>
+        <div class="mq-blog__body">
+          <span class="mq-blog__meta">
+            <span class="mq-blog__cat">Máquinas</span>
+            <time datetime="2026-07-22">22/07/2026</time>
+          </span>
+          <h3 class="mq-blog__card-title">Importação de máquinas agrícolas e peças cresce no Brasil</h3>
+          <span class="mq-blog__more">Ler artigo
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                 stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </span>
+        </div>
+      </a>
+      <a class="mq-blog__card" href="/blog/ex-tarifario-importacao-industrial/">
+        <div class="mq-blog__media">
+          <img src="/wp-content/uploads/2026/05/ex-tarifario-importacao-industrial-v2.webp" alt="" width="640" height="420" loading="lazy" decoding="async">
+        </div>
+        <div class="mq-blog__body">
+          <span class="mq-blog__meta">
+            <span class="mq-blog__cat">Importação</span>
+            <time datetime="2026-05-14">14/05/2026</time>
+          </span>
+          <h3 class="mq-blog__card-title">Ex-tarifário na importação industrial: quando faz sentido?</h3>
+          <span class="mq-blog__more">Ler artigo
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                 stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </span>
+        </div>
+      </a>
+      <a class="mq-blog__card" href="/blog/importacao-de-maquinas-agricolas-44/">
+        <div class="mq-blog__media">
+          <img src="/wp-content/uploads/2025/03/photo-yellow-combine-harvesting-wheat-blue-sky-Freepik-v2.webp" alt="" width="640" height="420" loading="lazy" decoding="async">
+        </div>
+        <div class="mq-blog__body">
+          <span class="mq-blog__meta">
+            <span class="mq-blog__cat">Máquinas</span>
+            <time datetime="2025-03-19">19/03/2025</time>
+          </span>
+          <h3 class="mq-blog__card-title">Importação de máquinas agrícolas registra alta de 44,6% em janeiro</h3>
+          <span class="mq-blog__more">Ler artigo
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                 stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </span>
+        </div>
+      </a>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════
+     SEÇÃO 7 — DIFERENCIAIS DA WM
+     Clone de .aero-diff: mesmos cards em arco (01/05 na base, 02/04 a -20px,
+     03 destacado a -40px e mais largo), mesma sobreposição e o mesmo swoosh.
+     O rodapé traz o bloco de parametrização em canal verde.
+══════════════════════════════════════ -->
+<section class="mq-diff">
+  <div class="container">
+
+    <h2 class="mq-diff__title">
+      <span class="mq-diff__title-hl">Diferenciais da WM</span> na importação de máquinas e equipamentos
+    </h2>
+
+    <div class="mq-diff__cards">
+
+      <div class="mq-diff__card mq-diff__card--outer">
+        <span class="mq-diff__num">01</span>
+        <p class="mq-diff__text">Relacionamento e suporte junto a fornecedores internacionais.</p>
+      </div>
+
+      <div class="mq-diff__card mq-diff__card--mid">
+        <span class="mq-diff__num">02</span>
+        <p class="mq-diff__text">Planejamento de embarques, cargas especiais e cronogramas.</p>
+      </div>
+
+      <div class="mq-diff__card mq-diff__card--featured">
+        <span class="mq-diff__num">03</span>
+        <p class="mq-diff__text">Gestão da Licença de Importação e acompanhamento da entrada no Brasil.</p>
+      </div>
+
+      <div class="mq-diff__card mq-diff__card--mid">
+        <span class="mq-diff__num">04</span>
+        <p class="mq-diff__text">Análise de alternativas aplicáveis a cada operação.</p>
+      </div>
+
+      <div class="mq-diff__card mq-diff__card--outer">
+        <span class="mq-diff__num">05</span>
+        <p class="mq-diff__text">Estruturação da compra e importação internacional.</p>
+      </div>
+
+    </div><!-- /.mq-diff__cards -->
+
+    <!-- Swoosh: o mesmo elemento do aeronaves, sem o avião -->
+    <div class="mq-diff__swoosh" aria-hidden="true">
+      <img src="/images/maquinas/swoosh.svg" alt="" class="mq-diff__swoosh-img">
+    </div>
+
+    <!-- Rodapé: canal verde -->
+    <div class="mq-diff__footer">
+      <div class="mq-diff__selo-text">
+        <p class="mq-diff__selo-title">92% de parametrização em canal verde!</p>
+        <p class="mq-diff__selo-desc">
+          Nosso índice de parametrização em canal verde chega a 92%, e apenas 5% das
+          operações são retidas em canal amarelo. Na prática, o tempo de nacionalização
+          e de liberação da carga no porto com a WM é muito mais curto.
+        </p>
+      </div>
+      <div class="mq-diff__divider"></div>
+      <div class="mq-diff__selo">
+        <img src="/images/maquinas/icone-selo-reconhecimento.svg"
+             alt="Selo de reconhecimento: 92% de parametrização em canal verde"
+             class="mq-diff__selo-logo" width="512" height="512"
+             loading="lazy" decoding="async">
+      </div>
+    </div>
+
+  </div><!-- /.container -->
+</section>
+
+
+<!-- ══════════════════════════════════════
+     SEÇÃO 8 — NOSSOS RESULTADOS
+     Substitui os cases: nao havia nomes nem numeros de operacoes de maquinas.
+     Layout do print: titulo em duas linhas a esquerda com a regua laranja,
+     texto a direita, faixa larga no meio e o fecho embaixo.
+══════════════════════════════════════ -->
+<section class="mq-result">
+  <div class="container">
+
+    <div class="mq-result__header reveal">
+      <h2 class="mq-result__title">
+        Nossos<br>
+        <span class="mq-result__title-hl">resultados</span>
+      </h2>
+      <p class="mq-result__text">
+        Como resultado do desejo de <strong>importar máquinas</strong> com as condições
+        mais vantajosas do mercado, conquistamos o índice de
+        <span class="mq-result__num">92%</span> de
+        <strong>parametrização em canal verde</strong>, agregando mais
+        <strong>segurança</strong> e <strong>agilidade</strong> às operações.
+      </p>
+    </div>
+
+    <div class="mq-result__banner reveal">
+      <img src="/images/maquinas/banner-resultados.jpg"
+           alt="Contêiner WM Trading e pá carregadeira — We Make it better"
+           width="2100" height="552" loading="lazy" decoding="async">
+    </div>
+
+    <p class="mq-result__footer reveal">
+      Isso significa que o tempo de nacionalização e liberação da carga no porto
+      <strong>com a WM é muito mais rápido.</strong> Conte com o know-how da WM para
+      importar máquinas através das melhores oportunidades do comércio internacional.
+    </p>
+
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════
+     SEÇÃO 9 — CTA + FORMULÁRIO
+     Clone de .aero-cta. O formulário mantém as classes que o js/contact-form.js
+     do site procura (.contact-form-js + data-form-type), então ao integrar ele
+     passa a enviar para /api/contato sem alteração.
+══════════════════════════════════════ -->
+<section class="mq-cta" id="contato">
+  <div class="mq-cta__bg" aria-hidden="true"></div>
+
+  <div class="mq-cta__inner">
+
+    <!-- Lado esquerdo -->
+    <div class="mq-cta__left">
+      <span class="mq-cta__icon" aria-hidden="true">
+        <svg fill="currentColor" aria-hidden="true" id="Capa_1" enable-background="new 0 0 512 512" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><g><path d="m97.371 217.611-56.094 24.01c-3.808 1.63-5.574 6.038-3.944 9.846 1.218 2.846 3.987 4.551 6.898 4.551.984 0 1.986-.195 2.948-.607l56.094-24.01c3.808-1.63 5.574-6.038 3.944-9.846s-6.04-5.572-9.846-3.944z"/><path d="m97.37 248.023-56.094 24.02c-3.808 1.63-5.573 6.039-3.942 9.847 1.218 2.845 3.987 4.55 6.898 4.55.985 0 1.986-.195 2.949-.607l56.094-24.02c3.808-1.63 5.573-6.039 3.942-9.847-1.63-3.808-6.041-5.573-9.847-3.943z"/><path d="m103.247 325.071c-21.284 0-38.599 17.315-38.599 38.599s17.315 38.6 38.599 38.6 38.6-17.316 38.6-38.6-17.317-38.599-38.6-38.599zm0 62.199c-13.013 0-23.599-10.587-23.599-23.6s10.586-23.599 23.599-23.599 23.6 10.586 23.6 23.599-10.588 23.6-23.6 23.6z"/><path d="m494.483 317.181h-6.44c-13.406-38.211-49.979-64.441-90.894-64.441-38.803 0-73.477 23.152-88.543 58.348l-23.184-8.358c-1.164-.419-2.374-.651-3.603-.713v-17.587h7.46c9.566 0 18.633-4.154 24.877-11.396 6.245-7.243 9.02-16.825 7.61-26.292l-8.18-54.76c-.612-4.097-4.434-6.925-8.525-6.31-4.097.612-6.922 4.429-6.31 8.525l8.179 54.756c.766 5.143-.742 10.35-4.135 14.285-3.392 3.935-8.319 6.191-13.517 6.191h-66.264v-161.049h62.922l7.579 50.763c.556 3.722 3.756 6.394 7.409 6.394.368 0 .742-.027 1.117-.083 4.097-.612 6.922-4.429 6.311-8.525l-7.249-48.548h15.146c7.449 0 13.51-6.061 13.51-13.51v-14.731c0-7.455-6.061-13.52-13.51-13.52h-176.529c-7.45 0-13.51 6.065-13.51 13.52v99.08h-12.96c-1.821 0-3.604.367-5.311 1.095l-99.761 42.695c-4.968 2.136-8.178 7.011-8.178 12.42v120.9c0 4.861 2.631 9.37 6.875 11.771l15.772 8.9c6.386 38.731 40.088 68.374 80.6 68.374 39.13 0 71.909-27.657 79.854-64.445h123.156c13.405 38.217 49.978 64.45 90.893 64.45 19.972 0 39.132-6.061 55.41-17.528 3.386-2.386 4.197-7.064 1.812-10.451-2.385-3.386-7.064-4.197-10.451-1.812-13.736 9.676-29.909 14.791-46.771 14.791-32.749 0-62.216-19.896-74.832-49.451h25.671c10.755 16.581 29.195 26.711 49.161 26.711 19.96 0 38.397-10.13 49.151-26.711h25.67c-1.677 3.929-3.657 7.735-5.948 11.375-2.207 3.505-1.155 8.136 2.351 10.343 1.241.782 2.623 1.154 3.989 1.154 2.492 0 4.929-1.241 6.354-3.505 3.844-6.105 6.964-12.601 9.336-19.367h6.431c9.659 0 17.517-7.858 17.517-17.517v-28.715c-.001-9.658-7.859-17.516-17.518-17.516zm-97.333-49.441c32.748 0 62.214 19.892 74.832 49.441h-25.69c-10.754-16.581-29.188-26.711-49.142-26.711-19.96 0-38.397 10.13-49.152 26.711h-22.49l-2.75-.992c12.902-29.254 41.93-48.449 74.392-48.449zm29.698 49.441h-59.406c7.948-7.408 18.501-11.711 29.707-11.711 11.203 0 21.753 4.303 29.699 11.711zm-218.832-47.751h-9.234c-8.581-9.824-18.502-18.333-29.522-25.322v-135.728h38.756zm-104.769 160.945c-36.781 0-66.705-29.924-66.705-66.705s29.924-66.705 66.705-66.705 66.705 29.923 66.705 66.705-29.924 66.705-66.705 66.705zm0-148.41c-43.561 0-79.263 34.267-81.58 77.26l-6.667-3.762v-119.057l98.572-42.186h14.128c7.449 0 13.51-6.061 13.51-13.51v-99.09h173.55v11.76c-15.627 0-125.689 0-148.99 0-6.347 0-11.51 5.159-11.51 11.5v140.65c0 4.336 2.218 8.297 5.928 10.594 10.504 6.513 19.912 14.569 27.955 23.934 2.379 2.779 5.83 4.373 9.467 4.373h69.21v17.559h-1.22c-9.659 0-17.517 7.858-17.517 17.517v43.907c0 .857.083 1.693.202 2.518h-63.39c.021-.753.057-1.502.057-2.26 0-45.054-36.653-81.707-81.705-81.707zm293.903 110.675c-11.21 0-21.766-4.303-29.716-11.711h59.423c-7.948 7.408-18.501 11.711-29.707 11.711zm99.85-29.227c0 1.388-1.129 2.517-2.517 2.517h-228.883c-1.388 0-2.517-1.129-2.517-2.517v-43.907c0-1.388 1.129-2.517 2.517-2.517h15.147l29.784 10.737c.018.006.034.014.052.02l10.251 3.694c1.364.492 2.791.741 4.24.741h169.41c1.388 0 2.517 1.129 2.517 2.517v28.715z"/><path d="m207.696 347.958h17.643c4.142 0 7.5-3.358 7.5-7.5s-3.358-7.5-7.5-7.5h-17.643c-4.142 0-7.5 3.358-7.5 7.5s3.358 7.5 7.5 7.5z"/><path d="m207.696 320.829h17.643c4.142 0 7.5-3.358 7.5-7.5s-3.358-7.5-7.5-7.5h-17.643c-4.142 0-7.5 3.358-7.5 7.5s3.358 7.5 7.5 7.5z"/></g></svg>
+      </span>
+
+      <h2 class="mq-cta__title">
+        Importe máquinas e equipamentos<br>
+        com <span class="mq-cta__hl">agilidade e segurança</span>
+      </h2>
+
+      <p class="mq-cta__text">
+        Conte com planejamento tributário, gestão logística e
+        acompanhamento da operação de ponta a ponta.
+      </p>
+
+      <p class="mq-cta__label">Fale com um especialista e tire suas dúvidas.</p>
+
+      <div class="mq-cta__actions">
+        <a href="https://wa.me/5527981610055" class="mq-cta__btn" target="_blank" rel="noopener">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          WhatsApp
+        </a>
+        <a href="tel:+552730229700" class="mq-cta__btn">(27) 3022-9700</a>
+      </div>
+    </div>
+
+    <!-- Lado direito — formulário -->
+    <div class="mq-cta__right">
+      <form class="mq-cta__form contact-form-js" data-form-type="segmentos">
+        <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true" style="display:none;">
+
+        <div class="mq-cta__row">
+          <label class="mq-cta__field-label" for="mq-nome">Nome *</label>
+          <input class="mq-cta__input" id="mq-nome" name="nome" type="text" required>
+        </div>
+
+        <div class="mq-cta__row mq-cta__row--2">
+          <div>
+            <label class="mq-cta__field-label" for="mq-email">E-mail *</label>
+            <input class="mq-cta__input" id="mq-email" name="email" type="email" required>
+          </div>
+          <div>
+            <label class="mq-cta__field-label" for="mq-tel">Número de Telefone *</label>
+            <input class="mq-cta__input" id="mq-tel" name="telefone" type="tel" required placeholder="(DDD) 99999-0000">
+          </div>
+        </div>
+
+        <div class="mq-cta__row mq-cta__row--3">
+          <div>
+            <label class="mq-cta__field-label" for="mq-empresa">Empresa</label>
+            <input class="mq-cta__input" id="mq-empresa" name="empresa" type="text">
+          </div>
+          <div>
+            <label class="mq-cta__field-label" for="mq-estado">Estado *</label>
+            <select class="mq-cta__input" id="mq-estado" name="estado" required>
+              <option value="" disabled selected>Selecione</option>
+              <option value="Acre">Acre</option>
+              <option value="Amapá">Amapá</option>
+              <option value="Amazonas">Amazonas</option>
+              <option value="Pará">Pará</option>
+              <option value="Rondônia">Rondônia</option>
+              <option value="Roraima">Roraima</option>
+              <option value="Tocantins">Tocantins</option>
+              <option value="Alagoas">Alagoas</option>
+              <option value="Bahia">Bahia</option>
+              <option value="Ceará">Ceará</option>
+              <option value="Maranhão">Maranhão</option>
+              <option value="Paraíba">Paraíba</option>
+              <option value="Pernambuco">Pernambuco</option>
+              <option value="Piauí">Piauí</option>
+              <option value="Rio Grande do Norte">Rio Grande do Norte</option>
+              <option value="Sergipe">Sergipe</option>
+              <option value="Distrito Federal">Distrito Federal</option>
+              <option value="Goiás">Goiás</option>
+              <option value="Mato Grosso">Mato Grosso</option>
+              <option value="Mato Grosso do Sul">Mato Grosso do Sul</option>
+              <option value="Espírito Santo">Espírito Santo</option>
+              <option value="Minas Gerais">Minas Gerais</option>
+              <option value="Rio de Janeiro">Rio de Janeiro</option>
+              <option value="São Paulo">São Paulo</option>
+              <option value="Paraná">Paraná</option>
+              <option value="Rio Grande do Sul">Rio Grande do Sul</option>
+              <option value="Santa Catarina">Santa Catarina</option>
+              <option value="Exterior">Exterior</option>
+            </select>
+          </div>
+          <div>
+            <label class="mq-cta__field-label" for="mq-segmento">Segmento</label>
+            <select class="mq-cta__input" id="mq-segmento" name="segmento" required>
+              <option value="Aeronaves">Aeronaves</option>
+              <option value="Energia Renovável">Energia Renovável</option>
+              <option value="Alimentos e Bebidas">Alimentos e Bebidas</option>
+              <option value="Vestuário/Têxtil">Vestuário/Têxtil</option>
+              <option value="Informática e Eletrônicos">Informática e Eletrônicos</option>
+              <option value="Metais & Derivados">Metais & Derivados</option>
+              <option value="Partes e Peças Automotivas">Partes e Peças Automotivas</option>
+              <option value="Produtos Químicos">Produtos Químicos</option>
+              <option value="Partes e Peças Geral">Partes e Peças Geral</option>
+              <option value="Cosméticos e Healthcare">Cosméticos e Healthcare</option>
+              <option value="Insumos e Matéria Prima">Insumos e Matéria Prima</option>
+              <option value="Medicamentos">Medicamentos</option>
+              <option value="Combustível">Combustível</option>
+              <option value="Máquinas e Equipamentos" selected>Máquinas e Equipamentos</option>
+              <option value="Setor Automotivo">Setor Automotivo</option>
+              <option value="Outros">Outros</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="mq-cta__row">
+          <label class="mq-cta__field-label" for="mq-forma">Como deseja ser respondido? *</label>
+          <select class="mq-cta__input" id="mq-forma" name="forma_resposta" required>
+            <option value="" disabled selected>Selecione</option>
             <option value="WhatsApp">WhatsApp</option>
             <option value="Telefone">Telefone</option>
             <option value="E-mail">E-mail</option>
           </select>
-          
-          <textarea name="mensagem" required rows="4" placeholder="Mensagem *" class="input-wm sm-col-span-2 resize-y"></textarea>
-          
-          <label class="sm-col-span-2 form-checkbox-label">
-            <input type="checkbox" name="aceite_privacidade" required value="sim" />
-            <span data-wm-aceite>Li e estou de acordo com a <a href="/politica-de-privacidade/" class="text-primary underline">Política de Privacidade</a> e autorizo a WM Trading a tratar meus dados para responder a esta solicitação.</span>
-          </label>
+        </div>
 
-          <label class="sm-col-span-2 form-checkbox-label">
-            <input type="checkbox" name="aceite_marketing" value="sim" />
-            <span data-wm-aceite-marketing>Também quero receber conteúdos, materiais e comunicações comerciais da WM Trading (opcional).</span>
-          </label>
+        <div class="mq-cta__row">
+          <label class="mq-cta__field-label" for="mq-mensagem">Mensagem *</label>
+          <textarea class="mq-cta__input mq-cta__textarea" id="mq-mensagem" name="mensagem" rows="4" required></textarea>
+        </div>
 
-          <button type="submit" class="btn btn-block sm-col-span-2 btn-lg">Enviar</button>
-        </form>
-    
-                </div>
-              </div>
-            </section>
-            
+        <label class="mq-cta__check">
+          <input type="checkbox" name="aceite_privacidade" required value="sim">
+          <span data-wm-aceite>Li e estou de acordo com a <a href="/politica-de-privacidade/">Política de Privacidade</a> e autorizo a WM Trading a tratar meus dados para responder a esta solicitação.</span>
+        </label>
+
+        <label class="mq-cta__check">
+          <input type="checkbox" name="aceite_marketing" value="sim">
+          <span data-wm-aceite-marketing>Também quero receber conteúdos, materiais e comunicações comerciais da WM Trading (opcional).</span>
+        </label>
+
+        <button type="submit" class="mq-cta__submit">ENVIAR</button>
+      </form>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     MODAL — Vídeo YouTube
+══════════════════════════════════════ -->
+<div id="mq-video-modal" class="mq-video-modal" role="dialog" aria-modal="true" aria-label="Vídeo institucional" hidden>
+  <div class="mq-video-modal__backdrop"></div>
+  <div class="mq-video-modal__inner">
+    <button class="mq-video-modal__close" aria-label="Fechar vídeo">
+      <svg viewBox="0 0 24 24" fill="none">
+        <path d="M18 6L6 18M6 6l12 12" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+      </svg>
+    </button>
+    <div class="mq-video-modal__frame" id="mq-video-frame"></div>
+  </div>
+</div>
+
 </main>
 
 <!-- ══════════════════════════════════════
@@ -498,6 +1105,7 @@
 
 
 <script src="/js/main.js"></script>
+<script src="/js/maquinas.js"></script>
 <script src="/js/i18n.js" defer></script>
 
 
