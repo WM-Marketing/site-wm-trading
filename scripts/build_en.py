@@ -98,6 +98,31 @@ def capa_da_pagina_pt(url_pt):
     return ""
 
 
+def careers_open_positions_html():
+    """CTA de vagas da pagina de carreiras em ingles."""
+    return """
+    <section class="page-section page-section--alternate text-center" style="text-align:center;">
+      <div class="container intro-container">
+        <h2 class="t-h2" style="margin-bottom:16px;">Open positions</h2>
+        <p class="intro-text" style="color:var(--color-text-muted);">Explore current opportunities and apply. We are always looking for new talent.</p>
+        <a href="https://wmtrading.gupy.io/" class="btn btn-lg" style="margin-top:24px;" target="_blank" rel="noopener noreferrer">Apply now</a>
+        <p class="card-desc" style="margin-top:20px; font-size:12px;">By applying for a position, you agree to the processing of your personal data in accordance with WM’s Privacy Statement for Recruitment and Selection.</p>
+      </div>
+    </section>"""
+
+
+def compliance_cta_html():
+    """CTA no lugar do formulario da pagina de Compliance em ingles."""
+    return """
+    <section class="page-section" style="background: var(--color-primary); color: var(--color-text-white); text-align: center;">
+      <div class="container">
+        <h2 class="t-display" style="margin-bottom: 16px;">Import with confidence.</h2>
+        <p class="t-lead" style="margin-bottom: 24px;">Count on a reliable partner to make your import operations more secure and predictable.</p>
+        <a href="/en/contact-us.html" class="btn btn-outline-white btn-lg">Talk to a WM specialist</a>
+      </div>
+    </section>"""
+
+
 def corpo_html(pagina):
     """Monta o miolo com as mesmas classes do site, para o visual bater."""
     # `blocos` e o conteudo BRUTO raspado do site antigo, guardado so para conferencia:
@@ -136,6 +161,11 @@ def corpo_html(pagina):
         texto = "".join(
             f'<p class="card-desc" style="font-size: var(--fs-base); line-height: 1.7; '
             f'margin-bottom: 14px;">{html_mod.escape(p)}</p>' for p in sec["paragrafos"])
+        if pagina["en"] == "/en/careers/":
+            texto = texto.replace(
+                "Gupy website",
+                '<a href="https://wmtrading.gupy.io/" target="_blank" rel="noopener noreferrer" style="text-decoration: underline;">Gupy website</a>',
+            )
         cabecalho = (f'<h2 class="card-title" style="font-size: var(--fs-lg); '
                      f'font-weight: var(--fw-semibold); color: var(--color-primary); '
                      f'margin-bottom: 18px;">{html_mod.escape(sec["titulo"])}</h2>'
@@ -149,8 +179,10 @@ def corpo_html(pagina):
       </div>
     </section>""")
         idx += 1
+        if pagina["en"] == "/en/careers/" and idx == 2:
+            partes.append(careers_open_positions_html())
 
-    partes.append(formulario_en(pagina))
+    partes.append(compliance_cta_html() if pagina["en"] == "/en/compliance/" else formulario_en(pagina))
     return "\n".join(partes)
 
 

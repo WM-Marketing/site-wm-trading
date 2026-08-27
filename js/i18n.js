@@ -232,7 +232,7 @@ const translations = {
 
     // Section 5
     's5.title': 'tax benefits<br>to <span class="text-primary">optimize your imports</span>',
-    's5.text1': 'Present in <strong>14 Brazilian states</strong> and <strong>Panama</strong>, we optimize imports and reduce our clients\' costs with unique planning, always committed to finding the best nationalization opportunities.',
+    's5.text1': 'Present in <strong>12 Brazilian states</strong> and <strong>Panama</strong>, we optimize imports and reduce our clients\' costs with unique planning, always committed to finding the best nationalization opportunities.',
     's5.text2': 'Through the Order Operation or Commission Operation, we optimize the logistics chain and reduce the tax burden of imports by nationalizing your cargo in states with ICMS reduction incentives, such as ES and SC.',
 
     // Section 6
@@ -364,7 +364,7 @@ const translations = {
     'qs.act.planejamento.t': 'Planning and Management',
     'qs.act.planejamento.d': 'Planning is essential to frame the operation under the right import modality and to avoid complications in the process.',
     'qs.act.localizacao.t': 'Strategic Location',
-    'qs.act.localizacao.d': 'To optimize the logistics and tax chain, we are strategically located in 15 Brazilian states and in Panama.',
+    'qs.act.localizacao.d': 'To optimize the logistics and tax chain, we are strategically located in 12 Brazilian states and in Panama.',
     'qs.quality.title': 'Our <span class="text-primary">quality policy</span> is:',
     'qs.quality.quote': '“At WM Trading, quality means delivering uncomplicated, agile and reliable foreign trade solutions, exceeding our clients expectations in every operation. Our leadership and our team are committed to acting with ethics and transparency, promoting innovation and pursuing the continuous improvement of the people and processes behind that result.” <br /><span class="qs-quality__rev">(Rev.01 – 08/11/2026)</span>',
     'qs.quality.p1': 'Quality is our priority to ensure your satisfaction. We maintain a Quality Management System that lets us hear what our clients think and refine our services.',
