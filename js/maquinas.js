@@ -46,8 +46,13 @@
    Abre com autoplay ao clicar no play, fecha ao clicar fora, no X ou ESC.
 ───────────────────────────────────── */
 (function () {
-  const VIDEO_ID = 'IqGdtPnWhyY';
-  const VIDEO_T  = 1;               /* start time em segundos */
+  /* Video do SEGMENTO DE MAQUINAS. O clone da pagina fotovoltaica veio com o
+     video dela (IqGdtPnWhyY) e ficou assim no ar de 27/08/2026 ate ser
+     corrigido no mesmo dia. A fonte da verdade e o SEGMENT_MEDIA["maquinas"]
+     do build_pages.py, que ja trazia https://youtu.be/LUHSCxojw9A e alimentava
+     a versao gerada da pagina antes do layout novo. */
+  const VIDEO_ID = 'LUHSCxojw9A';
+  const VIDEO_T  = 0;               /* start time em segundos */
 
   const modal    = document.getElementById('mq-video-modal');
   const frame    = document.getElementById('mq-video-frame');
