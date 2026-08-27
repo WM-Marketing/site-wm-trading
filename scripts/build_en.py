@@ -67,6 +67,10 @@ CAPAS_PROPRIAS_EN = {
     # pagina em ingles saia do build sem imagem de capa. O arquivo e o que a
     # versao PT usava ate a virada.
     "/en/segments/photovoltaic-equipment/": "/wp-content/uploads/2024/06/banner-fotovolaticos.webp",
+    # Mesmo caso desde 27/08/2026: a /segmentos/maquinas/ tambem trocou o hero
+    # generico pelo mosaico .mq-hero. Sem esta linha a versao em ingles sai do
+    # build sem imagem de capa.
+    "/en/segments/machines/": "/images/maquinas/faixa-tratores.jpg",
 }
 
 
@@ -473,6 +477,322 @@ ATRIBUTOS_QS_EN = [
 ]
 
 
+# Texto do CORPO da /segmentos/maquinas/, em pares (portugues, ingles).
+#
+# POR QUE UMA TABELA E NAO O data-i18n
+# A /about/ e a home carregam data-i18n em cada elemento, e a traducao vem do
+# dicionario do js/i18n.js. A pagina de maquinas nao: os 28 data-i18n dela sao
+# do cabecalho e do rodape compartilhados; o corpo e prosa escrita a mao. Em vez
+# de instrumentar a pagina inteira so para gerar a irma, trocamos os textos
+# literalmente — mesmo mecanismo do ATRIBUTOS_QS_EN.
+#
+# A ORDEM DA LISTA NAO IMPORTA: a maquinas_em_ingles() aplica as trocas da mais
+# longa para a mais curta, senao "Maquinas agricolas" traduziria o prefixo de
+# "Maquinas agricolas prontas para embarque" e a entrada longa nunca casaria.
+# Agrupamos por secao aqui so para dar para ler.
+#
+# Se uma entrada nao casar, o build AVISA em vez de seguir quieto: texto em
+# portugues sobrando na pagina em ingles e exatamente o que ninguem percebe.
+TEXTOS_MAQUINAS_EN = [
+    # ── S1 hero ──
+    ("Importe máquinas e", "Import machinery and"),
+    ("equipamentos com", "equipment with"),
+    ("agilidade e segurança</span>", "speed and security</span>"),
+    ("Planejamento tributário, licenciamento e logística para tornar sua operação\n          mais eficiente, da compra no exterior à entrega na sua planta.",
+     "Tax planning, licensing and logistics to make your operation more efficient,\n          from the purchase abroad to delivery at your plant."),
+    ("Falar com um<br>especialista", "Talk to a<br>specialist"),
+
+    # ── S3 intro ──
+    ("Importação de <span class=\"mq-intro__title-hl\">Máquinas<br>\n        e Equipamentos</span>",
+     "Importing <span class=\"mq-intro__title-hl\">Machinery<br>\n        and Equipment</span>"),
+    ("Máquinas com tecnologia avançada podem representar um investimento\n        relevante para a indústria e o agronegócio. A WM estrutura a operação\n        desde a análise fiscal até a nacionalização, avaliando classificação,\n        licenciamento e requisitos aplicáveis à carga.",
+     "Advanced-technology machinery can be a major investment for industry and\n        agribusiness. WM structures the operation from the tax analysis through to\n        customs clearance, assessing classification, licensing and the requirements\n        that apply to the cargo."),
+    ("Quando necessário, o processo inclui suporte para Licença de Importação\n        e análise de exigências como LCVM junto ao IBAMA, reduzindo riscos antes\n        do embarque.",
+     "Where required, the process includes support for the Import Licence and a\n        review of requirements such as the LCVM with IBAMA, reducing risk before\n        shipment."),
+    ("Nossas soluções →", "Our solutions →"),
+
+    # ── S4 beneficios ──
+    ("Nossos diferenciais", "What sets us apart"),
+    ("Benefícios de importar máquinas e", "Benefits of importing machinery and"),
+    ("equipamentos com a WM", "equipment with WM"),
+    ("Máquinas agrícolas", "Agricultural machinery"),
+    ("Tratores, colheitadeiras, pulverizadores e implementos, com acompanhamento da operação do embarque à entrega na propriedade.",
+     "Tractors, combine harvesters, sprayers and implements, with the operation followed from shipment through to delivery at the farm."),
+    ("Máquinas industriais", "Industrial machinery"),
+    ("Equipamentos para as indústrias têxtil, alimentícia, plástica e metalmecânica, com apoio na certificação e no desembaraço.",
+     "Equipment for the textile, food, plastics and metalworking industries, with support on certification and customs clearance."),
+    ("Direto do fabricante", "Direct from the manufacturer"),
+    ("Capacidade de importar diretamente de fabricantes, reduzindo intermediários e buscando melhores condições comerciais e custos logísticos.",
+     "The ability to import directly from manufacturers, cutting out intermediaries and pursuing better commercial terms and logistics costs."),
+    ("Licença de Importação e LCVM", "Import Licence and LCVM"),
+    ("Análise da classificação fiscal, verificação da necessidade de licenciamento e assessoria junto ao IBAMA para a emissão do LCVM quando aplicável.",
+     "Analysis of the tariff classification, assessment of whether licensing is required, and support with IBAMA for issuing the LCVM where applicable."),
+    ("Ex-tarifário e benefícios fiscais", "Ex-tariff and tax benefits"),
+    ("Planejamento tributário para aproveitar a redução do Imposto de Importação sobre bens de capital sem produção nacional equivalente.",
+     "Tax planning to take advantage of the reduced Import Duty on capital goods with no equivalent Brazilian production."),
+    ("Máquinas usadas", "Used machinery"),
+    ("Condução das etapas específicas exigidas para máquinas usadas, onde a Licença de Importação costuma travar a operação.",
+     "Handling the specific steps required for used machinery, where the Import Licence tends to hold the operation up."),
+    ("Saiba mais", "Learn more"),
+
+    # ── S5 gestao ──
+    ("Gestão completa<br>", "End-to-end management<br>"),
+    ("da operação.<br>", "of the operation.<br>"),
+    ("<span class=\"mq-gestao__hl\">documentação</span>", "<span class=\"mq-gestao__hl\">documentation</span>"),
+    ("<span class=\"mq-gestao__hl\">entrega na planta</span>", "<span class=\"mq-gestao__hl\">delivery at the plant</span>"),
+    ("Documentação<br>sob controle", "Documentation<br>under control"),
+    ("Acompanhamento documental para reduzir inconsistências e atrasos.",
+     "Document tracking to reduce inconsistencies and delays."),
+    ("Pagamentos<br>coordenados", "Coordinated<br>payments"),
+    ("Gestão dos pagamentos conforme as etapas e condições da operação.",
+     "Payments managed in line with the stages and terms of the operation."),
+    ("Gestão financeira<br>da operação", "Financial management<br>of the operation"),
+    ("Acompanhamento de cartas de crédito e instrumentos da negociação internacional.",
+     "Tracking of letters of credit and other international trade instruments."),
+    ("Embarques<br>sob medida", "Tailored<br>shipments"),
+    ("Organização de volumes, máquinas e prioridades conforme o cronograma de produção.",
+     "Volumes, machines and priorities organised around the production schedule."),
+    ("Visibilidade<br>ponta a ponta", "End-to-end<br>visibility"),
+    ("Monitoramento dos embarques e dos principais marcos da operação.",
+     "Monitoring of shipments and of the key milestones in the operation."),
+    ("Da chegada ao<br>destino final", "From arrival to<br>final destination"),
+    ("Coordenação da logística nacional, inclusive de cargas superdimensionadas, até a planta.",
+     "Coordination of domestic logistics, including oversized cargo, all the way to the plant."),
+    ("Coordenamos diferentes etapas da importação para dar mais",
+     "We coordinate the different stages of the import to bring more"),
+    ("<strong>previsibilidade, controle e eficiência</strong>",
+     "<strong>predictability, control and efficiency</strong>"),
+    ("à aquisição de máquinas e equipamentos.", "to the purchase of machinery and equipment."),
+    ("Conheça nossas soluções →", "See our solutions →"),
+
+    # ── S7 diferenciais ──
+    ("<span class=\"mq-diff__title-hl\">Diferenciais da WM</span> na importação de máquinas e equipamentos",
+     "<span class=\"mq-diff__title-hl\">What sets WM apart</span> in importing machinery and equipment"),
+    ("Relacionamento e suporte junto a fornecedores internacionais.",
+     "Relationships with and support from international suppliers."),
+    ("Planejamento de embarques, cargas especiais e cronogramas.",
+     "Planning of shipments, special cargo and schedules."),
+    ("Gestão da Licença de Importação e acompanhamento da entrada no Brasil.",
+     "Management of the Import Licence and of entry into Brazil."),
+    ("Análise de alternativas aplicáveis a cada operação.",
+     "Analysis of the alternatives available for each operation."),
+    ("Estruturação da compra e importação internacional.",
+     "Structuring of the international purchase and import."),
+    ("92% de parametrização em canal verde!", "92% cleared through the green channel!"),
+    ("Nosso índice de parametrização em canal verde chega a 92%, e apenas 5% das\n          operações são retidas em canal amarelo. Na prática, o tempo de nacionalização\n          e de liberação da carga no porto com a WM é muito mais curto.",
+     "Our green-channel clearance rate reaches 92%, with only 5% of operations held\n          in the yellow channel. In practice, customs clearance and cargo release at\n          the port are far quicker with WM."),
+
+    # ── S8 resultados ──
+    ("Nossos<br>\n        <span class=\"mq-result__title-hl\">resultados</span>",
+     "Our<br>\n        <span class=\"mq-result__title-hl\">results</span>"),
+    ("Como resultado do desejo de <strong>importar máquinas</strong> com as condições\n        mais vantajosas do mercado, conquistamos o índice de\n        <span class=\"mq-result__num\">92%</span> de\n        <strong>parametrização em canal verde</strong>, agregando mais\n        <strong>segurança</strong> e <strong>agilidade</strong> às operações.",
+     "Out of the drive to <strong>import machinery</strong> on the best terms in the\n        market, we reached a <span class=\"mq-result__num\">92%</span>\n        <strong>green-channel clearance rate</strong>, bringing more\n        <strong>security</strong> and <strong>speed</strong> to our operations."),
+    ("Isso significa que o tempo de nacionalização e liberação da carga no porto\n      <strong>com a WM é muito mais rápido.</strong> Conte com o know-how da WM para\n      importar máquinas através das melhores oportunidades do comércio internacional.",
+     "That means customs clearance and cargo release at the port are\n      <strong>much faster with WM.</strong> Count on WM's know-how to import machinery\n      through the best opportunities in international trade."),
+
+    # ── S9 CTA (o formulario e trocado a parte, ver formulario_maquinas_en) ──
+    ("Importe máquinas e equipamentos<br>", "Import machinery and equipment<br>"),
+    ("com <span class=\"mq-cta__hl\">", "with <span class=\"mq-cta__hl\">"),
+    ("Conte com planejamento tributário, gestão logística e\n        acompanhamento da operação de ponta a ponta.",
+     "Count on tax planning, logistics management and end-to-end\n        tracking of the operation."),
+    ("Fale com um especialista e tire suas dúvidas.", "Talk to a specialist and get your questions answered."),
+
+    # ── alt e aria-label ──
+    ("Frota de tratores em operação no campo ao pôr do sol",
+     "Fleet of tractors working in the field at sunset"),
+    ("Colheitadeira e trator em operação no campo",
+     "Combine harvester and tractor working in the field"),
+    ("Colheitadeira embarcada em prancha no porto",
+     "Combine harvester loaded onto a lowboy trailer at the port"),
+    ("Trator sendo transportado em terminal portuário",
+     "Tractor being transported at a port terminal"),
+    ("Caminhão-prancha transportando trator", "Lowboy truck carrying a tractor"),
+    ("Carreta com carga superdimensionada e escolta em rodovia",
+     "Truck with oversized cargo and escort on the highway"),
+    ("Máquina industrial em operação", "Industrial machine in operation"),
+    ("Máquinas agrícolas prontas para embarque", "Agricultural machinery ready for shipment"),
+    ("Selo de reconhecimento: 92% de parametrização em canal verde",
+     "Recognition seal: 92% cleared through the green channel"),
+    ("Contêiner WM Trading e pá carregadeira — We Make it better",
+     "WM Trading container and wheel loader — We Make it better"),
+    ("Reproduzir vídeo", "Play video"),
+    ("Fechar vídeo", "Close video"),
+    ("Vídeo institucional", "Corporate video"),
+]
+
+
+FORM_MAQUINAS_EN = '''<form class="mq-cta__form contact-form-js" data-form-type="segmentos">
+        <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true" style="display:none;">
+
+        <div class="mq-cta__row">
+          <label class="mq-cta__field-label" for="mq-nome">Full name *</label>
+          <input class="mq-cta__input" id="mq-nome" name="nome" type="text" required>
+        </div>
+
+        <div class="mq-cta__row mq-cta__row--2">
+          <div>
+            <label class="mq-cta__field-label" for="mq-email">E-mail *</label>
+            <input class="mq-cta__input" id="mq-email" name="email" type="email" required>
+          </div>
+          <div>
+            <label class="mq-cta__field-label" for="mq-tel">Phone (with country code) *</label>
+            <input class="mq-cta__input" id="mq-tel" name="telefone" type="tel" required
+                   pattern="[0-9\\s\\(\\)\\+\\-\\.]+" placeholder="+55 27 99999-0000">
+          </div>
+        </div>
+
+        <div class="mq-cta__row mq-cta__row--2">
+          <div>
+            <label class="mq-cta__field-label" for="mq-empresa">Company</label>
+            <input class="mq-cta__input" id="mq-empresa" name="empresa" type="text">
+          </div>
+          <div>
+            <label class="mq-cta__field-label" for="mq-segmento">Segment</label>
+            <select class="mq-cta__input" id="mq-segmento" name="segmento">%s
+            </select>
+          </div>
+        </div>
+
+        <div class="mq-cta__row">
+          <label class="mq-cta__field-label" for="mq-forma">How would you like to be contacted? *</label>
+          <select class="mq-cta__input" id="mq-forma" name="forma_resposta" required>
+            <option value="" disabled selected>Select</option>
+            <option value="WhatsApp">WhatsApp</option>
+            <option value="Telefone">Phone</option>
+            <option value="E-mail">E-mail</option>
+          </select>
+        </div>
+
+        <div class="mq-cta__row">
+          <label class="mq-cta__field-label" for="mq-mensagem">Message *</label>
+          <textarea class="mq-cta__input mq-cta__textarea" id="mq-mensagem" name="mensagem" rows="4" required></textarea>
+        </div>
+
+        <label class="mq-cta__check">
+          <input type="checkbox" name="aceite_privacidade" required value="sim">
+          <span data-wm-aceite>I have read and agree to the <a href="/en/privacy-policy/">Privacy Policy</a> and authorise WM Trading to process my data in order to respond to this request.</span>
+        </label>
+
+        <label class="mq-cta__check">
+          <input type="checkbox" name="aceite_marketing" value="sim">
+          <span data-wm-aceite-marketing>I would also like to receive content, materials and commercial communications from WM Trading (optional).</span>
+        </label>
+
+        <button type="submit" class="mq-cta__submit">SEND</button>
+      </form>'''
+
+
+def formulario_maquinas_en():
+    """Campos do formulario da /en/segments/machines/, na marcacao .mq-cta__.
+
+    Nao da para reaproveitar o formulario_en(): aquele devolve uma <section>
+    inteira no molde generico, e aqui o formulario vive dentro do layout proprio
+    do CTA. O que se reaproveita sao as TRES REGRAS dele, que existem por motivo:
+
+      - o campo Estado sai. Quem chega pelo ingles em geral nao e do Brasil, e um
+        obrigatorio impossivel de responder derruba a conversao;
+      - o telefone aceita formato internacional, nao a mascara (DDD) brasileira;
+      - o VALUE do segmento continua em PORTUGUES. E o que o Zap espera para
+        classificar o lead no Pipedrive; so o rotulo e traduzido.
+
+    O data-form-type continua "segmentos", igual ao da versao PT: os ramos em
+    ingles do Zap estao adormecidos desde 09/07, e um envio que nao casa com ramo
+    nenhum e descartado em silencio — o lead sumiria sem erro na tela.
+    """
+    opcoes = "".join(
+        '\n              <option value="%s"%s>%s</option>'
+        % (valor, " selected" if valor == "Máquinas" else "", rotulo)
+        for valor, rotulo in SEGMENTOS_EN)
+
+    return FORM_MAQUINAS_EN % opcoes
+
+
+def maquinas_em_ingles(pagina):
+    """Gera /en/segments/machines/ com o DESENHO da /segmentos/maquinas/.
+
+    Mesma razao da home e da /about/: a pagina de maquinas tem layout proprio de
+    9 secoes (mosaico no hero, sanfona de beneficios, faixa de resultados). Pelo
+    molde generico ela viraria outra pagina, sem nada disso.
+
+    Reaproveita o /css/maquinas.css e o /js/maquinas.js sem copia: as classes
+    .mq- sao as mesmas nos dois idiomas.
+
+    A SECAO DE BLOG SAI. A vitrine da versao PT lista posts de /blog/, e nao
+    existe blog em ingles — a arvore /en/ tem 27 paginas e nenhuma e post.
+    Mandar quem le em ingles para um artigo em portugues, sem aviso, e pior do
+    que nao ter a secao. A versao EN fica com 8 secoes.
+    """
+    origem = os.path.join(ROOT, "segmentos", "maquinas.html")
+    if not os.path.exists(origem):
+        print("  AVISO: segmentos/maquinas.html nao existe — /en/segments/machines/ nao foi gerada")
+        return None
+    html = open(origem, encoding="utf-8").read()
+
+    # 1) fora a vitrine de blog
+    ini = html.find('<section class="mq-blog"')
+    if ini == -1:
+        print("  AVISO: secao .mq-blog nao encontrada — a versao EN pode ter saido com posts em portugues")
+    else:
+        fim = html.index("</section>", ini) + len("</section>")
+        # o comentario que abre a secao tambem vai junto
+        abre = html.rfind("<!--", 0, ini)
+        html = html[:abre] + html[fim:]
+
+    # 2) formulario em ingles no lugar do brasileiro (Estado sai, tel internacional)
+    f_ini = html.find('<form class="mq-cta__form')
+    if f_ini == -1:
+        print("  AVISO: formulario nao encontrado em maquinas.html")
+    else:
+        f_fim = html.index("</form>", f_ini) + len("</form>")
+        html = html[:f_ini] + formulario_maquinas_en() + html[f_fim:]
+
+    # 3) o texto do corpo
+    faltando = []
+    # DA MAIS LONGA PARA A MAIS CURTA, sempre. "Maquinas agricolas" e prefixo de
+    # "Maquinas agricolas prontas para embarque": na ordem do arquivo a entrada
+    # curta traduzia o prefixo e a longa nunca mais casava. Ordenar por tamanho
+    # resolve isso sem depender de ninguem manter a lista na ordem certa.
+    for ptxt, entxt in sorted(TEXTOS_MAQUINAS_EN, key=lambda e: -len(e[0])):
+        if ptxt not in html:
+            faltando.append(ptxt[:60])
+            continue
+        html = html.replace(ptxt, entxt)
+    if faltando:
+        print("  AVISO: %d trecho(s) de TEXTOS_MAQUINAS_EN nao casaram (texto mudou na versao PT?):"
+              % len(faltando))
+        for t in faltando:
+            print("           %r" % t)
+
+    # 4) links do corpo que tem par em ingles
+    for pt_url, en_url in (("/solucoes-wm/", "/en/solutions-wm/"),
+                           ("/politica-de-privacidade/", "/en/privacy-policy/")):
+        html = html.replace('href="%s"' % pt_url, 'href="%s"' % en_url)
+
+    # 5) cabecalho: titulo, descricao, canonical, og, lang
+    titulo = "WM Trading — %s" % pagina["titulo"]
+    html = re.sub(r"<title>.*?</title>", "<title>%s</title>" % titulo, html, flags=re.S)
+    for prop, valor in (('name="description"', pagina["description"]),
+                        ('property="og:description"', pagina["description"]),
+                        ('property="og:title"', titulo)):
+        html = re.sub(r'(<meta\s+' + prop + r'\s+content=")[^"]*(")',
+                      lambda m, v=valor: m.group(1) + v + m.group(2), html)
+    for tag in (r'<link\s+rel="canonical"\s+href="', r'<meta\s+property="og:url"\s+content="'):
+        html = re.sub(r"(" + tag + r')[^"]*(")',
+                      lambda m: m.group(1) + SITE + pagina["en"] + m.group(2), html)
+    html = re.sub(r'<meta\s+property="og:locale"\s+content="[^"]*"',
+                  '<meta property="og:locale" content="en_US"', html, count=1)
+    html = re.sub(r'<html[^>]*\blang="[^"]*"', '<html lang="en"', html, count=1)
+
+    # mesmo motivo da home: caminho relativo copiado para /en/ resolve contra /en/
+    html = bp.make_paths_absolute(html)
+
+    saida = caminho_saida(pagina["en"])
+    os.makedirs(os.path.dirname(saida), exist_ok=True)
+    with open(saida, "w", encoding="utf-8", newline="\n") as f:
+        f.write(html)
+    return saida
+
+
 def quem_somos_em_ingles(pagina):
     """Gera /en/about/ com o DESENHO da /about/ em portugues e o texto em ingles.
 
@@ -707,6 +1027,14 @@ def main():
         # quem_somos_em_ingles().
         elif p["en"].rstrip("/") == "/en/about":
             if quem_somos_em_ingles(p) is None:
+                continue
+            corpo_copiado = True
+        # A /segmentos/maquinas/ e a TERCEIRA pagina de corpo proprio: 9 secoes
+        # escritas a mao, com o mesmo css/js dos dois idiomas. Ver
+        # maquinas_em_ingles() — e a irma da trava em SEGMENT_URL_OVERRIDES do
+        # build_pages, que impede o gerador de refazer a versao PT.
+        elif p["en"].rstrip("/") == "/en/segments/machines":
+            if maquinas_em_ingles(p) is None:
                 continue
             corpo_copiado = True
         else:
