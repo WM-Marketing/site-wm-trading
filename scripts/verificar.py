@@ -104,6 +104,142 @@ SCRIPTS_OBRIGATORIOS = [nome for nome, _ in SCRIPTS_DO_MOLDE]
 # Unico href="#" legitimo do site: acionado por JS, reabre o painel de cookies.
 LINK_VAZIO_OK = "data-wm-consent-prefs"
 
+# ══════════════════════════════════════════════════════════════════════════
+# FORMULARIOS — a regra, fixada em 27/08/2026
+# ══════════════════════════════════════════════════════════════════════════
+# Os campos que existem hoje e a mecanica de hoje sao PRE-REQUISITO:
+#
+#   1) campo novo pode ser criado, sempre;
+#   2) campo existente pode ser OCULTADO — menos os dois de aceite;
+#   3) mas a informacao TEM que continuar sendo enviada, ainda que oculta.
+#
+# Por que ocultar e permitido e desaparecer nao e: api/contato.js e LISTA FIXA
+# de campos — ela enumera um por um em vez de repassar ...data. Campo que para
+# de ser enviado nao volta a aparecer no Zapier sozinho: ele chega vazio para
+# sempre, e os 5 Zaps que o mapeiam passam a receber string vazia sem ninguem
+# perceber. Nao ha erro, nao ha alerta — so um campo do Pipedrive que seca.
+#
+# Por que os DOIS aceites nao podem ser ocultados: consentimento oculto nao e
+# consentimento (LGPD art. 8). O checkbox tem que estar visivel e o ato tem que
+# ser do visitante. Por isso aqui eles sao conferidos como VISIVEIS, e nao
+# apenas presentes — e o aceite_privacidade tambem como required, porque sem
+# 'sim' a funcao devolve 400 e o lead morre.
+
+# Piso de informacao por tipo de formulario. Medido do site em 27/08/2026:
+# e o que os formularios coletam HOJE, e por decisao e o minimo de amanha.
+PISO_POR_TIPO = {
+    "contato":     {"nome", "email", "telefone", "empresa", "estado",
+                    "segmento", "forma_resposta", "mensagem"},
+    "segmentos":   {"nome", "email", "telefone", "empresa", "estado",
+                    "segmento", "forma_resposta", "mensagem"},
+    "ebook":       {"nome", "email", "empresa"},
+    "whatsapp":    {"nome", "email", "telefone"},
+    "carne-suina": {"nome", "empresa", "cargo", "email", "telefone",
+                    "volume", "mensagem"},
+}
+
+# Informacao que o HANDLER injeta no payload em vez de coletar num campo do
+# formulario. Conta como enviada — e a regra 3 levada ao extremo: nao ha campo
+# nenhum, e a informacao chega. Ex.: o handler inline da carne-suina faz
+# payload.segmento = 'Carne suina', porque a LP e de um segmento so.
+# Campo do piso que uma ARVORE de idioma legitimamente NAO coleta.
+#
+# Medido em 28/08/2026: por um <input type="hidden" name="estado" value=""> ou
+# por nao ter o campo nenhum, o payload que chega no Zapier e IDENTICO — 42
+# campos, estado:'' nos dois casos. O api/contato.js e lista fixa e ja preenche
+# vazio o que nao vem. Ou seja, exigir o campo oculto na arvore /en/ era no-op
+# puro: mais markup para nenhum efeito.
+#
+# Entao a arvore /en/ fica sem o campo, como o build_en.py escreve, e o piso
+# reconhece a isencao. NAO confundir com a regra 3 (ocultar pode, desaparecer
+# nao): ela vale para campo que o site COLETA de alguem. Visitante de fora nao
+# tem UF brasileira para informar — nao ha dado sendo perdido aqui.
+PISO_ISENTO_POR_ARVORE = {
+    "en": {"estado"},
+}
+
+
+def _isencao_da_arvore(pagina):
+    """Campos do piso dispensados pela arvore em que a pagina vive."""
+    primeira = pagina.replace("\\", "/").split("/")[0]
+    return PISO_ISENTO_POR_ARVORE.get(primeira, set())
+
+
+INJETADO_PELO_HANDLER = {
+    "carne-suina": {"segmento"},
+}
+
+# Formularios com handler proprio, fora do js/contact-form.js. Sao legitimos e
+# existem por motivo (a carne-suina preserva a tela de sucesso da LP), mas
+# precisam ser DECLARADOS aqui — senao um <form> novo sem a classe
+# contact-form-js passaria como se tivesse handler, e nao envia nada.
+# Chave: (arquivo, id do form)  ->  tipo do formulario.
+HANDLERS_PROPRIOS = {
+    (os.path.join("importacao-carne-suina", "index.html"), "leadForm"): "carne-suina",
+}
+
+# O formulario de WhatsApp e montado em JS, nao existe em HTML nenhum.
+FORM_EM_JS = {"whatsapp": os.path.join("js", "whatsapp-popup.js")}
+
+# ══════════════════════════════════════════════════════════════════════════
+# VERSAO EM INGLES E IDIOMA — a regra, fixada em 27/08/2026
+# ══════════════════════════════════════════════════════════════════════════
+# Decisao do Giovanni. Vale para pagina E para post de blog:
+#
+#   1) Quem for criar uma pagina PERGUNTA se ela vai ter versao em ingles.
+#      A pergunta e obrigatoria — nao se assume nem que sim nem que nao.
+#   2) Se sim, a versao em ingles e criada na mesma leva. A traducao e feita
+#      pela IA da propria maquina de quem esta trabalhando — nao por servico
+#      externo, e nao depois "quando der".
+#   3) Depois de pronta, a PESSOA valida a traducao. Enquanto nao validou, a
+#      traducao esta marcada como pendente e o guarda REPROVA a publicacao.
+#   4) Post de blog carrega uma TAG VISIVEL do idioma da pagina.
+#
+# O item 1 e de processo: nenhum script sabe se a pergunta foi feita. O que da
+# para cobrar aqui e o resultado — e e o que esta cobrado abaixo.
+#
+# Por que o item 4 existe (medido em 27/08/2026): ha 6 posts em ingles em
+# /blog/, na MESMA listagem dos 207 em portugues, ordenados so por data. O card
+# mostrava categoria e data e nada mais — o leitor brasileiro clicava e caia num
+# texto em ingles sem aviso nenhum.
+
+# A marca de "traducao ainda nao validada por uma pessoa".
+# Em pagina: a chave no content/en/paginas.json. Em post: no frontmatter do .mdx.
+# Ausente = traducao antiga, de antes desta regra (nao reprova, so e contada).
+# Explicitamente false = criada sob esta regra e AINDA NAO VALIDADA -> reprova.
+# A decisao do item 1 da regra, REGISTRADA na fonte.
+#
+# "Perguntou se vai ter versao em ingles?" nenhum script sabe. Mas a RESPOSTA da
+# para exigir: toda fonte NOVA em content/ declara versao_en: true|false. Assim
+# a pergunta deixa de ser honra e passa a ser um campo que falta.
+#
+# Quem e "nova": o git decide (ver _fontes_novas). Arquivo ainda nao commitado,
+# ou acrescentado depois de DATA_DA_REGRA. As 295 fontes que ja existiam ficam
+# isentas — nao ha como afirmar retroativamente que alguem foi perguntado.
+CHAVE_VERSAO_EN = "versao_en"
+DATA_DA_REGRA = "2026-08-27"
+
+# Pastas de content/ que produzem pagina publica. content/en/ fica de fora: e o
+# LADO ingles, nao uma pagina que precisa decidir se tera versao em ingles.
+PASTAS_DE_PAGINA = ("pages", "segments", "services", "blog", "ebooks", "aircraft")
+
+CHAVE_REVISADA = "traducao_revisada"
+
+# Idioma do site. Post em outro idioma precisa da tag visivel.
+IDIOMA_PADRAO = "pt-BR"
+CLASSE_TAG_POST = "post-meta__idioma"
+# Uma listagem por idioma, desde 28/08 (gerar_listagens_do_blog no gerador).
+# A EN sai como en/blog.html, e nao en/blog/index.html: e a convencao da arvore
+# /en/ e o caminho que o build_en.py deriva de "/en/blog/".
+LISTAGENS_POR_IDIOMA = {
+    "pt-BR": os.path.join("blog", "index.html"),
+    "en": os.path.join("en", "blog.html"),
+}
+
+ACEITE_OBRIGATORIO = "aceite_privacidade"
+ACEITE_OPCIONAL = "aceite_marketing"
+
+
 # Amostra para o smoke test em producao: uma URL por classe de regra.
 # A origem tem que ser testada NA FORMA QUE O WORDPRESS PUBLICAVA — com barra no fim.
 # E a forma que o Google tem indexada, e com trailingSlash:true e a unica que casa com
@@ -778,6 +914,481 @@ def checar_robots(rel):
 
 
 # --------------------------------------------------------------------------
+# J. Formularios
+# --------------------------------------------------------------------------
+FORM_RE = re.compile(r"<form\b.*?</form>", re.S | re.I)
+CAMPO_RE = re.compile(r'name="([^"]+)"')
+
+
+def _tag_do_campo(form_html, nome):
+    """A tag <input>/<select>/<textarea> daquele name, ou None."""
+    m = re.search(
+        r'<(?:input|select|textarea)\b[^>]*\bname="%s"[^>]*>' % re.escape(nome),
+        form_html, re.I)
+    return m.group(0) if m else None
+
+
+def _rotulo_que_envolve(form_html, nome):
+    """O <label> que contem o campo.
+
+    Um aceite escondido pelo label conta como escondido, mesmo que o <input>
+    pareca normal — e o jeito mais facil de esconder um checkbox sem parecer.
+    """
+    for m in re.finditer(r"<label\b[^>]*>.*?</label>", form_html, re.S | re.I):
+        if ('name="%s"' % nome) in m.group(0):
+            return m.group(0)
+    return None
+
+
+OCULTO_RE = re.compile(
+    r'type="hidden"'
+    r'|display\s*:\s*none'
+    r'|visibility\s*:\s*hidden'
+    r'|class="[^"]*\bhidden\b',
+    re.I)
+
+
+def _esta_oculto(form_html, nome):
+    """True quando o campo — ou o label que o envolve — esta escondido.
+
+    Confere a MARCACAO, nao o CSS calculado: uma classe de projeto que esconda
+    o campo por arquivo .css passa por aqui. E o limite honesto de um
+    verificador estatico, e esta escrito de proposito para ninguem confundir
+    "passou no verificador" com "esta visivel no navegador".
+    """
+    tag = _tag_do_campo(form_html, nome)
+    if tag and OCULTO_RE.search(tag):
+        return True
+    rotulo = _rotulo_que_envolve(form_html, nome)
+    if rotulo:
+        abertura = rotulo[:rotulo.find(">") + 1]
+        if OCULTO_RE.search(abertura):
+            return True
+    return False
+
+
+def _tipo_do_form(pagina, form_html):
+    """(tipo, tem_handler) — de onde sai o tipo, e se alguem escuta o submit."""
+    m = re.search(r'data-form-type="([^"]*)"', form_html)
+    if m:
+        return m.group(1), "contact-form-js" in form_html
+    m_id = re.search(r'\bid="([^"]+)"', form_html)
+    chave = (pagina, m_id.group(1) if m_id else "")
+    if chave in HANDLERS_PROPRIOS:
+        return HANDLERS_PROPRIOS[chave], True
+    return None, "contact-form-js" in form_html
+
+
+def checar_formularios(rel):
+    titulo("J. Formularios — piso de informacao e mecanica de envio")
+
+    # Agrupa por problema: 28 paginas com a mesma falta viram uma linha, senao
+    # o relatorio vira uma parede e ninguem le.
+    grupos = {}
+
+    def anotar(chave, pagina):
+        grupos.setdefault(chave, []).append(pagina)
+
+    total = 0
+    for pagina in paginas_html():
+        html = sem_comentarios(ler(pagina))
+        for form_html in FORM_RE.findall(html):
+            total += 1
+            tipo, tem_handler = _tipo_do_form(pagina, form_html)
+
+            if tipo is None:
+                anotar("form sem data-form-type e sem handler declarado em "
+                       "HANDLERS_PROPRIOS — nao envia para /api/contato", pagina)
+                continue
+            if tipo not in PISO_POR_TIPO:
+                env = tipo.replace("-", "_").upper()
+                anotar("data-form-type=%r desconhecido — sem ZAPIER_WEBHOOK_%s "
+                       "a funcao devolve 503" % (tipo, env), pagina)
+                continue
+            if not tem_handler:
+                anotar("[%s] sem a classe contact-form-js — o handler ignora o "
+                       "form (contact-form.js:55) e o submit recarrega a pagina"
+                       % tipo, pagina)
+                continue
+
+            campos = set(CAMPO_RE.findall(form_html))
+
+            # 1) honeypot
+            if "_gotcha" not in campos:
+                anotar("[%s] sem o honeypot _gotcha — perde a barreira anti-spam "
+                       "do cliente e do servidor" % tipo, pagina)
+
+            # 2) os dois aceites, e VISIVEIS
+            if ACEITE_OBRIGATORIO not in campos:
+                anotar("[%s] sem %s — a funcao devolve 400 e NENHUM lead entra"
+                       % (tipo, ACEITE_OBRIGATORIO), pagina)
+            else:
+                tag = _tag_do_campo(form_html, ACEITE_OBRIGATORIO) or ""
+                if "required" not in tag.lower():
+                    anotar("[%s] %s sem required — deixa enviar e a funcao "
+                           "recusa com 400" % (tipo, ACEITE_OBRIGATORIO), pagina)
+                if 'value="sim"' not in tag:
+                    anotar("[%s] %s sem value=\"sim\" — a funcao compara com "
+                           "'sim' e recusa qualquer outro valor"
+                           % (tipo, ACEITE_OBRIGATORIO), pagina)
+                if _esta_oculto(form_html, ACEITE_OBRIGATORIO):
+                    anotar("[%s] %s OCULTO — consentimento oculto nao e "
+                           "consentimento (LGPD art. 8)"
+                           % (tipo, ACEITE_OBRIGATORIO), pagina)
+
+            if ACEITE_OPCIONAL not in campos:
+                anotar("[%s] sem %s" % (tipo, ACEITE_OPCIONAL), pagina)
+            else:
+                tag = _tag_do_campo(form_html, ACEITE_OPCIONAL) or ""
+                if "required" in tag.lower():
+                    anotar("[%s] %s com required — marketing e base legal "
+                           "separada e nao pode ser condicao de envio"
+                           % (tipo, ACEITE_OPCIONAL), pagina)
+                if _esta_oculto(form_html, ACEITE_OPCIONAL):
+                    anotar("[%s] %s OCULTO — consentimento oculto nao e "
+                           "consentimento (LGPD art. 8)"
+                           % (tipo, ACEITE_OPCIONAL), pagina)
+
+            # 3) o texto do aceite, que vai para o CRM como prova do QUE
+            # O atributo EXATO. Um "data-wm-aceite" solto casa tambem com
+            # "data-wm-aceite-marketing", e um formulario que perdesse o texto
+            # do aceite de privacidade mas mantivesse o de marketing passaria
+            # batido — foi o unico caso que escapou no teste negativo.
+            if not re.search(r"data-wm-aceite(?=[\s>=/])", form_html):
+                anotar("[%s] sem [data-wm-aceite] — o texto aceito nao e "
+                       "capturado e o registro de consentimento fica sem o QUE"
+                       % tipo, pagina)
+
+            # 4) o piso de informacao — regra 3: oculto pode, ausente nao
+            injetado = INJETADO_PELO_HANDLER.get(tipo, set())
+            isento = _isencao_da_arvore(pagina)
+            faltando = sorted(PISO_POR_TIPO[tipo] - campos - injetado - isento)
+            if faltando:
+                anotar("[%s] abaixo do piso, nao envia: %s — pode ficar oculto, "
+                       "mas tem que ser enviado" % (tipo, ", ".join(faltando)),
+                       pagina)
+
+    # ── o formulario de WhatsApp e montado em JS: nao existe em HTML nenhum ──
+    for tipo, arquivo in sorted(FORM_EM_JS.items()):
+        try:
+            js = ler(arquivo)
+        except FileNotFoundError:
+            rel.erro("%s nao existe — o formulario de %s desapareceu"
+                     % (arquivo, tipo))
+            continue
+        total += 1
+        campos = set(CAMPO_RE.findall(js))
+        faltando = sorted(PISO_POR_TIPO[tipo] - campos)
+        if faltando:
+            rel.erro("%s [%s] abaixo do piso: %s"
+                     % (arquivo, tipo, ", ".join(faltando)))
+        if "_gotcha" not in campos:
+            rel.erro("%s [%s] sem o honeypot _gotcha" % (arquivo, tipo))
+        for aceite in (ACEITE_OBRIGATORIO, ACEITE_OPCIONAL):
+            if aceite not in campos:
+                rel.erro("%s [%s] sem %s" % (arquivo, tipo, aceite))
+
+    for chave, paginas in sorted(grupos.items()):
+        exemplos = ", ".join(paginas[:3])
+        resto = " (+%d)" % (len(paginas) - 3) if len(paginas) > 3 else ""
+        rel.erro("%d form(s): %s" % (len(paginas), chave))
+        rel.erro("    em: %s%s" % (exemplos, resto))
+
+    if not grupos:
+        rel.ok("%d formulario(s): piso de informacao completo, honeypot, aceites "
+               "visiveis e handler declarado" % total)
+
+
+# --------------------------------------------------------------------------
+# K. Idioma: versao em ingles e tag no blog
+# --------------------------------------------------------------------------
+def _posts_e_idiomas():
+    """[(slug, lang, revisada, arquivo)] de cada post em content/blog.
+
+    revisada: True, False, ou None quando a chave nao existe (post antigo).
+    """
+    saida = []
+    for caminho in sorted(glob.glob(os.path.join(ROOT_DIR, "content", "blog", "*.mdx"))):
+        with open(caminho, encoding="utf-8", errors="replace") as fh:
+            texto = fh.read()
+        m_s = re.search(r'^slug:\s*"(.*?)"\s*$', texto, re.M)
+        if not m_s:
+            continue
+        m_l = re.search(r'^lang:\s*"?([\w-]+)"?\s*$', texto, re.M)
+        lang = m_l.group(1) if m_l else None
+        if not lang:
+            m_o = re.search(r'^originalUrl:\s*"(.*?)"\s*$', texto, re.M)
+            lang = "en" if (m_o and "/en/" in m_o.group(1)) else IDIOMA_PADRAO
+        m_r = re.search(r"^%s:\s*(true|false)\s*$" % CHAVE_REVISADA, texto, re.M)
+        revisada = None if not m_r else (m_r.group(1) == "true")
+        saida.append((m_s.group(1), lang, revisada, os.path.basename(caminho)))
+    return saida
+
+
+def _esta_na_listagem(listagem_html, slug):
+    """True se a listagem tem um card apontando para aquele post.
+
+    Casa o href com a fronteira do slug (o ponto do .html ou a barra final),
+    senao 'aco-sucesso' seria encontrado dentro de 'aco-sucesso-parte-2'.
+    """
+    return bool(re.search(
+        r'href="/blog/%s(?:\.html|/)"' % re.escape(slug), listagem_html))
+
+
+def _fontes_novas():
+    """Fontes de content/ que sao NOVAS: ainda nao commitadas, ou acrescentadas
+    depois de DATA_DA_REGRA.
+
+    Duas chamadas de git, nao uma por arquivo — sao ~295 fontes.
+    Se o git nao responder (copia sem .git), devolve None e a checagem e
+    ANUNCIADA como nao feita, em vez de passar calada.
+    """
+    nao_commitadas = git("ls-files", "--others", "--exclude-standard", "content")
+    desde_a_regra = git("log", "--diff-filter=A", "--since", DATA_DA_REGRA,
+                        "--name-only", "--format=", "--", "content")
+    if nao_commitadas is None and desde_a_regra is None:
+        return None
+    novas = set()
+    for bloco in (nao_commitadas, desde_a_regra):
+        for linha in (bloco or "").splitlines():
+            linha = linha.strip().replace("\\", "/")
+            if linha:
+                novas.add(linha)
+    return novas
+
+
+def _e_fonte_de_pagina(rel_git):
+    partes = rel_git.split("/")
+    if len(partes) < 2 or partes[0] != "content":
+        return False
+    return partes[1] in PASTAS_DE_PAGINA and rel_git.endswith((".json", ".mdx"))
+
+
+def _declaracao_versao_en(rel_git):
+    """True/False conforme declarado; None quando nao declara; "ilegivel" quando
+    o JSON nao abre.
+
+    A diferenca importa: dizer "sem declarar versao_en" para um arquivo com erro
+    de sintaxe manda a pessoa procurar um campo faltando quando o problema e uma
+    virgula. Foi o que o testar-idioma.py pegou em 27/08 — o fixture do teste
+    gerava JSON invalido e a mensagem culpava o campo.
+    """
+    try:
+        texto = ler(rel_git.replace("/", os.sep))
+    except (FileNotFoundError, OSError):
+        return None
+    if rel_git.endswith(".json"):
+        try:
+            dados = json.loads(texto)
+        except ValueError:
+            return "ilegivel"
+        if isinstance(dados, dict) and isinstance(dados.get(CHAVE_VERSAO_EN), bool):
+            return dados[CHAVE_VERSAO_EN]
+        return None
+    m = re.search(r"^%s:\s*(true|false)\s*$" % CHAVE_VERSAO_EN, texto, re.M)
+    return None if not m else (m.group(1) == "true")
+
+
+def _marca_revisada(rel_git):
+    """A marca traducao_revisada da fonte: True, False, ou None se ausente."""
+    try:
+        texto = ler(rel_git.replace("/", os.sep))
+    except (FileNotFoundError, OSError):
+        return None
+    if rel_git.endswith(".json"):
+        try:
+            dados = json.loads(texto)
+        except ValueError:
+            return None
+        v = dados.get(CHAVE_REVISADA) if isinstance(dados, dict) else None
+        return v if isinstance(v, bool) else None
+    m = re.search(r"^%s:\s*(true|false)\s*$" % CHAVE_REVISADA, texto, re.M)
+    return None if not m else (m.group(1) == "true")
+
+
+def checar_idioma(rel):
+    titulo("K. Idioma — versao em ingles e tag no blog")
+
+    # ── 1. tag de idioma nos posts que nao estao em portugues ──────────────
+    posts = _posts_e_idiomas()
+    fora_do_padrao = [(s, l, f) for s, l, _, f in posts if l != IDIOMA_PADRAO]
+
+    # As listagens, uma por idioma. Lidas uma vez.
+    listagens = {}
+    for lang, rel_lst in LISTAGENS_POR_IDIOMA.items():
+        try:
+            listagens[lang] = ler(rel_lst)
+        except FileNotFoundError:
+            rel.erro("%s nao existe — rode 'python scripts/build_pages.py'" % rel_lst)
+
+    sem_tag_post, sem_lang_html = [], []
+    for slug, lang, _arq in fora_do_padrao:
+        rel_html = os.path.join("blog", slug + ".html")
+        try:
+            html = ler(rel_html)
+        except FileNotFoundError:
+            rel.erro("%s declara lang=%s mas blog/%s.html nao existe"
+                     % (slug, lang, slug))
+            continue
+        if CLASSE_TAG_POST not in html:
+            sem_tag_post.append(slug)
+        if ('<html lang="%s"' % lang) not in html:
+            sem_lang_html.append(slug)
+
+    if sem_tag_post:
+        rel.erro("%d post(s) em outro idioma SEM a tag visivel no cabecalho: %s"
+                 % (len(sem_tag_post), ", ".join(sem_tag_post[:5])))
+        rel.erro("    rode 'python scripts/build_pages.py' — a tag sai de "
+                 "tag_de_idioma() no gerador")
+    if sem_lang_html:
+        rel.erro("%d post(s) com <html lang> diferente do frontmatter: %s"
+                 % (len(sem_lang_html), ", ".join(sem_lang_html[:5])))
+    if not (sem_tag_post or sem_lang_html):
+        if fora_do_padrao:
+            idiomas = sorted(set(l for _, l, _ in fora_do_padrao))
+            rel.ok("%d post(s) fora do portugues (%s) com tag visivel no "
+                   "cabecalho e <html lang> correto"
+                   % (len(fora_do_padrao), ", ".join(idiomas)))
+        else:
+            rel.ok("todos os posts estao em portugues — nenhuma tag necessaria")
+
+    # ── 1b. cada post na listagem do SEU idioma, e em nenhuma outra ────────
+    #
+    # Isto substituiu a checagem da tag no card. Com uma listagem por idioma a
+    # tag no card nao informa nada (em /blog/ nunca apareceria; em /en/blog/
+    # apareceria em todos), mas a SEPARACAO em si passou a ser a coisa que pode
+    # regredir — e ja esteve errada: ate 27/08 a listagem unica trazia os 6
+    # posts em ingles no meio dos 207 em portugues.
+    faltando_na_sua, vazando_na_outra, sem_listagem = [], [], set()
+    for slug, lang, _r, _arq in posts:
+        if lang not in listagens:
+            sem_listagem.add(lang)
+            continue
+        if not _esta_na_listagem(listagens[lang], slug):
+            faltando_na_sua.append("%s (%s)" % (slug, lang))
+        for outro, html_outro in listagens.items():
+            if outro != lang and _esta_na_listagem(html_outro, slug):
+                vazando_na_outra.append("%s (%s) aparece na listagem %s"
+                                        % (slug, lang, outro))
+
+    if faltando_na_sua:
+        rel.erro("%d post(s) fora da listagem do proprio idioma: %s"
+                 % (len(faltando_na_sua), ", ".join(faltando_na_sua[:5])))
+    if vazando_na_outra:
+        rel.erro("%d post(s) na listagem do idioma ERRADO: %s"
+                 % (len(vazando_na_outra), ", ".join(vazando_na_outra[:5])))
+        rel.erro("    era o defeito de ate 27/08 — leitor de um idioma "
+                 "encontrando artigo do outro no meio da grade")
+    if sem_listagem:
+        rel.aviso("idioma(s) sem listagem propria: %s — acrescente em "
+                  "LISTAGENS_POR_IDIOMA" % ", ".join(sorted(sem_listagem)))
+    if not (faltando_na_sua or vazando_na_outra):
+        resumo = ", ".join("%s=%d" % (l, sum(1 for _s, ll, _r, _a in posts if ll == l))
+                           for l in sorted(listagens))
+        rel.ok("%d post(s) cada um so na listagem do seu idioma (%s)"
+               % (len(posts), resumo))
+
+    # ── 2. traducao aguardando validacao de uma pessoa ─────────────────────
+    pendentes = ["blog/%s" % s for s, _, r, _ in posts if r is False]
+    antigos_sem_marca = 0
+
+    fonte = os.path.join(ROOT_DIR, "content", "en", "paginas.json")
+    if os.path.exists(fonte):
+        with open(fonte, encoding="utf-8") as f:
+            try:
+                paginas = json.load(f)
+            except ValueError as e:
+                rel.erro("content/en/paginas.json ilegivel: %s" % e)
+                paginas = []
+        for entrada in paginas:
+            if CHAVE_REVISADA not in entrada:
+                antigos_sem_marca += 1
+            elif entrada.get(CHAVE_REVISADA) is False:
+                pendentes.append(entrada.get("en", "?"))
+
+    if pendentes:
+        rel.erro("%d traducao(oes) AGUARDANDO VALIDACAO de uma pessoa "
+                 "(%s: false):" % (len(pendentes), CHAVE_REVISADA))
+        for alvo in pendentes[:10]:
+            rel.erro("    %s" % alvo)
+        if len(pendentes) > 10:
+            rel.erro("    ...e mais %d" % (len(pendentes) - 10))
+        rel.erro("    a pessoa confere a traducao e troca para "
+                 "%s: true. Nao publique traducao que ninguem leu." % CHAVE_REVISADA)
+    else:
+        rel.ok("nenhuma traducao pendente de validacao")
+
+    if antigos_sem_marca:
+        rel.aviso("%d pagina(s) /en/ sem a marca %s — traducao anterior a esta "
+                  "regra (27/08/2026). Nao reprova; ao revisar uma delas, "
+                  "acrescente a marca." % (antigos_sem_marca, CHAVE_REVISADA))
+
+    # ── 3. a decisao "vai ter versao em ingles?" registrada na fonte ────────
+    novas = _fontes_novas()
+    if novas is None:
+        rel.aviso("git nao respondeu — NAO foi possivel conferir se as fontes "
+                  "novas declaram %s. A checagem foi PULADA, nao aprovada."
+                  % CHAVE_VERSAO_EN)
+        return
+
+    fontes = sorted(f for f in novas if _e_fonte_de_pagina(f))
+    if not fontes:
+        rel.ok("nenhuma fonte de pagina nova desde %s — nada a declarar"
+               % DATA_DA_REGRA)
+        return
+
+    sem_declaracao, com_en_sem_marca, ilegiveis = [], [], []
+    com_en = 0
+    for fonte in fontes:
+        decisao = _declaracao_versao_en(fonte)
+        if decisao == "ilegivel":
+            ilegiveis.append(fonte)
+            continue
+        if decisao is None:
+            sem_declaracao.append(fonte)
+            continue
+        if decisao:
+            com_en += 1
+            # Declarou que TEM versao em ingles: a marca de validacao humana
+            # passa a ser obrigatoria. Enquanto ela for false, o bloco 2 acima
+            # ja reprova; aqui o que se cobra e ela EXISTIR.
+            if _marca_revisada(fonte) is None:
+                com_en_sem_marca.append(fonte)
+
+    if ilegiveis:
+        rel.erro("%d fonte(s) nova(s) com JSON ILEGIVEL (nao e campo faltando, "
+                 "e erro de sintaxe — o build_pages.py tambem vai falhar):"
+                 % len(ilegiveis))
+        for f in ilegiveis:
+            rel.erro("    %s" % f)
+
+    if sem_declaracao:
+        rel.erro("%d fonte(s) nova(s) sem declarar %s:"
+                 % (len(sem_declaracao), CHAVE_VERSAO_EN))
+        for f in sem_declaracao[:10]:
+            rel.erro("    %s" % f)
+        if len(sem_declaracao) > 10:
+            rel.erro("    ...e mais %d" % (len(sem_declaracao) - 10))
+        rel.erro("    PERGUNTE a quem pediu a pagina se ela vai ter versao em "
+                 "ingles e registre a resposta na fonte:")
+        rel.erro('      .json  ->  "%s": true   (ou false)' % CHAVE_VERSAO_EN)
+        rel.erro("      .mdx   ->  %s: true     (ou false), no frontmatter"
+                 % CHAVE_VERSAO_EN)
+
+    if com_en_sem_marca:
+        rel.erro("%d fonte(s) com %s: true e SEM a marca %s:"
+                 % (len(com_en_sem_marca), CHAVE_VERSAO_EN, CHAVE_REVISADA))
+        for f in com_en_sem_marca:
+            rel.erro("    %s" % f)
+        rel.erro("    quem cria a traducao escreve %s: false; a PESSOA confere "
+                 "e troca para true." % CHAVE_REVISADA)
+
+    if not (sem_declaracao or com_en_sem_marca or ilegiveis):
+        rel.ok("%d fonte(s) de pagina nova(s) declaram %s (%d com versao em "
+               "ingles)" % (len(fontes), CHAVE_VERSAO_EN, com_en))
+
+
+# --------------------------------------------------------------------------
 # G/H. Producao
 # --------------------------------------------------------------------------
 def _buscar(url, seguir=True):
@@ -866,6 +1477,8 @@ def main():
     checar_caminhos_relativos(rel)
     checar_slug_dos_posts(rel)
     checar_ingles(rel)
+    checar_formularios(rel)
+    checar_idioma(rel)
     if args.producao:
         checar_producao(rel, args.url.rstrip("/"))
 
