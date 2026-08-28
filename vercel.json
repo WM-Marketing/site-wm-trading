@@ -6,7 +6,10 @@
     {
       "source": "/(.*)",
       "has": [
-        { "type": "host", "value": "site-wm-trading.vercel.app" }
+        {
+          "type": "host",
+          "value": "site-wm-trading.vercel.app"
+        }
       ],
       "headers": [
         {
@@ -73,11 +76,6 @@
     {
       "source": "/en/main-import-taxes/",
       "destination": "/materiais/",
-      "permanent": true
-    },
-    {
-      "source": "/en/blog/",
-      "destination": "/blog/",
       "permanent": true
     },
     {
