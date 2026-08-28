@@ -228,11 +228,24 @@
    Os 62px não são a altura intrínseca dele — são a altura que deixa o "WM" do
    sinal com a mesma altura óptica do "WM" dos vizinhos, que é o que casa a
    fileira. Trocar o arquivo de novo? Recalcular esse número, não copiar. */
-.qs-brands__list img {
+.qs-brands__list img,
+.qs-brands__list > .qs-brands__link {
   flex: 0 0 auto;
   width: auto;
   max-width: 100%;
 }
+
+/* Dois dos quatro logos tem site proprio (27/08/2026) e viraram link. O <a>
+   passa a ser o item flex no lugar do <img>, entao herda o flex: 0 0 auto acima
+   e vira inline-flex — sem isso ele viraria bloco de largura total e a fileira
+   de quatro desmontava. */
+.qs-brands__link {
+  display: inline-flex;
+  align-items: center;
+  line-height: 0;
+  transition: opacity var(--transition, .25s ease);
+}
+.qs-brands__link:hover { opacity: 0.7; }
 .qs-brands__logo--trading   { height: calc(var(--qs-brands-escala) * 46px); }
 .qs-brands__logo--hubi      { height: calc(var(--qs-brands-escala) * 36px); }
 .qs-brands__logo--energy    { height: calc(var(--qs-brands-escala) * 46px); }
