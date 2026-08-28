@@ -157,21 +157,36 @@ def corpo_html(pagina):
 # Segmentos como aparecem no formulario PT — o Zap espera exatamente estes
 # valores, entao o rotulo em ingles e so visual: o value enviado continua o
 # mesmo. Trocar o value quebraria a classificacao do lead no Pipedrive.
+# Segmentos do formulario em ingles: (value, rotulo).
+#
+# O VALUE E O QUE O ZAPIER LE — ele casa o lead por string exata numa lookup
+# table e manda o que nao casa para o default. Por isso o value e o texto em
+# PORTUGUES da tabela, e so o rotulo e traduzido.
+#
+# Ate 27/08/2026 esta lista trazia a taxonomia das paginas de segmento do site
+# (Aco, Varejo, Vinho, Drone, Rebocadores...), que nao existe na tabela do
+# Zapier: 11 dos 14 valores nao casavam e o lead chegava sem segmento. Agora sao
+# os mesmos 16 do SEGMENTS_LIST do build_pages, na mesma ordem.
+#
+# "Parte e Peças Geral" sem o S nao e erro de digitacao: e como esta cadastrado
+# no Zapier. Ver SEGMENTO_VALUE_ZAPIER no build_pages.py.
 SEGMENTOS_EN = [
     ("Aeronaves", "Aircraft"),
-    ("Equipamentos Fotovoltaicos", "Photovoltaic Equipment"),
+    ("Energia Renovável", "Renewable Energy"),
+    ("Alimentos e Bebidas", "Food and Beverages"),
+    ("Vestuário/Têxtil", "Apparel/Textiles"),
+    ("Informática e Eletrônicos", "IT and Electronics"),
+    ("Metais & Derivados", "Metals & Derivatives"),
+    ("Partes e Peças Automotivas", "Automotive Parts and Components"),
     ("Produtos Químicos", "Chemicals"),
-    ("Cosméticos", "Cosmetics"),
-    ("Informática e Telecomunicações", "IT and Telecommunications"),
-    ("Partes e Peças Geral", "Auto Parts and Components"),
-    ("Aço", "Steel"),
-    ("Máquinas", "Machines"),
-    ("Varejo", "Retail"),
-    ("Vinho", "Wine"),
-    ("Drone", "Drone"),
-    ("Rebocadores", "Aircraft Tugs"),
-    ("Combustível e Derivados de Petróleo", "Fuels and Petroleum Products"),
-    ("Outros", "Other"),
+    ("Parte e Peças Geral", "General Parts and Components"),
+    ("Cosméticos e Healthcare", "Cosmetics and Healthcare"),
+    ("Insumos e Matéria Prima", "Inputs and Raw Material"),
+    ("Medicamentos", "Pharmaceuticals"),
+    ("Combustível", "Fuel"),
+    ("Máquinas e Equipamentos", "Machines and Equipment"),
+    ("Setor Automotivo", "Automotive Sector"),
+    ("Outros", "Others"),
 ]
 
 
@@ -701,7 +716,7 @@ def formulario_maquinas_en():
     """
     opcoes = "".join(
         '\n              <option value="%s"%s>%s</option>'
-        % (valor, " selected" if valor == "Máquinas" else "", rotulo)
+        % (valor, " selected" if valor == "Máquinas e Equipamentos" else "", rotulo)
         for valor, rotulo in SEGMENTOS_EN)
 
     return FORM_MAQUINAS_EN % opcoes

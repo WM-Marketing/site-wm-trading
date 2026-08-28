@@ -108,6 +108,24 @@ BRANCHES = [
 ]
 
 # Segment categories for contact form select
+# O Zapier casa o lead por STRING EXATA numa lookup table; o que nao casa cai no
+# default e o lead chega sem segmento. Onde a linha cadastrada la diverge do
+# portugues correto, o VALUE segue a tabela e o texto na tela segue o portugues.
+#
+# "Parte e Peças Geral" (sem o S) e como esta cadastrado no Zapier. Enquanto o
+# site enviava "Partes", TODO lead desse segmento caiu no default — em todos os
+# formularios, desde sempre. Corrigido em 27/08/2026 sem tocar no Zapier.
+# Ao arrumar a linha la, basta remover a entrada daqui.
+SEGMENTO_VALUE_ZAPIER = {
+    "Partes e Peças Geral": "Parte e Peças Geral",
+}
+
+
+def valor_do_segmento(rotulo):
+    """String que vai para o Zapier — igual ao rotulo, salvo divergencia mapeada."""
+    return SEGMENTO_VALUE_ZAPIER.get(rotulo, rotulo)
+
+
 SEGMENTS_LIST = [
     "Aeronaves", "Energia Renovável", "Alimentos e Bebidas", "Vestuário/Têxtil",
     "Informática e Eletrônicos", "Metais & Derivados", "Partes e Peças Automotivas",
@@ -1106,7 +1124,7 @@ def build_contact_form_html(form_type="contato", selected_segment=""):
     segment_options = ""
     for s in SEGMENTS_LIST:
         sel = "selected" if s.lower() == selected_segment.lower() else ""
-        segment_options += f'\n          <option value="{s}" {sel}>{s}</option>'
+        segment_options += f'\n          <option value="{valor_do_segmento(s)}" {sel}>{s}</option>'
         
     state_options = ""
     for st in STATES_LIST:
