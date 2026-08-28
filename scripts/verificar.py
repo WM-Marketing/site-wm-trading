@@ -17,7 +17,11 @@ reprovam). Nao altera nenhum arquivo.
 Contexto: criado apos o incidente de 24/07/2026, quando uma index.html vinda
 de uma copia local antiga derrubou banner LGPD, GA4/Ads, atribuicao de leads
 e o popup de WhatsApp — e o gerador espalhou o defeito para as paginas novas.
-Ver ROTINA-ATUALIZACAO-SITE.md.
+
+O processo de publicacao esta no CLAUDE.md, secao "PROCESSO DE PUBLICACAO VIA
+GITHUB". Ate 28/08 estas duas mencoes apontavam para ROTINA-ATUALIZACAO-SITE.md,
+um arquivo que NUNCA existiu no repositorio — o guarda mandava o operador
+consultar um documento inexistente justamente no momento mais critico.
 """
 
 import argparse
@@ -414,7 +418,7 @@ def checar_molde(rel):
     if faltando:
         rel.erro("NAO PUBLIQUE. Uma index.html incompleta contamina o site inteiro "
                  "na proxima geracao. Provavel causa: copia local antiga. "
-                 "Ver ROTINA-ATUALIZACAO-SITE.md.")
+                 "Ver o processo no CLAUDE.md, secao PROCESSO DE PUBLICACAO.")
     else:
         total = len(SCRIPTS_DO_MOLDE) + len(TAGS_DO_MOLDE) + 1
         rel.ok(f"os {total} elementos criticos do <head> estao presentes "
