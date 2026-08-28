@@ -177,6 +177,9 @@
 
     <div class="lp-formcard" id="lead">
       <form id="leadForm" novalidate>
+            <!-- honeypot: bot preenche, humano nao ve. O handler inline manda
+                 o campo junto (FormData) e api/contato.js descarta em silencio. -->
+            <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true" style="display:none;" />
         <h3>Solicitar Cotação</h3>
         <p class="lp-form-sub">Preencha os dados e um especialista entrará em contato.</p>
         <div class="lp-fgrid">
