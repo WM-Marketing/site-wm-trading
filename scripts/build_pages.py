@@ -896,6 +896,211 @@ def categorias_do_post(slug):
             for c in re.findall(r"-\s*(.+)", bloco.group(1))]
 
 
+# Rotulos da listagem do blog, por idioma. A pagina e a mesma nos dois; so o
+# texto e o conjunto de posts mudam.
+TEXTOS_LISTAGEM_BLOG = {
+    "pt-BR": {
+        "eyebrow": "Blog",
+        "h1": "Blog da WM Trading",
+        "intro": "Acompanhe os principais insights sobre comércio exterior, tributação, logística e tendências de mercado.",
+        "busca": "Pesquisar artigos por palavra-chave...",
+        "todos": "Todos",
+        "ler": "Ler artigo →",
+        "mais": "Carregar mais artigos",
+        "titulo_seo": "Blog da WM Trading",
+        "desc_seo": "Confira as notícias e artigos da WM Trading.",
+        "vazio": "Nenhum artigo encontrado.",
+        "sem_categoria": "Geral",
+    },
+    "en": {
+        "eyebrow": "Blog",
+        "h1": "WM Trading Blog",
+        "intro": "Insights on foreign trade, taxation, logistics and market trends.",
+        "busca": "Search articles by keyword...",
+        "todos": "All",
+        "ler": "Read article →",
+        "mais": "Load more articles",
+        "titulo_seo": "WM Trading Blog",
+        "desc_seo": "News and articles from WM Trading.",
+        "vazio": "No articles found.",
+        "sem_categoria": "General",
+    },
+}
+
+
+def gerar_listagens_do_blog(posts_data, head_tpl, header_tpl, footer_tpl):
+    """Escreve /blog/ e /en/blog/, cada uma so com os posts do seu idioma.
+
+    ATE 27/08/2026 EXISTIA UMA SO LISTAGEM e ela trazia os 213 posts, os 6 em
+    ingles junto. Quem navegava em portugues encontrava artigo em ingles no meio
+    da grade, e nao havia como chegar aos artigos em ingles pelo site em ingles.
+
+    O idioma de cada post vem do frontmatter (campo lang) — ver posts_data.
+    Um post sem lang e tratado como pt-BR, que e a regra dos 207.
+
+    A /en/blog/ sai daqui, e nao do build_en.py, porque e aqui que estao os
+    posts. O build_en so passa depois para traduzir o menu e injetar o hreflang
+    (ver a excecao de /en/blog/ no main() dele).
+    """
+    # A EN sai como en/blog.html, e nao en/blog/index.html: e a convencao da
+    # arvore /en/, e e o caminho que o caminho_saida() do build_en.py deriva de
+    # "/en/blog/". As duas formas servem a mesma URL (cleanUrls+trailingSlash),
+    # mas so esta e encontrada por ele para traduzir o menu.
+    for lang, destino in (("pt-BR", ("blog", "index.html")),
+                          ("en", ("en", "blog.html"))):
+        t = TEXTOS_LISTAGEM_BLOG[lang]
+        posts = [dict(x) for x in posts_data if x.get("lang", "pt-BR") == lang]
+
+        # "Not categorized" e resto da migracao do WordPress e estava indo ao ar
+        # como rotulo de filtro e de card (4 posts na PT, 1 na EN). Vira um
+        # rotulo neutro do idioma — ver CATEGORIAS_VAZIAS.
+        for x in posts:
+            if (x.get("category") or "").strip().lower() in CATEGORIAS_VAZIAS:
+                x["category"] = t["sem_categoria"]
+
+        # As categorias saem dos posts DAQUELE idioma: os filtros da /en/blog/
+        # com as categorias em portugues nao filtrariam nada.
+        categorias = sorted({x["category"] for x in posts if x.get("category")})
+        filtros = '<button class="filter-btn active" data-filter="all">%s</button>\n' % t["todos"]
+        for cat in categorias:
+            filtros += f'<button class="filter-btn" data-filter="{cat}">{cat}</button>\n'
+
+        cards = ""
+        for x in posts:
+            capa = (f'<img src="{x["cover"]}" alt="{x["title"]}" class="blog-card__cover" loading="lazy" />'
+                    if x["cover"] else '')
+            cards += f"""
+        <div class="blog-card-item" data-category="{x["category"]}" style="display:flex;">
+          <a href="/blog/{x["slug"]}.html" class="blog-card">
+            <div class="blog-card__cover-wrap">
+              {capa}
+            </div>
+            <div class="blog-card__content">
+              <div class="blog-card__meta">
+                <span class="blog-card__category">{x["category"]}</span>
+                <span>{x["display_date"]}</span>
+              </div>
+              <h3 class="blog-card__title">{x["title"]}</h3>
+              <p class="blog-card__excerpt">{x["excerpt"]}</p>
+              <span class="blog-card__link">{t["ler"]}</span>
+            </div>
+          </a>
+        </div>
+        """
+
+        corpo = """
+    <section class="page-section" style="padding-bottom:20px;">
+      <div class="container" style="text-align:center;">
+        <p class="dynamic-hero__eyebrow" style="margin-bottom:8px;">{eyebrow}</p>
+        <h1 class="t-display" style="font-weight:var(--fw-semibold); font-size:var(--fs-2xl); line-height:1.2; margin-bottom:12px;">{h1}</h1>
+        <p class="intro-text" style="color:var(--color-text-muted); max-width:600px; margin: 0 auto 30px auto;">{intro}</p>
+
+        <div class="blog-search-wrap">
+          <svg class="blog-search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+          <input type="text" id="blog-search" placeholder="{busca}" class="blog-search-input" />
+        </div>
+
+        <div class="blog-filters">
+          {filter_buttons_html}
+        </div>
+      </div>
+    </section>
+
+    <section class="blog-section" style="padding-top:0;">
+      <div class="container">
+        <div class="blog-grid" id="blog-posts-grid">
+          {cards_grid_html}
+        </div>
+
+        <div class="blog-pagination-container">
+          <button id="load-more-btn" class="btn btn-lg">{mais}</button>
+        </div>
+      </div>
+    </section>
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        const searchInput = document.getElementById('blog-search');
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        const cards = document.querySelectorAll('.blog-card-item');
+        const loadMoreBtn = document.getElementById('load-more-btn');
+        let visibleCount = 12;
+
+        function updateFilter() {
+          const activeFilter = document.querySelector('.filter-btn.active').dataset.filter;
+          const searchText = searchInput.value.toLowerCase().trim();
+          let matchCount = 0;
+
+          cards.forEach(card => {
+            const category = card.dataset.category || '';
+            const title = card.querySelector('.blog-card__title').textContent.toLowerCase();
+            const excerpt = card.querySelector('.blog-card__excerpt').textContent.toLowerCase();
+            
+            const matchesFilter = (activeFilter === 'all' || category.toLowerCase() === activeFilter.toLowerCase());
+            const matchesSearch = (!searchText || title.includes(searchText) || excerpt.includes(searchText));
+
+            if (matchesFilter && matchesSearch) {
+              card.classList.remove('filtered-out');
+              matchCount++;
+              if (matchCount <= visibleCount) {
+                card.style.display = 'flex';
+              } else {
+                card.style.display = 'none';
+              }
+            } else {
+              card.classList.add('filtered-out');
+              card.style.display = 'none';
+            }
+          });
+
+          if (loadMoreBtn) {
+            const totalMatches = document.querySelectorAll('.blog-card-item:not(.filtered-out)').length;
+            if (visibleCount >= totalMatches) {
+              loadMoreBtn.style.display = 'none';
+            } else {
+              loadMoreBtn.style.display = 'inline-block';
+            }
+          }
+        }
+
+        filterButtons.forEach(btn => {
+          btn.addEventListener('click', () => {
+            filterButtons.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            visibleCount = 12;
+            updateFilter();
+          });
+        });
+
+        searchInput.addEventListener('input', () => {
+          visibleCount = 12;
+          updateFilter();
+        });
+
+        if (loadMoreBtn) {
+          loadMoreBtn.addEventListener('click', () => {
+            visibleCount += 12;
+            updateFilter();
+          });
+        }
+
+        updateFilter();
+      });
+    </script>
+    """
+        for chave in ("eyebrow", "h1", "intro", "busca", "mais"):
+            corpo = corpo.replace("{%s}" % chave, t[chave])
+        corpo = (corpo.replace("{filter_buttons_html}", filtros)
+                      .replace("{cards_grid_html}", cards))
+
+        saida = os.path.join(ROOT_DIR, *destino)
+        os.makedirs(os.path.dirname(saida), exist_ok=True)
+        render_html_page(saida, t["titulo_seo"], t["desc_seo"], corpo,
+                         head_tpl, header_tpl, footer_tpl, lang=lang)
+        print(f" - listagem do blog ({lang}): {len(posts)} posts -> {'/'.join(destino)}")
+
+
 def build_contact_form_html(form_type="contato", selected_segment=""):
     """Generates standard responsive contact form HTML styled with Brand system."""
     segment_options = ""
@@ -2556,6 +2761,10 @@ Se você tiver alguma pergunta sobre esta Política de Privacidade ou as prátic
             pass
 
         # Save post data for index listing
+        # O idioma vem do frontmatter; sem ele, da URL do WordPress (as paginas
+        # /en/ de la ficavam sob /en/). E o que separa as duas listagens: ate
+        # 27/08/2026 os 6 posts em ingles apareciam misturados na /blog/.
+        post_lang_card = fm.get("lang") or ("en" if "/en/" in fm.get("originalUrl", "") else "pt-BR")
         posts_data.append({
             "title": title,
             "slug": slug,
@@ -2564,7 +2773,8 @@ Se você tiver alguma pergunta sobre esta Política de Privacidade ou as prátic
             "author": author,
             "excerpt": excerpt,
             "category": category,
-            "cover": cover
+            "cover": cover,
+            "lang": post_lang_card
         })
         
         # Build Post Detail Page content
@@ -2638,143 +2848,8 @@ Se você tiver alguma pergunta sobre esta Política de Privacidade ou as prátic
     # como criterio — varios posts de maquina nunca receberam a categoria.
     escrever_vitrines_de_blog(posts_data)
     
-    # 8. GENERATE BLOG LISTING PAGE (blog/index.html)
-    print("Generating Blog Listing page (blog/index.html)...")
-    
-    # Get all unique categories for filtering
-    categories_set = set(p["category"] for p in posts_data if p.get("category"))
-    categories_list = sorted(list(categories_set))
-    
-    filter_buttons_html = '<button class="filter-btn active" data-filter="all">Todos</button>\n'
-    for cat in categories_list:
-        filter_buttons_html += f'<button class="filter-btn" data-filter="{cat}">{cat}</button>\n'
-        
-    cards_grid_html = ""
-    for p in posts_data:
-        cover_img_html = f'<img src="{p["cover"]}" alt="{p["title"]}" class="blog-card__cover" loading="lazy" />' if p["cover"] else ''
-        cards_grid_html += f"""
-        <div class="blog-card-item" data-category="{p["category"]}" style="display:flex;">
-          <a href="/blog/{p["slug"]}.html" class="blog-card">
-            <div class="blog-card__cover-wrap">
-              {cover_img_html}
-            </div>
-            <div class="blog-card__content">
-              <div class="blog-card__meta">
-                <span class="blog-card__category">{p["category"]}</span>
-                <span>{p["display_date"]}</span>
-              </div>
-              <h3 class="blog-card__title">{p["title"]}</h3>
-              <p class="blog-card__excerpt">{p["excerpt"]}</p>
-              <span class="blog-card__link">Ler artigo →</span>
-            </div>
-          </a>
-        </div>
-        """
-        
-    blog_listing_html = """
-    <section class="page-section" style="padding-bottom:20px;">
-      <div class="container" style="text-align:center;">
-        <p class="dynamic-hero__eyebrow" style="margin-bottom:8px;">Blog</p>
-        <h1 class="t-display" style="font-weight:var(--fw-semibold); font-size:var(--fs-2xl); line-height:1.2; margin-bottom:12px;">Blog da WM Trading</h1>
-        <p class="intro-text" style="color:var(--color-text-muted); max-width:600px; margin: 0 auto 30px auto;">Acompanhe os principais insights sobre comércio exterior, tributação, logística e tendências de mercado.</p>
-        
-        <div class="blog-search-wrap">
-          <svg class="blog-search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-          </svg>
-          <input type="text" id="blog-search" placeholder="Pesquisar artigos por palavra-chave..." class="blog-search-input" />
-        </div>
-        
-        <div class="blog-filters">
-          {filter_buttons_html}
-        </div>
-      </div>
-    </section>
-    
-    <section class="blog-section" style="padding-top:0;">
-      <div class="container">
-        <div class="blog-grid" id="blog-posts-grid">
-          {cards_grid_html}
-        </div>
-        
-        <div class="blog-pagination-container">
-          <button id="load-more-btn" class="btn btn-lg">Carregar mais artigos</button>
-        </div>
-      </div>
-    </section>
-    
-    <script>
-      document.addEventListener('DOMContentLoaded', function() {
-        const searchInput = document.getElementById('blog-search');
-        const filterButtons = document.querySelectorAll('.filter-btn');
-        const cards = document.querySelectorAll('.blog-card-item');
-        const loadMoreBtn = document.getElementById('load-more-btn');
-        let visibleCount = 12;
-
-        function updateFilter() {
-          const activeFilter = document.querySelector('.filter-btn.active').dataset.filter;
-          const searchText = searchInput.value.toLowerCase().trim();
-          let matchCount = 0;
-
-          cards.forEach(card => {
-            const category = card.dataset.category || '';
-            const title = card.querySelector('.blog-card__title').textContent.toLowerCase();
-            const excerpt = card.querySelector('.blog-card__excerpt').textContent.toLowerCase();
-            
-            const matchesFilter = (activeFilter === 'all' || category.toLowerCase() === activeFilter.toLowerCase());
-            const matchesSearch = (!searchText || title.includes(searchText) || excerpt.includes(searchText));
-
-            if (matchesFilter && matchesSearch) {
-              card.classList.remove('filtered-out');
-              matchCount++;
-              if (matchCount <= visibleCount) {
-                card.style.display = 'flex';
-              } else {
-                card.style.display = 'none';
-              }
-            } else {
-              card.classList.add('filtered-out');
-              card.style.display = 'none';
-            }
-          });
-
-          if (loadMoreBtn) {
-            const totalMatches = document.querySelectorAll('.blog-card-item:not(.filtered-out)').length;
-            if (visibleCount >= totalMatches) {
-              loadMoreBtn.style.display = 'none';
-            } else {
-              loadMoreBtn.style.display = 'inline-block';
-            }
-          }
-        }
-
-        filterButtons.forEach(btn => {
-          btn.addEventListener('click', () => {
-            filterButtons.forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-            visibleCount = 12;
-            updateFilter();
-          });
-        });
-
-        searchInput.addEventListener('input', () => {
-          visibleCount = 12;
-          updateFilter();
-        });
-
-        if (loadMoreBtn) {
-          loadMoreBtn.addEventListener('click', () => {
-            visibleCount += 12;
-            updateFilter();
-          });
-        }
-
-        updateFilter();
-      });
-    </script>
-    """.replace("{filter_buttons_html}", filter_buttons_html).replace("{cards_grid_html}", cards_grid_html)
-    
-    render_html_page(os.path.join(ROOT_DIR, "blog", "index.html"), "Blog da WM Trading", "Confira as notícias e artigos da WM Trading.", blog_listing_html, head_tpl, header_tpl, footer_tpl)
+    # 8. LISTAGENS DO BLOG — uma por idioma (/blog/ e /en/blog/)
+    gerar_listagens_do_blog(posts_data, head_tpl, header_tpl, footer_tpl)
 
     # 9. SITEMAP.XML — todas as paginas .html do site, apontando para o dominio final
     # 6Z. PAGINA 404 — a Vercel serve este arquivo em qualquer rota que nao casar.

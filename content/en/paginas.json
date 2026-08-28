@@ -3367,5 +3367,11 @@
         "texto": "We are specialists in importing different sectors."
       }
     ]
+  },
+  {
+    "pt": "/blog/",
+    "en": "/en/blog/",
+    "titulo": "WM Trading Blog",
+    "description": "News and articles from WM Trading."
   }
 ]

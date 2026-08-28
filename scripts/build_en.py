@@ -1037,6 +1037,15 @@ def main():
             if maquinas_em_ingles(p) is None:
                 continue
             corpo_copiado = True
+        # A /en/blog/ e o unico caso em que o corpo JA ESTA PRONTO quando este
+        # script roda: quem escreve as duas listagens e o build_pages.py, que e
+        # onde estao os posts (ver gerar_listagens_do_blog). Aqui so passamos
+        # para traduzir o menu e injetar o hreflang — reescrever pelo molde
+        # generico apagaria a grade de artigos.
+        elif p["en"].rstrip("/") == "/en/blog":
+            if not os.path.exists(caminho_saida(p["en"])):
+                print("  AVISO: /en/blog/ nao existe — rode o build_pages.py antes")
+                continue
         else:
             corpo = corpo_html(p)
             if not corpo:
