@@ -44,6 +44,49 @@ def url_publica(caminho_relativo):
     if rel.endswith(".html"):
         return f"{SITE_URL}/{rel[:-len('.html')]}/"
     return f"{SITE_URL}/{rel}"
+# Idioma do site. Post em outro idioma recebe uma TAG VISIVEL no cabecalho.
+#
+# Por que isso existe (medido em 27/08/2026): ha 6 posts em ingles publicados em
+# /blog/, e o leitor brasileiro caia neles sem aviso nenhum.
+#
+# EM 28/08 A LISTAGEM PASSOU A SER SEPARADA POR IDIOMA (gerar_listagens_do_blog),
+# e isso mudou o alcance desta tag. No CARD ela deixou de fazer sentido: em
+# /blog/ so ha post em portugues, e a tag nunca apareceria; em /en/blog/ so ha
+# post em ingles, e ela apareceria em TODOS os cards, virando ruido. Por isso a
+# tag ficou apenas no CABECALHO DO POST — que e onde ela ainda salva alguem: a
+# listagem esta separada, mas o visitante brasileiro continua chegando a um post
+# em ingles por busca do Google ou link compartilhado, sem passar por listagem
+# nenhuma.
+#
+# O rotulo e o endonimo (o nome do idioma NO idioma): "English", nao "Ingles".
+# Assim funciona para quem le qualquer um dos dois, e o dia que entrar espanhol
+# basta somar uma linha aqui.
+IDIOMA_PADRAO = "pt-BR"
+IDIOMA_ROTULO = {
+    "en": ("English", "Artigo em inglês"),
+    "es": ("Español", "Artigo em espanhol"),
+}
+
+
+def tag_de_idioma(lang, classe, indento=""):
+    """O bloco da tag de idioma, ou string VAZIA quando o post e no idioma do site.
+
+    classe:  hoje so 'post-meta__idioma' (cabecalho do post). O parametro fica
+             porque a listagem separada por idioma pode voltar a precisar de
+             rotulo — numa busca interna, por exemplo, que cruze os dois idiomas.
+    indento: espacos da linha. O bloco sai com o \n e a indentacao DENTRO dele,
+             ou vazio — mesma convencao do extra_head_block do render_html_page.
+             Sem isso, os 208 posts em portugues ganhavam uma linha de espacos
+             em branco e o build sujava o diff com 208 arquivos sem mudanca real.
+    """
+    if not lang or lang == IDIOMA_PADRAO:
+        return ""
+    curto = lang.split("-")[0].lower()
+    rotulo, titulo = IDIOMA_ROTULO.get(curto, (lang.upper(), "Artigo em " + lang))
+    return ('\n%s<span class="%s" lang="%s" title="%s">%s</span>'
+            % (indento, classe, curto, _esc_attr(titulo), rotulo))
+
+
 ORGANIZATION_JSONLD = {
     "@context": "https://schema.org",
     "@type": "Organization",
@@ -2802,7 +2845,7 @@ Se você tiver alguma pergunta sobre esta Política de Privacidade ou as prátic
         <article class="blog-section">
           <div class="container">
             <header class="post-header">
-              <div class="post-meta">
+              <div class="post-meta">{tag_de_idioma(post_lang_card, "post-meta__idioma", " " * 16)}
                 <span class="post-meta__category">{category}</span>
                 <span>•</span>
                 <span>{display_date}</span>
