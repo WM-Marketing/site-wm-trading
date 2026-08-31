@@ -112,6 +112,12 @@
     // Milissegundos entre a pagina ficar pronta e o visitante enviar.
     payload._ms = Date.now() - CARREGADA_EM;
 
+    // Qual material foi baixado. Ja existia no data-ebook-title e ia para o
+    // dataLayer, mas nunca chegava ao CRM — e e a informacao mais util deste
+    // lead: diz o assunto que interessa ao contato.
+    const tituloEbook = form.getAttribute('data-ebook-title');
+    if (tituloEbook) payload.ebook = tituloEbook;
+
     try {
       const response = await fetch('/api/contato/', {
         method: 'POST',

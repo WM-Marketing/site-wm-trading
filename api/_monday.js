@@ -16,10 +16,37 @@ const MONDAY_API_VERSION = '2026-07';
 const BOARD_ID = '18428618371';
 const GROUP_ID = 'topics'; // "Entrada de LEADS"
 
-/* Tipos de formulario que viram item no Monday.
-   O de e-book fica de fora de proposito: tem so nome, e-mail e empresa, e um
-   dropdown sem label faz a mutation falhar. */
-const FORMULARIOS_NO_MONDAY = new Set(['contato', 'segmentos']);
+/* CONFIGURACAO POR TIPO DE FORMULARIO
+   Os quatro tipos coletam campos diferentes, entao cada um preenche um conjunto
+   diferente de colunas. Coluna sem dado fica de fora — dropdown com label vazio
+   faz a mutation falhar.
+
+   O que muda entre eles:
+
+   contato/segmentos  os 8 campos. Nada a completar.
+   whatsapp           nome, e-mail e telefone. A preferencia de contato e o
+                      proprio canal que a pessoa escolheu ao abrir o popup, entao
+                      vai preenchida; nao e suposicao.
+   ebook              nome, e-mail e empresa. Sem telefone. A nota carrega qual
+                      material foi baixado, que e o que diz o assunto de
+                      interesse — vinha no data-ebook-title e nunca chegava ao CRM.
+
+   A nota de origem entra na coluna de mensagem, que nestes dois estaria vazia.
+   Sem ela o card nao diria de onde veio o lead. */
+const CONFIG_FORMULARIO = {
+  contato:   {},
+  segmentos: {},
+  whatsapp: {
+    preferencia: 'WhatsApp',
+    nota: () => 'Lead pelo popup de WhatsApp do site.',
+  },
+  ebook: {
+    nota: (d) => {
+      const t = limpa(d.ebook, 255);
+      return t ? `Baixou o material: ${t}` : 'Baixou um material do site.';
+    },
+  },
+};
 
 /* Colunas do board, na ordem do mapeamento acordado. As internas do Monday
    (name, subtasks_mm6ncwjb) nao entram. */
@@ -120,7 +147,8 @@ const MUTATION = `
 
 /** Este formulário deve virar item no Monday? */
 function vaiParaOMonday(tipoFormulario) {
-  return FORMULARIOS_NO_MONDAY.has(String(tipoFormulario || '').toLowerCase());
+  return Object.prototype.hasOwnProperty.call(
+    CONFIG_FORMULARIO, String(tipoFormulario || '').toLowerCase());
 }
 
 /**
@@ -143,12 +171,18 @@ async function criarLead(data) {
 
   /* Chaves fixas, definidas em COL. O payload do visitante nunca escolhe qual
      coluna preencher — so o conteudo. */
+  const cfg = CONFIG_FORMULARIO[String(data.formulario || '').toLowerCase()] || {};
+
+  /* Mensagem do visitante quando existe; senao a nota de origem do tipo. Nunca
+     as duas: o que a pessoa escreveu vale mais que o carimbo automatico. */
+  const textoMensagem = mensagem || (cfg.nota ? cfg.nota(data) : '');
+
   const columnValues = {
     [COL.email]: { email, text: email },
-    [COL.empresa]: empresa,
-    [COL.mensagem]: { text: mensagem },
     [COL.data]: { date: dataDeHoje() },
   };
+  if (empresa) columnValues[COL.empresa] = empresa;
+  if (textoMensagem) columnValues[COL.mensagem] = { text: textoMensagem };
 
   /* Campos opcionais so entram quando tem valor: dropdown com label vazio e
      phone vazio fazem a mutation falhar. */
@@ -160,7 +194,7 @@ async function criarLead(data) {
   const dropdowns = [
     [COL.estado, estado],
     [COL.segmento, rotulo('segmento', data.segmento)],
-    [COL.contato, rotulo('contato', data.forma_resposta)],
+    [COL.contato, rotulo('contato', data.forma_resposta || cfg.preferencia)],
   ];
   for (const [coluna, label] of dropdowns) {
     if (label) columnValues[coluna] = { labels: [label] };

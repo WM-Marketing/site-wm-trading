@@ -136,6 +136,7 @@ module.exports = async function handler(req, res) {
       forma_resposta: data.forma_resposta || '',
       mensagem: data.mensagem || '',
       formulario: data.formulario || '',
+      ebook: data.ebook || '',
       url: data.url || '',
       origem: data.origem || 'site wmtrading.com.br',
       enviado_em: new Date().toISOString(),
