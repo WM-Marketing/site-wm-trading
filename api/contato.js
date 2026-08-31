@@ -2,6 +2,8 @@
    WM Trading — api/contato.js (Vercel Serverless Function proxying to Zapier)
    ========================================================================== */
 
+const { criarLead, vaiParaOMonday } = require('./_monday');
+
 module.exports = async function handler(req, res) {
   // CORS Headers
   res.setHeader('Access-Control-Allow-Origin', '*');
@@ -124,6 +126,27 @@ module.exports = async function handler(req, res) {
       pagina_entrada: data.pagina_entrada || '',
     };
 
+    // ── MONDAY ANTES DO ZAPIER, e a ordem importa ────────────────────────
+    // O envio so e considerado sucesso se o item existir no board. Fazendo o
+    // Monday PRIMEIRO, uma falha dele devolve erro sem ter mandado nada ao
+    // Zapier — o visitante tenta de novo e nao gera lead duplicado no
+    // Pipedrive. Na ordem inversa, cada nova tentativa duplicaria.
+    // O formulario de e-book nao entra: ver FORMULARIOS_NO_MONDAY.
+    if (vaiParaOMonday(data.formulario)) {
+      try {
+        const item = await criarLead(payload);
+        console.log(`Monday: item ${item.id} criado (${payload.formulario})`);
+      } catch (erroMonday) {
+        // Motivo tecnico so no log do servidor. O visitante recebe texto
+        // generico — nada de mensagem da API, query ou token.
+        console.error('Monday: falha ao criar item —', erroMonday.message);
+        return res.status(502).json({
+          ok: false,
+          error: 'Não foi possível enviar sua solicitação. Por favor, tente novamente.'
+        });
+      }
+    }
+
     const response = await fetch(webhook, {
       method: 'POST',
       headers: {
@@ -133,7 +156,11 @@ module.exports = async function handler(req, res) {
     });
 
     if (!response.ok) {
-      throw new Error(`Zapier respondeu com status HTTP ${response.status}`);
+      // O item ja existe no Monday e a automacao de e-mail ja disparou.
+      // Devolver erro aqui faria o visitante reenviar e criar um item
+      // duplicado, entao o lead conta como recebido e a falha do Pipedrive
+      // fica registrada no log para conferencia.
+      console.error(`Zapier respondeu HTTP ${response.status} — lead esta no Monday, mas nao no Pipedrive`);
     }
 
     return res.status(200).json({ ok: true });
