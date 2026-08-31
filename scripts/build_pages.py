@@ -185,7 +185,13 @@ SEGMENTS_LIST = [
 # nome, a descricao do card e a lista do <select> dos formularios.
 # Ao remover um slug daqui, o gerador volta a criar a pagina normalmente.
 SEGMENT_URL_OVERRIDES = {
-    "importacao-aeronaves": "/segmentos-aeronaves/",
+    # A pagina volta para /segmentos/importacao-aeronaves/ em 31/08/2026. Era ali
+    # que ela vivia no WordPress — os posts raspados so citavam esse endereco, e
+    # e o que tem historico de indexacao. O /segmentos-aeronaves/ nasceu em
+    # 11/06/2026, com o site novo, e so virou oficial em 11/08; ficou canonico
+    # por duas semanas e meia. A URL aqui e a MESMA que o gerador criaria: nao e
+    # redirecionamento, e a pagina manual ocupando o endereco padrao do slug.
+    "importacao-aeronaves": "/segmentos/importacao-aeronaves/",
     # A URL aqui e a MESMA que o gerador criaria. Nao e redirecionamento: o
     # arquivo segmentos/equipamentos-fotovoltaicos.html continua existindo, so
     # que escrito a mao (layout proprio de 9 secoes, 26/08/2026). Entrar neste

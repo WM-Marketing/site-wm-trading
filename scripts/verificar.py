@@ -257,7 +257,10 @@ AMOSTRA_REDIRECTS = [
     ("/duimp/", "/ebooks/duimp/"),
     ("/blog/tag/importacao/", "/blog/"),
     ("/podcast/episodio-10/", "/podcast/"),
-    ("/segmentos/aeronaves/", "/segmentos-aeronaves/"),
+    ("/segmentos/aeronaves/", "/segmentos/importacao-aeronaves/"),
+    # Invertido em 31/08/2026: a pagina voltou para o endereco do WordPress,
+    # que e o que tem historico de indexacao. Ver SEGMENT_URL_OVERRIDES.
+    ("/segmentos-aeronaves/", "/segmentos/importacao-aeronaves/"),
     ("/blog/ex-tarifario-energia-solar/", "/blog/ex-tarifario-importacoes-fotovoltaico/"),
 ]
 

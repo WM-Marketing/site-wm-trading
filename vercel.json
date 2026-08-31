@@ -39,6 +39,11 @@
   ],
   "redirects": [
     {
+      "source": "/segmentos-aeronaves/",
+      "destination": "/segmentos/importacao-aeronaves/",
+      "permanent": true
+    },
+    {
       "source": "/en/contact/",
       "destination": "/en/contact-us/",
       "permanent": true
@@ -565,12 +570,7 @@
     },
     {
       "source": "/segmentos/aeronaves/",
-      "destination": "/segmentos-aeronaves/",
-      "permanent": true
-    },
-    {
-      "source": "/segmentos/importacao-aeronaves/",
-      "destination": "/segmentos-aeronaves/",
+      "destination": "/segmentos/importacao-aeronaves/",
       "permanent": true
     },
     {
@@ -635,7 +635,7 @@
     },
     {
       "source": "/cases/aeronaves/",
-      "destination": "/segmentos-aeronaves/",
+      "destination": "/segmentos/importacao-aeronaves/",
       "permanent": true
     },
     {
