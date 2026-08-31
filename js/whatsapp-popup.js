@@ -11,6 +11,11 @@
 (function () {
   'use strict';
 
+  /* CARIMBO DE TEMPO — o /api/contato/ recusa envio sem ele desde 31/08/2026.
+     Este popup monta o proprio formulario e faz o proprio fetch, entao NAO passa
+     pelo js/contact-form.js e precisa carimbar por conta propria. */
+  var CARREGADA_EM = Date.now();
+
   var WA_NUMBER = '5527981610055'; // WhatsApp oficial (confirmado Renato 09/07); o fixo (27) 3022-9700 é só telefone
   var DEFAULT_WA_URL = 'https://wa.me/' + WA_NUMBER;
 
@@ -198,7 +203,11 @@
       aceite_marketing: form.querySelector('[name="aceite_marketing"]:checked') ? 'sim' : 'nao',
       aceite_texto: aceiteEl ? aceiteEl.textContent.replace(/\s+/g, ' ').trim() : '',
       politica_versao: versaoEl ? versaoEl.getAttribute('content') : '',
-      aceite_em: new Date().toISOString()
+      aceite_em: new Date().toISOString(),
+      // Milissegundos entre a pagina ficar pronta e o envio. Sem isto o
+      // servidor descarta o lead achando que e robo — e responde ok, entao a
+      // perda seria silenciosa.
+      _ms: Date.now() - CARREGADA_EM
     };
 
     // Campos de atribuição (UTMs, gclid, GA client id — js/utm-tracking.js)
