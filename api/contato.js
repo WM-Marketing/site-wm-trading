@@ -146,7 +146,9 @@ module.exports = async function handler(req, res) {
       try {
         const item = await criarLead(payload);
         mondayItemId = item.id;
-        console.log(`Monday: item ${item.id} criado (${payload.formulario})`);
+        const vazias = (item.colunasVazias || []).join(', ');
+        console.log(`Monday: item ${item.id} criado (${payload.formulario})` +
+          (vazias ? ` — COLUNAS QUE NAO GRAVARAM: ${vazias}` : ' — todas as colunas gravadas'));
       } catch (erroMonday) {
         // Motivo tecnico so no log do servidor. O visitante nunca ve mensagem
         // da API, query nem token — e nao e penalizado por uma falha nossa.

@@ -95,6 +95,7 @@ const MUTATION = `
     ) {
       id
       name
+      column_values { id text }
     }
   }`;
 
@@ -176,10 +177,21 @@ async function criarLead(data) {
     throw new Error(`GraphQL: ${motivo || 'erro sem mensagem'}`);
   }
 
-  const id = corpo.data && corpo.data.create_item && corpo.data.create_item.id;
+  const item = corpo.data && corpo.data.create_item;
+  const id = item && item.id;
   if (!id) throw new Error('resposta sem data.create_item.id');
 
-  return { id: String(id) };
+  /* CONFERENCIA DO QUE FOI MESMO GRAVADO
+     A mutation pode devolver id sem ter preenchido uma coluna — foi o que
+     aconteceu em 31/08/2026 com o dropdown de Estado. Comparamos o que
+     mandamos com o que voltou e registramos apenas os IDs das colunas vazias.
+     So os IDs: o conteudo e dado do visitante e nao vai para log. */
+  const gravadas = new Set(
+    (item.column_values || []).filter((c) => c && c.text).map((c) => c.id)
+  );
+  const vazias = Object.keys(columnValues).filter((c) => !gravadas.has(c));
+
+  return { id: String(id), colunasVazias: vazias };
 }
 
 module.exports = { criarLead, vaiParaOMonday };
