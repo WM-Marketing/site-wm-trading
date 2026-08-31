@@ -483,6 +483,27 @@ textarea.input-wm {
   font-weight: var(--fw-semibold);
   text-transform: uppercase;
 }
+/* Tag de idioma no cabecalho do post: so aparece em post que NAO esta no idioma
+   do site. Contorno em vez de fundo cheio para nao competir com a categoria,
+   que e o rotulo primario.
+   A classe .blog-card__idioma saiu em 28/08: com a listagem separada por idioma
+   a tag no card nao informa nada — ver tag_de_idioma() no build_pages.py. */
+.post-meta__idioma {
+  display: inline-block;
+  border: 1px solid var(--color-primary);
+  color: var(--color-primary);
+  border-radius: 3px;
+  padding: 1px 6px;
+  font-size: 10px;
+  font-weight: var(--fw-semibold);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  line-height: 1.5;
+  white-space: nowrap;
+}
+.post-meta__idioma {
+  font-size: 11px;
+}
 .blog-card__title {
   font-size: var(--fs-base);
   font-weight: var(--fw-semibold);

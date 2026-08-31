@@ -2,7 +2,8 @@
 
 Site institucional da **WM Trading**, empresa especializada em soluções tributárias, logísticas e aduaneiras para importações.
 
-**Live:** [site-wm-trading.vercel.app](https://site-wm-trading.vercel.app)  
+**Live:** [www.wmtrading.com.br](https://www.wmtrading.com.br) — no ar desde 20/08/2026  
+**Preview:** [site-wm-trading.vercel.app](https://site-wm-trading.vercel.app) — mesmo conteúdo, com `canonical` para o domínio  
 **Repo:** [github.com/WM-Marketing/site-wm-trading](https://github.com/WM-Marketing/site-wm-trading)
 
 ---
@@ -12,8 +13,8 @@ Site institucional da **WM Trading**, empresa especializada em soluções tribut
 - **HTML5** / **CSS3** / **JavaScript** puro (sem frameworks)
 - **Lottie Web** — animação do loader (cargo ship)
 - **Google Fonts** — Poppins + Nunito Sans
-- **Hosting** — Vercel (deploy via API)
-- **Versionamento** — GitHub (`main` branch)
+- **Hosting** — Vercel, com deploy **automático pela integração com o GitHub**
+- **Versionamento** — GitHub. **Push em `main` publica em produção** (`www.wmtrading.com.br`); branch gera preview
 
 ---
 
