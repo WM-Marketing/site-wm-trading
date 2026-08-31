@@ -126,26 +126,34 @@ module.exports = async function handler(req, res) {
       pagina_entrada: data.pagina_entrada || '',
     };
 
-    // ── MONDAY ANTES DO ZAPIER, e a ordem importa ────────────────────────
-    // O envio so e considerado sucesso se o item existir no board. Fazendo o
-    // Monday PRIMEIRO, uma falha dele devolve erro sem ter mandado nada ao
-    // Zapier — o visitante tenta de novo e nao gera lead duplicado no
-    // Pipedrive. Na ordem inversa, cada nova tentativa duplicaria.
+    // ── MONDAY: TENTATIVA, NUNCA BLOQUEIO ────────────────────────────────
+    // A primeira versao (31/08/2026) tratava a falha do Monday como falha do
+    // envio, devolvendo 502 antes de chamar o Zapier. Em producao isso derrubou
+    // a captacao inteira: os dropdowns do board estavam praticamente vazios — o
+    // de Estado so tinha "São Paulo" — entao QUALQUER lead de outro estado era
+    // recusado e nao chegava nem ao Pipedrive.
+    //
+    // A licao: o Monday e destino ADICIONAL, e a captacao nao pode depender da
+    // configuracao de um board que este repositorio nao controla. A falha e
+    // registrada no log e o lead segue para o Zapier como sempre.
+    //
+    // Enquanto os labels nao estiverem completos no board, o item so nasce para
+    // as combinacoes ja cadastradas — ver MAPA_ROTULOS e CRIAR_LABEL_SE_FALTAR
+    // em api/_monday.js.
     // O formulario de e-book nao entra: ver FORMULARIOS_NO_MONDAY.
+    let mondayItemId = '';
     if (vaiParaOMonday(data.formulario)) {
       try {
         const item = await criarLead(payload);
+        mondayItemId = item.id;
         console.log(`Monday: item ${item.id} criado (${payload.formulario})`);
       } catch (erroMonday) {
-        // Motivo tecnico so no log do servidor. O visitante recebe texto
-        // generico — nada de mensagem da API, query ou token.
+        // Motivo tecnico so no log do servidor. O visitante nunca ve mensagem
+        // da API, query nem token — e nao e penalizado por uma falha nossa.
         console.error('Monday: falha ao criar item —', erroMonday.message);
-        return res.status(502).json({
-          ok: false,
-          error: 'Não foi possível enviar sua solicitação. Por favor, tente novamente.'
-        });
       }
     }
+    payload.monday_item_id = mondayItemId;
 
     const response = await fetch(webhook, {
       method: 'POST',
@@ -156,11 +164,11 @@ module.exports = async function handler(req, res) {
     });
 
     if (!response.ok) {
-      // O item ja existe no Monday e a automacao de e-mail ja disparou.
-      // Devolver erro aqui faria o visitante reenviar e criar um item
-      // duplicado, entao o lead conta como recebido e a falha do Pipedrive
-      // fica registrada no log para conferencia.
-      console.error(`Zapier respondeu HTTP ${response.status} — lead esta no Monday, mas nao no Pipedrive`);
+      // Aqui sim o envio falhou de verdade: o Zapier e o destino que sustenta a
+      // captacao. Se o item do Monday chegou a ser criado, reenviar duplicaria
+      // — por isso o id vai no log, para conciliacao manual.
+      throw new Error(`Zapier respondeu com status HTTP ${response.status}` +
+        (mondayItemId ? ` (item ${mondayItemId} ja criado no Monday)` : ''));
     }
 
     return res.status(200).json({ ok: true });
