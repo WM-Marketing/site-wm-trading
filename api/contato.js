@@ -4,9 +4,46 @@
 
 const { criarLead, vaiParaOMonday } = require('./_monday');
 
+/* ══════════════════════════════════════════════════════════════════════════
+   BARREIRAS ANTI-ROBO (31/08/2026)
+
+   O honeypot _gotcha sozinho so pega robo que PREENCHE o formulario. Quem
+   manda JSON direto para /api/contato/ nunca toca no campo-armadilha e passava
+   batido — era possivel criar lead no CRM sem nunca abrir o site.
+
+   Isto NAO substitui um CAPTCHA. Sao filtros baratos que cortam o envio
+   automatizado oportunista; contra robo dedicado, so um desafio criptografico
+   (Turnstile/reCAPTCHA) resolve.
+   ══════════════════════════════════════════════════════════════════════════ */
+
+/* De onde um envio legitimo pode vir. O CORS era "*", entao qualquer site
+   podia disparar envios pelo navegador dos visitantes dele. */
+const ORIGENS_OK = [
+  'https://www.wmtrading.com.br',
+  'https://wmtrading.com.br',
+];
+/* Deploys de preview da Vercel: o formulario precisa continuar testavel neles. */
+const PREVIEW_OK = /^https:\/\/site-wm-trading-[a-z0-9-]+\.vercel\.app$/;
+
+function origemPermitida(origem) {
+  if (!origem) return false;
+  return ORIGENS_OK.includes(origem) || PREVIEW_OK.test(origem);
+}
+
+/* Menos que isto nao e gente preenchendo: e script. Sete campos, um deles
+   textarea — o formulario mais curto do site leva bem mais que 3 segundos. */
+const MS_MINIMO = 3000;
+/* Aba aberta ha mais de 12h: o carimbo perdeu o sentido, provavelmente e
+   sessao esquecida. Nao barra — so nao serve de prova. */
+const MS_MAXIMO = 12 * 60 * 60 * 1000;
+
 module.exports = async function handler(req, res) {
-  // CORS Headers
-  res.setHeader('Access-Control-Allow-Origin', '*');
+  // CORS restrito a origem do proprio site
+  const origem = req.headers.origin || '';
+  if (origemPermitida(origem)) {
+    res.setHeader('Access-Control-Allow-Origin', origem);
+  }
+  res.setHeader('Vary', 'Origin');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
   res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
 
@@ -26,6 +63,35 @@ module.exports = async function handler(req, res) {
     if (data && data._gotcha) {
       console.log('Bot detected via honeypot.');
       return res.status(200).json({ ok: true });
+    }
+
+    /* ── ORIGEM ──
+       Navegador manda Origin em POST, mesmo same-origin. Requisicao de script
+       (curl e afins) nao manda nenhum dos dois. O Referer entra como segunda
+       chance: extensao de privacidade as vezes remove um, nao os dois.
+       Resposta 200 de proposito: dizer "bloqueado" ensina o robo a ajustar. */
+    const referer = req.headers.referer || '';
+    const origemDoReferer = referer ? (referer.match(/^https?:\/\/[^/]+/) || [''])[0] : '';
+    if (!origemPermitida(origem) && !origemPermitida(origemDoReferer)) {
+      console.log(`Bloqueado: origem nao permitida (origin=${origem || '-'} referer=${origemDoReferer || '-'})`);
+      return res.status(200).json({ ok: true });
+    }
+
+    /* ── TEMPO DE PREENCHIMENTO ──
+       O campo so existe se a pagina foi carregada de verdade (js/contact-form.js).
+       Ausente ou rapido demais = script. Nao e a prova definitiva: quem sabe do
+       campo consegue forjar um numero. Serve como filtro, nao como muralha. */
+    const ms = Number(data._ms);
+    if (!Number.isFinite(ms) || ms < 0) {
+      console.log('Bloqueado: envio sem carimbo de tempo (nao passou pela pagina)');
+      return res.status(200).json({ ok: true });
+    }
+    if (ms < MS_MINIMO) {
+      console.log(`Bloqueado: preenchido em ${ms}ms, abaixo do minimo de ${MS_MINIMO}ms`);
+      return res.status(200).json({ ok: true });
+    }
+    if (ms > MS_MAXIMO) {
+      console.log(`Aviso: carimbo de ${Math.round(ms / 3600000)}h — aba antiga, envio aceito`);
     }
 
     // Sem registro de aceite não entra no CRM: o checkbox é obrigatório em todos

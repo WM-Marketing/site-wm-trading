@@ -47,6 +47,13 @@
     return form.querySelector('[name="' + name + '"]:checked') ? 'sim' : 'nao';
   }
 
+  /* CARIMBO DE TEMPO — camada anti-robo (31/08/2026)
+     Guarda quando esta pagina ficou pronta. O tempo ate o envio segue no
+     payload e o servidor recusa o que for rapido demais para ser humano.
+     Vale tambem pela AUSENCIA: robo que posta JSON direto no endpoint, sem
+     abrir a pagina, nao tem como produzir este campo. */
+  const CARREGADA_EM = Date.now();
+
   // Intercept all submit events at document level
   document.addEventListener('submit', async function(e) {
     const form = e.target;
@@ -101,6 +108,9 @@
     if (window.wmTracking) {
       Object.assign(payload, await window.wmTracking.getFieldsAsync());
     }
+
+    // Milissegundos entre a pagina ficar pronta e o visitante enviar.
+    payload._ms = Date.now() - CARREGADA_EM;
 
     try {
       const response = await fetch('/api/contato/', {
