@@ -63,6 +63,25 @@ const MAPA_ROTULOS = {
    Prefira corrigir o MAPA_ROTULOS acima. */
 const CRIAR_LABEL_SE_FALTAR = false;
 
+/* Estado dos leads que chegam pelo site em ingles.
+   O formulario /en/ nao TEM campo de estado, e isso e proposital: quem chega
+   pelo ingles em geral nao e do Brasil, e um obrigatorio impossivel de
+   responder derruba a conversao (ver formulario_en no build_en.py). Sem isto a
+   coluna ficaria vazia em todo lead estrangeiro; "Exterior" ja e o rotulo que a
+   lista de estados usa para esse caso, e ja esta cadastrado no board.
+   Nao e infalivel — um brasileiro pode navegar em ingles — mas e melhor
+   informacao do que campo vazio. */
+const ESTADO_PADRAO_EN = 'Exterior';
+
+/** O lead veio de uma pagina /en/? A URL e preenchida pelo js/contact-form.js. */
+function veioDoSiteEmIngles(url) {
+  try {
+    return new URL(String(url)).pathname.startsWith('/en/');
+  } catch (e) {
+    return /\/en\//.test(String(url || ''));
+  }
+}
+
 const LIMITES = { nome: 255, email: 255, telefone: 40, empresa: 255, mensagem: 5000 };
 
 function limpa(valor, max) {
@@ -135,8 +154,11 @@ async function criarLead(data) {
      phone vazio fazem a mutation falhar. */
   if (telefone) columnValues[COL.telefone] = { phone: telefone, countryShortName: 'BR' };
 
+  const estado = rotulo('estado', data.estado) ||
+    (veioDoSiteEmIngles(data.url) ? ESTADO_PADRAO_EN : '');
+
   const dropdowns = [
-    [COL.estado, rotulo('estado', data.estado)],
+    [COL.estado, estado],
     [COL.segmento, rotulo('segmento', data.segmento)],
     [COL.contato, rotulo('contato', data.forma_resposta)],
   ];
