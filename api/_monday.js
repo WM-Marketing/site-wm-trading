@@ -120,6 +120,32 @@ function rotulo(campo, valor) {
   return MAPA_ROTULOS[campo] && MAPA_ROTULOS[campo][v] ? MAPA_ROTULOS[campo][v] : v;
 }
 
+/* TELEFONE PARA A COLUNA phone DO MONDAY — so digitos.
+   O site aplica mascara: o visitante manda "(27) 99999-9999". A coluna rejeita
+   parenteses, espaco e hifen com "invalid value ... for this column", e a
+   mutation inteira falha — o lead nao vira item. Passou despercebido ate
+   31/08/2026 porque os testes preenchiam o campo por JavaScript, com o numero
+   ja limpo, contornando a mascara.
+
+   Numero brasileiro sem DDI (10 digitos fixo, 11 celular) recebe o 55. Fora da
+   faixa plausivel devolve vazio, e a coluna e OMITIDA: perder o telefone e
+   ruim, perder o lead inteiro por causa dele e pior. */
+function normalizaTelefone(bruto) {
+  const texto = String(bruto == null ? '' : bruto).trim();
+  const digitos = texto.replace(/\D/g, '');
+  if (digitos.length < 10 || digitos.length > 15) return '';
+
+  /* O "+" (ou o 00) diz que o DDI JA veio — nao prefixar. Sem esta checagem um
+     numero americano de 11 digitos, +1 555 123 4567, virava 55 1 555..., um
+     telefone brasileiro que nao existe. Vale para os formularios /en/, que
+     pedem justamente o formato internacional. */
+  const jaTemDDI = /^\s*(\+|00)/.test(texto);
+  if (jaTemDDI) return digitos;
+
+  /* Sem DDI: 10 digitos e fixo com DDD, 11 e celular. Os dois sao brasileiros. */
+  return digitos.length <= 11 ? '55' + digitos : digitos;
+}
+
 function emailValido(e) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(e);
 }
@@ -186,7 +212,12 @@ async function criarLead(data) {
 
   /* Campos opcionais so entram quando tem valor: dropdown com label vazio e
      phone vazio fazem a mutation falhar. */
-  if (telefone) columnValues[COL.telefone] = { phone: telefone, countryShortName: 'BR' };
+  const telefoneMonday = normalizaTelefone(telefone);
+  if (telefoneMonday) {
+    columnValues[COL.telefone] = { phone: telefoneMonday, countryShortName: 'BR' };
+  } else if (telefone) {
+    console.log('Monday: telefone fora do formato aceito, coluna omitida');
+  }
 
   const estado = rotulo('estado', data.estado) ||
     (veioDoSiteEmIngles(data.url) ? ESTADO_PADRAO_EN : '');
