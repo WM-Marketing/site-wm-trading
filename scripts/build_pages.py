@@ -484,9 +484,12 @@ def get_youtube_embed_url(url):
     """Extracts YouTube ID and formats it as an embeddable URL."""
     if not url:
         return ""
-    match = re.search(r'(?:youtu\.be/|youtube\.com/(?:embed/|v/|watch\?v=|watch\?.+&v=))([^&\s?#\\]+)', url)
+    # Alguns arquivos Markdown escapam o sublinhado em IDs do YouTube.
+    # Normalize antes de extrair o ID para não truncá-lo no caractere "\\".
+    url = url.replace('\\_', '_')
+    match = re.search(r'(?:youtu\.be/|youtube\.com/(?:embed/|v/|shorts/|watch\?v=|watch\?.+&v=))([^&\s?#\\]+)', url)
     if match:
-        video_id = match.group(1)
+        video_id = match.group(1).replace('\\_', '_')
         return f"https://www.youtube.com/embed/{video_id}"
     return ""
 
@@ -698,6 +701,15 @@ def markdown_to_html(text):
             new_lines.append(f'<blockquote>{quote_text}</blockquote>')
             
         # Headers
+        elif line.startswith('###### '):
+            new_lines.append(f'<h6>{line[7:].strip()}</h6>')
+            i += 1
+        elif line.startswith('##### '):
+            new_lines.append(f'<h5>{line[6:].strip()}</h5>')
+            i += 1
+        elif line.startswith('#### '):
+            new_lines.append(f'<h4>{line[5:].strip()}</h4>')
+            i += 1
         elif line.startswith('### '):
             new_lines.append(f'<h3>{line[4:].strip()}</h3>')
             i += 1
@@ -768,18 +780,20 @@ def markdown_to_html(text):
             i += 1
 
         # YouTube Videos
-        elif line.strip().startswith('https://youtu.be/') or line.strip().startswith('https://www.youtube.com/embed/') or line.strip().startswith('https://www.youtube.com/watch'):
-            yt_url = line.strip()
+        elif line.strip().startswith('https://youtu.be/') or line.strip().startswith('https://www.youtube.com/embed/') or line.strip().startswith('https://www.youtube.com/watch') or line.strip().startswith('https://www.youtube.com/shorts/') or line.strip().startswith('https://youtube.com/shorts/'):
+            yt_url = line.strip().replace('\\_', '_')
             yt_id = ''
             if 'youtu.be/' in yt_url:
-                yt_id = yt_url.split('youtu.be/')[1].split('?')[0].split('\\')[0].strip()
+                yt_id = yt_url.split('youtu.be/')[1].split('?')[0].strip()
             elif 'v=' in yt_url:
                 yt_id = yt_url.split('v=')[1].split('&')[0].strip()
             elif 'embed/' in yt_url:
                 yt_id = yt_url.split('embed/')[1].split('?')[0].strip()
+            elif 'shorts/' in yt_url:
+                yt_id = yt_url.split('shorts/')[1].split('?')[0].strip()
                 
             if yt_id:
-                new_lines.append(f'<iframe src="https://www.youtube.com/embed/{yt_id}" allowfullscreen></iframe>')
+                new_lines.append(f'<iframe src="https://www.youtube.com/embed/{yt_id}" title="Vídeo do YouTube" loading="lazy" allowfullscreen></iframe>')
             else:
                 new_lines.append(f'<p>{line}</p>')
             i += 1
@@ -800,7 +814,27 @@ def markdown_to_html(text):
                 i += 1
             para_text = ' '.join(para_lines)
             if para_text:
+                # URLs soltas do YouTube, inclusive no fim de uma frase, devem
+                # aparecer como video incorporado. Links aplicados a palavras
+                # em Markdown sao preservados e continuam links normais.
+                bare_youtube_urls = re.findall(
+                    r'(?<!\()https?://(?:www\.)?(?:youtube\.com|youtu\.be)/[^\s<]+',
+                    para_text,
+                    flags=re.IGNORECASE,
+                )
+                embed_urls = []
+                for video_url in bare_youtube_urls:
+                    clean_url = video_url.rstrip('.,;:!?)')
+                    embed_url = get_youtube_embed_url(clean_url)
+                    if embed_url:
+                        para_text = para_text.replace(video_url, '')
+                        if embed_url not in embed_urls:
+                            embed_urls.append(embed_url)
                 new_lines.append(f'<p>{para_text}</p>')
+                new_lines.extend(
+                    f'<iframe src="{embed_url}" title="Vídeo do YouTube" loading="lazy" allowfullscreen></iframe>'
+                    for embed_url in embed_urls
+                )
                 
         # Safeguard to prevent infinite loops
         if i == old_i:
