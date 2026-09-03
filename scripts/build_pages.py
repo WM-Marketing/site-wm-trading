@@ -745,7 +745,7 @@ def markdown_to_html(text):
   <div class="wm-interactive-chart__canvas"><canvas id="chart-autos-8703" aria-label="Gráfico de linha da importação mensal de automóveis de passageiros, de julho de 2025 a junho de 2026"></canvas></div>
   <p class="wm-interactive-chart__source">Valores FOB em US$ milhões. Fonte: MDIC/Comex Stat.</p>
 </figure>
-<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+<script src="/js/chart.umd.min.js"></script>
 <script>
 (() => {
   const canvas = document.getElementById('chart-autos-8703');
@@ -772,6 +772,86 @@ def markdown_to_html(text):
       scales: {
         y: { beginAtZero: true, ticks: { callback: value => `US$ ${value.toLocaleString('pt-BR')} mi` }, grid: { color: '#e5e5e5' } },
         x: { grid: { display: false } }
+      }
+    }
+  });
+})();
+</script>''')
+            i += 1
+
+        # Gráfico interativo: importação mensal de T-shirts e camisetas de malha (SH4 6109)
+        elif line.strip() == '{{wm-chart:camisetas-mensal}}':
+            new_lines.append('''<figure class="wm-interactive-chart">
+  <figcaption>Importação mensal de T-shirts e camisetas de malha</figcaption>
+  <div class="wm-interactive-chart__canvas"><canvas id="chart-camisetas-mensal" aria-label="Gráfico de linha da importação mensal de T-shirts e camisetas de malha, de agosto de 2025 a julho de 2026"></canvas></div>
+  <p class="wm-interactive-chart__source">Fonte: MDIC/Comex Stat</p>
+</figure>
+<script src="/js/chart.umd.min.js"></script>
+<script>
+(() => {
+  const canvas = document.getElementById('chart-camisetas-mensal');
+  if (!canvas || !window.Chart) return;
+  new Chart(canvas, {
+    type: 'line',
+    data: {
+      labels: ['ago./25', 'set./25', 'out./25', 'nov./25', 'dez./25', 'jan./26', 'fev./26', 'mar./26', 'abr./26', 'mai./26', 'jun./26', 'jul./26'],
+      datasets: [{
+        label: 'Valor FOB (US$ milhões)',
+        data: [21.1, 19.8, 28.1, 22.5, 20.6, 29.6, 21.0, 22.1, 21.9, 19.1, 22.6, 25.1],
+        borderColor: '#ff5a1f', backgroundColor: 'rgba(255, 90, 31, 0.16)',
+        borderWidth: 3, fill: true, tension: 0.32, pointRadius: 4,
+        pointHoverRadius: 6, pointBackgroundColor: '#ff5a1f'
+      }]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      interaction: { mode: 'index', intersect: false },
+      plugins: {
+        legend: { display: false },
+        tooltip: { callbacks: { label: ctx => ` US$ ${ctx.parsed.y.toLocaleString('pt-BR', { minimumFractionDigits: 1, maximumFractionDigits: 1 })} milhões` } }
+      },
+      scales: {
+        y: { beginAtZero: false, ticks: { callback: value => `US$ ${value.toLocaleString('pt-BR')} mi` }, grid: { color: '#e5e5e5' } },
+        x: { grid: { display: false } }
+      }
+    }
+  });
+})();
+</script>''')
+            i += 1
+
+        # Gráfico interativo: composição de algodão e valor médio por quilo de camisetas importadas
+        elif line.strip() == '{{wm-chart:camisetas-origens}}':
+            new_lines.append('''<figure class="wm-interactive-chart">
+  <figcaption>Composição por fibra e valor médio por quilo, por origem</figcaption>
+  <div class="wm-interactive-chart__canvas"><canvas id="chart-camisetas-origens" aria-label="Gráfico comparativo da participação de algodão, outras fibras e valor médio por quilo de camisetas importadas da China, Peru e Bangladesh"></canvas></div>
+  <p class="wm-interactive-chart__source">Fonte: MDIC/Comex Stat</p>
+</figure>
+<script src="/js/chart.umd.min.js"></script>
+<script>
+(() => {
+  const canvas = document.getElementById('chart-camisetas-origens');
+  if (!canvas || !window.Chart) return;
+  new Chart(canvas, {
+    data: {
+      labels: ['China', 'Peru', 'Bangladesh'],
+      datasets: [
+        { type: 'bar', label: 'Algodão (%)', data: [29, 99, 85], backgroundColor: '#ff5a1f', borderRadius: 4, stack: 'composição', yAxisID: 'y' },
+        { type: 'bar', label: 'Outras fibras (%)', data: [71, 1, 15], backgroundColor: '#8b8b8b', borderRadius: 4, stack: 'composição', yAxisID: 'y' },
+        { type: 'line', label: 'Valor médio (US$/kg)', data: [11.3, 27.7, 16.9], borderColor: '#133b5c', backgroundColor: '#133b5c', borderWidth: 3, pointRadius: 5, pointHoverRadius: 7, tension: 0.25, yAxisID: 'yPrice' }
+      ]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      interaction: { mode: 'index', intersect: false },
+      plugins: {
+        legend: { position: 'bottom', labels: { usePointStyle: true, padding: 18 } },
+        tooltip: { callbacks: { label: ctx => ctx.dataset.yAxisID === 'yPrice' ? ` ${ctx.dataset.label}: US$ ${ctx.parsed.y.toLocaleString('pt-BR', { minimumFractionDigits: 1, maximumFractionDigits: 1 })}/kg` : ` ${ctx.dataset.label}: ${ctx.parsed.y.toLocaleString('pt-BR')}%` } }
+      },
+      scales: {
+        x: { stacked: true, grid: { display: false } },
+        y: { stacked: true, beginAtZero: true, max: 100, ticks: { callback: value => `${value}%` }, grid: { color: '#e5e5e5' } },
+        yPrice: { position: 'right', beginAtZero: true, ticks: { callback: value => `US$ ${value}/kg` }, grid: { drawOnChartArea: false } }
       }
     }
   });
