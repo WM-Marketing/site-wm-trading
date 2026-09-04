@@ -3092,7 +3092,12 @@ Se você tiver alguma pergunta sobre esta Política de Privacidade ou as prátic
     print("\nGenerating sitemap.xml...")
     skip_dirs = {".git", ".claude", ".agents", ".cursor", ".windsurf", "node_modules",
                  "scripts", "content", "docs", "brand", "api", "js", "css", "images",
-                 "wp-content", "mapa-brasil"}
+                 "wp-content", "mapa-brasil",
+                 # Paginas internas: acessiveis por link, nunca no sitemap.
+                 # Declarar no mapa uma pagina noindex manda o Google para um
+                 # endereco que ele nao pode indexar — o mesmo motivo do
+                 # skip_files logo abaixo.
+                 "interno"}
     # Pagina que responde 404 ou que e noindex nao entra no mapa — declarar uma
     # dessas manda o Google para um endereco que ele nao pode indexar (era o caso do
     # /offline/, herdado da pausa de julho).

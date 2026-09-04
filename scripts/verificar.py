@@ -47,8 +47,14 @@ URL_PADRAO = "https://site-wm-trading.vercel.app"
 
 # Paginas que legitimamente NAO tem tracking/consent (conferido em 24/07/2026):
 # a pagina de pausa e os tres iframes do mapa, que sao embutidos em outras paginas.
+#
+# 04/09/2026: entram as instrucoes de trabalho em interno/. Sao documentos de
+# uso interno, sem GTM e sem cookie nenhum — sem tratamento de dados nao ha o
+# que consentir, entao o CMP nao se aplica. Se um dia uma pagina de interno/
+# passar a carregar tracking, tirar daqui em vez de manter a excecao.
 SEM_TRACKING_OK = {
     "offline.html",
+    os.path.join("interno", "padrao-de-emails.html"),
     os.path.join("mapa-brasil", "assets", "original_visitedplaces.html"),
     os.path.join("mapa-brasil", "mapa_colombia_panama.html"),
     os.path.join("mapa-brasil", "mapa_completo.html"),
