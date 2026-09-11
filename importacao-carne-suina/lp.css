@@ -142,16 +142,6 @@ img { max-width: 100%; display: block; }
 .lp-ms .l { font-size: var(--fs-xs); color: rgba(255,255,255,0.65); margin-top: 8px; }
 
 /* ---------- PROVA SOCIAL ---------- */
-.lp-quotes { display: grid; grid-template-columns: repeat(3,1fr); gap: 18px; }
-.lp-quote { background: #fff; border: 1px solid #efefef; border-radius: var(--radius-lg); padding: 28px; }
-.lp-quote .stars { color: var(--color-primary); letter-spacing: 2px; font-size: var(--fs-sm); margin-bottom: 12px; }
-.lp-quote p { font-size: var(--fs-sm); color: var(--color-text-dark); line-height: 1.7; font-style: italic; margin-bottom: 18px; }
-.lp-quote .who { display: flex; align-items: center; gap: 12px; }
-.lp-quote .av { width: 44px; height: 44px; border-radius: 50%; background: var(--color-primary); color: #fff; display: flex; align-items: center; justify-content: center; font-weight: var(--fw-semibold); font-size: var(--fs-sm); flex-shrink: 0; }
-.lp-quote .who b { display: block; font-size: var(--fs-sm); font-weight: var(--fw-semibold); }
-.lp-quote .who span { font-size: var(--fs-xs); color: var(--color-text-muted); }
-.lp-ph-note { text-align: center; margin-top: 24px; font-size: var(--fs-xs); color: var(--color-text-muted); }
-.lp-ph-note code { background: var(--color-primary-light); color: var(--color-primary); padding: 2px 8px; border-radius: var(--radius-sm); font-weight: var(--fw-semibold); }
 
 /* ---------- FAQ ---------- */
 .lp-faq-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0 40px; max-width: 1000px; margin: 0 auto; }
@@ -215,7 +205,7 @@ img { max-width: 100%; display: block; }
   .lp-nav-links.open li { width: 100%; }
   .lp-nav-links.open a { display: block; width: 100%; padding: 14px 24px; border-bottom: 1px solid #f8f8f8; }
   .lp-nav-actions .btn { display: none; }
-  .lp-grid.c3, .lp-grid.c4, .lp-steps, .lp-quotes, .lp-faq-grid, .lp-market-stats { grid-template-columns: 1fr; }
+  .lp-grid.c3, .lp-grid.c4, .lp-steps, .lp-faq-grid, .lp-market-stats { grid-template-columns: 1fr; }
   .lp-trustbar .container { grid-template-columns: 1fr 1fr; gap: 28px 16px; }
   .lp-market-stats { grid-template-columns: 1fr 1fr; }
   .lp-fgrid { grid-template-columns: 1fr; }
