@@ -197,6 +197,7 @@ SEGMENT_URL_OVERRIDES = {
     # que escrito a mao (layout proprio de 9 secoes, 26/08/2026). Entrar neste
     # dicionario e o que impede o gerador de sobrescreve-lo no proximo build.
     "equipamentos-fotovoltaicos": "/segmentos/equipamentos-fotovoltaicos/",
+    "aco": "/segmentos/aco/",
     # Mesmo caso (27/08/2026): segmentos/maquinas.html passou a ser escrita a
     # mao, clonando o layout de 9 secoes da fotovoltaico com namespace .mq- em
     # css/maquinas.css e js/maquinas.js. A URL nao muda; esta entrada so
@@ -1009,6 +1010,17 @@ VITRINES_DE_BLOG = {
         ("maquina", "máquina", "equipamento", "trator", "colheitadeira",
          "industrial", "agricola", "agrícola"),
         "Máquinas",
+    ),
+    "blog/posts-aco.json": (
+        {"aço", "aco", "metais", "metais & derivados", "siderurgia"},
+        # ATENCAO: o casamento por palavra e SUBSTRING sobre titulo+slug, e em
+        # portugues "aco"/"aço" moram dentro de importaCOes, aCOrdo e
+        # desembaraCO — com eles a vitrine trazia varejo e Mercosul. Aqui so
+        # entram termos que nao aparecem dentro de outra palavra comum; quem
+        # de fato seleciona os posts de aco e a CATEGORIA, acima.
+        ("siderurg", "niquel", "níquel", "vergalh", "galvaniz", "bobina",
+         "metalurg", "metais"),
+        "Aço e Metais",
     ),
 }
 VITRINE_QTD = 6

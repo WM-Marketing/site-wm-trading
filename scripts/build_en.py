@@ -71,6 +71,10 @@ CAPAS_PROPRIAS_EN = {
     # generico pelo mosaico .mq-hero. Sem esta linha a versao em ingles sai do
     # build sem imagem de capa.
     "/en/segments/machines/": "/images/maquinas/faixa-tratores.jpg",
+    # Mesmo caso desde 11/09/2026: a /segmentos/aco/ virou pagina manual com o
+    # mosaico .aco-hero. Sem esta linha a /en/segments/steel/ sai do build sem
+    # imagem de capa.
+    "/en/segments/steel/": "/images/aco/faixa-aco.jpg",
 }
 
 
