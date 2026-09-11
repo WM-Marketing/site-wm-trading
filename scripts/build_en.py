@@ -813,8 +813,10 @@ TEXTOS_ACO_EN = [
     # ── S8 resultados ──
     ("Nossos<br>\n        <span class=\"aco-result__title-hl\">resultados</span>",
      "Our<br>\n        <span class=\"aco-result__title-hl\">results</span>"),
-    ("Como resultado do desejo de <strong>importar aço</strong> com as condições\n        mais vantajosas do mercado, conquistamos o índice de",
-     "Driven by the goal of <strong>importing steel</strong> on the best terms in the\n        market, we have reached a rate of"),
+    # o 92% entra NO PAR: solto entre os dois trechos, o "de" que liga o numero
+    # ao canal verde nao casava com nada e saia em portugues na pagina inglesa.
+    ("Como resultado do desejo de <strong>importar aço</strong> com as condições\n        mais vantajosas do mercado, conquistamos o índice de\n        <span class=\"aco-result__num\">92%</span> de",
+     "Driven by the goal of <strong>importing steel</strong> on the best terms in the\n        market, we have reached a rate of\n        <span class=\"aco-result__num\">92%</span>"),
     ("<strong>parametrização em canal verde</strong> — e apenas 5% das operações\n        são retidas em canal amarelo —, agregando mais <strong>segurança</strong> e\n        <strong>agilidade</strong> às operações.",
      "<strong>green-channel clearance</strong> — with only 5% of operations held in the\n        yellow channel — bringing more <strong>security</strong> and\n        <strong>speed</strong> to the operations."),
     ("Isso significa que o tempo de nacionalização e liberação da carga no porto\n      <strong>com a WM é muito mais rápido.</strong> Conte com o know-how da WM para\n      importar aço através das melhores oportunidades do comércio internacional.",
@@ -826,6 +828,22 @@ TEXTOS_ACO_EN = [
     ("Conte com planejamento tributário, gestão logística e\n        acompanhamento da operação de ponta a ponta.",
      "Count on tax planning, logistics management and end-to-end\n        follow-up of the operation."),
     ("Fale com um especialista e tire suas dúvidas.", "Talk to a specialist and get your questions answered."),
+
+    # ── alt e aria-label ──
+    ("Bobinas de aço em galpão industrial — WM CAST sobre importação de aço",
+     "Steel coils in an industrial warehouse — WM CAST on steel imports"),
+    ("Bobinas de aço em linha de laminação, no galpão de uma siderúrgica",
+     "Steel coils on a rolling line inside a steel mill"),
+    ("Bobinas de aço estocadas em galpão industrial",
+     "Steel coils stored in an industrial warehouse"),
+    ("Barras e perfilados de aço em linha de produção",
+     "Steel bars and sections on a production line"),
+    ("Chapas de aço empilhadas", "Stacked steel plates"),
+    ("Contêiner WM Trading e pá carregadeira — We Make it better",
+     "WM Trading container and wheel loader — We Make it better"),
+    ("Reproduzir vídeo", "Play video"),
+    ("Fechar vídeo", "Close video"),
+    ("Vídeo institucional", "Corporate video"),
 ]
 
 
@@ -935,6 +953,18 @@ TEXTOS_FOTOVOLTAICO_EN = [
     ("Conte com planejamento tributário, gestão logística e\n        acompanhamento da operação de ponta a ponta.",
      "Count on tax planning, logistics management and end-to-end\n        follow-up of the operation."),
     ("Fale com um especialista e tire suas dúvidas.", "Talk to a specialist and get your questions answered."),
+
+    # ── alt e aria-label ──
+    ("Usina fotovoltaica ao pôr do sol", "Photovoltaic plant at sunset"),
+    ("Usina fotovoltaica vista de cima", "Aerial view of a photovoltaic plant"),
+    ("Painéis fotovoltaicos em detalhe", "Close-up of photovoltaic panels"),
+    ("Linha de produção de módulos", "Module production line"),
+    ("Contêineres de módulos em obra", "Containers of modules on site"),
+    ("Fileira de inversores em usina", "Row of inverters at a solar plant"),
+    ("Inversores solares instalados", "Solar inverters installed"),
+    ("Reproduzir vídeo", "Play video"),
+    ("Fechar vídeo", "Close video"),
+    ("Vídeo institucional", "Corporate video"),
 ]
 
 

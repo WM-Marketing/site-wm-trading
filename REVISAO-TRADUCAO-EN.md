@@ -156,3 +156,23 @@ Páginas no ar local (`python3 -m http.server 4321` na raiz do repo):
 Mandar quem lê em inglês para um artigo ou PDF em português é pior que omitir a
 seção. As duas ficam com 8 seções em vez de 9.
 
+---
+
+## Correções aplicadas na revisão (11/09/2026)
+
+Revisão do Renato apontou dois defeitos; os dois saíram do `build_en.py`, não do
+HTML gerado — corrigir na mão voltaria no build seguinte.
+
+1. **"92% de green-channel clearance"** — o `de` que liga o número ao canal verde
+   ficava entre os dois pares de tradução da seção de resultados e não casava com
+   nenhum, saindo em português na página inglesa. O par agora engloba o
+   `<span class="aco-result__num">92%</span>`, como já era na página de Máquinas.
+
+2. **`alt` de imagem e `aria-label` em português** nas duas páginas. A tabela de
+   Máquinas tem o bloco `── alt e aria-label ──`; as de Aço e Fotovoltaico não
+   tinham. Traduzidos 6 `alt` + 3 `aria-label` no Aço e 7 `alt` + 3 `aria-label`
+   no Fotovoltaico. Alt em português em página `lang="en"` faz o leitor de tela
+   trocar de voz no meio da página.
+
+Seguem em português de propósito: o `alt` do **Selo Portal de Privacidade LGPD**
+(igual em todas as páginas /en/ que já estão no ar) e os nomes das usinas.
