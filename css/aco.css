@@ -1061,22 +1061,8 @@ body.loaded .aco-hero__cta {
   display: block;
 }
 
-/* O selo e o dado dos 5% vieram do antigo rodapé da seção 7: as duas seções
-   repetiam o mesmo 92%, então o índice passou a viver num lugar só. */
-/* O selo vive sob o título, e não ao lado do texto: encostado no parágrafo
-   ele estreitava a coluna e deixava a metade esquerda vazia. Aqui ele ocupa
-   justamente esse vão, e o texto volta a ter a largura inteira. */
-.aco-result__col-titulo {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-}
-.aco-result__selo {
-  width: clamp(88px, 9vw, 124px);
-  height: auto;
-  display: block;
-  margin-top: clamp(24px, 3vw, 40px);
-}
+/* O dado dos 5% veio do antigo rodapé da seção 7: as duas seções repetiam o
+   mesmo 92%, então o índice passou a viver num lugar só. */
 
 
 /* ─────────────────────────────────────
@@ -1610,6 +1596,4 @@ select.aco-cta__input { cursor: pointer; }
   /* ── S8 — NOSSOS RESULTADOS ── */
   .aco-result__header { grid-template-columns: 1fr; }
   .aco-result__text { text-align: left; }
-  /* Empilhado, o selo fica sob o título com folga menor. */
-  .aco-result__selo { margin-top: 20px; }
 }
