@@ -1061,43 +1061,21 @@ body.loaded .aco-hero__cta {
   display: block;
 }
 
-/* Rodapé: texto + divisória + selo */
-.aco-diff__footer {
+/* O selo e o dado dos 5% vieram do antigo rodapé da seção 7: as duas seções
+   repetiam o mesmo 92%, então o índice passou a viver num lugar só. */
+.aco-result__texto-wrap {
   display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 40px;
-  margin-top: 40px;
+  align-items: flex-start;
+  gap: 28px;
 }
-
-.aco-diff__selo-text {
-  max-width: 620px;
-}
-.aco-diff__selo-title {
-  font-size: var(--fs-sm, 14px);
-  font-weight: var(--fw-semibold, 600);
-  color: var(--color-text-dark, #3A3A3A);
-  margin-bottom: 10px;
-}
-.aco-diff__selo-desc {
-  font-size: 13px;
-  font-weight: var(--fw-light, 300);
-  color: #666;
-  line-height: 1.85;
-  margin: 0;
-}
-
-.aco-diff__divider {
-  width: 1px;
-  height: 84px;
-  background: #ccc;
-  flex-shrink: 0;
-}
-
-.aco-diff__selo-logo {
-  width: 136px;
+.aco-result__selo {
+  width: 96px;
   height: auto;
   display: block;
+  flex-shrink: 0;
+}
+@media (max-width: 768px) {
+  .aco-result__texto-wrap { flex-direction: column; align-items: center; gap: 18px; }
 }
 
 
@@ -1618,13 +1596,6 @@ select.aco-cta__input { cursor: pointer; }
   .aco-diff__card--mid:hover,
   .aco-diff__card--featured:hover,
   .aco-diff__card--outer:hover { transform: none; }
-  .aco-diff__footer {
-    flex-direction: column;
-    gap: 24px;
-    text-align: center;
-  }
-  .aco-diff__divider { width: 84px; height: 1px; }
-
   /* ── S6 — CONTEÚDOS DO BLOG ──
      Abaixo de 768 os 3 cards viram uma coluna. Entre 768 e 1000 a grade cai
      para 2 colunas — ver o bloco de 1000px acima. */
