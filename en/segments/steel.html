@@ -48,9 +48,8 @@
   <script src="https://tag.goadopt.io/injector.js?website_code=e7ae093c-b92e-4ceb-9c53-ac44c0b811f8"
           class="adopt-injector"></script>
 
-  <link rel="stylesheet" href="/css/dynamic-pages.css" />
+  <link rel="stylesheet" href="/css/aco.css" />
   <script src="/js/contact-form.js" defer></script>
-  <script src="/js/lightbox.js" defer></script>
 
   <link rel="alternate" hreflang="pt-BR" href="https://www.wmtrading.com.br/segmentos/aco/" />
   <link rel="alternate" hreflang="en" href="https://www.wmtrading.com.br/en/segments/steel/" />
@@ -181,93 +180,602 @@
 
 <main>
 
-    <section class="dynamic-hero">
-      <img src="/images/aco/faixa-aco.jpg" alt="Do you want to import steel quickly and safely?" class="dynamic-hero__bg" />
-      <div class="container dynamic-hero__container">
-        <h1 class="dynamic-hero__title">Do you want to import steel quickly and safely?</h1>
-        <p class="dynamic-hero__subtitle">Get in touch with the most complete trading company in Brazil to make this dream come true.</p>
+<!-- ══════════════════════════════════════
+     SEÇÃO 1 — HERO
+     Estrutura clonada de segmentos-aeronaves.html (.aero-hero), com prefixo
+     próprio .aco-* para que ajustes aqui não alterem a página de aeronaves.
+══════════════════════════════════════ -->
+<section class="aco-hero">
+
+  <!-- Wrapper centralizado: controla tamanho e responsividade ao zoom -->
+  <div class="aco-hero__inner">
+
+    <div class="aco-hero__bg-wrap">
+      <!-- ══ MOSAICO — DESKTOP ══
+           Coordenadas em % do viewBox 2005 x 626 — mesma grade do hero de
+           aeronaves (colunas de 10%, linhas de 25%). Só as fotos mudam. -->
+      <div class="aco-hero__mosaico aco-hero__mosaico--desktop" aria-hidden="true">
+        <span class="aco-hero__bloco" style="--x:70.025%; --y:50%;     --w:20%;     --h:50%;     --cor:#F0F0F0"></span>
+        <img class="aco-hero__foto"
+             src="/images/aco/hero-bobinas.jpg"
+             sizes="(max-width: 768px) 38vw, (max-width: 1440px) 28vw, 403px"
+             alt="" width="820" height="640" decoding="async"
+             style="--x:70.025%; --y:0%;      --w:20%;     --h:50%" />
+        <img class="aco-hero__foto"
+             src="/images/aco/hero-laminado.jpg"
+             sizes="(max-width: 768px) 38vw, (max-width: 1440px) 28vw, 403px"
+             alt="" width="820" height="640" decoding="async"
+             style="--x:50.025%; --y:50%;     --w:20%;     --h:50%" />
+        <span class="aco-hero__bloco" style="--x:90.025%; --y:50%;     --w:9.975%;  --h:25.08%;  --cor:#F0F0F0"></span>
+        <span class="aco-hero__bloco" style="--x:0.798%;  --y:50%;     --w:10.025%; --h:25.08%;  --cor:#F5F5F5"></span>
+        <span class="aco-hero__bloco" style="--x:0.798%;  --y:0%;      --w:10.025%; --h:25.08%;  --cor:#F2F2F2"></span>
+        <span class="aco-hero__bloco" style="--x:59.999%; --y:24.92%;  --w:10.025%; --h:25.08%;  --cor:#F2F2F2"></span>
+        <span class="aco-hero__bloco" style="--x:10.025%; --y:74.92%;  --w:9.975%;  --h:25.08%;  --cor:#F2F2F2"></span>
+        <span class="aco-hero__bloco" style="--x:90.025%; --y:25.08%;  --w:9.975%;  --h:25.08%;  --cor:#F5F5F5"></span>
       </div>
-    </section>
+    </div>
 
-    <section class="page-section ">
-      <div class="container intro-container">
-        
-        <p class="card-desc" style="font-size: var(--fs-base); line-height: 1.7; margin-bottom: 14px;">Steel imports are a competitive and lucrative market. The availability of steel in different countries increases trade opportunities and offers many benefits to importers. Even with transport costs, the final price of steel is cheaper when imported than when purchased in Brazil.</p>
-        
+    <!-- ══ MOSAICO — SOMENTE MOBILE ══
+         Composição vertical, em % do viewBox 1254 x 1657. Mesmas duas fotos. -->
+    <div class="aco-hero__mosaico aco-hero__mosaico--mobile" aria-hidden="true">
+      <span class="aco-hero__bloco" style="--x:1.276%;  --y:0%;      --w:13.876%; --h:18.648%; --cor:#F0F0F0"></span>
+      <img class="aco-hero__foto"
+           src="/images/aco/hero-laminado.jpg"
+           alt="" width="820" height="640" decoding="async"
+           style="--x:28.549%; --y:81.352%; --w:31.738%; --h:18.648%" />
+      <span class="aco-hero__bloco" style="--x:60.526%; --y:81.231%; --w:31.579%; --h:18.648%; --cor:#F0F0F0"></span>
+      <img class="aco-hero__foto"
+           src="/images/aco/hero-bobinas.jpg"
+           alt="" width="820" height="640" decoding="async"
+           style="--x:60.287%; --y:62.583%; --w:31.738%; --h:18.769%" />
+      <span class="aco-hero__bloco" style="--x:13.876%; --y:18.648%; --w:15.789%; --h:9.354%;  --cor:#F0F0F0"></span>
+      <span class="aco-hero__bloco" style="--x:44.498%; --y:71.998%; --w:15.789%; --h:9.354%;  --cor:#F0F0F0"></span>
+      <span class="aco-hero__bloco" style="--x:84.211%; --y:18.648%; --w:15.789%; --h:9.354%;  --cor:#F0F0F0"></span>
+      <span class="aco-hero__bloco" style="--x:12.759%; --y:90.586%; --w:15.789%; --h:9.415%;  --cor:#F5F5F5"></span>
+    </div>
+
+    <!-- Conteúdo sobreposto à esquerda -->
+    <div class="aco-hero__overlay container">
+      <div class="aco-hero__content">
+        <h1 class="aco-hero__title">
+          Import steel with<br>
+          <span class="aco-hero__title-highlight">speed and security</span>
+        </h1>
+        <p class="aco-hero__text">
+          Tax planning, licensing and logistics to import steel and steelmaking inputs
+          efficiently, from the purchase abroad to delivery at your plant.
+        </p>
+        <a href="#contato" class="aco-hero__cta">
+          <img src="/images/aco/icone-botao-seta.svg" alt="" class="aco-hero__cta-icon" />
+          <span class="aco-hero__cta-text">Talk to a<br>specialist</span>
+        </a>
       </div>
-    </section>
+    </div>
 
-    <section class="page-section page-section--alternate">
-      <div class="container intro-container">
-        <h2 class="card-title" style="font-size: var(--fs-lg); font-weight: var(--fw-semibold); color: var(--color-primary); margin-bottom: 18px;">Benefits of importing with WM</h2>
-        <p class="card-desc" style="font-size: var(--fs-base); line-height: 1.7; margin-bottom: 14px;">Check below how WM offers excellence in steel imports</p><p class="card-desc" style="font-size: var(--fs-base); line-height: 1.7; margin-bottom: 14px;">We provide a complete dashboard for you to manage your imports and demands.</p><p class="card-desc" style="font-size: var(--fs-base); line-height: 1.7; margin-bottom: 14px;">Your imports will be under the responsibility of an experienced team in charge of carrying out each step with excellence.</p><p class="card-desc" style="font-size: var(--fs-base); line-height: 1.7; margin-bottom: 14px;">We have 100% parameterization in the green channel, in addition to tax benefits and specialized advice focused on better management of your imports.</p><p class="card-desc" style="font-size: var(--fs-base); line-height: 1.7; margin-bottom: 14px;">With WM, your company has a solid partnership to import steel under purchasing and nationalization conditions that are advantageous to the competitiveness of your business. WM also helps in the search and contact with the best suppliers in the international market.</p>
-        
+  </div>
+
+</section>
+
+
+<!-- ══════════════════════════════════════
+     SEÇÃO 2 — IMAGEM FULL-WIDTH (FAIXA)
+══════════════════════════════════════ -->
+<section class="aco-faixa">
+  <img
+    src="/images/aco/faixa-aco.jpg"
+    alt="Bobinas de aço em linha de laminação, no galpão de uma siderúrgica"
+    class="aco-faixa__img"
+    width="3840" height="640"
+    loading="lazy" decoding="async"
+  />
+</section>
+
+
+<!-- ══════════════════════════════════════
+     SEÇÃO 3 — INTRO: título + texto + vídeo
+══════════════════════════════════════ -->
+<section class="aco-intro">
+  <div class="container aco-intro__inner">
+
+    <!-- Coluna esquerda: título, texto e CTA -->
+    <div class="aco-intro__col reveal">
+      <h2 class="aco-intro__title">
+        Importing <span class="aco-intro__title-hl">Steel</span>
+      </h2>
+
+      <p class="aco-intro__text">
+        Used in sheets, wire, rebar and even fasteners, these items bring real gains to
+        Brazilian companies. In a highly dynamic international market, full of suppliers
+        with a technological edge in production, importing steel can make your company
+        even more competitive.
+      </p>
+
+      <p class="aco-intro__text">
+        We study the characteristics of the product to be imported and monitor the
+        applicable rates, optimising the logistics and tax chain and reducing costs
+        during customs clearance.
+      </p>
+
+      <p class="aco-intro__text">
+        <strong>Steel grades we handle:</strong> galvanised, galvalume, carbon,
+        hot- and cold-rolled, wire and mesh, welding wire, tubes, plate, valves,
+        rebar and sections.
+      </p>
+
+      <a href="/en/solutions-wm/" class="btn aco-intro__btn">Our solutions →</a>
+    </div>
+
+    <!-- Coluna direita: card de vídeo -->
+    <div class="aco-intro__video-wrap reveal">
+      <div class="aco-intro__video-card">
+        <img
+          src="/images/aco/video-poster.jpg"
+          alt="Bobinas de aço em galpão industrial — WM CAST sobre importação de aço"
+          class="aco-intro__video-img"
+          width="2080" height="770"
+          loading="lazy" decoding="async"
+        />
+        <button class="aco-intro__play" aria-label="Reproduzir vídeo">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <polygon points="6,3 20,12 6,21" fill="#FC5000"/>
+          </svg>
+        </button>
       </div>
-    </section>
+    </div>
 
-    <section class="page-section ">
-      <div class="container intro-container">
-        <h2 class="card-title" style="font-size: var(--fs-lg); font-weight: var(--fw-semibold); color: var(--color-primary); margin-bottom: 18px;">Need to import steel for your company?</h2>
-        <p class="card-desc" style="font-size: var(--fs-base); line-height: 1.7; margin-bottom: 14px;">Fill out the form for one of our specialists to contact you</p><p class="card-desc" style="font-size: var(--fs-base); line-height: 1.7; margin-bottom: 14px;">We are specialists in importing different sectors.</p>
-        
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════
+     SEÇÃO 4 — BENEFÍCIOS (LISTA EXPANSÍVEL)
+     Substitui o carrossel. O comportamento é o do protocolo enviado: no
+     desktop o item abre ao passar o mouse, no toque abre no clique, e o
+     teclado abre no foco — sempre um único item aberto.
+     A pele é a do site: Poppins, tokens de cor, container de 1200 e o botão
+     padrão .btn.
+══════════════════════════════════════ -->
+<section class="aco-benef" aria-labelledby="aco-benef-title">
+  <div class="container aco-benef__inner">
+
+    <header class="aco-benef__header reveal">
+      <p class="aco-benef__eyebrow">What sets us apart</p>
+
+      <h2 class="aco-benef__title" id="aco-benef-title">
+        Benefits of importing
+        <span class="aco-benef__title-hl">steel with WM</span>
+      </h2>
+
+      <span class="aco-benef__header-arrow" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+             stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg>
+      </span>
+    </header>
+
+    <div class="aco-benef__list">
+
+      <article class="aco-benef__item is-open" tabindex="0">
+        <div class="aco-benef__thumb">
+          <img width="720" height="760" src="/images/aco/benef-01.jpg" alt="Barras e perfilados de aço em linha de produção" loading="lazy" decoding="async">
+        </div>
+
+        <div class="aco-benef__num">01.</div>
+
+        <div class="aco-benef__content">
+          <div class="aco-benef__head">
+            <h3 class="aco-benef__item-title">Real-time tracking</h3>
+            <span class="aco-benef__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                     stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            </span>
+          </div>
+
+          <div class="aco-benef__details">
+            <div class="aco-benef__details-inner">
+              <p class="aco-benef__desc">A full dashboard where you follow every stage of the operation, with more control and transparency over the import process.</p>
+              <a class="btn aco-benef__btn" href="/en/solutions-wm/">
+                Learn more
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                     stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+              </a>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <article class="aco-benef__item" tabindex="0">
+        <div class="aco-benef__thumb">
+          <img width="720" height="760" src="/images/aco/benef-02.jpg" alt="Bobinas de aço estocadas em galpão industrial" loading="lazy" decoding="async">
+        </div>
+
+        <div class="aco-benef__num">02.</div>
+
+        <div class="aco-benef__content">
+          <div class="aco-benef__head">
+            <h3 class="aco-benef__item-title">Global supplier network</h3>
+            <span class="aco-benef__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                     stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            </span>
+          </div>
+
+          <div class="aco-benef__details">
+            <div class="aco-benef__details-inner">
+              <p class="aco-benef__desc">Solid partnerships with suppliers abroad, so you can choose the product that best fits your need and negotiate the terms of purchase.</p>
+              <a class="btn aco-benef__btn" href="/en/solutions-wm/">
+                Learn more
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                     stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+              </a>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <article class="aco-benef__item" tabindex="0">
+        <div class="aco-benef__thumb">
+          <img width="720" height="760" src="/images/aco/benef-03.jpg" alt="Chapas de aço empilhadas" loading="lazy" decoding="async">
+        </div>
+
+        <div class="aco-benef__num">03.</div>
+
+        <div class="aco-benef__content">
+          <div class="aco-benef__head">
+            <h3 class="aco-benef__item-title">Tax benefits for your import</h3>
+            <span class="aco-benef__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                     stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            </span>
+          </div>
+
+          <div class="aco-benef__details">
+            <div class="aco-benef__details-inner">
+              <p class="aco-benef__desc">Nationwide reach and 7 tax benefits that cut the ICMS rate levied on steel imports, making the tax planning sharper.</p>
+              <a class="btn aco-benef__btn" href="/en/solutions-wm/">
+                Learn more
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                     stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+              </a>
+            </div>
+          </div>
+        </div>
+      </article>
+
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════
+     SEÇÃO 5 — GESTÃO DA OPERAÇÃO
+     Grade escalonada full-bleed: a faixa de cima ocupa a metade DIREITA da
+     viewport (37,5% → 87,5%) e a de baixo a metade ESQUERDA (12,5% → 62,5%),
+     com o texto encaixado no vão de cada uma. Os cards usam o mesmo efeito
+     dos .motivo-card da home (holofote radial + borda em gradiente).
+══════════════════════════════════════ -->
+<section class="aco-gestao">
+
+  <!-- Faixa 1: texto à esquerda, três cards à direita -->
+  <div class="aco-gestao__band aco-gestao__band--1">
+    <div class="aco-gestao__aside aco-gestao__aside--left reveal">
+      <h2 class="aco-gestao__title">
+        Full management<br>
+        of the operation.<br>
+        From <span class="aco-gestao__hl">documentation</span><br>
+        to <span class="aco-gestao__hl">delivery at the plant</span>
+      </h2>
+    </div>
+
+    <div class="aco-gestao__cards">
+        <article class="aco-gestao__card">
+          <div class="aco-gestao__card-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"
+                 stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8l-5-5Z"/><path d="M14 3v5h5"/><path d="m8.8 14.2 2 2 3.6-3.6"/></svg>
+          </div>
+          <h3 class="aco-gestao__card-title">Documentation<br>under control</h3>
+          <p class="aco-gestao__card-text">Document tracking to reduce inconsistencies and delays.</p>
+        </article>
+
+        <article class="aco-gestao__card">
+          <div class="aco-gestao__card-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"
+                 stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="6" width="19" height="12" rx="2"/><circle cx="12" cy="12" r="2.4"/><path d="M6 9.6v4.8M18 9.6v4.8"/></svg>
+          </div>
+          <h3 class="aco-gestao__card-title">Coordinated<br>payments</h3>
+          <p class="aco-gestao__card-text">Payments managed according to the stages and terms of the operation.</p>
+        </article>
+
+        <article class="aco-gestao__card">
+          <div class="aco-gestao__card-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"
+                 stroke-linecap="round" stroke-linejoin="round"><path d="M3 10 12 4.5 21 10"/><path d="M5.5 10v8.5M10 10v8.5M14 10v8.5M18.5 10v8.5"/><path d="M3 21h18"/></svg>
+          </div>
+          <h3 class="aco-gestao__card-title">Financial management<br>of the operation</h3>
+          <p class="aco-gestao__card-text">Follow-up on letters of credit and other international trade instruments.</p>
+        </article>
+    </div>
+  </div>
+
+  <!-- Faixa 2: três cards à esquerda, texto à direita -->
+  <div class="aco-gestao__band aco-gestao__band--2">
+    <div class="aco-gestao__cards">
+        <article class="aco-gestao__card">
+          <div class="aco-gestao__card-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"
+                 stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 3 7.5v9L12 21l9-4.5v-9L12 3Z"/><path d="M3 7.5 12 12l9-4.5M12 12v9"/></svg>
+          </div>
+          <h3 class="aco-gestao__card-title">Tailored<br>shipments</h3>
+          <p class="aco-gestao__card-text">Volumes, batches and priorities organised to match the production schedule.</p>
+        </article>
+
+        <article class="aco-gestao__card">
+          <div class="aco-gestao__card-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"
+                 stroke-linecap="round" stroke-linejoin="round"><path d="M6 13.5s3-2.9 3-5.2A3 3 0 1 0 3 8.3c0 2.3 3 5.2 3 5.2Z"/><circle cx="6" cy="8.2" r="1"/><path d="M18 21s3-2.9 3-5.2a3 3 0 1 0-6 0c0 2.3 3 5.2 3 5.2Z"/><circle cx="18" cy="15.8" r="1"/><path d="M9 11.2c3 0 3 4.2 6 4.2" stroke-dasharray="2 2.2"/></svg>
+          </div>
+          <h3 class="aco-gestao__card-title">End-to-end<br>visibility</h3>
+          <p class="aco-gestao__card-text">Monitoring of shipments and of the key milestones of the operation.</p>
+        </article>
+
+        <article class="aco-gestao__card">
+          <div class="aco-gestao__card-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"
+                 stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 7h10.5v9H2.5z"/><path d="M13 10.2h3.9l3.1 3.1V16H13z"/><circle cx="6.6" cy="18.4" r="1.8"/><circle cx="16.8" cy="18.4" r="1.8"/></svg>
+          </div>
+          <h3 class="aco-gestao__card-title">From arrival to<br>final destination</h3>
+          <p class="aco-gestao__card-text">Domestic logistics coordinated all the way to the plant, heavy cargo included.</p>
+        </article>
+    </div>
+
+    <div class="aco-gestao__aside aco-gestao__aside--right reveal">
+      <p class="aco-gestao__text">
+        We coordinate the different stages of the import to bring more
+        <strong>predictability, control and efficiency</strong>
+        to steel and steelmaking inputs.
+      </p>
+      <a href="/en/solutions-wm/" class="btn aco-gestao__btn">See our solutions →</a>
+    </div>
+  </div>
+
+  <!-- Padrão WM em zig-zag fechando a seção (equivale ao .numeros-deco do
+       site, que repete o WM.svg no rodapé de uma seção) -->
+  <div class="aco-deco-wm" aria-hidden="true"></div>
+
+</section>
+
+
+
+
+
+<!-- ══════════════════════════════════════
+     SEÇÃO 7 — DIFERENCIAIS DA WM
+     Clone de .aero-diff: mesmos cards em arco (01/05 na base, 02/04 a -20px,
+     03 destacado a -40px e mais largo), mesma sobreposição e o mesmo swoosh.
+     O rodapé traz o bloco de parametrização em canal verde.
+══════════════════════════════════════ -->
+<section class="aco-diff">
+  <div class="container">
+
+    <h2 class="aco-diff__title">
+      <span class="aco-diff__title-hl">What sets WM apart</span> in steel imports
+    </h2>
+
+    <div class="aco-diff__cards">
+
+      <div class="aco-diff__card aco-diff__card--outer">
+        <span class="aco-diff__num">01</span>
+        <p class="aco-diff__text">Relationships with and support from international suppliers.</p>
       </div>
-    </section>
 
-    <section class="page-section page-section--alternate" id="contact">
-      <div class="container intro-container">
-        <h2 class="card-title" style="font-size: var(--fs-lg); font-weight: var(--fw-semibold); margin-bottom: 10px;">Talk to our specialists</h2>
-        <p class="card-desc" style="margin-bottom: 26px;">Tell us about your operation and our team will get back to you shortly.</p>
-        <form class="contact-form-js grid gap-4 form-grid-wm form-grid-wm--2col" data-form-type="contato">
-          <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" class="hidden" aria-hidden="true" style="display:none;" />
+      <div class="aco-diff__card aco-diff__card--mid">
+        <span class="aco-diff__num">02</span>
+        <p class="aco-diff__text">Planning of shipments, heavy cargo and schedules.</p>
+      </div>
 
-          <input name="nome" required placeholder="Full name *" class="input-wm sm-col-span-2" />
-          <input name="email" type="email" required placeholder="E-mail *" class="input-wm" />
-          <input name="telefone" type="tel" required placeholder="Phone (with country code) *" pattern="[0-9\s\(\)\+\-\.]+" class="input-wm" />
-          <input name="empresa" placeholder="Company" class="input-wm sm-col-span-2" />
+      <div class="aco-diff__card aco-diff__card--featured">
+        <span class="aco-diff__num">03</span>
+        <p class="aco-diff__text">Import Licence management and follow-up of entry into Brazil.</p>
+      </div>
 
-          <select name="segmento" required class="input-wm sm-col-span-2">
-            <option value="" disabled selected>Segment *</option>
-            <option value="Aeronaves">Aircraft</option>
-            <option value="Energia Renovável">Renewable Energy</option>
-            <option value="Alimentos e Bebidas">Food and Beverages</option>
-            <option value="Vestuário/Têxtil">Apparel/Textiles</option>
-            <option value="Informática e Eletrônicos">IT and Electronics</option>
-            <option value="Metais & Derivados">Metals & Derivatives</option>
-            <option value="Partes e Peças Automotivas">Automotive Parts and Components</option>
-            <option value="Produtos Químicos">Chemicals</option>
-            <option value="Parte e Peças Geral">General Parts and Components</option>
-            <option value="Cosméticos e Healthcare">Cosmetics and Healthcare</option>
-            <option value="Insumos e Matéria Prima">Inputs and Raw Material</option>
-            <option value="Medicamentos">Pharmaceuticals</option>
-            <option value="Combustível">Fuel</option>
-            <option value="Máquinas e Equipamentos">Machines and Equipment</option>
-            <option value="Setor Automotivo">Automotive Sector</option>
-            <option value="Outros">Others</option>
-          </select>
+      <div class="aco-diff__card aco-diff__card--mid">
+        <span class="aco-diff__num">04</span>
+        <p class="aco-diff__text">Analysis of the alternatives that apply to each operation.</p>
+      </div>
 
-          <select name="forma_resposta" required class="input-wm sm-col-span-2">
-            <option value="" disabled selected>How would you like to be contacted? *</option>
-            <option value="E-mail">E-mail</option>
+      <div class="aco-diff__card aco-diff__card--outer">
+        <span class="aco-diff__num">05</span>
+        <p class="aco-diff__text">Structuring of the international purchase and import.</p>
+      </div>
+
+    </div><!-- /.aco-diff__cards -->
+
+    <!-- Swoosh: o mesmo elemento do aeronaves, sem o avião -->
+    <div class="aco-diff__swoosh" aria-hidden="true">
+      <img src="/images/aco/swoosh.svg" alt="" class="aco-diff__swoosh-img">
+    </div>
+
+    <!-- Rodapé: canal verde -->
+  </div><!-- /.container -->
+</section>
+
+
+<!-- ══════════════════════════════════════
+     SEÇÃO 8 — NOSSOS RESULTADOS
+     Substitui os cases: nao havia nomes nem numeros de operacoes de maquinas.
+     Layout do print: titulo em duas linhas a esquerda com a regua laranja,
+     texto a direita, faixa larga no meio e o fecho embaixo.
+══════════════════════════════════════ -->
+<section class="aco-result">
+  <div class="container">
+
+    <div class="aco-result__header reveal">
+      <h2 class="aco-result__title">
+        Our<br>
+        <span class="aco-result__title-hl">results</span>
+      </h2>
+
+      <p class="aco-result__text">
+        Driven by the goal of <strong>importing steel</strong> on the best terms in the
+        market, we have reached a rate of
+        <span class="aco-result__num">92%</span> de
+        <strong>green-channel clearance</strong> — with only 5% of operations held in the
+        yellow channel — bringing more <strong>security</strong> and
+        <strong>speed</strong> to the operations.
+      </p>
+    </div>
+
+    <div class="aco-result__banner reveal">
+      <img src="/images/aco/banner-resultados.jpg"
+           alt="Contêiner WM Trading e pá carregadeira — We Make it better"
+           width="2100" height="552" loading="lazy" decoding="async">
+    </div>
+
+    <p class="aco-result__footer reveal">
+      That means customs clearance and cargo release at the port are
+      <strong>much faster with WM.</strong> Count on WM's know-how to import steel
+      through the best opportunities in international trade.
+    </p>
+
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════
+     SEÇÃO 9 — CTA + FORMULÁRIO
+     Clone de .aero-cta. O formulário mantém as classes que o js/contact-form.js
+     do site procura (.contact-form-js + data-form-type), então ao integrar ele
+     passa a enviar para /api/contato sem alteração.
+══════════════════════════════════════ -->
+<section class="aco-cta" id="contato">
+  <div class="aco-cta__bg" aria-hidden="true"></div>
+
+  <div class="aco-cta__inner">
+
+    <!-- Lado esquerdo -->
+    <div class="aco-cta__left">
+      <span class="aco-cta__icon" aria-hidden="true">
+        <svg fill="currentColor" aria-hidden="true" id="Capa_1" enable-background="new 0 0 512 512" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><g><path d="m97.371 217.611-56.094 24.01c-3.808 1.63-5.574 6.038-3.944 9.846 1.218 2.846 3.987 4.551 6.898 4.551.984 0 1.986-.195 2.948-.607l56.094-24.01c3.808-1.63 5.574-6.038 3.944-9.846s-6.04-5.572-9.846-3.944z"/><path d="m97.37 248.023-56.094 24.02c-3.808 1.63-5.573 6.039-3.942 9.847 1.218 2.845 3.987 4.55 6.898 4.55.985 0 1.986-.195 2.949-.607l56.094-24.02c3.808-1.63 5.573-6.039 3.942-9.847-1.63-3.808-6.041-5.573-9.847-3.943z"/><path d="m103.247 325.071c-21.284 0-38.599 17.315-38.599 38.599s17.315 38.6 38.599 38.6 38.6-17.316 38.6-38.6-17.317-38.599-38.6-38.599zm0 62.199c-13.013 0-23.599-10.587-23.599-23.6s10.586-23.599 23.599-23.599 23.6 10.586 23.6 23.599-10.588 23.6-23.6 23.6z"/><path d="m494.483 317.181h-6.44c-13.406-38.211-49.979-64.441-90.894-64.441-38.803 0-73.477 23.152-88.543 58.348l-23.184-8.358c-1.164-.419-2.374-.651-3.603-.713v-17.587h7.46c9.566 0 18.633-4.154 24.877-11.396 6.245-7.243 9.02-16.825 7.61-26.292l-8.18-54.76c-.612-4.097-4.434-6.925-8.525-6.31-4.097.612-6.922 4.429-6.31 8.525l8.179 54.756c.766 5.143-.742 10.35-4.135 14.285-3.392 3.935-8.319 6.191-13.517 6.191h-66.264v-161.049h62.922l7.579 50.763c.556 3.722 3.756 6.394 7.409 6.394.368 0 .742-.027 1.117-.083 4.097-.612 6.922-4.429 6.311-8.525l-7.249-48.548h15.146c7.449 0 13.51-6.061 13.51-13.51v-14.731c0-7.455-6.061-13.52-13.51-13.52h-176.529c-7.45 0-13.51 6.065-13.51 13.52v99.08h-12.96c-1.821 0-3.604.367-5.311 1.095l-99.761 42.695c-4.968 2.136-8.178 7.011-8.178 12.42v120.9c0 4.861 2.631 9.37 6.875 11.771l15.772 8.9c6.386 38.731 40.088 68.374 80.6 68.374 39.13 0 71.909-27.657 79.854-64.445h123.156c13.405 38.217 49.978 64.45 90.893 64.45 19.972 0 39.132-6.061 55.41-17.528 3.386-2.386 4.197-7.064 1.812-10.451-2.385-3.386-7.064-4.197-10.451-1.812-13.736 9.676-29.909 14.791-46.771 14.791-32.749 0-62.216-19.896-74.832-49.451h25.671c10.755 16.581 29.195 26.711 49.161 26.711 19.96 0 38.397-10.13 49.151-26.711h25.67c-1.677 3.929-3.657 7.735-5.948 11.375-2.207 3.505-1.155 8.136 2.351 10.343 1.241.782 2.623 1.154 3.989 1.154 2.492 0 4.929-1.241 6.354-3.505 3.844-6.105 6.964-12.601 9.336-19.367h6.431c9.659 0 17.517-7.858 17.517-17.517v-28.715c-.001-9.658-7.859-17.516-17.518-17.516zm-97.333-49.441c32.748 0 62.214 19.892 74.832 49.441h-25.69c-10.754-16.581-29.188-26.711-49.142-26.711-19.96 0-38.397 10.13-49.152 26.711h-22.49l-2.75-.992c12.902-29.254 41.93-48.449 74.392-48.449zm29.698 49.441h-59.406c7.948-7.408 18.501-11.711 29.707-11.711 11.203 0 21.753 4.303 29.699 11.711zm-218.832-47.751h-9.234c-8.581-9.824-18.502-18.333-29.522-25.322v-135.728h38.756zm-104.769 160.945c-36.781 0-66.705-29.924-66.705-66.705s29.924-66.705 66.705-66.705 66.705 29.923 66.705 66.705-29.924 66.705-66.705 66.705zm0-148.41c-43.561 0-79.263 34.267-81.58 77.26l-6.667-3.762v-119.057l98.572-42.186h14.128c7.449 0 13.51-6.061 13.51-13.51v-99.09h173.55v11.76c-15.627 0-125.689 0-148.99 0-6.347 0-11.51 5.159-11.51 11.5v140.65c0 4.336 2.218 8.297 5.928 10.594 10.504 6.513 19.912 14.569 27.955 23.934 2.379 2.779 5.83 4.373 9.467 4.373h69.21v17.559h-1.22c-9.659 0-17.517 7.858-17.517 17.517v43.907c0 .857.083 1.693.202 2.518h-63.39c.021-.753.057-1.502.057-2.26 0-45.054-36.653-81.707-81.705-81.707zm293.903 110.675c-11.21 0-21.766-4.303-29.716-11.711h59.423c-7.948 7.408-18.501 11.711-29.707 11.711zm99.85-29.227c0 1.388-1.129 2.517-2.517 2.517h-228.883c-1.388 0-2.517-1.129-2.517-2.517v-43.907c0-1.388 1.129-2.517 2.517-2.517h15.147l29.784 10.737c.018.006.034.014.052.02l10.251 3.694c1.364.492 2.791.741 4.24.741h169.41c1.388 0 2.517 1.129 2.517 2.517v28.715z"/><path d="m207.696 347.958h17.643c4.142 0 7.5-3.358 7.5-7.5s-3.358-7.5-7.5-7.5h-17.643c-4.142 0-7.5 3.358-7.5 7.5s3.358 7.5 7.5 7.5z"/><path d="m207.696 320.829h17.643c4.142 0 7.5-3.358 7.5-7.5s-3.358-7.5-7.5-7.5h-17.643c-4.142 0-7.5 3.358-7.5 7.5s3.358 7.5 7.5 7.5z"/></g></svg>
+      </span>
+
+      <h2 class="aco-cta__title">
+        Import steel<br>
+        with <span class="aco-cta__hl">speed and security</span>
+      </h2>
+
+      <p class="aco-cta__text">
+        Count on tax planning, logistics management and end-to-end
+        follow-up of the operation.
+      </p>
+
+      <p class="aco-cta__label">Talk to a specialist and get your questions answered.</p>
+
+      <div class="aco-cta__actions">
+        <a href="https://wa.me/5527981610055" class="aco-cta__btn" target="_blank" rel="noopener">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          WhatsApp
+        </a>
+        <a href="tel:+552730229700" class="aco-cta__btn">(27) 3022-9700</a>
+      </div>
+    </div>
+
+    <!-- Lado direito — formulário -->
+    <div class="aco-cta__right">
+      <form class="aco-cta__form contact-form-js" data-form-type="segmentos">
+        <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true" style="display:none;">
+
+        <div class="aco-cta__row">
+          <label class="aco-cta__field-label" for="aco-nome">Full name *</label>
+          <input class="aco-cta__input" id="aco-nome" name="nome" type="text" required>
+        </div>
+
+        <div class="aco-cta__row aco-cta__row--2">
+          <div>
+            <label class="aco-cta__field-label" for="aco-email">E-mail *</label>
+            <input class="aco-cta__input" id="aco-email" name="email" type="email" required>
+          </div>
+          <div>
+            <label class="aco-cta__field-label" for="aco-tel">Phone (with country code) *</label>
+            <input class="aco-cta__input" id="aco-tel" name="telefone" type="tel" required
+                   pattern="[0-9\s\(\)\+\-\.]+" placeholder="+55 27 99999-0000">
+          </div>
+        </div>
+
+        <div class="aco-cta__row aco-cta__row--2">
+          <div>
+            <label class="aco-cta__field-label" for="aco-empresa">Company</label>
+            <input class="aco-cta__input" id="aco-empresa" name="empresa" type="text">
+          </div>
+          <div>
+            <label class="aco-cta__field-label" for="aco-segmento">Segment</label>
+            <select class="aco-cta__input" id="aco-segmento" name="segmento">
+              <option value="Aeronaves">Aircraft</option>
+              <option value="Energia Renovável">Renewable Energy</option>
+              <option value="Alimentos e Bebidas">Food and Beverages</option>
+              <option value="Vestuário/Têxtil">Apparel/Textiles</option>
+              <option value="Informática e Eletrônicos">IT and Electronics</option>
+              <option value="Metais & Derivados" selected>Metals & Derivatives</option>
+              <option value="Partes e Peças Automotivas">Automotive Parts and Components</option>
+              <option value="Produtos Químicos">Chemicals</option>
+              <option value="Parte e Peças Geral">General Parts and Components</option>
+              <option value="Cosméticos e Healthcare">Cosmetics and Healthcare</option>
+              <option value="Insumos e Matéria Prima">Inputs and Raw Material</option>
+              <option value="Medicamentos">Pharmaceuticals</option>
+              <option value="Combustível">Fuel</option>
+              <option value="Máquinas e Equipamentos">Machines and Equipment</option>
+              <option value="Setor Automotivo">Automotive Sector</option>
+              <option value="Outros">Others</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="aco-cta__row">
+          <label class="aco-cta__field-label" for="aco-forma">How would you like to be contacted? *</label>
+          <select class="aco-cta__input" id="aco-forma" name="forma_resposta" required>
+            <option value="" disabled selected>Select</option>
             <option value="WhatsApp">WhatsApp</option>
             <option value="Telefone">Phone</option>
+            <option value="E-mail">E-mail</option>
           </select>
+        </div>
 
-          <textarea name="mensagem" required rows="4" placeholder="How can we help? *" class="input-wm sm-col-span-2 resize-y"></textarea>
+        <div class="aco-cta__row">
+          <label class="aco-cta__field-label" for="aco-mensagem">Message *</label>
+          <textarea class="aco-cta__input aco-cta__textarea" id="aco-mensagem" name="mensagem" rows="4" required></textarea>
+        </div>
 
-          <label class="sm-col-span-2 form-checkbox-label">
-            <input type="checkbox" name="aceite_privacidade" required value="sim" />
-            <span data-wm-aceite>I have read and agree to the <a href="/en/privacy-policy/" class="text-primary underline">Privacy Policy</a> and authorise WM Trading to process my data in order to respond to this request.</span>
-          </label>
+        <label class="aco-cta__check">
+          <input type="checkbox" name="aceite_privacidade" required value="sim">
+          <span data-wm-aceite>I have read and agree to the <a href="/en/privacy-policy/">Privacy Policy</a> and authorise WM Trading to process my data in order to respond to this request.</span>
+        </label>
 
-          <label class="sm-col-span-2 form-checkbox-label">
-            <input type="checkbox" name="aceite_marketing" value="sim" />
-            <span data-wm-aceite-marketing>I would also like to receive content, materials and commercial communications from WM Trading (optional).</span>
-          </label>
+        <label class="aco-cta__check">
+          <input type="checkbox" name="aceite_marketing" value="sim">
+          <span data-wm-aceite-marketing>I would also like to receive content, materials and commercial communications from WM Trading (optional).</span>
+        </label>
 
-          <button type="submit" class="btn btn-block sm-col-span-2 btn-lg">Send</button>
-        </form>
-      </div>
-    </section>
+        <button type="submit" class="aco-cta__submit">SEND</button>
+      </form>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     MODAL — Vídeo YouTube
+══════════════════════════════════════ -->
+<div id="aco-video-modal" class="aco-video-modal" role="dialog" aria-modal="true" aria-label="Vídeo institucional" hidden>
+  <div class="aco-video-modal__backdrop"></div>
+  <div class="aco-video-modal__inner">
+    <button class="aco-video-modal__close" aria-label="Fechar vídeo">
+      <svg viewBox="0 0 24 24" fill="none">
+        <path d="M18 6L6 18M6 6l12 12" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+      </svg>
+    </button>
+    <div class="aco-video-modal__frame" id="aco-video-frame"></div>
+  </div>
+</div>
+
 </main>
 
 <!-- ══════════════════════════════════════
@@ -381,6 +889,7 @@
 
 
 <script src="/js/main.js"></script>
+<script src="/js/aco.js"></script>
 <script src="/js/i18n.js" defer></script>
 
 
