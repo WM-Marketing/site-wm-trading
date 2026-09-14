@@ -109,7 +109,10 @@ ORGANIZATION_JSONLD = {
     "slogan": "We Make it better",
     "url": SITE_URL,
     "logo": SITE_URL + DEFAULT_OG_IMAGE,
-    "description": "Trading company especializada em soluções completas de importação e comércio exterior para empresas no Brasil.",
+    # Mesma frase nos dois idiomas, cada uma ja publicada no site antes de virar
+    # marcacao: a versao PT vem do Organization proprio da LP de carne suina, a EN
+    # do hero da home em ingles. Ver DESCRICAO_ORG e organization_jsonld().
+    "description": "Desde 2004, a WM Trading é referência em soluções tributárias, logísticas e aduaneiras para a importação de empresas no Brasil.",
     "sameAs": [
         "https://pt.linkedin.com/company/wmtrading",
         "https://instagram.com/wmtrading/",
@@ -175,6 +178,37 @@ ORGANIZATION_JSONLD = {
         "Importação de carne suína",
     ],
 }
+
+
+# A descricao da empresa em cada idioma. Nenhuma das duas foi escrita para a
+# marcacao: a PT e a que a LP de carne suina ja declarava, a EN e a frase do hero
+# da home em ingles ("Since 2004 we have been a reference in tax, logistics and
+# customs solutions..."), passada para terceira pessoa. Aprovadas em 14/09/2026.
+DESCRICAO_ORG = {
+    "pt": ORGANIZATION_JSONLD["description"],
+    "en": "Since 2004, WM Trading has been a reference in tax, logistics and customs "
+          "solutions for imports by companies in Brazil.",
+}
+
+
+def organization_jsonld(lang="pt-BR"):
+    """O bloco Organization no idioma da pagina.
+
+    Muda so o que e texto corrido: a descricao e o nome dos dois paises. Razao
+    social, CNPJ, endereco, telefone e perfis sao os mesmos — e a mesma entidade,
+    e o @id identico nos dois idiomas e o que diz isso a quem le a marcacao.
+
+    `knowsAbout` continua em portugues nas paginas /en/: sao os nomes das paginas
+    do site, e traduzi-los aqui seria inventar texto que nao existe publicado.
+    """
+    if not lang or lang.lower().startswith("pt"):
+        return ORGANIZATION_JSONLD
+    org = json.loads(json.dumps(ORGANIZATION_JSONLD))
+    org["description"] = DESCRICAO_ORG["en"]
+    for lugar in org["areaServed"]:
+        if lugar.get("@type") == "Country":
+            lugar["name"] = {"Brasil": "Brazil", "Panamá": "Panama"}.get(lugar["name"], lugar["name"])
+    return org
 
 
 def service_jsonld(nome, descricao, tipo_servico, lang="pt-BR"):
@@ -714,7 +748,7 @@ def render_html_page(output_path, title, description, content_body, head_tpl, he
     extra_head_block = "\n" + extra_head.strip("\n").rstrip() if extra_head.strip() else ""
     extra_scripts_block = "\n" + extra_scripts.strip() + "\n\n" if extra_scripts.strip() else "\n"
 
-    jsonld_blocks = [ORGANIZATION_JSONLD] + ([jsonld] if jsonld else [])
+    jsonld_blocks = [organization_jsonld(lang)] + ([jsonld] if jsonld else [])
     jsonld_html = "\n  ".join(
         '<script type="application/ld+json">%s</script>' % json.dumps(b, ensure_ascii=False)
         for b in jsonld_blocks

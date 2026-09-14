@@ -78,23 +78,30 @@ def service_en(pagina):
                              pagina["titulo"], lang="en")
 
 
-def troca_service_por_ingles(html, pagina):
-    """Substitui o Service herdado da copia PT pelo bloco em ingles.
+def troca_jsonld_por_ingles(html, pagina):
+    """Passa para ingles o JSON-LD que veio na copia da pagina em portugues.
 
-    So as paginas de SEGMENTOS_COM_DESENHO_PROPRIO passam por aqui: elas nascem de
-    uma copia byte a byte do arquivo em portugues, e o JSON-LD vem junto. Sem esta
-    troca, /en/segments/steel declararia o servico em portugues.
+    As paginas /en/ com desenho proprio (home, /en/about/ e as de
+    SEGMENTOS_COM_DESENHO_PROPRIO) nascem de uma copia byte a byte do arquivo em
+    portugues, e o JSON-LD vem junto. Sem esta troca, elas declarariam a empresa
+    — e, nos segmentos, o servico — em portugues.
+
+    As outras paginas /en/ nao passam por aqui: saem do render_html_page, que ja
+    escolhe o idioma do bloco sozinho.
     """
-    novo = service_en(pagina)
-    if novo is None:
-        return html
+    servico = service_en(pagina)
 
     def _troca(m):
         try:
             bloco = json.loads(m.group(1))
         except ValueError:
             return m.group(0)
-        if bloco.get("@type") != "Service":
+        tipo = bloco.get("@type")
+        if tipo == "Organization":
+            novo = bp.organization_jsonld("en")
+        elif tipo == "Service" and servico is not None:
+            novo = servico
+        else:
             return m.group(0)
         return ('<script type="application/ld+json">%s</script>'
                 % json.dumps(novo, ensure_ascii=False))
@@ -546,6 +553,9 @@ def home_em_ingles(pagina):
     html = re.sub(r'(<meta\s+property="og:description"\s+content=")[^"]*(")',
                   lambda m: m.group(1) + pagina["description"] + m.group(2), html)
     html = re.sub(r'<html[^>]*\blang="[^"]*"', '<html lang="en"', html, count=1)
+
+    # o JSON-LD veio na copia da pagina PT: empresa em portugues
+    html = troca_jsonld_por_ingles(html, pagina)
 
     # CAMINHO ABSOLUTO — obrigatorio. A home e servida na raiz, onde relativo e
     # absoluto coincidem, entao ela pode ter src="images/...". Copiada para /en/,
@@ -1180,8 +1190,8 @@ def segmento_em_ingles(pagina, cfg):
                   '<meta property="og:locale" content="en_US"', html, count=1)
     html = re.sub(r'<html[^>]*\blang="[^"]*"', '<html lang="en"', html, count=1)
 
-    # 5b) o JSON-LD tambem veio na copia: o Service estava em portugues
-    html = troca_service_por_ingles(html, pagina)
+    # 5b) o JSON-LD tambem veio na copia: empresa e servico estavam em portugues
+    html = troca_jsonld_por_ingles(html, pagina)
 
     # mesmo motivo da home: caminho relativo copiado para /en/ resolve contra /en/
     html = bp.make_paths_absolute(html)
@@ -1255,6 +1265,9 @@ def quem_somos_em_ingles(pagina):
     html = re.sub(r'<meta\s+property="og:locale"\s+content="[^"]*"',
                   '<meta property="og:locale" content="en_US"', html, count=1)
     html = re.sub(r'<html[^>]*\blang="[^"]*"', '<html lang="en"', html, count=1)
+
+    # o JSON-LD veio na copia da pagina PT: empresa em portugues
+    html = troca_jsonld_por_ingles(html, pagina)
 
     # mesmo motivo da home: caminho relativo copiado para /en/ resolve contra /en/
     html = bp.make_paths_absolute(html)
