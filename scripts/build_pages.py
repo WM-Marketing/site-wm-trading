@@ -999,6 +999,166 @@ def markdown_to_html(text):
 </script>''')
             i += 1
 
+        # Gráfico interativo: importação mensal de baterias e acumuladores elétricos (SH4 8507)
+        elif line.strip() == '{{wm-chart:baterias-mensal}}':
+            new_lines.append('''<figure class="wm-interactive-chart">
+  <figcaption>Importação mensal de baterias e acumuladores elétricos</figcaption>
+  <div class="wm-interactive-chart__canvas"><canvas id="chart-baterias-mensal" aria-label="Gráfico de linha da importação mensal de baterias e acumuladores elétricos, de agosto de 2025 a julho de 2026"></canvas></div>
+  <p class="wm-interactive-chart__source">Fonte: MDIC/Comex Stat</p>
+</figure>
+<script src="/js/chart.umd.min.js"></script>
+<script>
+(() => {
+  const canvas = document.getElementById('chart-baterias-mensal');
+  if (!canvas || !window.Chart) return;
+  new Chart(canvas, {
+    type: 'line',
+    data: {
+      labels: ['ago./25', 'set./25', 'out./25', 'nov./25', 'dez./25', 'jan./26', 'fev./26', 'mar./26', 'abr./26', 'mai./26', 'jun./26', 'jul./26'],
+      datasets: [{
+        label: 'Valor FOB (US$ milhões)',
+        data: [71.4, 83.8, 75.9, 76.7, 67.6, 87.4, 76.7, 97.6, 97.2, 128.2, 97.0, 99.7],
+        borderColor: '#ff5a1f', backgroundColor: 'rgba(255, 90, 31, 0.16)',
+        borderWidth: 3, fill: true, tension: 0.32, pointRadius: 4,
+        pointHoverRadius: 6, pointBackgroundColor: '#ff5a1f'
+      }]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      interaction: { mode: 'index', intersect: false },
+      plugins: {
+        legend: { display: false },
+        tooltip: { callbacks: { label: ctx => ` US$ ${ctx.parsed.y.toLocaleString('pt-BR', { minimumFractionDigits: 1, maximumFractionDigits: 1 })} milhões` } }
+      },
+      scales: {
+        y: { beginAtZero: false, ticks: { callback: value => `US$ ${value.toLocaleString('pt-BR')} mi` }, grid: { color: '#e5e5e5' } },
+        x: { grid: { display: false } }
+      }
+    }
+  });
+})();
+</script>''')
+            i += 1
+
+        # Gráfico interativo: importação mensal de platina bruta (NCM 71101100)
+        elif line.strip() == '{{wm-chart:platina-mensal}}':
+            new_lines.append('''<figure class="wm-interactive-chart">
+  <figcaption>Importação mensal de platina bruta</figcaption>
+  <div class="wm-interactive-chart__canvas"><canvas id="chart-platina-mensal" aria-label="Gráfico de linha da importação mensal de platina bruta, de agosto de 2025 a julho de 2026"></canvas></div>
+  <p class="wm-interactive-chart__source">Fonte: MDIC/Comex Stat</p>
+</figure>
+<script src="/js/chart.umd.min.js"></script>
+<script>
+(() => {
+  const canvas = document.getElementById('chart-platina-mensal');
+  if (!canvas || !window.Chart) return;
+  new Chart(canvas, {
+    type: 'line',
+    data: {
+      labels: ['ago./25', 'set./25', 'out./25', 'nov./25', 'dez./25', 'jan./26', 'fev./26', 'mar./26', 'abr./26', 'mai./26', 'jun./26', 'jul./26'],
+      datasets: [{
+        label: 'Valor FOB (US$ milhões)',
+        data: [12.4, 25.8, 11.2, 10.9, 22.8, 28.5, 35.9, 22.7, 18.1, 30.9, 33.1, 44.9],
+        borderColor: '#ff5a1f', backgroundColor: 'rgba(255, 90, 31, 0.16)',
+        borderWidth: 3, fill: true, tension: 0.32, pointRadius: 4,
+        pointHoverRadius: 6, pointBackgroundColor: '#ff5a1f'
+      }]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      interaction: { mode: 'index', intersect: false },
+      plugins: {
+        legend: { display: false },
+        tooltip: { callbacks: { label: ctx => ` US$ ${ctx.parsed.y.toLocaleString('pt-BR', { minimumFractionDigits: 1, maximumFractionDigits: 1 })} milhões` } }
+      },
+      scales: {
+        y: { beginAtZero: false, ticks: { callback: value => `US$ ${value.toLocaleString('pt-BR')} mi` }, grid: { color: '#e5e5e5' } },
+        x: { grid: { display: false } }
+      }
+    }
+  });
+})();
+</script>''')
+            i += 1
+
+        # Gráfico interativo: origens da platina bruta importada
+        elif line.strip() == '{{wm-chart:platina-origens}}':
+            new_lines.append('''<figure class="wm-interactive-chart">
+  <figcaption>Principais origens da platina bruta importada pelo Brasil</figcaption>
+  <div class="wm-interactive-chart__canvas"><canvas id="chart-platina-origens" aria-label="Gráfico de barras da participação de África do Sul, Bélgica e Estados Unidos na importação brasileira de platina bruta"></canvas></div>
+  <p class="wm-interactive-chart__source">Fonte: MDIC/Comex Stat</p>
+</figure>
+<script src="/js/chart.umd.min.js"></script>
+<script>
+(() => {
+  const canvas = document.getElementById('chart-platina-origens');
+  if (!canvas || !window.Chart) return;
+  new Chart(canvas, {
+    type: 'bar',
+    data: {
+      labels: ['África do Sul', 'Bélgica', 'Estados Unidos'],
+      datasets: [{
+        label: 'Participação no valor importado', data: [69.7, 17.7, 7.7],
+        backgroundColor: ['#ff5a1f', '#6e6e6e', '#133b5c'], borderRadius: 5
+      }]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false },
+        tooltip: { callbacks: { label: ctx => ` ${ctx.parsed.y.toLocaleString('pt-BR', { minimumFractionDigits: 1, maximumFractionDigits: 1 })}% do valor importado` } }
+      },
+      scales: {
+        y: { beginAtZero: true, max: 100, ticks: { callback: value => `${value}%` }, grid: { color: '#e5e5e5' } },
+        x: { grid: { display: false } }
+      }
+    }
+  });
+})();
+</script>''')
+            i += 1
+
+        # Gráfico interativo: importação mensal de equipamentos de ginástica (NCM 95069100)
+        elif line.strip() == '{{wm-chart:ginastica-mensal}}':
+            new_lines.append('''<figure class="wm-interactive-chart">
+  <figcaption>Importação mensal de equipamentos para cultura física e ginástica</figcaption>
+  <div class="wm-interactive-chart__canvas"><canvas id="chart-ginastica-mensal" aria-label="Gráfico de linha da importação mensal de equipamentos para cultura física e ginástica, de agosto de 2025 a julho de 2026"></canvas></div>
+  <p class="wm-interactive-chart__source">Fonte: MDIC/Comex Stat</p>
+</figure>
+<script src="/js/chart.umd.min.js"></script>
+<script>
+(() => {
+  const canvas = document.getElementById('chart-ginastica-mensal');
+  if (!canvas || !window.Chart) return;
+  new Chart(canvas, {
+    type: 'line',
+    data: {
+      labels: ['ago./25', 'set./25', 'out./25', 'nov./25', 'dez./25', 'jan./26', 'fev./26', 'mar./26', 'abr./26', 'mai./26', 'jun./26', 'jul./26'],
+      datasets: [{
+        label: 'Valor FOB (US$ milhões)',
+        data: [21.3, 20.2, 29.8, 30.3, 34.4, 31.3, 21.9, 31.4, 30.1, 24.6, 29.9, 35.1],
+        borderColor: '#ff5a1f', backgroundColor: 'rgba(255, 90, 31, 0.16)',
+        borderWidth: 3, fill: true, tension: 0.32, pointRadius: 4,
+        pointHoverRadius: 6, pointBackgroundColor: '#ff5a1f'
+      }]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      interaction: { mode: 'index', intersect: false },
+      plugins: {
+        legend: { display: false },
+        tooltip: { callbacks: { label: ctx => ` US$ ${ctx.parsed.y.toLocaleString('pt-BR', { minimumFractionDigits: 1, maximumFractionDigits: 1 })} milhões` } }
+      },
+      scales: {
+        y: { beginAtZero: false, ticks: { callback: value => `US$ ${value.toLocaleString('pt-BR')} mi` }, grid: { color: '#e5e5e5' } },
+        x: { grid: { display: false } }
+      }
+    }
+  });
+})();
+</script>''')
+            i += 1
+
         # YouTube Videos
         elif line.strip().startswith('https://youtu.be/') or line.strip().startswith('https://www.youtube.com/embed/') or line.strip().startswith('https://www.youtube.com/watch') or line.strip().startswith('https://www.youtube.com/shorts/') or line.strip().startswith('https://youtube.com/shorts/'):
             yt_url = line.strip().replace('\\_', '_')
