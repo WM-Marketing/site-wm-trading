@@ -42,6 +42,67 @@ def caminho_saida(url_en):
     return os.path.join(ROOT, rel.replace("/", os.sep) + ".html")
 
 
+# ---------------------------------------------------------------- JSON-LD /en/
+# Regra de espelho (Camada 1, 14/09/2026): se a pagina em PORTUGUES declara um
+# bloco Service, a gemea em ingles declara o equivalente. A lista de quem tem
+# Service nao e escrita a mao aqui — sai dos MESMOS diretorios que o build_pages
+# percorre, senao as duas listas saem de sincronia no dia em que alguem criar um
+# segmento novo.
+_PT_COM_SERVICE = None
+
+
+def _urls_pt_com_service():
+    urls = set()
+    for pasta, molde in (("services", "/%s/"), ("segments", "/segmentos/%s/")):
+        diretorio = os.path.join(ROOT, "content", pasta)
+        for nome in sorted(os.listdir(diretorio)):
+            if not nome.endswith(".json"):
+                continue
+            with open(os.path.join(diretorio, nome), encoding="utf-8") as f:
+                urls.add(molde % json.load(f)["slug"])
+    return urls
+
+
+def service_en(pagina):
+    """Bloco Service em ingles da pagina, ou None se ela nao for comercial.
+
+    Titulo e descricao saem de content/en/paginas.json — ingles ja revisado por
+    pessoa. Nada e traduzido por maquina e nenhum texto novo e escrito aqui.
+    """
+    global _PT_COM_SERVICE
+    if _PT_COM_SERVICE is None:
+        _PT_COM_SERVICE = _urls_pt_com_service()
+    if pagina["pt"] not in _PT_COM_SERVICE:
+        return None
+    return bp.service_jsonld(pagina["titulo"], pagina["description"],
+                             pagina["titulo"], lang="en")
+
+
+def troca_service_por_ingles(html, pagina):
+    """Substitui o Service herdado da copia PT pelo bloco em ingles.
+
+    So as paginas de SEGMENTOS_COM_DESENHO_PROPRIO passam por aqui: elas nascem de
+    uma copia byte a byte do arquivo em portugues, e o JSON-LD vem junto. Sem esta
+    troca, /en/segments/steel declararia o servico em portugues.
+    """
+    novo = service_en(pagina)
+    if novo is None:
+        return html
+
+    def _troca(m):
+        try:
+            bloco = json.loads(m.group(1))
+        except ValueError:
+            return m.group(0)
+        if bloco.get("@type") != "Service":
+            return m.group(0)
+        return ('<script type="application/ld+json">%s</script>'
+                % json.dumps(novo, ensure_ascii=False))
+
+    return re.sub(r'<script type="application/ld\+json">(.*?)</script>',
+                  _troca, html, flags=re.S)
+
+
 # Capa para paginas /en/ cuja irma PT tem hero de DESENHO PROPRIO, de onde
 # capa_da_pagina_pt() nao consegue extrair nada. Hoje e so a de aeronaves: a
 # /segmentos-aeronaves/ usa um mosaico de fotos em fundo branco (.aero-hero), e nao
@@ -1119,6 +1180,9 @@ def segmento_em_ingles(pagina, cfg):
                   '<meta property="og:locale" content="en_US"', html, count=1)
     html = re.sub(r'<html[^>]*\blang="[^"]*"', '<html lang="en"', html, count=1)
 
+    # 5b) o JSON-LD tambem veio na copia: o Service estava em portugues
+    html = troca_service_por_ingles(html, pagina)
+
     # mesmo motivo da home: caminho relativo copiado para /en/ resolve contra /en/
     html = bp.make_paths_absolute(html)
 
@@ -1391,7 +1455,8 @@ def main():
                 continue
             bp.render_html_page(
                 saida, p["titulo"], p["description"], corpo,
-                head_tpl, header_tpl, footer_tpl, lang="en")
+                head_tpl, header_tpl, footer_tpl, lang="en",
+                jsonld=service_en(p))
 
         # menu e rodape apontando para as paginas /en/ que existem
         links_en += menu_para_ingles(saida, pares)

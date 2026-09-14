@@ -87,14 +87,119 @@ def tag_de_idioma(lang, classe, indento=""):
             % (indento, classe, curto, _esc_attr(titulo), rotulo))
 
 
+# Identidade da empresa para buscadores e modelos de linguagem (Camada 1, 14/09/2026).
+# TODO valor aqui sai de uma pagina publicada do site — razao social e CNPJ do rodape,
+# endereco da MATRIZ e telefone de fale-conosco.html, pracas de unidades.html, perfis do
+# rodape. Nada e inferido: se um dado sair do site, ele sai daqui junto.
+#
+# O "@id" e o endereco fixo da entidade. Todo bloco Service aponta o seu "provider" para
+# ele (ver service_jsonld) — e assim que se diz "o prestador e ESTA empresa, a mesma das
+# outras 297 paginas", sem repetir a empresa inteira dentro de cada servico.
 ORGANIZATION_JSONLD = {
     "@context": "https://schema.org",
     "@type": "Organization",
+    "@id": SITE_URL + "/#organization",
     "name": "WM Trading",
+    "legalName": "WM Trading LTDA",
+    "taxID": "06.194.675/0001-03",
+    # Ano de fundacao e slogan vinham do Organization proprio da LP de carne suina —
+    # a unica pagina do site que os declarava. Subiram para ca em 14/09/2026 para valer
+    # nas 298 paginas, em vez de uma so.
+    "foundingDate": "2004",
+    "slogan": "We Make it better",
     "url": SITE_URL,
     "logo": SITE_URL + DEFAULT_OG_IMAGE,
-    "description": "Trading company especializada em solucoes completas de importacao e comercio exterior para empresas no Brasil.",
+    "description": "Trading company especializada em soluções completas de importação e comércio exterior para empresas no Brasil.",
+    "sameAs": [
+        "https://pt.linkedin.com/company/wmtrading",
+        "https://instagram.com/wmtrading/",
+        "https://facebook.com/WMTradingComercioInternacional/",
+        "https://www.youtube.com/channel/UCGdBOuDTCnglBU3expUhMPg",
+    ],
+    "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Rua Engenheiro Guilherme José Monjardim Varejão, 275 — Salas 201 e 301, Enseada do Suá",
+        "addressLocality": "Vitória",
+        "addressRegion": "ES",
+        "postalCode": "29050-260",
+        "addressCountry": "BR",
+    },
+    "contactPoint": [{
+        "@type": "ContactPoint",
+        "contactType": "sales",
+        "telephone": "+55-27-3022-9700",
+        "email": "comercial@wmtrading.com.br",
+        "availableLanguage": ["Portuguese", "English"],
+    }],
+    # As 12 pracas de unidades.html, mais os dois paises que as tres paginas
+    # institucionais declaram ("Presente em 12 estados brasileiros e no Panamá").
+    "areaServed": [
+        {"@type": "Country", "name": "Brasil"},
+        {"@type": "Country", "name": "Panamá"},
+        {"@type": "Place", "name": "Vitória, ES"},
+        {"@type": "Place", "name": "Rio de Janeiro, RJ"},
+        {"@type": "Place", "name": "São Paulo, SP"},
+        {"@type": "Place", "name": "Navegantes, SC"},
+        {"@type": "Place", "name": "Belém, PA"},
+        {"@type": "Place", "name": "Camaragibe, PE"},
+        {"@type": "Place", "name": "Santana do Ipanema, AL"},
+        {"@type": "Place", "name": "Lauro de Freitas, BA"},
+        {"@type": "Place", "name": "Manaus, AM"},
+        {"@type": "Place", "name": "Paranaguá, PR"},
+        {"@type": "Place", "name": "Porto Velho, RO"},
+        {"@type": "Place", "name": "São Luís, MA"},
+    ],
+    # Temas que a empresa domina, cada um com pagina propria no site. Ao criar ou
+    # aposentar uma pagina de modalidade ou de segmento, atualizar esta lista.
+    "knowsAbout": [
+        "Importação por conta e ordem",
+        "Importação por encomenda",
+        "Assessoria aduaneira",
+        "Entreposto aduaneiro (bonded warehouse)",
+        "Global sourcing",
+        "Compliance aduaneiro",
+        "Logística 4PL",
+        "Importação de aeronaves",
+        "Importação de equipamentos fotovoltaicos",
+        "Importação de máquinas e equipamentos",
+        "Importação de aço",
+        "Importação de autopeças",
+        "Importação de produtos químicos",
+        "Importação de combustíveis e derivados de petróleo",
+        "Importação de cosméticos",
+        "Importação de informática e telecomunicações",
+        "Importação de drones",
+        "Importação de rebocadores de aeronaves",
+        "Importação de vinhos",
+        "Importação para o varejo",
+        "Importação de carne suína",
+    ],
 }
+
+
+def service_jsonld(nome, descricao, tipo_servico, lang="pt-BR"):
+    """Bloco Service de UMA pagina comercial (modalidade ou segmento).
+
+    `nome` e `descricao` saem do texto que ja esta na pagina — nunca de copy nova.
+    O `provider` referencia o @id do ORGANIZATION_JSONLD em vez de repetir a empresa.
+
+    Vale para os dois idiomas: o build_en.py chama esta mesma funcao com o titulo e a
+    descricao em ingles que ja existem em content/en/paginas.json.
+    """
+    # As descricoes em ingles vem do campo meta description, cortado em ~160 caracteres
+    # e terminado em reticencias. Frase cortada no meio nao atrapalha, mas as reticencias
+    # e a quebra de linha sim: quem le a marcacao recebe o texto como esta.
+    descricao = re.sub(r"\s+", " ", (descricao or "")).strip()
+    descricao = re.sub(r"\s*(\.{3}|…)$", "", descricao).strip()
+    return {
+        "@context": "https://schema.org",
+        "@type": "Service",
+        "name": nome,
+        "description": descricao,
+        "serviceType": tipo_servico,
+        "provider": {"@id": ORGANIZATION_JSONLD["@id"]},
+        "areaServed": {"@type": "Country", "name": "Brazil" if lang == "en" else "Brasil"},
+    }
 # LGPD: versao vigente das politicas de privacidade/cookies.
 # Alterar SEMPRE que o texto mudar de forma relevante. Efeitos automaticos:
 #   1) o aviso de cookies reaparece para quem aceitou uma versao anterior;
@@ -1467,7 +1572,16 @@ def main():
         
         body_content = hero_html + intro_html + benefits_html + sections_html + cta_html
         output_path = os.path.join(ROOT_DIR, f"{slug}.html")
-        render_html_page(output_path, s["name"], s.get("subtitle", s["name"]), body_content, head_tpl, header_tpl, footer_tpl)
+        # A descricao do Service sai do `intro` (frase afirmativa do que a WM faz) e nao
+        # do `subtitle`, que na maioria destes arquivos e uma pergunta ao visitante —
+        # pergunta nao descreve servico nenhum para quem le a marcacao.
+        servico = service_jsonld(
+            s.get("title") or s["name"],
+            s.get("intro") or s.get("subtitle") or s["name"],
+            s.get("name") or s.get("title"),
+        )
+        render_html_page(output_path, s["name"], s.get("subtitle", s["name"]), body_content, head_tpl, header_tpl, footer_tpl,
+                         jsonld=servico)
 
     # 2. GENERATE SOLUTIONS HOME (solucoes-wm.json)
     print("Generating Solutions Portal (solucoes-wm.html)...")
@@ -1799,7 +1913,17 @@ def main():
         
         body_content = hero_html + intro_html + sections_html + benefits_html + contact_section_html
         output_path = os.path.join(SEGMENTS_OUT_DIR, f"{slug}.html")
-        render_html_page(output_path, f"Importação de {s['name']}", s.get("heroQuestion", s["name"]), body_content, head_tpl, header_tpl, footer_tpl)
+        # `cardDesc` e a unica frase do JSON que descreve a operacao ("Através da
+        # certificação MAPA, cuidamos da importação de vinhos de ponta a ponta").
+        # `heroQuestion` e pergunta e `heroSub` e chamada para contato: nenhum dos dois
+        # serve de descricao para quem le a marcacao.
+        servico = service_jsonld(
+            f"Importação de {s['name']}",
+            s.get("cardDesc") or s.get("heroSub") or f"Importação de {s['name']}",
+            s["name"],
+        )
+        render_html_page(output_path, f"Importação de {s['name']}", s.get("heroQuestion", s["name"]), body_content, head_tpl, header_tpl, footer_tpl,
+                         jsonld=servico)
 
     # 3b. GENERATE SEGMENTS INDEX PAGE (segmentos/index.html) — lista todos os
     # segmentos em cards no padrão da home; alvo do "VER TODOS" e da URL antiga /segmentos/
