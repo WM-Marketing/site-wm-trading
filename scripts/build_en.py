@@ -537,7 +537,7 @@ ATRIBUTOS_QS_EN = [
 # de instrumentar a pagina inteira so para gerar a irma, trocamos os textos
 # literalmente — mesmo mecanismo do ATRIBUTOS_QS_EN.
 #
-# A ORDEM DA LISTA NAO IMPORTA: a maquinas_em_ingles() aplica as trocas da mais
+# A ORDEM DA LISTA NAO IMPORTA: a segmento_em_ingles() aplica as trocas da mais
 # longa para a mais curta, senao "Maquinas agricolas" traduziria o prefixo de
 # "Maquinas agricolas prontas para embarque" e a entrada longa nunca casaria.
 # Agrupamos por secao aqui so para dar para ler.
@@ -641,7 +641,7 @@ TEXTOS_MAQUINAS_EN = [
     ("Isso significa que o tempo de nacionalização e liberação da carga no porto\n      <strong>com a WM é muito mais rápido.</strong> Conte com o know-how da WM para\n      importar máquinas através das melhores oportunidades do comércio internacional.",
      "That means customs clearance and cargo release at the port are\n      <strong>much faster with WM.</strong> Count on WM's know-how to import machinery\n      through the best opportunities in international trade."),
 
-    # ── S9 CTA (o formulario e trocado a parte, ver formulario_maquinas_en) ──
+    # ── S9 CTA (o formulario e trocado a parte, ver formulario_segmento_en) ──
     ("Importe máquinas e equipamentos<br>", "Import machinery and equipment<br>"),
     ("com <span class=\"mq-cta__hl\">", "with <span class=\"mq-cta__hl\">"),
     ("Conte com planejamento tributário, gestão logística e\n        acompanhamento da operação de ponta a ponta.",
@@ -672,7 +672,7 @@ TEXTOS_MAQUINAS_EN = [
 ]
 
 
-FORM_MAQUINAS_EN = '''<form class="mq-cta__form contact-form-js" data-form-type="segmentos">
+FORM_SEGMENTO_EN = '''<form class="mq-cta__form contact-form-js" data-form-type="segmentos">
         <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true" style="display:none;">
 
         <div class="mq-cta__row">
@@ -733,8 +733,279 @@ FORM_MAQUINAS_EN = '''<form class="mq-cta__form contact-form-js" data-form-type=
       </form>'''
 
 
-def formulario_maquinas_en():
-    """Campos do formulario da /en/segments/machines/, na marcacao .mq-cta__.
+# Mesma mecanica da tabela de maquinas: pares (portugues exato do HTML, ingles).
+# As trocas sao aplicadas da mais longa para a mais curta pela
+# segmento_em_ingles(), e o que nao casar vira AVISO no build.
+TEXTOS_ACO_EN = [
+    # ── S1 hero ──
+    ("Importe aço com", "Import steel with"),
+    ("agilidade e segurança</span>", "speed and security</span>"),
+    ("Planejamento tributário, licenciamento e logística para importar aço e\n          recursos siderúrgicos com eficiência, da compra no exterior à entrega na\n          sua planta.",
+     "Tax planning, licensing and logistics to import steel and steelmaking inputs\n          efficiently, from the purchase abroad to delivery at your plant."),
+    ("Falar com um<br>especialista", "Talk to a<br>specialist"),
+
+    # ── S3 intro ──
+    ("Importação de <span class=\"aco-intro__title-hl\">Aço</span>",
+     "Importing <span class=\"aco-intro__title-hl\">Steel</span>"),
+    ("Empregados em chapas, fios, vergalhões ou até mesmo parafusos, esses itens\n        trazem ganhos relevantes às empresas brasileiras. Com um mercado internacional\n        altamente dinâmico e repleto de fornecedores com diferencial tecnológico na\n        produção, importar aço pode tornar a sua empresa ainda mais competitiva.",
+     "Used in sheets, wire, rebar and even fasteners, these items bring real gains to\n        Brazilian companies. In a highly dynamic international market, full of suppliers\n        with a technological edge in production, importing steel can make your company\n        even more competitive."),
+    ("Estudamos a característica do produto a ser importado e monitoramos as\n        alíquotas incidentes, otimizando a cadeia logística e tributária e reduzindo\n        custos durante a nacionalização.",
+     "We study the characteristics of the product to be imported and monitor the\n        applicable rates, optimising the logistics and tax chain and reducing costs\n        during customs clearance."),
+    ("<strong>Aços que temos expertise:</strong> galvanizado, galvalume, carbono,\n        laminado a quente e a frio, arames e telas, fios de solda, tubos, chapas,\n        válvulas, vergalhão e perfilados.",
+     "<strong>Steel grades we handle:</strong> galvanised, galvalume, carbon,\n        hot- and cold-rolled, wire and mesh, welding wire, tubes, plate, valves,\n        rebar and sections."),
+    ("Nossas soluções →", "Our solutions →"),
+
+    # ── S4 beneficios ──
+    ("Nossos diferenciais", "What sets us apart"),
+    ("Benefícios de importar\n        <span class=\"aco-benef__title-hl\">aço com a WM</span>",
+     "Benefits of importing\n        <span class=\"aco-benef__title-hl\">steel with WM</span>"),
+    ("Acompanhamento em tempo real", "Real-time tracking"),
+    ("Dashboard completo no qual você acompanha cada etapa da operação, com mais controle e transparência sobre o processo de importação.",
+     "A full dashboard where you follow every stage of the operation, with more control and transparency over the import process."),
+    ("Saiba mais", "Learn more"),
+    ("Cadeia global de fornecedores", "Global supplier network"),
+    ("Parcerias sólidas com fornecedores externos, para você escolher o produto mais adequado à necessidade e negociar as condições de compra.",
+     "Solid partnerships with suppliers abroad, so you can choose the product that best fits your need and negotiate the terms of purchase."),
+    ("Benefícios fiscais para sua importação", "Tax benefits for your import"),
+    ("Capilaridade nacional e 7 benefícios fiscais que reduzem a alíquota do ICMS incidente na importação do aço, tornando o planejamento tributário mais assertivo.",
+     "Nationwide reach and 7 tax benefits that cut the ICMS rate levied on steel imports, making the tax planning sharper."),
+
+    # ── S5 gestao ──
+    ("Gestão completa<br>\n        da operação.<br>", "Full management<br>\n        of the operation.<br>"),
+    ("Da <span class=\"aco-gestao__hl\">documentação</span><br>\n        à <span class=\"aco-gestao__hl\">entrega na planta</span>",
+     "From <span class=\"aco-gestao__hl\">documentation</span><br>\n        to <span class=\"aco-gestao__hl\">delivery at the plant</span>"),
+    ("Documentação<br>sob controle", "Documentation<br>under control"),
+    ("Acompanhamento documental para reduzir inconsistências e atrasos.",
+     "Document tracking to reduce inconsistencies and delays."),
+    ("Pagamentos<br>coordenados", "Coordinated<br>payments"),
+    ("Gestão dos pagamentos conforme as etapas e condições da operação.",
+     "Payments managed according to the stages and terms of the operation."),
+    ("Gestão financeira<br>da operação", "Financial management<br>of the operation"),
+    ("Acompanhamento de cartas de crédito e instrumentos da negociação internacional.",
+     "Follow-up on letters of credit and other international trade instruments."),
+    ("Embarques<br>sob medida", "Tailored<br>shipments"),
+    ("Organização de volumes, lotes e prioridades conforme o cronograma de produção.",
+     "Volumes, batches and priorities organised to match the production schedule."),
+    ("Visibilidade<br>ponta a ponta", "End-to-end<br>visibility"),
+    ("Monitoramento dos embarques e dos principais marcos da operação.",
+     "Monitoring of shipments and of the key milestones of the operation."),
+    ("Da chegada ao<br>destino final", "From arrival to<br>final destination"),
+    ("Coordenação da logística nacional, inclusive de cargas pesadas, até a planta.",
+     "Domestic logistics coordinated all the way to the plant, heavy cargo included."),
+    ("Coordenamos diferentes etapas da importação para dar mais\n        <strong>previsibilidade, controle e eficiência</strong>\n        à importação de aço e recursos siderúrgicos.",
+     "We coordinate the different stages of the import to bring more\n        <strong>predictability, control and efficiency</strong>\n        to steel and steelmaking inputs."),
+    ("Conheça nossas soluções →", "See our solutions →"),
+
+    # ── S7 diferenciais ──
+    ("<span class=\"aco-diff__title-hl\">Diferenciais da WM</span> na importação de aço",
+     "<span class=\"aco-diff__title-hl\">What sets WM apart</span> in steel imports"),
+    ("Relacionamento e suporte junto a fornecedores internacionais.",
+     "Relationships with and support from international suppliers."),
+    ("Planejamento de embarques, cargas pesadas e cronogramas.",
+     "Planning of shipments, heavy cargo and schedules."),
+    ("Gestão da Licença de Importação e acompanhamento da entrada no Brasil.",
+     "Import Licence management and follow-up of entry into Brazil."),
+    ("Análise de alternativas aplicáveis a cada operação.",
+     "Analysis of the alternatives that apply to each operation."),
+    ("Estruturação da compra e importação internacional.",
+     "Structuring of the international purchase and import."),
+
+    # ── S8 resultados ──
+    ("Nossos<br>\n        <span class=\"aco-result__title-hl\">resultados</span>",
+     "Our<br>\n        <span class=\"aco-result__title-hl\">results</span>"),
+    # o 92% entra NO PAR: solto entre os dois trechos, o "de" que liga o numero
+    # ao canal verde nao casava com nada e saia em portugues na pagina inglesa.
+    ("Como resultado do desejo de <strong>importar aço</strong> com as condições\n        mais vantajosas do mercado, conquistamos o índice de\n        <span class=\"aco-result__num\">92%</span> de",
+     "Driven by the goal of <strong>importing steel</strong> on the best terms in the\n        market, we have reached a rate of\n        <span class=\"aco-result__num\">92%</span>"),
+    ("<strong>parametrização em canal verde</strong> — e apenas 5% das operações\n        são retidas em canal amarelo —, agregando mais <strong>segurança</strong> e\n        <strong>agilidade</strong> às operações.",
+     "<strong>green-channel clearance</strong> — with only 5% of operations held in the\n        yellow channel — bringing more <strong>security</strong> and\n        <strong>speed</strong> to the operations."),
+    ("Isso significa que o tempo de nacionalização e liberação da carga no porto\n      <strong>com a WM é muito mais rápido.</strong> Conte com o know-how da WM para\n      importar aço através das melhores oportunidades do comércio internacional.",
+     "That means customs clearance and cargo release at the port are\n      <strong>much faster with WM.</strong> Count on WM's know-how to import steel\n      through the best opportunities in international trade."),
+
+    # ── S9 CTA ──
+    ("Importe aço<br>\n        com <span class=\"aco-cta__hl\">agilidade e segurança</span>",
+     "Import steel<br>\n        with <span class=\"aco-cta__hl\">speed and security</span>"),
+    ("Conte com planejamento tributário, gestão logística e\n        acompanhamento da operação de ponta a ponta.",
+     "Count on tax planning, logistics management and end-to-end\n        follow-up of the operation."),
+    ("Fale com um especialista e tire suas dúvidas.", "Talk to a specialist and get your questions answered."),
+
+    # ── alt e aria-label ──
+    ("Bobinas de aço em galpão industrial — WM CAST sobre importação de aço",
+     "Steel coils in an industrial warehouse — WM CAST on steel imports"),
+    ("Bobinas de aço em linha de laminação, no galpão de uma siderúrgica",
+     "Steel coils on a rolling line inside a steel mill"),
+    ("Bobinas de aço estocadas em galpão industrial",
+     "Steel coils stored in an industrial warehouse"),
+    ("Barras e perfilados de aço em linha de produção",
+     "Steel bars and sections on a production line"),
+    ("Chapas de aço empilhadas", "Stacked steel plates"),
+    ("Contêiner WM Trading e pá carregadeira — We Make it better",
+     "WM Trading container and wheel loader — We Make it better"),
+    ("Reproduzir vídeo", "Play video"),
+    ("Fechar vídeo", "Close video"),
+    ("Vídeo institucional", "Corporate video"),
+]
+
+
+TEXTOS_FOTOVOLTAICO_EN = [
+    # ── S1 hero ──
+    ("Importe equipamentos<br>\n          fotovoltaicos com<br>", "Import photovoltaic<br>\n          equipment with<br>"),
+    ("agilidade e segurança</span>", "speed and security</span>"),
+    ("Planejamento tributário, logística e nacionalização para tornar sua operação\n          mais eficiente, da compra no exterior à entrega do projeto.",
+     "Tax planning, logistics and customs clearance to make your operation more\n          efficient, from the purchase abroad to delivery at the project site."),
+    ("Falar com um<br>especialista", "Talk to a<br>specialist"),
+
+    # ── S3 intro ──
+    ("Importação de<br>\n          <span class=\"fv-intro__title-hl\">Equipamentos<br>Fotovoltaicos</span>",
+     "Importing<br>\n          <span class=\"fv-intro__title-hl\">Photovoltaic<br>Equipment</span>"),
+    ("Com experiência em comércio exterior desde 2004, a WM Trading oferece soluções\n          completas para a importação de equipamentos fotovoltaicos, cuidando do\n          planejamento, logística e nacionalização da operação com\n          <strong>agilidade e segurança.</strong>",
+     "With experience in foreign trade since 2004, WM Trading offers complete solutions\n          for importing photovoltaic equipment, handling the planning, logistics and\n          customs clearance of the operation with\n          <strong>speed and security.</strong>"),
+    ("Experiência em operações fotovoltaicas, com gestão completa da importação\n      até a entrega do projeto.",
+     "Experience in photovoltaic operations, with full management of the import\n      through to delivery at the project site."),
+    ("Nossas soluções →", "Our solutions →"),
+
+    # ── S4 beneficios ──
+    ("Nossos diferenciais", "What sets us apart"),
+    ("Benefícios de importar equipamentos\n        <span class=\"fv-benef__title-hl\">fotovoltaicos com a WM</span>",
+     "Benefits of importing photovoltaic\n        <span class=\"fv-benef__title-hl\">equipment with WM</span>"),
+    ("Importação de painéis solares", "Solar panel imports"),
+    ("Especialização na importação de módulos fotovoltaicos, com relacionamento consolidado com fornecedores estratégicos e acompanhamento de toda a operação.",
+     "Specialist expertise in importing photovoltaic modules, with established relationships with strategic suppliers and follow-up of the entire operation."),
+    ("Saiba mais", "Learn more"),
+    ("Importação de inversores", "Inverter imports"),
+    ("Soluções completas para importação de inversores, incluindo suporte técnico, certificação Inmetro e condução do processo para um desembaraço mais ágil.",
+     "Complete solutions for importing inverters, including technical support, Inmetro certification and handling of the process for faster customs clearance."),
+    ("Direto do fabricante", "Direct from the manufacturer"),
+    ("Capacidade de importar diretamente de fabricantes, reduzindo intermediários e buscando melhores condições comerciais e custos logísticos.",
+     "The ability to import directly from manufacturers, cutting out intermediaries and seeking better commercial terms and logistics costs."),
+    ("Benefícios fiscais para kits", "Tax benefits for kits"),
+    ("Acesso a incentivos tributários brasileiros aplicáveis ao setor, contribuindo para maior competitividade das operações de energia solar.",
+     "Access to Brazilian tax incentives that apply to the sector, supporting greater competitiveness in solar energy operations."),
+    ("ICMS reduzido em inversores", "Reduced ICMS on inverters"),
+    ("Planejamento tributário especializado para aproveitar oportunidades de redução da carga tributária nas operações de importação.",
+     "Specialist tax planning to take advantage of opportunities to reduce the tax burden on import operations."),
+    ("Nacionalização ágil dos módulos", "Fast customs clearance for modules"),
+    ("Processo eficiente de nacionalização, com domínio de regulamentações aduaneiras específicas para equipamentos fotovoltaicos.",
+     "An efficient customs clearance process, with command of the customs rules specific to photovoltaic equipment."),
+
+    # ── S5 gestao ──
+    ("Gestão completa<br>\n        da operação.<br>", "Full management<br>\n        of the operation.<br>"),
+    ("Da <span class=\"fv-gestao__hl\">documentação</span><br>\n        à <span class=\"fv-gestao__hl\">entrega na obra</span>",
+     "From <span class=\"fv-gestao__hl\">documentation</span><br>\n        to <span class=\"fv-gestao__hl\">delivery on site</span>"),
+    ("Documentação<br>sob controle", "Documentation<br>under control"),
+    ("Acompanhamento documental para reduzir inconsistências e atrasos.",
+     "Document tracking to reduce inconsistencies and delays."),
+    ("Pagamentos<br>coordenados", "Coordinated<br>payments"),
+    ("Gestão dos pagamentos conforme as etapas e condições da operação.",
+     "Payments managed according to the stages and terms of the operation."),
+    ("Gestão financeira<br>da operação", "Financial management<br>of the operation"),
+    ("Acompanhamento de cartas de crédito e instrumentos da negociação internacional.",
+     "Follow-up on letters of credit and other international trade instruments."),
+    ("Embarques<br>sob medida", "Tailored<br>shipments"),
+    ("Organização de volumes, equipamentos e prioridades conforme o cronograma.",
+     "Volumes, equipment and priorities organised to match the schedule."),
+    ("Visibilidade<br>ponta a ponta", "End-to-end<br>visibility"),
+    ("Monitoramento dos embarques e dos principais marcos da operação.",
+     "Monitoring of shipments and of the key milestones of the operation."),
+    ("Da chegada ao<br>destino final", "From arrival to<br>final destination"),
+    ("Coordenação da logística nacional até o destino final dos equipamentos.",
+     "Domestic logistics coordinated through to the equipment's final destination."),
+    ("Coordenamos diferentes etapas da importação para dar mais\n        <strong>previsibilidade, controle e eficiência</strong>\n        aos projetos fotovoltaicos.",
+     "We coordinate the different stages of the import to bring more\n        <strong>predictability, control and efficiency</strong>\n        to photovoltaic projects."),
+    ("Conheça nossos cases →", "See our case studies →"),
+
+    # ── S7 diferenciais ──
+    ("<span class=\"fv-diff__title-hl\">Diferenciais da WM</span> na importação equipamentos fotovoltaicos",
+     "<span class=\"fv-diff__title-hl\">What sets WM apart</span> in photovoltaic equipment imports"),
+    ("Relacionamento e suporte junto a fornecedores internacionais.",
+     "Relationships with and support from international suppliers."),
+    ("Planejamento de embarques, volumes e cronogramas.",
+     "Planning of shipments, volumes and schedules."),
+    ("Gestão documental e acompanhamento da entrada no Brasil.",
+     "Document management and follow-up of entry into Brazil."),
+    ("Análise de alternativas aplicáveis a cada operação.",
+     "Analysis of the alternatives that apply to each operation."),
+    ("Estruturação da compra e importação internacional.",
+     "Structuring of the international purchase and import."),
+    ("Somos associados à ABSOLAR!", "We are an ABSOLAR member!"),
+    ("Nossa associação à ABSOLAR mantém nossos especialistas atualizados sobre\n          soluções técnicas, legais e de mercado do setor fotovoltaico, contribuindo\n          para operações mais qualificadas e seguras para nossos clientes.",
+     "Our ABSOLAR membership keeps our specialists up to date on the technical, legal\n          and market developments of the photovoltaic sector, supporting better informed\n          and safer operations for our clients."),
+    ("ABSOLAR — Associação Brasileira de Energia Solar Fotovoltaica: empresa associada",
+     "ABSOLAR — Brazilian Photovoltaic Solar Energy Association: member company"),
+
+    # ── S8 cases ──
+    ("Experiência<br>\n        comprovada<br>\n        em <span class=\"fv-cases__title-hl\">grandes<br>projetos</span>",
+     "Proven<br>\n        experience<br>\n        in <span class=\"fv-cases__title-hl\">large-scale<br>projects</span>"),
+    ("Nossa atuação em projetos fotovoltaicos envolve a gestão de operações\n        complexas, com grandes volumes de equipamentos e acompanhamento\n        logístico de ponta a ponta.",
+     "Our work on photovoltaic projects involves managing complex operations, with\n        large volumes of equipment and end-to-end logistics follow-up."),
+    ("Conheça nossos cases</a>", "See our case studies</a>"),
+    ("módulos<br>fotovoltaicos", "photovoltaic<br>modules"),
+    ("400 mil", "400,000"),
+    ("154 mil", "154,000"),
+    ("87 mil", "87,000"),
+    ("101,7", "101.7"),
+    ("57,6", "57.6"),
+    ("containers.", "containers."),
+
+    # ── S9 CTA ──
+    ("Importe equipamentos fotovoltaicos<br>\n        com <span class=\"fv-cta__hl\">agilidade e segurança</span>",
+     "Import photovoltaic equipment<br>\n        with <span class=\"fv-cta__hl\">speed and security</span>"),
+    ("Conte com planejamento tributário, gestão logística e\n        acompanhamento da operação de ponta a ponta.",
+     "Count on tax planning, logistics management and end-to-end\n        follow-up of the operation."),
+    ("Fale com um especialista e tire suas dúvidas.", "Talk to a specialist and get your questions answered."),
+
+    # ── alt e aria-label ──
+    ("Usina fotovoltaica ao pôr do sol", "Photovoltaic plant at sunset"),
+    ("Usina fotovoltaica vista de cima", "Aerial view of a photovoltaic plant"),
+    ("Painéis fotovoltaicos em detalhe", "Close-up of photovoltaic panels"),
+    ("Linha de produção de módulos", "Module production line"),
+    ("Contêineres de módulos em obra", "Containers of modules on site"),
+    ("Fileira de inversores em usina", "Row of inverters at a solar plant"),
+    ("Inversores solares instalados", "Solar inverters installed"),
+    ("Reproduzir vídeo", "Play video"),
+    ("Fechar vídeo", "Close video"),
+    ("Vídeo institucional", "Corporate video"),
+]
+
+
+# Segmentos cuja versao PT tem desenho proprio de 9 secoes. Pelo molde generico
+# em ingles eles virariam outra pagina, sem mosaico, sanfona nem faixa de
+# resultados — por isso passam pela segmento_em_ingles().
+#
+# "remover_secoes" lista o que NAO tem par em ingles: a vitrine de blog (nao ha
+# posts em /en/) e a faixa de e-book (nao ha e-books em /en/). Mandar quem le em
+# ingles para um PDF ou artigo em portugues e pior do que omitir a secao.
+SEGMENTOS_COM_DESENHO_PROPRIO = {
+    "/en/segments/machines": {
+        "origem": "segmentos/maquinas.html",
+        "prefixo": "mq-",
+        "segmento": "Máquinas e Equipamentos",
+        "textos": TEXTOS_MAQUINAS_EN,
+        "remover_secoes": ("blog",),
+    },
+    "/en/segments/steel": {
+        "origem": "segmentos/aco.html",
+        "prefixo": "aco-",
+        "segmento": "Metais & Derivados",
+        "textos": TEXTOS_ACO_EN,
+        "remover_secoes": ("blog",),
+    },
+    "/en/segments/photovoltaic-equipment": {
+        "origem": "segmentos/equipamentos-fotovoltaicos.html",
+        "prefixo": "fv-",
+        "segmento": "Energia Renovável",
+        "textos": TEXTOS_FOTOVOLTAICO_EN,
+        "remover_secoes": ("ebook",),
+    },
+}
+
+
+def formulario_segmento_en(prefixo="mq-", segmento="Máquinas e Equipamentos"):
+    """Campos do formulario de uma pagina de segmento com desenho proprio.
+
+    `prefixo` troca a familia de classes (.mq-, .aco-, .fv-) e `segmento` diz
+    qual opcao ja vem marcada. O molde e um so: os tres layouts sao clones e a
+    marcacao do CTA e identica fora o prefixo.
 
     Nao da para reaproveitar o formulario_en(): aquele devolve uma <section>
     inteira no molde generico, e aqui o formulario vive dentro do layout proprio
@@ -752,50 +1023,60 @@ def formulario_maquinas_en():
     """
     opcoes = "".join(
         '\n              <option value="%s"%s>%s</option>'
-        % (valor, " selected" if valor == "Máquinas e Equipamentos" else "", rotulo)
+        % (valor, " selected" if valor == segmento else "", rotulo)
         for valor, rotulo in SEGMENTOS_EN)
+    assert any(v == segmento for v, _ in SEGMENTOS_EN), (
+        "segmento %r fora de SEGMENTOS_EN — o Zap nao classificaria o lead" % segmento)
 
-    return FORM_MAQUINAS_EN % opcoes
+    return FORM_SEGMENTO_EN.replace("mq-", prefixo) % opcoes
 
 
-def maquinas_em_ingles(pagina):
-    """Gera /en/segments/machines/ com o DESENHO da /segmentos/maquinas/.
+def segmento_em_ingles(pagina, cfg):
+    """Gera a versao /en/ de um segmento cuja pagina PT tem desenho proprio.
 
-    Mesma razao da home e da /about/: a pagina de maquinas tem layout proprio de
-    9 secoes (mosaico no hero, sanfona de beneficios, faixa de resultados). Pelo
-    molde generico ela viraria outra pagina, sem nada disso.
+    Mesma razao da home e da /about/: /segmentos/maquinas/, /segmentos/aco/ e
+    /segmentos/equipamentos-fotovoltaicos/ tem layout proprio de 9 secoes
+    (mosaico no hero, sanfona de beneficios, faixa de resultados). Pelo molde
+    generico elas virariam outra pagina, sem nada disso.
 
-    Reaproveita o /css/maquinas.css e o /js/maquinas.js sem copia: as classes
-    .mq- sao as mesmas nos dois idiomas.
+    Reaproveita o CSS e o JS da versao PT sem copia: as classes sao as mesmas
+    nos dois idiomas, so muda o prefixo entre os segmentos.
 
-    A SECAO DE BLOG SAI. A vitrine da versao PT lista posts de /blog/, e nao
-    existe blog em ingles — a arvore /en/ tem 27 paginas e nenhuma e post.
-    Mandar quem le em ingles para um artigo em portugues, sem aviso, e pior do
-    que nao ter a secao. A versao EN fica com 8 secoes.
+    `cfg` vem de SEGMENTOS_COM_DESENHO_PROPRIO e traz origem, prefixo, a tabela
+    de textos, o segmento pre-selecionado no formulario e quais secoes saem.
+
+    SECOES QUE SAEM. A vitrine de blog e a faixa de e-book apontam para
+    conteudo que so existe em portugues — nao ha blog nem e-book na arvore /en/.
+    Mandar quem le em ingles para um artigo ou PDF em portugues, sem aviso, e
+    pior do que nao ter a secao. A versao EN fica com 8 secoes.
     """
-    origem = os.path.join(ROOT, "segmentos", "maquinas.html")
+    prefixo = cfg["prefixo"]
+    origem = os.path.join(ROOT, *cfg["origem"].split("/"))
     if not os.path.exists(origem):
-        print("  AVISO: segmentos/maquinas.html nao existe — /en/segments/machines/ nao foi gerada")
+        print("  AVISO: %s nao existe — %s nao foi gerada" % (cfg["origem"], pagina["en"]))
         return None
     html = open(origem, encoding="utf-8").read()
 
-    # 1) fora a vitrine de blog
-    ini = html.find('<section class="mq-blog"')
-    if ini == -1:
-        print("  AVISO: secao .mq-blog nao encontrada — a versao EN pode ter saido com posts em portugues")
-    else:
+    # 1) fora as secoes sem par em ingles
+    for nome in cfg.get("remover_secoes", ()):
+        marca = '<section class="%s%s"' % (prefixo, nome)
+        ini = html.find(marca)
+        if ini == -1:
+            print("  AVISO: secao .%s%s nao encontrada em %s — a versao EN pode ter "
+                  "saido com conteudo em portugues" % (prefixo, nome, cfg["origem"]))
+            continue
         fim = html.index("</section>", ini) + len("</section>")
         # o comentario que abre a secao tambem vai junto
         abre = html.rfind("<!--", 0, ini)
         html = html[:abre] + html[fim:]
 
     # 2) formulario em ingles no lugar do brasileiro (Estado sai, tel internacional)
-    f_ini = html.find('<form class="mq-cta__form')
+    f_ini = html.find('<form class="%scta__form' % prefixo)
     if f_ini == -1:
-        print("  AVISO: formulario nao encontrado em maquinas.html")
+        print("  AVISO: formulario nao encontrado em %s" % cfg["origem"])
     else:
         f_fim = html.index("</form>", f_ini) + len("</form>")
-        html = html[:f_ini] + formulario_maquinas_en() + html[f_fim:]
+        html = html[:f_ini] + formulario_segmento_en(prefixo, cfg["segmento"]) + html[f_fim:]
 
     # 3) o texto do corpo
     faltando = []
@@ -803,20 +1084,24 @@ def maquinas_em_ingles(pagina):
     # "Maquinas agricolas prontas para embarque": na ordem do arquivo a entrada
     # curta traduzia o prefixo e a longa nunca mais casava. Ordenar por tamanho
     # resolve isso sem depender de ninguem manter a lista na ordem certa.
-    for ptxt, entxt in sorted(TEXTOS_MAQUINAS_EN, key=lambda e: -len(e[0])):
+    for ptxt, entxt in sorted(cfg["textos"], key=lambda e: -len(e[0])):
         if ptxt not in html:
             faltando.append(ptxt[:60])
             continue
         html = html.replace(ptxt, entxt)
     if faltando:
-        print("  AVISO: %d trecho(s) de TEXTOS_MAQUINAS_EN nao casaram (texto mudou na versao PT?):"
-              % len(faltando))
+        print("  AVISO: %d trecho(s) da tabela de %s nao casaram (texto mudou na versao PT?):"
+              % (len(faltando), pagina["en"]))
         for t in faltando:
             print("           %r" % t)
 
     # 4) links do corpo que tem par em ingles
     for pt_url, en_url in (("/solucoes-wm/", "/en/solutions-wm/"),
-                           ("/politica-de-privacidade/", "/en/privacy-policy/")):
+                           ("/politica-de-privacidade/", "/en/privacy-policy/"),
+                           # a fotovoltaica linka os cases em dois lugares e esse
+                           # destino TEM par em ingles, diferente do blog e do e-book
+                           ("/segmentos/cases-de-usinas-fotovoltaicas/",
+                            "/en/segments/photovoltaic-plant-cases/")):
         html = html.replace('href="%s"' % pt_url, 'href="%s"' % en_url)
 
     # 5) cabecalho: titulo, descricao, canonical, og, lang
@@ -1080,12 +1365,14 @@ def main():
             if quem_somos_em_ingles(p) is None:
                 continue
             corpo_copiado = True
-        # A /segmentos/maquinas/ e a TERCEIRA pagina de corpo proprio: 9 secoes
-        # escritas a mao, com o mesmo css/js dos dois idiomas. Ver
-        # maquinas_em_ingles() — e a irma da trava em SEGMENT_URL_OVERRIDES do
-        # build_pages, que impede o gerador de refazer a versao PT.
-        elif p["en"].rstrip("/") == "/en/segments/machines":
-            if maquinas_em_ingles(p) is None:
+        # Os segmentos de corpo proprio: 9 secoes escritas a mao, com o mesmo
+        # css/js dos dois idiomas. Ver segmento_em_ingles() — e a irma da trava
+        # em SEGMENT_URL_OVERRIDES do build_pages, que impede o gerador de
+        # refazer a versao PT. Quem entra aqui esta em
+        # SEGMENTOS_COM_DESENHO_PROPRIO.
+        elif p["en"].rstrip("/") in SEGMENTOS_COM_DESENHO_PROPRIO:
+            cfg = SEGMENTOS_COM_DESENHO_PROPRIO[p["en"].rstrip("/")]
+            if segmento_em_ingles(p, cfg) is None:
                 continue
             corpo_copiado = True
         # A /en/blog/ e o unico caso em que o corpo JA ESTA PRONTO quando este
