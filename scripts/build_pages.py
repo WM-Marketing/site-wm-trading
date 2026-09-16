@@ -748,7 +748,13 @@ def render_html_page(output_path, title, description, content_body, head_tpl, he
     extra_head_block = "\n" + extra_head.strip("\n").rstrip() if extra_head.strip() else ""
     extra_scripts_block = "\n" + extra_scripts.strip() + "\n\n" if extra_scripts.strip() else "\n"
 
-    jsonld_blocks = [organization_jsonld(lang)] + ([jsonld] if jsonld else [])
+    if isinstance(jsonld, list):
+        jsonld_extra = jsonld
+    elif jsonld:
+        jsonld_extra = [jsonld]
+    else:
+        jsonld_extra = []
+    jsonld_blocks = [organization_jsonld(lang)] + jsonld_extra
     jsonld_html = "\n  ".join(
         '<script type="application/ld+json">%s</script>' % json.dumps(b, ensure_ascii=False)
         for b in jsonld_blocks
@@ -1246,6 +1252,13 @@ def markdown_to_html(text):
     # (rendered as a grid; js/lightbox.js opens them enlarged in a popup).
     # 1) unwrap paragraphs that contain only images
     html = re.sub(r'<p>((?:\s*<img [^>]*/>)+)\s*</p>', r'\1', html)
+    # Tabelas comparativas sao escritas como HTML no MDX para preservar a
+    # semantica de tabela; o conversor simples as envolve em <p>, o que gera
+    # HTML invalido e pode impedir a exibicao correta no navegador.
+    html = re.sub(
+        r'<p>\s*(<div class="comparison-table-wrap".*?</div>)\s*</p>',
+        r'\1', html, flags=re.S,
+    )
     # 2) group runs of 2+ adjacent images into .post-gallery
     def _gallery_repl(m):
         imgs = re.findall(r'<img [^>]*/>', m.group(0))
@@ -1300,6 +1313,42 @@ def parse_mdx(file_path):
             frontmatter["category"] = "Geral"
 
     return frontmatter, body
+
+
+def faq_jsonld_from_markdown(body):
+    """Cria FAQPage a partir de uma secao 'Perguntas frequentes' do post.
+
+    O schema so e emitido quando o frontmatter declara ``faq_schema: true``.
+    Assim, cada pergunta e resposta estruturada tambem permanece visivel e
+    verificavel para o leitor na propria pagina.
+    """
+    section = re.search(
+        r'^##\s+(?:Perguntas frequentes|Frequently asked questions).*?\n(.*?)(?=^##\s+|\Z)',
+        body, flags=re.I | re.M | re.S,
+    )
+    if not section:
+        return None
+
+    entities = []
+    for match in re.finditer(
+        r'^###\s+(.+?)\n+(.+?)(?=^###\s+|\Z)',
+        section.group(1), flags=re.M | re.S,
+    ):
+        question = re.sub(r'\s+', ' ', match.group(1)).strip()
+        answer = match.group(2).strip()
+        answer = re.sub(r'<[^>]+>', '', answer)
+        answer = re.sub(r'\[([^\]]+)\]\([^\)]+\)', r'\1', answer)
+        answer = re.sub(r'[*_`]', '', answer)
+        answer = re.sub(r'\s+', ' ', answer).strip()
+        if question and answer:
+            entities.append({
+                "@type": "Question",
+                "name": question,
+                "acceptedAnswer": {"@type": "Answer", "text": answer},
+            })
+
+    return ({"@context": "https://schema.org", "@type": "FAQPage",
+             "mainEntity": entities} if entities else None)
 
 VITRINES_DE_BLOG = {
     # arquivo publicado  : (categorias aceitas, palavras no titulo/slug, rotulo)
@@ -1478,7 +1527,7 @@ def gerar_listagens_do_blog(posts_data, head_tpl, header_tpl, footer_tpl):
             </div>
           </a>
         </div>
-        """
+        """.rstrip() + "\n"
 
         corpo = """
     <section class="page-section" style="padding-bottom:20px;">
@@ -3290,6 +3339,10 @@ Se você tiver alguma pergunta sobre esta Política de Privacidade ou as prátic
         
         # Build Post Detail Page content
         cover_html = f'<div class="post-cover-wrap"><img src="{cover}" alt="{title}" class="post-cover" /></div>' if cover else ""
+        post_lang = fm.get("lang") or ("en" if "/en/" in fm.get("originalUrl", "") else "pt-BR")
+        blog_back_url = "/en/blog/" if post_lang == "en" else "/blog/"
+        blog_back_label = "← Back to Blog" if post_lang == "en" else "← Voltar ao Blog"
+        by_label = "By" if post_lang == "en" else "Por"
         
         post_detail_html = f"""
         <article class="blog-section">
@@ -3300,10 +3353,10 @@ Se você tiver alguma pergunta sobre esta Política de Privacidade ou as prátic
                 <span>•</span>
                 <span>{display_date}</span>
                 <span>•</span>
-                <span>Por {author}</span>
+                <span>{by_label} {author}</span>
               </div>
               <h1 class="post-title">{title}</h1>
-              <a href="/blog/" class="link-arrow" style="margin-top:10px;">← Voltar ao Blog</a>
+              <a href="{blog_back_url}" class="link-arrow" style="margin-top:10px;">{blog_back_label}</a>
             </header>
             
             {cover_html}
@@ -3313,7 +3366,7 @@ Se você tiver alguma pergunta sobre esta Política de Privacidade ou as prátic
                 {markdown_to_html(body)}
               </div>
               <div style="margin-top: 60px; padding-top: 30px; border-top: 1px solid #efefef;">
-                <a href="/blog/" class="link-arrow">← Voltar ao Blog</a>
+                <a href="{blog_back_url}" class="link-arrow">{blog_back_label}</a>
               </div>
             </div>
           </div>
@@ -3322,7 +3375,6 @@ Se você tiver alguma pergunta sobre esta Política de Privacidade ou as prátic
         
         post_out_path = os.path.join(BLOG_OUT_DIR, f"{slug}.html")
         # Posts em ingles (frontmatter lang: "en", ou originalUrl /en/) declaram o idioma correto
-        post_lang = fm.get("lang") or ("en" if "/en/" in fm.get("originalUrl", "") else "pt-BR")
         post_jsonld = {
             "@context": "https://schema.org",
             "@type": "BlogPosting",
@@ -3333,8 +3385,28 @@ Se você tiver alguma pergunta sobre esta Política de Privacidade ou as prátic
             "image": (SITE_URL + cover) if cover else (SITE_URL + DEFAULT_OG_IMAGE),
             "mainEntityOfPage": url_publica(f"blog/{slug}.html"),
         }
+        post_jsonld_blocks = [post_jsonld]
+        if fm.get("faq_schema", "").lower() == "true":
+            faq_jsonld = faq_jsonld_from_markdown(body)
+            if faq_jsonld:
+                post_jsonld_blocks.append(faq_jsonld)
+
+        alternate_url = fm.get("alternateUrl", "")
+        extra_head = ""
+        if alternate_url:
+            own_url = url_publica(f"blog/{slug}.html")
+            own_lang = "en" if post_lang == "en" else "pt-BR"
+            alternate_lang = "pt-BR" if own_lang == "en" else "en"
+            default_url = SITE_URL + alternate_url if own_lang == "en" else own_url
+            extra_head = (
+                f'<link rel="alternate" hreflang="{own_lang}" href="{own_url}" />\n'
+                f'  <link rel="alternate" hreflang="{alternate_lang}" '
+                f'href="{SITE_URL}{alternate_url}" />\n'
+                f'  <link rel="alternate" hreflang="x-default" href="{default_url}" />'
+            )
         render_html_page(post_out_path, title, excerpt[:155], post_detail_html, head_tpl, header_tpl, footer_tpl,
-                         lang=post_lang, og_type="article", og_image=cover or None, jsonld=post_jsonld)
+                         lang=post_lang, og_type="article", og_image=cover or None,
+                         jsonld=post_jsonld_blocks, extra_head=extra_head)
 
     # Sort listing data by date descending, desempatando por slug.
     # Sem o desempate a ordem vinha do glob.glob() (ordem do sistema de

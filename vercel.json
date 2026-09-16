@@ -578,6 +578,21 @@
       "permanent": true
     },
     {
+      "source": "/blog/importacao-por-encomenda-ou-conta-ordem/",
+      "destination": "/blog/importacao-conta-e-ordem-ou-encomenda/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/importacao-por-encomenda-ou-conta-ordem.html",
+      "destination": "/blog/importacao-conta-e-ordem-ou-encomenda/",
+      "permanent": true
+    },
+    {
+      "source": "/en/blog/import-by-account-and-order-or-custom-import/",
+      "destination": "/blog/import-by-account-and-order-or-custom-import/",
+      "permanent": true
+    },
+    {
       "source": "/segmentos/aeronaves/",
       "destination": "/segmentos/importacao-aeronaves/",
       "permanent": true

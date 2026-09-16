@@ -648,6 +648,46 @@ textarea.input-wm {
   font-weight: var(--fw-semibold);
   color: var(--color-text-dark);
 }
+.comparison-table-wrap {
+  width: 100%;
+  overflow-x: auto;
+  margin: 28px 0 32px;
+  border: 1px solid #e7e7e7;
+  border-radius: var(--radius-md);
+  -webkit-overflow-scrolling: touch;
+}
+.comparison-table {
+  width: 100%;
+  min-width: 700px;
+  border-collapse: collapse;
+  font-size: 14px;
+  line-height: 1.55;
+}
+.comparison-table th,
+.comparison-table td {
+  padding: 16px;
+  border-bottom: 1px solid #e7e7e7;
+  text-align: left;
+  vertical-align: top;
+}
+.comparison-table thead th {
+  background: var(--color-primary);
+  color: var(--color-text-white);
+  font-weight: var(--fw-semibold);
+}
+.comparison-table tbody th {
+  width: 22%;
+  background: var(--color-light-bg);
+  font-weight: var(--fw-semibold);
+}
+.comparison-table tbody tr:last-child th,
+.comparison-table tbody tr:last-child td {
+  border-bottom: 0;
+}
+@media (max-width: 767px) {
+  .comparison-table th,
+  .comparison-table td { padding: 13px; }
+}
 .prose-wm iframe {
   width: 100%;
   aspect-ratio: 16/9;
