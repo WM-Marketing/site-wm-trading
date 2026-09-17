@@ -504,6 +504,87 @@ def checar_links_mortos(rel):
         rel.ok("nenhum link sem destino (fora o de preferencias de cookies, que e por JS)")
 
 
+def checar_link_na_forma_publica(rel):
+    """Link interno tem que sair na forma publica: sem .html e com barra.
+
+    A trava que faltou em agosto. Com cleanUrls+trailingSlash a URL publica
+    perdeu o .html (ver url_publica no build_pages), e a varredura de 17/08
+    (0f8a25b) trocou 13.263 dos 13.895 links internos. Ela era busca por
+    CAMINHO LITERAL, entao nao casava com href montado por variavel: o card da
+    listagem do blog e o de e-book passaram batido e so foram achados em
+    17/09/2026 — 221 links, o unico caminho interno de 209 dos 218 artigos,
+    cada clique e cada rastreada pagando um 308.
+
+    Por isso a checagem le a FONTE e nao a pagina pronta, e a regex tolera
+    chave: 'href="/[^"]*\.html"' nao encontra /blog/{x["slug"]}.html, porque
+    as aspas de dentro da chave fecham o grupo antes da hora — foi exatamente
+    assim que o defeito se escondeu de todo mundo que procurou por grep.
+
+    Corpo de post (content/**.mdx) ainda e AVISO: sao 422 links herdados do
+    WordPress, tratados na Etapa B. Quando ela fechar, este aviso vira erro.
+    """
+    titulo("L. Link interno na forma publica (sem .html)")
+
+    # /(...)\.html — dentro do caminho, ou caracter comum ou uma {chave} inteira
+    padrao_fonte = re.compile(r'href="(/(?:[^"{]|\{[^}]*\})*)\.html"')
+
+    achados = {}
+    for fonte in ("scripts/build_pages.py", "scripts/build_en.py", "index.html"):
+        alvos = padrao_fonte.findall(ler(fonte))
+        if alvos:
+            achados[fonte] = alvos
+
+    if achados:
+        total = sum(len(v) for v in achados.values())
+        rel.erro(f"{total} link(s) interno(s) com .html na FONTE — cada um vira um "
+                 f"308 em toda pagina gerada:")
+        for fonte, alvos in sorted(achados.items(), key=lambda x: -len(x[1])):
+            rel.erro(f"    {fonte}: {len(alvos)}x  ex.: {alvos[0]}.html")
+        rel.erro("    a forma publica sai de url_publica(): sem .html e com barra final")
+    else:
+        rel.ok("gerador e molde: nenhum link interno com .html")
+
+    # Conferencia de resultado: a pagina pronta nao pode ter .html fora do
+    # corpo do post. O corpo e o unico lugar onde ainda ha resto do WordPress.
+    corpo = re.compile(r'<div class="prose-wm">.*?</div>\s*<div style="margin-top: 60px;',
+                       re.DOTALL)
+    padrao_saida = re.compile(r'href="(/[^"]*)\.html"')
+    fora_do_corpo = {}
+    for pagina in paginas_html():
+        html = corpo.sub("", ler(pagina))
+        alvos = padrao_saida.findall(html)
+        if alvos:
+            fora_do_corpo[pagina] = alvos
+
+    if fora_do_corpo:
+        total = sum(len(v) for v in fora_do_corpo.values())
+        rel.erro(f"{total} link(s) com .html em menu, rodape, card ou CTA de "
+                 f"{len(fora_do_corpo)} pagina(s):")
+        for pagina, alvos in sorted(fora_do_corpo.items(), key=lambda x: -len(x[1]))[:8]:
+            rel.erro(f"    {pagina}: {len(alvos)}x  ex.: {alvos[0]}.html")
+    else:
+        rel.ok("paginas geradas: nenhum link com .html fora do corpo dos posts")
+
+    # Corpo dos posts — Etapa B. Aviso com numero, para a fila nao sumir de vista.
+    herdados = 0
+    arquivos = set()
+    for caminho in glob.glob(os.path.join(ROOT_DIR, "content", "blog", "*.mdx")):
+        texto = ler(os.path.relpath(caminho, ROOT_DIR))
+        if _e_rascunho(texto):   # post fora do ar nao tem pagina para consertar
+            continue
+        n = len(re.findall(r"\]\(/[^)]*\.html", texto))
+        if n:
+            herdados += n
+            arquivos.add(caminho)
+    if herdados:
+        rel.aviso(f"{herdados} link(s) com .html no corpo de {len(arquivos)} post(s) "
+                  f"(content/blog/*.mdx) — resto do WordPress, Etapa B. Nao reprova "
+                  f"ainda; quando a Etapa B fechar, este aviso vira erro.")
+    else:
+        rel.ok("corpo dos posts: nenhum link com .html — a Etapa B fechou, "
+               "troque este aviso por erro")
+
+
 def checar_ingles(rel):
     """A arvore /en/ existe e esta pareada com o portugues?
 
@@ -1500,6 +1581,7 @@ def main():
     checar_molde(rel)
     checar_propagacao(rel)
     checar_links_mortos(rel)
+    checar_link_na_forma_publica(rel)
     checar_vercel(rel)
     checar_robots(rel)
     checar_caminhos_relativos(rel)
