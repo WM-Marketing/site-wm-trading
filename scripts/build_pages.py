@@ -1315,6 +1315,28 @@ def parse_mdx(file_path):
     return frontmatter, body
 
 
+def e_rascunho(fm):
+    """True quando o frontmatter marca o post como rascunho (``draft: true``).
+
+    RASCUNHO E CONTEUDO QUE FICA NO REPOSITORIO SEM IR AO AR: o .mdx segue em
+    content/blog/ para ser editado, mas o gerador nao escreve a pagina do post
+    nem o inclui em lugar nenhum — nem na /blog/, nem na /en/blog/, nem no
+    sitemap.xml, porque as tres saem da mesma lista (posts_data).
+
+    POR QUE A MARCA VIVE NO FRONTMATTER, e nao em apagar o .html: o proximo
+    build reescreveria o arquivo a partir do .mdx, e o post voltaria ao ar
+    sozinho, sem ninguem ter pedido.
+
+    AO REPUBLICAR: apagar a linha `draft` do .mdx, conferir se a URL ganhou
+    redirect no vercel.json enquanto estava fora (na Vercel o redirect ganha do
+    arquivo estatico — a pagina voltaria invisivel) e rodar build_pages.py e
+    depois build_en.py.
+    """
+    return str(fm.get("draft", "")).strip().strip('"').strip("'").lower() in (
+        "true", "sim", "1", "yes",
+    )
+
+
 def faq_jsonld_from_markdown(body):
     """Cria FAQPage a partir de uma secao 'Perguntas frequentes' do post.
 
@@ -3307,8 +3329,14 @@ Se você tiver alguma pergunta sobre esta Política de Privacidade ou as prátic
     # Compile each blog post page
     for file_path in blog_posts_files:
         basename = os.path.basename(file_path)
-        print(f" - compiling blog post {basename}...")
         fm, body = parse_mdx(file_path)
+
+        # Rascunho: o post existe no repositorio, mas nao vai ao ar (ver e_rascunho).
+        if e_rascunho(fm):
+            print(f" - RASCUNHO (fora do ar): {basename}")
+            continue
+
+        print(f" - compiling blog post {basename}...")
         
         # Get elements
         title = fm.get("title", "Post sem título")

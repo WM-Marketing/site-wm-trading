@@ -578,18 +578,28 @@
       "permanent": true
     },
     {
+      "source": "/blog/importacao-conta-e-ordem-ou-encomenda/",
+      "destination": "/importacao-por-conta-e-ordem/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/import-by-account-and-order-or-custom-import/",
+      "destination": "/en/account-order-import/",
+      "permanent": true
+    },
+    {
       "source": "/blog/importacao-por-encomenda-ou-conta-ordem/",
-      "destination": "/blog/importacao-conta-e-ordem-ou-encomenda/",
+      "destination": "/importacao-por-conta-e-ordem/",
       "permanent": true
     },
     {
       "source": "/blog/importacao-por-encomenda-ou-conta-ordem.html",
-      "destination": "/blog/importacao-conta-e-ordem-ou-encomenda/",
+      "destination": "/importacao-por-conta-e-ordem/",
       "permanent": true
     },
     {
       "source": "/en/blog/import-by-account-and-order-or-custom-import/",
-      "destination": "/blog/import-by-account-and-order-or-custom-import/",
+      "destination": "/en/account-order-import/",
       "permanent": true
     },
     {
