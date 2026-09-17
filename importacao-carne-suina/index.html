@@ -469,10 +469,44 @@ document.querySelectorAll('.lp-faq-item').forEach(item => {
   });
 });
 
-/* Phone mask */
+/* Phone mask
+   Quem comeca com + ou 00 esta informando o DDI, e a mascara brasileira NAO
+   se aplica: ela lia o 55 do DDI como DDD e cortava no 11o digito, entao
+   "+55 27 99999-0000" virava "(55) 27999-9900" — 11 digitos, formatado, e
+   errado. Pior que vir incompleto: ninguem desconfia ao ver no CRM.
+   O criterio do que e DDI e o mesmo do normalizaTelefone() no servidor. */
 const tel = document.getElementById('telefone');
+
+/* corta no N-esimo digito preservando o que a pessoa digitou entre eles */
+function cortaEmDigitos(texto, max) {
+  let d = 0, out = '';
+  for (const ch of texto) {
+    if (/\d/.test(ch)) { if (d >= max) break; d++; }
+    out += ch;
+  }
+  return out;
+}
+
 tel.addEventListener('input', e => {
-  let v = e.target.value.replace(/\D/g, '').slice(0, 11);
+  const bruto = e.target.value;
+
+  const digitos = bruto.replace(/\D/g, '');
+
+  /* O "00" precisa ser detectado pelos DIGITOS: digitado caractere a caractere,
+     no primeiro "0" o valor ainda e "0" e a mascara brasileira ja o viraria
+     "(0" — dali em diante nada mais comecaria com "00". */
+  if (/^00/.test(digitos)) {
+    e.target.value = digitos.slice(0, 15);
+    return;
+  }
+  if (/^\s*\+/.test(bruto)) {
+    /* internacional: deixa como a pessoa escreveu, so limpa caractere
+       invalido e limita a 15 digitos — o teto do padrao E.164 */
+    e.target.value = cortaEmDigitos(bruto.replace(/[^\d+\s().-]/g, ''), 15);
+    return;
+  }
+
+  let v = digitos.slice(0, 11);
   if (v.length > 10) v = v.replace(/(\d{2})(\d{5})(\d{4})/, '($1) $2-$3');
   else if (v.length > 6) v = v.replace(/(\d{2})(\d{4,5})(\d{0,4})/, '($1) $2-$3');
   else if (v.length > 2) v = v.replace(/(\d{2})(\d{0,5})/, '($1) $2');

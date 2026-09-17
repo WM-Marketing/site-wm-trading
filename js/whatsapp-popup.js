@@ -109,7 +109,7 @@
           '<input type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true" style="display:none;" />' +
           '<input type="text" name="nome" required placeholder="Nome *" autocomplete="name" />' +
           '<input type="email" name="email" required placeholder="E-mail *" autocomplete="email" />' +
-          '<input type="tel" name="telefone" required placeholder="Telefone * — (DDD) 99999-0000" autocomplete="tel" maxlength="16" />' +
+          '<input type="tel" name="telefone" required placeholder="Telefone * — (DDD) 99999-0000" autocomplete="tel" maxlength="24" />' +
           '<label class="wm-wa-consent">' +
             '<input type="checkbox" name="aceite_privacidade" required value="sim" />' +
             '<span data-wm-aceite>Li e estou de acordo com a <a href="/politica-de-privacidade/" target="_blank" rel="noopener">Pol&iacute;tica de Privacidade</a> e autorizo a WM Trading a tratar meus dados para responder a este contato.</span>' +
@@ -131,8 +131,39 @@
     form.addEventListener('submit', onSubmit);
   }
 
+  /* Corta no N-esimo digito preservando o que a pessoa digitou entre eles. */
+  function cortaEmDigitos(texto, max) {
+    var d = 0, out = '', i;
+    for (i = 0; i < texto.length; i++) {
+      if (/\d/.test(texto[i])) { if (d >= max) break; d++; }
+      out += texto[i];
+    }
+    return out;
+  }
+
+  /* Quem comeca com + ou 00 esta informando o DDI, e a mascara brasileira NAO
+     se aplica: ela lia o 55 do DDI como DDD e cortava no 11o digito, entao
+     "+55 27 99999-0000" virava "(55) 27999-9900" — 11 digitos, formatado, e
+     errado. Pior que vir incompleto: ninguem desconfia ao ver no CRM.
+     O criterio do que e DDI e o mesmo do normalizaTelefone() no servidor. */
   function maskPhone(e) {
-    var d = e.target.value.replace(/\D/g, '').slice(0, 11);
+    var bruto = e.target.value;
+
+    var digitos = bruto.replace(/\D/g, '');
+
+    /* O "00" precisa ser detectado pelos DIGITOS: digitado caractere a
+       caractere, no primeiro "0" o valor ainda e "0" e a mascara brasileira ja
+       o viraria "(0" — dali em diante nada mais comecaria com "00". */
+    if (/^00/.test(digitos)) {
+      e.target.value = digitos.slice(0, 15);
+      return;
+    }
+    if (/^\s*\+/.test(bruto)) {
+      e.target.value = cortaEmDigitos(bruto.replace(/[^\d+\s().-]/g, ''), 15);
+      return;
+    }
+
+    var d = digitos.slice(0, 11);
     var out = '';
     if (d.length > 0) out = '(' + d.slice(0, 2);
     if (d.length > 2) out += ') ' + (d.length === 11 ? d.slice(2, 7) : d.slice(2, 6));
