@@ -667,6 +667,8 @@ def checar_slug_dos_posts(rel):
     for caminho in fontes:
         with open(caminho, encoding="utf-8", errors="replace") as fh:
             texto = fh.read()
+        if _e_rascunho(texto):
+            continue
         if re.search(r"^originalUrl:", texto, re.M):
             continue          # migrado: o slug do WordPress e o correto
         m_t = re.search(r'^title:\s*"(.*?)"\s*$', texto, re.M)
@@ -1115,6 +1117,17 @@ def checar_formularios(rel):
 # --------------------------------------------------------------------------
 # K. Idioma: versao em ingles e tag no blog
 # --------------------------------------------------------------------------
+def _e_rascunho(texto):
+    """True quando o .mdx traz ``draft: true`` no frontmatter.
+
+    Rascunho e post que fica no repositorio e NAO vai ao ar — o build_pages.py
+    nao gera a pagina nem a listagem (ver e_rascunho la). Aqui ele tem que sair
+    das conferencias pelo mesmo motivo: cobrar pagina publicada de um post que
+    ninguem publicou reprova o build inteiro e trava publicacao alheia.
+    """
+    return re.search(r"^draft:\s*[\"']?(true|sim|yes|1)[\"']?\s*$", texto, re.M | re.I) is not None
+
+
 def _posts_e_idiomas():
     """[(slug, lang, revisada, arquivo)] de cada post em content/blog.
 
@@ -1124,6 +1137,8 @@ def _posts_e_idiomas():
     for caminho in sorted(glob.glob(os.path.join(ROOT_DIR, "content", "blog", "*.mdx"))):
         with open(caminho, encoding="utf-8", errors="replace") as fh:
             texto = fh.read()
+        if _e_rascunho(texto):
+            continue
         m_s = re.search(r'^slug:\s*"(.*?)"\s*$', texto, re.M)
         if not m_s:
             continue
