@@ -19,3 +19,7 @@ images/videos/
 # Node
 node_modules/
 npm-debug.log*
+
+# Ferramenta local: imita cleanUrls/trailingSlash para conferir antes do push.
+# Versionada no git (o AGENTS.md a indica), mas nao tem o que fazer na Vercel.
+dev-server.py

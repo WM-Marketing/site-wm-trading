@@ -1506,13 +1506,21 @@ def gerar_listagens_do_blog(posts_data, head_tpl, header_tpl, footer_tpl):
         for cat in categorias:
             filtros += f'<button class="filter-btn" data-filter="{cat}">{cat}</button>\n'
 
+        # O href sai na forma publica de url_publica(): sem .html e com barra.
+        # Ate 17/09/2026 saia "/blog/<slug>.html" — correto em 26/06, quando o
+        # arquivo em disco ERA o endereco, e obsoleto desde o cleanUrls de 14/08.
+        # A varredura de 17/08 (0f8a25b) trocou 13.263 links, mas era busca por
+        # CAMINHO LITERAL e nao casava com um href montado por variavel: estes
+        # 213 cards e os 8 de e-book sobreviveram, e foram anotados como se
+        # fossem corpo de post. Sao o unico link interno de 209 dos 218 artigos,
+        # entao cada um deles custava um 308 ao visitante e ao rastreador.
         cards = ""
         for x in posts:
             capa = (f'<img src="{x["cover"]}" alt="{x["title"]}" class="blog-card__cover" loading="lazy" />'
                     if x["cover"] else '')
             cards += f"""
         <div class="blog-card-item" data-category="{x["category"]}" style="display:flex;">
-          <a href="/blog/{x["slug"]}.html" class="blog-card">
+          <a href="/blog/{x["slug"]}/" class="blog-card">
             <div class="blog-card__cover-wrap">
               {capa}
             </div>
@@ -2953,10 +2961,11 @@ def main():
         {"title": "Importação de equipamentos de energia solar", "slug": "e-book-equipamentos-fotovoltaicos"},
         {"title": "Importação de vinhos", "slug": "importacao-de-vinhos"}
     ]
+    # Mesma correcao do card do blog (17/09/2026): forma publica, sem .html.
     ebooks_cards = ""
     for eb in ebooks_list:
         ebooks_cards += f"""
-        <a href="/ebooks/{eb["slug"]}.html" class="blog-card" style="padding:24px; text-decoration:none; display:flex; flex-direction:column; justify-content:space-between; height:100%;">
+        <a href="/ebooks/{eb["slug"]}/" class="blog-card" style="padding:24px; text-decoration:none; display:flex; flex-direction:column; justify-content:space-between; height:100%;">
           <div>
             <span class="blog-card__category" style="font-size:11px;">E-BOOK</span>
             <h3 class="blog-card__title" style="margin-top:8px;">{eb["title"]}</h3>

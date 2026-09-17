@@ -61,6 +61,5 @@ client_secret*.json
 GTM-*.json
 
 # Ferramentas locais de desenvolvimento
-dev-server.py
 testar-*
 payloads_capturados.jsonl
