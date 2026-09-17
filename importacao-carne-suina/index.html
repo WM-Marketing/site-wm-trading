@@ -508,7 +508,10 @@ tel.addEventListener('input', e => {
 
   let v = digitos.slice(0, 11);
   if (v.length > 10) v = v.replace(/(\d{2})(\d{5})(\d{4})/, '($1) $2-$3');
-  else if (v.length > 6) v = v.replace(/(\d{2})(\d{4,5})(\d{0,4})/, '($1) $2-$3');
+  /* {4} e nao {4,5}: ganancioso, ele pegava 5 digitos do fixo de 10 e sobrava
+     so 3 para o final — (27) 33229-700 em vez de (27) 3322-9700. O celular de
+     11 digitos ja e tratado no ramo acima. */
+  else if (v.length > 6) v = v.replace(/(\d{2})(\d{4})(\d{0,4})/, '($1) $2-$3');
   else if (v.length > 2) v = v.replace(/(\d{2})(\d{0,5})/, '($1) $2');
   else if (v.length > 0) v = v.replace(/(\d{0,2})/, '($1');
   e.target.value = v;
