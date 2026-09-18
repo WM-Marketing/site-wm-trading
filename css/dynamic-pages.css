@@ -695,6 +695,13 @@ textarea.input-wm {
   margin: 32px 0;
   border: none;
 }
+.prose-wm iframe.wm-video-vertical {
+  display: block;
+  width: min(100%, 405px);
+  aspect-ratio: 9/16;
+  margin-right: auto;
+  margin-left: auto;
+}
 
 .wm-interactive-chart {
   margin: 36px 0;

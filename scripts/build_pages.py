@@ -1018,6 +1018,18 @@ def markdown_to_html(text):
             )
             i += 1
 
+        # Vídeos verticais do Facebook, como Shorts/Reels publicados em 9:16.
+        elif re.match(r'^\{\{wm-facebook-video-vertical:\d+\}\}$', line.strip()):
+            video_id = re.search(r'\d+', line.strip()).group(0)
+            watch_url = f'https://www.facebook.com/watch/?v={video_id}'
+            embed_url = 'https://www.facebook.com/plugins/video.php?href=' + urllib.parse.quote(watch_url, safe='') + '&show_text=false'
+            new_lines.append(
+                f'<iframe class="wm-video-vertical" src="{embed_url}" title="Vídeo vertical do Facebook" loading="lazy" '
+                'allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share" '
+                'referrerpolicy="origin" allowfullscreen></iframe>'
+            )
+            i += 1
+
         # Gráfico interativo: importação mensal de automóveis de passageiros (SH4 8703)
         elif line.strip() == '{{wm-chart:autos-8703}}':
             new_lines.append('''<figure class="wm-interactive-chart">
