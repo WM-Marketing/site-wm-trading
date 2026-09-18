@@ -1000,3 +1000,44 @@ textarea.input-wm {
 @media (max-width: 600px) {
   .segmentos-index-grid { grid-template-columns: 1fr; }
 }
+
+/* Cards informativos usados em posts sobre tributação. Não são botões nem links. */
+.tax-rate-cards {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+  margin: 28px 0 10px;
+}
+.tax-rate-card {
+  padding: 22px 18px;
+  border: 1px solid #f0d7cb;
+  border-radius: var(--radius-lg);
+  background: var(--color-primary-light);
+  text-align: center;
+}
+.tax-rate-card__label {
+  display: block;
+  color: var(--color-text-dark);
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.35;
+}
+.tax-rate-card__value {
+  display: block;
+  margin-top: 7px;
+  color: var(--color-primary);
+  font-family: 'Nunito Sans', sans-serif;
+  font-size: clamp(25px, 2.7vw, 36px);
+  font-weight: 800;
+  line-height: 1;
+}
+.tax-rate-cards__caption {
+  margin: 0;
+  color: var(--color-text-muted);
+  font-size: 12px;
+  line-height: 1.35;
+  text-align: center;
+}
+@media (max-width: 640px) {
+  .tax-rate-cards { grid-template-columns: 1fr; }
+}

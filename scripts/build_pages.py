@@ -8,6 +8,7 @@ import re
 import json
 import glob
 import shutil
+import urllib.parse
 from datetime import datetime
 
 # Define workspace directories (derived from this script's location, works on any machine)
@@ -17,6 +18,98 @@ ROOT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # para consolidar indexacao no dominio oficial antes e depois da virada.
 SITE_URL = "https://www.wmtrading.com.br"
 DEFAULT_OG_IMAGE = "/images/logo/fechado_logo_wm_trading_ajustada_logo_laranja.png"
+
+# Dados de gráficos editoriais. As séries são mantidas aqui, junto com a
+# marcação, para que a versão HTML publicada e a prévia local usem exatamente
+# os mesmos números e a mesma interação.
+GRAFICOS_INTERATIVOS = {
+    "aco-set-2026": {
+        "titulo": "Importação mensal de ferro e aço por grau de transformação",
+        "descricao": "Gráfico de linhas comparando importações mensais de ferro e aço em formas brutas ou semimanufaturadas e de produtos de ferro e aço transformados, de setembro de 2024 a agosto de 2026.",
+        "labels": ["set./24", "out./24", "nov./24", "dez./24", "jan./25", "fev./25", "mar./25", "abr./25", "mai./25", "jun./25", "jul./25", "ago./25", "set./25", "out./25", "nov./25", "dez./25", "jan./26", "fev./26", "mar./26", "abr./26", "mai./26", "jun./26", "jul./26", "ago./26"],
+        "series": [
+            {"label": "Formas brutas e semimanufaturadas", "data": [494.61, 476.94, 338.01, 291, 462.05, 377.24, 483.02, 409.98, 502.47, 471.28, 471.05, 368.37, 334.47, 362.31, 351.42, 293.75, 407.25, 421.95, 415.49, 302.03, 251.27, 365.99, 316.96, 317.1], "color": "#FC5000", "fill": "rgba(252, 80, 0, 0.10)"},
+            {"label": "Produtos de aço transformados", "data": [373.68, 395.51, 321.19, 359.93, 397.01, 410.1, 342.17, 353.41, 347.54, 353.98, 415.09, 378.17, 409.91, 394.07, 309.19, 344.37, 385.81, 328.79, 506.52, 379.05, 366.15, 488.39, 402.18, 473.3], "color": "#133B5C", "fill": "rgba(19, 59, 92, 0.08)"},
+        ],
+    },
+    "maquinas-aditivas-set-2026": {
+        "titulo": "Importação mensal de máquinas para fabricação aditiva",
+        "descricao": "Gráfico de linha da importação mensal de máquinas para fabricação aditiva, de setembro de 2024 a agosto de 2026.",
+        "labels": ["set./24", "out./24", "nov./24", "dez./24", "jan./25", "fev./25", "mar./25", "abr./25", "mai./25", "jun./25", "jul./25", "ago./25", "set./25", "out./25", "nov./25", "dez./25", "jan./26", "fev./26", "mar./26", "abr./26", "mai./26", "jun./26", "jul./26", "ago./26"],
+        "series": [
+            {"label": "Máquinas para fabricação aditiva", "data": [3.19, 2.74, 2.53, 2.16, 3.07, 1.69, 2.27, 2.09, 2.3, 3.88, 2.37, 5.52, 6.72, 7.43, 4.86, 4.64, 4.5, 4.98, 6.57, 6.18, 10.99, 13.97, 12.44, 22.67], "color": "#FC5000", "fill": "rgba(252, 80, 0, 0.16)"},
+        ],
+    },
+    "ciclos-eletricos-set-2026": {
+        "titulo": "Importação mensal de ciclos com motor elétrico para propulsão",
+        "descricao": "Gráfico de linha da importação mensal de motocicletas, ciclomotores e outros ciclos com motor elétrico para propulsão, de setembro de 2024 a agosto de 2026.",
+        "labels": ["set./24", "out./24", "nov./24", "dez./24", "jan./25", "fev./25", "mar./25", "abr./25", "mai./25", "jun./25", "jul./25", "ago./25", "set./25", "out./25", "nov./25", "dez./25", "jan./26", "fev./26", "mar./26", "abr./26", "mai./26", "jun./26", "jul./26", "ago./26"],
+        "series": [
+            {"label": "Ciclos com motor elétrico para propulsão", "data": [3.83, 5.75, 6.09, 6.03, 6.19, 6.11, 5.7, 4.25, 4.65, 7.46, 9.41, 12.37, 11.13, 11.48, 14.24, 19.58, 14.02, 10.49, 16.69, 14.01, 14.89, 14.74, 25.39, 25.87], "color": "#FC5000", "fill": "rgba(252, 80, 0, 0.16)", "highlight": [22, 23]},
+        ],
+    },
+    "instrumentos-analise-set-2026": {
+        "titulo": "Importação mensal de instrumentos e aparelhos para análises físicas ou químicas",
+        "descricao": "Gráfico de linha da importação mensal de instrumentos e aparelhos para análises físicas ou químicas, de setembro de 2024 a agosto de 2026.",
+        "labels": ["set./24", "out./24", "nov./24", "dez./24", "jan./25", "fev./25", "mar./25", "abr./25", "mai./25", "jun./25", "jul./25", "ago./25", "set./25", "out./25", "nov./25", "dez./25", "jan./26", "fev./26", "mar./26", "abr./26", "mai./26", "jun./26", "jul./26", "ago./26"],
+        "series": [
+            {"label": "Instrumentos e aparelhos para análises físicas ou químicas", "data": [82.87, 71.63, 66.88, 78.12, 63.27, 78.58, 69.6, 78.82, 78.6, 81.9, 87.52, 80.02, 94.01, 85.03, 76.23, 88.52, 83.25, 81.51, 88.31, 87.24, 86.14, 97.12, 99.13, 100.58], "color": "#FC5000", "fill": "rgba(252, 80, 0, 0.16)"},
+        ],
+    },
+}
+
+
+def grafico_interativo(chave):
+    """Retorna um gráfico Chart.js para os dados de pautas da WM Trading."""
+    spec = GRAFICOS_INTERATIVOS[chave]
+    chart_id = "chart-" + chave
+    datasets = []
+    for serie in spec["series"]:
+        pontos = {"radius": 4, "hoverRadius": 6}
+        if serie.get("highlight"):
+            pontos = {
+                "radius": [7 if i in serie["highlight"] else 4 for i in range(len(serie["data"]))],
+                "hoverRadius": 7,
+                "backgroundColor": ["#133B5C" if i in serie["highlight"] else serie["color"] for i in range(len(serie["data"]))],
+            }
+        datasets.append({
+            "label": serie["label"], "data": serie["data"], "borderColor": serie["color"],
+            "backgroundColor": serie["fill"], "borderWidth": 3, "fill": len(spec["series"]) == 1,
+            "tension": 0.32, "pointRadius": pontos["radius"],
+            "pointHoverRadius": pontos["hoverRadius"],
+            "pointBackgroundColor": pontos.get("backgroundColor", serie["color"]),
+        })
+    labels = json.dumps(spec["labels"], ensure_ascii=False)
+    datasets_json = json.dumps(datasets, ensure_ascii=False)
+    legenda = "{ display: false }" if len(datasets) == 1 else "{ display: true, position: 'bottom', labels: { usePointStyle: true, padding: 18 } }"
+    return f'''<figure class="wm-interactive-chart">
+  <figcaption>{spec["titulo"]}</figcaption>
+  <div class="wm-interactive-chart__canvas"><canvas id="{chart_id}" aria-label="{spec["descricao"]}"></canvas></div>
+  <p class="wm-interactive-chart__source">Fonte: MDIC/Comex Stat.</p>
+</figure>
+<script src="/js/chart.umd.min.js"></script>
+<script>
+(() => {{
+  const canvas = document.getElementById('{chart_id}');
+  if (!canvas || !window.Chart) return;
+  new Chart(canvas, {{
+    type: 'line',
+    data: {{ labels: {labels}, datasets: {datasets_json} }},
+    options: {{
+      responsive: true, maintainAspectRatio: false,
+      interaction: {{ mode: 'index', intersect: false }},
+      plugins: {{
+        legend: {legenda},
+        tooltip: {{ callbacks: {{ label: ctx => ` ${{ctx.dataset.label}}: US$ ${{ctx.parsed.y.toLocaleString('pt-BR', {{ minimumFractionDigits: 2, maximumFractionDigits: 2 }})}} milhões` }} }}
+      }},
+      scales: {{
+        y: {{ beginAtZero: false, ticks: {{ callback: value => `US$ ${{value.toLocaleString('pt-BR')}} mi` }}, grid: {{ color: '#e5e5e5' }} }},
+        x: {{ grid: {{ display: false }} }}
+      }}
+    }}
+  }});
+}})();
+</script>'''
 
 
 def url_publica(caminho_relativo):
@@ -884,6 +977,47 @@ def markdown_to_html(text):
             )
             i += 1
 
+        # Cards informativos de tributação para posts de aeronaves.
+        elif line.strip() == '{{wm-tax-cards:aeronaves}}':
+            new_lines.append('''<div class="tax-rate-cards-wrap">
+<div class="tax-rate-cards" role="list" aria-label="Principais tributos na importação de aeronaves">
+  <div class="tax-rate-card" role="listitem"><span class="tax-rate-card__label">IPI</span><span class="tax-rate-card__value">6,5%</span></div>
+  <div class="tax-rate-card" role="listitem"><span class="tax-rate-card__label">ICMS</span><span class="tax-rate-card__value">4%*</span></div>
+  <div class="tax-rate-card" role="listitem"><span class="tax-rate-card__label">PIS + Cofins</span><span class="tax-rate-card__value">2,1%</span></div>
+</div>
+<p class="tax-rate-cards__caption">* Em operações elegíveis</p>
+</div>''')
+            i += 1
+
+        elif line.strip() == '{{wm-tax-cards:aeronaves-en}}':
+            new_lines.append('''<div class="tax-rate-cards-wrap">
+<div class="tax-rate-cards" role="list" aria-label="Main taxes on aircraft imports into Brazil">
+  <div class="tax-rate-card" role="listitem"><span class="tax-rate-card__label">IPI</span><span class="tax-rate-card__value">6.5%</span></div>
+  <div class="tax-rate-card" role="listitem"><span class="tax-rate-card__label">ICMS</span><span class="tax-rate-card__value">4%*</span></div>
+  <div class="tax-rate-card" role="listitem"><span class="tax-rate-card__label">PIS + Cofins</span><span class="tax-rate-card__value">2.1%</span></div>
+</div>
+<p class="tax-rate-cards__caption">* In eligible transactions</p>
+</div>''')
+            i += 1
+
+        # Gráficos editoriais de pautas de dados da WM Trading.
+        elif re.match(r'^\{\{wm-chart:(aco-set-2026|maquinas-aditivas-set-2026|ciclos-eletricos-set-2026|instrumentos-analise-set-2026)\}\}$', line.strip()):
+            chave = re.search(r'wm-chart:([^}]+)', line.strip()).group(1)
+            new_lines.append(grafico_interativo(chave))
+            i += 1
+
+        # Vídeos do Facebook informados como um ID de publicação.
+        elif re.match(r'^\{\{wm-facebook-video:\d+\}\}$', line.strip()):
+            video_id = re.search(r'\d+', line.strip()).group(0)
+            watch_url = f'https://www.facebook.com/watch/?v={video_id}'
+            embed_url = 'https://www.facebook.com/plugins/video.php?href=' + urllib.parse.quote(watch_url, safe='') + '&show_text=false'
+            new_lines.append(
+                f'<iframe src="{embed_url}" title="Vídeo do Facebook" loading="lazy" '
+                'allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share" '
+                'referrerpolicy="origin" allowfullscreen></iframe>'
+            )
+            i += 1
+
         # Gráfico interativo: importação mensal de automóveis de passageiros (SH4 8703)
         elif line.strip() == '{{wm-chart:autos-8703}}':
             new_lines.append('''<figure class="wm-interactive-chart">
@@ -1179,7 +1313,12 @@ def markdown_to_html(text):
                 yt_id = yt_url.split('shorts/')[1].split('?')[0].strip()
                 
             if yt_id:
-                new_lines.append(f'<iframe src="https://www.youtube.com/embed/{yt_id}" title="Vídeo do YouTube" loading="lazy" allowfullscreen></iframe>')
+                new_lines.append(
+                    f'<iframe src="https://www.youtube.com/embed/{yt_id}?rel=0&amp;playsinline=1" '
+                    'title="Vídeo do YouTube" loading="lazy" '
+                    'allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" '
+                    'referrerpolicy="origin" allowfullscreen></iframe>'
+                )
             else:
                 new_lines.append(f'<p>{line}</p>')
             i += 1
@@ -1218,7 +1357,9 @@ def markdown_to_html(text):
                             embed_urls.append(embed_url)
                 new_lines.append(f'<p>{para_text}</p>')
                 new_lines.extend(
-                    f'<iframe src="{embed_url}" title="Vídeo do YouTube" loading="lazy" allowfullscreen></iframe>'
+                    f'<iframe src="{embed_url}?rel=0&amp;playsinline=1" title="Vídeo do YouTube" loading="lazy" '
+                    'allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" '
+                    'referrerpolicy="origin" allowfullscreen></iframe>'
                     for embed_url in embed_urls
                 )
                 
