@@ -2945,12 +2945,29 @@ def main():
     # 6B. CARREIRAS
     print(" - compiling carreiras.html...")
     carreiras_body = f"""
-    <section class="dynamic-hero">
-      <img src="/images/heros/time-wm.webp" alt="" class="dynamic-hero__bg" />
-      <div class="container dynamic-hero__container">
-        <p class="dynamic-hero__eyebrow">Carreiras</p>
-        <h1 class="dynamic-hero__title">Faça parte de uma das maiores tradings do Brasil</h1>
-        <p class="dynamic-hero__subtitle">Deseja trabalhar conosco? Conheça nossa cultura e veja se o seu perfil combina com os nossos valores.</p>
+    <section class="car-hero">
+      <img src="/images/heros/time-wm.webp"
+           alt="Equipe da WM Trading reunida em confraternização, de braços erguidos"
+           class="car-hero__foto" width="1920" height="1080" fetchpriority="high" decoding="async" />
+
+      <div class="container car-hero__faixa">
+        <div>
+          <h1 class="car-hero__title">
+            Faça parte de uma das<br>
+            <span class="car-hero__title-hl">maiores tradings</span> do Brasil
+          </h1>
+          <p class="car-hero__text">
+            <strong>Deseja trabalhar conosco?</strong> Conheça nossa cultura e
+            veja se o seu perfil combina com os nossos valores.
+          </p>
+        </div>
+
+        <svg class="car-hero__grafismo" viewBox="0 0 120 120" fill="none"
+             stroke="currentColor" stroke-width="5" stroke-linecap="square"
+             aria-hidden="true">
+          <path d="M6 4v112h112" />
+          <path d="M6 116 116 6" />
+        </svg>
       </div>
     </section>
     
@@ -2988,7 +3005,10 @@ def main():
       </div>
     </section>
     """
-    render_html_page(os.path.join(ROOT_DIR, "carreiras.html"), "Trabalhe Conosco", "Faça parte da nossa equipe na WM Trading.", carreiras_body, head_tpl, header_tpl, footer_tpl)
+    render_html_page(os.path.join(ROOT_DIR, "carreiras.html"), "Trabalhe Conosco",
+                     "Faça parte da nossa equipe na WM Trading.", carreiras_body,
+                     head_tpl, header_tpl, footer_tpl,
+                     extra_head='  <link rel="stylesheet" href="/css/carreiras.css" />\n')
 
     # 6C. UNIDADES
     print(" - compiling unidades.html...")

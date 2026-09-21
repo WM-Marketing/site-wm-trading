@@ -1,0 +1,78 @@
+/* =============================================
+   WM Trading — Carreiras
+   Carregado só por /carreiras/, via extra_head do render_html_page.
+
+   O hero desta página NÃO é o .dynamic-hero do molde genérico: ali a foto vira
+   fundo escurecido e o texto fica por cima, e numa foto de equipe com 80 rostos
+   o escurecimento apaga justamente o que se quer mostrar. Aqui a foto fica
+   inteira em cima, sem véu, e o texto desce para uma faixa escura logo abaixo.
+   ============================================= */
+
+.car-hero {
+  background: var(--color-bg-dark, #1E1E1E);
+}
+
+/* ── A foto, de ponta a ponta ──
+   A original é 1920x1080 (16:9). Numa faixa larga o 16:9 ocuparia meia tela e
+   empurraria o texto para fora da dobra, então o object-fit recorta para uma
+   proporção mais baixa. O 52% no eixo Y foi medido no navegador: com a janela
+   visível ocupando ~60% da altura da foto, centrar em 52% deixa o telhado no
+   topo e corta o excesso de céu e de gramado, que é o enquadramento do layout
+   aprovado. */
+.car-hero__foto {
+  display: block;
+  width: 100%;
+  height: clamp(260px, 34vw, 560px);
+  object-fit: cover;
+  object-position: 50% 52%;
+}
+
+/* ── A faixa escura ── */
+.car-hero__faixa {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: clamp(24px, 5vw, 72px);
+  padding: clamp(36px, 5vw, 64px) 0;
+}
+
+.car-hero__title {
+  margin: 0;
+  font-family: var(--font-primary, 'Poppins', sans-serif);
+  font-size: clamp(26px, 3.4vw, 44px);
+  font-weight: var(--fw-light, 300);
+  line-height: 1.22;
+  color: var(--color-text-white, #fff);
+  text-wrap: pretty;
+}
+.car-hero__title-hl {
+  color: var(--color-primary, #FC5000);
+}
+
+.car-hero__text {
+  margin: 18px 0 0;
+  max-width: 34em;
+  font-size: var(--fs-base, 16px);
+  font-weight: var(--fw-light, 300);
+  line-height: 1.8;
+  color: rgba(255, 255, 255, 0.78);
+}
+.car-hero__text strong {
+  color: var(--color-text-white, #fff);
+  font-weight: var(--fw-semibold, 600);
+}
+
+/* ── Grafismo: eixo em L com a diagonal subindo, na cor da marca ── */
+.car-hero__grafismo {
+  width: clamp(96px, 11vw, 168px);
+  height: auto;
+  color: var(--color-primary, #FC5000);
+  flex-shrink: 0;
+}
+
+/* Abaixo de 860 o grafismo sai: espremido ao lado do texto ele vira um risco
+   sem leitura, e a faixa fica mais alta sem ganhar nada. */
+@media (max-width: 860px) {
+  .car-hero__faixa { grid-template-columns: 1fr; }
+  .car-hero__grafismo { display: none; }
+}
