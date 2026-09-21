@@ -2978,7 +2978,12 @@ def main():
       <div class="container intro-container">
         <h2 class="t-h2" style="margin-bottom:16px;">Vagas abertas</h2>
         <p class="intro-text" style="color:var(--color-text-muted);">Confira as oportunidades disponíveis e candidate-se. Estamos sempre em busca de novos talentos.</p>
-        <a href="/fale-conosco/" class="btn btn-lg" style="margin-top:24px;">Quero me candidatar</a>
+        <!-- Gupy, e nao /fale-conosco/: o formulario de contato pergunta sobre
+             projeto de importacao e manda o lead para o funil comercial — quem
+             quer se candidatar caia no lugar errado e o RH nunca via. A versao
+             em ingles (careers_open_positions_html no build_en.py) ja apontava
+             para a Gupy desde sempre; as duas estavam divergentes. -->
+        <a href="https://wmtrading.gupy.io/" class="btn btn-lg" style="margin-top:24px;" target="_blank" rel="noopener noreferrer">Quero me candidatar</a>
         <p class="card-desc" style="margin-top:20px; font-size:12px;">Ao se inscrever no processo seletivo, você concorda com o tratamento dos seus dados pessoais nos termos da nossa Declaração de Privacidade para Recrutamento e Seleção.</p>
       </div>
     </section>
