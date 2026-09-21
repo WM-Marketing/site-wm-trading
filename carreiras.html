@@ -193,7 +193,11 @@
 
     <section class="car-hero">
       <div class="car-hero__media">
-        <img src="/images/heros/time-wm.webp"
+        <!-- O nome carrega o ano de proposito. /images/ responde
+             Cache-Control max-age de 30 dias, entao trocar o CONTEUDO de um
+             arquivo nao chega a quem ja visitou: so a mudanca de URL invalida
+             o cache. Ao trocar a foto de novo, trocar o nome junto. -->
+        <img src="/images/heros/time-wm-2026.webp"
              alt="Equipe da WM Trading reunida em confraternização, de braços erguidos"
              class="car-hero__foto" width="2737" height="1520" fetchpriority="high" decoding="async" />
       </div>

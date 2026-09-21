@@ -143,6 +143,12 @@ CAPAS_PROPRIAS_EN = {
     # mosaico .aco-hero. Sem esta linha a /en/segments/steel/ sai do build sem
     # imagem de capa.
     "/en/segments/steel/": "/images/aco/faixa-aco.jpg",
+    # Mesmo caso desde 21/09/2026: a /carreiras/ trocou o .dynamic-hero__bg pelo
+    # hero proprio .car-hero e a capa_da_pagina_pt() ficou sem o que ler — a
+    # /en/careers/ saiu do build SEM hero. O arquivo e o mesmo que a versao PT
+    # usa; o sufixo do ano acompanha a troca de foto, por causa do cache de 30
+    # dias em /images/.
+    "/en/careers/": "/images/heros/time-wm-2026.webp",
 }
 
 
