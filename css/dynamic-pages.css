@@ -1048,3 +1048,73 @@ textarea.input-wm {
 @media (max-width: 640px) {
   .tax-rate-cards { grid-template-columns: 1fr; }
 }
+
+/* ---------- POSTS RELACIONADOS ---------- */
+/* Relações editoriais curadas em content/blog-relations.json. O bloco fica
+   no HTML inicial do post, sem depender de JavaScript, para servir ao leitor
+   e também aos rastreadores. */
+.related-posts {
+  margin-top: 56px;
+  padding-top: 34px;
+  border-top: 1px solid #efefef;
+}
+.related-posts h2 {
+  margin: 0 0 20px;
+  color: var(--color-text-dark);
+  font-size: clamp(24px, 3vw, 32px);
+  font-weight: var(--fw-light);
+  line-height: 1.2;
+}
+.related-posts__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 16px;
+}
+.related-posts__card {
+  display: flex;
+  min-height: 188px;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 22px;
+  border: 1px solid #ececec;
+  border-radius: var(--radius-lg);
+  background: #fff;
+  color: var(--color-text-dark);
+  text-decoration: none;
+  transition: border-color var(--transition), box-shadow var(--transition), transform var(--transition);
+}
+.related-posts__card:hover {
+  border-color: rgba(252, 80, 0, 0.45);
+  box-shadow: var(--shadow-card);
+  transform: translateY(-2px);
+}
+.related-posts__category {
+  margin-bottom: 10px;
+  color: var(--color-primary);
+  font-size: 11px;
+  font-weight: var(--fw-semibold);
+  letter-spacing: .04em;
+  text-transform: uppercase;
+}
+.related-posts__card strong {
+  color: var(--color-text-dark);
+  font-size: 16px;
+  line-height: 1.4;
+}
+.related-posts__excerpt {
+  display: -webkit-box;
+  margin-top: 10px;
+  overflow: hidden;
+  color: var(--color-text-muted);
+  font-size: 13px;
+  line-height: 1.5;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+.related-posts__link {
+  margin-top: auto;
+  padding-top: 16px;
+  color: var(--color-primary);
+  font-size: 13px;
+  font-weight: var(--fw-semibold);
+}

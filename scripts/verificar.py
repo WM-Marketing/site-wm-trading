@@ -308,10 +308,20 @@ def titulo(texto):
 
 
 def paginas_html():
-    """Todos os .html do repo, como caminho relativo."""
+    """Todos os HTMLs publicados do repo, como caminho relativo.
+
+    ``content/drafts`` guarda prévias locais e arquivos portáteis para revisão.
+    Eles não são enviados à Vercel e, por isso, não devem obedecer às regras de
+    tracking, CMP ou caminhos absolutos das páginas públicas.
+    """
     encontrados = []
     for pasta, subpastas, arquivos in os.walk(ROOT_DIR):
         subpastas[:] = [s for s in subpastas if s not in (".git", "node_modules", "__pycache__")]
+        relativo = os.path.relpath(pasta, ROOT_DIR).replace(os.sep, "/")
+        if relativo == "content":
+            subpastas[:] = [s for s in subpastas if s != "drafts"]
+        if relativo == "content/drafts" or relativo.startswith("content/drafts/"):
+            continue
         for a in arquivos:
             if a.endswith(".html"):
                 completo = os.path.join(pasta, a)
@@ -1234,6 +1244,74 @@ def _posts_e_idiomas():
     return saida
 
 
+def checar_relacoes_blog(rel):
+    """Valida a fonte editorial e o HTML dos blocos de relacionados."""
+    titulo("L. Relações editoriais entre posts")
+    caminho = os.path.join(ROOT_DIR, "content", "blog-relations.json")
+    if not os.path.isfile(caminho):
+        rel.ok("sem content/blog-relations.json — nenhum bloco de relacionados configurado")
+        return
+    try:
+        with open(caminho, encoding="utf-8") as arquivo:
+            relacoes = json.load(arquivo)
+    except (OSError, ValueError) as erro:
+        rel.erro("content/blog-relations.json inválido: %s" % erro)
+        return
+    if not isinstance(relacoes, dict):
+        rel.erro("content/blog-relations.json deve conter um objeto JSON")
+        return
+
+    posts = {slug: lang for slug, lang, _revisada, _arquivo in _posts_e_idiomas()}
+    erros = []
+    total = 0
+    for origem, spec in relacoes.items():
+        if origem.startswith("_"):
+            continue
+        if origem not in posts:
+            erros.append("origem não publicada: %s" % origem)
+            continue
+        destinos = spec.get("related") if isinstance(spec, dict) else None
+        if not isinstance(destinos, list):
+            erros.append("%s: 'related' deve ser uma lista" % origem)
+            continue
+        vistos = set()
+        for destino in destinos:
+            total += 1
+            if not isinstance(destino, str) or not destino:
+                erros.append("%s: destino inválido" % origem)
+                continue
+            if destino == origem:
+                erros.append("%s: autorreferência" % origem)
+                continue
+            if destino in vistos:
+                erros.append("%s: destino duplicado %s" % (origem, destino))
+                continue
+            vistos.add(destino)
+            if destino not in posts:
+                erros.append("%s -> %s: destino não publicado ou rascunho" % (origem, destino))
+                continue
+            if posts[origem] != posts[destino]:
+                erros.append("%s -> %s: relação entre idiomas diferentes" % (origem, destino))
+                continue
+            try:
+                pagina = ler(os.path.join("blog", origem + ".html"))
+            except FileNotFoundError:
+                erros.append("blog/%s.html não existe — rode o build" % origem)
+                continue
+            href = 'href="/blog/%s/"' % destino
+            if href not in pagina:
+                erros.append("%s -> %s não aparece no HTML gerado" % (origem, destino))
+
+    if erros:
+        rel.erro("%d problema(s) nas relações editoriais:" % len(erros))
+        for erro in erros[:12]:
+            rel.erro("    " + erro)
+        if len(erros) > 12:
+            rel.erro("    ... e mais %d" % (len(erros) - 12))
+    else:
+        rel.ok("%d relação(ões) editorial(is) com destinos publicados, mesmo idioma e URL canônica" % total)
+
+
 def _esta_na_listagem(listagem_html, slug):
     """True se a listagem tem um card apontando para aquele post.
 
@@ -1589,6 +1667,7 @@ def main():
     checar_ingles(rel)
     checar_formularios(rel)
     checar_idioma(rel)
+    checar_relacoes_blog(rel)
     if args.producao:
         checar_producao(rel, args.url.rstrip("/"))
 

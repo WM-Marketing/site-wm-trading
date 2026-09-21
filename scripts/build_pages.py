@@ -9,6 +9,7 @@ import json
 import glob
 import shutil
 import urllib.parse
+from html import escape
 from datetime import datetime
 
 # Define workspace directories (derived from this script's location, works on any machine)
@@ -1488,6 +1489,71 @@ def e_rascunho(fm):
     return str(fm.get("draft", "")).strip().strip('"').strip("'").lower() in (
         "true", "sim", "1", "yes",
     )
+
+
+def carregar_relacoes_blog():
+    """Carrega as relações editoriais curadas entre posts do blog.
+
+    A seleção mora em ``content/blog-relations.json`` para que o gerador não
+    invente recomendações por coincidência de palavras. Um arquivo ausente
+    apenas omite o componente; JSON inválido deve interromper o build para não
+    publicar uma rede parcial sem revisão.
+    """
+    caminho = os.path.join(CONTENT_DIR, "blog-relations.json")
+    if not os.path.isfile(caminho):
+        return {}
+    with open(caminho, "r", encoding="utf-8") as arquivo:
+        dados = json.load(arquivo)
+    if not isinstance(dados, dict):
+        raise ValueError("content/blog-relations.json deve conter um objeto JSON.")
+    return {slug: spec for slug, spec in dados.items() if not slug.startswith("_")}
+
+
+def renderizar_posts_relacionados(slug, idioma, posts_por_slug, relacoes):
+    """Renderiza recomendações já aprovadas no HTML inicial do artigo.
+
+    Itens inexistentes, rascunhos, duplicados, autorreferências ou relações
+    entre idiomas são ignorados com aviso. Isso mantém a página publicada
+    segura mesmo quando alguém edita a fonte editorial antes de criar o post
+    de destino.
+    """
+    spec = relacoes.get(slug, {})
+    destinos = spec.get("related", []) if isinstance(spec, dict) else []
+    if not isinstance(destinos, list):
+        print(f" ! relação inválida em {slug}: 'related' deve ser uma lista")
+        return ""
+
+    cards = []
+    vistos = set()
+    for destino_slug in destinos:
+        if not isinstance(destino_slug, str) or destino_slug in vistos or destino_slug == slug:
+            continue
+        vistos.add(destino_slug)
+        destino = posts_por_slug.get(destino_slug)
+        if not destino:
+            print(f" ! relacionado ignorado: {slug} -> {destino_slug} não é post publicado")
+            continue
+        if destino["lang"] != idioma:
+            print(f" ! relacionado ignorado: {slug} -> {destino_slug} usa outro idioma")
+            continue
+        titulo = escape(destino["title"])
+        resumo = escape(destino["excerpt"])
+        cards.append(f'''<a class="related-posts__card" href="/blog/{destino_slug}/">
+                  <span class="related-posts__category">{escape(destino["category"])}</span>
+                  <strong>{titulo}</strong>
+                  <span class="related-posts__excerpt">{resumo}</span>
+                  <span class="related-posts__link">Leia o artigo <span aria-hidden="true">→</span></span>
+                </a>''')
+        if len(cards) == 5:
+            break
+
+    if not cards:
+        return ""
+    titulo_secao = "Related content" if idioma == "en" else "Conteúdos relacionados"
+    return f'''<aside class="related-posts" aria-label="{titulo_secao}">
+                <h2>{titulo_secao}</h2>
+                <div class="related-posts__grid">{"".join(cards)}</div>
+              </aside>'''
 
 
 def faq_jsonld_from_markdown(body):
@@ -3509,6 +3575,27 @@ Se você tiver alguma pergunta sobre esta Política de Privacidade ou as prátic
     print("\nGenerating Blog...")
     blog_posts_files = glob.glob(os.path.join(CONTENT_DIR, "blog", "*.mdx"))
     posts_data = []
+    relacoes_blog = carregar_relacoes_blog()
+
+    # O índice é carregado antes do loop de renderização: assim um post pode
+    # recomendar outro independentemente da ordem retornada pelo sistema de
+    # arquivos. Rascunhos ficam fora do índice e, portanto, nunca aparecem no
+    # componente, mesmo se forem incluídos acidentalmente no JSON editorial.
+    posts_por_slug = {}
+    for file_path in blog_posts_files:
+        fm_relacao, _ = parse_mdx(file_path)
+        if e_rascunho(fm_relacao):
+            continue
+        slug_relacao = fm_relacao.get("slug", os.path.basename(file_path).replace(".mdx", ""))
+        idioma_relacao = fm_relacao.get("lang") or (
+            "en" if "/en/" in fm_relacao.get("originalUrl", "") else "pt-BR"
+        )
+        posts_por_slug[slug_relacao] = {
+            "title": fm_relacao.get("title", "Post sem título"),
+            "excerpt": fm_relacao.get("excerpt", ""),
+            "category": fm_relacao.get("category", "Geral"),
+            "lang": idioma_relacao,
+        }
     
     # Compile each blog post page
     for file_path in blog_posts_files:
@@ -3566,6 +3653,9 @@ Se você tiver alguma pergunta sobre esta Política de Privacidade ou as prátic
         blog_back_url = "/en/blog/" if post_lang == "en" else "/blog/"
         blog_back_label = "← Back to Blog" if post_lang == "en" else "← Voltar ao Blog"
         by_label = "By" if post_lang == "en" else "Por"
+        relacionados_html = renderizar_posts_relacionados(
+            slug, post_lang, posts_por_slug, relacoes_blog
+        )
         
         post_detail_html = f"""
         <article class="blog-section">
@@ -3588,6 +3678,7 @@ Se você tiver alguma pergunta sobre esta Política de Privacidade ou as prátic
               <div class="prose-wm">
                 {markdown_to_html(body)}
               </div>
+              {relacionados_html}
               <div style="margin-top: 60px; padding-top: 30px; border-top: 1px solid #efefef;">
                 <a href="{blog_back_url}" class="link-arrow">{blog_back_label}</a>
               </div>
