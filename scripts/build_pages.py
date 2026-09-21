@@ -2946,9 +2946,11 @@ def main():
     print(" - compiling carreiras.html...")
     carreiras_body = f"""
     <section class="car-hero">
-      <img src="/images/heros/time-wm.webp"
-           alt="Equipe da WM Trading reunida em confraternização, de braços erguidos"
-           class="car-hero__foto" width="1920" height="1080" fetchpriority="high" decoding="async" />
+      <div class="car-hero__media">
+        <img src="/images/heros/time-wm.webp"
+             alt="Equipe da WM Trading reunida em confraternização, de braços erguidos"
+             class="car-hero__foto" width="2737" height="1520" fetchpriority="high" decoding="async" />
+      </div>
 
       <div class="container car-hero__faixa">
         <div>
