@@ -1691,7 +1691,7 @@ def gerar_listagens_do_blog(posts_data, head_tpl, header_tpl, footer_tpl):
         # entao cada um deles custava um 308 ao visitante e ao rastreador.
         cards = ""
         for x in posts:
-            capa = (f'<img src="{x["cover"]}" alt="{x["title"]}" class="blog-card__cover" loading="lazy" />'
+            capa = (f'<img src="{x["cover"]}" alt="{x.get("cover_alt", x["title"])}" class="blog-card__cover" loading="lazy" />'
                     if x["cover"] else '')
             cards += f"""
         <div class="blog-card-item" data-category="{x["category"]}" style="display:flex;">
@@ -3499,6 +3499,7 @@ Se você tiver alguma pergunta sobre esta Política de Privacidade ou as prátic
         excerpt = fm.get("excerpt", "")
         category = fm.get("category", "Geral")
         cover = fm.get("cover", "")
+        cover_alt = fm.get("cover_alt", title)
         
         # Format date for displaying
         display_date = date_str
@@ -3524,11 +3525,12 @@ Se você tiver alguma pergunta sobre esta Política de Privacidade ou as prátic
             "excerpt": excerpt,
             "category": category,
             "cover": cover,
+            "cover_alt": cover_alt,
             "lang": post_lang_card
         })
         
         # Build Post Detail Page content
-        cover_html = f'<div class="post-cover-wrap"><img src="{cover}" alt="{title}" class="post-cover" /></div>' if cover else ""
+        cover_html = f'<div class="post-cover-wrap"><img src="{cover}" alt="{cover_alt}" class="post-cover" /></div>' if cover else ""
         post_lang = fm.get("lang") or ("en" if "/en/" in fm.get("originalUrl", "") else "pt-BR")
         blog_back_url = "/en/blog/" if post_lang == "en" else "/blog/"
         blog_back_label = "← Back to Blog" if post_lang == "en" else "← Voltar ao Blog"
