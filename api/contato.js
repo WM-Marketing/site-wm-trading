@@ -124,6 +124,8 @@ module.exports = async function handler(req, res) {
     const userAgent = String(req.headers['user-agent'] || '').slice(0, 300);
 
     // Standardized payload format for Zapier catch hooks
+    // `origem_canal` e o unico campo do payload que NAO vem do navegador: ele e
+    // calculado aqui. Ver `origemCanal`, logo abaixo do handler.
     const payload = {
       nome: data.nome || '',
       email: data.email || '',
@@ -191,6 +193,8 @@ module.exports = async function handler(req, res) {
       clientid: data.clientid || '',
       referrer_inicial: data.referrer_inicial || '',
       pagina_entrada: data.pagina_entrada || '',
+      // O CAMPO QUE O CRM PRECISA, JA PRONTO. Ver `origemCanal` abaixo.
+      origem_canal: origemCanal(data),
     };
 
     // ── MONDAY: TENTATIVA, NUNCA BLOQUEIO ────────────────────────────────
@@ -250,3 +254,58 @@ module.exports = async function handler(req, res) {
     });
   }
 };
+
+// ── ORIGEM DO LEAD, EM UMA STRING SO ─────────────────────────────────────────
+//
+// POR QUE ESTE CAMPO EXISTE (22/09/2026)
+// O campo "Campanha" do negocio no Pipedrive e o que a operacao de midia le para
+// dizer de onde veio cada lead — e ele vinha recebendo a URL DA PAGINA, que nao
+// diz origem nenhuma. Resultado medido no periodo de 01 a 21/09/2026: dos leads
+// qualificados do mes, menos da metade sabia dizer de onde tinha vindo, e a
+// correcao era uma passada MANUAL no CRM que ninguem repete todo mes.
+//
+// Este payload ja carregava tudo o que era preciso — utm_*, gclid, fbclid,
+// referrer_inicial — mas espalhado em dez campos. Quem monta o negocio no
+// Pipedrive (hoje um Zap) teria de implementar a precedencia do lado de la, e
+// regra de negocio dentro de automacao visual e regra que ninguem revisa.
+//
+// A PRECEDENCIA E POR CONFIABILIDADE, e e a MESMA do painel de midia
+// (orquestrador/server/conectores/pipedrive.js). Se mudar de um lado, mude do
+// outro — senao o site e o painel passam a discordar sobre o mesmo lead:
+//   1. utm_source/utm_medium      -> MEDIDA. A plataforma etiquetou o link.
+//   2. gclid / fbclid / msclkid   -> MEDIDA. Id que so o clique no anuncio cria.
+//   3. referrer_inicial           -> INFERENCIA. Diz de onde veio, nao o que clicou.
+//   4. nada                       -> "(direct)". Nao e chute: e a ausencia declarada.
+//
+// O FORMATO E "fonte / meio", minusculo, porque e o que o painel ja sabe ler.
+// Nunca devolve vazio: campo vazio no CRM vira lead sem origem, que e o problema
+// que este codigo existe para acabar.
+function origemCanal(data) {
+  const limpo = (v) => String(v || '').trim().toLowerCase();
+
+  const utmSource = limpo(data.utm_source) || limpo(data.utm_source_inicial);
+  if (utmSource) {
+    return `${utmSource} / ${limpo(data.utm_medium) || 'nao informado'}`;
+  }
+
+  // Click id sem UTM acontece quando o anuncio usa auto-tagging e o link nao leva
+  // parametro. O id sozinho ja diz a plataforma com certeza.
+  if (limpo(data.gclid)) return 'googleads / cpc';
+  if (limpo(data.msclkid)) return 'microsoftads / cpc';
+  if (limpo(data.fbclid)) return 'metaads / paid_social';
+
+  // Referenciador: host sem "www.". Buscador vira "/ organic"; qualquer outro
+  // site vira "/ referral". Auto-referencia (o proprio dominio) NAO e origem —
+  // quer dizer que o rastreio perdeu o referenciador original.
+  const ref = limpo(data.referrer_inicial);
+  const host = (ref.match(/^https?:\/\/([^/?#]+)/) || [])[1];
+  if (host) {
+    const limpoHost = host.replace(/^www\./, '');
+    if (!/(^|\.)wmtrading\.com\.br$/.test(limpoHost)) {
+      const buscador = /^(google|bing|search\.yahoo|br\.search\.yahoo|duckduckgo|ecosia|yandex|baidu)\./.test(limpoHost + '.');
+      return `${limpoHost} / ${buscador ? 'organic' : 'referral'}`;
+    }
+  }
+
+  return '(direct)';
+}
