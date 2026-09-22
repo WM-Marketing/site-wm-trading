@@ -34,11 +34,11 @@ GRAFICOS_INTERATIVOS = {
         ],
     },
     "maquinas-aditivas-set-2026": {
-        "titulo": "Importação mensal de máquinas para fabricação aditiva",
-        "descricao": "Gráfico de linha da importação mensal de máquinas para fabricação aditiva, de setembro de 2024 a agosto de 2026.",
+        "titulo": "Importação mensal de máquinas para fabricação aditiva por depósito de plástico ou borracha",
+        "descricao": "Gráfico de linha da importação mensal de máquinas para fabricação aditiva por depósito de plástico ou borracha, de setembro de 2024 a agosto de 2026.",
         "labels": ["set./24", "out./24", "nov./24", "dez./24", "jan./25", "fev./25", "mar./25", "abr./25", "mai./25", "jun./25", "jul./25", "ago./25", "set./25", "out./25", "nov./25", "dez./25", "jan./26", "fev./26", "mar./26", "abr./26", "mai./26", "jun./26", "jul./26", "ago./26"],
         "series": [
-            {"label": "Máquinas para fabricação aditiva", "data": [3.19, 2.74, 2.53, 2.16, 3.07, 1.69, 2.27, 2.09, 2.3, 3.88, 2.37, 5.52, 6.72, 7.43, 4.86, 4.64, 4.5, 4.98, 6.57, 6.18, 10.99, 13.97, 12.44, 22.67], "color": "#FC5000", "fill": "rgba(252, 80, 0, 0.16)"},
+            {"label": "Máquinas por depósito de plástico ou borracha", "data": [2.92, 1.82, 1.6, 1.89, 2.5, 1.26, 1.71, 1.9, 2.08, 2.9, 1.83, 3.97, 5.82, 6.82, 4.48, 3.69, 3.22, 4.76, 6.46, 5.55, 10.62, 13.21, 11.8, 21.58], "color": "#FC5000", "fill": "rgba(252, 80, 0, 0.16)"},
         ],
     },
     "ciclos-eletricos-set-2026": {

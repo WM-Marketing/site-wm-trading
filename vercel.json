@@ -698,6 +698,11 @@
       "permanent": true
     },
     {
+      "source": "/blog/brasil-importa-mais-de-us-1-bilhao-em-instrumentos-para-analises-fisicas-e-quimicas/",
+      "destination": "/blog/importacao-instrumentos-analises-fisicas-quimicas/",
+      "permanent": true
+    },
+    {
       "source": "/pt-BR/:path(.*)",
       "destination": "/",
       "permanent": true
