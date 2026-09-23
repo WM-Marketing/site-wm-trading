@@ -1,0 +1,15 @@
+{
+  "slug": "incoterms",
+  "title": "Incoterms",
+  "subtitle": "Os 11 termos em uma linha do tempo: onde termina a responsabilidade do exportador e começa a sua.",
+  "description": "EXW, FOB, CIF, DDP: cada Incoterm move o ponto em que o risco e o custo passam do exportador para o importador. O infográfico mostra os 11 termos sobre o trajeto da carga — da fábrica de origem ao armazém do comprador — com o ponto exato de transferência de risco.",
+  "bullets": [
+    "Os 11 Incoterms posicionados sobre o trajeto real da carga",
+    "Onde cada termo transfere o risco do exportador para o importador",
+    "Quem paga o quê em cada trecho: origem, transporte e destino"
+  ],
+  "imagemUrl": "/images/infograficos/incoterms.png",
+  "imagemAlt": "Infográfico dos 11 Incoterms posicionados sobre o trajeto da carga, da origem ao armazém do comprador, indicando o ponto de transferência de risco",
+  "formato": "1500 × 790 px",
+  "versao_en": false
+}

@@ -345,12 +345,14 @@ BLOG_OUT_DIR = os.path.join(ROOT_DIR, "blog")
 SEGMENTS_OUT_DIR = os.path.join(ROOT_DIR, "segmentos")
 AIRCRAFT_OUT_DIR = os.path.join(ROOT_DIR, "aeronaves")
 EBOOKS_OUT_DIR = os.path.join(ROOT_DIR, "ebooks")
+INFOGRAFICOS_OUT_DIR = os.path.join(ROOT_DIR, "infograficos")
 
 # Ensure output directories exist
 os.makedirs(BLOG_OUT_DIR, exist_ok=True)
 os.makedirs(SEGMENTS_OUT_DIR, exist_ok=True)
 os.makedirs(AIRCRAFT_OUT_DIR, exist_ok=True)
 os.makedirs(EBOOKS_OUT_DIR, exist_ok=True)
+os.makedirs(INFOGRAFICOS_OUT_DIR, exist_ok=True)
 
 # List of branches for footer/contact listing
 BRANCHES = [
@@ -2037,6 +2039,42 @@ def build_ebook_form_html(ebook_title, pdf_url):
         </form>
     """
 
+def build_infografico_form_html(titulo, imagem_url):
+    """Formulario da LP de infografico.
+
+    Igual ao de e-book em campos e aceites — muda o que acontece no sucesso:
+    o e-book abre um PDF em outra aba, o infografico mostra a IMAGEM na
+    propria pagina (data-imagem-url). window.open depois de uma chamada
+    assincrona e barrado por bloqueador de pop-up; com imagem nao ha motivo
+    para arriscar.
+
+    O data-ebook-title continua com este nome porque e ele que alimenta o
+    campo `ebook` do CRM — e a informacao mais util deste lead: o assunto.
+    """
+    return f"""
+        <form class="contact-form-js grid gap-4 form-grid-wm" data-form-type="infografico" data-imagem-url="{imagem_url}" data-ebook-title="{titulo}">
+          <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" class="hidden" aria-hidden="true" style="display:none;" />
+          <p class="text-center font-semibold" style="margin-bottom:12px;">Preencha os dados abaixo para ver o infográfico</p>
+
+          <input name="nome" required placeholder="Nome *" class="input-wm" />
+          <input name="email" type="email" required placeholder="E-mail *" class="input-wm" />
+          <input name="empresa" required placeholder="Empresa *" class="input-wm" />
+
+          <label class="form-checkbox-label" style="margin: 8px 0;">
+            <input type="checkbox" name="aceite_privacidade" required value="sim" />
+            <span data-wm-aceite>Li e estou de acordo com a <a href="/politica-de-privacidade/" class="text-primary underline">Política de Privacidade</a> e autorizo a WM Trading a tratar meus dados para enviar este material.</span>
+          </label>
+
+          <label class="form-checkbox-label" style="margin: 0 0 8px;">
+            <input type="checkbox" name="aceite_marketing" value="sim" />
+            <span data-wm-aceite-marketing>Também quero receber conteúdos, materiais e comunicações comerciais da WM Trading (opcional).</span>
+          </label>
+
+          <button type="submit" class="btn btn-block btn-lg">Ver o infográfico</button>
+        </form>
+    """
+
+
 # ----------------- COMPILING PAGES -----------------
 
 def main():
@@ -2721,6 +2759,55 @@ def main():
         output_path = os.path.join(EBOOKS_OUT_DIR, f"{slug}.html")
         render_html_page(output_path, e["title"], e["description"][:160], ebook_content, head_tpl, header_tpl, footer_tpl)
 
+    # 5B. GENERATE INFOGRAFICOS LANDING PAGES
+    # Ate 23/09/2026 os cinco infograficos da /materiais/ apontavam para
+    # /fale-conosco/: o visitante preenchia um formulario comercial e recebia
+    # "um especialista entrara em contato", sem material nenhum. Aqui eles
+    # ganham LP propria, no mesmo desenho da de e-book.
+    print("\nGenerating Infografico landing pages...")
+    infograficos = []
+    for file_path in sorted(glob.glob(os.path.join(CONTENT_DIR, "infograficos", "*.json"))):
+        with open(file_path, "r", encoding="utf-8") as f:
+            g = json.load(f)
+        infograficos.append(g)
+
+        slug = g["slug"]
+        print(f" - compiling infograficos/{slug}...")
+
+        bullets_html = ""
+        if g.get("bullets"):
+            li_html = "".join(f"<li>{b}</li>" for b in g["bullets"])
+            bullets_html = f'<ul class="ebook-info__bullets">{li_html}</ul>'
+
+        form_html = build_infografico_form_html(g["title"], g["imagemUrl"])
+
+        info_content = f"""
+        <section class="ebook-layout">
+          <div class="container">
+            <div class="ebook-grid">
+              <div>
+                <p class="ebook-info__tag">Infográfico gratuito</p>
+                <h1 class="ebook-info__title">{g["title"]}</h1>
+                {f'<p class="ebook-info__subtitle">{g["subtitle"]}</p>' if g.get("subtitle") else ''}
+                <p class="ebook-info__description">{g["description"]}</p>
+                {bullets_html}
+              </div>
+              <div>
+                <div class="ebook-form-panel info-panel">
+                  <h3 class="ebook-form-panel__title">Veja o infográfico completo</h3>
+                  {form_html}
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        """
+
+        output_path = os.path.join(INFOGRAFICOS_OUT_DIR, f"{slug}.html")
+        render_html_page(output_path, g["title"], g["description"][:160], info_content,
+                         head_tpl, header_tpl, footer_tpl,
+                         og_image=g["imagemUrl"])
+
     # 6. GENERATE INSTITUTIONAL PAGES
     print("\nGenerating Institutional Pages...")
     
@@ -3314,18 +3401,20 @@ def main():
         </a>
         """
         
-    infographics_list = [
-        "Lei 14.300/2022 (energia solar)", "Incoterms", "Leasing de Máquinas",
-        "Leasing de Aeronaves", "Entreposto Aduaneiro"
-    ]
+    # Os cards saem das fontes de content/infograficos/ (secao 5B), entao a
+    # /materiais/ nao pode mais divergir das LPs: titulo e endereco vem do
+    # mesmo lugar. Antes eram cinco strings soltas apontando para
+    # /fale-conosco/ — o visitante nunca chegava ao material.
     info_cards = ""
-    for info in infographics_list:
+    for g in infograficos:
         info_cards += f"""
-        <div class="blog-card" style="padding:24px;">
-          <span class="blog-card__category" style="font-size:11px;">INFOGRÁFICO</span>
-          <h3 class="blog-card__title" style="margin-top:8px; margin-bottom:20px; flex-grow:1;">{info}</h3>
-          <a href="/fale-conosco/" class="text-primary" style="font-weight:var(--fw-semibold); font-size:13px; text-decoration:none; margin-top:auto;">Baixar material →</a>
-        </div>
+        <a href="/infograficos/{g["slug"]}/" class="blog-card" style="padding:24px; text-decoration:none; display:flex; flex-direction:column; justify-content:space-between; height:100%;">
+          <div>
+            <span class="blog-card__category" style="font-size:11px;">INFOGRÁFICO</span>
+            <h3 class="blog-card__title" style="margin-top:8px;">{g["title"]}</h3>
+          </div>
+          <span class="text-primary" style="font-weight:var(--fw-semibold); font-size:13px; margin-top:20px;">Ver o infográfico →</span>
+        </a>
         """
         
     materiais_body = f"""

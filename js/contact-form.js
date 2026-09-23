@@ -18,7 +18,10 @@
     sucessoTexto:  'We have received your message. A WM Trading specialist will contact you shortly.',
     ebookTitulo:   'Your material is ready! ✅',
     ebookTexto:    'The download of <strong>"{TITULO}"</strong> should start automatically.',
-    ebookBotao:    'Download manually'
+    ebookBotao:    'Download manually',
+    infoTitulo:    'Here is your infographic ✅',
+    infoTexto:     '<strong>"{TITULO}"</strong> is right below. Click the image to open it at full size.',
+    infoBotao:     'Open at full size'
   } : {
     erroGenerico:  'Ocorreu um erro. Tente novamente.',
     erroEnvio:     'Não foi possível enviar o formulário. Tente novamente.',
@@ -26,7 +29,10 @@
     sucessoTexto:  'Recebemos o seu contato. Um especialista da WM falará com você em breve.',
     ebookTitulo:   'Material liberado! ✅',
     ebookTexto:    'O download do e-book <strong>"{TITULO}"</strong> deve começar automaticamente.',
-    ebookBotao:    'Baixar e-book manualmente'
+    ebookBotao:    'Baixar e-book manualmente',
+    infoTitulo:    'Infográfico liberado! ✅',
+    infoTexto:     'O <strong>"{TITULO}"</strong> está logo abaixo. Clique na imagem para abrir em tamanho real.',
+    infoBotao:     'Abrir em tamanho real'
   };
 
   /* ---- Registro de aceite (LGPD art. 8º, § 2º — o ônus da prova é do controlador) ----
@@ -145,9 +151,9 @@
         form_type: payload.formulario,
         page: window.location.pathname
       });
-      if (payload.formulario === 'ebook') {
+      if (payload.formulario === 'ebook' || payload.formulario === 'infografico') {
         window.dataLayer.push({
-          event: 'ebook_download',
+          event: payload.formulario === 'ebook' ? 'ebook_download' : 'infografico_view',
           ebook: form.getAttribute('data-ebook-title') || '',
           page: window.location.pathname
         });
@@ -175,15 +181,34 @@
   });
 
   function showSuccess(form) {
-    const isEbook = form.getAttribute('data-form-type') === 'ebook';
+    const tipo = form.getAttribute('data-form-type');
+    const isEbook = tipo === 'ebook';
+    const isInfografico = tipo === 'infografico';
     const pdfUrl = form.getAttribute('data-pdf-url');
+    const imagemUrl = form.getAttribute('data-imagem-url');
     const formTitle = form.getAttribute('data-ebook-title') || 'Material';
 
     // Create success box
     const successBox = document.createElement('div');
     successBox.className = 'form-success-box';
 
-    if (isEbook) {
+    if (isInfografico && imagemUrl) {
+      /* O infografico aparece AQUI, na propria pagina. Nada de window.open:
+         este codigo roda depois do fetch, e o bloqueador de pop-up barra
+         janela aberta fora do clique. O link abaixo e um clique do visitante,
+         entao esse abre normalmente. */
+      successBox.classList.add('form-success-box--infografico');
+      successBox.innerHTML = `
+        <h3 class="form-success-box__title">${T.infoTitulo}</h3>
+        <p class="form-success-box__text">${T.infoTexto.replace('{TITULO}', formTitle)}</p>
+        <a href="${imagemUrl}" target="_blank" rel="noopener noreferrer" class="info-reveal">
+          <img src="${imagemUrl}" alt="${formTitle}" class="info-reveal__img" />
+        </a>
+        <a href="${imagemUrl}" target="_blank" rel="noopener noreferrer" class="btn mt-4" style="display: inline-flex;">
+          ${T.infoBotao}
+        </a>
+      `;
+    } else if (isEbook) {
       successBox.innerHTML = `
         <h3 class="form-success-box__title">${T.ebookTitulo}</h3>
         <p class="form-success-box__text">${T.ebookTexto.replace('{TITULO}', formTitle)}</p>

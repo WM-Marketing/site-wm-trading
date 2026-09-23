@@ -437,16 +437,7 @@
       "destination": "/importacao-por-encomenda/",
       "permanent": true
     },
-    {
-      "source": "/infograficos/entreposto-aduaneiro/",
-      "destination": "/blog/entreposto-aduaneiro/",
-      "permanent": true
-    },
-    {
-      "source": "/infograficos/leasing-de-aeronaves/",
-      "destination": "/blog/leasing-aeronaves/",
-      "permanent": true
-    },
+
     {
       "source": "/m500/",
       "destination": "/aeronaves/m500/",

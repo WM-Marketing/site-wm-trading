@@ -1118,3 +1118,38 @@ textarea.input-wm {
   font-size: 13px;
   font-weight: var(--fw-semibold);
 }
+
+/* ---------- LP DE INFOGRÁFICO ---------- */
+/* O painel é largo de propósito: quando o formulário some e a imagem entra no
+   lugar dele, um infográfico de 1500px precisa de espaço para ser lido. O
+   formulário em si continua estreito, centralizado dentro do painel. */
+.info-panel .contact-form-js {
+  max-width: 520px;
+  margin: 0 auto;
+}
+.form-success-box--infografico {
+  text-align: center;
+}
+/* Depois do envio o titulo do painel ("Veja o infografico completo") repete o
+   que a caixa de sucesso ja diz. */
+.info-panel:has(.form-success-box--infografico) .ebook-form-panel__title {
+  display: none;
+}
+.info-reveal {
+  display: block;
+  margin: 24px 0 8px;
+}
+.info-reveal__img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius-lg, 12px);
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.18);
+}
+@media (min-width: 1024px) {
+  /* Antes do envio o painel acompanha a coluna; depois ele precisa caber a
+     imagem. Sem :has() o painel fica estreito e o infográfico, ilegível. */
+  .ebook-grid:has(.form-success-box--infografico) {
+    grid-template-columns: 1fr;
+  }
+}

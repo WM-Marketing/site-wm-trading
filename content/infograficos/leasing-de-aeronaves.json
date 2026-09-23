@@ -1,0 +1,16 @@
+{
+  "slug": "leasing-de-aeronaves",
+  "title": "Leasing de Aeronaves",
+  "subtitle": "As 6 etapas da importação de aeronaves com financiamento, até a transferência do bem.",
+  "description": "Importar uma aeronave por leasing envolve o cliente, a instituição financeira e a trading em papéis bem definidos. O infográfico mostra as 6 etapas, da escolha do modelo à quitação do contrato — com a WM importando em nome do cliente e cuidando da documentação da nacionalização.",
+  "bullets": [
+    "Escolha da aeronave e negociação de taxas com a instituição financeira",
+    "A parte do valor desembolsada como garantia",
+    "A WM nacionalizando a aeronave com o cliente como operador",
+    "A transferência do bem para o seu nome ao fim do contrato"
+  ],
+  "imagemUrl": "/images/infograficos/leasing-de-aeronaves.png",
+  "imagemAlt": "Infográfico com as seis etapas do leasing de aeronaves importadas, da escolha do modelo à transferência do bem",
+  "formato": "1500 × 790 px",
+  "versao_en": false
+}

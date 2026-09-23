@@ -143,6 +143,11 @@ PISO_POR_TIPO = {
     "segmentos":   {"nome", "email", "telefone", "empresa", "estado",
                     "segmento", "forma_resposta", "mensagem"},
     "ebook":       {"nome", "email", "empresa"},
+    # Mesmo piso do e-book: a LP de infografico pede so o que precisa para
+    # entregar o material. Sem ZAPIER_WEBHOOK_INFOGRAFICO o api/contato.js
+    # cai no ZAPIER_WEBHOOK_URL generico — o lead chega, mas sem Zap
+    # proprio ele entra no Pipedrive como contato comum.
+    "infografico": {"nome", "email", "empresa"},
     "whatsapp":    {"nome", "email", "telefone"},
     "carne-suina": {"nome", "empresa", "cargo", "email", "telefone",
                     "volume", "mensagem"},

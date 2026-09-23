@@ -1,0 +1,16 @@
+{
+  "slug": "entreposto-aduaneiro",
+  "title": "Entreposto Aduaneiro",
+  "subtitle": "Como a mercadoria fica armazenada sem nacionalizar e sai conforme a venda acontece.",
+  "description": "No entreposto aduaneiro a carga chega ao Brasil, é registrada em uma DA e fica em recinto alfandegado sem pagar os tributos de nacionalização. O desembaraço acontece por partes, conforme cada cliente compra — o infográfico mostra o fluxo nas 5 etapas.",
+  "bullets": [
+    "As 5 etapas, do embarque no exportador à entrega ao importador brasileiro",
+    "O papel da WM como consignatária na Proforma Invoice",
+    "Commercial Invoices parciais emitidas conforme chegam os pedidos",
+    "Nacionalização fracionada: tributo só quando a mercadoria é vendida"
+  ],
+  "imagemUrl": "/images/infograficos/entreposto-aduaneiro.png",
+  "imagemAlt": "Infográfico com as cinco etapas do entreposto aduaneiro, do envio pelo exportador até a entrega aos importadores brasileiros",
+  "formato": "1500 × 790 px",
+  "versao_en": false
+}
