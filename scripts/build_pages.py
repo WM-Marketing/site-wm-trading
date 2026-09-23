@@ -1491,6 +1491,74 @@ def e_rascunho(fm):
     )
 
 
+def _texto_do_post(conteudo):
+    """Reduz o .mdx ao que o leitor le: titulo + texto, sem endereco de link ou imagem.
+
+    E a regua do dateModified (ver data_modificacao_post): trocar a URL de um
+    link, a extensao de uma imagem ou a capa nao e atualizacao de conteudo.
+    """
+    titulo, corpo = "", conteudo
+    if conteudo.startswith("---"):
+        partes = conteudo.split("---", 2)
+        if len(partes) >= 3:
+            m = re.search(r"^title:\s*(.*)$", partes[1], re.M)
+            titulo, corpo = (m.group(1) if m else ""), partes[2]
+    corpo = re.sub(r"!\[([^\]]*)\]\([^)]*\)", r"\1", corpo)
+    corpo = re.sub(r"\[([^\]]*)\]\([^)]*\)", r"\1", corpo)
+    corpo = re.sub(r"""(href|src|srcset|poster)=("[^"]*"|'[^']*')""", "", corpo)
+    corpo = re.sub(r"[*_`>#-]", "", corpo)
+    return titulo + "|" + re.sub(r"\s+", " ", corpo).strip()
+
+
+def _git(*args):
+    import subprocess
+    try:
+        r = subprocess.run(["git", *args], cwd=ROOT_DIR, capture_output=True,
+                           text=True, encoding="utf-8")
+    except OSError:
+        return None
+    return r.stdout if r.returncode == 0 else None
+
+
+def data_modificacao_post(file_path, fm):
+    """Data (AAAA-MM-DD) da ultima mudanca REAL de texto do post, ou None.
+
+    Alimenta o dateModified do BlogPosting e o "Atualizado em" visivel.
+    Ordem de decisao:
+      1. `updated:` no frontmatter, se existir — vale o que a pessoa escreveu;
+      2. texto editado e ainda nao commitado -> hoje;
+      3. o commit mais recente que mudou o TEXTO (ver _texto_do_post). O commit
+         que criou o arquivo nao conta: e a migracao, nao uma atualizacao.
+    None = o texto nunca mudou; quem chama usa a data de publicacao.
+
+    POR QUE NAO O ULTIMO COMMIT DO ARQUIVO: em 18/09/2026 93 posts foram
+    tocados so para corrigir link interno, e em 20/08 outros tantos so por
+    imagem. Carimbar isso como "atualizado" e frescor falso — o mesmo motivo
+    que tira o sitemap.xml dos commits de build.
+    Data sem hora de proposito: o build roda antes do commit e o commit sai
+    minutos depois; com hora, o proximo build mudaria o HTML sem mudar nada.
+    Sem git na maquina, cai para `updated:` ou None — nunca inventa.
+    """
+    manual = str(fm.get("updated", "")).strip()
+    if manual:
+        return manual[:10]
+    rel = os.path.relpath(file_path, ROOT_DIR).replace(os.sep, "/")
+    historico = _git("log", "--follow", "--format=%H %cs", "--", rel)
+    if not historico:
+        return None
+    commits = [linha.split() for linha in historico.splitlines() if linha.strip()]
+    with open(file_path, "r", encoding="utf-8") as f:
+        atual = _texto_do_post(f.read())
+    no_commit = _git("show", f"{commits[0][0]}:{rel}")
+    if no_commit is not None and _texto_do_post(no_commit) != atual:
+        return datetime.now().strftime("%Y-%m-%d")
+    for (sha, data), (sha_anterior, _) in zip(commits, commits[1:]):
+        depois, antes = _git("show", f"{sha}:{rel}"), _git("show", f"{sha_anterior}:{rel}")
+        if depois is not None and antes is not None and _texto_do_post(depois) != _texto_do_post(antes):
+            return data
+    return None
+
+
 def carregar_relacoes_blog():
     """Carrega as relações editoriais curadas entre posts do blog.
 
@@ -3629,6 +3697,18 @@ Se você tiver alguma pergunta sobre esta Política de Privacidade ou as prátic
         except Exception as ex:
             pass
 
+        # dateModified: ultima mudanca real de texto (ver data_modificacao_post).
+        # Nunca anterior a publicacao; sem mudanca (ou mudanca no mesmo dia), igual a ela.
+        modified_str = data_modificacao_post(file_path, fm)
+        if not modified_str or modified_str <= date_str[:10]:
+            modified_str = date_str
+        display_modified = ""
+        if modified_str[:10] > date_str[:10]:
+            try:
+                display_modified = datetime.strptime(modified_str[:10], "%Y-%m-%d").strftime("%d/%m/%Y")
+            except ValueError:
+                pass
+
         # Save post data for index listing
         # O idioma vem do frontmatter; sem ele, da URL do WordPress (as paginas
         # /en/ de la ficavam sob /en/). E o que separa as duas listagens: ate
@@ -3653,6 +3733,11 @@ Se você tiver alguma pergunta sobre esta Política de Privacidade ou as prátic
         blog_back_url = "/en/blog/" if post_lang == "en" else "/blog/"
         blog_back_label = "← Back to Blog" if post_lang == "en" else "← Voltar ao Blog"
         by_label = "By" if post_lang == "en" else "Por"
+        updated_label = "Updated" if post_lang == "en" else "Atualizado em"
+        updated_html = (
+            f'\n                <span>•</span>\n                <span>{updated_label} '
+            f'<time datetime="{modified_str[:10]}">{display_modified}</time></span>'
+        ) if display_modified else ""
         relacionados_html = renderizar_posts_relacionados(
             slug, post_lang, posts_por_slug, relacoes_blog
         )
@@ -3664,7 +3749,7 @@ Se você tiver alguma pergunta sobre esta Política de Privacidade ou as prátic
               <div class="post-meta">{tag_de_idioma(post_lang_card, "post-meta__idioma", " " * 16)}
                 <span class="post-meta__category">{category}</span>
                 <span>•</span>
-                <span>{display_date}</span>
+                <span>{display_date}</span>{updated_html}
                 <span>•</span>
                 <span>{by_label} {author}</span>
               </div>
@@ -3694,6 +3779,7 @@ Se você tiver alguma pergunta sobre esta Política de Privacidade ou as prátic
             "@type": "BlogPosting",
             "headline": title,
             "datePublished": date_str,
+            "dateModified": modified_str,
             "author": {"@type": "Person", "name": author},
             "publisher": {"@type": "Organization", "name": "WM Trading", "logo": {"@type": "ImageObject", "url": SITE_URL + DEFAULT_OG_IMAGE}},
             "image": (SITE_URL + cover) if cover else (SITE_URL + DEFAULT_OG_IMAGE),
