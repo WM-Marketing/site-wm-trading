@@ -703,6 +703,22 @@ textarea.input-wm {
   margin-left: auto;
 }
 
+.prose-wm iframe.wm-instagram-embed {
+  display: block;
+  width: min(100%, 540px);
+  height: 720px;
+  margin-inline: auto;
+  aspect-ratio: auto;
+}
+
+.prose-wm .wm-text-highlight {
+  padding: 0 0.14em;
+  color: inherit;
+  background: #ffebe0;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}
+
 .wm-interactive-chart {
   margin: 36px 0;
   padding: 24px;

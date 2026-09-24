@@ -574,11 +574,6 @@
       "permanent": true
     },
     {
-      "source": "/blog/importacao-conta-e-ordem-ou-encomenda/",
-      "destination": "/importacao-por-conta-e-ordem/",
-      "permanent": true
-    },
-    {
       "source": "/blog/import-by-account-and-order-or-custom-import/",
       "destination": "/en/account-order-import/",
       "permanent": true
@@ -696,6 +691,11 @@
     {
       "source": "/blog/brasil-importa-mais-de-us-1-bilhao-em-instrumentos-para-analises-fisicas-e-quimicas/",
       "destination": "/blog/importacao-instrumentos-analises-fisicas-quimicas/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/por-que-a-importacao-de-maquinas-agricolas-esta-crescendo-no-brasil/",
+      "destination": "/blog/importacao-maquinas-agricolas-cresce-brasil/",
       "permanent": true
     },
     {

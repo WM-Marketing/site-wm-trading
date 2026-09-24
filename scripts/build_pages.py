@@ -1033,6 +1033,16 @@ def markdown_to_html(text):
             )
             i += 1
 
+        # Publicações e vídeos do Instagram: o leitor assiste no próprio artigo,
+        # sem uma URL crua no meio do conteúdo.
+        elif re.match(r'^\{\{wm-instagram-post:[A-Za-z0-9_-]+\}\}$', line.strip()):
+            post_id = re.search(r'wm-instagram-post:([A-Za-z0-9_-]+)', line.strip()).group(1)
+            new_lines.append(
+                f'<iframe class="wm-instagram-embed" src="https://www.instagram.com/p/{post_id}/embed/captioned/" '
+                'title="Publicação do Instagram" loading="lazy" allowfullscreen></iframe>'
+            )
+            i += 1
+
         # Gráfico interativo: importação mensal de automóveis de passageiros (SH4 8703)
         elif line.strip() == '{{wm-chart:autos-8703}}':
             new_lines.append('''<figure class="wm-interactive-chart">
