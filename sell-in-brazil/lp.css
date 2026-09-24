@@ -27,19 +27,35 @@ img { max-width: 100%; display: block; }
 .lp-hero { position: relative; background: var(--color-bg-dark); overflow: hidden; }
 .lp-hero-bg { position: absolute; inset: 0; }
 .lp-hero-bg img { width: 100%; height: 100%; object-fit: cover; }
-.lp-hero-bg::after { content: ''; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(20,24,31,0.92) 0%, rgba(20,24,31,0.72) 45%, rgba(20,24,31,0.45) 100%); }
+/* Duas camadas SEPARADAS, e nao dois gradientes no mesmo background:
+   ::before escurece a foto; ::after poe a brasa laranja em cima do escuro.
+   Com os dois no mesmo background a ordem forcava escolher entre laranja
+   lavado (escuro por cima) ou paragrafo ilegivel (laranja por cima). */
+.lp-hero-bg::before {
+  content: ''; position: absolute; inset: 0; z-index: 1;
+  background: linear-gradient(90deg, rgba(14,17,22,0.93) 0%, rgba(14,17,22,0.86) 45%, rgba(14,17,22,0.80) 100%);
+}
+.lp-hero-bg::after {
+  content: ''; position: absolute; inset: 0; z-index: 2;
+  background: radial-gradient(78% 118% at 103% 0%, rgba(252,80,0,0.96) 0%, rgba(252,80,0,0.70) 24%, rgba(252,80,0,0.34) 46%, rgba(252,80,0,0.10) 62%, rgba(252,80,0,0) 75%);
+}
 .lp-hero-grid {
   position: relative; z-index: 2;
-  display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 56px; align-items: center;
+  display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 56px; align-items: center;
+  min-height: 520px;
   /* var(--container-px) e nao 0: o shorthand anulava o recuo lateral do
      .container e no telefone o texto encostava na borda. */
-  padding: 72px var(--container-px) 84px;
+  padding: 96px var(--container-px) 104px;
 }
+/* A coluna da direita comeca alinhada ao corpo do titulo, nao ao topo dele */
+.lp-hero-aside { padding-top: 6px; }
 .lp-hero-copy .eyebrow { color: #ff7a3d; margin-bottom: 18px; }
 .lp-hero-title { font-size: var(--fs-2xl); font-weight: var(--fw-light); color: #fff; line-height: 1.12; }
-.lp-hero-sub { font-size: var(--fs-md); color: rgba(255,255,255,0.85); line-height: 1.7; margin: 20px 0 24px; max-width: 520px; }
+.lp-hero-sub { font-size: var(--fs-md); color: rgba(255,255,255,0.88); line-height: 1.7; margin: 0 0 24px; max-width: 520px; }
+.lp-hero-sub strong { color: #fff; font-weight: var(--fw-semibold); }
 .lp-benes { list-style: none; display: grid; gap: 11px; margin-bottom: 28px; }
 .lp-benes li { display: flex; align-items: center; gap: 11px; font-size: var(--fs-sm); color: #fff; }
+.lp-close-copy .lp-benes { margin: 24px 0 0; }
 .lp-benes svg { width: 18px; height: 18px; color: var(--color-primary); flex-shrink: 0; }
 .lp-hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 28px; }
 .lp-trust-mini { display: flex; flex-wrap: wrap; gap: 18px 24px; }
@@ -192,7 +208,7 @@ img { max-width: 100%; display: block; }
 /* ---------- RESPONSIVO ---------- */
 @media (max-width: 1024px) {
   :root { --container-px: 40px; }
-  .lp-hero-grid { grid-template-columns: 1fr; gap: 40px; }
+  .lp-hero-grid { grid-template-columns: 1fr; gap: 32px; min-height: 0; }
   .lp-grid.c4 { grid-template-columns: repeat(2,1fr); }
   .lp-grid.c3 { grid-template-columns: repeat(2,1fr); }
   .lp-steps { grid-template-columns: repeat(2,1fr); }
@@ -266,4 +282,23 @@ img { max-width: 100%; display: block; }
   .lp-flow-step::after { display: none; }
   .lp-why { grid-template-columns: 1fr; }
   .lp-quote { font-size: var(--fs-base); }
+}
+
+
+/* ---------- FECHAMENTO: CTA + FORMULÁRIO ----------
+   O formulario deixou o hero e virou a ultima secao. O CTA laranja separado
+   saiu junto: com o formulario logo abaixo, ele so repetia o pedido. */
+.lp-close { position: relative; background: var(--color-bg-dark); padding: var(--section-py) 0; overflow: hidden; }
+.lp-close::before {
+  content: ''; position: absolute; inset: 0; pointer-events: none;
+  background: radial-gradient(70% 90% at 12% 15%, rgba(252,80,0,0.20) 0%, rgba(252,80,0,0) 62%);
+}
+.lp-close-grid { position: relative; z-index: 1; display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: center; }
+.lp-close-copy .eyebrow { margin-bottom: 14px; }
+.lp-close-copy h2 { font-size: var(--fs-xl); font-weight: var(--fw-light); color: #fff; margin-bottom: 16px; }
+.lp-close-copy p { font-size: var(--fs-base); color: rgba(255,255,255,0.72); line-height: 1.75; }
+.lp-close-extra { margin-top: 26px; }
+
+@media (max-width: 1024px) {
+  .lp-close-grid { grid-template-columns: 1fr; gap: 36px; }
 }
