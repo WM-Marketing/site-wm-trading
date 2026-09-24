@@ -253,63 +253,57 @@ img { max-width: 100%; display: block; }
 .lp-checks li:hover { transform: translateY(-3px); box-shadow: var(--shadow-card); }
 .lp-checks svg { width: 20px; height: 20px; color: var(--color-primary); flex-shrink: 0; margin-top: 1px; }
 
-/* Door-to-door — serpentina de 7 etapas
-   Linha 1 corre para a direita, linha 2 volta para a esquerda. Os tracos que
-   ligam as etapas sao pseudo-elementos das proprias celulas: a seta horizontal
-   fica no ::after e a curva de retorno, no ::before da etapa 5. Nada de SVG por
-   cima do grid — ele desalinharia a cada quebra de coluna. */
-.lp-flow { display: grid; grid-template-columns: repeat(4, 1fr); gap: 30px 42px; position: relative; }
-.lp-flow-step { position: relative; padding: 4px 6px 0; }
-.lp-flow-n {
-  position: absolute; top: 0; right: 8px;
-  font-size: var(--fs-lg); font-weight: var(--fw-light); color: rgba(252,80,0,0.22); line-height: 1;
+/* Door-to-door — 7 etapas + fechamento, em duas linhas de quatro
+   A primeira versao era uma serpentina: a linha de baixo corria da direita
+   para a esquerda e o fluxo ficava dificil de seguir — ninguem le ao contrario
+   por causa de uma seta. Agora as duas linhas correm para a direita, como
+   qualquer texto, e quem carrega a ordem e o NUMERO dentro do circulo. O
+   trilho e so apoio visual, nao instrucao de leitura. */
+.lp-flow { display: grid; grid-template-columns: repeat(4, 1fr); gap: 34px 26px; }
+.lp-flow-step { position: relative; }
+
+/* O trilho: uma linha fina que atravessa a etapa inteira e some no fim de cada
+   fileira, com o numero sentado em cima dela. */
+.lp-flow-trilho { position: relative; height: 34px; margin-bottom: 18px; }
+.lp-flow-trilho::before {
+  content: ''; position: absolute; top: 50%; left: 34px; right: -26px;
+  height: 2px; background: rgba(252,80,0,0.18);
 }
-/* altura fixa e largura livre: os arquivos tem proporcoes diferentes (o
-   navio e largo, a prancheta e alta) e travar os dois lados deixaria uns
-   opticamente menores que os outros. */
-.lp-flow-ico { height: 54px; width: auto; max-width: 84px; margin-bottom: 18px; }
+.lp-flow-step:nth-child(4n) .lp-flow-trilho::before { right: 0; }
+.lp-flow-n {
+  position: absolute; top: 0; left: 0; width: 34px; height: 34px;
+  display: flex; align-items: center; justify-content: center;
+  border-radius: 50%; background: var(--color-primary); color: #fff;
+  font-size: var(--fs-sm); font-weight: var(--fw-semibold); line-height: 1;
+}
+.lp-flow-n--fim { background: #16A34A; font-size: 16px; }
+
+/* Caixa do icone com tamanho FIXO: o alinhamento do titulo nao pode depender
+   da altura de cada desenho. */
+.lp-flow-ico-box { height: 58px; display: flex; align-items: flex-end; margin-bottom: 16px; }
+/* Altura por arquivo, e nao uma altura so para todos. Igualar a altura deixa o
+   navio e o galpao (bem mais largos que altos) parecendo maiores que os
+   demais; o que o olho compara e a AREA. Para area constante A vale
+   h = sqrt(A * H/W), com A calibrado para 52px num icone quadrado. */
+.lp-flow-ico { width: auto; height: 52px; }
+.lp-flow-step:nth-child(1) .lp-flow-ico { height: 41px; }  /* navio     286x181 */
+.lp-flow-step:nth-child(2) .lp-flow-ico { height: 53px; }  /* guindaste 278x289 */
+.lp-flow-step:nth-child(3) .lp-flow-ico { height: 56px; }  /* documento 256x298 */
+.lp-flow-step:nth-child(4) .lp-flow-ico { height: 55px; }  /* caminhao  264x296 */
+.lp-flow-step:nth-child(5) .lp-flow-ico { height: 42px; }  /* galpao    278x178 */
+.lp-flow-step:nth-child(6) .lp-flow-ico { height: 56px; }  /* caixas    209x240 */
+.lp-flow-step:nth-child(7) .lp-flow-ico { height: 52px; }  /* aperto    278x278 */
+.lp-flow-step:nth-child(8) .lp-flow-ico { height: 53px; }  /* pessoas   287x294 */
+
 .lp-flow-step h3 { font-size: var(--fs-base); font-weight: var(--fw-semibold); line-height: 1.3; margin-bottom: 8px; }
 .lp-flow-step p { font-size: var(--fs-sm); color: var(--color-text-muted); line-height: 1.6; }
 
-/* Seta entre etapas da MESMA linha. Linha 1 aponta para a direita; linha 2,
-   que corre ao contrario, aponta para a esquerda. */
-.lp-flow-step::after {
-  content: ''; position: absolute; top: 22px;
-  height: 0; border-top: 1.5px solid rgba(252,80,0,0.5);
-}
-.lp-flow-step[data-linha="1"]::after { left: calc(100% + 6px); width: 30px; }
-.lp-flow-step[data-linha="2"]::after { right: calc(100% + 6px); width: 30px; }
-/* a ponta da seta */
-.lp-flow-step::before {
-  content: ''; position: absolute; top: 18px; width: 7px; height: 7px;
-  border-top: 1.5px solid rgba(252,80,0,0.7); border-right: 1.5px solid rgba(252,80,0,0.7);
-}
-.lp-flow-step[data-linha="1"]::before { left: calc(100% + 29px); transform: rotate(45deg); }
-.lp-flow-step[data-linha="2"]::before { right: calc(100% + 29px); transform: rotate(-135deg); }
-/* A etapa 4 fecha a linha 1 e desce para a 5, na mesma coluna: no lugar da
-   seta horizontal ela recebe a descida. O seletor precisa casar coluna E
-   linha — so a coluna pegaria tambem a etapa 5, que abre a linha de baixo e
-   precisa da sua seta para a esquerda.
-   Casa por data-col/data-linha e NAO pelo style inline: o navegador reescreve
-   'grid-column:4;grid-row:1' como 'grid-area: 1 / 4' e o seletor de atributo
-   deixa de casar — foi assim que os tracos sumiram na primeira tentativa. */
-.lp-flow-step[data-col="4"][data-linha="1"]::after {
-  top: 100%; left: 22px; width: 0; height: 30px;
-  border-top: none; border-left: 1.5px solid rgba(252,80,0,0.5);
-}
-.lp-flow-step[data-col="4"][data-linha="1"]::before {
-  top: calc(100% + 22px); left: 19px; right: auto; transform: rotate(135deg);
-}
-
-/* Caixa de fechamento, na celula que sobra (linha 2, coluna 1) */
+/* O bloco de fechamento se distingue pelo fundo, nao pela posicao */
 .lp-flow-fim {
-  grid-column: 1; grid-row: 2; align-self: start;
-  background: rgba(252,80,0,0.06); border: 1px solid rgba(252,80,0,0.22);
-  border-radius: var(--radius-lg); padding: 22px;
+  background: rgba(22,163,74,0.05); border: 1px solid rgba(22,163,74,0.18);
+  border-radius: var(--radius-lg); padding: 18px 18px 20px; margin: -18px -18px 0;
 }
-.lp-flow-fim img { height: 44px; width: auto; max-width: 70px; margin-bottom: 12px; }
-.lp-flow-fim h3 { font-size: var(--fs-base); font-weight: var(--fw-semibold); margin-bottom: 6px; }
-.lp-flow-fim p { font-size: var(--fs-sm); color: var(--color-text-muted); line-height: 1.6; }
+.lp-flow-fim .lp-flow-trilho::before { display: none; }
 
 /* Motivos — cartoes sobre o fundo escuro */
 .lp-why { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-top: 40px; }
@@ -321,17 +315,24 @@ img { max-width: 100%; display: block; }
 
 @media (max-width: 1024px) {
   .lp-checks { grid-template-columns: repeat(2, 1fr); }
-  .lp-flow { gap: 30px 34px; }
+  .lp-flow { grid-template-columns: repeat(2, 1fr); gap: 34px 26px; }
+  .lp-flow-step:nth-child(2n) .lp-flow-trilho::before { right: 0; }
   .lp-why { grid-template-columns: repeat(2, 1fr); }
 }
 @media (max-width: 768px) {
   .lp-checks { grid-template-columns: 1fr; }
-  /* No telefone a serpentina vira lista: a posicao explicita de coluna e linha
-     e desfeita e as setas saem — em uma coluna elas ligariam etapas empilhadas. */
-  .lp-flow { grid-template-columns: 1fr; gap: 26px; }
-  .lp-flow-step[style] { grid-column: 1 !important; grid-row: auto !important; }
-  .lp-flow-step::after, .lp-flow-step::before { display: none; }
-  .lp-flow-fim { grid-column: 1 !important; grid-row: auto !important; }
+  /* No telefone vira lista e o trilho passa a ser vertical: e ele que mostra
+     que as etapas sao uma sequencia, e nao sete itens soltos. */
+  .lp-flow { grid-template-columns: 1fr; gap: 0; }
+  .lp-flow-step { display: grid; grid-template-columns: 34px 1fr; column-gap: 18px; padding-bottom: 26px; }
+  /* height:auto para o trilho ocupar a altura inteira da etapa — com os 34px
+     herdados do desktop a linha virava um tracinho solto sob o numero. */
+  .lp-flow-trilho { height: auto; margin-bottom: 0; grid-row: 1 / span 3; }
+  .lp-flow-trilho::before { top: 44px; bottom: 0; left: 16px; right: auto; width: 2px; height: auto; }
+  .lp-flow-step:last-child .lp-flow-trilho::before { display: none; }
+  .lp-flow-ico-box { height: 44px; margin-bottom: 12px; align-items: center; }
+  .lp-flow-ico { height: 40px !important; }
+  .lp-flow-fim { margin: 0; padding: 16px; }
   .lp-why { grid-template-columns: 1fr; }
   .lp-quote { font-size: var(--fs-base); }
 }
