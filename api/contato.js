@@ -131,6 +131,9 @@ module.exports = async function handler(req, res) {
       email: data.email || '',
       telefone: data.telefone || '',
       empresa: data.empresa || '',
+      // pais: coletado pela LP do folder (publico estrangeiro). Fica aqui
+      // para o Zapier poder mapear; a LP tambem repete na mensagem.
+      pais: data.pais || '',
       cargo: data.cargo || '',
       estado: data.estado || '',
       volume: data.volume || '',

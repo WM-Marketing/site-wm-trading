@@ -1,5 +1,7 @@
 /* =============================================
-   LP — Importação de Carne Suína
+   LP — Sell in Brazil / Venda no Brasil
+   Nasceu do importacao-carne-suina/lp.css, sem as regras de menu:
+   esta pagina e de conversao e nao tem navegacao.
    Layout PRÓPRIO da landing page.
    Consome os fundamentos (variables + foundations);
    NÃO usa css/main.css nem css/responsive.css (home).
@@ -19,14 +21,7 @@ img { max-width: 100%; display: block; }
 }
 .lp-nav { display: flex; align-items: center; justify-content: space-between; height: 76px; gap: 24px; }
 .lp-logo img { height: 50px; width: auto; }
-.lp-nav-links { display: flex; align-items: center; gap: 26px; list-style: none; }
-.lp-nav-links a { font-size: var(--fs-sm); font-weight: var(--fw-medium); color: var(--color-text-dark); transition: color var(--transition); }
-.lp-nav-links a:hover { color: var(--color-primary); }
 .lp-nav-actions { display: flex; align-items: center; gap: 12px; }
-.lp-phone { display: flex; align-items: center; gap: 7px; font-size: var(--fs-sm); font-weight: var(--fw-semibold); color: var(--color-text-dark); }
-.lp-phone svg { width: 17px; height: 17px; color: var(--color-primary); }
-.lp-burger { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 6px; }
-.lp-burger span { width: 24px; height: 2px; background: var(--color-text-dark); border-radius: 2px; transition: 0.25s; }
 
 /* ---------- HERO ---------- */
 .lp-hero { position: relative; background: var(--color-bg-dark); overflow: hidden; }
@@ -37,7 +32,7 @@ img { max-width: 100%; display: block; }
   position: relative; z-index: 2;
   display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 56px; align-items: center;
   /* var(--container-px) e nao 0: o shorthand anulava o recuo lateral do
-     .container e no telefone o texto encostava na borda da tela. */
+     .container e no telefone o texto encostava na borda. */
   padding: 72px var(--container-px) 84px;
 }
 .lp-hero-copy .eyebrow { color: #ff7a3d; margin-bottom: 18px; }
@@ -116,6 +111,12 @@ img { max-width: 100%; display: block; }
 .lp-media { position: relative; border-radius: var(--radius-xl); overflow: hidden; min-height: 400px; display: flex; align-items: flex-end; padding: 32px; }
 .lp-media img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0; }
 .lp-media > * { position: relative; z-index: 1; }
+/* Escurece a base da foto. O numero e a legenda ficam sobre um por do sol
+   claro e, sem isto, o texto branco some — mesmo problema do hero da
+   /carreiras/. O ::after e o ultimo filho: pinta acima da imagem e abaixo
+   do conteudo, que tem z-index 1. */
+.lp-media::after { content: ''; position: absolute; inset: 0; z-index: 0;
+  background: linear-gradient(to top, rgba(20,24,31,0.88) 0%, rgba(20,24,31,0.5) 40%, rgba(20,24,31,0) 68%); }
 .lp-pills { position: absolute; top: 28px; left: 28px; right: 28px; z-index: 1; display: flex; gap: 10px; flex-wrap: wrap; }
 .lp-pill { background: rgba(255,255,255,0.14); border: 1px solid rgba(255,255,255,0.22); color: #fff; padding: 7px 14px; border-radius: var(--radius-full); font-size: var(--fs-xs); font-weight: var(--fw-medium); backdrop-filter: blur(4px); }
 .lp-stat .big { font-size: var(--fs-3xl); font-weight: var(--fw-light); color: #fff; line-height: 1; }
@@ -179,10 +180,9 @@ img { max-width: 100%; display: block; }
 .lp-foot-social a:hover { background: var(--color-primary); }
 .lp-foot-social svg { width: 16px; height: 16px; fill: #fff; }
 
-/* ---------- FLUTUANTES ---------- */
-.lp-whats { position: fixed; right: 22px; bottom: 22px; z-index: 80; width: 56px; height: 56px; border-radius: 50%; background: #25D366; display: flex; align-items: center; justify-content: center; box-shadow: 0 10px 30px rgba(37,211,102,0.45); transition: transform .25s ease; }
-.lp-whats:hover { transform: scale(1.08); }
-.lp-whats svg { width: 30px; height: 30px; fill: #fff; }
+/* ---------- FLUTUANTES ----------
+   O botao de WhatsApp nao esta aqui: vem do js/whatsapp-popup.js, que captura
+   o lead antes de abrir a conversa. Duas bolinhas no mesmo canto seria erro. */
 .lp-sticky { position: fixed; left: 0; right: 0; bottom: 0; z-index: 79; background: #fff; border-top: 1px solid #f0f0f0; box-shadow: 0 -8px 30px rgba(0,0,0,0.1); padding: 12px 16px; display: none; align-items: center; gap: 12px; transform: translateY(100%); transition: transform .4s ease; }
 .lp-sticky.show { transform: translateY(0); }
 .lp-sticky .st b { display: block; font-size: var(--fs-sm); font-weight: var(--fw-semibold); color: var(--color-text-dark); }
@@ -201,19 +201,13 @@ img { max-width: 100%; display: block; }
 }
 @media (max-width: 768px) {
   :root { --container-px: 20px; --section-py: 56px; --fs-2xl: 34px; --fs-xl: 26px; --fs-lg: 22px; }
-  .lp-nav-links, .lp-phone { display: none; }
-  .lp-burger { display: flex; }
-  .lp-nav-links.open { display: flex; position: absolute; top: 76px; left: 0; right: 0; flex-direction: column; align-items: flex-start; gap: 0; background: #fff; border-bottom: 1px solid #f0f0f0; box-shadow: var(--shadow-card); padding: 8px 0; }
-  .lp-nav-links.open li { width: 100%; }
-  .lp-nav-links.open a { display: block; width: 100%; padding: 14px 24px; border-bottom: 1px solid #f8f8f8; }
-  .lp-nav-actions .btn { display: none; }
   .lp-grid.c3, .lp-grid.c4, .lp-steps, .lp-faq-grid, .lp-market-stats { grid-template-columns: 1fr; }
   .lp-trustbar .container { grid-template-columns: 1fr 1fr; gap: 28px 16px; }
   .lp-market-stats { grid-template-columns: 1fr 1fr; }
   .lp-fgrid { grid-template-columns: 1fr; }
   .lp-foot-grid { grid-template-columns: 1fr; gap: 28px; }
+  .lp-nav-actions .btn { display: none; }
   .lp-sticky { display: flex; }
-  .lp-whats { bottom: 84px; }
   .lp-media { min-height: 300px; }
 }
 
@@ -225,3 +219,51 @@ img { max-width: 100%; display: block; }
    cartao. Ficou assim no ar na LP de carne suina ate 24/09/2026. */
 .lp-check input[type="checkbox"]{width:auto;margin-top:3px;flex-shrink:0;accent-color:#FC5000;}
 .lp-check a{color:#FC5000;text-decoration:underline;}
+
+/* ═══════════ EXCLUSIVO DESTA LP ═══════════ */
+
+/* Troca de idioma — o unico link que sai da pagina alem da politica de
+   privacidade. Uma LP de conversao nao tem menu, mas obrigar um fabricante
+   estrangeiro a ler em portugues (ou o contrario) custa mais do que o link. */
+.lp-lang { display: flex; gap: 4px; background: var(--color-bg-light); border-radius: var(--radius-full); padding: 4px; }
+.lp-lang a { font-size: var(--fs-xs); font-weight: var(--fw-semibold); color: var(--color-text-muted); padding: 6px 13px; border-radius: var(--radius-full); transition: all var(--transition); }
+.lp-lang a[aria-current="true"] { background: var(--color-primary); color: #fff; }
+.lp-lang a:not([aria-current="true"]):hover { color: var(--color-text-dark); }
+
+/* Lista de entregas — os 9 itens do folder */
+.lp-checks { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+.lp-checks li { display: flex; align-items: flex-start; gap: 12px; background: #fff; border: 1px solid #efefef; border-radius: var(--radius-md); padding: 16px 18px; font-size: var(--fs-sm); line-height: 1.5; transition: transform .25s ease, box-shadow .25s ease; }
+.lp-checks li:hover { transform: translateY(-3px); box-shadow: var(--shadow-card); }
+.lp-checks svg { width: 20px; height: 20px; color: var(--color-primary); flex-shrink: 0; margin-top: 1px; }
+
+/* Door-to-door — as 7 etapas, em fila */
+.lp-flow { display: grid; grid-template-columns: repeat(7, 1fr); gap: 0; align-items: stretch; }
+.lp-flow-step { position: relative; text-align: center; padding: 0 8px; }
+.lp-flow-step .dot { width: 54px; height: 54px; margin: 0 auto 14px; border-radius: 50%; background: var(--color-primary); color: #fff; display: flex; align-items: center; justify-content: center; font-weight: var(--fw-semibold); font-size: var(--fs-base); box-shadow: 0 8px 22px rgba(252,80,0,0.28); }
+.lp-flow-step h3 { font-size: var(--fs-sm); font-weight: var(--fw-semibold); line-height: 1.35; }
+/* A linha que liga as etapas nasce do circulo e para antes do proximo */
+.lp-flow-step::after { content: ''; position: absolute; top: 27px; left: calc(50% + 34px); right: calc(-50% + 34px); height: 2px; background: repeating-linear-gradient(to right, rgba(252,80,0,0.45) 0 6px, transparent 6px 12px); }
+.lp-flow-step:last-child::after { display: none; }
+
+/* Motivos — cartoes sobre o fundo escuro */
+.lp-why { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-top: 40px; }
+.lp-why-item { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: var(--radius-lg); padding: 24px; }
+.lp-why-item h3 { font-size: var(--fs-base); font-weight: var(--fw-semibold); color: #fff; margin-bottom: 8px; }
+.lp-why-item p { font-size: var(--fs-sm); color: rgba(255,255,255,0.68); line-height: 1.6; }
+.lp-quote { margin-top: 44px; text-align: center; font-size: var(--fs-lg); font-weight: var(--fw-light); color: #fff; line-height: 1.5; }
+.lp-quote strong { color: var(--color-primary); font-weight: var(--fw-semibold); }
+
+@media (max-width: 1024px) {
+  .lp-checks { grid-template-columns: repeat(2, 1fr); }
+  .lp-flow { grid-template-columns: repeat(4, 1fr); gap: 32px 0; }
+  .lp-flow-step:nth-child(4)::after { display: none; }
+  .lp-why { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 768px) {
+  .lp-checks { grid-template-columns: 1fr; }
+  .lp-flow { grid-template-columns: repeat(2, 1fr); gap: 28px 0; }
+  /* Em duas colunas a linha pontilhada liga etapas que nao se seguem */
+  .lp-flow-step::after { display: none; }
+  .lp-why { grid-template-columns: 1fr; }
+  .lp-quote { font-size: var(--fs-base); }
+}

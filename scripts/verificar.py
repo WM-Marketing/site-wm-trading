@@ -151,6 +151,11 @@ PISO_POR_TIPO = {
     "whatsapp":    {"nome", "email", "telefone"},
     "carne-suina": {"nome", "empresa", "cargo", "email", "telefone",
                     "volume", "mensagem"},
+    # LP do folder de evento (QR code do cartao do parceiro). Publico e
+    # fabricante estrangeiro: nao ha UF nem volume em conteiner a informar, e
+    # o pais entra no lugar — ver o handler proprio em sell-in-brazil/.
+    "sell-in-brazil": {"nome", "empresa", "cargo", "email", "telefone",
+                       "pais", "mensagem"},
 }
 
 # Informacao que o HANDLER injeta no payload em vez de coletar num campo do
@@ -191,6 +196,8 @@ INJETADO_PELO_HANDLER = {
 # Chave: (arquivo, id do form)  ->  tipo do formulario.
 HANDLERS_PROPRIOS = {
     (os.path.join("importacao-carne-suina", "index.html"), "leadForm"): "carne-suina",
+    (os.path.join("sell-in-brazil", "index.html"), "leadForm"): "sell-in-brazil",
+    (os.path.join("venda-no-brasil", "index.html"), "leadForm"): "sell-in-brazil",
 }
 
 # O formulario de WhatsApp e montado em JS, nao existe em HTML nenhum.

@@ -56,6 +56,16 @@ const CONFIG_FORMULARIO = {
       return t ? `Viu o infografico: ${t}` : 'Viu um infografico do site.';
     },
   },
+  /* LP do folder de evento, lida por QR code no cartao do parceiro. Lead de
+     evento e quente e precisa aparecer no board, nao so no Pipedrive. A LP
+     manda estado='Exterior' (rotulo que o board ja tem) porque o publico e
+     fabricante de fora; o pais vai na mensagem. */
+  'sell-in-brazil': {
+    nota: (d) => {
+      const p = limpa(d.pais, 120);
+      return p ? `Lead do folder/QR code — pais: ${p}` : 'Lead do folder/QR code do parceiro.';
+    },
+  },
 };
 
 /* Colunas do board, na ordem do mapeamento acordado. As internas do Monday
