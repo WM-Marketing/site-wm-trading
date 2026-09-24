@@ -48,6 +48,11 @@
   ],
   "redirects": [
     {
+      "source": "/importacao-carne-suina/",
+      "destination": "/",
+      "permanent": true
+    },
+    {
       "source": "/segmentos-aeronaves/",
       "destination": "/segmentos/importacao-aeronaves/",
       "permanent": true
