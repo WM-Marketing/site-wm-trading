@@ -211,7 +211,9 @@ module.exports = async function handler(req, res) {
     // Enquanto os labels nao estiverem completos no board, o item so nasce para
     // as combinacoes ja cadastradas — ver MAPA_ROTULOS e CRIAR_LABEL_SE_FALTAR
     // em api/_monday.js.
-    // O formulario de e-book nao entra: ver FORMULARIOS_NO_MONDAY.
+    // Quem entra e quem nao entra esta em CONFIG_FORMULARIO (api/_monday.js).
+    // Hoje: contato, segmentos, whatsapp, ebook e infografico. A LP de carne
+    // suina fica de fora por decisao do cliente — so Pipedrive.
     let mondayItemId = '';
     if (vaiParaOMonday(data.formulario)) {
       try {

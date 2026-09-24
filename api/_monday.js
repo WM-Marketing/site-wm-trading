@@ -46,6 +46,16 @@ const CONFIG_FORMULARIO = {
       return t ? `Baixou o material: ${t}` : 'Baixou um material do site.';
     },
   },
+  /* Mesmo tratamento do e-book: a LP de infografico coleta nome, e-mail e
+     empresa, e o titulo do material vem no mesmo campo `ebook`. Sem esta
+     entrada o lead ia so para o Zapier e o board nao recebia card nenhum —
+     divergencia dos e-books, que recebem. */
+  infografico: {
+    nota: (d) => {
+      const t = limpa(d.ebook, 255);
+      return t ? `Viu o infografico: ${t}` : 'Viu um infografico do site.';
+    },
+  },
 };
 
 /* Colunas do board, na ordem do mapeamento acordado. As internas do Monday
