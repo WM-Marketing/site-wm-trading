@@ -124,15 +124,11 @@ img { max-width: 100%; display: block; }
 
 /* ---------- SPLIT (produto) ---------- */
 .lp-split { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: center; }
-.lp-media { position: relative; border-radius: var(--radius-xl); overflow: hidden; min-height: 400px; display: flex; align-items: flex-end; padding: 32px; }
+.lp-media { position: relative; border-radius: var(--radius-xl); overflow: hidden; min-height: 400px; }
 .lp-media img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0; }
 .lp-media > * { position: relative; z-index: 1; }
-/* Escurece a base da foto. O numero e a legenda ficam sobre um por do sol
-   claro e, sem isto, o texto branco some — mesmo problema do hero da
-   /carreiras/. O ::after e o ultimo filho: pinta acima da imagem e abaixo
-   do conteudo, que tem z-index 1. */
-.lp-media::after { content: ''; position: absolute; inset: 0; z-index: 0;
-  background: linear-gradient(to top, rgba(20,24,31,0.88) 0%, rgba(20,24,31,0.5) 40%, rgba(20,24,31,0) 68%); }
+/* Sem veu escuro: ele existia so para o texto que ficava sobre a foto, e
+   que saiu — a foto agora aparece limpa. */
 .lp-pills { position: absolute; top: 28px; left: 28px; right: 28px; z-index: 1; display: flex; gap: 10px; flex-wrap: wrap; }
 .lp-pill { background: rgba(255,255,255,0.14); border: 1px solid rgba(255,255,255,0.22); color: #fff; padding: 7px 14px; border-radius: var(--radius-full); font-size: var(--fs-xs); font-weight: var(--fw-medium); backdrop-filter: blur(4px); }
 .lp-stat .big { font-size: var(--fs-3xl); font-weight: var(--fw-light); color: #fff; line-height: 1; }
