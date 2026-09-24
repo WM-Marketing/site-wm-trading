@@ -574,11 +574,6 @@
       "permanent": true
     },
     {
-      "source": "/blog/import-by-account-and-order-or-custom-import/",
-      "destination": "/en/account-order-import/",
-      "permanent": true
-    },
-    {
       "source": "/blog/importacao-por-encomenda-ou-conta-ordem/",
       "destination": "/importacao-por-conta-e-ordem/",
       "permanent": true
@@ -586,11 +581,6 @@
     {
       "source": "/blog/importacao-por-encomenda-ou-conta-ordem.html",
       "destination": "/importacao-por-conta-e-ordem/",
-      "permanent": true
-    },
-    {
-      "source": "/en/blog/import-by-account-and-order-or-custom-import/",
-      "destination": "/en/account-order-import/",
       "permanent": true
     },
     {
