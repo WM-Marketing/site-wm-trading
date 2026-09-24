@@ -396,3 +396,49 @@ img { max-width: 100%; display: block; }
 @media (max-width: 1024px) {
   .lp-close-grid { grid-template-columns: 1fr; gap: 36px; }
 }
+
+
+/* ---------- BARRA DE CONTATO FIXA (só no telefone) ----------
+   Existe fora do @media para ficar escondida em tudo que nao for telefone. */
+.lp-barra { display: none; }
+
+@media (max-width: 768px) {
+  .lp-barra {
+    position: fixed; left: 0; right: 0; bottom: 0; z-index: 995;
+    display: flex; align-items: center; gap: 10px;
+    /* 96px a esquerda: e onde mora o botao de cookies do AdOpt, que tem
+       z-index 2147483647 — nao ha como passar por cima dele, entao a barra
+       abre espaco em vez de brigar. */
+    padding: 12px 14px calc(14px + env(safe-area-inset-bottom, 0px)) 96px;
+    background: rgba(255, 255, 255, 0.97);
+    -webkit-backdrop-filter: saturate(180%) blur(12px);
+    backdrop-filter: saturate(180%) blur(12px);
+    border-top: 1px solid #ececec;
+    box-shadow: 0 -8px 26px rgba(0, 0, 0, 0.12);
+    /* visibility junto com o transform: so deslocada, a barra continuaria
+       recebendo foco por teclado mesmo fora da tela */
+    visibility: hidden; transform: translateY(112%);
+    transition: transform .34s ease, visibility .34s;
+  }
+  .lp-barra.mostra { visibility: visible; transform: translateY(0); }
+  .lp-barra .btn { flex: 1; padding: 14px 8px; font-size: 14px; }
+  .lp-barra-wa {
+    width: 50px; height: 50px; flex-shrink: 0; border-radius: 50%;
+    background: #25D366; display: flex; align-items: center; justify-content: center;
+  }
+  .lp-barra-wa svg { width: 27px; height: 27px; fill: #fff; }
+
+  /* O botao redondo do whatsapp-popup.js sai: a barra ja leva o WhatsApp, e
+     o proprio popup intercepta links wa.me, entao a captura antes da conversa
+     continua acontecendo. */
+  .wm-wa-fab { display: none !important; }
+
+  /* O webchat sai NESTA LP. E um <div> sem classe que embrulha o iframe do
+     Botmaker; o :has() casa pelo iframe, que tem name estavel.
+     ATENCAO: isto so ESCONDE — o GTM continua carregando o widget. O corte de
+     verdade e uma excecao de acionador no GTM para estas duas URLs. */
+  body > div:has(> iframe[name="Botmaker"]) { display: none !important; }
+
+  /* espaco para a barra nao cobrir o fim do rodape */
+  .lp-footer { padding-bottom: 104px; }
+}
