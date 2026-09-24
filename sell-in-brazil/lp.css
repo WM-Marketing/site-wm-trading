@@ -264,7 +264,10 @@ img { max-width: 100%; display: block; }
   position: absolute; top: 0; right: 8px;
   font-size: var(--fs-lg); font-weight: var(--fw-light); color: rgba(252,80,0,0.22); line-height: 1;
 }
-.lp-flow-ico { width: 44px; height: 44px; color: var(--color-primary); margin-bottom: 16px; }
+/* altura fixa e largura livre: os arquivos tem proporcoes diferentes (o
+   navio e largo, a prancheta e alta) e travar os dois lados deixaria uns
+   opticamente menores que os outros. */
+.lp-flow-ico { height: 54px; width: auto; max-width: 84px; margin-bottom: 18px; }
 .lp-flow-step h3 { font-size: var(--fs-base); font-weight: var(--fw-semibold); line-height: 1.3; margin-bottom: 8px; }
 .lp-flow-step p { font-size: var(--fs-sm); color: var(--color-text-muted); line-height: 1.6; }
 
@@ -304,7 +307,7 @@ img { max-width: 100%; display: block; }
   background: rgba(252,80,0,0.06); border: 1px solid rgba(252,80,0,0.22);
   border-radius: var(--radius-lg); padding: 22px;
 }
-.lp-flow-fim svg { width: 26px; height: 26px; color: var(--color-primary); margin-bottom: 12px; }
+.lp-flow-fim img { height: 44px; width: auto; max-width: 70px; margin-bottom: 12px; }
 .lp-flow-fim h3 { font-size: var(--fs-base); font-weight: var(--fw-semibold); margin-bottom: 6px; }
 .lp-flow-fim p { font-size: var(--fs-sm); color: var(--color-text-muted); line-height: 1.6; }
 
