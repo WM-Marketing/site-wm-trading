@@ -719,6 +719,30 @@ textarea.input-wm {
   -webkit-box-decoration-break: clone;
 }
 
+/* Conteúdos WM nas páginas comerciais: mesmo padrão visual de Aeronaves. */
+.aero-resources.commercial-related { padding: 96px 0; background: #F5F5F5; border: 0; }
+.aero-resources.commercial-related .aero-resources__heading { max-width: 760px; margin-bottom: 36px; }
+.aero-resources.commercial-related .aero-resources__eyebrow { margin: 0 0 10px; color: #FC5000; font-size: 12px; font-weight: 700; letter-spacing: .09em; }
+.aero-resources.commercial-related h2 { margin: 0 0 14px; font-size: clamp(28px, 3vw, 42px); font-weight: 300; line-height: 1.15; color: #3A3A3A; }
+.aero-resources.commercial-related h2 span { color: #FC5000; }
+.aero-resources.commercial-related .aero-resources__heading > p:last-child { margin: 0; color: #666; font-size: 16px; line-height: 1.7; }
+.aero-resources.commercial-related .aero-resources__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+.aero-resources.commercial-related .aero-resources__card { display: flex; flex-direction: column; min-height: 224px; padding: 28px; border: 1px solid #E4E4E4; border-radius: 14px; background: #fff; color: #3A3A3A; text-decoration: none; transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease; }
+.aero-resources.commercial-related .aero-resources__card:hover { transform: translateY(-4px); border-color: #FC5000; box-shadow: 0 10px 26px rgba(0,0,0,.08); }
+.aero-resources.commercial-related .aero-resources__card span { color: #FC5000; font-size: 11px; font-weight: 700; letter-spacing: .08em; }
+.aero-resources.commercial-related .aero-resources__card strong { margin: 16px 0 auto; font-size: 19px; line-height: 1.35; }
+.aero-resources.commercial-related .aero-resources__card em { margin-top: 24px; color: #FC5000; font-size: 14px; font-style: normal; font-weight: 700; }
+.aero-resources.commercial-related .aero-resources__card b { font-size: 18px; }
+@media (max-width: 800px) { .aero-resources.commercial-related { padding: 64px 0; } .aero-resources.commercial-related .aero-resources__grid { grid-template-columns: 1fr; } .aero-resources.commercial-related .aero-resources__card { min-height: 0; } }
+
+/* Fachada de vídeo: mostra uma prévia clicável antes do player externo carregar. */
+.wm-youtube-facade { overflow: hidden; width: 100%; aspect-ratio: 16 / 9; border-radius: var(--radius-lg); background: #1A1A1A; box-shadow: 0 10px 30px rgba(0,0,0,.15); }
+.wm-youtube-facade__button { position: relative; display: block; width: 100%; height: 100%; padding: 0; border: 0; background: #1A1A1A; cursor: pointer; }
+.wm-youtube-facade__button img { width: 100%; height: 100%; object-fit: cover; opacity: .8; }
+.wm-youtube-facade__play { position: absolute; top: 50%; left: 50%; display: grid; width: 66px; height: 46px; place-items: center; transform: translate(-50%, -50%); border-radius: 12px; background: #FC5000; color: #fff; font-size: 24px; line-height: 1; }
+.wm-youtube-facade__label { position: absolute; right: 16px; bottom: 14px; padding: 7px 11px; border-radius: 18px; background: rgba(26,26,26,.82); color: #fff; font-size: 13px; font-weight: 600; }
+.wm-youtube-facade iframe { display: block; width: 100%; height: 100%; border: 0; }
+
 .wm-interactive-chart {
   margin: 36px 0;
   padding: 24px;

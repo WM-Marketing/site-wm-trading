@@ -1,6 +1,9 @@
 {
   "slug": "autopecas",
   "name": "Autopeças",
+  "relatedTitle": "a importação de autopeças",
+  "relatedDescription": "Veja conteúdos para entender os requisitos, a tributação e as mudanças que influenciam a importação de autopeças e veículos.",
+  "relatedPosts": [{"label":"AUTOPEÇAS","title":"Importação de autopeças: o que sua empresa precisa saber","url":"/blog/importacao-de-autopecas/"},{"label":"VEÍCULOS","title":"Veículos elétricos importados: o que muda com o fim da janela tarifária","url":"/blog/importacao-de-veiculos-eletricos/"}],
   "heroQuestion": "Quer importar autopeças com agilidade e segurança?",
   "heroSub": "Entre em contato com a trading mais completa do Brasil para otimizar essa operação para sua empresa!",
   "cardDesc": "Importação de autopeças agregando segurança e agilidade no processo, mapeando benefícios como PIS e COFINS monofásicos na operação por Encomenda",

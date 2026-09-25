@@ -1,6 +1,9 @@
 {
   "slug": "importacao-por-conta-e-ordem",
   "name": "Importação por Conta e Ordem",
+  "relatedTitle": "a Importação por Conta e Ordem",
+  "relatedDescription": "Veja conteúdos para entender a modalidade, a habilitação no RADAR e os pontos que orientam a estrutura da operação.",
+  "relatedPosts": [{"label":"MODALIDADES","title":"Importação por Conta e Ordem ou por Encomenda: quais as diferenças?","url":"/blog/importacao-conta-e-ordem-ou-encomenda/"},{"label":"RADAR","title":"Como habilitar a sua empresa no RADAR para operar no comércio exterior?","url":"/blog/habilitar-radar/"}],
   "title": "Importação por Conta e Ordem",
   "subtitle": "Sua empresa precisa de gestão para realizar uma importação? Conheça como a nossa operação funciona e como auxiliamos o seu negócio.",
   "intro": "Nas operações de importação por Conta e Ordem, as despesas da nacionalização e do produto podem ser pagas pela WM ou pela empresa importadora. A WM atua como consignatária da operação, e você aproveita benefícios fiscais e capilaridade nacional para receber produtos com as melhores condições logísticas e tributárias.",

@@ -1,6 +1,9 @@
 {
   "slug": "solucoes-4pl",
   "name": "Soluções 4PL",
+  "relatedTitle": "a logística 4PL",
+  "relatedDescription": "Veja conteúdos para aprofundar a integração da operação logística, a gestão de custos e as alternativas de armazenagem.",
+  "relatedPosts": [{"label":"LOGÍSTICA","title":"Como otimizar e integrar sua operação logística?","url":"/blog/como-otimizar-e-integrar-sua-operacao-logistica/"},{"label":"CUSTOS","title":"Demurrage e detention: como superar esses desafios da logística?","url":"/blog/demurrage-detention-desafios-logistica/"},{"label":"ENTREPOSTO","title":"Como o Entreposto Aduaneiro pode facilitar suas operações de importação?","url":"/blog/entreposto-aduaneiro/"}],
   "title": "Eleve sua logística com o 4PL da WM Trading",
   "subtitle": "Gestão estratégica da sua cadeia logística, com tecnologia e integração de ponta a ponta.",
   "intro": "A solução 4PL da WM Trading conecta processos, fornecedores e sistemas, oferecendo uma gestão de ponta a ponta com mais visibilidade, eficiência e controle para a sua operação.",

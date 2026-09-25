@@ -1,6 +1,9 @@
 {
   "slug": "importacao-por-encomenda",
   "name": "Importação por Encomenda",
+  "relatedTitle": "a Importação por Encomenda",
+  "relatedDescription": "Veja conteúdos para entender a modalidade, os pagamentos e os critérios que devem ser analisados antes de estruturar a operação.",
+  "relatedPosts": [{"label":"MODALIDADES","title":"Importação por Conta e Ordem ou por Encomenda: quais as diferenças?","url":"/blog/importacao-conta-e-ordem-ou-encomenda/"},{"label":"PAGAMENTOS","title":"Modalidades de pagamento em importações","url":"/blog/modalidades-pagamento-importacoes/"},{"label":"WM TRADING","title":"Por que escolher a WM Trading para importar?","url":"/blog/por-que-escolher-wm-trading-para-importar/"}],
   "title": "Importação por Encomenda",
   "subtitle": "Precisa importar mercadorias e quer aproveitar benefícios fiscais mesmo sem ter filial no estado de nacionalização?",
   "intro": "Nessa operação, a WM atua como importadora e emite nota fiscal de venda para o encomendante, realizando o pagamento de todos os custos da importação, inclusive do bem importado. Através dessa modalidade, aproveita-se um dos 7 benefícios fiscais e a capilaridade da trading especialista em importação.",

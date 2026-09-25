@@ -730,6 +730,19 @@ def get_youtube_embed_url(url):
     return ""
 
 
+def renderizar_fachada_youtube(embed_url, titulo):
+    """Cria uma prévia clicável antes de carregar o player do YouTube."""
+    video_id = embed_url.rsplit('/', 1)[-1]
+    titulo_seguro = escape(titulo)
+    return f'''<div class="wm-youtube-facade" data-wm-youtube-id="{escape(video_id)}">
+      <button class="wm-youtube-facade__button" type="button" aria-label="Assistir ao vídeo: {titulo_seguro}">
+        <img src="https://i.ytimg.com/vi/{escape(video_id)}/hqdefault.jpg" alt="{titulo_seguro}" loading="lazy" />
+        <span class="wm-youtube-facade__play" aria-hidden="true">▶</span>
+        <span class="wm-youtube-facade__label">Assistir ao vídeo</span>
+      </button>
+    </div>'''
+
+
 def load_template_elements():
     """Reads index.html to extract common HEAD, HEADER, and FOOTER sections."""
     index_path = os.path.join(ROOT_DIR, "index.html")
@@ -775,7 +788,7 @@ def load_template_elements():
     head_content = f'\n  <meta name="wm-politica-versao" content="{POLITICA_VERSAO_ID}" />' + head_content
 
     # Inject dynamic-pages styles and contact-form script
-    head_content += '\n  <link rel="stylesheet" href="/css/dynamic-pages.css" />'
+    head_content += '\n  <link rel="stylesheet" href="/css/dynamic-pages.css?v=20260925c" />'
     head_content += '\n  <script src="/js/contact-form.js" defer></script>'
     head_content += '\n  <script src="/js/lightbox.js" defer></script>'
 
@@ -1503,6 +1516,34 @@ def e_rascunho(fm):
     )
 
 
+def renderizar_conteudos_aprofundar(itens, titulo="este tema", descricao="Selecione um conteúdo para aprofundar o planejamento da sua operação."):
+    """Renderiza links editoriais configurados em paginas comerciais.
+
+    Os itens vivem no JSON da pagina comercial, para que a curadoria seja
+    editorial e auditavel — nao uma recomendacao automatica por palavras.
+    """
+    if not itens:
+        return ""
+    cards = "".join(
+        f'''<a class="aero-resources__card commercial-related__card" href="{escape(item["url"])}">
+              <span>{escape(item.get("label", "CONTEÚDO WM"))}</span>
+              <strong>{escape(item["title"])}</strong>
+              <em>Leia o artigo <b aria-hidden="true">→</b></em>
+            </a>'''
+        for item in itens
+    )
+    return f'''<section class="aero-resources commercial-related" aria-labelledby="commercial-related-title">
+      <div class="container">
+        <div class="aero-resources__heading commercial-related__heading">
+          <p class="aero-resources__eyebrow">CONTEÚDO WM</p>
+          <h2 id="commercial-related-title">Entenda mais sobre <span>{escape(titulo)}</span></h2>
+          <p>{escape(descricao)}</p>
+        </div>
+        <div class="aero-resources__grid commercial-related__grid">{cards}</div>
+      </div>
+    </section>'''
+
+
 def _texto_do_post(conteudo):
     """Reduz o .mdx ao que o leitor le: titulo + texto, sem endereco de link ou imagem.
 
@@ -2178,7 +2219,8 @@ def main():
         </section>
         """
         
-        body_content = hero_html + intro_html + benefits_html + sections_html + cta_html
+        related_html = renderizar_conteudos_aprofundar(s.get("relatedPosts", []), s.get("relatedTitle", "esta solução"), s.get("relatedDescription", "Selecione um conteúdo para aprofundar o planejamento da sua operação."))
+        body_content = hero_html + intro_html + benefits_html + sections_html + related_html + cta_html
         output_path = os.path.join(ROOT_DIR, f"{slug}.html")
         # A descricao do Service sai do `intro` (frase afirmativa do que a WM faz) e nao
         # do `subtitle`, que na maioria destes arquivos e uma pergunta ao visitante —
@@ -2356,7 +2398,8 @@ def main():
             if embed_url:
                 media_html = f"""
                 <div class="split-section__image-wrap">
-                  <iframe src="{embed_url}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="width:100%; height:315px; border-radius:var(--radius-lg); box-shadow: 0 10px 30px rgba(0,0,0,0.15);"></iframe>
+                  {renderizar_fachada_youtube(embed_url, f'Vídeo sobre {s["name"]}')}
+                  <script src="/js/youtube-facade.js" defer></script>
                 </div>
                 """
             else:
@@ -2519,7 +2562,8 @@ def main():
             </section>
             """
         
-        body_content = hero_html + intro_html + sections_html + benefits_html + contact_section_html
+        related_html = renderizar_conteudos_aprofundar(s.get("relatedPosts", []), s.get("relatedTitle", f"a importação de {s['name'].lower()}"), s.get("relatedDescription", "Selecione um conteúdo para aprofundar o planejamento da sua operação."))
+        body_content = hero_html + intro_html + sections_html + benefits_html + related_html + contact_section_html
         output_path = os.path.join(SEGMENTS_OUT_DIR, f"{slug}.html")
         # `cardDesc` e a unica frase do JSON que descreve a operacao ("Através da
         # certificação MAPA, cuidamos da importação de vinhos de ponta a ponta").
@@ -2618,6 +2662,12 @@ def main():
         "A WM Trading é especialista na importação de diversos setores: aeronaves, energia solar, aço, máquinas, cosméticos, informática e muito mais.",
         index_body, head_tpl, header_tpl, footer_tpl
     )
+
+    # Atalho de desenvolvimento: regenera apenas páginas comerciais. Útil para
+    # conferir blocos de serviços/segmentos sem reprocessar todos os posts.
+    if os.environ.get("WM_BUILD_COMMERCIAL_ONLY") == "1":
+        print("[OK] Commercial pages successfully generated!")
+        return
 
     # 4. GENERATE AIRCRAFT PAGES
     print("\nGenerating Aircraft models...")

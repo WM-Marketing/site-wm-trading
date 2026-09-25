@@ -1,6 +1,9 @@
 {
   "slug": "bonded-warehouse",
   "name": "Gestão de Entreposto Aduaneiro",
+  "relatedTitle": "o Entreposto Aduaneiro",
+  "relatedDescription": "Veja conteúdos para entender o regime especial, a gestão de estoque e as possibilidades operacionais do entreposto aduaneiro.",
+  "relatedPosts": [{"label":"ENTREPOSTO","title":"Saiba mais sobre o regime especial de Entreposto Aduaneiro","url":"/blog/entreposto-aduaneiro/"},{"label":"OPERAÇÃO","title":"Entreposto Aduaneiro: o que é e como pode facilitar suas operações de importação","url":"/blog/entreposto-aduaneiro-reduzir-custos/"}],
   "title": "Gestão de Entreposto Aduaneiro (Bonded Warehouse)",
   "subtitle": "Venda para o Brasil com menos barreiras e mais controle. Armazene sua mercadoria com suspensão de impostos e nacionalize sob demanda, sem abrir filial no país.",
   "intro": "Sua carga é admitida no Brasil com os impostos de importação suspensos e permanece sob controle da Receita Federal até ser nacionalizada. Como consignatária das mercadorias, a WM cuida de toda a gestão documental, fiscal e logística da operação — do embarque internacional ao processo de admissão, registro da Declaração de Admissão (DA) e gestão contínua do estoque entrepostado. Estruturamos a melhor estratégia de armazenagem, combinando eficiência logística e planejamento tributário.",

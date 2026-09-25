@@ -49,13 +49,9 @@
   <script src="https://tag.goadopt.io/injector.js?website_code=e7ae093c-b92e-4ceb-9c53-ac44c0b811f8"
           class="adopt-injector"></script>
 
-  <link rel="stylesheet" href="/css/dynamic-pages.css" />
+  <link rel="stylesheet" href="/css/dynamic-pages.css?v=20260925c" />
   <script src="/js/contact-form.js" defer></script>
   <script src="/js/lightbox.js" defer></script>
-
-  <link rel="alternate" hreflang="pt-BR" href="https://www.wmtrading.com.br/segmentos/autopecas/" />
-  <link rel="alternate" hreflang="en" href="https://www.wmtrading.com.br/en/segments/auto-parts-imports/" />
-  <link rel="alternate" hreflang="x-default" href="https://www.wmtrading.com.br/segmentos/autopecas/" />
 </head>
 <body>
 
@@ -209,7 +205,14 @@
                 </div>
                 
                 <div class="split-section__image-wrap">
-                  <iframe src="https://www.youtube.com/embed/shyKF2xAZlk" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="width:100%; height:315px; border-radius:var(--radius-lg); box-shadow: 0 10px 30px rgba(0,0,0,0.15);"></iframe>
+                  <div class="wm-youtube-facade" data-wm-youtube-id="shyKF2xAZlk">
+      <button class="wm-youtube-facade__button" type="button" aria-label="Assistir ao vídeo: Vídeo sobre Autopeças">
+        <img src="https://i.ytimg.com/vi/shyKF2xAZlk/hqdefault.jpg" alt="Vídeo sobre Autopeças" loading="lazy" />
+        <span class="wm-youtube-facade__play" aria-hidden="true">▶</span>
+        <span class="wm-youtube-facade__label">Assistir ao vídeo</span>
+      </button>
+    </div>
+                  <script src="/js/youtube-facade.js" defer></script>
                 </div>
                 
               </div>
@@ -291,7 +294,24 @@
                 </div>
               </div>
             </section>
-            
+            <section class="aero-resources commercial-related" aria-labelledby="commercial-related-title">
+      <div class="container">
+        <div class="aero-resources__heading commercial-related__heading">
+          <p class="aero-resources__eyebrow">CONTEÚDO WM</p>
+          <h2 id="commercial-related-title">Entenda mais sobre <span>a importação de autopeças</span></h2>
+          <p>Veja conteúdos para entender os requisitos, a tributação e as mudanças que influenciam a importação de autopeças e veículos.</p>
+        </div>
+        <div class="aero-resources__grid commercial-related__grid"><a class="aero-resources__card commercial-related__card" href="/blog/importacao-de-autopecas/">
+              <span>AUTOPEÇAS</span>
+              <strong>Importação de autopeças: o que sua empresa precisa saber</strong>
+              <em>Leia o artigo <b aria-hidden="true">→</b></em>
+            </a><a class="aero-resources__card commercial-related__card" href="/blog/importacao-de-veiculos-eletricos/">
+              <span>VEÍCULOS</span>
+              <strong>Veículos elétricos importados: o que muda com o fim da janela tarifária</strong>
+              <em>Leia o artigo <b aria-hidden="true">→</b></em>
+            </a></div>
+      </div>
+    </section>
             <section class="page-section" id="contato-form" style="background: var(--color-bg-dark); color: var(--color-text-white);">
               <div class="container split-section" style="align-items: center; gap: 50px;">
                 <div class="split-section__text" style="color: var(--color-text-white);">

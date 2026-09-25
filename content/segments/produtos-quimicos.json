@@ -1,6 +1,9 @@
 {
   "slug": "produtos-quimicos",
   "name": "Produtos Químicos",
+  "relatedTitle": "a importação de produtos químicos",
+  "relatedDescription": "Veja conteúdos para entender documentação, requisitos regulatórios e cuidados aplicáveis à importação de produtos químicos.",
+  "relatedPosts": [{"label":"ANVISA","title":"Importação com Anvisa: o que precisa estar validado antes da compra?","url":"/blog/importacao-com-anvisa-documentos/"},{"label":"REGULADOS","title":"Como importar produtos regulados pela Anvisa?","url":"/blog/importar-produtos-regulados-anvisa/"},{"label":"DOCUMENTAÇÃO","title":"A importância do MSDS na importação de cargas perigosas","url":"/blog/msds-importacao-cargas-perigosas/"}],
   "heroQuestion": "Quer importar produtos químicos com agilidade e segurança?",
   "heroSub": "Entre em contato conosco e conheça os benefícios que oferecemos para nacionalizar a sua carga!",
   "cardDesc": "Possuímos certificações e registros para os diversos produtos químicos, além de grande conhecimento para embarcar os itens de acordo com cada uma das suas particularidades",

@@ -1,6 +1,9 @@
 {
   "slug": "assessoria-aduaneira",
   "name": "Assessoria Aduaneira",
+  "relatedTitle": "a assessoria aduaneira",
+  "relatedDescription": "Veja conteúdos para entender DUIMP, habilitação no RADAR e práticas de compliance que fazem parte da gestão aduaneira.",
+  "relatedPosts": [{"label":"DUIMP","title":"DUIMP: o que muda nos custos, prazos e governança?","url":"/blog/duimp-importacao-entenda/"},{"label":"RADAR","title":"Como habilitar a sua empresa no RADAR para operar no comércio exterior?","url":"/blog/habilitar-radar/"},{"label":"COMPLIANCE","title":"Por que o Trade Compliance é fundamental nas importações?","url":"/blog/trade-compliance/"}],
   "title": "Assessoria Aduaneira",
   "subtitle": "Precisa de auxílio no processo de importação e no desembaraço aduaneiro? Conte com a WM para uma assessoria completa para a sua empresa.",
   "intro": "Conheça como nossa operação funciona e como auxiliamos o seu negócio.",
