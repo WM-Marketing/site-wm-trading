@@ -239,7 +239,7 @@ img { max-width: 100%; display: block; }
    privacidade. Uma LP de conversao nao tem menu, mas obrigar um fabricante
    estrangeiro a ler em portugues (ou o contrario) custa mais do que o link. */
 .lp-lang { display: flex; gap: 4px; background: var(--color-bg-light); border-radius: var(--radius-full); padding: 4px; }
-.lp-lang a { font-size: var(--fs-xs); font-weight: var(--fw-semibold); color: var(--color-text-muted); padding: 6px 13px; border-radius: var(--radius-full); transition: all var(--transition); }
+.lp-lang a { font-size: var(--fs-xs); font-weight: var(--fw-semibold); color: var(--color-text-muted); padding: 6px 13px; border-radius: var(--radius-full); transition: all var(--transition); white-space: nowrap; }
 .lp-lang a[aria-current="true"] { background: var(--color-primary); color: #fff; }
 .lp-lang a:not([aria-current="true"]):hover { color: var(--color-text-dark); }
 

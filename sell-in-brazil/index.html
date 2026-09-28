@@ -4,6 +4,21 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <script>document.documentElement.classList.add('js');</script>
+<script>
+/* VERSAO EM CHINES (28/09/2026) — o QR impresso do cartao aponta para esta
+   pagina. Celular configurado em chines vai direto para /zh/sell-in-brazil/,
+   com a query junto (as UTMs do QR precisam chegar ao formulario de la).
+   Nao redireciona quem ja escolheu um idioma na troca EN | PT | 中文
+   (wm_lp_idioma) nem robo de busca, que nao declara chines. */
+(function () {
+  try {
+    var idioma = (navigator.languages && navigator.languages[0]) || navigator.language || '';
+    if (!/^zh/i.test(idioma)) return;
+    if (localStorage.getItem('wm_lp_idioma')) return;
+    location.replace('/zh/sell-in-brazil/' + location.search + location.hash);
+  } catch (e) {}
+})();
+</script>
 
 <!-- ============ SEO ============ -->
 <title>Bring your products to the Brazilian market | WM Trading</title>
@@ -17,6 +32,7 @@
 <link rel="canonical" href="https://www.wmtrading.com.br/sell-in-brazil/" />
 <link rel="alternate" hreflang="en" href="https://www.wmtrading.com.br/sell-in-brazil/" />
 <link rel="alternate" hreflang="pt-BR" href="https://www.wmtrading.com.br/venda-no-brasil/" />
+<link rel="alternate" hreflang="zh-Hans" href="https://www.wmtrading.com.br/zh/sell-in-brazil/" />
 <link rel="alternate" hreflang="x-default" href="https://www.wmtrading.com.br/sell-in-brazil/" />
 <meta name="theme-color" content="#FC5000" />
 
@@ -78,6 +94,7 @@
       <nav class="lp-lang" aria-label="Language">
         <a href="/sell-in-brazil/" aria-current="true" lang="en" hreflang="en">EN</a>
         <a href="/venda-no-brasil/" lang="pt-BR" hreflang="pt-BR">PT</a>
+        <a href="/zh/sell-in-brazil/" lang="zh-Hans" hreflang="zh-Hans">中文</a>
       </nav>
       <a class="btn" href="#lead">Talk to our team</a>
     </div>
@@ -343,6 +360,12 @@ new IntersectionObserver(es => {
   formVisivel = es[0].isIntersecting;
   pintaBarra();
 }, { threshold: 0.18 }).observe(lead);
+
+/* Troca de idioma: grava a escolha, para o redirecionamento automatico da
+   /sell-in-brazil/ (celular em chines -> /zh/) nao desfazer quem escolheu EN. */
+document.querySelectorAll('.lp-lang a').forEach(a => a.addEventListener('click', () => {
+  try { localStorage.setItem('wm_lp_idioma', a.getAttribute('hreflang')); } catch (e) {}
+}));
 
 /* Reveal on scroll */
 const io = new IntersectionObserver((entries) => {
