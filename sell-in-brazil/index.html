@@ -105,8 +105,8 @@
 <!-- ══════════════ TRUST BAR ══════════════ -->
 <section class="lp-trustbar">
   <div class="container">
-    <div class="lp-tb-item"><div class="n" data-anos-desde="2004" data-suffix="+">0</div><div class="c">Years of experience in international operations</div></div>
-    <div class="lp-tb-item"><div class="n" data-count="12">0</div><div class="c">Branches in Brazil + a unit in Panama</div></div>
+    <div class="lp-tb-item"><div class="n" data-anos-desde="2004" data-suffix="+">22+</div><div class="c">Years of experience in international operations</div></div>
+    <div class="lp-tb-item"><div class="n" data-count="12">12</div><div class="c">Branches in Brazil + a unit in Panama</div></div>
     <div class="lp-tb-item"><div class="n"><span>ISO</span> 9001</div><div class="c">Quality management certified</div></div>
     <div class="lp-tb-item"><div class="n" style="font-size:26px;">Door<span>-</span>to<span>-</span>door</div><div class="c">From shipment to final customer</div></div>
   </div>
@@ -116,11 +116,11 @@
 <section class="lp-section surface">
   <div class="container">
     <div class="lp-split">
-      <div class="lp-split-copy reveal">
+      <div class="lp-split-copy">
         <span class="eyebrow">Your one-stop solution with WM</span>
         <h2>One partner for the entire chain</h2>
         <p>WM Trading manages the <strong>entire supply chain</strong> for international companies that want to sell products in Brazil.</p>
-        <p>Whether supplying Brazilian clients, supporting local operations, or positioning products closer to the market, WM structures operations with <strong>efficiency</strong>, <strong>visibility</strong> and <strong>full control</strong>.</p>
+        <p>Whether supplying Brazilian clients, supporting local operations, or positioning products closer to the final customers, WM structures operations with <strong>efficiency</strong>, <strong>visibility</strong> and <strong>full control</strong>.</p>
         <p>Instead of managing multiple suppliers, your company works with a <strong>single strategic partner</strong>.</p>
       </div>
       <div class="lp-media reveal">
@@ -157,7 +157,6 @@
     <div class="lp-head">
       <span class="eyebrow">Door-to-door</span>
       <h2>From your factory to your customer in Brazil</h2>
-      <p>Seven stages, one operation.</p>
     </div>
     <div class="lp-flow">
       <div class="lp-flow-grade">
@@ -227,7 +226,7 @@
         </div>
         <div class="lp-why-item reveal">
           <h3>Customs support</h3>
-          <p>Clearance conducted by people who deal with Brazilian customs every day, in every port we operate.</p>
+          <p>Customs clearance handled by professionals specialized in Brazilian customs, at every port where we operate.</p>
         </div>
         <div class="lp-why-item reveal">
           <h3>Real-time monitoring</h3>
@@ -265,7 +264,7 @@
           <div class="field"><label for="nome">Full name <span class="req">*</span></label><input id="nome" name="nome" type="text" required autocomplete="name" placeholder="Your name" /></div>
           <div class="field"><label for="empresa">Company <span class="req">*</span></label><input id="empresa" name="empresa" type="text" required autocomplete="organization" placeholder="Company name" /></div>
           <div class="field"><label for="cargo">Job title <span class="req">*</span></label><input id="cargo" name="cargo" type="text" required autocomplete="organization-title" placeholder="Your role" /></div>
-          <div class="field"><label for="pais">Country <span class="req">*</span></label><input id="pais" name="pais" type="text" required autocomplete="country-name" placeholder="Where your company is based" /></div>
+          <div class="field"><label for="pais">Country <span class="req">*</span></label><input id="pais" name="pais" type="text" required autocomplete="country-name" placeholder="Company's country" /></div>
           <div class="field"><label for="email">Business email <span class="req">*</span></label><input id="email" name="email" type="email" required autocomplete="email" placeholder="you@company.com" /></div>
           <div class="field"><label for="telefone">Phone <span class="req">*</span></label><input id="telefone" name="telefone" type="tel" required autocomplete="tel" placeholder="+1 555 000 0000" /></div>
           <div class="field full"><label for="mensagem">What do you want to bring to Brazil?</label><textarea id="mensagem" name="mensagem" placeholder="Products, volumes, timeline — whatever helps us prepare."></textarea></div>
@@ -296,7 +295,7 @@
     <div class="lp-foot-grid" style="grid-template-columns: 1.6fr 1fr;">
       <div>
         <img class="flogo" src="/images/logo/fechado_logo_wm_trading_ajustada_logo_laranja.png" alt="WM Trading — We Make it Better" />
-        <p class="fabout">Since 2004, a Brazilian company specialized in tax, logistics and customs solutions for imports. Your strategic partner in Brazil.</p>
+        <p class="fabout">Since 2004, we have specialized in tax, logistics, and customs solutions for imports. Your strategic partner in Brazil.</p>
       </div>
       <div>
         <ul class="lp-foot-contact">
@@ -351,7 +350,9 @@ const io = new IntersectionObserver((entries) => {
 }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
 document.querySelectorAll('.reveal').forEach((el, i) => { el.style.setProperty('--reveal-delay', (i % 4 * 0.08) + 's'); io.observe(el); });
 
-/* Count-up */
+/* Count-up — o valor final ja vem escrito no HTML (buscador, previa de
+   link e visitante sem JS veem o numero certo); a animacao so roda quando
+   a faixa entra na tela. */
 function countUp(el) {
   /* data-anos-desde="2004" conta a partir do ano corrente, em vez de um numero
      fixo que envelhece na virada do ano — mesmo criterio do anos-experiencia.js */
@@ -368,7 +369,16 @@ function countUp(el) {
 const cio = new IntersectionObserver((entries) => {
   entries.forEach(e => { if (e.isIntersecting) { countUp(e.target); cio.unobserve(e.target); } });
 }, { threshold: 0.5 });
-document.querySelectorAll('[data-count], [data-anos-desde]').forEach(el => cio.observe(el));
+/* Quem ja abre a pagina com a faixa na tela ve o numero parado: a contagem a
+   partir do zero mostrava "2+" e "1" a quem chegasse (e a qualquer captura). */
+document.querySelectorAll('[data-count], [data-anos-desde]').forEach(el => {
+  if (el.getBoundingClientRect().top < window.innerHeight) {
+    const desde = +el.dataset.anosDesde;
+    if (desde) el.textContent = (el.dataset.prefix || '') + (new Date().getFullYear() - desde) + (el.dataset.suffix || '');
+    return;
+  }
+  cio.observe(el);
+});
 
 /* Telefone — internacional por padrao nesta LP.
    O visitante e um fabricante estrangeiro: a mascara brasileira nao cabe. So
@@ -390,6 +400,11 @@ tel.addEventListener('input', e => {
 /* Form submit — /api/contato (Zapier -> Pipedrive + card no Monday).
    Handler proprio, e nao js/contact-form.js, para preservar a tela de sucesso. */
 const form = document.getElementById('leadForm');
+/* CARIMBO DE TEMPO — o /api/contato/ descarta, respondendo ok:true, todo
+   envio sem _ms (desde 31/08/2026). Este handler nao passa pelo
+   js/contact-form.js, entao carimba por conta propria. Sem isto, nenhum
+   lead desta LP chegava ao CRM. */
+const CARREGADA_EM = Date.now();
 form.addEventListener('submit', async e => {
   e.preventDefault();
   if (!form.checkValidity()) { form.reportValidity(); return; }
@@ -419,6 +434,7 @@ form.addEventListener('submit', async e => {
   payload.aceite_texto = aceiteEl ? aceiteEl.textContent.replace(/\s+/g, ' ').trim() : '';
   payload.politica_versao = versaoEl ? versaoEl.getAttribute('content') : '';
   payload.aceite_em = new Date().toISOString();
+  payload._ms = Date.now() - CARREGADA_EM;
 
   // Aguarda wm_vid + IDs do GA4; nunca rejeita, entao o envio nao fica preso.
   if (window.wmTracking) Object.assign(payload, await window.wmTracking.getFieldsAsync());

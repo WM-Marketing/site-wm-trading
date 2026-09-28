@@ -19,6 +19,73 @@
   var WA_NUMBER = '5527981610055'; // WhatsApp oficial (confirmado Renato 09/07); o fixo (27) 3022-9700 é só telefone
   var DEFAULT_WA_URL = 'https://wa.me/' + WA_NUMBER;
 
+  /* IDIOMA — pela tag <html lang>. So "en*" troca os textos; qualquer outra
+     coisa (pt-BR, vazio) fica exatamente como era antes de 28/09/2026. Quem
+     pediu foi a LP /sell-in-brazil/ (QR do cartao da China), mas vale para
+     todas as paginas /en/, que tambem declaram lang="en". */
+  var LANG = /^en/i.test(document.documentElement.lang || '') ? 'en' : 'pt';
+
+  var TEXTOS = {
+    pt: {
+      fab: 'Falar com a WM no WhatsApp',
+      dialogo: 'Falar com a WM no WhatsApp',
+      fechar: 'Fechar',
+      titulo: 'Fale com a WM no WhatsApp',
+      subtitulo: 'Preencha os dados abaixo e inicie agora a conversa com um dos nossos especialistas.',
+      nome: 'Nome *',
+      email: 'E-mail *',
+      telefone: 'Telefone * — (DDD) 99999-0000',
+      telefoneDica: null,
+      politica: '/politica-de-privacidade/',
+      aceite: 'Li e estou de acordo com a <a href="{politica}" target="_blank" rel="noopener">Pol&iacute;tica de Privacidade</a> e autorizo a WM Trading a tratar meus dados para responder a este contato.',
+      aceiteMarketing: 'Tamb&eacute;m quero receber conte&uacute;dos e comunica&ccedil;&otilde;es comerciais da WM Trading (opcional).',
+      botao: 'WhatsApp',
+      enviando: 'Enviando...',
+      tentarDeNovo: 'Tentar novamente',
+      erro: 'Não foi possível enviar seus dados. Tente novamente ou <a href="{url}" target="_blank" rel="noopener">abra o WhatsApp diretamente</a>.',
+      sucessoTitulo: 'Dados enviados! ✅',
+      sucessoTexto: 'Clique no botão abaixo caso a conversa não tenha aberto automaticamente.',
+      abrir: 'Abrir WhatsApp',
+      mensagem: 'Olá! Sou {nome}. Vim pelo site da WM Trading e gostaria de falar com um especialista.',
+      /* Em PT a validacao continua a do navegador — nada muda. */
+      validacao: null
+    },
+    en: {
+      fab: 'Talk to WM on WhatsApp',
+      dialogo: 'Talk to WM on WhatsApp',
+      fechar: 'Close',
+      titulo: 'Talk to WM on WhatsApp',
+      subtitulo: 'Fill in your details below to start a conversation with one of our specialists.',
+      nome: 'Name *',
+      email: 'Email *',
+      /* O texto aprovado inteiro nao cabe no placeholder (cortava ate no
+         desktop): o exemplo vai numa linha propria, logo abaixo do campo. */
+      telefone: 'Phone * (with country code)',
+      telefoneDica: 'e.g. +1 555 000 0000',
+      politica: '/en/privacy-policy/',
+      aceite: 'I have read and agree to the <a href="{politica}" target="_blank" rel="noopener">Privacy Policy</a> and authorize WM Trading to process my data to respond to this request.',
+      aceiteMarketing: 'I also want to receive content and commercial communications from WM Trading (optional).',
+      botao: 'Open WhatsApp',
+      enviando: 'Sending...',
+      tentarDeNovo: 'Try again',
+      erro: 'We couldn’t send your details. Please try again or <a href="{url}" target="_blank" rel="noopener">open WhatsApp directly</a>.',
+      sucessoTitulo: 'Details sent! ✅',
+      sucessoTexto: 'If the chat didn’t open automatically, click the button below.',
+      abrir: 'Open WhatsApp',
+      mensagem: 'Hello! I’m {nome}. I found WM Trading’s website and I want to bring my products to the Brazilian market.',
+      /* A mensagem nativa do navegador sai no idioma do SISTEMA do visitante
+         (chines, no caso do cartao), nao no da pagina. Por isso em EN elas
+         sao escritas aqui. */
+      validacao: {
+        nome: 'Please enter your name.',
+        email: 'Please enter a valid email address.',
+        telefone: 'Please enter a valid phone number with country code (8 to 15 digits).',
+        aceite_privacidade: 'Please accept the Privacy Policy to continue.'
+      }
+    }
+  };
+  var T = TEXTOS[LANG];
+
   var CSS = [
     // bottom deixa espaço para o webchat Botmaker (via GTM), que ocupa o canto inferior direito
     '.wm-wa-fab{position:fixed;bottom:104px;right:24px;width:60px;height:60px;border-radius:50%;',
@@ -42,6 +109,7 @@
     'padding:12px 14px;border:1px solid #ddd;border-radius:8px;margin-bottom:12px;font:inherit;font-size:14px;',
     'color:#3A3A3A;background:#fff;box-sizing:border-box;}',
     '.wm-wa-form input:focus{outline:none;border-color:var(--color-primary,#FC5000);}',
+    '.wm-wa-hint{font-size:12px;color:#888;margin:-8px 0 12px;line-height:1.4;}',
     '.wm-wa-consent{display:flex;align-items:flex-start;gap:8px;font-size:12px;color:#888;margin:2px 0 16px;',
     'line-height:1.5;cursor:pointer;}',
     '.wm-wa-consent input{margin-top:2px;flex-shrink:0;}',
@@ -86,7 +154,7 @@
     var fab = document.createElement('button');
     fab.type = 'button';
     fab.className = 'wm-wa-fab';
-    fab.setAttribute('aria-label', 'Falar com a WM no WhatsApp');
+    fab.setAttribute('aria-label', T.fab);
     fab.innerHTML = WA_ICON;
     fab.addEventListener('click', function () { openPopup(DEFAULT_WA_URL); });
     document.body.appendChild(fab);
@@ -99,26 +167,27 @@
     overlay.className = 'wm-wa-overlay';
     overlay.setAttribute('role', 'dialog');
     overlay.setAttribute('aria-modal', 'true');
-    overlay.setAttribute('aria-label', 'Falar com a WM no WhatsApp');
+    overlay.setAttribute('aria-label', T.dialogo);
     overlay.innerHTML =
       '<div class="wm-wa-modal">' +
-        '<button type="button" class="wm-wa-close" aria-label="Fechar">&times;</button>' +
-        '<h3 class="wm-wa-title">' + WA_ICON + 'Fale com a WM no WhatsApp</h3>' +
-        '<p class="wm-wa-subtitle">Preencha os dados abaixo e inicie agora a conversa com um dos nossos especialistas.</p>' +
+        '<button type="button" class="wm-wa-close" aria-label="' + T.fechar + '">&times;</button>' +
+        '<h3 class="wm-wa-title">' + WA_ICON + T.titulo + '</h3>' +
+        '<p class="wm-wa-subtitle">' + T.subtitulo + '</p>' +
         '<form class="wm-wa-form" novalidate>' +
           '<input type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true" style="display:none;" />' +
-          '<input type="text" name="nome" required placeholder="Nome *" autocomplete="name" />' +
-          '<input type="email" name="email" required placeholder="E-mail *" autocomplete="email" />' +
-          '<input type="tel" name="telefone" required placeholder="Telefone * — (DDD) 99999-0000" autocomplete="tel" maxlength="24" />' +
+          '<input type="text" name="nome" required placeholder="' + T.nome + '" autocomplete="name" />' +
+          '<input type="email" name="email" required placeholder="' + T.email + '" autocomplete="email" />' +
+          '<input type="tel" name="telefone" required placeholder="' + T.telefone + '" autocomplete="tel" maxlength="24" />' +
+          (T.telefoneDica ? '<p class="wm-wa-hint">' + T.telefoneDica + '</p>' : '') +
           '<label class="wm-wa-consent">' +
             '<input type="checkbox" name="aceite_privacidade" required value="sim" />' +
-            '<span data-wm-aceite>Li e estou de acordo com a <a href="/politica-de-privacidade/" target="_blank" rel="noopener">Pol&iacute;tica de Privacidade</a> e autorizo a WM Trading a tratar meus dados para responder a este contato.</span>' +
+            '<span data-wm-aceite>' + T.aceite.replace('{politica}', T.politica) + '</span>' +
           '</label>' +
           '<label class="wm-wa-consent">' +
             '<input type="checkbox" name="aceite_marketing" value="sim" />' +
-            '<span>Tamb&eacute;m quero receber conte&uacute;dos e comunica&ccedil;&otilde;es comerciais da WM Trading (opcional).</span>' +
+            '<span>' + T.aceiteMarketing + '</span>' +
           '</label>' +
-          '<button type="submit" class="wm-wa-submit">' + WA_ICON + 'WhatsApp</button>' +
+          '<button type="submit" class="wm-wa-submit">' + WA_ICON + T.botao + '</button>' +
           '<p class="wm-wa-error"></p>' +
         '</form>' +
       '</div>';
@@ -127,7 +196,13 @@
     form = overlay.querySelector('.wm-wa-form');
     overlay.querySelector('.wm-wa-close').addEventListener('click', closePopup);
     overlay.addEventListener('click', function (e) { if (e.target === overlay) closePopup(); });
-    form.querySelector('[name="telefone"]').addEventListener('input', maskPhone);
+    form.querySelector('[name="telefone"]').addEventListener('input', LANG === 'en' ? cleanPhoneIntl : maskPhone);
+    if (T.validacao) {
+      // a mensagem propria so vale ate a pessoa mexer no campo de novo
+      var limpa = function (e) { if (e.target.setCustomValidity) e.target.setCustomValidity(''); };
+      form.addEventListener('input', limpa);
+      form.addEventListener('change', limpa);
+    }
     form.addEventListener('submit', onSubmit);
   }
 
@@ -172,6 +247,29 @@
     e.target.value = out;
   }
 
+  /* EN: publico estrangeiro, sem mascara brasileira. So limpa o que nao e
+     digito, +, espaco, parenteses, ponto ou hifen e corta no 15o digito
+     (teto do E.164) — mesmo tratamento do telefone do formulario da LP. */
+  function cleanPhoneIntl(e) {
+    e.target.value = cortaEmDigitos(e.target.value.replace(/[^\d+\s().-]/g, ''), 15);
+  }
+
+  /* So em EN. Marca cada campo com a mensagem em ingles antes do
+     reportValidity(); em PT a funcao nem roda. */
+  function applyValidationMessages() {
+    var v = T.validacao;
+    var nome = form.querySelector('[name="nome"]');
+    var email = form.querySelector('[name="email"]');
+    var tel = form.querySelector('[name="telefone"]');
+    var aceite = form.querySelector('[name="aceite_privacidade"]');
+    var digitos = tel.value.replace(/\D/g, '').length;
+
+    nome.setCustomValidity(nome.value.trim() ? '' : v.nome);
+    email.setCustomValidity(email.value.trim() && !email.validity.typeMismatch ? '' : v.email);
+    tel.setCustomValidity(digitos >= 8 && digitos <= 15 ? '' : v.telefone);
+    aceite.setCustomValidity(aceite.checked ? '' : v.aceite_privacidade);
+  }
+
   function openPopup(targetUrl) {
     state.targetUrl = targetUrl || DEFAULT_WA_URL;
     state.lastFocused = document.activeElement;
@@ -190,10 +288,16 @@
   }
 
   function buildWaUrl(nome) {
-    // Preserva ?text= do link original, se houver; senão usa a mensagem padrão.
-    if (state.targetUrl.indexOf('text=') !== -1) return state.targetUrl;
-    var msg = 'Olá! Sou ' + nome + '. Vim pelo site da WM Trading e gostaria de falar com um especialista.';
-    return state.targetUrl + (state.targetUrl.indexOf('?') === -1 ? '?' : '&') + 'text=' + encodeURIComponent(msg);
+    var msg = T.mensagem.replace('{nome}', nome);
+    // PT: preserva ?text= do link original, se houver; senão usa a mensagem padrão.
+    if (LANG !== 'en') {
+      if (state.targetUrl.indexOf('text=') !== -1) return state.targetUrl;
+      return state.targetUrl + (state.targetUrl.indexOf('?') === -1 ? '?' : '&') + 'text=' + encodeURIComponent(msg);
+    }
+    // EN: a mensagem com o nome substitui o ?text= do link. Hoje os unicos
+    // links wa.me com texto em pagina lang="en" sao os da /sell-in-brazil/,
+    // e a mensagem aprovada para eles e esta (28/09/2026).
+    return DEFAULT_WA_URL + '?text=' + encodeURIComponent(msg);
   }
 
   function pushDataLayer(event, extra) {
@@ -205,6 +309,7 @@
 
   function onSubmit(e) {
     e.preventDefault();
+    if (T.validacao) applyValidationMessages();
     if (!form.reportValidity()) return;
 
     var gotcha = form.querySelector('[name="_gotcha"]');
@@ -216,7 +321,7 @@
     var btn = form.querySelector('.wm-wa-submit');
     var errorEl = form.querySelector('.wm-wa-error');
     btn.disabled = true;
-    btn.innerHTML = 'Enviando...';
+    btn.innerHTML = T.enviando;
     errorEl.style.display = 'none';
 
     var aceiteEl = form.querySelector('[data-wm-aceite]');
@@ -235,6 +340,9 @@
       aceite_texto: aceiteEl ? aceiteEl.textContent.replace(/\s+/g, ' ').trim() : '',
       politica_versao: versaoEl ? versaoEl.getAttribute('content') : '',
       aceite_em: new Date().toISOString(),
+      // Idioma do popup. O api/contato.js ainda NAO repassa este campo ao
+      // Zapier (monta o payload com campos fixos): chega e e ignorado.
+      idioma: LANG,
       // Milissegundos entre a pagina ficar pronta e o envio. Sem isto o
       // servidor descarta o lead achando que e robo — e responde ok, entao a
       // perda seria silenciosa.
@@ -272,9 +380,8 @@
       })
       .catch(function () {
         btn.disabled = false;
-        btn.innerHTML = WA_ICON + 'Tentar novamente';
-        errorEl.innerHTML = 'Não foi possível enviar seus dados. Tente novamente ou ' +
-          '<a href="' + waUrl + '" target="_blank" rel="noopener">abra o WhatsApp diretamente</a>.';
+        btn.innerHTML = WA_ICON + T.tentarDeNovo;
+        errorEl.innerHTML = T.erro.replace('{url}', waUrl);
         errorEl.style.display = 'block';
       });
   }
@@ -282,11 +389,11 @@
   function showSuccess(waUrl) {
     var modal = overlay.querySelector('.wm-wa-modal');
     modal.innerHTML =
-      '<button type="button" class="wm-wa-close" aria-label="Fechar">&times;</button>' +
+      '<button type="button" class="wm-wa-close" aria-label="' + T.fechar + '">&times;</button>' +
       '<div class="wm-wa-success">' +
-        '<h3>Dados enviados! ✅</h3>' +
-        '<p>Clique no botão abaixo caso a conversa não tenha aberto automaticamente.</p>' +
-        '<a class="wm-wa-open" href="' + waUrl + '" target="_blank" rel="noopener">' + WA_ICON + 'Abrir WhatsApp</a>' +
+        '<h3>' + T.sucessoTitulo + '</h3>' +
+        '<p>' + T.sucessoTexto + '</p>' +
+        '<a class="wm-wa-open" href="' + waUrl + '" target="_blank" rel="noopener">' + WA_ICON + T.abrir + '</a>' +
       '</div>';
     form = null;
     modal.querySelector('.wm-wa-close').addEventListener('click', closePopup);
