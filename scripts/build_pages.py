@@ -792,10 +792,13 @@ def load_template_elements():
     head_content += '\n  <script src="/js/contact-form.js" defer></script>'
     head_content += '\n  <script src="/js/lightbox.js" defer></script>'
 
-    # Extract header (including loader)
-    loader_start = html.find('<div id="page-loader"')
+    # Extract header. Ate 28/09/2026 comecava no <div id="page-loader"> (navio
+    # animado, desativado — ver docs/04-loader-navio-desativado.md).
+    header_start = html.find("<!-- ══════════════════════════════════════\n     HEADER")
+    if header_start == -1:
+        header_start = html.find("<header")
     header_end = html.find("</header>") + 9
-    header_content = html[loader_start:header_end]
+    header_content = html[header_start:header_end]
 
     # Extract footer (up to </body> — the closing </body></html> is emitted
     # by render_html_page; including it here duplicated the closing tags)

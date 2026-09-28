@@ -1,39 +1,16 @@
 // WM Trading 2.0 — Main JS
 
-// Page Loader — Lottie cargo ship
+// Hero entrance — dispara body.loaded assim que o HTML esta pronto.
+// O loader do navio (Lottie) saiu em 28/09/2026: ele esperava o window.load,
+// isto e, chat, GTM e AdOpt, e escondia a foto principal (LCP 5,9 s no celular).
+// Como reativar: docs/04-loader-navio-desativado.md
 (function () {
-  const loader = document.getElementById('page-loader');
-  const container = document.getElementById('loader-lottie');
-  if (!loader || !container) return;
-
-  const init = () => {
-    if (typeof lottie === 'undefined') return;
-    lottie.loadAnimation({
-      container,
-      renderer: 'svg',
-      loop: true,
-      autoplay: true,
-      // caminho ABSOLUTO: relativo resolve contra a pasta da pagina, entao em
-      // /en/about/ virava /en/about/images/... e dava 404 em 291 das 292 paginas.
-      // Mesma armadilha que deixou a pagina de aeronaves sem CSS em 14-17/08.
-      path: '/images/assets/cargo-ship.json'
-    });
-  };
-
-  // Init when lottie is ready
-  if (typeof lottie !== 'undefined') {
-    init();
+  const start = () => document.body.classList.add('loaded');
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', start);
   } else {
-    document.querySelector('script[src*="lottie"]')?.addEventListener('load', init);
+    start();
   }
-
-  // Hide loader + trigger hero entrance
-  window.addEventListener('load', () => {
-    setTimeout(() => {
-      loader.classList.add('hidden');
-      document.body.classList.add('loaded');
-    }, 300);
-  });
 })();
 
 // Counter animation — Section 4
