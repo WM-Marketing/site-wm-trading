@@ -111,6 +111,15 @@ GTM_ARQUIVO = os.path.join("js", "consent.js")
 # Scripts que TODA pagina publica precisa ter (propagados pelo gerador).
 SCRIPTS_OBRIGATORIOS = [nome for nome, _ in SCRIPTS_DO_MOLDE]
 
+# Script do molde que uma pagina especifica dispensa DE PROPOSITO. So entra aqui
+# com o motivo escrito — o resto das obrigacoes continua valendo para ela.
+SCRIPT_DISPENSADO_POR_PAGINA = {
+    # Versao em chines da LP do cartao (28/09/2026): o WhatsApp e bloqueado na
+    # China continental, e o popup so tem textos em PT e EN. O contato por
+    # mensagem ali e o WeChat, por QR code.
+    os.path.join("zh", "sell-in-brazil", "index.html"): {"js/whatsapp-popup.js"},
+}
+
 # Unico href="#" legitimo do site: acionado por JS, reabre o painel de cookies.
 LINK_VAZIO_OK = "data-wm-consent-prefs"
 
@@ -198,6 +207,8 @@ HANDLERS_PROPRIOS = {
     (os.path.join("importacao-carne-suina", "index.html"), "leadForm"): "carne-suina",
     (os.path.join("sell-in-brazil", "index.html"), "leadForm"): "sell-in-brazil",
     (os.path.join("venda-no-brasil", "index.html"), "leadForm"): "sell-in-brazil",
+    # versao em chines (28/09/2026), mesmo handler e mesmo tipo das duas acima
+    (os.path.join("zh", "sell-in-brazil", "index.html"), "leadForm"): "sell-in-brazil",
 }
 
 # O formulario de WhatsApp e montado em JS, nao existe em HTML nenhum.
@@ -470,7 +481,9 @@ def checar_propagacao(rel):
         if pagina in SEM_TRACKING_OK:
             continue
         conteudo = sem_comentarios(ler(pagina))
-        ausentes = [s for s in SCRIPTS_OBRIGATORIOS if not tem_script(conteudo, s)]
+        dispensados = SCRIPT_DISPENSADO_POR_PAGINA.get(pagina, set())
+        ausentes = [s for s in SCRIPTS_OBRIGATORIOS
+                    if s not in dispensados and not tem_script(conteudo, s)]
         if ausentes:
             sem_scripts.append((pagina, ausentes))
         # O CMP e conferido PAGINA POR PAGINA, e nao so na index.html: duas
