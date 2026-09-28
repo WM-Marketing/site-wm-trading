@@ -434,6 +434,20 @@ def checar_git(rel):
 # --------------------------------------------------------------------------
 # B. index.html — o molde do site inteiro
 # --------------------------------------------------------------------------
+def checar_base_css(rel):
+    # css/base.css e GERADO por scripts/build_css.py (variables + reset + main +
+    # responsive). Desde 28/09/2026 as paginas carregam SO ele: editar main.css
+    # sem regerar = a mudanca nao chega ao site, e ninguem entende por que.
+    titulo("A2. css/base.css em dia com os 4 CSS de origem")
+    sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+    import build_css
+    if build_css.atual() != build_css.montar():
+        rel.erro("css/base.css DESATUALIZADO — alguem editou variables/reset/main/"
+                 "responsive.css sem regerar. Rode: python scripts/build_css.py")
+    else:
+        rel.ok("css/base.css bate com os 4 arquivos de origem")
+
+
 def checar_molde(rel):
     titulo("B. index.html — o molde de head/menu/rodape das 254 paginas")
 
@@ -1681,6 +1695,7 @@ def main():
 
     rel = Relatorio()
     checar_git(rel)
+    checar_base_css(rel)
     checar_molde(rel)
     checar_propagacao(rel)
     checar_links_mortos(rel)

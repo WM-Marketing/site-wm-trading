@@ -1,3 +1,81 @@
+/* =============================================================
+   ARQUIVO GERADO — NAO EDITE.
+   Edite css/variables.css, css/reset.css, css/main.css, css/responsive.css e rode: python scripts/build_css.py
+   ============================================================= */
+
+/* ---- css/variables.css ---- */
+/* ATENCAO (28/09/2026): as paginas carregam css/base.css, GERADO a partir deste
+   arquivo. Depois de editar aqui, rode: python scripts/build_css.py
+   Sem isso a mudanca NAO chega ao site. */
+/* =============================================
+   WM Trading 2.0 — Design Tokens (Figma)
+   ============================================= */
+:root {
+  --color-primary:       #FC5000;
+  --color-primary-light: #FFEBE0;
+  --color-text-dark:     #3A3A3A;
+  --color-text-muted:    #888888;
+  --color-text-white:    #FFFFFF;
+  --color-bg-white:      #FFFFFF;
+  --color-bg-light:      #F5F5F5;
+  --color-bg-dark:       #1A1A1A;
+
+  --font-primary:   'Poppins', sans-serif;
+  --font-secondary: 'Nunito Sans', sans-serif;
+
+  --fw-light:    300;
+  --fw-regular:  400;
+  --fw-medium:   500;
+  --fw-semibold: 600;
+  --fw-bold:     700;
+  --fw-extra:    800;
+
+  --fs-xs:   12px;
+  --fs-sm:   14px;
+  --fs-base: 16px;
+  --fs-md:   18px;
+  --fs-lg:   27px;
+  --fs-xl:   32px;
+  --fs-2xl:  56px;
+  --fs-3xl:  72px;
+
+  --container-width: 1200px;
+  --container-px: 80px;
+  --section-py: 80px;
+
+  --radius-sm:   4px;
+  --radius-md:   10px;
+  --radius-lg:   16px;
+  --radius-xl:   24px;
+  --radius-full: 9999px;
+
+  --transition: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  --shadow-card: 0 2px 16px rgba(0,0,0,0.07);
+}
+
+/* ---- css/reset.css ---- */
+/* ATENCAO (28/09/2026): as paginas carregam css/base.css, GERADO a partir deste
+   arquivo. Depois de editar aqui, rode: python scripts/build_css.py
+   Sem isso a mudanca NAO chega ao site. */
+/* WM Trading 2.0 — Reset */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; overflow-x: hidden; }
+body {
+  font-family: var(--font-primary);
+  font-size: var(--fs-base);
+  font-weight: var(--fw-regular);
+  color: var(--color-text-dark);
+  background: var(--color-bg-white);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+img, video { max-width: 100%; height: auto; display: block; }
+a { color: inherit; text-decoration: none; }
+ul, ol { list-style: none; }
+button { cursor: pointer; border: none; background: none; font: inherit; }
+input, textarea, select { font: inherit; }
+
+/* ---- css/main.css ---- */
 /* ATENCAO (28/09/2026): as paginas carregam css/base.css, GERADO a partir deste
    arquivo. Depois de editar aqui, rode: python scripts/build_css.py
    Sem isso a mudanca NAO chega ao site. */
@@ -1370,4 +1448,473 @@ body.loaded .section-cards .card-img:nth-child(2) {
 }
 body.loaded .section-cards .card-img:nth-child(3) {
   animation: heroFadeUp 0.6s ease 1.05s forwards;
+}
+
+/* ---- css/responsive.css ---- */
+/* ATENCAO (28/09/2026): as paginas carregam css/base.css, GERADO a partir deste
+   arquivo. Depois de editar aqui, rode: python scripts/build_css.py
+   Sem isso a mudanca NAO chega ao site. */
+/* =============================================
+   WM Trading 2.0 — Responsive Styles
+   Mobile-first breakpoints: 768px | 480px
+   ============================================= */
+
+/* Previne overflow horizontal global */
+html, body { overflow-x: hidden; }
+
+/* =============================================
+   TABLET (≤ 1024px)
+   ============================================= */
+@media (max-width: 1024px) {
+  :root {
+    --container-px: 40px;
+  }
+
+  .hero .container { padding-left: var(--container-px); }
+  .motivo-grid-top { grid-template-columns: repeat(2, 1fr); }
+  .section-beneficios .container { gap: 40px; }
+  .beneficios-map { min-width: 0; }
+  .footer-links .container { grid-template-columns: repeat(3, 1fr); }
+}
+
+
+/* =============================================
+   MOBILE (≤ 768px)
+   ============================================= */
+@media (max-width: 768px) {
+
+  /* --- TOKENS --- */
+  :root {
+    --container-px: 20px;
+    --section-py: 56px;
+    --fs-2xl: 34px;
+    --fs-lg:  22px;
+    --fs-xl:  26px;
+  }
+
+
+  /* --- HEADER --- */
+  .header { height: 64px; }
+  .header-logo img { height: 44px; }
+
+  .header-nav {
+    display: none;
+    position: fixed;
+    top: 64px;
+    left: 0; right: 0;
+    background: #fff;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0;
+    padding: 16px 0 24px;
+    border-bottom: 1px solid #f0f0f0;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+    z-index: 99;
+  }
+  .header-nav.open { display: flex; }
+  .header-nav a {
+    width: 100%;
+    padding: 14px 24px;
+    font-size: 15px;
+    border-bottom: 1px solid #f8f8f8;
+  }
+
+  /* Dropdown mobile — expande inline */
+  .nav-dropdown {
+    width: 100%;
+  }
+  .nav-dropdown__trigger {
+    width: 100%;
+    padding: 14px 24px;
+    font-size: 15px;
+    border-bottom: 1px solid #f8f8f8;
+    justify-content: space-between;
+  }
+  .nav-dropdown__menu {
+    position: static;
+    transform: none !important;
+    box-shadow: none;
+    border-radius: 0;
+    background: #fafafa;
+    opacity: 1;
+    pointer-events: auto;
+    display: none;
+    padding: 0;
+  }
+  .nav-dropdown__menu::before { display: none; }
+  .nav-dropdown__menu.open { display: block; }
+  .nav-dropdown__menu a {
+    padding: 12px 36px;
+    font-size: 14px;
+    border-bottom: 1px solid #f0f0f0;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+  }
+
+  /* Mega-menu no mobile — as 3 colunas do desktop viram seções empilhadas.
+     Sem estas regras o min-width:680px do desktop sobrevive e transborda
+     305px numa tela de 375px, forçando rolagem horizontal para ver
+     "Energia & Indústria" e "Consumo & Tech". */
+  .nav-dropdown__menu--mega {
+    min-width: 0;
+    width: 100%;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    padding: 0;
+  }
+  .nav-mega-col {
+    flex: none;
+    width: 100%;
+    padding: 0;
+    border-right: none;
+  }
+
+  /* O rótulo da coluna passa a ser o cabeçalho tocável do 2º nível.
+     No desktop segue sendo só um rótulo — nada aqui vaza para lá. */
+  .nav-mega-label {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    width: 100%;
+    min-height: 44px;
+    margin: 0;
+    padding: 0 30px;
+    font-size: 12px;
+    color: #888;
+    background: #f4f4f4;
+    border-bottom: 1px solid #ececec;
+    cursor: pointer;
+    user-select: none;
+  }
+  .nav-mega-label::after {
+    content: "";
+    flex-shrink: 0;
+    width: 7px;
+    height: 7px;
+    border-right: 2px solid currentColor;
+    border-bottom: 2px solid currentColor;
+    transform: rotate(45deg) translateY(-2px);
+    transition: transform var(--transition);
+  }
+  .nav-mega-col.open .nav-mega-label {
+    color: var(--color-primary);
+    background: #fff;
+  }
+  .nav-mega-col.open .nav-mega-label::after {
+    transform: rotate(-135deg) translateY(-2px);
+  }
+
+  /* 3º nível: os links da coluna só aparecem com a seção aberta */
+  .nav-mega-col > a { display: none; }
+  .nav-mega-col.open > a { display: flex; }
+
+  .nav-dropdown__menu--mega .nav-mega-all {
+    width: 100%;
+    min-height: 44px;
+    text-align: left;
+    justify-content: flex-start;
+  }
+
+  /* A gaveta precisa rolar na VERTICAL quando uma seção abre, senão os
+     últimos itens ficam fora da tela e inalcançáveis. */
+  .header-nav {
+    max-height: calc(100vh - 64px);
+    max-height: calc(100dvh - 64px);
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior: contain;
+  }
+
+  .header-actions .btn { display: none; }
+  .header-flag { display: none; }
+
+  /* Hamburger */
+  .menu-toggle {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    width: 36px;
+    height: 36px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+  }
+  .menu-toggle span {
+    display: block;
+    height: 2px;
+    background: var(--color-text-dark);
+    border-radius: 2px;
+    transition: all 0.25s ease;
+  }
+  /* X ao abrir */
+  .menu-toggle.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .menu-toggle.open span:nth-child(2) { opacity: 0; }
+  .menu-toggle.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+
+  /* --- HERO --- */
+  .hero { height: auto; min-height: 520px; }
+  .hero .container {
+    height: auto;
+    min-height: 520px;
+    padding-left: var(--container-px);
+    padding-right: var(--container-px);
+    padding-bottom: 100px;
+    align-items: flex-end;
+  }
+  .hero-inner {
+    grid-template-columns: 1fr;
+    row-gap: 20px;
+  }
+  .hero-title { font-size: 34px; }
+  .hero-right { max-width: 100%; }
+  .hero-deco img { left: -260px; width: 520px; }
+  .hero-badge { top: auto; bottom: -50px; right: 10px; width: 130px; height: 130px; }
+
+
+  /* --- SECTION 2 — CARDS --- */
+  .section-cards { margin-top: -60px; }
+  .section-cards-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+  .card-img { height: 200px; }
+
+
+  /* --- SECTION 3 — MOTIVO --- */
+  .motivo-grid-top  { grid-template-columns: 1fr; gap: 12px; }
+  .motivo-grid-bottom { grid-template-columns: 1fr; gap: 12px; }
+  .motivo-title { font-size: 22px; }
+
+
+  /* --- SECTION 4 — NÚMEROS --- */
+  .section-numeros .container {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0;
+  }
+  .numero-item {
+    padding: 40px 20px;
+    border-right: 1px solid rgba(255,255,255,0.15);
+    border-bottom: 1px solid rgba(255,255,255,0.15);
+  }
+  .numero-item:nth-child(2n) { border-right: none; }
+  .numero-item:nth-child(3),
+  .numero-item:nth-child(4) { border-bottom: none; }
+
+
+  /* --- SECTION 5 — BENEFÍCIOS --- */
+  .section-beneficios .container {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+  }
+  .beneficios-left { max-width: 100%; }
+  .beneficios-map {
+    width: 100%;
+    height: 320px;
+    margin-right: 0;
+    border-radius: var(--radius-xl);
+  }
+  .beneficios-map iframe { height: 320px; }
+  .beneficios-title { font-size: 22px; }
+  .beneficios-num { font-size: 48px; }
+
+
+  /* --- SECTION 6 — EXPERIÊNCIA --- */
+  .section-experiencia .container {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+  }
+  .experiencia-media { width: 100%; }
+  .experiencia-img-full { width: 100%; height: 280px; object-fit: cover; border-radius: var(--radius-lg); }
+  .experiencia-content { max-width: 100%; }
+  .experiencia-label { font-size: 26px; }
+
+
+  /* --- SECTION 7 — SEGMENTOS --- */
+  .segmentos-grid-wrapper { flex-direction: column; }
+  .segmentos-carousel { width: 100%; }
+  .segmentos-grid { gap: 24px; }
+  /* carrossel: 1 card por vez no mobile */
+  .segmentos-grid .segmento-card { flex: 0 0 100%; }
+  .segmento-card-img img { aspect-ratio: 16/9; }
+  .segmentos-nav--prev { left: 4px; }
+  .segmentos-nav--next { right: 4px; }
+  .segmentos-ver-todos {
+    writing-mode: horizontal-tb;
+    text-orientation: mixed;
+    width: 100%;
+    height: 48px;
+    border-radius: var(--radius-lg);
+  }
+  .segmentos-title { font-size: 22px; }
+
+
+  /* --- SECTION 8 — MODALIDADES --- */
+  .modalidade-title { font-size: 22px; }
+  .section-modalidade { overflow: hidden; }
+  /* Rede de seguranca: hoje o JS converte estas abas em acordeao e o bloco
+     .tabs.modo-acordeao zera o overflow. Se o JS falhar, cai aqui — e aqui o
+     -y precisa ser explicito, senao o navegador o promove para auto e a faixa
+     rola na vertical junto com a horizontal. */
+  .tabs {
+    width: calc(100vw - 40px);
+    max-width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+    overscroll-behavior-x: contain;
+    -webkit-overflow-scrolling: touch;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    padding: 6px;
+    scrollbar-width: none;
+  }
+  .tabs::-webkit-scrollbar { display: none; }
+  .tab-radio-name {
+    white-space: nowrap;
+    padding: 8px 16px;
+    font-size: 13px;
+  }
+  .tab-panels { margin-top: -16px; }
+  .modalidade-content {
+    display: flex;
+    flex-direction: column;
+    padding: calc(16px + 40px) 24px 40px;
+    gap: 24px;
+  }
+  .modalidade-content-img { width: 100%; height: 200px; }
+  .modalidade-content-img img { width: 100%; height: 100%; border-radius: var(--radius-lg); }
+  .modalidade-content-title { font-size: 20px; }
+
+
+  /* --- SECTION 9 — CTA --- */
+  .section-cta { padding: 56px 0; overflow: hidden; }
+  .cta-title { font-size: 22px; }
+  .cta-deco { overflow: hidden; }
+
+
+  /* --- FOOTER --- */
+  .footer-links .container {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 32px;
+  }
+  .footer-cta-col {
+    grid-column: 1 / -1;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    border-top: 1px solid #f0f0f0;
+    padding-top: 24px;
+  }
+  .footer-cta-text { font-size: 20px; }
+
+  .footer-social .container {
+    flex-direction: column;
+    gap: 20px;
+    padding: 32px var(--container-px);
+  }
+  .footer-brand img { height: 36px; }
+}
+
+
+/* =============================================
+   SMALL MOBILE (≤ 480px)
+   ============================================= */
+@media (max-width: 480px) {
+  :root {
+    --fs-2xl: 28px;
+  }
+
+  .hero-title { font-size: 28px; }
+  .hero-badge { width: 100px; height: 100px; }
+
+  .section-numeros .container { grid-template-columns: repeat(2, 1fr); }
+  .numero-value { font-size: 48px; }
+
+  .footer-links .container { grid-template-columns: 1fr 1fr; gap: 24px; }
+  .footer-cta-col { flex-direction: column; align-items: flex-start; gap: 16px; }
+}
+
+
+/* --- HAMBURGER ALWAYS HIDDEN ON DESKTOP --- */
+@media (min-width: 769px) {
+  .menu-toggle { display: none; }
+}
+
+
+/* ══════════════════════════════════════════════════
+   SEÇÃO 8 — MODALIDADES COMO ACORDEÃO NO MOBILE
+   As 4 abas tinham 756px de largura em 335px visíveis: 421px de opções
+   fora da tela, sem nenhuma pista de que existiam. Com rótulos longos
+   ("Operação por Conta e Ordem") nenhum ajuste de fonte caberia as
+   quatro em 375px, então viram seções empilhadas.
+   .modo-acordeao vem do JS, que move cada painel para depois do rótulo.
+   ══════════════════════════════════════════════════ */
+@media (max-width: 768px) {
+  .tabs.modo-acordeao {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    /* overflow inteiro, não só o -x: com overflow-y herdando hidden do
+       desktop, o navegador promovia overflow-x:visible para auto (combinação
+       inválida) e o container seguia sendo área de rolagem. */
+    overflow: visible;
+    padding: 0;
+    background: none;
+    border: none;
+    border-radius: 0;
+    /* O .tabs do desktop desenha um anel de 1,5px + sombra difusa. No acordeão
+       cada seção tem a sua borda, então o anel do container virava uma moldura
+       cinza sobrando em volta da pilha. */
+    box-shadow: none;
+  }
+  .modo-acordeao .tab-radio {
+    display: block;
+    width: 100%;
+    margin: 0 0 8px;
+  }
+  .modo-acordeao .tab-radio-name {
+    justify-content: space-between;
+    width: 100%;
+    min-height: 48px;
+    padding: 0 16px;
+    text-align: left;
+    white-space: normal;
+    border: 1px solid #ececec;
+    border-radius: 8px;
+    background: #fafafa;
+  }
+  .modo-acordeao .tab-radio-name::after {
+    content: "";
+    flex-shrink: 0;
+    width: 7px;
+    height: 7px;
+    margin-left: 12px;
+    border-right: 2px solid currentColor;
+    border-bottom: 2px solid currentColor;
+    transform: rotate(45deg) translateY(-2px);
+    transition: transform var(--transition);
+  }
+  .modo-acordeao .tab-radio input:checked + .tab-radio-name {
+    border-color: var(--color-primary);
+    border-radius: 8px 8px 0 0;
+  }
+  .modo-acordeao .tab-radio input:checked + .tab-radio-name::after {
+    transform: rotate(-135deg) translateY(-2px);
+  }
+  .modo-acordeao .tab-panel { display: none; margin: 0 0 8px; }
+  .modo-acordeao .tab-panel.active { display: block; }
+  .modo-acordeao .tab-panel .modalidade-content {
+    padding: 24px;
+    border: 1px solid #ececec;
+    border-top: none;
+    border-radius: 0 0 8px 8px;
+  }
+  /* O container original fica vazio no modo acordeão */
+  .tabs.modo-acordeao ~ .tab-panels { display: none; }
 }

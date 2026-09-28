@@ -1,3 +1,6 @@
+/* ATENCAO (28/09/2026): as paginas carregam css/base.css, GERADO a partir deste
+   arquivo. Depois de editar aqui, rode: python scripts/build_css.py
+   Sem isso a mudanca NAO chega ao site. */
 /* =============================================
    WM Trading 2.0 — Responsive Styles
    Mobile-first breakpoints: 768px | 480px
