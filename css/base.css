@@ -1409,13 +1409,11 @@ input, textarea, select { font: inherit; }
   from { opacity: 0; }
   to   { opacity: 1; }
 }
-@keyframes heroZoomIn {
-  from { opacity: 0.5; transform: scale(1.06); }
-  to   { opacity: 0.7; transform: scale(1); }
-}
 
-/* Estado inicial — elementos invisíveis até .loaded */
-.hero-bg img,
+/* Estado inicial — elementos invisíveis até .loaded.
+   A foto do hero (.hero-bg img) NAO entra aqui desde 28/09/2026: ela e o LCP
+   da home e nascia invisivel, esperando o body.loaded + 1,4 s de zoom
+   (heroZoomIn). Agora aparece direto no estado final (opacity 0.7 da regra base). */
 .hero-deco,
 .hero-title,
 .hero-right,
@@ -1425,9 +1423,6 @@ input, textarea, select { font: inherit; }
 }
 
 /* Dispara ao adicionar .loaded no <body> */
-body.loaded .hero-bg img {
-  animation: heroZoomIn 1.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
-}
 body.loaded .hero-deco {
   animation: heroFadeIn 1s ease 0.1s forwards;
 }
