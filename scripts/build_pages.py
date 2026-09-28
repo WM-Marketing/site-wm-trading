@@ -928,6 +928,55 @@ def escrever_se_mudou(output_path, conteudo):
         f.write(conteudo)
     return True
 
+def _markdown_table_cells(line):
+    """Separates a simple Markdown table row, preserving the cell text."""
+    row = line.strip()
+    if row.startswith('|'):
+        row = row[1:]
+    if row.endswith('|'):
+        row = row[:-1]
+    return [cell.strip() for cell in row.split('|')]
+
+
+def _is_markdown_table_delimiter(line):
+    """Returns True for a Markdown table separator such as | --- | :---: |."""
+    cells = _markdown_table_cells(line)
+    return bool(cells) and all(re.fullmatch(r':?-{3,}:?', cell) for cell in cells)
+
+
+def _markdown_table_to_html(table_lines):
+    """Render Markdown tables in the responsive comparison-table component."""
+    header = _markdown_table_cells(table_lines[0])
+    rows = [_markdown_table_cells(line) for line in table_lines[2:]]
+    column_count = len(header)
+
+    def normalized(cells):
+        return (cells + [''] * column_count)[:column_count]
+
+    head_html = ''.join(f'<th scope="col">{cell}</th>' for cell in header)
+    body_html = []
+    for row in rows:
+        cells = normalized(row)
+        if not any(cells):
+            continue
+        first, *rest = cells
+        body_html.append(
+            '<tr>'
+            f'<th scope="row">{first}</th>'
+            + ''.join(f'<td>{cell}</td>' for cell in rest)
+            + '</tr>'
+        )
+
+    return (
+        '<div class="comparison-table-wrap" role="region" '
+        'aria-label="Tabela comparativa" tabindex="0">'
+        '<table class="comparison-table">'
+        f'<thead><tr>{head_html}</tr></thead>'
+        f'<tbody>{"".join(body_html)}</tbody>'
+        '</table></div>'
+    )
+
+
 def markdown_to_html(text):
     """A clean, lightweight, dependency-free Markdown to HTML parser in Python. Prevents infinite loops."""
     text = text.replace('\r\n', '\n')
@@ -974,6 +1023,21 @@ def markdown_to_html(text):
         elif line.startswith('# '):
             new_lines.append(f'<h1>{line[2:].strip()}</h1>')
             i += 1
+
+        # Markdown tables are emitted with the same accessible, responsive
+        # component used by the account-and-order import guide. Older posts
+        # imported from WordPress still contain pipe-table syntax in MDX.
+        elif (
+            '|' in line
+            and i + 1 < len(lines)
+            and _is_markdown_table_delimiter(lines[i + 1])
+        ):
+            table_lines = [line, lines[i + 1]]
+            i += 2
+            while i < len(lines) and lines[i].strip() and '|' in lines[i]:
+                table_lines.append(lines[i])
+                i += 1
+            new_lines.append(_markdown_table_to_html(table_lines))
             
         # Bullet Lists
         elif line.strip().startswith('- ') or line.strip().startswith('* '):
