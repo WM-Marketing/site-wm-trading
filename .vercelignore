@@ -23,3 +23,7 @@ npm-debug.log*
 # Ferramenta local: imita cleanUrls/trailingSlash para conferir antes do push.
 # Versionada no git (o AGENTS.md a indica), mas nao tem o que fazer na Vercel.
 dev-server.py
+
+# Documentacao interna (29/09/2026): versionada no git para a equipe, mas NAO vai
+# para o site. Ate aqui, /docs/*.md respondia 200 em wmtrading.com.br.
+docs/
