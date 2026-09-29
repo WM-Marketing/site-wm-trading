@@ -1,9 +1,11 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Gera css/base.css juntando, NESTA ORDEM, os 4 CSS que toda pagina carrega:
+Gera css/base.css juntando, NESTA ORDEM, os CSS que toda pagina carrega:
 
-    variables.css -> reset.css -> main.css -> responsive.css
+    fonts.css -> variables.css -> reset.css -> main.css -> responsive.css
+
+(fonts.css entrou em 29/09/2026: as fontes deixaram de vir do Google Fonts.)
 
 Por que existe (28/09/2026): eram 4 <link> que travavam a primeira exibicao
 da pagina, cada um uma ida e volta ao servidor. Viraram 1. A Vercel nao roda
@@ -12,7 +14,7 @@ build (site estatico), entao o base.css vai commitado.
     python scripts/build_css.py            # regrava css/base.css
     python scripts/build_css.py --checar   # so confere; sai 1 se estiver velho
 
-REGRA: NUNCA edite css/base.css. Edite os 4 arquivos de origem e rode este
+REGRA: NUNCA edite css/base.css. Edite os arquivos de origem e rode este
 script. O scripts/verificar.py reprova se o base.css estiver desatualizado.
 As paginas especificas (aco.css, dynamic-pages.css etc.) continuam separadas.
 """
@@ -21,7 +23,7 @@ import os
 import sys
 
 RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-FONTES = ["variables.css", "reset.css", "main.css", "responsive.css"]
+FONTES = ["fonts.css", "variables.css", "reset.css", "main.css", "responsive.css"]
 DESTINO = os.path.join(RAIZ, "css", "base.css")
 
 CABECALHO = (

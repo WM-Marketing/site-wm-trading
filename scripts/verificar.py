@@ -438,14 +438,14 @@ def checar_base_css(rel):
     # css/base.css e GERADO por scripts/build_css.py (variables + reset + main +
     # responsive). Desde 28/09/2026 as paginas carregam SO ele: editar main.css
     # sem regerar = a mudanca nao chega ao site, e ninguem entende por que.
-    titulo("A2. css/base.css em dia com os 4 CSS de origem")
+    titulo("A2. css/base.css em dia com os CSS de origem")
     sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
     import build_css
     if build_css.atual() != build_css.montar():
-        rel.erro("css/base.css DESATUALIZADO — alguem editou variables/reset/main/"
+        rel.erro("css/base.css DESATUALIZADO — alguem editou fonts/variables/reset/main/"
                  "responsive.css sem regerar. Rode: python scripts/build_css.py")
     else:
-        rel.ok("css/base.css bate com os 4 arquivos de origem")
+        rel.ok("css/base.css bate com os arquivos de origem")
 
 
 def checar_molde(rel):
