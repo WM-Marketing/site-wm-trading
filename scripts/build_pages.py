@@ -983,6 +983,16 @@ def _markdown_table_to_html(table_lines):
 def markdown_to_html(text):
     """A clean, lightweight, dependency-free Markdown to HTML parser in Python. Prevents infinite loops."""
     text = text.replace('\r\n', '\n')
+
+    # Assinatura institucional legada, importada de posts antigos do WordPress.
+    # Ela costuma aparecer logo depois do CTA e não acrescenta informação ao leitor;
+    # removê-la aqui mantém os artigos já migrados limpos em todas as reconstruções.
+    text = re.sub(
+        r'\s*(?:\*{1,3}|_{1,3})?\s*WM Trading,\s*inovação e excelência em comércio internacional\.?\s*(?:\*{1,3}|_{1,3})?[\u200b\u200c\u200d\ufeff]*',
+        '',
+        text,
+        flags=re.IGNORECASE,
+    )
     
     # Strip frontmatter if it is passed in the body
     if text.startswith('---'):
@@ -1505,6 +1515,9 @@ def markdown_to_html(text):
         r'<p>\s*(<div class="comparison-table-wrap".*?</div>)\s*</p>',
         r'\1', html, flags=re.S,
     )
+    # Alguns posts migrados usam <p> manualmente no CTA. O conversor simples
+    # já envolve o bloco em parágrafo; remover a duplicação evita HTML inválido.
+    html = re.sub(r'<p>\s*(<p\b.*?</p>)\s*</p>', r'\1', html, flags=re.S)
     # 2) group runs of 2+ adjacent images into .post-gallery
     def _gallery_repl(m):
         imgs = re.findall(r'<img [^>]*/>', m.group(0))
