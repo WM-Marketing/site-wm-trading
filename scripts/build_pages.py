@@ -25,12 +25,12 @@ DEFAULT_OG_IMAGE = "/images/logo/fechado_logo_wm_trading_ajustada_logo_laranja.p
 # os mesmos números e a mesma interação.
 GRAFICOS_INTERATIVOS = {
     "aco-set-2026": {
-        "titulo": "Importação mensal de ferro e aço por grau de transformação",
-        "descricao": "Gráfico de linhas comparando importações mensais de ferro e aço em formas brutas ou semimanufaturadas e de produtos de ferro e aço transformados, de setembro de 2024 a agosto de 2026.",
+        "titulo": "Importação mensal de produtos siderúrgicos e obras de ferro ou aço",
+        "descricao": "Gráfico de linhas comparando as importações mensais de produtos siderúrgicos e obras de ferro ou aço, de setembro de 2024 a agosto de 2026.",
         "labels": ["set./24", "out./24", "nov./24", "dez./24", "jan./25", "fev./25", "mar./25", "abr./25", "mai./25", "jun./25", "jul./25", "ago./25", "set./25", "out./25", "nov./25", "dez./25", "jan./26", "fev./26", "mar./26", "abr./26", "mai./26", "jun./26", "jul./26", "ago./26"],
         "series": [
-            {"label": "Formas brutas e semimanufaturadas", "data": [494.61, 476.94, 338.01, 291, 462.05, 377.24, 483.02, 409.98, 502.47, 471.28, 471.05, 368.37, 334.47, 362.31, 351.42, 293.75, 407.25, 421.95, 415.49, 302.03, 251.27, 365.99, 316.96, 317.1], "color": "#FC5000", "fill": "rgba(252, 80, 0, 0.10)"},
-            {"label": "Produtos de aço transformados", "data": [373.68, 395.51, 321.19, 359.93, 397.01, 410.1, 342.17, 353.41, 347.54, 353.98, 415.09, 378.17, 409.91, 394.07, 309.19, 344.37, 385.81, 328.79, 506.52, 379.05, 366.15, 488.39, 402.18, 473.3], "color": "#133B5C", "fill": "rgba(19, 59, 92, 0.08)"},
+            {"label": "Produtos siderúrgicos", "data": [494.61, 476.94, 338.01, 291, 462.05, 377.24, 483.02, 409.98, 502.47, 471.28, 471.05, 368.37, 334.47, 362.31, 351.42, 293.75, 407.25, 421.95, 415.49, 302.03, 251.27, 365.99, 316.96, 317.1], "color": "#FC5000", "fill": "rgba(252, 80, 0, 0.10)"},
+            {"label": "Obras de ferro ou aço", "data": [373.68, 395.51, 321.19, 359.93, 397.01, 410.1, 342.17, 353.41, 347.54, 353.98, 415.09, 378.17, 409.91, 394.07, 309.19, 344.37, 385.81, 328.79, 506.52, 379.05, 366.15, 488.39, 402.18, 473.3], "color": "#133B5C", "fill": "rgba(19, 59, 92, 0.08)"},
         ],
     },
     "maquinas-aditivas-set-2026": {
