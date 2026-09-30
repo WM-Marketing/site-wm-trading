@@ -1,0 +1,26 @@
+{
+  "slug": "entreposto-aduaneiro",
+  "title": "Guia de Entreposto Aduaneiro",
+  "description": "Entenda o entreposto aduaneiro, também chamado de bonded warehouse, suas possibilidades de armazenagem, gestão de estoque e tributos na importação.",
+  "eyebrow": "GUIA DE IMPORTAÇÃO",
+  "hero": "Entreposto aduaneiro: como o regime pode apoiar sua operação de importação",
+  "intro": "O entreposto aduaneiro permite armazenar mercadorias sob controle aduaneiro em condições específicas. Para avaliar o regime, é importante considerar o fluxo de estoque, o prazo, a operação e a legislação aplicável.",
+  "feature": {"label": "GUIA PRINCIPAL", "title": "Entreposto Aduaneiro: o que é e como pode facilitar suas operações de importação", "description": "Entenda o funcionamento do regime e os aspectos que precisam ser avaliados antes da admissão da carga.", "url": "/blog/entreposto-aduaneiro-reduzir-custos/"},
+  "feature_heading": "Entenda o regime antes de estruturar a operação",
+  "primary_label": "SOLUÇÃO WM",
+  "primary_heading": "Bonded warehouse e gestão de estoque para importações",
+  "primary_intro": "A WM avalia a adequação do regime ao projeto, conectando armazenagem, documentos, tributos e a logística necessária para cada operação.",
+  "primary_links": [{"title": "Bonded Warehouse", "description": "Conheça a solução da WM para operações de entreposto aduaneiro.", "url": "/bonded-warehouse/"}],
+  "considerations_heading": "O que avaliar para usar o entreposto aduaneiro",
+  "considerations": ["tipo de mercadoria e fluxo de estoque", "prazo e finalidade da armazenagem", "recinto e operação sob controle aduaneiro", "tributos federais suspensos conforme o regime", "tratamento de ICMS conforme legislação estadual e operação", "documentação, nacionalização e entrega da carga"],
+  "articles_heading": "Aprofunde o uso do regime especial",
+  "articles": [
+    {"category": "Regime especial", "title": "Saiba mais sobre o regime especial de Entreposto Aduaneiro", "description": "Conheça conceitos e possibilidades do regime para importadores.", "url": "/blog/entreposto-aduaneiro/"},
+    {"category": "Armazenagem", "title": "Reduza custos de armazenagem ao importar com a WM", "description": "Veja por que a gestão de prazos e documentos é relevante para a carga.", "url": "/blog/reduza-custos-de-armazenagem-ao-importar-com-a-wm/"},
+    {"category": "Logística", "title": "Como otimizar a sua operação logística por completo?", "description": "Entenda a importância de integrar as decisões logísticas da operação.", "url": "/blog/como-otimizar-e-integrar-sua-operacao-logistica/"}
+  ],
+  "faqs": [{"question": "O entreposto aduaneiro é o mesmo que bonded warehouse?", "answer": "Bonded warehouse é uma expressão usada para se referir a operações de armazenagem sob controle aduaneiro. A adequação do regime deve ser analisada conforme o projeto."}, {"question": "O entreposto suspende automaticamente o ICMS?", "answer": "Não. O tratamento do ICMS depende da legislação estadual e da estrutura da operação."}, {"question": "Toda mercadoria pode ser admitida no regime?", "answer": "A possibilidade depende das regras aplicáveis, da mercadoria e do enquadramento da operação."}],
+  "cta_title": "Avalie se o entreposto aduaneiro faz sentido para sua operação",
+  "cta_text": "Cadastre-se e converse com a WM Trading sobre a estrutura de armazenagem, tributos e logística mais adequada para sua carga.",
+  "cta_url": "/fale-conosco/"
+}

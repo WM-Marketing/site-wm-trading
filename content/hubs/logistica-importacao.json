@@ -1,0 +1,26 @@
+{
+  "slug": "logistica-importacao",
+  "title": "Guia de Logística de Importação",
+  "description": "Conteúdos sobre Incoterms, frete, armazenagem, demurrage, 4PL, DUIMP e planejamento logístico de importações.",
+  "eyebrow": "GUIA DE IMPORTAÇÃO",
+  "hero": "Logística de importação: como conectar custos, prazos e operação",
+  "intro": "Frete, modal, armazenagem, documentos e tempo de liberação influenciam o custo total da importação. Uma visão integrada ajuda a antecipar riscos e dar mais previsibilidade à operação.",
+  "feature": {"label": "GUIA PRINCIPAL", "title": "Incoterm, modal e armazenagem: como reduzir custo total na importação", "description": "Entenda como decisões conectadas influenciam o custo e o prazo da carga.", "url": "/blog/incoterm-modal-e-armazenagem-como-reduzir-custo-total-na-importacao/"},
+  "feature_heading": "Planeje a logística antes do embarque",
+  "primary_label": "SOLUÇÃO WM",
+  "primary_heading": "Uma operação logística integrada para sua importação",
+  "primary_intro": "A WM coordena planejamento, documentos, transporte e etapas operacionais para ajudar empresas a conduzir a importação com mais controle.",
+  "primary_links": [{"title": "Soluções logísticas 4PL", "description": "Conheça a gestão integrada da WM para operações logísticas.", "url": "/solucoes-4pl/"}],
+  "considerations_heading": "Pontos que precisam entrar no planejamento logístico",
+  "considerations": ["Incoterm e responsabilidades entre as partes", "modal e rota internacional", "prazo de produção, embarque e entrega", "frete, seguro e custos de armazenagem", "documentação e licenças antes do embarque", "desembaraço, transporte nacional e destino final"],
+  "articles_heading": "Aprofunde os temas que afetam custo e prazo",
+  "articles": [
+    {"category": "4PL", "title": "Entenda como a WM otimiza sua logística para além da importação", "description": "Veja o papel da gestão integrada em operações mais complexas.", "url": "/blog/conheca-o-4pl/"},
+    {"category": "Armazenagem", "title": "Demurrage e detention: como superar esses desafios da logística", "description": "Conheça cuidados para evitar custos associados ao uso de contêineres.", "url": "/blog/demurrage-detention-desafios-logistica/"},
+    {"category": "DUIMP", "title": "DUIMP: o que muda nos custos, prazos e governança?", "description": "Entenda o impacto da declaração na organização das importações.", "url": "/blog/duimp-importacao-entenda/"}
+  ],
+  "faqs": [{"question": "O Incoterm define o custo total da importação?", "answer": "Não sozinho. Ele distribui responsabilidades entre comprador e vendedor, mas frete, seguro, tributos, armazenagem e etapas locais também precisam ser considerados."}, {"question": "O planejamento reduz o risco de custos de armazenagem?", "answer": "Ele ajuda a antecipar documentos, prazos e responsabilidades, reduzindo a exposição a atrasos e custos não previstos."}, {"question": "Quando uma solução 4PL faz sentido?", "answer": "Pode fazer sentido para empresas que precisam de uma gestão integrada das etapas logísticas, da origem à entrega."}],
+  "cta_title": "Planeje a logística da sua importação com a WM",
+  "cta_text": "Cadastre-se e converse com especialistas sobre uma estrutura logística compatível com os prazos, a carga e os objetivos da sua empresa.",
+  "cta_url": "/fale-conosco/"
+}

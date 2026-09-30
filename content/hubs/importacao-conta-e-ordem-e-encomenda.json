@@ -1,0 +1,71 @@
+{
+  "slug": "importacao-conta-e-ordem-e-encomenda",
+  "title": "Guia de Importação por Conta e Ordem e por Encomenda",
+  "description": "Entenda as modalidades de importação por conta e ordem e por encomenda, os fatores que a WM Trading avalia e os conteúdos essenciais para estruturar a operação.",
+  "eyebrow": "GUIA DE IMPORTAÇÃO",
+  "hero": "Conta e Ordem ou Encomenda: entenda qual estrutura faz sentido para sua operação",
+  "intro": "A modalidade não deve ser escolhida apenas pelo imposto ou por uma preferência comercial. A WM Trading analisa a empresa, a mercadoria, a origem, o destino, os documentos, os tributos e a logística para estruturar um caminho compatível com a legislação.",
+  "guide": {
+    "label": "GUIA COMPLETO",
+    "title": "Importação por Conta e Ordem ou por Encomenda: quais as diferenças?",
+    "description": "Veja a comparação entre as modalidades, responsabilidades, requisitos e perguntas frequentes.",
+    "url": "/blog/importacao-conta-e-ordem-ou-encomenda/"
+  },
+  "modalities": [
+    {
+      "title": "Importação por Conta e Ordem",
+      "description": "A adquirente contrata a trading para conduzir a importação. A estrutura comercial, financeira e documental deve refletir o contrato entre as partes.",
+      "url": "/importacao-por-conta-e-ordem/"
+    },
+    {
+      "title": "Importação por Encomenda",
+      "description": "A trading conduz a operação para uma encomendante predeterminada e realiza o pagamento ao fornecedor estrangeiro, conforme o contrato e a legislação aplicável.",
+      "url": "/importacao-por-encomenda/"
+    }
+  ],
+  "considerations": [
+    "origem e destino da carga",
+    "características da empresa e da mercadoria",
+    "documentação comercial, fiscal e aduaneira",
+    "habilitação e vinculação no RADAR Siscomex",
+    "classificação fiscal, tributos e benefícios aplicáveis",
+    "exigências regulatórias, prazos, transporte e entrega"
+  ],
+  "articles": [
+    {
+      "category": "Habilitação",
+      "title": "Como habilitar o RADAR Siscomex para importar",
+      "description": "Entenda a habilitação exigida para operações de importação.",
+      "url": "/blog/habilitar-radar/"
+    },
+    {
+      "category": "Pagamentos",
+      "title": "Modalidades de pagamento em importações",
+      "description": "Conheça aspectos financeiros que precisam ser planejados antes da compra.",
+      "url": "/blog/modalidades-pagamento-importacoes/"
+    },
+    {
+      "category": "Planejamento",
+      "title": "Por que escolher a WM Trading para importar?",
+      "description": "Veja como planejamento tributário, aduaneiro e logístico se conectam em uma operação.",
+      "url": "/blog/por-que-escolher-wm-trading-para-importar/"
+    }
+  ],
+  "faqs": [
+    {
+      "question": "Quem define a modalidade de importação?",
+      "answer": "A trading avalia a realidade comercial, financeira, tributária, documental e logística da operação para definir uma modalidade compatível com a legislação e os objetivos do negócio."
+    },
+    {
+      "question": "A empresa precisa estar habilitada no RADAR Siscomex?",
+      "answer": "Sim. As partes envolvidas devem observar as exigências de habilitação e vinculação aplicáveis à operação, com limite disponível e documentação compatível com cada modalidade."
+    },
+    {
+      "question": "Benefícios fiscais podem influenciar a estrutura?",
+      "answer": "Sim. O destino e a utilização da mercadoria, além das características da empresa e da operação, podem influenciar os benefícios que serão avaliados. Eles não substituem os requisitos legais de cada modalidade."
+    }
+  ],
+  "cta_title": "Conte com especialistas para estruturar sua importação",
+  "cta_text": "Cadastre-se e um especialista da WM Trading ajudará sua empresa a avaliar a modalidade e a estrutura mais adequadas para o seu projeto.",
+  "cta_url": "/fale-conosco/"
+}

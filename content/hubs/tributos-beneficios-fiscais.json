@@ -1,0 +1,26 @@
+{
+  "slug": "tributos-beneficios-fiscais",
+  "title": "Guia de Tributos e Benefícios Fiscais na Importação",
+  "description": "Entenda os impostos incidentes na importação, benefícios fiscais, Ex-Tarifário e fatores que precisam ser avaliados na estrutura tributária da operação.",
+  "eyebrow": "GUIA DE IMPORTAÇÃO",
+  "hero": "Tributos e benefícios fiscais: o que avaliar antes de importar",
+  "intro": "II, IPI, PIS, Cofins e ICMS fazem parte do custo de uma importação. A incidência e os benefícios possíveis dependem da mercadoria, do destino, da operação e da legislação aplicável.",
+  "feature": {"label": "PLANEJAMENTO TRIBUTÁRIO", "title": "Como obter redução de impostos na importação", "description": "Entenda por que o estudo da operação precisa acontecer antes da compra internacional.", "url": "/blog/reducao-impostos-importacao/"},
+  "feature_heading": "Comece pela estrutura tributária da operação",
+  "primary_label": "SOLUÇÃO WM",
+  "primary_heading": "Tributação, logística e operação precisam estar conectadas",
+  "primary_intro": "A análise não se limita a uma alíquota isolada. A WM avalia os elementos do projeto para estruturar uma operação coerente com a legislação e com o custo total.",
+  "primary_links": [{"title": "Assessoria aduaneira", "description": "Conheça o apoio da WM para classificação, documentação e planejamento da importação.", "url": "/assessoria-aduaneira/"}],
+  "considerations_heading": "Fatores que influenciam os tributos da importação",
+  "considerations": ["classificação fiscal da mercadoria", "origem e destino da carga", "utilização e características do produto", "impostos federais e ICMS aplicáveis", "benefícios fiscais e regimes especiais vigentes", "documentação e requisitos da operação"],
+  "articles_heading": "Aprofunde os principais temas tributários",
+  "articles": [
+    {"category": "ICMS", "title": "Incentivos fiscais para importações", "description": "Veja por que o estado de destino e a estrutura da operação fazem diferença.", "url": "/blog/incentivos-fiscais-importacoes/"},
+    {"category": "Ex-Tarifário", "title": "Ex-tarifário na importação industrial: quando faz sentido?", "description": "Entenda as condições que precisam ser verificadas antes de considerar o regime.", "url": "/blog/ex-tarifario-importacao-industrial/"},
+    {"category": "Reforma tributária", "title": "Reforma Tributária na importação: o que revisar antes de 2027?", "description": "Conheça pontos que empresas importadoras precisam acompanhar.", "url": "/blog/reforma-tributaria-importacao/"}
+  ],
+  "faqs": [{"question": "Quais impostos incidem na importação?", "answer": "A incidência depende da classificação fiscal, da mercadoria e da operação. Entre os tributos que podem ser avaliados estão II, IPI, PIS-Importação, Cofins-Importação e ICMS."}, {"question": "Todo produto importado pode usar benefício fiscal?", "answer": "Não. A possibilidade deve ser estudada conforme a legislação, a classificação, o destino e as características da operação."}, {"question": "O Ex-Tarifário reduz automaticamente o imposto?", "answer": "Não. O regime possui requisitos e vigência específicos, que precisam ser confirmados antes da operação."}],
+  "cta_title": "Estruture sua importação com planejamento tributário",
+  "cta_text": "Cadastre-se e um especialista da WM Trading ajudará sua empresa a avaliar tributos, benefícios aplicáveis e a estrutura da operação.",
+  "cta_url": "/fale-conosco/"
+}

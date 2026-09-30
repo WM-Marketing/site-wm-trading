@@ -1,0 +1,26 @@
+{
+  "slug": "veiculos-autopecas",
+  "title": "Guia de Importação de Veículos e Autopeças",
+  "description": "Conteúdos sobre importação de veículos, autopeças, tarifas, classificação fiscal e tributos aplicáveis às operações do setor.",
+  "eyebrow": "GUIA DE IMPORTAÇÃO",
+  "hero": "Importação de veículos e autopeças: o que avaliar antes de operar",
+  "intro": "Veículos, componentes e autopeças possuem particularidades tributárias, técnicas e regulatórias. Entender a classificação, as tarifas e os documentos ajuda a estruturar uma operação mais previsível.",
+  "feature": {"label": "GUIA PRINCIPAL", "title": "Importação de autopeças: o que sua empresa precisa saber", "description": "Conheça cuidados tributários, fiscais e operacionais para importar peças e componentes.", "url": "/blog/importacao-de-autopecas/"},
+  "feature_heading": "Comece pelo produto, pela classificação e pelas regras aplicáveis",
+  "primary_label": "SOLUÇÃO WM",
+  "primary_heading": "Estruture sua operação de veículos ou autopeças",
+  "primary_intro": "A WM apoia empresas no planejamento tributário, aduaneiro e logístico de operações com veículos, peças e componentes.",
+  "primary_links": [{"title": "Importação de autopeças", "description": "Conheça a solução da WM para operações do setor automotivo.", "url": "/segmentos/autopecas/"}],
+  "considerations_heading": "O que avaliar na importação de veículos e autopeças",
+  "considerations": ["classificação fiscal e descrição técnica", "tarifas e tributos aplicáveis", "requisitos técnicos e regulatórios", "origem, fornecedor e documentação comercial", "modal, frete e seguro internacional", "nacionalização, transporte e entrega"],
+  "articles_heading": "Aprofunde os temas do setor automotivo",
+  "articles": [
+    {"category": "Veículos elétricos", "title": "Veículos elétricos importados: o que muda com o fim da janela tarifária", "description": "Veja fatores tarifários que passaram a exigir atenção nas operações.", "url": "/blog/importacao-de-veiculos-eletricos/"},
+    {"category": "Tributação", "title": "PIS e Cofins monofásicos na importação de autopeças: o que avaliar", "description": "Entenda a relevância da classificação e do enquadramento fiscal.", "url": "/blog/pis-cofins-autopecas/"},
+    {"category": "Ex-Tarifário", "title": "Ex-tarifários de autopeças agora têm prazo de vigência", "description": "Conheça a importância de acompanhar prazo e enquadramento nas operações.", "url": "/blog/prazo-ex-tarifarios-de-autopecas/"}
+  ],
+  "faqs": [{"question": "Importar veículo e autopeça segue as mesmas regras?", "answer": "Não necessariamente. Classificação fiscal, exigências técnicas e tratamentos administrativos variam conforme o produto e a operação."}, {"question": "A tarifa de importação pode mudar?", "answer": "Sim. Tarifas e regimes precisam ser confirmados conforme a legislação vigente antes da operação."}, {"question": "A classificação fiscal influencia o custo?", "answer": "Sim. Ela interfere nos tributos, nas exigências administrativas e na estrutura de importação."}],
+  "cta_title": "Planeje sua importação de veículos ou autopeças",
+  "cta_text": "Cadastre-se e fale com a WM Trading sobre os requisitos tributários, aduaneiros e logísticos do seu projeto.",
+  "cta_url": "/fale-conosco/"
+}

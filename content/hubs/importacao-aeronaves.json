@@ -1,0 +1,26 @@
+{
+  "slug": "importacao-aeronaves",
+  "title": "Guia de Importação de Aeronaves",
+  "description": "Conteúdos para avaliar a compra, os tributos, a nacionalização e a logística da importação de aeronaves para o Brasil.",
+  "eyebrow": "GUIA DE IMPORTAÇÃO",
+  "hero": "Importação de aeronaves: da compra no exterior à nacionalização no Brasil",
+  "intro": "A importação de uma aeronave envolve a avaliação do modelo, impostos, documentação, traslado e estrutura da operação. Reunimos conteúdos para ajudar sua empresa ou seu cliente a entender as principais etapas antes da compra.",
+  "feature": {"label": "COMECE POR AQUI", "title": "Quais impostos incidem na importação de uma aeronave?", "description": "Veja os tributos que precisam ser considerados e como o planejamento influencia o custo total da operação.", "url": "/blog/impostos-importacao-aeronaves/"},
+  "feature_heading": "Entenda os custos antes de decidir pela compra",
+  "primary_label": "SOLUÇÃO WM",
+  "primary_heading": "Estruture a importação da sua aeronave com especialistas",
+  "primary_intro": "A WM conecta planejamento tributário, documentação aduaneira, nacionalização e logística para que a operação seja conduzida de acordo com as características de cada aeronave.",
+  "primary_links": [{"title": "Importação de aeronaves", "description": "Conheça a solução da WM para importar aviões, jatos e helicópteros.", "url": "/segmentos/importacao-aeronaves/"}],
+  "considerations_heading": "O que avaliar antes de importar uma aeronave",
+  "considerations": ["modelo, configuração e condição da aeronave", "tributos e benefícios fiscais aplicáveis", "documentação, habilitações e exigências aduaneiras", "logística internacional, seguro e traslado", "estado de destino e nacionalização", "custo total da operação, além do preço de compra"],
+  "articles_heading": "Entenda mais sobre a importação de aeronaves",
+  "articles": [
+    {"category": "Planejamento", "title": "Por que importar uma aeronave em vez de comprar uma que já está no Brasil?", "description": "Compare possibilidades de escolha, tecnologia e condições do mercado internacional.", "url": "/blog/importar-aeronave-ou-comprar-no-brasil/"},
+    {"category": "Tributação", "title": "O tamanho da aeronave muda os impostos na importação?", "description": "Entenda por que o porte, por si só, não define uma alíquota maior.", "url": "/blog/tamanho-aeronave-muda-impostos-importacao/"},
+    {"category": "Mercado", "title": "2026 é o momento perfeito para importar aeronaves", "description": "Veja fatores que podem ampliar as oportunidades de compra no mercado internacional.", "url": "/blog/2026-e-o-momento-perfeito-para-importar-aeronaves/"}
+  ],
+  "faqs": [{"question": "É possível importar aeronaves para o Brasil?", "answer": "Sim. A operação exige planejamento tributário, aduaneiro, documental e logístico compatível com o modelo e a finalidade da aeronave."}, {"question": "O preço de compra é o único custo a considerar?", "answer": "Não. Tributos, seguro, frete ou traslado, documentação e nacionalização também fazem parte da análise de viabilidade."}, {"question": "A WM atende importações de aviões e helicópteros?", "answer": "Sim. A WM estrutura operações para diferentes tipos de aeronaves, conforme as características de cada projeto."}],
+  "cta_title": "Conte com especialistas para importar sua aeronave",
+  "cta_text": "Cadastre-se e converse com a WM Trading sobre a estrutura mais adequada para a compra e a importação da sua aeronave.",
+  "cta_url": "/fale-conosco/"
+}

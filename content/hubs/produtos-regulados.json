@@ -1,0 +1,26 @@
+{
+  "slug": "produtos-regulados",
+  "title": "Guia de Importação de Produtos Regulados",
+  "description": "Conteúdos sobre ANVISA, MAPA, Inmetro, produtos químicos, cosméticos e documentos necessários para estruturar importações reguladas.",
+  "eyebrow": "GUIA DE IMPORTAÇÃO",
+  "hero": "Produtos regulados: o que verificar antes de importar para o Brasil",
+  "intro": "Produtos sujeitos à ANVISA, MAPA, Inmetro ou outros órgãos exigem atenção antes da compra. A documentação, a classificação e as licenças precisam ser avaliadas conforme a mercadoria e a finalidade da operação.",
+  "feature": {"label": "GUIA PRINCIPAL", "title": "Importação com Anvisa: o que precisa estar validado antes da compra?", "description": "Veja por que requisitos regulatórios e documentos devem ser analisados antes do embarque.", "url": "/blog/importacao-com-anvisa-documentos/"},
+  "feature_heading": "A conformidade começa antes de negociar a compra",
+  "primary_label": "SOLUÇÃO WM",
+  "primary_heading": "Planeje requisitos e documentos antes do embarque",
+  "primary_intro": "A WM integra a análise documental, aduaneira e logística para ajudar a empresa a estruturar importações de produtos regulados dentro das exigências aplicáveis.",
+  "primary_links": [{"title": "Importação de produtos químicos", "description": "Conheça a atuação da WM em operações com produtos químicos.", "url": "/segmentos/produtos-quimicos/"}, {"title": "Importação de cosméticos", "description": "Veja a solução para operações de cosméticos e produtos relacionados.", "url": "/segmentos/cosmeticos/"}],
+  "considerations_heading": "O que avaliar em uma importação de produto regulado",
+  "considerations": ["classificação fiscal e descrição técnica do produto", "órgãos anuentes e exigências aplicáveis", "licenças, registros e documentos necessários", "rotulagem, composição e especificações", "documentação antes do embarque", "logística, armazenagem e liberação da carga"],
+  "articles_heading": "Aprofunde exigências e documentos da operação",
+  "articles": [
+    {"category": "ANVISA", "title": "Como importar produtos regulados pela Anvisa?", "description": "Entenda os cuidados essenciais para produtos sujeitos à vigilância sanitária.", "url": "/blog/importar-produtos-regulados-anvisa/"},
+    {"category": "Produtos químicos", "title": "MSDS na importação de cargas perigosas: por que esse documento é essencial", "description": "Veja o papel da ficha de segurança em operações com cargas perigosas.", "url": "/blog/msds-importacao-cargas-perigosas/"},
+    {"category": "Cosméticos", "title": "Importação de cosméticos: como estruturar uma operação segura", "description": "Conheça pontos que exigem planejamento em operações do setor.", "url": "/blog/importacao-cosmeticos-seguranca/"}
+  ],
+  "faqs": [{"question": "Todo produto regulado precisa de licença?", "answer": "As exigências dependem do produto, da classificação e do órgão anuente. A análise deve acontecer antes da compra e do embarque."}, {"question": "A documentação pode ser providenciada depois que a carga embarca?", "answer": "Muitos requisitos precisam ser confirmados previamente. Planejar antes ajuda a evitar retenções e custos adicionais."}, {"question": "Produtos químicos e cosméticos têm as mesmas exigências?", "answer": "Não. Cada produto possui características, classificações e requisitos regulatórios próprios."}],
+  "cta_title": "Importe produtos regulados com planejamento",
+  "cta_text": "Cadastre-se e converse com a WM Trading sobre os requisitos documentais, aduaneiros e logísticos do seu produto.",
+  "cta_url": "/fale-conosco/"
+}

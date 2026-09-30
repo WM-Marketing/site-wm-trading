@@ -1,0 +1,26 @@
+{
+  "slug": "maquinas-e-equipamentos",
+  "title": "Guia de Importação de Máquinas e Equipamentos",
+  "description": "Conteúdos sobre importação de máquinas novas e usadas, classificação fiscal, Ex-Tarifário, máquinas agrícolas e planejamento da operação.",
+  "eyebrow": "GUIA DE IMPORTAÇÃO",
+  "hero": "Importação de máquinas e equipamentos: o que avaliar antes da compra",
+  "intro": "A importação pode ampliar as opções de máquinas, tecnologias e fornecedores. Para saber se a operação é viável, é preciso olhar além do preço do catálogo e estudar os requisitos técnicos, tributários, regulatórios e logísticos.",
+  "feature": {"label": "GUIA PRINCIPAL", "title": "Importação de máquinas: o que você precisa saber para importar com segurança", "description": "Conheça etapas importantes para planejar a compra e a nacionalização de máquinas e equipamentos.", "url": "/blog/importacao-maquinas-seguranca/"},
+  "feature_heading": "Antes de comprar, avalie a viabilidade da importação",
+  "primary_label": "SOLUÇÃO WM",
+  "primary_heading": "Estruture a importação da máquina certa para sua operação",
+  "primary_intro": "A WM avalia requisitos fiscais, aduaneiros e logísticos para apoiar empresas que já possuem uma máquina ou fornecedor definido no exterior.",
+  "primary_links": [{"title": "Importação de máquinas e equipamentos", "description": "Conheça a solução da WM para projetos de importação de máquinas.", "url": "/segmentos/maquinas/"}],
+  "considerations_heading": "O que avaliar antes de importar máquinas e equipamentos",
+  "considerations": ["características técnicas e finalidade do equipamento", "classificação fiscal e tributos aplicáveis", "possibilidade de Ex-Tarifário quando aplicável", "regras para máquinas novas ou usadas", "documentação e exigências regulatórias", "frete, seguro, transporte e instalação"],
+  "articles_heading": "Conteúdos para aprofundar sua decisão",
+  "articles": [
+    {"category": "Máquinas usadas", "title": "É possível importar máquinas usadas? Sim, é possível, mas há restrições", "description": "Entenda por que esse tipo de operação exige análise específica.", "url": "/blog/e-possivel-importar-maquinas-usadas-sim-e-possivel-mas-ha-restricoes/"},
+    {"category": "Ex-Tarifário", "title": "Ex-tarifário na importação industrial: quando faz sentido?", "description": "Veja os pontos que precisam ser confirmados para avaliar o regime.", "url": "/blog/ex-tarifario-importacao-industrial/"},
+    {"category": "Agronegócio", "title": "Por que a importação de máquinas agrícolas está crescendo no Brasil?", "description": "Conheça fatores que levam empresas e produtores a buscar equipamentos no exterior.", "url": "/blog/importacao-maquinas-agricolas-cresce-brasil/"}
+  ],
+  "faqs": [{"question": "É possível importar máquina usada?", "answer": "Em alguns casos, sim. A operação possui regras e restrições específicas que precisam ser avaliadas antes da compra."}, {"question": "O Ex-Tarifário se aplica a toda máquina importada?", "answer": "Não. A elegibilidade depende da classificação fiscal, da inexistência de produção nacional equivalente e dos requisitos vigentes."}, {"question": "A classificação fiscal pode mudar o custo da operação?", "answer": "Sim. Ela influencia tributos, tratamentos administrativos e exigências aplicáveis à máquina."}],
+  "cta_title": "Avalie a importação da sua máquina antes da compra",
+  "cta_text": "Cadastre-se e fale com a WM Trading sobre a viabilidade tributária, aduaneira e logística do seu projeto.",
+  "cta_url": "/fale-conosco/"
+}

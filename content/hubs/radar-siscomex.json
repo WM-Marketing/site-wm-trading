@@ -1,0 +1,26 @@
+{
+  "slug": "radar-siscomex",
+  "title": "Guia de RADAR Siscomex e Habilitação para Importar",
+  "description": "Conteúdos para entender a habilitação no RADAR Siscomex, limites, aumento de limite, vinculação e documentos envolvidos na importação.",
+  "eyebrow": "GUIA DE IMPORTAÇÃO",
+  "hero": "RADAR Siscomex: como estruturar a habilitação para importar",
+  "intro": "A habilitação no RADAR Siscomex faz parte da preparação para importar. O enquadramento e o limite disponível precisam estar alinhados à capacidade financeira e à realidade da operação.",
+  "feature": {"label": "GUIA PRINCIPAL", "title": "Radar Siscomex: como estruturar a habilitação e o aumento de limite sem atrasos", "description": "Entenda modalidades, limites e cuidados práticos para organizar a habilitação.", "url": "/blog/radar-siscomex/"},
+  "feature_heading": "Comece pela habilitação da sua empresa",
+  "primary_label": "ORIENTAÇÃO WM",
+  "primary_heading": "A habilitação precisa acompanhar o projeto de importação",
+  "primary_intro": "A WM apoia a empresa na organização da operação, considerando documentos, capacidade financeira, vinculação e os próximos passos aduaneiros.",
+  "primary_links": [{"title": "Assessoria aduaneira", "description": "Conheça a solução para apoiar as etapas documentais e aduaneiras da sua importação.", "url": "/assessoria-aduaneira/"}],
+  "considerations_heading": "O que avaliar para a habilitação no RADAR Siscomex",
+  "considerations": ["perfil e capacidade financeira da empresa", "modalidade de habilitação aplicável", "limite disponível para as operações", "documentação exigida no processo", "vinculação das partes quando aplicável", "planejamento da compra e do embarque"],
+  "articles_heading": "Conteúdos para aprofundar a preparação da importação",
+  "articles": [
+    {"category": "Habilitação", "title": "Como habilitar a sua empresa no RADAR para operar no comércio exterior?", "description": "Veja os primeiros pontos que empresas costumam avaliar antes de operar.", "url": "/blog/habilitar-radar/"},
+    {"category": "Limites", "title": "Como a Receita avalia coerência na habilitação do Radar Siscomex", "description": "Entenda a relação entre a capacidade financeira e a habilitação da empresa.", "url": "/blog/como-a-receita-avalia-na-habilitacao-do-radar-siscomex/"},
+    {"category": "Modalidades", "title": "Importação por Conta e Ordem ou por Encomenda: quais as diferenças?", "description": "Conheça duas modalidades que também exigem atenção à vinculação e à documentação.", "url": "/blog/importacao-conta-e-ordem-ou-encomenda/"}
+  ],
+  "faqs": [{"question": "Toda empresa precisa de RADAR Siscomex para importar?", "answer": "A habilitação é necessária para operar no comércio exterior conforme as regras aplicáveis à empresa e à operação."}, {"question": "A empresa pode aumentar o limite do RADAR?", "answer": "A possibilidade depende da análise de capacidade financeira e do procedimento aplicável no Portal Único."}, {"question": "A habilitação é suficiente para embarcar a mercadoria?", "answer": "Não. A empresa também precisa estruturar classificação, documentação, tributos, logística e demais requisitos da importação."}],
+  "cta_title": "Prepare sua empresa para importar com segurança",
+  "cta_text": "Cadastre-se e converse com a WM Trading sobre a habilitação e a estrutura necessária para o seu projeto de importação.",
+  "cta_url": "/fale-conosco/"
+}
