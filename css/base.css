@@ -272,6 +272,18 @@ input, textarea, select { font: inherit; }
 }
 .btn-orange:hover { background: #e04700; }
 
+/* CTA sobre fundo laranja: contraste alto e ação claramente visível. */
+.btn.btn-white {
+  background: #ffffff;
+  color: #FC5000;
+  border: 1px solid #ffffff;
+}
+.btn.btn-white:hover {
+  background: #f5f5f5;
+  color: #e04700;
+  border-color: #f5f5f5;
+}
+
 
 /* =============================================
    HEADER

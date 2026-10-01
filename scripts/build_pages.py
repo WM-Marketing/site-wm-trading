@@ -788,7 +788,7 @@ def load_template_elements():
     head_content = f'\n  <meta name="wm-politica-versao" content="{POLITICA_VERSAO_ID}" />' + head_content
 
     # Inject dynamic-pages styles and contact-form script
-    head_content += '\n  <link rel="stylesheet" href="/css/dynamic-pages.css?v=20260925c" />'
+    head_content += '\n  <link rel="stylesheet" href="/css/dynamic-pages.css?v=20261001b" />'
     head_content += '\n  <script src="/js/contact-form.js" defer></script>'
     head_content += '\n  <script src="/js/lightbox.js" defer></script>'
 
@@ -1596,7 +1596,27 @@ def e_rascunho(fm):
     )
 
 
-def renderizar_conteudos_aprofundar(itens, titulo="este tema", descricao="Selecione um conteúdo para aprofundar o planejamento da sua operação."):
+def imagem_conteudo_relacionado(item):
+    """Resolve a capa de um conteúdo curado sem duplicar metadados de posts.
+
+    Guias e páginas comerciais declaram sua imagem no JSON. Para artigos de
+    blog, a capa continua sendo lida do frontmatter do próprio MDX, que é a
+    fonte editorial já usada na vitrine do blog.
+    """
+    if item.get("image"):
+        return item["image"]
+    caminho = urllib.parse.urlparse(item.get("url", "")).path.strip("/")
+    partes = caminho.split("/")
+    if len(partes) == 2 and partes[0] == "blog":
+        arquivo = os.path.join(CONTENT_DIR, "blog", f"{partes[1]}.mdx")
+        if os.path.isfile(arquivo):
+            frontmatter, _ = parse_mdx(arquivo)
+            if frontmatter.get("cover"):
+                return frontmatter["cover"]
+    return DEFAULT_OG_IMAGE
+
+
+def renderizar_conteudos_aprofundar(itens, titulo="este tema", descricao="Selecione um conteúdo para aprofundar o planejamento da sua operação.", eyebrow="CONTEÚDO WM"):
     """Renderiza links editoriais configurados em paginas comerciais.
 
     Os itens vivem no JSON da pagina comercial, para que a curadoria seja
@@ -1606,16 +1626,19 @@ def renderizar_conteudos_aprofundar(itens, titulo="este tema", descricao="Seleci
         return ""
     cards = "".join(
         f'''<a class="aero-resources__card commercial-related__card" href="{escape(item["url"])}">
+              <span class="commercial-related__media"><img src="{escape(imagem_conteudo_relacionado(item))}" alt="{escape(item.get("imageAlt", item["title"]))}" loading="lazy" decoding="async"></span>
+              <span class="commercial-related__body">
               <span>{escape(item.get("label", "CONTEÚDO WM"))}</span>
               <strong>{escape(item["title"])}</strong>
-              <em>Leia o artigo <b aria-hidden="true">→</b></em>
+              <em>{escape(item.get("cta", "Leia o artigo"))} <b aria-hidden="true">→</b></em>
+              </span>
             </a>'''
         for item in itens
     )
     return f'''<section class="aero-resources commercial-related" aria-labelledby="commercial-related-title">
       <div class="container">
         <div class="aero-resources__heading commercial-related__heading">
-          <p class="aero-resources__eyebrow">CONTEÚDO WM</p>
+          <p class="aero-resources__eyebrow">{escape(eyebrow)}</p>
           <h2 id="commercial-related-title">Entenda mais sobre <span>{escape(titulo)}</span></h2>
           <p>{escape(descricao)}</p>
         </div>
@@ -2211,6 +2234,11 @@ def build_infografico_form_html(titulo, imagem_url):
 def main():
     print("Loading index.html structure templates...")
     head_tpl, header_tpl, footer_tpl = load_template_elements()
+    # Uso local: permite regenerar apenas páginas comerciais selecionadas sem
+    # reescrever todo o site. Exemplo: WM_BUILD_PAGES_ONLY=maquinas,autopecas.
+    paginas_selecionadas = {
+        slug.strip() for slug in os.environ.get("WM_BUILD_PAGES_ONLY", "").split(",") if slug.strip()
+    }
     
     # 1. GENERATE SERVICES PAGES
     print("\nGenerating Services...")
@@ -2220,6 +2248,8 @@ def main():
             s = json.load(f)
             
         slug = s["slug"]
+        if paginas_selecionadas and slug not in paginas_selecionadas:
+            continue
         print(f" - compiling {slug}...")
         
         # Build Hero
@@ -2299,7 +2329,7 @@ def main():
         </section>
         """
         
-        related_html = renderizar_conteudos_aprofundar(s.get("relatedPosts", []), s.get("relatedTitle", "esta solução"), s.get("relatedDescription", "Selecione um conteúdo para aprofundar o planejamento da sua operação."))
+        related_html = renderizar_conteudos_aprofundar(s.get("relatedPosts", []), s.get("relatedTitle", "esta solução"), s.get("relatedDescription", "Selecione um conteúdo para aprofundar o planejamento da sua operação."), s.get("relatedEyebrow", "CONTEÚDO WM"))
         body_content = hero_html + intro_html + benefits_html + sections_html + related_html + cta_html
         output_path = os.path.join(ROOT_DIR, f"{slug}.html")
         # A descricao do Service sai do `intro` (frase afirmativa do que a WM faz) e nao
@@ -2432,6 +2462,8 @@ def main():
             s = json.load(f)
             
         slug = s["slug"]
+        if paginas_selecionadas and slug not in paginas_selecionadas:
+            continue
         if slug in SEGMENT_URL_OVERRIDES:
             print(f" - skipping segments/{slug} (pagina manual: {SEGMENT_URL_OVERRIDES[slug]})")
             continue
@@ -2642,7 +2674,7 @@ def main():
             </section>
             """
         
-        related_html = renderizar_conteudos_aprofundar(s.get("relatedPosts", []), s.get("relatedTitle", f"a importação de {s['name'].lower()}"), s.get("relatedDescription", "Selecione um conteúdo para aprofundar o planejamento da sua operação."))
+        related_html = renderizar_conteudos_aprofundar(s.get("relatedPosts", []), s.get("relatedTitle", f"a importação de {s['name'].lower()}"), s.get("relatedDescription", "Selecione um conteúdo para aprofundar o planejamento da sua operação."), s.get("relatedEyebrow", "CONTEÚDO WM"))
         body_content = hero_html + intro_html + sections_html + benefits_html + related_html + contact_section_html
         output_path = os.path.join(SEGMENTS_OUT_DIR, f"{slug}.html")
         # `cardDesc` e a unica frase do JSON que descreve a operacao ("Através da
@@ -2656,6 +2688,10 @@ def main():
         )
         render_html_page(output_path, f"Importação de {s['name']}", s.get("heroQuestion", s["name"]), body_content, head_tpl, header_tpl, footer_tpl,
                          jsonld=servico)
+
+    if paginas_selecionadas:
+        print(" - compilação seletiva concluída")
+        return
 
     # 3b. GENERATE SEGMENTS INDEX PAGE (segmentos/index.html) — lista todos os
     # segmentos em cards no padrão da home; alvo do "VER TODOS" e da URL antiga /segmentos/

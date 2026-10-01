@@ -1,9 +1,10 @@
 {
   "slug": "solucoes-4pl",
   "name": "Soluções 4PL",
-  "relatedTitle": "a logística 4PL",
-  "relatedDescription": "Veja conteúdos para aprofundar a integração da operação logística, a gestão de custos e as alternativas de armazenagem.",
-  "relatedPosts": [{"label":"LOGÍSTICA","title":"Como otimizar e integrar sua operação logística?","url":"/blog/como-otimizar-e-integrar-sua-operacao-logistica/"},{"label":"CUSTOS","title":"Demurrage e detention: como superar esses desafios da logística?","url":"/blog/demurrage-detention-desafios-logistica/"},{"label":"ENTREPOSTO","title":"Como o Entreposto Aduaneiro pode facilitar suas operações de importação?","url":"/blog/entreposto-aduaneiro/"}],
+  "relatedTitle": "logística de importação com 4PL",
+  "relatedEyebrow": "GUIA DE IMPORTAÇÃO",
+  "relatedDescription": "Veja conteúdos sobre integração logística, gestão de custos, frete, armazenagem e planejamento da operação.",
+  "relatedPosts": [{"label":"GUIA WM","title":"Guia de Logística de Importação","url":"/guias/logistica-importacao/","cta":"Acesse o guia","image":"/wp-content/uploads/2025/12/4pl-integracao-logistica-v2.webp","imageAlt":"Operação logística integrada, representando o guia de logística de importação"},{"label":"LOGÍSTICA","title":"Como otimizar e integrar sua operação logística?","url":"/blog/como-otimizar-e-integrar-sua-operacao-logistica/"},{"label":"CUSTOS","title":"Demurrage e detention: como superar esses desafios da logística?","url":"/blog/demurrage-detention-desafios-logistica/"}],
   "title": "Eleve sua logística com o 4PL da WM Trading",
   "subtitle": "Gestão estratégica da sua cadeia logística, com tecnologia e integração de ponta a ponta.",
   "intro": "A solução 4PL da WM Trading conecta processos, fornecedores e sistemas, oferecendo uma gestão de ponta a ponta com mais visibilidade, eficiência e controle para a sua operação.",

@@ -29,7 +29,6 @@
   /* Recalcula depois do load, caso a fonte mude a métrica do texto */
   window.addEventListener('load', updateScale);
 })();
-
 /* ─────────────────────────────────────
    ENTRADA DO HERO
    Quem adiciona body.loaded é o js/main.js, junto com o loader — aqui só
@@ -175,56 +174,4 @@
       }
     });
   });
-})();
-
-
-/* ══════════════════════════════════════
-   S6 — VITRINE DO BLOG, SEMPRE ATUAL
-   O HTML já chega com os 3 posts do último build. Aqui a lista é relida de
-   /blog/posts-maquinas.json — publicado pelo build_pages.py — e reescrita,
-   para o caso de um post ter entrado depois de esta página ser gerada.
-   Se o fetch falhar (offline, 404, JSON quebrado) nada acontece e o visitante
-   continua vendo os cards do HTML: nunca trocamos conteúdo bom por vazio.
-══════════════════════════════════════ */
-(function () {
-  const grade = document.querySelector('[data-mq-blog-feed]');
-  if (!grade || !('fetch' in window)) return;
-
-  const QUANTOS = 3;
-  const SETA = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" ' +
-    'stroke-width="2" stroke-linecap="round" stroke-linejoin="round" ' +
-    'aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>';
-
-  /* O título e a categoria vêm do frontmatter dos posts. Escapar aqui evita
-     que um '&' ou um '<' num título quebre a marcação da vitrine. */
-  const esc = (t) => String(t == null ? '' : t).replace(/[&<>"']/g, (c) => ({
-    '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
-  })[c]);
-
-  function card(post) {
-    const capa = post.cover || '/images/maquinas/benef-01.jpg';
-    return '<a class="mq-blog__card" href="' + esc(post.url) + '">' +
-      '<div class="mq-blog__media">' +
-        '<img src="' + esc(capa) + '" alt="" width="640" height="420" ' +
-             'loading="lazy" decoding="async">' +
-      '</div>' +
-      '<div class="mq-blog__body">' +
-        '<span class="mq-blog__meta">' +
-          '<span class="mq-blog__cat">' + esc(post.category) + '</span>' +
-          '<time datetime="' + esc(String(post.date).slice(0, 10)) + '">' +
-            esc(post.displayDate) + '</time>' +
-        '</span>' +
-        '<h3 class="mq-blog__card-title">' + esc(post.title) + '</h3>' +
-        '<span class="mq-blog__more">Ler artigo' + SETA + '</span>' +
-      '</div>' +
-    '</a>';
-  }
-
-  fetch('/blog/posts-maquinas.json', { cache: 'no-cache' })
-    .then((r) => (r.ok ? r.json() : Promise.reject(r.status)))
-    .then((posts) => {
-      if (!Array.isArray(posts) || !posts.length) return;
-      grade.innerHTML = posts.slice(0, QUANTOS).map(card).join('');
-    })
-    .catch(() => { /* fica o HTML do build */ });
 })();

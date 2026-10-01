@@ -1,7 +1,10 @@
 {
   "slug": "equipamentos-fotovoltaicos",
   "name": "Equipamentos Fotovoltaicos",
-  "relatedPosts": [{"label":"ENERGIA","title":"Por que o leilão de BESS vai impulsionar importações?","url":"/blog/importacao-bess/"},{"label":"FOTOVOLTAICO","title":"Fim das cotas globais para importação de módulos fotovoltaicos. E agora?","url":"/blog/fim-cotas-importacao-modulos-fotovoltaicos/"}],
+  "relatedTitle": "Importação de equipamentos fotovoltaicos",
+  "relatedEyebrow": "GUIA DE IMPORTAÇÃO",
+  "relatedDescription": "Veja conteúdos sobre cotas, sistemas de armazenamento de energia, tributos e requisitos que influenciam projetos fotovoltaicos.",
+  "relatedPosts": [{"label":"GUIA WM","title":"Guia de Importação de Equipamentos Fotovoltaicos","url":"/guias/energia-solar-fotovoltaica/","cta":"Acesse o guia","image":"/images/home/equipamentos-fotovoltaicos.webp","imageAlt":"Módulos fotovoltaicos, representando o guia de importação de equipamentos fotovoltaicos"},{"label":"ENERGIA","title":"Por que o leilão de BESS vai impulsionar importações?","url":"/blog/importacao-bess/"},{"label":"FOTOVOLTAICO","title":"Fim das cotas globais para importação de módulos fotovoltaicos. E agora?","url":"/blog/fim-cotas-importacao-modulos-fotovoltaicos/"}],
   "heroQuestion": "Quer importar equipamentos fotovoltaicos com agilidade e segurança?",
   "heroSub": "Entre em contato com a trading mais completa do Brasil para tornar esse sonho realidade.",
   "cardDesc": "Somos referência nacional na importação de equipamentos fotovoltaicos, sejam Módulos, Inversores ou Trackers",

@@ -1,0 +1,29 @@
+{
+  "slug": "energia-solar-fotovoltaica",
+  "title": "Guia de Importação de Equipamentos Fotovoltaicos",
+  "description": "Conteúdos sobre importação de módulos, inversores, sistemas de armazenamento de energia, tributos, cotas e requisitos para equipamentos fotovoltaicos.",
+  "eyebrow": "GUIA DE IMPORTAÇÃO",
+  "hero": "Importação de equipamentos fotovoltaicos: o que avaliar antes de comprar",
+  "intro": "Módulos, inversores e sistemas de armazenamento exigem planejamento tributário, análise de requisitos técnicos e uma logística compatível com o projeto. Este guia reúne os pontos que ajudam a estruturar a operação.",
+  "feature": {"label": "GUIA PRINCIPAL", "title": "Importação de equipamentos fotovoltaicos", "description": "Entenda fatores que podem influenciar custo, prazo e viabilidade da importação para projetos de energia solar.", "url": "/segmentos/equipamentos-fotovoltaicos/"},
+  "feature_heading": "Comece avaliando a estrutura do projeto",
+  "primary_label": "SOLUÇÃO WM",
+  "primary_heading": "Planeje a importação de equipamentos para energia solar",
+  "primary_intro": "A WM avalia os requisitos tributários, aduaneiros e logísticos de cada projeto antes da compra e da nacionalização dos equipamentos.",
+  "primary_links": [{"title": "Importação de equipamentos fotovoltaicos", "description": "Conheça a solução da WM para módulos, inversores, trackers e outros equipamentos do setor.", "url": "/segmentos/equipamentos-fotovoltaicos/"}],
+  "considerations_heading": "O que avaliar antes de importar equipamentos fotovoltaicos",
+  "considerations": ["especificações técnicas e certificações aplicáveis", "classificação fiscal, tributos e benefícios vigentes", "eventuais cotas ou medidas tarifárias", "licenciamento e requisitos de órgãos anuentes", "frete, seguro, armazenagem e transporte até o projeto", "prazo de produção, embarque e nacionalização"],
+  "articles_heading": "Conteúdos para aprofundar sua decisão",
+  "articles": [
+    {"category": "Energia", "title": "Por que o leilão de BESS vai impulsionar importações?", "description": "Veja como sistemas de armazenamento de energia podem ampliar a demanda por equipamentos importados.", "url": "/blog/importacao-bess/"},
+    {"category": "Fotovoltaico", "title": "Fim das cotas globais para importação de módulos fotovoltaicos. E agora?", "description": "Entenda o cenário das cotas e os pontos que merecem atenção na operação.", "url": "/blog/fim-cotas-importacao-modulos-fotovoltaicos/"}
+  ],
+  "faqs": [
+    {"question": "Todo equipamento fotovoltaico exige o mesmo tratamento na importação?", "answer": "Não. A classificação fiscal, as especificações e as exigências aplicáveis variam conforme o tipo de equipamento e a estrutura da operação."},
+    {"question": "As cotas podem influenciar a importação de módulos?", "answer": "Sim. Medidas tarifárias e cotas vigentes podem influenciar o custo e o planejamento da operação, por isso devem ser verificadas antes da compra."},
+    {"question": "Quando avaliar a viabilidade da importação?", "answer": "O ideal é realizar a avaliação antes de confirmar a compra, considerando tributos, requisitos, cronograma e logística do projeto."}
+  ],
+  "cta_title": "Avalie a importação do seu projeto de energia solar",
+  "cta_text": "Cadastre-se e fale com a WM Trading sobre a viabilidade tributária, aduaneira e logística dos equipamentos do seu projeto.",
+  "cta_url": "/fale-conosco/"
+}
