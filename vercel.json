@@ -57,6 +57,16 @@
   ],
   "redirects": [
     {
+      "source": "/blog/habilitar-radar/",
+      "destination": "/blog/passo-a-passo-habilitar-radar/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/habilitar-radar.html",
+      "destination": "/blog/passo-a-passo-habilitar-radar/",
+      "permanent": true
+    },
+    {
       "source": "/importacao-carne-suina/",
       "destination": "/",
       "permanent": true

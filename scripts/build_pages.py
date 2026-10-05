@@ -9,7 +9,7 @@ import json
 import glob
 import shutil
 import urllib.parse
-from html import escape
+from html import escape, unescape
 from datetime import datetime
 
 # Define workspace directories (derived from this script's location, works on any machine)
@@ -743,6 +743,75 @@ def renderizar_fachada_youtube(embed_url, titulo):
     </div>'''
 
 
+def video_jsonld_from_html(content_html, page_title, page_description):
+    """Retorna VideoObject para videos que fazem parte do conteudo da pagina.
+
+    A descoberta ocorre no HTML do corpo, antes de cabecalho e rodape serem
+    combinados. Assim, o link institucional para o canal da WM no rodape nao
+    vira, incorretamente, um video da pagina. So entram YouTube, videos do
+    Facebook e Reels do Instagram, cujas URLs permitem identificar que ha
+    conteudo audiovisual. Publicacoes genericas do Instagram (``/p/``) ficam
+    de fora porque tambem podem ser somente imagens.
+
+    Nao usamos data de publicacao como data de envio do video: sem essa
+    informacao na fonte, seria um dado inventado. A marcacao permanece valida
+    como VideoObject e informa a relacao entre o video e a pagina.
+    """
+    if not content_html:
+        return []
+
+    html_body = unescape(content_html)
+    videos = []
+    vistos = set()
+
+    def adicionar(chave, embed_url, thumbnail_url=None):
+        if not chave or chave in vistos:
+            return
+        vistos.add(chave)
+        video = {
+            "@context": "https://schema.org",
+            "@type": "VideoObject",
+            "name": page_title,
+            "description": page_description,
+            "embedUrl": embed_url,
+        }
+        if thumbnail_url:
+            video["thumbnailUrl"] = thumbnail_url
+        videos.append(video)
+
+    # Fachadas e iframes do YouTube. A mesma expressao tambem captura links
+    # dentro do texto, quando a pagina oferece um episodio sem incorpora-lo.
+    youtube_ids = re.findall(
+        r'(?:data-wm-youtube-id=["\']|(?:youtube(?:-nocookie)?\.com/embed/|youtu\.be/|youtube\.com/(?:watch\?v=|shorts/)))([A-Za-z0-9_-]{6,})',
+        html_body,
+        flags=re.I,
+    )
+    for video_id in youtube_ids:
+        adicionar(
+            f"youtube:{video_id}",
+            f"https://www.youtube.com/embed/{video_id}",
+            f"https://i.ytimg.com/vi/{video_id}/hqdefault.jpg",
+        )
+
+    # Iframes do Facebook usam a URL watch codificada no parametro href.
+    for video_id in re.findall(
+        r'(?:facebook\.com/watch/\?v=|facebook\.com%2Fwatch%2F%3Fv%3D)(\d+)',
+        html_body,
+        flags=re.I,
+    ):
+        adicionar(
+            f"facebook:{video_id}",
+            f"https://www.facebook.com/plugins/video.php?href="
+            + urllib.parse.quote(f"https://www.facebook.com/watch/?v={video_id}", safe=""),
+        )
+
+    # Reels sao videos por definicao; posts /p/ nao entram por poderem ser fotos.
+    for reel_id in re.findall(r'instagram\.com/reel/([A-Za-z0-9_-]+)', html_body, flags=re.I):
+        adicionar(f"instagram:{reel_id}", f"https://www.instagram.com/reel/{reel_id}/embed/")
+
+    return videos
+
+
 def load_template_elements():
     """Reads index.html to extract common HEAD, HEADER, and FOOTER sections."""
     index_path = os.path.join(ROOT_DIR, "index.html")
@@ -851,7 +920,9 @@ def render_html_page(output_path, title, description, content_body, head_tpl, he
     og_img = og_image or DEFAULT_OG_IMAGE
     if og_img.startswith("/"):
         og_img = SITE_URL + og_img
-    full_title = _esc_attr(f"WM Trading — {title}")
+    # Nos artigos, o tema vem antes da marca para que o título responda à busca
+    # já no início do resultado. Demais páginas preservam o padrão institucional.
+    full_title = _esc_attr(f"{title} | WM Trading" if og_type == "article" else f"WM Trading — {title}")
     desc_attr = _esc_attr(description)
     og_locale = "en_US" if lang == "en" else "pt_BR"
 
@@ -866,7 +937,14 @@ def render_html_page(output_path, title, description, content_body, head_tpl, he
         jsonld_extra = [jsonld]
     else:
         jsonld_extra = []
-    jsonld_blocks = [organization_jsonld(lang)] + jsonld_extra
+    # VideoObject e derivado do proprio conteudo que sera publicado. Isso cobre
+    # posts, paginas de segmento e servicos sem exigir uma lista manual que
+    # inevitavelmente ficaria desatualizada quando um novo video fosse inserido.
+    jsonld_blocks = (
+        [organization_jsonld(lang)]
+        + jsonld_extra
+        + video_jsonld_from_html(content_body, title, description)
+    )
     jsonld_html = "\n  ".join(
         '<script type="application/ld+json">%s</script>' % json.dumps(b, ensure_ascii=False)
         for b in jsonld_blocks
@@ -890,7 +968,7 @@ def render_html_page(output_path, title, description, content_body, head_tpl, he
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>WM Trading — {title}</title>
+  <title>{full_title}</title>
   <meta name="description" content="{desc_attr}" />
   {seo_block}
   {head_tpl}{extra_head_block}
