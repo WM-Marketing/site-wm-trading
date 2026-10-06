@@ -743,6 +743,13 @@ def renderizar_fachada_youtube(embed_url, titulo):
     </div>'''
 
 
+VIDEO_UPLOAD_DATES = {
+    # Datas confirmadas nas páginas públicas do YouTube em 06/10/2026.
+    "jEbtD4CrppQ": "2023-10-11T09:20:40-07:00",
+    "mBtUzu7iLjI": "2026-10-05T06:20:40-07:00",
+}
+
+
 def video_jsonld_from_html(content_html, page_title, page_description):
     """Retorna VideoObject para videos que fazem parte do conteudo da pagina.
 
@@ -753,9 +760,8 @@ def video_jsonld_from_html(content_html, page_title, page_description):
     conteudo audiovisual. Publicacoes genericas do Instagram (``/p/``) ficam
     de fora porque tambem podem ser somente imagens.
 
-    Nao usamos data de publicacao como data de envio do video: sem essa
-    informacao na fonte, seria um dado inventado. A marcacao permanece valida
-    como VideoObject e informa a relacao entre o video e a pagina.
+    A data de envio so e incluida quando foi confirmada na pagina publica do
+    video. Sem fonte verificavel, ela fica de fora para evitar dado inventado.
     """
     if not content_html:
         return []
@@ -764,7 +770,7 @@ def video_jsonld_from_html(content_html, page_title, page_description):
     videos = []
     vistos = set()
 
-    def adicionar(chave, embed_url, thumbnail_url=None):
+    def adicionar(chave, embed_url, thumbnail_url=None, upload_date=None):
         if not chave or chave in vistos:
             return
         vistos.add(chave)
@@ -777,6 +783,8 @@ def video_jsonld_from_html(content_html, page_title, page_description):
         }
         if thumbnail_url:
             video["thumbnailUrl"] = thumbnail_url
+        if upload_date:
+            video["uploadDate"] = upload_date
         videos.append(video)
 
     # Fachadas e iframes do YouTube. A mesma expressao tambem captura links
@@ -791,6 +799,7 @@ def video_jsonld_from_html(content_html, page_title, page_description):
             f"youtube:{video_id}",
             f"https://www.youtube.com/embed/{video_id}",
             f"https://i.ytimg.com/vi/{video_id}/hqdefault.jpg",
+            VIDEO_UPLOAD_DATES.get(video_id),
         )
 
     # Iframes do Facebook usam a URL watch codificada no parametro href.
