@@ -929,9 +929,10 @@ def render_html_page(output_path, title, description, content_body, head_tpl, he
     og_img = og_image or DEFAULT_OG_IMAGE
     if og_img.startswith("/"):
         og_img = SITE_URL + og_img
-    # Nos artigos, o tema vem antes da marca para que o título responda à busca
-    # já no início do resultado. Demais páginas preservam o padrão institucional.
-    full_title = _esc_attr(f"{title} | WM Trading" if og_type == "article" else f"WM Trading — {title}")
+    # O tema vem antes da marca em toda página indexável: a busca identifica o
+    # assunto logo no começo do snippet, enquanto a assinatura continua clara
+    # no fim do título.
+    full_title = _esc_attr(f"{title} | WM Trading")
     desc_attr = _esc_attr(description)
     og_locale = "en_US" if lang == "en" else "pt_BR"
 

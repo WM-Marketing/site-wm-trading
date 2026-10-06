@@ -546,7 +546,7 @@ def home_em_ingles(pagina):
         print("  AVISO: sem traducao em ingles: %s" % sorted(set(faltando)))
 
     # cabecalho: o que e especifico da home em portugues
-    titulo = "WM Trading \u2014 %s" % pagina["titulo"]
+    titulo = "%s | WM Trading" % pagina["titulo"]
     html = re.sub(r"<title>.*?</title>", "<title>%s</title>" % titulo, html, flags=re.S)
     html = re.sub(r'(<meta\s+name="description"\s+content=")[^"]*(")',
                   lambda m: m.group(1) + pagina["description"] + m.group(2), html)
@@ -1072,7 +1072,11 @@ SEGMENTOS_COM_DESENHO_PROPRIO = {
         "prefixo": "fv-",
         "segmento": "Energia Renovável",
         "textos": TEXTOS_FOTOVOLTAICO_EN,
-        "remover_secoes": ("ebook",),
+        # O guia e os artigos desta faixa existem apenas em português. Como esta
+        # página nasce de uma cópia da versão PT, a seção precisa sair antes de
+        # os textos serem traduzidos, assim não reaparece conteúdo em português
+        # a cada build_en.py.
+        "remover_secoes": ("ebook", "resources"),
     },
 }
 
@@ -1136,7 +1140,10 @@ def segmento_em_ingles(pagina, cfg):
 
     # 1) fora as secoes sem par em ingles
     for nome in cfg.get("remover_secoes", ()):
-        marca = '<section class="%s%s"' % (prefixo, nome)
+        # A classe de remoção vem primeiro, mas a seção pode também carregar
+        # uma classe de estilo compartilhada, como "aero-resources". Não
+        # exigir a aspa imediatamente após o nome preserva essa composição.
+        marca = '<section class="%s%s' % (prefixo, nome)
         ini = html.find(marca)
         if ini == -1:
             print("  AVISO: secao .%s%s nao encontrada em %s — a versao EN pode ter "
@@ -1182,7 +1189,7 @@ def segmento_em_ingles(pagina, cfg):
         html = html.replace('href="%s"' % pt_url, 'href="%s"' % en_url)
 
     # 5) cabecalho: titulo, descricao, canonical, og, lang
-    titulo = "WM Trading — %s" % pagina["titulo"]
+    titulo = "%s | WM Trading" % pagina["titulo"]
     html = re.sub(r"<title>.*?</title>", "<title>%s</title>" % titulo, html, flags=re.S)
     for prop, valor in (('name="description"', pagina["description"]),
                         ('property="og:description"', pagina["description"]),
@@ -1258,7 +1265,7 @@ def quem_somos_em_ingles(pagina):
     # o botao de vagas tem par em ingles
     html = html.replace('href="/carreiras/" class="btn"', 'href="/en/careers/" class="btn"')
 
-    titulo = "WM Trading \u2014 %s" % pagina["titulo"]
+    titulo = "%s | WM Trading" % pagina["titulo"]
     html = re.sub(r"<title>.*?</title>", "<title>%s</title>" % titulo, html, flags=re.S)
     for prop, valor in (('name="description"', pagina["description"]),
                         ('property="og:description"', pagina["description"]),
