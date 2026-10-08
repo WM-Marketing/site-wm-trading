@@ -729,6 +729,22 @@ textarea.input-wm {
   aspect-ratio: auto;
 }
 
+.prose-wm iframe.wm-tiktok-embed {
+  display: block;
+  width: min(100%, 605px);
+  height: 740px;
+  margin: 32px auto;
+  border: 0;
+  border-radius: var(--radius-lg);
+  background: #f5f5f5;
+}
+
+@media (max-width: 600px) {
+  .prose-wm iframe.wm-tiktok-embed {
+    height: 650px;
+  }
+}
+
 .prose-wm .wm-text-highlight {
   padding: 0 0.14em;
   color: inherit;

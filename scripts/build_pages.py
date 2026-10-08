@@ -749,6 +749,15 @@ VIDEO_UPLOAD_DATES = {
     "mBtUzu7iLjI": "2026-10-05T06:20:40-07:00",
 }
 
+# Metadados confirmados dos vídeos TikTok inseridos nos artigos. A miniatura
+# fica no próprio site para não depender de uma URL temporária da plataforma.
+TIKTOK_VIDEO_METADATA = {
+    "7659059074574585106": {
+        "thumbnail": "/images/assets/video-aviao-ideal-tiktok.png",
+        "upload_date": "2026-07-05T00:00:00-03:00",
+    },
+}
+
 
 def video_jsonld_from_html(content_html, page_title, page_description):
     """Retorna VideoObject para videos que fazem parte do conteudo da pagina.
@@ -756,7 +765,7 @@ def video_jsonld_from_html(content_html, page_title, page_description):
     A descoberta ocorre no HTML do corpo, antes de cabecalho e rodape serem
     combinados. Assim, o link institucional para o canal da WM no rodape nao
     vira, incorretamente, um video da pagina. So entram YouTube, videos do
-    Facebook e Reels do Instagram, cujas URLs permitem identificar que ha
+    Facebook, TikTok e Reels do Instagram, cujas URLs permitem identificar que ha
     conteudo audiovisual. Publicacoes genericas do Instagram (``/p/``) ficam
     de fora porque tambem podem ser somente imagens.
 
@@ -812,6 +821,17 @@ def video_jsonld_from_html(content_html, page_title, page_description):
             f"facebook:{video_id}",
             f"https://www.facebook.com/plugins/video.php?href="
             + urllib.parse.quote(f"https://www.facebook.com/watch/?v={video_id}", safe=""),
+        )
+
+    # Vídeos do TikTok incorporados pelo componente wm-tiktok-video.
+    for video_id in re.findall(r'tiktok\.com/embed/v2/(\d+)', html_body, flags=re.I):
+        metadata = TIKTOK_VIDEO_METADATA.get(video_id, {})
+        thumbnail = metadata.get("thumbnail")
+        adicionar(
+            f"tiktok:{video_id}",
+            f"https://www.tiktok.com/embed/v2/{video_id}",
+            f"{SITE_URL}{thumbnail}" if thumbnail else None,
+            metadata.get("upload_date"),
         )
 
     # Reels sao videos por definicao; posts /p/ nao entram por poderem ser fotos.
@@ -1218,6 +1238,17 @@ def markdown_to_html(text):
             new_lines.append(
                 f'<iframe class="wm-instagram-embed" src="https://www.instagram.com/p/{post_id}/embed/captioned/" '
                 'title="Publicação do Instagram" loading="lazy" allowfullscreen></iframe>'
+            )
+            i += 1
+
+        # Vídeos do TikTok incorporados no próprio artigo. A proporção vertical
+        # preserva a experiência original sem levar o leitor para fora do site.
+        elif re.match(r'^\{\{wm-tiktok-video:\d+\}\}$', line.strip()):
+            video_id = re.search(r'wm-tiktok-video:(\d+)', line.strip()).group(1)
+            new_lines.append(
+                f'<iframe class="wm-tiktok-embed" src="https://www.tiktok.com/embed/v2/{video_id}" '
+                'title="Vídeo do TikTok" loading="lazy" '
+                'allow="fullscreen; encrypted-media" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>'
             )
             i += 1
 

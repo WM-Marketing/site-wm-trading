@@ -7,6 +7,7 @@
   "importacao-aco-bruto-produtos-transformados": { "related": ["importacao-de-niquel-dobrou", "importacao-aco"] },
   "importacao-maquinas-impressao-3d-cresce": { "related": ["importacao-maquinas-seguranca", "imposto-importacao-maquinas-equipamentos-zerado"] },
   "impostos-importacao-aeronaves": { "related": ["tamanho-aeronave-muda-impostos-importacao", "importar-aeronave-ou-comprar-no-brasil", "importar-aeronaves-pelo-espirito-santo"] },
+  "aviao-ideal-comprar-aeronave": { "related": ["importar-aeronave-ou-comprar-no-brasil", "impostos-importacao-aeronaves", "tamanho-aeronave-muda-impostos-importacao"] },
   "rebocador-aeronaves-towflex-tf3-seguranca": { "related": ["importacao-rebocadores-aviao", "importar-aeronave-ou-comprar-no-brasil"] },
   "redata-incentivos-importacao-data-centers": { "related": ["data-centers-importacao-aumento-ii", "importacao-de-chips-bate-recorde-e-alta-de-precos-pressiona-tecnologia-no-brasil", "importando-equipamentos-telecomunicacoes-wm"] },
   "importacao-equipamentos-ginastica-cresce": { "related": ["importacao-artigos-esportivos-copa-2026", "importacoes-para-varejo-inverno"] },
