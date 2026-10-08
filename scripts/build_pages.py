@@ -824,12 +824,12 @@ def video_jsonld_from_html(content_html, page_title, page_description):
         )
 
     # Vídeos do TikTok incorporados pelo componente wm-tiktok-video.
-    for video_id in re.findall(r'tiktok\.com/embed/v2/(\d+)', html_body, flags=re.I):
+    for video_id in re.findall(r'tiktok\.com/(?:embed/v2|player/v1)/(\d+)', html_body, flags=re.I):
         metadata = TIKTOK_VIDEO_METADATA.get(video_id, {})
         thumbnail = metadata.get("thumbnail")
         adicionar(
             f"tiktok:{video_id}",
-            f"https://www.tiktok.com/embed/v2/{video_id}",
+            f"https://www.tiktok.com/player/v1/{video_id}",
             f"{SITE_URL}{thumbnail}" if thumbnail else None,
             metadata.get("upload_date"),
         )
@@ -1246,7 +1246,7 @@ def markdown_to_html(text):
         elif re.match(r'^\{\{wm-tiktok-video:\d+\}\}$', line.strip()):
             video_id = re.search(r'wm-tiktok-video:(\d+)', line.strip()).group(1)
             new_lines.append(
-                f'<iframe class="wm-tiktok-embed" src="https://www.tiktok.com/embed/v2/{video_id}" '
+                f'<iframe class="wm-tiktok-embed" src="https://www.tiktok.com/player/v1/{video_id}?controls=1&amp;description=0&amp;music_info=0&amp;rel=0" '
                 'title="Vídeo do TikTok" loading="lazy" '
                 'allow="fullscreen; encrypted-media" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>'
             )
