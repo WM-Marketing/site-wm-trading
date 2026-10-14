@@ -488,6 +488,10 @@ document.addEventListener('DOMContentLoaded', function() {
   if (TEM_IRMA) currentLang = paginaEmIngles() ? 'en' : 'pt';
 
   var toggle = document.getElementById('lang-toggle');
+  /* So mostra o botao onde ha para onde ir. Ele nasce escondido no CSS; aqui a
+     pagina que tem irma o revela. Um post que ganhar versao em ingles volta a
+     exibi-lo sozinho, pelo hreflang — nao ha lista para manter. */
+  if (toggle && TEM_IRMA) toggle.classList.add('header-flag--com-par');
   if (toggle) {
     toggle.addEventListener('click', function() {
       var novoIdioma = currentLang === 'pt' ? 'en' : 'pt';

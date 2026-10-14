@@ -486,11 +486,19 @@ input, textarea, select { font: inherit; }
   gap: 12px;
   flex-shrink: 0;
 }
+/* O botao de idioma nasce escondido e so aparece onde existe a pagina irma —
+   a classe e posta pelo js/i18n.js quando a pagina declara <link rel="alternate"
+   hreflang>. Em 227 dos 232 posts do blog, e em mais 14 paginas (aeronaves,
+   materiais, podcast, unidades...), nao existe versao em ingles: clicar ali
+   trocava o rodape e o rotulo do proprio botao, deixava o menu em portugues de
+   proposito (ver setLang no i18n.js) e nao tocava no artigo. Botao que promete e
+   nao entrega. Sem JavaScript ele tambem nao aparece, o que esta certo: a troca
+   de idioma e feita por JavaScript. */
 .header-flag {
   cursor: pointer;
   background: none;
   border: none;
-  display: flex;
+  display: none;
   align-items: center;
   gap: 4px;
   font-size: 13px;
@@ -500,6 +508,7 @@ input, textarea, select { font: inherit; }
   border-radius: 8px;
   transition: background 0.2s;
 }
+.header-flag--com-par { display: flex; }
 .header-flag:hover { background: #f0f0f0; }
 
 
