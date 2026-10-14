@@ -12,6 +12,8 @@ import urllib.parse
 from html import escape, unescape
 from datetime import datetime
 
+from graficos import GRAFICOS, grafico_svg
+
 # Define workspace directories (derived from this script's location, works on any machine)
 ROOT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -19,99 +21,6 @@ ROOT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # para consolidar indexacao no dominio oficial antes e depois da virada.
 SITE_URL = "https://www.wmtrading.com.br"
 DEFAULT_OG_IMAGE = "/images/logo/fechado_logo_wm_trading_ajustada_logo_laranja.png"
-
-# Dados de gráficos editoriais. As séries são mantidas aqui, junto com a
-# marcação, para que a versão HTML publicada e a prévia local usem exatamente
-# os mesmos números e a mesma interação.
-GRAFICOS_INTERATIVOS = {
-    "aco-set-2026": {
-        "titulo": "Importação mensal de produtos siderúrgicos e obras de ferro ou aço",
-        "descricao": "Gráfico de linhas comparando as importações mensais de produtos siderúrgicos e obras de ferro ou aço, de setembro de 2024 a agosto de 2026.",
-        "labels": ["set./24", "out./24", "nov./24", "dez./24", "jan./25", "fev./25", "mar./25", "abr./25", "mai./25", "jun./25", "jul./25", "ago./25", "set./25", "out./25", "nov./25", "dez./25", "jan./26", "fev./26", "mar./26", "abr./26", "mai./26", "jun./26", "jul./26", "ago./26"],
-        "series": [
-            {"label": "Produtos siderúrgicos", "data": [494.61, 476.94, 338.01, 291, 462.05, 377.24, 483.02, 409.98, 502.47, 471.28, 471.05, 368.37, 334.47, 362.31, 351.42, 293.75, 407.25, 421.95, 415.49, 302.03, 251.27, 365.99, 316.96, 317.1], "color": "#FC5000", "fill": "rgba(252, 80, 0, 0.10)"},
-            {"label": "Obras de ferro ou aço", "data": [373.68, 395.51, 321.19, 359.93, 397.01, 410.1, 342.17, 353.41, 347.54, 353.98, 415.09, 378.17, 409.91, 394.07, 309.19, 344.37, 385.81, 328.79, 506.52, 379.05, 366.15, 488.39, 402.18, 473.3], "color": "#133B5C", "fill": "rgba(19, 59, 92, 0.08)"},
-        ],
-    },
-    "maquinas-aditivas-set-2026": {
-        "titulo": "Importação mensal de máquinas para fabricação aditiva por depósito de plástico ou borracha",
-        "descricao": "Gráfico de linha da importação mensal de máquinas para fabricação aditiva por depósito de plástico ou borracha, de setembro de 2024 a agosto de 2026.",
-        "labels": ["set./24", "out./24", "nov./24", "dez./24", "jan./25", "fev./25", "mar./25", "abr./25", "mai./25", "jun./25", "jul./25", "ago./25", "set./25", "out./25", "nov./25", "dez./25", "jan./26", "fev./26", "mar./26", "abr./26", "mai./26", "jun./26", "jul./26", "ago./26"],
-        "series": [
-            {"label": "Máquinas por depósito de plástico ou borracha", "data": [2.92, 1.82, 1.6, 1.89, 2.5, 1.26, 1.71, 1.9, 2.08, 2.9, 1.83, 3.97, 5.82, 6.82, 4.48, 3.69, 3.22, 4.76, 6.46, 5.55, 10.62, 13.21, 11.8, 21.58], "color": "#FC5000", "fill": "rgba(252, 80, 0, 0.16)"},
-        ],
-    },
-    "ciclos-eletricos-set-2026": {
-        "titulo": "Importação mensal de ciclos com motor elétrico para propulsão",
-        "descricao": "Gráfico de linha da importação mensal de motocicletas, ciclomotores e outros ciclos com motor elétrico para propulsão, de setembro de 2024 a agosto de 2026.",
-        "labels": ["set./24", "out./24", "nov./24", "dez./24", "jan./25", "fev./25", "mar./25", "abr./25", "mai./25", "jun./25", "jul./25", "ago./25", "set./25", "out./25", "nov./25", "dez./25", "jan./26", "fev./26", "mar./26", "abr./26", "mai./26", "jun./26", "jul./26", "ago./26"],
-        "series": [
-            {"label": "Ciclos com motor elétrico para propulsão", "data": [3.83, 5.75, 6.09, 6.03, 6.19, 6.11, 5.7, 4.25, 4.65, 7.46, 9.41, 12.37, 11.13, 11.48, 14.24, 19.58, 14.02, 10.49, 16.69, 14.01, 14.89, 14.74, 25.39, 25.87], "color": "#FC5000", "fill": "rgba(252, 80, 0, 0.16)", "highlight": [22, 23]},
-        ],
-    },
-    "instrumentos-analise-set-2026": {
-        "titulo": "Importação mensal de instrumentos e aparelhos para análises físicas ou químicas",
-        "descricao": "Gráfico de linha da importação mensal de instrumentos e aparelhos para análises físicas ou químicas, de setembro de 2024 a agosto de 2026.",
-        "labels": ["set./24", "out./24", "nov./24", "dez./24", "jan./25", "fev./25", "mar./25", "abr./25", "mai./25", "jun./25", "jul./25", "ago./25", "set./25", "out./25", "nov./25", "dez./25", "jan./26", "fev./26", "mar./26", "abr./26", "mai./26", "jun./26", "jul./26", "ago./26"],
-        "series": [
-            {"label": "Instrumentos e aparelhos para análises físicas ou químicas", "data": [82.87, 71.63, 66.88, 78.12, 63.27, 78.58, 69.6, 78.82, 78.6, 81.9, 87.52, 80.02, 94.01, 85.03, 76.23, 88.52, 83.25, 81.51, 88.31, 87.24, 86.14, 97.12, 99.13, 100.58], "color": "#FC5000", "fill": "rgba(252, 80, 0, 0.16)"},
-        ],
-    },
-}
-
-
-def grafico_interativo(chave):
-    """Retorna um gráfico Chart.js para os dados de pautas da WM Trading."""
-    spec = GRAFICOS_INTERATIVOS[chave]
-    chart_id = "chart-" + chave
-    datasets = []
-    for serie in spec["series"]:
-        pontos = {"radius": 4, "hoverRadius": 6}
-        if serie.get("highlight"):
-            pontos = {
-                "radius": [7 if i in serie["highlight"] else 4 for i in range(len(serie["data"]))],
-                "hoverRadius": 7,
-                "backgroundColor": ["#133B5C" if i in serie["highlight"] else serie["color"] for i in range(len(serie["data"]))],
-            }
-        datasets.append({
-            "label": serie["label"], "data": serie["data"], "borderColor": serie["color"],
-            "backgroundColor": serie["fill"], "borderWidth": 3, "fill": len(spec["series"]) == 1,
-            "tension": 0.32, "pointRadius": pontos["radius"],
-            "pointHoverRadius": pontos["hoverRadius"],
-            "pointBackgroundColor": pontos.get("backgroundColor", serie["color"]),
-        })
-    labels = json.dumps(spec["labels"], ensure_ascii=False)
-    datasets_json = json.dumps(datasets, ensure_ascii=False)
-    legenda = "{ display: false }" if len(datasets) == 1 else "{ display: true, position: 'bottom', labels: { usePointStyle: true, padding: 18 } }"
-    return f'''<figure class="wm-interactive-chart">
-  <figcaption>{spec["titulo"]}</figcaption>
-  <div class="wm-interactive-chart__canvas"><canvas id="{chart_id}" aria-label="{spec["descricao"]}"></canvas></div>
-  <p class="wm-interactive-chart__source">Fonte: MDIC/Comex Stat.</p>
-</figure>
-<script src="/js/chart.umd.min.js"></script>
-<script>
-(() => {{
-  const canvas = document.getElementById('{chart_id}');
-  if (!canvas || !window.Chart) return;
-  new Chart(canvas, {{
-    type: 'line',
-    data: {{ labels: {labels}, datasets: {datasets_json} }},
-    options: {{
-      responsive: true, maintainAspectRatio: false,
-      interaction: {{ mode: 'index', intersect: false }},
-      plugins: {{
-        legend: {legenda},
-        tooltip: {{ callbacks: {{ label: ctx => ` ${{ctx.dataset.label}}: US$ ${{ctx.parsed.y.toLocaleString('pt-BR', {{ minimumFractionDigits: 2, maximumFractionDigits: 2 }})}} milhões` }} }}
-      }},
-      scales: {{
-        y: {{ beginAtZero: false, ticks: {{ callback: value => `US$ ${{value.toLocaleString('pt-BR')}} mi` }}, grid: {{ color: '#e5e5e5' }} }},
-        x: {{ grid: {{ display: false }} }}
-      }}
-    }}
-  }});
-}})();
-</script>'''
-
 
 def url_publica(caminho_relativo):
     """URL publica de uma pagina, a partir do caminho do arquivo dentro do repo.
@@ -1201,11 +1110,15 @@ def markdown_to_html(text):
 </div>''')
             i += 1
 
-        # Gráficos editoriais de pautas de dados da WM Trading.
-        elif re.match(r'^\{\{wm-chart:(aco-set-2026|maquinas-aditivas-set-2026|ciclos-eletricos-set-2026|instrumentos-analise-set-2026)\}\}$', line.strip()):
+        # Gráficos editoriais: SVG escrito aqui no build, com os meses e os
+        # valores em <text>. Ver scripts/graficos.py.
+        elif re.match(r'^\{\{wm-chart:[a-z0-9-]+\}\}$', line.strip()):
             chave = re.search(r'wm-chart:([^}]+)', line.strip()).group(1)
-            new_lines.append(grafico_interativo(chave))
+            if chave not in GRAFICOS:
+                raise SystemExit(f'Gráfico desconhecido em {chave!r}: cadastre a série em scripts/graficos.py')
+            new_lines.append(grafico_svg(chave))
             i += 1
+
 
         # Vídeos do Facebook informados como um ID de publicação.
         elif re.match(r'^\{\{wm-facebook-video:\d+\}\}$', line.strip()):
@@ -1252,286 +1165,12 @@ def markdown_to_html(text):
             )
             i += 1
 
-        # Gráfico interativo: importação mensal de automóveis de passageiros (SH4 8703)
-        elif line.strip() == '{{wm-chart:autos-8703}}':
-            new_lines.append('''<figure class="wm-interactive-chart">
-  <figcaption>Importação mensal de automóveis de passageiros</figcaption>
-  <div class="wm-interactive-chart__canvas"><canvas id="chart-autos-8703" aria-label="Gráfico de linha da importação mensal de automóveis de passageiros, de julho de 2025 a junho de 2026"></canvas></div>
-  <p class="wm-interactive-chart__source">Valores FOB em US$ milhões. Fonte: MDIC/Comex Stat.</p>
-</figure>
-<script src="/js/chart.umd.min.js"></script>
-<script>
-(() => {
-  const canvas = document.getElementById('chart-autos-8703');
-  if (!canvas || !window.Chart) return;
-  new Chart(canvas, {
-    type: 'line',
-    data: {
-      labels: ['jul./25', 'ago./25', 'set./25', 'out./25', 'nov./25', 'dez./25', 'jan./26', 'fev./26', 'mar./26', 'abr./26', 'mai./26', 'jun./26'],
-      datasets: [{
-        label: 'Valor FOB (US$ milhões)',
-        data: [321.38, 405.49, 484.00, 601.14, 785.16, 678.75, 564.20, 559.68, 1125.77, 1249.62, 1873.87, 2416.53],
-        borderColor: '#ff5a1f', backgroundColor: 'rgba(255, 90, 31, 0.18)',
-        borderWidth: 3, fill: true, tension: 0.32, pointRadius: 4,
-        pointHoverRadius: 6, pointBackgroundColor: '#ff5a1f'
-      }]
-    },
-    options: {
-      responsive: true, maintainAspectRatio: false,
-      interaction: { mode: 'index', intersect: false },
-      plugins: {
-        legend: { display: false },
-        tooltip: { callbacks: { label: ctx => ` US$ ${ctx.parsed.y.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} milhões` } }
-      },
-      scales: {
-        y: { beginAtZero: true, ticks: { callback: value => `US$ ${value.toLocaleString('pt-BR')} mi` }, grid: { color: '#e5e5e5' } },
-        x: { grid: { display: false } }
-      }
-    }
-  });
-})();
-</script>''')
-            i += 1
 
-        # Gráfico interativo: importação mensal de T-shirts e camisetas de malha (SH4 6109)
-        elif line.strip() == '{{wm-chart:camisetas-mensal}}':
-            new_lines.append('''<figure class="wm-interactive-chart">
-  <figcaption>Importação mensal de T-shirts e camisetas de malha</figcaption>
-  <div class="wm-interactive-chart__canvas"><canvas id="chart-camisetas-mensal" aria-label="Gráfico de linha da importação mensal de T-shirts e camisetas de malha, de agosto de 2025 a julho de 2026"></canvas></div>
-  <p class="wm-interactive-chart__source">Fonte: MDIC/Comex Stat</p>
-</figure>
-<script src="/js/chart.umd.min.js"></script>
-<script>
-(() => {
-  const canvas = document.getElementById('chart-camisetas-mensal');
-  if (!canvas || !window.Chart) return;
-  new Chart(canvas, {
-    type: 'line',
-    data: {
-      labels: ['ago./25', 'set./25', 'out./25', 'nov./25', 'dez./25', 'jan./26', 'fev./26', 'mar./26', 'abr./26', 'mai./26', 'jun./26', 'jul./26'],
-      datasets: [{
-        label: 'Valor FOB (US$ milhões)',
-        data: [21.1, 19.8, 28.1, 22.5, 20.6, 29.6, 21.0, 22.1, 21.9, 19.1, 22.6, 25.1],
-        borderColor: '#ff5a1f', backgroundColor: 'rgba(255, 90, 31, 0.16)',
-        borderWidth: 3, fill: true, tension: 0.32, pointRadius: 4,
-        pointHoverRadius: 6, pointBackgroundColor: '#ff5a1f'
-      }]
-    },
-    options: {
-      responsive: true, maintainAspectRatio: false,
-      interaction: { mode: 'index', intersect: false },
-      plugins: {
-        legend: { display: false },
-        tooltip: { callbacks: { label: ctx => ` US$ ${ctx.parsed.y.toLocaleString('pt-BR', { minimumFractionDigits: 1, maximumFractionDigits: 1 })} milhões` } }
-      },
-      scales: {
-        y: { beginAtZero: false, ticks: { callback: value => `US$ ${value.toLocaleString('pt-BR')} mi` }, grid: { color: '#e5e5e5' } },
-        x: { grid: { display: false } }
-      }
-    }
-  });
-})();
-</script>''')
-            i += 1
 
-        # Gráfico interativo: composição de algodão e valor médio por quilo de camisetas importadas
-        elif line.strip() == '{{wm-chart:camisetas-origens}}':
-            new_lines.append('''<figure class="wm-interactive-chart">
-  <figcaption>Composição por fibra e valor médio por quilo, por origem</figcaption>
-  <div class="wm-interactive-chart__canvas"><canvas id="chart-camisetas-origens" aria-label="Gráfico comparativo da participação de algodão, outras fibras e valor médio por quilo de camisetas importadas da China, Peru e Bangladesh"></canvas></div>
-  <p class="wm-interactive-chart__source">Fonte: MDIC/Comex Stat</p>
-</figure>
-<script src="/js/chart.umd.min.js"></script>
-<script>
-(() => {
-  const canvas = document.getElementById('chart-camisetas-origens');
-  if (!canvas || !window.Chart) return;
-  new Chart(canvas, {
-    data: {
-      labels: ['China', 'Peru', 'Bangladesh'],
-      datasets: [
-        { type: 'bar', label: 'Algodão (%)', data: [29, 99, 85], backgroundColor: '#ff5a1f', borderRadius: 4, stack: 'composição', yAxisID: 'y' },
-        { type: 'bar', label: 'Outras fibras (%)', data: [71, 1, 15], backgroundColor: '#8b8b8b', borderRadius: 4, stack: 'composição', yAxisID: 'y' },
-        { type: 'line', label: 'Valor médio (US$/kg)', data: [11.3, 27.7, 16.9], borderColor: '#133b5c', backgroundColor: '#133b5c', borderWidth: 3, pointRadius: 5, pointHoverRadius: 7, tension: 0.25, yAxisID: 'yPrice' }
-      ]
-    },
-    options: {
-      responsive: true, maintainAspectRatio: false,
-      interaction: { mode: 'index', intersect: false },
-      plugins: {
-        legend: { position: 'bottom', labels: { usePointStyle: true, padding: 18 } },
-        tooltip: { callbacks: { label: ctx => ctx.dataset.yAxisID === 'yPrice' ? ` ${ctx.dataset.label}: US$ ${ctx.parsed.y.toLocaleString('pt-BR', { minimumFractionDigits: 1, maximumFractionDigits: 1 })}/kg` : ` ${ctx.dataset.label}: ${ctx.parsed.y.toLocaleString('pt-BR')}%` } }
-      },
-      scales: {
-        x: { stacked: true, grid: { display: false } },
-        y: { stacked: true, beginAtZero: true, max: 100, ticks: { callback: value => `${value}%` }, grid: { color: '#e5e5e5' } },
-        yPrice: { position: 'right', beginAtZero: true, ticks: { callback: value => `US$ ${value}/kg` }, grid: { drawOnChartArea: false } }
-      }
-    }
-  });
-})();
-</script>''')
-            i += 1
 
-        # Gráfico interativo: importação mensal de baterias e acumuladores elétricos (SH4 8507)
-        elif line.strip() == '{{wm-chart:baterias-mensal}}':
-            new_lines.append('''<figure class="wm-interactive-chart">
-  <figcaption>Importação mensal de baterias e acumuladores elétricos</figcaption>
-  <div class="wm-interactive-chart__canvas"><canvas id="chart-baterias-mensal" aria-label="Gráfico de linha da importação mensal de baterias e acumuladores elétricos, de agosto de 2025 a julho de 2026"></canvas></div>
-  <p class="wm-interactive-chart__source">Fonte: MDIC/Comex Stat</p>
-</figure>
-<script src="/js/chart.umd.min.js"></script>
-<script>
-(() => {
-  const canvas = document.getElementById('chart-baterias-mensal');
-  if (!canvas || !window.Chart) return;
-  new Chart(canvas, {
-    type: 'line',
-    data: {
-      labels: ['ago./25', 'set./25', 'out./25', 'nov./25', 'dez./25', 'jan./26', 'fev./26', 'mar./26', 'abr./26', 'mai./26', 'jun./26', 'jul./26'],
-      datasets: [{
-        label: 'Valor FOB (US$ milhões)',
-        data: [71.4, 83.8, 75.9, 76.7, 67.6, 87.4, 76.7, 97.6, 97.2, 128.2, 97.0, 99.7],
-        borderColor: '#ff5a1f', backgroundColor: 'rgba(255, 90, 31, 0.16)',
-        borderWidth: 3, fill: true, tension: 0.32, pointRadius: 4,
-        pointHoverRadius: 6, pointBackgroundColor: '#ff5a1f'
-      }]
-    },
-    options: {
-      responsive: true, maintainAspectRatio: false,
-      interaction: { mode: 'index', intersect: false },
-      plugins: {
-        legend: { display: false },
-        tooltip: { callbacks: { label: ctx => ` US$ ${ctx.parsed.y.toLocaleString('pt-BR', { minimumFractionDigits: 1, maximumFractionDigits: 1 })} milhões` } }
-      },
-      scales: {
-        y: { beginAtZero: false, ticks: { callback: value => `US$ ${value.toLocaleString('pt-BR')} mi` }, grid: { color: '#e5e5e5' } },
-        x: { grid: { display: false } }
-      }
-    }
-  });
-})();
-</script>''')
-            i += 1
 
-        # Gráfico interativo: importação mensal de platina bruta (NCM 71101100)
-        elif line.strip() == '{{wm-chart:platina-mensal}}':
-            new_lines.append('''<figure class="wm-interactive-chart">
-  <figcaption>Importação mensal de platina bruta</figcaption>
-  <div class="wm-interactive-chart__canvas"><canvas id="chart-platina-mensal" aria-label="Gráfico de linha da importação mensal de platina bruta, de agosto de 2025 a julho de 2026"></canvas></div>
-  <p class="wm-interactive-chart__source">Fonte: MDIC/Comex Stat</p>
-</figure>
-<script src="/js/chart.umd.min.js"></script>
-<script>
-(() => {
-  const canvas = document.getElementById('chart-platina-mensal');
-  if (!canvas || !window.Chart) return;
-  new Chart(canvas, {
-    type: 'line',
-    data: {
-      labels: ['ago./25', 'set./25', 'out./25', 'nov./25', 'dez./25', 'jan./26', 'fev./26', 'mar./26', 'abr./26', 'mai./26', 'jun./26', 'jul./26'],
-      datasets: [{
-        label: 'Valor FOB (US$ milhões)',
-        data: [12.4, 25.8, 11.2, 10.9, 22.8, 28.5, 35.9, 22.7, 18.1, 30.9, 33.1, 44.9],
-        borderColor: '#ff5a1f', backgroundColor: 'rgba(255, 90, 31, 0.16)',
-        borderWidth: 3, fill: true, tension: 0.32, pointRadius: 4,
-        pointHoverRadius: 6, pointBackgroundColor: '#ff5a1f'
-      }]
-    },
-    options: {
-      responsive: true, maintainAspectRatio: false,
-      interaction: { mode: 'index', intersect: false },
-      plugins: {
-        legend: { display: false },
-        tooltip: { callbacks: { label: ctx => ` US$ ${ctx.parsed.y.toLocaleString('pt-BR', { minimumFractionDigits: 1, maximumFractionDigits: 1 })} milhões` } }
-      },
-      scales: {
-        y: { beginAtZero: false, ticks: { callback: value => `US$ ${value.toLocaleString('pt-BR')} mi` }, grid: { color: '#e5e5e5' } },
-        x: { grid: { display: false } }
-      }
-    }
-  });
-})();
-</script>''')
-            i += 1
 
-        # Gráfico interativo: origens da platina bruta importada
-        elif line.strip() == '{{wm-chart:platina-origens}}':
-            new_lines.append('''<figure class="wm-interactive-chart">
-  <figcaption>Principais origens da platina bruta importada pelo Brasil</figcaption>
-  <div class="wm-interactive-chart__canvas"><canvas id="chart-platina-origens" aria-label="Gráfico de barras da participação de África do Sul, Bélgica e Estados Unidos na importação brasileira de platina bruta"></canvas></div>
-  <p class="wm-interactive-chart__source">Fonte: MDIC/Comex Stat</p>
-</figure>
-<script src="/js/chart.umd.min.js"></script>
-<script>
-(() => {
-  const canvas = document.getElementById('chart-platina-origens');
-  if (!canvas || !window.Chart) return;
-  new Chart(canvas, {
-    type: 'bar',
-    data: {
-      labels: ['África do Sul', 'Bélgica', 'Estados Unidos'],
-      datasets: [{
-        label: 'Participação no valor importado', data: [69.7, 17.7, 7.7],
-        backgroundColor: ['#ff5a1f', '#6e6e6e', '#133b5c'], borderRadius: 5
-      }]
-    },
-    options: {
-      responsive: true, maintainAspectRatio: false,
-      plugins: {
-        legend: { display: false },
-        tooltip: { callbacks: { label: ctx => ` ${ctx.parsed.y.toLocaleString('pt-BR', { minimumFractionDigits: 1, maximumFractionDigits: 1 })}% do valor importado` } }
-      },
-      scales: {
-        y: { beginAtZero: true, max: 100, ticks: { callback: value => `${value}%` }, grid: { color: '#e5e5e5' } },
-        x: { grid: { display: false } }
-      }
-    }
-  });
-})();
-</script>''')
-            i += 1
 
-        # Gráfico interativo: importação mensal de equipamentos de ginástica (NCM 95069100)
-        elif line.strip() == '{{wm-chart:ginastica-mensal}}':
-            new_lines.append('''<figure class="wm-interactive-chart">
-  <figcaption>Importação mensal de equipamentos para cultura física e ginástica</figcaption>
-  <div class="wm-interactive-chart__canvas"><canvas id="chart-ginastica-mensal" aria-label="Gráfico de linha da importação mensal de equipamentos para cultura física e ginástica, de agosto de 2025 a julho de 2026"></canvas></div>
-  <p class="wm-interactive-chart__source">Fonte: MDIC/Comex Stat</p>
-</figure>
-<script src="/js/chart.umd.min.js"></script>
-<script>
-(() => {
-  const canvas = document.getElementById('chart-ginastica-mensal');
-  if (!canvas || !window.Chart) return;
-  new Chart(canvas, {
-    type: 'line',
-    data: {
-      labels: ['ago./25', 'set./25', 'out./25', 'nov./25', 'dez./25', 'jan./26', 'fev./26', 'mar./26', 'abr./26', 'mai./26', 'jun./26', 'jul./26'],
-      datasets: [{
-        label: 'Valor FOB (US$ milhões)',
-        data: [21.3, 20.2, 29.8, 30.3, 34.4, 31.3, 21.9, 31.4, 30.1, 24.6, 29.9, 35.1],
-        borderColor: '#ff5a1f', backgroundColor: 'rgba(255, 90, 31, 0.16)',
-        borderWidth: 3, fill: true, tension: 0.32, pointRadius: 4,
-        pointHoverRadius: 6, pointBackgroundColor: '#ff5a1f'
-      }]
-    },
-    options: {
-      responsive: true, maintainAspectRatio: false,
-      interaction: { mode: 'index', intersect: false },
-      plugins: {
-        legend: { display: false },
-        tooltip: { callbacks: { label: ctx => ` US$ ${ctx.parsed.y.toLocaleString('pt-BR', { minimumFractionDigits: 1, maximumFractionDigits: 1 })} milhões` } }
-      },
-      scales: {
-        y: { beginAtZero: false, ticks: { callback: value => `US$ ${value.toLocaleString('pt-BR')} mi` }, grid: { color: '#e5e5e5' } },
-        x: { grid: { display: false } }
-      }
-    }
-  });
-})();
-</script>''')
-            i += 1
 
         # YouTube Videos
         elif line.strip().startswith('https://youtu.be/') or line.strip().startswith('https://www.youtube.com/embed/') or line.strip().startswith('https://www.youtube.com/watch') or line.strip().startswith('https://www.youtube.com/shorts/') or line.strip().startswith('https://youtube.com/shorts/'):

@@ -795,7 +795,46 @@ textarea.input-wm {
   font-weight: 700;
   text-align: center;
 }
-.wm-interactive-chart__canvas { height: 360px; }
+.wm-interactive-chart__canvas { margin-bottom: 4px; }
+/* O gráfico é um SVG escrito no HTML: escala com a coluna, sem altura fixa. */
+.wm-chart-svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.wm-chart-dados {
+  margin-top: 14px;
+  font-size: 13px;
+}
+.wm-chart-dados summary {
+  color: var(--color-text-muted);
+  cursor: pointer;
+  font-weight: 600;
+}
+.wm-chart-dados table {
+  width: 100%;
+  max-width: 560px;
+  margin-top: 12px;
+  border-collapse: collapse;
+}
+.wm-chart-dados caption {
+  padding-bottom: 8px;
+  color: var(--color-text-muted);
+  font-size: 12px;
+  text-align: left;
+}
+.wm-chart-dados th,
+.wm-chart-dados td {
+  padding: 6px 10px;
+  border-bottom: 1px solid #ededed;
+  text-align: right;
+}
+.wm-chart-dados thead th,
+.wm-chart-dados tbody th {
+  color: var(--color-text-dark);
+  text-align: left;
+  font-weight: 700;
+}
 .wm-interactive-chart__source {
   margin: 16px 0 0 !important;
   color: var(--color-text-muted);
@@ -813,7 +852,12 @@ textarea.input-wm {
 }
 @media (max-width: 640px) {
   .wm-interactive-chart { padding: 16px; }
-  .wm-interactive-chart__canvas { height: 280px; }
+  /* Série longa não cabe em 360 px de largura sem virar texto ilegível:
+     o leitor arrasta o gráfico de lado. */
+  .wm-interactive-chart__canvas { overflow-x: auto; }
+  .wm-chart-svg { min-width: 560px; }
+  .wm-chart-svg--largo { min-width: 760px; }
+  .wm-chart-dados { font-size: 12px; }
   .google-sheet-chart { height: 320px; }
 }
 
