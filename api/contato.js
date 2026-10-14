@@ -280,7 +280,17 @@ module.exports = async function handler(req, res) {
 //   1. utm_source/utm_medium      -> MEDIDA. A plataforma etiquetou o link.
 //   2. gclid / fbclid / msclkid   -> MEDIDA. Id que so o clique no anuncio cria.
 //   3. referrer_inicial           -> INFERENCIA. Diz de onde veio, nao o que clicou.
-//   4. nada                       -> "(direct)". Nao e chute: e a ausencia declarada.
+//   4. nada, e o rastreio rodou   -> "(direct)". Nao e chute: e a ausencia declarada.
+//   5. nada, e o rastreio NAO rodou -> "(not set)". Nao sabemos a origem.
+//
+// (direct) x (not set) (14/10/2026): ate aqui os dois viravam "(direct)", e o
+// painel nao separava quem digitou o endereco (ou abriu pelo WhatsApp/e-mail,
+// que nao mandam referenciador) de quem teve o js/utm-tracking.js bloqueado.
+// O sinal de que o rastreio rodou e o campo wm_rastreio="1"; o wm_vid serve de
+// reserva, porque so esse mesmo script o gera — cobre aba aberta antes do
+// deploy, ainda com a versao antiga do script. Consentimento recusado NAO
+// impede o script (ele so deixa de persistir entre visitas), entao continua
+// sendo "(direct)" quando nao ha referenciador.
 //
 // O FORMATO E "fonte / meio", minusculo, porque e o que o painel ja sabe ler.
 // Nunca devolve vazio: campo vazio no CRM vira lead sem origem, que e o problema
@@ -312,5 +322,6 @@ function origemCanal(data) {
     }
   }
 
-  return '(direct)';
+  const rastreioRodou = limpo(data.wm_rastreio) === '1' || limpo(data.wm_vid) !== '';
+  return rastreioRodou ? '(direct)' : '(not set)';
 }

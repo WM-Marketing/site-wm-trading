@@ -9,6 +9,7 @@
      ga_session_id  session_id do GA4 — permite join no grao de SESSAO.
      ga_status      por que clientid/session_id faltaram, quando faltarem.
      utm_*, gclid, msclkid, fbclid, referrer_inicial, pagina_entrada.
+     wm_rastreio    "1" sempre que este script roda: separa (direct) de (not set).
 
      paginas_vistas      trilha das ultimas 12 paginas ("/a/ > /b/ > ...").
      total_paginas       pageviews no total (conta tudo, mesmo o que a trilha cortou).
@@ -363,6 +364,10 @@
     if (f.referrer) out.referrer_inicial = f.referrer;
     if (f.pagina_entrada) out.pagina_entrada = f.pagina_entrada;
     out.wm_vid = VID;
+    // Marcador "este script rodou". Sem ele o servidor nao distingue visita
+    // direta (rastreio ok, sem referenciador) de rastreio que nao rodou
+    // (bloqueador, erro de carga) — ver origemCanal() em api/contato.js.
+    out.wm_rastreio = '1';
     var jn = camposJornada(d);
     for (var k in jn) { if (Object.prototype.hasOwnProperty.call(jn, k)) out[k] = jn[k]; }
     return out;
