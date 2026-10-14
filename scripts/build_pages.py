@@ -7,6 +7,7 @@ import os
 import re
 import json
 import glob
+import hashlib
 import shutil
 import urllib.parse
 from html import escape, unescape
@@ -21,6 +22,106 @@ ROOT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # para consolidar indexacao no dominio oficial antes e depois da virada.
 SITE_URL = "https://www.wmtrading.com.br"
 DEFAULT_OG_IMAGE = "/images/logo/fechado_logo_wm_trading_ajustada_logo_laranja.png"
+
+
+# ---------------------------------------------------------------------------
+# lastmod do sitemap
+# ---------------------------------------------------------------------------
+# A data de modificacao vinha do mtime do arquivo. Numa unica maquina isso
+# funcionava; atraves do git, nao: clone e pull carimbam a hora da checagem em
+# tudo. Em 14/10/2026 o sitemap declarou as 325 paginas como modificadas no
+# mesmo dia — e o Google desaprende a confiar num lastmod que se comporta
+# assim. Tentar adivinhar pelo que o build gravou tambem nao serve: 25 paginas
+# sao escritas duas vezes na mesma execucao, e a vitrine de blog so converge na
+# rodada seguinte.
+#
+# O que vale e comparar a pagina com a versao publicada. scripts/sitemap-datas.json
+# guarda, para cada URL, a impressao digital do HTML publicado e a data em que
+# ele mudou pela ultima vez. Igual, a data e preservada; diferente, vira hoje.
+# O arquivo e versionado junto com as paginas e tem que entrar no mesmo commit.
+DATAS_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), "sitemap-datas.json")
+
+
+def carregar_datas():
+    try:
+        with open(DATAS_PATH, encoding="utf-8") as f:
+            return json.load(f)
+    except (FileNotFoundError, ValueError):
+        return {}
+
+
+def salvar_datas(manifesto):
+    conteudo = json.dumps(manifesto, ensure_ascii=False, indent=2, sort_keys=True) + "\n"
+    escrever_se_mudou(DATAS_PATH, conteudo)
+
+
+def impressao(caminho):
+    with open(caminho, "rb") as f:
+        return hashlib.sha256(f.read()).hexdigest()[:16]
+
+
+def data_da_pagina(manifesto, loc, caminho):
+    """Data da ultima mudanca real da pagina; atualiza o manifesto quando mudou."""
+    sha = impressao(caminho)
+    registro = manifesto.get(loc)
+    if registro and registro.get("sha") == sha:
+        return registro["data"]
+    data = datetime.now().strftime("%Y-%m-%d")
+    manifesto[loc] = {"sha": sha, "data": data}
+    return data
+
+
+def fechar_datas_do_sitemap(paginas_html):
+    """Recalcula todo o lastmod com as paginas ja em sua forma final.
+
+    Tem que ser o ultimo passo do build: o build_en.py roda depois do
+    build_pages.py e ainda reescreve ~38 paginas em portugues para injetar o
+    hreflang. Se a data for carimbada antes disso, ela registra um estado
+    intermediario que nunca chega ao ar.
+
+    paginas_html: pares (loc, caminho no disco).
+    """
+    manifesto = carregar_datas()
+    datas = {loc: data_da_pagina(manifesto, loc, caminho) for loc, caminho in paginas_html}
+    caminho_sitemap = os.path.join(ROOT_DIR, "sitemap.xml")
+    with open(caminho_sitemap, encoding="utf-8") as f:
+        xml = f.read()
+
+    def troca(bloco):
+        loc = bloco.group(1)
+        return f"<loc>{loc}</loc>\n    <lastmod>{datas.get(loc, bloco.group(2))}</lastmod>"
+
+    xml = re.sub(r"<loc>([^<]+)</loc>\s*<lastmod>([^<]+)</lastmod>", troca, xml)
+    escrever_se_mudou(caminho_sitemap, xml)
+    salvar_datas(manifesto)
+    return sum(1 for loc, _ in paginas_html
+               if manifesto[loc]["data"] == datetime.now().strftime("%Y-%m-%d"))
+
+
+# O que fica de fora do sitemap. Pasta de apoio, pagina interna (noindex) e
+# pagina de erro: declarar uma delas manda o Google para um endereco que ele nao
+# pode indexar.
+SITEMAP_PASTAS_FORA = {".git", ".claude", ".agents", ".cursor", ".windsurf", "node_modules",
+                       "scripts", "content", "docs", "brand", "api", "js", "css", "images",
+                       "wp-content", "mapa-brasil", "interno"}
+SITEMAP_ARQUIVOS_FORA = {"404.html", "offline.html"}
+
+
+def paginas_do_sitemap():
+    """Pares (loc, caminho) de tudo que entra no sitemap, incluindo /en/."""
+    skip_dirs = {"node_modules", "scripts", "content", "images", "css", "js", "api",
+                 "wp-content", "wp-includes", "interno"}
+    skip_files = {"404.html", "offline.html"}
+    achados = []
+    for walk_root, walk_dirs, walk_files in os.walk(ROOT_DIR):
+        walk_dirs[:] = [d for d in walk_dirs if d not in SITEMAP_PASTAS_FORA and not d.startswith(".")]
+        for fn in walk_files:
+            if fn.endswith(".html") and fn not in SITEMAP_ARQUIVOS_FORA:
+                caminho = os.path.join(walk_root, fn)
+                rel = os.path.relpath(caminho, ROOT_DIR).replace(os.sep, "/")
+                achados.append((url_publica(rel), caminho))
+    return achados
+
 
 def url_publica(caminho_relativo):
     """URL publica de uma pagina, a partir do caminho do arquivo dentro do repo.
@@ -926,6 +1027,8 @@ def render_html_page(output_path, title, description, content_body, head_tpl, he
 """
     escrever_se_mudou(output_path, html)
 
+
+
 def escrever_se_mudou(output_path, conteudo):
     """Grava so quando o conteudo mudou de verdade.
 
@@ -935,8 +1038,9 @@ def escrever_se_mudou(output_path, conteudo):
     desprioriza lastmod que nao merece confianca. De quebra, cada build sujava
     o diff com 254 linhas de data.
 
-    Preservar o mtime das paginas inalteradas faz o lastmod voltar a significar
-    algo e deixa o build idempotente: rodar duas vezes nao produz diff.
+    Preservar o mtime das paginas inalteradas deixa o build idempotente: rodar
+    duas vezes nao produz diff. O lastmod do sitemap NAO sai mais daqui — ver
+    datas_do_sitemap().
     """
     try:
         with open(output_path, "r", encoding="utf-8", newline="") as f:
@@ -3915,26 +4019,19 @@ Se você tiver alguma pergunta sobre esta Política de Privacidade ou as prátic
                      robots="noindex, follow")
 
     print("\nGenerating sitemap.xml...")
-    skip_dirs = {".git", ".claude", ".agents", ".cursor", ".windsurf", "node_modules",
-                 "scripts", "content", "docs", "brand", "api", "js", "css", "images",
-                 "wp-content", "mapa-brasil",
-                 # Paginas internas: acessiveis por link, nunca no sitemap.
-                 # Declarar no mapa uma pagina noindex manda o Google para um
-                 # endereco que ele nao pode indexar — o mesmo motivo do
-                 # skip_files logo abaixo.
-                 "interno"}
-    # Pagina que responde 404 ou que e noindex nao entra no mapa — declarar uma
-    # dessas manda o Google para um endereco que ele nao pode indexar (era o caso do
-    # /offline/, herdado da pausa de julho).
-    skip_files = {"404.html", "offline.html"}
+    skip_dirs = SITEMAP_PASTAS_FORA
+    skip_files = SITEMAP_ARQUIVOS_FORA
+    manifesto = carregar_datas()
     sitemap_pages = []
     for walk_root, walk_dirs, walk_files in os.walk(ROOT_DIR):
         walk_dirs[:] = [d for d in walk_dirs if d not in skip_dirs and not d.startswith(".")]
         for fn in walk_files:
             if fn.endswith(".html") and fn not in skip_files:
-                rel = os.path.relpath(os.path.join(walk_root, fn), ROOT_DIR).replace(os.sep, "/")
-                mtime = datetime.fromtimestamp(os.path.getmtime(os.path.join(walk_root, fn)))
-                sitemap_pages.append((rel, mtime.strftime("%Y-%m-%d")))
+                caminho = os.path.join(walk_root, fn)
+                rel = os.path.relpath(caminho, ROOT_DIR).replace(os.sep, "/")
+                registro = manifesto.get(url_publica(rel))
+                sitemap_pages.append((rel, registro["data"] if registro
+                                      else datetime.now().strftime("%Y-%m-%d")))
     sitemap_pages.sort()
     entries = []
     for rel, lastmod in sitemap_pages:

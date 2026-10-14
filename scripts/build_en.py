@@ -23,6 +23,7 @@ depois. Se alguem regenerar e esquecer de rodar este, o verificar.py acusa.
 import json
 import os
 import re
+from datetime import datetime
 import sys
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
@@ -1510,6 +1511,9 @@ def main():
         print(f"  {p['en']:<56} <- {p['pt']}")
 
     n_sitemap = atualiza_sitemap(paginas)
+    # Ultimo passo do build inteiro: so agora as paginas estao na forma que vai
+    # ao ar (este script acabou de injetar hreflang em paginas do portugues).
+    n_datas = bp.fechar_datas_do_sitemap(bp.paginas_do_sitemap())
 
     print(f"\n{'=' * 70}")
     print(f"paginas /en/ geradas      : {gerados}")
@@ -1517,6 +1521,7 @@ def main():
     print(f"links de CORPO levados p/ EN: {links_corpo}")
     print(f"pares hreflang completos  : {com_par}")
     print(f"URLs /en/ no sitemap      : {n_sitemap}")
+    print(f"paginas com lastmod de hoje: {n_datas}")
     print("lembrete: rode SEMPRE depois do build_pages.py")
 
 
@@ -1535,11 +1540,8 @@ def atualiza_sitemap(paginas):
     # tira entradas /en/ antigas para nao duplicar em regeneracoes seguidas
     xml = re.sub(r"\s*<url>\s*<loc>[^<]*/en/[^<]*</loc>.*?</url>", "", xml, flags=re.S)
 
-    hoje = re.search(r"<lastmod>([^<]+)</lastmod>", xml)
-    data = hoje.group(1) if hoje else ""
     novas = "".join(
-        f"\n  <url>\n    <loc>{SITE}{p['en']}</loc>"
-        f"{f'{chr(10)}    <lastmod>{data}</lastmod>' if data else ''}\n  </url>"
+        f"\n  <url>\n    <loc>{SITE}{p['en']}</loc>\n    <lastmod>1970-01-01</lastmod>\n  </url>"
         for p in paginas)
 
     xml = xml.replace("</urlset>", novas + "\n</urlset>")
