@@ -1277,6 +1277,14 @@ def checar_origem_declarada(rel):
         return
     servidor = set(re.findall(r"'([a-z]+)'", m.group(1)))
     divergiu = False
+    # O texto que vai ao CRM (origem_declarada_texto) sai desta tabela: codigo
+    # sem rotulo viraria "undefined" no Pipedrive.
+    r = re.search(r"ROTULO_ORIGEM_DECLARADA\s*=\s*\{(.*?)\}", api, re.S)
+    rotulos = set(re.findall(r"^\s*([a-z]+):", r.group(1), re.M)) if r else set()
+    if rotulos != servidor:
+        divergiu = True
+        rel.erro("api/contato.js: ROTULO_ORIGEM_DECLARADA nao cobre os mesmos codigos "
+                 "de ORIGENS_DECLARADAS (falta: %s)" % (", ".join(sorted(servidor - rotulos)) or "-"))
     for arquivo in ORIGEM_DECLARADA_EM:
         codigos = _codigos_origem(arquivo, ler(arquivo))
         if codigos != servidor:

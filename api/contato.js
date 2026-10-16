@@ -351,13 +351,32 @@ const ORIGENS_DECLARADAS = [
   'google', 'ia', 'linkedin', 'instagram', 'indicacao', 'feira', 'cliente', 'outro',
 ];
 
+// O TEXTO QUE O CRM GRAVA (16/10/2026). O Pipedrive recebe a resposta num campo
+// de TEXTO ja existente ("Origem do Negocio (ultima conversao)", renomeado para
+// "Origem declarada pelo lead" — vazio desde 2023), e nao num campo de opcao.
+// Por isso a resposta vai por extenso, ja com o "Outro" junto: o Zap so liga
+// origem_declarada_texto ao campo, sem tabela de traducao. Regra de negocio
+// fica aqui, versionada, e nao dentro da automacao visual. Sempre em portugues:
+// o CRM e lido pelo time, qualquer que seja o idioma do formulario.
+const ROTULO_ORIGEM_DECLARADA = {
+  google: 'Pesquisa no Google',
+  ia: 'Resposta de uma IA',
+  linkedin: 'LinkedIn',
+  instagram: 'Instagram',
+  indicacao: 'Indicação',
+  feira: 'Feira ou evento',
+  cliente: 'Já sou cliente',
+  outro: 'Outro',
+};
+
 function origemDeclarada(data) {
   const codigo = String(data.origem_declarada || '').trim().toLowerCase();
   if (!ORIGENS_DECLARADAS.includes(codigo)) {
-    return { origem_declarada: '', origem_declarada_outro: '' };
+    return { origem_declarada: '', origem_declarada_outro: '', origem_declarada_texto: '' };
   }
   const outro = codigo === 'outro'
     ? String(data.origem_declarada_outro || '').replace(/\s+/g, ' ').trim().slice(0, 120)
     : '';
-  return { origem_declarada: codigo, origem_declarada_outro: outro };
+  const texto = ROTULO_ORIGEM_DECLARADA[codigo] + (outro ? ': ' + outro : '');
+  return { origem_declarada: codigo, origem_declarada_outro: outro, origem_declarada_texto: texto };
 }
