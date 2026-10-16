@@ -47,6 +47,8 @@
       sucessoTexto: 'Clique no botão abaixo caso a conversa não tenha aberto automaticamente.',
       abrir: 'Abrir WhatsApp',
       mensagem: 'Olá! Sou {nome}. Vim pelo site da WM Trading e gostaria de falar com um especialista.',
+      origemPergunta: 'Como conheceu a WM Trading? *',
+      origemOutro: 'Qual? *',
       /* Em PT a validacao continua a do navegador — nada muda. */
       validacao: null
     },
@@ -73,6 +75,8 @@
       sucessoTexto: 'If the chat didn’t open automatically, click the button below.',
       abrir: 'Open WhatsApp',
       mensagem: 'Hello! I’m {nome}. I found WM Trading’s website and I want to bring my products to the Brazilian market.',
+      origemPergunta: 'How did you hear about WM Trading? *',
+      origemOutro: 'Which one? *',
       /* A mensagem nativa do navegador sai no idioma do SISTEMA do visitante
          (chines, no caso do cartao), nao no da pagina. Por isso em EN elas
          sao escritas aqui. */
@@ -80,11 +84,32 @@
         nome: 'Please enter your name.',
         email: 'Please enter a valid email address.',
         telefone: 'Please enter a valid phone number with country code (8 to 15 digits).',
-        aceite_privacidade: 'Please accept the Privacy Policy to continue.'
+        aceite_privacidade: 'Please accept the Privacy Policy to continue.',
+        origem_declarada: 'Please tell us how you heard about WM Trading.',
+        origem_declarada_outro: 'Please tell us where you heard about WM Trading.'
       }
     }
   };
   var T = TEXTOS[LANG];
+
+  /* "Como conheceu a WM Trading?" — origem DECLARADA (16/10/2026). Mesma lista
+     fechada e mesmos codigos do api/contato.js (ORIGENS_DECLARADAS) e do
+     js/contact-form.js; o scripts/verificar.py confere que nao divergiram.
+     Por que existe: ver o comentario em origemDeclarada(), no api/contato.js. */
+  var ORIGENS = [
+    ['google',    'Pesquisa no Google', 'Google search'],
+    ['ia',        'Resposta de uma IA (ChatGPT, Gemini, resumo de IA do Google)',
+                  'An AI answer (ChatGPT, Gemini, Google AI Overview)'],
+    ['linkedin',  'LinkedIn', 'LinkedIn'],
+    ['instagram', 'Instagram', 'Instagram'],
+    ['indicacao', 'Indicação', 'Referral'],
+    ['feira',     'Feira ou evento', 'Trade show or event'],
+    ['cliente',   'Já sou cliente', 'I am already a client'],
+    ['outro',     'Outro', 'Other']
+  ];
+  var ORIGENS_HTML = ORIGENS.map(function (o) {
+    return '<option value="' + o[0] + '">' + (LANG === 'en' ? o[2] : o[1]) + '</option>';
+  }).join('');
 
   var CSS = [
     // bottom deixa espaço para o webchat Botmaker (via GTM), que ocupa o canto inferior direito
@@ -109,6 +134,10 @@
     'padding:12px 14px;border:1px solid #ddd;border-radius:8px;margin-bottom:12px;font:inherit;font-size:14px;',
     'color:#3A3A3A;background:#fff;box-sizing:border-box;}',
     '.wm-wa-form input:focus{outline:none;border-color:var(--color-primary,#FC5000);}',
+    '.wm-wa-form select{width:100%;padding:12px 14px;border:1px solid #ddd;border-radius:8px;margin-bottom:12px;',
+    'font:inherit;font-size:14px;color:#3A3A3A;background:#fff;box-sizing:border-box;}',
+    '.wm-wa-form select:invalid{color:#888;}',
+    '.wm-wa-form select:focus{outline:none;border-color:var(--color-primary,#FC5000);}',
     '.wm-wa-hint{font-size:12px;color:#888;margin:-8px 0 12px;line-height:1.4;}',
     '.wm-wa-consent{display:flex;align-items:flex-start;gap:8px;font-size:12px;color:#888;margin:2px 0 16px;',
     'line-height:1.5;cursor:pointer;}',
@@ -179,6 +208,11 @@
           '<input type="email" name="email" required placeholder="' + T.email + '" autocomplete="email" />' +
           '<input type="tel" name="telefone" required placeholder="' + T.telefone + '" autocomplete="tel" maxlength="24" />' +
           (T.telefoneDica ? '<p class="wm-wa-hint">' + T.telefoneDica + '</p>' : '') +
+          '<select name="origem_declarada" required aria-label="' + T.origemPergunta.replace(' *', '') + '">' +
+            '<option value="" disabled selected>' + T.origemPergunta + '</option>' + ORIGENS_HTML +
+          '</select>' +
+          '<input type="text" name="origem_declarada_outro" maxlength="120" disabled style="display:none;"' +
+            ' placeholder="' + T.origemOutro + '" aria-label="' + T.origemOutro.replace(' *', '') + '" />' +
           '<label class="wm-wa-consent">' +
             '<input type="checkbox" name="aceite_privacidade" required value="sim" />' +
             '<span data-wm-aceite>' + T.aceite.replace('{politica}', T.politica) + '</span>' +
@@ -203,6 +237,15 @@
       form.addEventListener('input', limpa);
       form.addEventListener('change', limpa);
     }
+    var origemSel = form.querySelector('[name="origem_declarada"]');
+    var origemOutro = form.querySelector('[name="origem_declarada_outro"]');
+    origemSel.addEventListener('change', function () {
+      var ativo = origemSel.value === 'outro';
+      origemOutro.style.display = ativo ? '' : 'none';
+      origemOutro.disabled = !ativo;
+      origemOutro.required = ativo;
+      if (ativo) origemOutro.focus();
+    });
     form.addEventListener('submit', onSubmit);
   }
 
@@ -268,6 +311,10 @@
     email.setCustomValidity(email.value.trim() && !email.validity.typeMismatch ? '' : v.email);
     tel.setCustomValidity(digitos >= 8 && digitos <= 15 ? '' : v.telefone);
     aceite.setCustomValidity(aceite.checked ? '' : v.aceite_privacidade);
+    var origem = form.querySelector('[name="origem_declarada"]');
+    var outro = form.querySelector('[name="origem_declarada_outro"]');
+    origem.setCustomValidity(origem.value ? '' : v.origem_declarada);
+    outro.setCustomValidity(outro.disabled || outro.value.trim() ? '' : v.origem_declarada_outro);
   }
 
   function openPopup(targetUrl) {
@@ -331,6 +378,8 @@
       nome: nome,
       email: form.querySelector('[name="email"]').value.trim(),
       telefone: form.querySelector('[name="telefone"]').value.trim(),
+      origem_declarada: form.querySelector('[name="origem_declarada"]').value,
+      origem_declarada_outro: form.querySelector('[name="origem_declarada_outro"]').value.trim(),
       formulario: 'whatsapp',
       url: window.location.href,
       origem: 'site wmtrading.com.br',

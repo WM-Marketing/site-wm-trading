@@ -271,6 +271,8 @@
           <div class="field"><label for="pais">País do fornecedor <span class="req">*</span></label><input id="pais" name="pais" type="text" required placeholder="Ex.: China" /></div>
           <div class="field"><label for="email">E-mail corporativo <span class="req">*</span></label><input id="email" name="email" type="email" required autocomplete="email" placeholder="voce@empresa.com" /></div>
           <div class="field"><label for="telefone">Telefone <span class="req">*</span></label><input id="telefone" name="telefone" type="tel" required autocomplete="tel" placeholder="(00) 00000-0000" /></div>
+          <!-- Origem DECLARADA (16/10/2026): lista fechada, mesmos codigos do api/contato.js. -->
+          <div class="field full"><label for="origem_declarada">Como conheceu a WM Trading? <span class="req">*</span></label><select id="origem_declarada" name="origem_declarada" required><option value="" disabled selected>Selecione</option><option value="google">Pesquisa no Google</option><option value="ia">Resposta de uma IA (ChatGPT, Gemini, resumo de IA do Google)</option><option value="linkedin">LinkedIn</option><option value="instagram">Instagram</option><option value="indicacao">Indicação</option><option value="feira">Feira ou evento</option><option value="cliente">Já sou cliente</option><option value="outro">Outro</option></select><input id="origem_declarada_outro" name="origem_declarada_outro" type="text" maxlength="120" placeholder="Qual?" aria-label="Qual?" disabled style="display:none;" /></div>
           <div class="field full"><label for="mensagem">Qual produto você está negociando e em que ponto está a conversa?</label><textarea id="mensagem" name="mensagem" placeholder="Produtos, volumes, prazos: o que ajudar a preparar a conversa."></textarea></div>
           <div class="field full">
             <label class="lp-check"><input type="checkbox" name="aceite_privacidade" required value="sim" />
@@ -415,6 +417,17 @@ const form = document.getElementById('leadForm');
    js/contact-form.js, entao carimba por conta propria. Sem isto, nenhum
    lead desta LP chegava ao CRM. */
 const CARREGADA_EM = Date.now();
+/* "Outro" abre o campo de texto; fora dele o campo fica desabilitado (nao e
+   obrigatorio nem e enviado). */
+const origemSel = form.querySelector('[name="origem_declarada"]');
+const origemOutro = form.querySelector('[name="origem_declarada_outro"]');
+origemSel.addEventListener('change', () => {
+  const ativo = origemSel.value === 'outro';
+  origemOutro.style.display = ativo ? '' : 'none';
+  origemOutro.disabled = !ativo;
+  origemOutro.required = ativo;
+  if (ativo) origemOutro.focus();
+});
 form.addEventListener('submit', async e => {
   e.preventDefault();
   if (!form.checkValidity()) { form.reportValidity(); return; }

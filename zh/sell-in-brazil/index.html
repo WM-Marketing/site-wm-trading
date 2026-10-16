@@ -293,6 +293,8 @@
           <div class="field"><label for="pais">国家 <span class="req">*</span></label><input id="pais" name="pais" type="text" required autocomplete="country-name" placeholder="公司所在国家" /></div>
           <div class="field"><label for="email">企业邮箱 <span class="req">*</span></label><input id="email" name="email" type="email" required autocomplete="email" placeholder="you@company.com" /></div>
           <div class="field"><label for="telefone">电话 <span class="req">*</span></label><input id="telefone" name="telefone" type="tel" required autocomplete="tel" placeholder="+86 138 0000 0000" /></div>
+          <!-- Origem DECLARADA (16/10/2026): lista fechada, mesmos codigos do api/contato.js. -->
+          <div class="field full"><label for="origem_declarada">您是如何了解 WM Trading 的？ <span class="req">*</span></label><select id="origem_declarada" name="origem_declarada" required><option value="" disabled selected>请选择</option><option value="google">Google 搜索</option><option value="ia">AI 回答（ChatGPT、Gemini、Google AI 摘要）</option><option value="linkedin">LinkedIn</option><option value="instagram">Instagram</option><option value="indicacao">他人推荐</option><option value="feira">展会或活动</option><option value="cliente">我已是客户</option><option value="outro">其他</option></select><input id="origem_declarada_outro" name="origem_declarada_outro" type="text" maxlength="120" placeholder="请说明" aria-label="请说明" disabled style="display:none;" /></div>
           <div class="field full"><label for="mensagem">您计划为巴西项目供应哪些产品？</label><textarea id="mensagem" name="mensagem" placeholder="产品、数量、时间安排等，任何有助于我们准备的信息。"></textarea></div>
           <div class="field full">
             <label class="lp-check"><input type="checkbox" name="aceite_privacidade" required value="sim" />
@@ -444,6 +446,17 @@ const form = document.getElementById('leadForm');
    js/contact-form.js, entao carimba por conta propria. Sem isto, nenhum
    lead desta LP chegava ao CRM. */
 const CARREGADA_EM = Date.now();
+/* "Outro" abre o campo de texto; fora dele o campo fica desabilitado (nao e
+   obrigatorio nem e enviado). */
+const origemSel = form.querySelector('[name="origem_declarada"]');
+const origemOutro = form.querySelector('[name="origem_declarada_outro"]');
+origemSel.addEventListener('change', () => {
+  const ativo = origemSel.value === 'outro';
+  origemOutro.style.display = ativo ? '' : 'none';
+  origemOutro.disabled = !ativo;
+  origemOutro.required = ativo;
+  if (ativo) origemOutro.focus();
+});
 form.addEventListener('submit', async e => {
   e.preventDefault();
   if (!form.checkValidity()) { form.reportValidity(); return; }

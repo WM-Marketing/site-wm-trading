@@ -53,6 +53,119 @@
     return form.querySelector('[name="' + name + '"]:checked') ? 'sim' : 'nao';
   }
 
+  /* ---- "Como conheceu a WM Trading?" — origem DECLARADA (16/10/2026) --------
+     O rastreio (utm, gclid, referenciador) diz por onde o lead ENTROU, nao o que
+     o convenceu: quem conheceu a WM numa resposta de IA e depois buscou o nome
+     chega como organico ou anuncio de marca. Esta pergunta guarda a versao do
+     proprio lead, em campo separado — o api/contato.js nunca a mistura com o
+     origem_canal.
+
+     MONTADA AQUI, e nao no HTML: sao 54 formularios em ~50 paginas, varias
+     geradas pelo build. Cada um recebe a pergunta copiando o visual do campo
+     vizinho DAQUELE formulario (o "Como deseja ser respondido?", ou a Empresa
+     no e-book), entao ela herda o estilo de cada layout sem CSS novo. Formulario
+     que ja tiver o campo no HTML e respeitado.
+
+     Os CODIGOS sao a lista fechada do api/contato.js (ORIGENS_DECLARADAS) e sao
+     os mesmos em PT e EN. O scripts/verificar.py confere que nao divergiram. */
+  var ORIGEM = {
+    pergunta: EN ? 'How did you hear about WM Trading? *' : 'Como conheceu a WM Trading? *',
+    selecione: EN ? 'Select' : 'Selecione',
+    outro: EN ? 'Which one? *' : 'Qual? *',
+    opcoes: [
+      ['google',    'Pesquisa no Google', 'Google search'],
+      ['ia',        'Resposta de uma IA (ChatGPT, Gemini, resumo de IA do Google)',
+                    'An AI answer (ChatGPT, Gemini, Google AI Overview)'],
+      ['linkedin',  'LinkedIn', 'LinkedIn'],
+      ['instagram', 'Instagram', 'Instagram'],
+      ['indicacao', 'Indicação', 'Referral'],
+      ['feira',     'Feira ou evento', 'Trade show or event'],
+      ['cliente',   'Já sou cliente', 'I am already a client'],
+      ['outro',     'Outro', 'Other']
+    ]
+  };
+  var origemSeq = 0;
+
+  function montarOrigemDeclarada(form) {
+    if (form.querySelector('[name="origem_declarada"]')) return;
+
+    var modelo = form.querySelector('select[name="forma_resposta"]') ||
+                 form.querySelector('[name="empresa"]') ||
+                 form.querySelector('[name="email"]');
+    if (!modelo) return;
+
+    /* Layout com rotulo proprio (<div><label/><select/></div>) copia o bloco
+       inteiro; layout de placeholder (o campo solto no grid) copia so o campo. */
+    var pai = modelo.parentElement;
+    var embrulhado = pai && pai !== form && pai.querySelector('label') &&
+                     pai.querySelectorAll('input, select, textarea').length === 1;
+    var bloco = embrulhado ? pai.cloneNode(true) : null;
+    var id = 'wm-origem-' + (++origemSeq);
+
+    var select = document.createElement('select');
+    select.name = 'origem_declarada';
+    select.required = true;
+    select.className = modelo.className;
+    select.id = id;
+
+    var vazio = document.createElement('option');
+    vazio.value = '';
+    vazio.disabled = true;
+    vazio.selected = true;
+    vazio.textContent = embrulhado ? ORIGEM.selecione : ORIGEM.pergunta;
+    select.appendChild(vazio);
+    ORIGEM.opcoes.forEach(function (o) {
+      var op = document.createElement('option');
+      op.value = o[0];
+      op.textContent = EN ? o[2] : o[1];
+      select.appendChild(op);
+    });
+    if (!embrulhado) select.setAttribute('aria-label', ORIGEM.pergunta.replace(' *', ''));
+
+    var outro = document.createElement('input');
+    outro.type = 'text';
+    outro.name = 'origem_declarada_outro';
+    outro.maxLength = 120;
+    outro.placeholder = ORIGEM.outro;
+    outro.setAttribute('aria-label', ORIGEM.outro.replace(' *', ''));
+    outro.className = modelo.className;
+    // Escondido E desabilitado: fora do "Outro" nao e obrigatorio nem e enviado.
+    outro.style.display = 'none';
+    outro.disabled = true;
+    if (embrulhado) outro.style.marginTop = '8px';
+
+    select.addEventListener('change', function () {
+      var ativo = select.value === 'outro';
+      outro.style.display = ativo ? '' : 'none';
+      outro.disabled = !ativo;
+      outro.required = ativo;
+      if (ativo) outro.focus();
+    });
+
+    var ancora = embrulhado ? pai : modelo;
+    if (embrulhado) {
+      var campoVelho = bloco.querySelector('input, select, textarea');
+      var rotulo = bloco.querySelector('label');
+      rotulo.textContent = ORIGEM.pergunta;
+      rotulo.setAttribute('for', id);
+      campoVelho.parentNode.replaceChild(select, campoVelho);
+      select.parentNode.insertBefore(outro, select.nextSibling);
+      ancora.parentNode.insertBefore(bloco, ancora.nextSibling);
+    } else {
+      ancora.parentNode.insertBefore(select, ancora.nextSibling);
+      select.parentNode.insertBefore(outro, select.nextSibling);
+    }
+  }
+
+  function montarTodas() {
+    Array.prototype.forEach.call(document.querySelectorAll('form.contact-form-js'), montarOrigemDeclarada);
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', montarTodas);
+  } else {
+    montarTodas();
+  }
+
   /* CARIMBO DE TEMPO — camada anti-robo (31/08/2026)
      Guarda quando esta pagina ficou pronta. O tempo ate o envio segue no
      payload e o servidor recusa o que for rapido demais para ser humano.

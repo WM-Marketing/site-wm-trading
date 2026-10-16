@@ -1245,6 +1245,52 @@ def checar_formularios(rel):
 
 
 # --------------------------------------------------------------------------
+# J2. Origem declarada — a mesma lista fechada em todo lugar (16/10/2026)
+# --------------------------------------------------------------------------
+# "Como conheceu a WM Trading?" e uma lista FECHADA de codigos. O servidor
+# (ORIGENS_DECLARADAS, api/contato.js) joga fora o que nao conhece, sem erro:
+# se um formulario ganhar uma opcao que o servidor nao tem, a resposta chega
+# vazia no CRM para sempre e ninguem percebe. Esta checagem pega isso antes.
+ORIGEM_DECLARADA_EM = [
+    os.path.join("js", "contact-form.js"),
+    os.path.join("js", "whatsapp-popup.js"),
+    os.path.join("venda-no-brasil", "index.html"),
+    os.path.join("sell-in-brazil", "index.html"),
+    os.path.join("zh", "sell-in-brazil", "index.html"),
+]
+
+
+def _codigos_origem(arquivo, texto):
+    if arquivo.endswith(".html"):
+        m = re.search(r'<select[^>]*name="origem_declarada".*?</select>', texto, re.S)
+        return set(re.findall(r'<option value="([a-z]+)"', m.group(0))) if m else set()
+    # JS: as linhas ['codigo', 'Rotulo PT', ...] da lista de opcoes
+    return set(re.findall(r"\[\s*'([a-z]+)',\s*'", texto))
+
+
+def checar_origem_declarada(rel):
+    titulo("J2. Origem declarada — mesma lista no servidor e nos formularios")
+    api = ler(os.path.join("api", "contato.js"))
+    m = re.search(r"ORIGENS_DECLARADAS\s*=\s*\[(.*?)\]", api, re.S)
+    if not m:
+        rel.erro("api/contato.js sem ORIGENS_DECLARADAS — a origem declarada nao chega ao CRM")
+        return
+    servidor = set(re.findall(r"'([a-z]+)'", m.group(1)))
+    divergiu = False
+    for arquivo in ORIGEM_DECLARADA_EM:
+        codigos = _codigos_origem(arquivo, ler(arquivo))
+        if codigos != servidor:
+            divergiu = True
+            falta = ", ".join(sorted(servidor - codigos)) or "-"
+            sobra = ", ".join(sorted(codigos - servidor)) or "-"
+            rel.erro("%s: lista de origem declarada diverge do api/contato.js "
+                     "(falta: %s; o servidor descarta: %s)" % (arquivo, falta, sobra))
+    if not divergiu:
+        rel.ok("%d codigos de origem declarada iguais no servidor e em %d arquivos"
+               % (len(servidor), len(ORIGEM_DECLARADA_EM)))
+
+
+# --------------------------------------------------------------------------
 # K. Idioma: versao em ingles e tag no blog
 # --------------------------------------------------------------------------
 def _e_rascunho(texto):
@@ -1706,6 +1752,7 @@ def main():
     checar_slug_dos_posts(rel)
     checar_ingles(rel)
     checar_formularios(rel)
+    checar_origem_declarada(rel)
     checar_idioma(rel)
     checar_relacoes_blog(rel)
     if args.producao:

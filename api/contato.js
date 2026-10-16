@@ -198,6 +198,9 @@ module.exports = async function handler(req, res) {
       pagina_entrada: data.pagina_entrada || '',
       // O CAMPO QUE O CRM PRECISA, JA PRONTO. Ver `origemCanal` abaixo.
       origem_canal: origemCanal(data),
+      // O que o LEAD diz que o trouxe ("Como conheceu a WM Trading?"). Fica ao
+      // lado de origem_canal, nunca no lugar dele. Ver `origemDeclarada` abaixo.
+      ...origemDeclarada(data),
     };
 
     // ── MONDAY: TENTATIVA, NUNCA BLOQUEIO ────────────────────────────────
@@ -324,4 +327,37 @@ function origemCanal(data) {
 
   const rastreioRodou = limpo(data.wm_rastreio) === '1' || limpo(data.wm_vid) !== '';
   return rastreioRodou ? '(direct)' : '(not set)';
+}
+
+// ── ORIGEM DECLARADA PELO LEAD (16/10/2026) ──────────────────────────────────
+//
+// origem_canal e o que o rastreio MEDIU: o ultimo clique. Nao mostra quem
+// convenceu. Quem pergunta ao ChatGPT, ve a WM e depois busca "WM Trading" no
+// Google chega como organico ou anuncio de marca — e a IA fica com zero. A
+// pergunta "Como conheceu a WM Trading?" pega o que o rastreio nao alcanca.
+// Pedido: orquestrador/docs/PEDIDO_SITE_ORIGEM_DECLARADA.md.
+//
+// LISTA FECHADA. O codigo e o mesmo em PT e EN; texto livre so no "outro",
+// porque texto livre nao da para contar. A mesma lista de codigos esta em
+// js/contact-form.js, js/whatsapp-popup.js e nas tres LPs com handler proprio
+// (venda-no-brasil, sell-in-brazil, zh/sell-in-brazil) — o scripts/verificar.py
+// reprova se uma delas divergir desta.
+//
+// NUNCA BARRA O LEAD. A pergunta e obrigatoria no navegador; aqui, resposta
+// ausente ou fora da lista vira string vazia e o lead segue. Aba aberta antes
+// do deploy manda o formulario sem o campo, e perder lead por isso seria pior
+// que perder a resposta.
+const ORIGENS_DECLARADAS = [
+  'google', 'ia', 'linkedin', 'instagram', 'indicacao', 'feira', 'cliente', 'outro',
+];
+
+function origemDeclarada(data) {
+  const codigo = String(data.origem_declarada || '').trim().toLowerCase();
+  if (!ORIGENS_DECLARADAS.includes(codigo)) {
+    return { origem_declarada: '', origem_declarada_outro: '' };
+  }
+  const outro = codigo === 'outro'
+    ? String(data.origem_declarada_outro || '').replace(/\s+/g, ' ').trim().slice(0, 120)
+    : '';
+  return { origem_declarada: codigo, origem_declarada_outro: outro };
 }
