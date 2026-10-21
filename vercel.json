@@ -461,7 +461,6 @@
       "destination": "/importacao-por-encomenda/",
       "permanent": true
     },
-
     {
       "source": "/m500/",
       "destination": "/aeronaves/m500/",
@@ -708,8 +707,128 @@
       "permanent": true
     },
     {
+      "source": "/blog/sao-paulo-exclui-mercadorias-substituicao-tributaria-icms/",
+      "destination": "/blog/sao-paulo-exclui-substituicao-tributaria/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/importacao-de-automoveis-recorde-jun26/",
+      "destination": "/blog/importacao-brasileira-automoveis-recorde-julho-2026/",
+      "permanent": true
+    },
+    {
+      "source": "/como-incoterm-afeta-importacoes/",
+      "destination": "/blog/como-incoterm-afeta-importacoes/",
+      "permanent": true
+    },
+    {
+      "source": "/rebocadores/",
+      "destination": "/segmentos/rebocadores/",
+      "permanent": true
+    },
+    {
+      "source": "/index.php/negocios/segmentos-de-atuacao/",
+      "destination": "/segmentos/",
+      "permanent": true
+    },
+    {
+      "source": "/ptbr/solicitar-orcamento/",
+      "destination": "/fale-conosco/",
+      "permanent": true
+    },
+    {
+      "source": "/pt-br/home/",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/declaração-de-privacidade/",
+      "destination": "/politica-de-privacidade/",
+      "permanent": true
+    },
+    {
+      "source": "/declara%C3%A7%C3%A3o-de-privacidade/",
+      "destination": "/politica-de-privacidade/",
+      "permanent": true
+    },
+    {
+      "source": "/landing/e-book-wm-trading/",
+      "destination": "/materiais/",
+      "permanent": true
+    },
+    {
+      "source": "/main-import-taxes/",
+      "destination": "/ebooks/principais-impostos-incidentes/",
+      "permanent": true
+    },
+    {
+      "source": "/company/",
+      "destination": "/about/",
+      "permanent": true
+    },
+    {
+      "source": "/en/cases/varejo/",
+      "destination": "/en/segments/retail/",
+      "permanent": true
+    },
+    {
+      "source": "/en/cases/combustivel/",
+      "destination": "/en/segments/fuels/",
+      "permanent": true
+    },
+    {
+      "source": "/en-US/compliance/",
+      "destination": "/en/compliance/",
+      "permanent": true
+    },
+    {
+      "source": "/en/politica-de-cookies/",
+      "destination": "/politica-de-cookies/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/aprovado-projeto-de-lei-que-acaba-com-impostos-sobre-importacao-de-instrumentos-musicais/",
+      "destination": "/blog/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/os-desafios-da-logistica-no-brasil/",
+      "destination": "/blog/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/paises-que-sofrem-embargo-dos-eua/",
+      "destination": "/blog/",
+      "permanent": true
+    },
+    {
+      "source": "/images/meta/:resto(.*)/politica-anticorrupcao-e-antifraude.pdf",
+      "destination": "/wp-content/uploads/2024/07/IT-CMP-002-POLITICA-ANTICORRUPCAO-E-ANTIFRAUDE-002-2.pdf",
+      "permanent": true
+    },
+    {
+      "source": "/images/meta/:resto(.*)/politicaanticorrupcaoeantifraude-wmtradingimportacao.pdf",
+      "destination": "/wp-content/uploads/2024/07/IT-CMP-002-POLITICA-ANTICORRUPCAO-E-ANTIFRAUDE-002-2.pdf",
+      "permanent": true
+    },
+    {
       "source": "/pt-BR/:path(.*)",
       "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/pt-br/:path(.*)",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/ptbr/:path(.*)",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/cases/:path(.*)",
+      "destination": "/segmentos/",
       "permanent": true
     }
   ]
