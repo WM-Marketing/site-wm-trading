@@ -62,27 +62,19 @@ UUID_BABEL = "ff7bcba6-4f23-460b-bd84-10070ca16387"
 #   2. Os tres desfoques do fundo aquarela. O caminho "horizon" e recalculado a
 #      cada quadro, entao o navegador nao reaproveita nada: ele refaz um
 #      desfoque gaussiano de 22 px sobre 1080x1920, trinta vezes por segundo.
-VARIANTES = {
-    # Tudo desligado: foi a que o usuario testou e achou bem melhor.
-    "leve": [
-        ("{grain && <Grain />}", "{false && <Grain />}"),
-        ('filter="url(#wBlur)"', ''),
-        ('filter="url(#wSoft)"', ''),
-    ],
-    # So o grao. Suspeito principal: retangulo de tela cheia com
-    # mix-blend-mode overlay, que obriga o navegador a remisturar toda a pilha
-    # a cada quadro enquanto o envelope flutua.
-    "sem-grao": [
-        ("{grain && <Grain />}", "{false && <Grain />}"),
-    ],
-    # So os desfoques. O caminho do horizonte para de mudar depois de 1,1s,
-    # entao em tese eles nao custam por quadro — esta variante e justamente
-    # para confirmar ou desmentir isso no aparelho.
-    "sem-blur": [
-        ('filter="url(#wBlur)"', ''),
-        ('filter="url(#wSoft)"', ''),
-    ],
-}
+# O grao sai, SEMPRE. Nao e opcional: era a camada que travava a animacao em
+# celular, confirmado pelo usuario testando variantes no proprio aparelho em
+# 27/10/2026 (a versao sem grao correu bem; a versao sem os desfoques do
+# horizonte nao era necessaria).
+#
+# O custo nao era o ruido — o feTurbulence tem geometria fixa e e rasterizado
+# uma vez. Era o mix-blend-mode overlay num retangulo de tela cheia por cima de
+# tudo: enquanto o envelope flutua, o navegador precisa remisturar a pilha
+# inteira a cada quadro, e isso nao cabe no orcamento de um aparelho de 2018.
+#
+# O preco visual e pequeno: o grao era uma textura a 35% de opacidade. O
+# horizonte difuso de aquarela, que e o efeito que se ve, continua intacto.
+SEM_GRAO = ("{grain && <Grain />}", "{false && <Grain />}")
 
 MODULOS_JSX = {
     "1dbc9ba4-bdf0-4952-be59-1c12176ea796": "animations-v3.jsx",
@@ -147,12 +139,12 @@ def compila_jsx(babel_js, fontes):
         return json.loads(r.stdout)
 
 
-def gera(html, publico, url_form, variante=None):
+def gera(html, publico, url_form):
     manifesto_m = re.search(r'(<script type="__bundler/manifest"[^>]*>)(.*?)(</script>)', html, re.S)
     manifesto = json.loads(manifesto_m.group(2).strip())
 
     # Primeiro as trocas de texto, ainda no JSX; depois compila.
-    fontes, trocas = {}, 0
+    fontes, trocas, grao_removido = {}, 0, False
     for uuid, nome in MODULOS_JSX.items():
         if uuid not in manifesto:
             raise SystemExit(f"o modulo {nome} sumiu do manifesto")
@@ -163,12 +155,15 @@ def gera(html, publico, url_form, variante=None):
                 raise SystemExit(f"nao achei a referencia a {TROCA_FUNDO[0]} para trocar pelo WebP")
             codigo = codigo.replace(*TROCA_FUNDO)
             trocas += 1
-        if variante:
-            for de, para in VARIANTES[variante]:
-                codigo = codigo.replace(de, para)
+        if SEM_GRAO[0] in codigo:
+            codigo = codigo.replace(*SEM_GRAO)
+            grao_removido = True
         fontes[nome] = codigo
     if trocas != 1:
         raise SystemExit(f"esperava trocar o RSVP_URL em 1 modulo, troquei em {trocas}")
+    if not grao_removido:
+        raise SystemExit("nao achei a camada de grao para remover — ela trava a "
+                         "animacao em celular, entao nao da para seguir sem conferir")
 
     if UUID_BABEL not in manifesto:
         raise SystemExit("nao achei o Babel no manifesto — o pacote mudou de formato")
@@ -219,12 +214,11 @@ def main():
     origem, saida = sys.argv[1], sys.argv[2]
     with open(origem, encoding="utf-8") as f:
         original = f.read()
-    variante = next((a[2:] for a in sys.argv[3:] if a[2:] in VARIANTES), None)
     for publico, url_form in PUBLICOS.items():
         destino = f"{saida}/{publico}.html"
         with open(destino, "w", encoding="utf-8") as f:
-            f.write(gera(original, publico, url_form, variante=variante))
-        print(f"  {destino}  ({url_form.split('/forms/')[1][:12]}...{' ' + variante.upper() if variante else ''})")
+            f.write(gera(original, publico, url_form))
+        print(f"  {destino}  ({url_form.split('/forms/')[1][:12]}...)")
 
 
 if __name__ == "__main__":
