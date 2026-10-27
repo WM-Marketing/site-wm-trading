@@ -79,7 +79,7 @@ SEM_GRAO = ("{grain && <Grain />}", "{false && <Grain />}")
 # Previa do link (WhatsApp, LinkedIn, e-mail). Entra no <head> do HTML CRU, nao
 # no documento que o carregador monta: o robo do WhatsApp nao executa
 # JavaScript, entao qualquer etiqueta posta em tempo de execucao e invisivel
-# para ele. A imagem e um frame real da cena do envelope, 1200x630.
+# para ele. A imagem (2000x1050, proporcao 1,905) foi feita pelo Thiago.
 SITE = "https://www.wmtrading.com.br"
 PREVIA = SITE + "/wm-party-26/assets/preview.jpg"
 DESCRICAO = ("Um ano de conquista merece uma comemoração especial. "
@@ -96,8 +96,8 @@ def etiquetas_de_previa(publico):
         f'  <meta property="og:url" content="{SITE}/wm-party-26/{publico}/">',
         f'  <meta property="og:image" content="{PREVIA}">',
         '  <meta property="og:image:type" content="image/jpeg">',
-        '  <meta property="og:image:width" content="1200">',
-        '  <meta property="og:image:height" content="630">',
+        '  <meta property="og:image:width" content="2000">',
+        '  <meta property="og:image:height" content="1050">',
         '  <meta property="og:image:alt" content="Envelope do convite da WM Party 26">',
         '  <meta name="twitter:card" content="summary_large_image">',
         f'  <meta name="description" content="{DESCRICAO}">',
