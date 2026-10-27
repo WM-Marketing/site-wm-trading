@@ -82,7 +82,7 @@ UUID_BABEL = "ff7bcba6-4f23-460b-bd84-10070ca16387"
 # do botao) para a fonte maior nao empurrar uma quarta linha contra o botao.
 TIPOGRAFIA = [
     ("width: 500, fontFamily: SANS, fontSize: 26, lineHeight: '40px'",
-     "width: 518, fontFamily: SANS, fontSize: 30, lineHeight: '44px'"),
+     "width: 518, fontFamily: SANS, fontSize: 34, lineHeight: '48px'"),
     ("fontWeight: 300, fontSize: 33, color: '#7C7C7C'",
      "fontWeight: 700, fontSize: 33, color: '#7C7C7C'"),
 ]
