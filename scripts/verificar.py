@@ -52,9 +52,17 @@ URL_PADRAO = "https://site-wm-trading.vercel.app"
 # uso interno, sem GTM e sem cookie nenhum — sem tratamento de dados nao ha o
 # que consentir, entao o CMP nao se aplica. Se um dia uma pagina de interno/
 # passar a carregar tracking, tirar daqui em vez de manter a excecao.
+# 27/10/2026: entram os dois convites da festa da empresa em wm-party-26/. Sao
+# pagina unica, fora da navegacao do site, sem formulario, sem cookie e sem
+# tracking — o botao de confirmar presenca abre um formulario do Monday em outra
+# aba. Poem GTM ali e o visitante ganha banner de cookie num convite de festa,
+# para nao medir nada. Respondem X-Robots-Tag: noindex, nofollow, noarchive
+# (vercel.json) e ficam fora do sitemap (SITEMAP_PASTAS_FORA).
 SEM_TRACKING_OK = {
     "offline.html",
     os.path.join("interno", "padrao-de-emails.html"),
+    os.path.join("wm-party-26", "colaboradores.html"),
+    os.path.join("wm-party-26", "clientes.html"),
     os.path.join("mapa-brasil", "assets", "original_visitedplaces.html"),
     os.path.join("mapa-brasil", "mapa_colombia_panama.html"),
     os.path.join("mapa-brasil", "mapa_completo.html"),

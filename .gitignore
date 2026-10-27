@@ -4,6 +4,11 @@ images/videos/
 *.mov
 *.mp4
 
+# Excecao: o convite da festa precisa do video junto, senao a animacao sobe
+# incompleta. Sao 4,6 MB — cabe folgado no limite do GitHub. A regra acima
+# continua valendo para o resto.
+!wm-party-26/assets/*.mp4
+
 # macOS
 .DS_Store
 .AppleDouble
