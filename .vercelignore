@@ -4,6 +4,12 @@ images/videos/
 *.mov
 *.mp4
 
+# Excecao (27/10/2026): o video do convite da festa TEM que ir ao ar, senao a
+# animacao da revelacao sobe sem ele. Sao 4,6 MB. Cuidado: esta lista e irma do
+# .gitignore e precisa da mesma excecao — o arquivo entrou no git e mesmo assim
+# respondeu 404 em producao, porque so o .gitignore tinha sido liberado.
+!wm-party-26/assets/*.mp4
+
 # macOS
 .DS_Store
 
