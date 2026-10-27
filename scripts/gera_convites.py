@@ -27,6 +27,12 @@ import zlib
 
 MARCA_RSVP = "const RSVP_URL = 'https://www.wmtrading.com.br';"
 
+# O fundo da revelacao veio como PNG de 2251x4000 com 4,2 MB — degrade suave, o
+# pior caso possivel para PNG. Em WebP com o mesmo canal alfa sao 81 KB: menos de
+# 2% do peso, com diferenca media de 0,6 em 255 por canal de cor e alfa identico.
+# Num convite que as pessoas abrem no celular, isso e um terco do download.
+TROCA_FUNDO = ("assets/bg-revelacao.png", "assets/bg-revelacao.webp")
+
 PUBLICOS = {
     "colaboradores": "https://forms.monday.com/forms/5c61c4a157846e8cecd3dbb20f69875c?r=use1",
     "clientes": "https://forms.monday.com/forms/0cf7000d4faa94ffe2658435aa79908b?r=use1",
@@ -65,6 +71,9 @@ def gera(html, publico, url_form):
         if MARCA_RSVP not in codigo:
             continue
         codigo = codigo.replace(MARCA_RSVP, f"const RSVP_URL = '{url_form}';")
+        if TROCA_FUNDO[0] not in codigo:
+            raise SystemExit(f"nao achei a referencia a {TROCA_FUNDO[0]} para trocar pelo WebP")
+        codigo = codigo.replace(*TROCA_FUNDO)
         comprime(entrada, codigo.encode("utf-8"))
         trocas += 1
     if trocas != 1:
