@@ -54,6 +54,20 @@ BASE_HREF = '<base href="/wm-party-26/">'
 # O compilador que vem no pacote e os dois modulos em JSX que ele compilaria no
 # aparelho. O carregador referencia cada modulo como "<uuid>#/<arquivo>".
 UUID_BABEL = "ff7bcba6-4f23-460b-bd84-10070ca16387"
+# Versao "leve": desliga as camadas que o celular repinta a cada quadro. Serve
+# para o proprio aparelho do usuario dizer se o custo esta no desenho ou na
+# animacao em si — nao da para medir isso num Mac, onde sobra GPU.
+#   1. O grao: retangulo de tela cheia com feTurbulence (ruido pixel a pixel) e
+#      mix-blend-mode overlay por cima de tudo.
+#   2. Os tres desfoques do fundo aquarela. O caminho "horizon" e recalculado a
+#      cada quadro, entao o navegador nao reaproveita nada: ele refaz um
+#      desfoque gaussiano de 22 px sobre 1080x1920, trinta vezes por segundo.
+LEVE = [
+    ("{grain && <Grain />}", "{false && <Grain />}"),
+    ('filter="url(#wBlur)"', ''),
+    ('filter="url(#wSoft)"', ''),
+]
+
 MODULOS_JSX = {
     "1dbc9ba4-bdf0-4952-be59-1c12176ea796": "animations-v3.jsx",
     "58429d41-745a-4c37-b8f4-ae25ee3edbe7": "wm-party.jsx",
@@ -117,7 +131,7 @@ def compila_jsx(babel_js, fontes):
         return json.loads(r.stdout)
 
 
-def gera(html, publico, url_form):
+def gera(html, publico, url_form, leve=False):
     manifesto_m = re.search(r'(<script type="__bundler/manifest"[^>]*>)(.*?)(</script>)', html, re.S)
     manifesto = json.loads(manifesto_m.group(2).strip())
 
@@ -133,6 +147,9 @@ def gera(html, publico, url_form):
                 raise SystemExit(f"nao achei a referencia a {TROCA_FUNDO[0]} para trocar pelo WebP")
             codigo = codigo.replace(*TROCA_FUNDO)
             trocas += 1
+        if leve:
+            for de, para in LEVE:
+                codigo = codigo.replace(de, para)
         fontes[nome] = codigo
     if trocas != 1:
         raise SystemExit(f"esperava trocar o RSVP_URL em 1 modulo, troquei em {trocas}")
@@ -186,11 +203,12 @@ def main():
     origem, saida = sys.argv[1], sys.argv[2]
     with open(origem, encoding="utf-8") as f:
         original = f.read()
+    leve = "--leve" in sys.argv
     for publico, url_form in PUBLICOS.items():
         destino = f"{saida}/{publico}.html"
         with open(destino, "w", encoding="utf-8") as f:
-            f.write(gera(original, publico, url_form))
-        print(f"  {destino}  ({url_form.split('/forms/')[1][:12]}...)")
+            f.write(gera(original, publico, url_form, leve=leve))
+        print(f"  {destino}  ({url_form.split('/forms/')[1][:12]}...{' LEVE' if leve else ''})")
 
 
 if __name__ == "__main__":

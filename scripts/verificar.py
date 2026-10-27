@@ -63,6 +63,8 @@ SEM_TRACKING_OK = {
     os.path.join("interno", "padrao-de-emails.html"),
     os.path.join("wm-party-26", "colaboradores.html"),
     os.path.join("wm-party-26", "clientes.html"),
+    # Variante de teste de desempenho, para medir no aparelho do usuario.
+    os.path.join("wm-party-26", "teste-leve.html"),
     os.path.join("mapa-brasil", "assets", "original_visitedplaces.html"),
     os.path.join("mapa-brasil", "mapa_colombia_panama.html"),
     os.path.join("mapa-brasil", "mapa_completo.html"),
