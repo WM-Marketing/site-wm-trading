@@ -62,11 +62,27 @@ UUID_BABEL = "ff7bcba6-4f23-460b-bd84-10070ca16387"
 #   2. Os tres desfoques do fundo aquarela. O caminho "horizon" e recalculado a
 #      cada quadro, entao o navegador nao reaproveita nada: ele refaz um
 #      desfoque gaussiano de 22 px sobre 1080x1920, trinta vezes por segundo.
-LEVE = [
-    ("{grain && <Grain />}", "{false && <Grain />}"),
-    ('filter="url(#wBlur)"', ''),
-    ('filter="url(#wSoft)"', ''),
-]
+VARIANTES = {
+    # Tudo desligado: foi a que o usuario testou e achou bem melhor.
+    "leve": [
+        ("{grain && <Grain />}", "{false && <Grain />}"),
+        ('filter="url(#wBlur)"', ''),
+        ('filter="url(#wSoft)"', ''),
+    ],
+    # So o grao. Suspeito principal: retangulo de tela cheia com
+    # mix-blend-mode overlay, que obriga o navegador a remisturar toda a pilha
+    # a cada quadro enquanto o envelope flutua.
+    "sem-grao": [
+        ("{grain && <Grain />}", "{false && <Grain />}"),
+    ],
+    # So os desfoques. O caminho do horizonte para de mudar depois de 1,1s,
+    # entao em tese eles nao custam por quadro — esta variante e justamente
+    # para confirmar ou desmentir isso no aparelho.
+    "sem-blur": [
+        ('filter="url(#wBlur)"', ''),
+        ('filter="url(#wSoft)"', ''),
+    ],
+}
 
 MODULOS_JSX = {
     "1dbc9ba4-bdf0-4952-be59-1c12176ea796": "animations-v3.jsx",
@@ -131,7 +147,7 @@ def compila_jsx(babel_js, fontes):
         return json.loads(r.stdout)
 
 
-def gera(html, publico, url_form, leve=False):
+def gera(html, publico, url_form, variante=None):
     manifesto_m = re.search(r'(<script type="__bundler/manifest"[^>]*>)(.*?)(</script>)', html, re.S)
     manifesto = json.loads(manifesto_m.group(2).strip())
 
@@ -147,8 +163,8 @@ def gera(html, publico, url_form, leve=False):
                 raise SystemExit(f"nao achei a referencia a {TROCA_FUNDO[0]} para trocar pelo WebP")
             codigo = codigo.replace(*TROCA_FUNDO)
             trocas += 1
-        if leve:
-            for de, para in LEVE:
+        if variante:
+            for de, para in VARIANTES[variante]:
                 codigo = codigo.replace(de, para)
         fontes[nome] = codigo
     if trocas != 1:
@@ -203,12 +219,12 @@ def main():
     origem, saida = sys.argv[1], sys.argv[2]
     with open(origem, encoding="utf-8") as f:
         original = f.read()
-    leve = "--leve" in sys.argv
+    variante = next((a[2:] for a in sys.argv[3:] if a[2:] in VARIANTES), None)
     for publico, url_form in PUBLICOS.items():
         destino = f"{saida}/{publico}.html"
         with open(destino, "w", encoding="utf-8") as f:
-            f.write(gera(original, publico, url_form, leve=leve))
-        print(f"  {destino}  ({url_form.split('/forms/')[1][:12]}...{' LEVE' if leve else ''})")
+            f.write(gera(original, publico, url_form, variante=variante))
+        print(f"  {destino}  ({url_form.split('/forms/')[1][:12]}...{' ' + variante.upper() if variante else ''})")
 
 
 if __name__ == "__main__":
