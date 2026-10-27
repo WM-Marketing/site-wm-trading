@@ -74,6 +74,19 @@ UUID_BABEL = "ff7bcba6-4f23-460b-bd84-10070ca16387"
 #
 # O preco visual e pequeno: o grao era uma textura a 35% de opacidade. O
 # horizonte difuso de aquarela, que e o efeito que se ve, continua intacto.
+# Ajustes de tipografia do fecho da carta, pedidos pelo Thiago em 27/10/2026
+# olhando a pagina pronta: o paragrafo estava pequeno ao lado dos 36 px dos
+# dados do evento, e o "Confirmar presenca" vinha em peso 300 — mais leve que
+# tudo em volta, o que fazia o unico elemento clicavel da pagina parecer
+# legenda. A largura do paragrafo sobe junto (500 -> 518, o mesmo fim de linha
+# do botao) para a fonte maior nao empurrar uma quarta linha contra o botao.
+TIPOGRAFIA = [
+    ("width: 500, fontFamily: SANS, fontSize: 26, lineHeight: '40px'",
+     "width: 518, fontFamily: SANS, fontSize: 30, lineHeight: '44px'"),
+    ("fontWeight: 300, fontSize: 33, color: '#7C7C7C'",
+     "fontWeight: 700, fontSize: 33, color: '#7C7C7C'"),
+]
+
 SEM_GRAO = ("{grain && <Grain />}", "{false && <Grain />}")
 
 # Previa do link (WhatsApp, LinkedIn, e-mail). Entra no <head> do HTML CRU, nao
@@ -181,6 +194,10 @@ def gera(html, publico, url_form):
             if TROCA_FUNDO[0] not in codigo:
                 raise SystemExit(f"nao achei a referencia a {TROCA_FUNDO[0]} para trocar pelo WebP")
             codigo = codigo.replace(*TROCA_FUNDO)
+            for de, para in TIPOGRAFIA:
+                if codigo.count(de) != 1:
+                    raise SystemExit(f"nao achei (ou achei repetido) o trecho de tipografia {de!r}")
+                codigo = codigo.replace(de, para)
             trocas += 1
         if SEM_GRAO[0] in codigo:
             codigo = codigo.replace(*SEM_GRAO)
