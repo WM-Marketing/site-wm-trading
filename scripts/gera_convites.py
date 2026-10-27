@@ -76,6 +76,33 @@ UUID_BABEL = "ff7bcba6-4f23-460b-bd84-10070ca16387"
 # horizonte difuso de aquarela, que e o efeito que se ve, continua intacto.
 SEM_GRAO = ("{grain && <Grain />}", "{false && <Grain />}")
 
+# Previa do link (WhatsApp, LinkedIn, e-mail). Entra no <head> do HTML CRU, nao
+# no documento que o carregador monta: o robo do WhatsApp nao executa
+# JavaScript, entao qualquer etiqueta posta em tempo de execucao e invisivel
+# para ele. A imagem e um frame real da cena do envelope, 1200x630.
+SITE = "https://www.wmtrading.com.br"
+PREVIA = SITE + "/wm-party-26/assets/preview.jpg"
+DESCRICAO = ("Um ano de conquista merece uma comemoração especial. "
+             "29 de novembro, das 12h às 17h, no Cerimonial Oasis, em Vitória.")
+
+
+def etiquetas_de_previa(publico):
+    return "\n".join([
+        '  <meta property="og:type" content="website">',
+        '  <meta property="og:site_name" content="WM Trading">',
+        '  <meta property="og:locale" content="pt_BR">',
+        '  <meta property="og:title" content="WM Party 26 — Convite">',
+        f'  <meta property="og:description" content="{DESCRICAO}">',
+        f'  <meta property="og:url" content="{SITE}/wm-party-26/{publico}/">',
+        f'  <meta property="og:image" content="{PREVIA}">',
+        '  <meta property="og:image:type" content="image/jpeg">',
+        '  <meta property="og:image:width" content="1200">',
+        '  <meta property="og:image:height" content="630">',
+        '  <meta property="og:image:alt" content="Envelope do convite da WM Party 26">',
+        '  <meta name="twitter:card" content="summary_large_image">',
+        f'  <meta name="description" content="{DESCRICAO}">',
+    ])
+
 MODULOS_JSX = {
     "1dbc9ba4-bdf0-4952-be59-1c12176ea796": "animations-v3.jsx",
     "58429d41-745a-4c37-b8f4-ae25ee3edbe7": "wm-party.jsx",
@@ -196,6 +223,13 @@ def gera(html, publico, url_form):
     ext_m = re.search(r'(<script type="__bundler/ext_resources"[^>]*>)(.*?)(</script>)', html, re.S)
     recursos = [r for r in json.loads(ext_m.group(2).strip()) if r.get("uuid") != UUID_BABEL]
     html = html[:ext_m.start(2)] + json.dumps(recursos, ensure_ascii=False) + html[ext_m.end(2):]
+
+    # Por ultimo, para nao deslocar as posicoes de que as reescritas acima
+    # dependem (foi o que quebrou na primeira tentativa).
+    ancora = "  <title>WM Party 26 — Convite</title>"
+    if ancora not in html:
+        raise SystemExit("nao achei o <title> do HTML cru para ancorar a previa do link")
+    html = html.replace(ancora, ancora + "\n" + etiquetas_de_previa(publico), 1)
     return html
 
 
