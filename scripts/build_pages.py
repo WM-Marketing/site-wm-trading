@@ -3931,7 +3931,11 @@ Se você tiver alguma pergunta sobre esta Política de Privacidade ou as prátic
                 f'href="{SITE_URL}{alternate_url}" />\n'
                 f'  <link rel="alternate" hreflang="x-default" href="{default_url}" />'
             )
-        render_html_page(post_out_path, title, excerpt[:155], post_detail_html, head_tpl, header_tpl, footer_tpl,
+        # seo_title / meta_description: <title> e description proprios, sem mexer no H1
+        # nem no resumo do card da /blog/. Sem os campos, o post sai como antes.
+        seo_title = fm.get("seo_title") or title
+        meta_description = fm.get("meta_description") or excerpt[:155]
+        render_html_page(post_out_path, seo_title, meta_description, post_detail_html, head_tpl, header_tpl, footer_tpl,
                          lang=post_lang, og_type="article", og_image=cover or None,
                          jsonld=post_jsonld_blocks, extra_head=extra_head)
 
