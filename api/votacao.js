@@ -24,6 +24,14 @@
 const MONDAY_ENDPOINT = 'https://api.monday.com/v2';
 const MONDAY_API_VERSION = '2026-07';
 
+/* A VOTACAO ESTA ABERTA?
+   false recusa qualquer voto novo, venha da pagina ou de um script. A pagina
+   tambem esconde os botoes, mas isso e so a tela: a recusa que vale e esta,
+   porque o repositorio e publico e o endereco do endpoint esta nele.
+   Encerrada em 29/10/2026, a pedido do Thiago, com 75 votos no board.
+   Para reabrir, troque para true e publique. */
+const VOTACAO_ABERTA = false;
+
 const NOME_DO_BOARD = 'Concurso de Fantasia WM 2026';
 
 /* Titulo da coluna -> tipo no Monday. A ordem e a ordem em que aparecem. */
@@ -229,6 +237,12 @@ module.exports = async function handler(req, res) {
   if (req.method !== 'POST') {
     res.setHeader('Allow', ['GET', 'POST']);
     return res.status(405).json({ ok: false, error: 'Método não permitido.' });
+  }
+
+  if (!VOTACAO_ABERTA) {
+    return res.status(403).json({
+      ok: false, encerrada: true,
+      error: 'A votação foi encerrada. O resultado sai no anúncio dos vencedores.' });
   }
 
   try {

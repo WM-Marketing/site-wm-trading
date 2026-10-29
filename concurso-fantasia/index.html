@@ -165,6 +165,11 @@ button{font:inherit; color:inherit; border:0; background:none; cursor:pointer}
   -webkit-background-clip:text; background-clip:text; color:transparent;
 }
 .topo .chamada{max-width:720px; margin-top:22px; font-size:19px; color:#D6CCD7}
+.topo .encerrado{
+  max-width:720px; margin-top:26px; padding:16px 22px; border-radius:14px;
+  font-size:17px; color:var(--ambar);
+  background:rgba(255,184,0,.08); border:1px solid rgba(255,184,0,.42);
+}
 
 .painel{display:grid; grid-template-columns:1.55fr 1fr; gap:22px; margin:44px 0 10px}
 .caixa{
@@ -369,6 +374,10 @@ body.ja-votou .votar{opacity:.3; pointer-events:none}
         verde. Outra atravessou o expediente debaixo de um lençol. Agora a
         decisão é sua — e é uma só.
       </p>
+      <p class="encerrado" id="encerrado" hidden>
+        A votação foi encerrada em 29 de outubro de 2026. Obrigado a quem votou —
+        o resultado sai no anúncio dos vencedores.
+      </p>
     </section>
 
     <section class="painel">
@@ -470,6 +479,13 @@ body.ja-votou .votar{opacity:.3; pointer-events:none}
 
   var SETORES = ['ADM','DHO','GEST','SEAFI','SECOM','SEDEP','SEFIS','SEJUD',
                  'SELOG','SEMAK','SEOPE','SETEC','SGQ','Outro'];
+
+  /* ── A VOTACAO ESTA ABERTA? ───────────────────────────────────────────
+     false tira os botoes e poe o aviso de encerrada. Isto aqui e so a tela:
+     a recusa que vale e a do api/votacao.js, que devolve 403 para qualquer
+     voto que chegue depois do fechamento — inclusive por fora da pagina.
+     Mudar so aqui nao fecha nada. Encerrada em 29/10/2026. */
+  var VOTACAO_ABERTA = false;
 
   var CHAVE_LOCAL = 'wm-fantasia-2026';
 
@@ -704,6 +720,11 @@ body.ja-votou .votar{opacity:.3; pointer-events:none}
   }
 
   document.getElementById('pronto-fechar').addEventListener('click', function () { fecha(janelaPronto); });
+
+  if (!VOTACAO_ABERTA) {
+    document.body.classList.add('ja-votou');
+    document.getElementById('encerrado').hidden = false;
+  }
 
   /* Quem ja votou neste navegador volta direto para a tela de "ja foi". */
   try {
