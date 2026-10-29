@@ -70,6 +70,7 @@ URL_PADRAO = "https://site-wm-trading.vercel.app"
 SEM_TRACKING_OK = {
     "offline.html",
     os.path.join("concurso-fantasia", "index.html"),
+    os.path.join("concurso-fantasia", "resultado", "index.html"),
     os.path.join("interno", "padrao-de-emails.html"),
     os.path.join("wm-party-26", "colaboradores.html"),
     os.path.join("wm-party-26", "clientes.html"),
