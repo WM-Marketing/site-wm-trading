@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Concurso de Fantasia WM 2026</title>
+<meta name="robots" content="noindex, nofollow, noarchive">
+<meta name="description" content="Votação do Concurso de Fantasia do Halloween da WM Trading. Um voto por colaborador.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="WM Trading">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:title" content="Concurso de Fantasia WM 2026">
+<meta property="og:description" content="Sete fantasias, um voto por pessoa. A votação está aberta.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><text y='26' font-size='26'>&#127875;</text></svg>">
+
+<!-- As fontes sao as do site, servidas pelo proprio dominio (/fonts/). A pagina
+     nao carrega css/base.css: ela nao tem cabecalho, rodape nem menu, e herdar
+     o CSS do site traria junto tudo o que ela nao usa. -->
+<style>
+@font-face{font-family:'Poppins';font-weight:300;font-display:swap;src:url('/fonts/poppins-300-latin.woff2') format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'Poppins';font-weight:300;font-display:swap;src:url('/fonts/poppins-300-latin-ext.woff2') format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:'Poppins';font-weight:400;font-display:swap;src:url('/fonts/poppins-400-latin.woff2') format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'Poppins';font-weight:400;font-display:swap;src:url('/fonts/poppins-400-latin-ext.woff2') format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:'Poppins';font-weight:600;font-display:swap;src:url('/fonts/poppins-600-latin.woff2') format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'Poppins';font-weight:600;font-display:swap;src:url('/fonts/poppins-600-latin-ext.woff2') format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:'Poppins';font-weight:700;font-display:swap;src:url('/fonts/poppins-700-latin.woff2') format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'Poppins';font-weight:700;font-display:swap;src:url('/fonts/poppins-700-latin-ext.woff2') format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+
+:root{
+  --laranja:#FC5000;       /* a cor da marca WM */
+  --ambar:#FFB800;
+  --roxo:#6B3FA0;
+  --fundo:#120D16;
+  --fundo-2:#1C1420;
+  --borda:rgba(255,255,255,.10);
+  --texto:#F3EDE8;
+  --texto-2:#A79CA8;
+}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0; background:var(--fundo); color:var(--texto);
+  font-family:'Poppins',system-ui,-apple-system,'Segoe UI',sans-serif;
+  font-weight:300; line-height:1.6; -webkit-font-smoothing:antialiased;
+}
+/* Nevoa de fundo: dois gradientes radiais parados. Parados de proposito — e um
+   fundo de pagina longa, e um degrade animado atras de uma pagina com rolagem
+   obriga o navegador a repintar tudo a cada quadro. */
+body::before{
+  content:''; position:fixed; inset:0; z-index:0; pointer-events:none;
+  background:
+    radial-gradient(1100px 620px at 15% -8%, rgba(252,80,0,.16), transparent 62%),
+    radial-gradient(900px 560px at 92% 4%, rgba(107,63,160,.22), transparent 60%);
+}
+.conteudo{position:relative; z-index:1}
+
+h1,h2,h3{font-weight:700; line-height:1.14; letter-spacing:-.4px; margin:0}
+p{margin:0}
+img{display:block; max-width:100%}
+button{font:inherit; color:inherit; border:0; background:none; cursor:pointer}
+
+/* ══════════════════ ABERTURA ══════════════════
+   Entra por cima de tudo, dura ~4 s e sai. Nada de filtro de desfoque nem de
+   mix-blend-mode em tela cheia: foi o que travou o convite da festa no celular
+   (27/10/2026). Aqui so ha opacidade e transform, que a GPU resolve sozinha. */
+#abertura{
+  position:fixed; inset:0; z-index:90; display:grid; place-items:center;
+  background:#0A070D; cursor:pointer; overflow:hidden;
+  transition:opacity .85s ease, visibility .85s;
+}
+#abertura.saiu{opacity:0; visibility:hidden}
+.lua{
+  position:absolute; top:-120px; right:-80px; width:520px; height:520px;
+  border-radius:50%; opacity:.5;
+  background:radial-gradient(circle at 38% 36%, #FFE6B8 0%, #FFC46B 34%, rgba(255,160,40,.16) 60%, transparent 72%);
+  animation:lua-sobe 3s cubic-bezier(.2,.7,.2,1) both;
+}
+@keyframes lua-sobe{from{transform:translateY(60px) scale(.92); opacity:0} to{transform:none; opacity:.5}}
+
+/* Nevoa: duas faixas largas deslizando devagar. Transform puro. */
+.nevoa{position:absolute; left:-50%; width:200%; height:280px; opacity:.5}
+.nevoa i{
+  position:absolute; inset:0; display:block;
+  background:radial-gradient(60% 100% at 20% 50%, rgba(167,156,168,.22), transparent 70%),
+             radial-gradient(50% 100% at 62% 46%, rgba(167,156,168,.16), transparent 70%);
+}
+.nevoa--baixo{bottom:-40px; animation:desliza 26s linear infinite}
+.nevoa--alto{bottom:170px; opacity:.3; animation:desliza 40s linear infinite reverse}
+@keyframes desliza{from{transform:translateX(-12%)} to{transform:translateX(12%)}}
+
+.morcego{position:absolute; width:46px; animation:voa linear infinite}
+.morcego path{fill:#0A070D; stroke:#2A2130; stroke-width:1.5}
+.morcego .asa{animation:bate .34s steps(2,end) infinite}
+@keyframes bate{from{transform:scaleY(1)} to{transform:scaleY(.42)}}
+@keyframes voa{
+  from{transform:translate(-14vw,0) scale(.8)}
+  50%{transform:translate(42vw,-70px) scale(1.05)}
+  to{transform:translate(112vw,30px) scale(.8)}
+}
+.morcego--a{top:18%; animation-duration:13s}
+.morcego--b{top:34%; width:30px; animation-duration:19s; animation-delay:-6s}
+.morcego--c{top:9%;  width:62px; animation-duration:16s; animation-delay:-11s}
+
+.teia{position:absolute; width:190px; opacity:.22; stroke:#C8BCCB; fill:none; stroke-width:1.2}
+.teia--esq{top:0; left:0}
+.teia--dir{top:0; right:0; transform:scaleX(-1)}
+
+.titulo{position:relative; text-align:center; padding:0 24px}
+.titulo .acima{
+  display:block; font-size:19px; font-weight:400; letter-spacing:11px;
+  color:var(--ambar); text-transform:uppercase; margin-bottom:14px;
+  animation:sobe .9s .25s cubic-bezier(.2,.8,.2,1) both;
+}
+.titulo .grande{
+  display:block; font-size:clamp(56px,11vw,142px); font-weight:700;
+  letter-spacing:-3px; line-height:.92;
+  background:linear-gradient(94deg,#FFB800,#FC5000 58%,#FF7A2F);
+  -webkit-background-clip:text; background-clip:text; color:transparent;
+  animation:sobe 1s .45s cubic-bezier(.2,.8,.2,1) both, piscada 2.6s 1.5s both;
+}
+.titulo .abaixo{
+  display:block; margin-top:20px; font-size:17px; letter-spacing:5px;
+  color:#CFC4D1; text-transform:uppercase;
+  animation:sobe .9s .95s cubic-bezier(.2,.8,.2,1) both;
+}
+.titulo .pular{
+  display:block; margin:44px auto 0; font-size:13px; letter-spacing:2.5px;
+  color:#6F6475; text-transform:uppercase;
+  animation:sobe .8s 2.1s ease both;
+}
+@keyframes sobe{from{opacity:0; transform:translateY(26px)} to{opacity:1; transform:none}}
+/* A piscada e de vela, nao de lampada quebrada: tres quedas curtas e acabou. */
+@keyframes piscada{
+  0%,100%{opacity:1} 6%{opacity:.35} 9%{opacity:1}
+  41%{opacity:.5} 44%{opacity:1} 70%{opacity:.4} 73%{opacity:1}
+}
+
+/* ══════════════════ PAGINA ══════════════════ */
+.faixa{
+  border-bottom:1px solid var(--borda);
+  background:linear-gradient(180deg,rgba(252,80,0,.10),transparent);
+}
+.limite{max-width:1180px; margin:0 auto; padding:0 28px}
+.faixa .limite{display:flex; align-items:center; justify-content:space-between; gap:24px; padding-block:22px}
+.marca{font-size:13px; letter-spacing:4px; text-transform:uppercase; color:var(--ambar)}
+.marca b{color:var(--texto); font-weight:600}
+.faixa .data{font-size:13px; letter-spacing:2px; text-transform:uppercase; color:var(--texto-2)}
+
+.topo{padding:68px 0 10px}
+.topo h1{font-size:clamp(38px,5.4vw,66px)}
+.topo h1 span{
+  background:linear-gradient(94deg,#FFB800,#FC5000 62%);
+  -webkit-background-clip:text; background-clip:text; color:transparent;
+}
+.topo .chamada{max-width:720px; margin-top:22px; font-size:19px; color:#D6CCD7}
+
+.painel{display:grid; grid-template-columns:1.55fr 1fr; gap:22px; margin:44px 0 10px}
+.caixa{
+  background:var(--fundo-2); border:1px solid var(--borda); border-radius:18px;
+  padding:28px 30px;
+}
+.caixa h2{font-size:15px; letter-spacing:3.5px; text-transform:uppercase; color:var(--ambar); margin-bottom:18px}
+.regras{list-style:none; margin:0; padding:0; display:grid; gap:13px}
+.regras li{display:grid; grid-template-columns:26px 1fr; gap:12px; font-size:15.5px; color:#D6CCD7}
+.regras li::before{content:'●'; color:var(--laranja); font-size:11px; line-height:1.9}
+.regras b{color:var(--texto); font-weight:600}
+
+.premios{list-style:none; margin:0; padding:0; display:grid; gap:12px}
+.premios li{
+  display:flex; align-items:baseline; justify-content:space-between; gap:16px;
+  padding:13px 16px; border-radius:12px; background:rgba(255,255,255,.035);
+  border:1px solid var(--borda);
+}
+.premios .pos{font-size:14px; letter-spacing:2px; text-transform:uppercase; color:var(--texto-2)}
+.premios li:first-child .pos{color:var(--ambar)}
+.premios .valor{font-size:23px; font-weight:700; color:var(--texto)}
+.premios li:first-child .valor{color:var(--ambar)}
+
+.grade{
+  display:grid; grid-template-columns:repeat(3,1fr); gap:26px;
+  margin:54px 0 0; padding:0; list-style:none;
+}
+.card{
+  background:var(--fundo-2); border:1px solid var(--borda); border-radius:18px;
+  overflow:hidden; display:flex; flex-direction:column;
+  transition:border-color .25s ease, transform .25s ease;
+}
+.card:hover{border-color:rgba(252,80,0,.45); transform:translateY(-3px)}
+.card.votado{border-color:var(--ambar)}
+.fotos{position:relative; aspect-ratio:3/4; background:#0D0A10}
+.fotos img{
+  position:absolute; inset:0; width:100%; height:100%; object-fit:cover;
+  opacity:0; transition:opacity .4s ease;
+}
+.fotos img.ativa{opacity:1}
+.pontos{position:absolute; left:0; right:0; bottom:12px; display:flex; justify-content:center; gap:8px}
+.pontos button{
+  width:9px; height:9px; border-radius:50%; background:rgba(255,255,255,.4);
+  box-shadow:0 0 0 1px rgba(0,0,0,.35); padding:0; transition:background .2s;
+}
+.pontos button[aria-current='true']{background:var(--ambar); width:22px; border-radius:5px}
+.ampliar{
+  position:absolute; right:10px; top:10px; padding:7px 12px; border-radius:999px;
+  font-size:12px; letter-spacing:1px; text-transform:uppercase;
+  background:rgba(10,7,13,.62); color:#EDE6EE; border:1px solid rgba(255,255,255,.18);
+  opacity:0; transition:opacity .2s ease;
+}
+.card:hover .ampliar, .ampliar:focus-visible{opacity:1}
+.dados{padding:20px 22px 22px; display:flex; flex-direction:column; gap:4px; flex:1}
+.dados h3{font-size:22px}
+.dados .fantasia{color:var(--ambar); font-size:15.5px; margin-bottom:16px}
+.votar{
+  margin-top:auto; width:100%; padding:13px 16px; border-radius:999px;
+  font-size:15px; font-weight:600; color:#1A1119;
+  background:linear-gradient(94deg,#FFB800,#FC5000);
+  transition:filter .2s ease, opacity .2s ease;
+}
+.votar:hover{filter:brightness(1.1)}
+.card .selo{
+  display:none; margin-top:auto; padding:13px 16px; border-radius:999px;
+  text-align:center; font-size:15px; font-weight:600; color:var(--ambar);
+  border:1px solid rgba(255,184,0,.5); background:rgba(255,184,0,.08);
+}
+.card.votado .votar{display:none}
+.card.votado .selo{display:block}
+body.ja-votou .votar{opacity:.3; pointer-events:none}
+
+.rodape{
+  margin:66px 0 0; border-top:1px solid var(--borda); padding:28px 0 60px;
+  font-size:14px; color:var(--texto-2);
+}
+.rodape a{color:var(--ambar)}
+
+/* ══════════════════ JANELAS ══════════════════ */
+.janela{
+  position:fixed; inset:0; z-index:80; display:none;
+  align-items:center; justify-content:center; padding:24px;
+  background:rgba(8,5,11,.82);
+}
+.janela.aberta{display:flex}
+.folha{
+  width:100%; max-width:470px; background:var(--fundo-2);
+  border:1px solid var(--borda); border-radius:20px; padding:32px;
+}
+.folha h2{font-size:24px}
+.folha .para{margin:8px 0 24px; color:var(--texto-2); font-size:15px}
+.folha .para b{color:var(--ambar); font-weight:600}
+.campo{display:block; margin-bottom:18px}
+.campo span{display:block; font-size:13.5px; letter-spacing:.4px; color:var(--texto-2); margin-bottom:7px}
+.campo input, .campo select{
+  width:100%; padding:13px 15px; border-radius:11px; font:inherit; font-size:16px;
+  color:var(--texto); background:#0F0B13; border:1px solid rgba(255,255,255,.14);
+}
+.campo input:focus, .campo select:focus{outline:2px solid var(--laranja); outline-offset:1px}
+.campo select{appearance:none; background-image:linear-gradient(45deg,transparent 50%,#A79CA8 50%),linear-gradient(135deg,#A79CA8 50%,transparent 50%); background-position:calc(100% - 20px) 22px,calc(100% - 14px) 22px; background-size:6px 6px; background-repeat:no-repeat}
+.armadilha{position:absolute; left:-9999px; width:1px; height:1px; overflow:hidden}
+.aviso{
+  display:none; margin-bottom:16px; padding:12px 14px; border-radius:11px;
+  font-size:14.5px; color:#FFD9C6; background:rgba(252,80,0,.14);
+  border:1px solid rgba(252,80,0,.38);
+}
+.aviso.visivel{display:block}
+.acoes{display:flex; gap:12px; margin-top:6px}
+.acoes .confirmar{
+  flex:1; padding:14px; border-radius:999px; font-size:15.5px; font-weight:600;
+  color:#1A1119; background:linear-gradient(94deg,#FFB800,#FC5000);
+}
+.acoes .confirmar[disabled]{opacity:.55; cursor:progress}
+.acoes .voltar{padding:14px 20px; border-radius:999px; color:var(--texto-2)}
+.acoes .voltar:hover{color:var(--texto)}
+
+.pronto{text-align:center}
+.pronto .marca-ok{font-size:52px; line-height:1; margin-bottom:14px}
+.pronto h2{margin-bottom:10px}
+.pronto p{color:var(--texto-2); font-size:15.5px}
+.pronto button{
+  margin-top:24px; padding:13px 26px; border-radius:999px; font-weight:600;
+  border:1px solid var(--borda); color:var(--texto);
+}
+
+#lupa{z-index:85; background:rgba(5,3,7,.93)}
+#lupa img{max-height:86vh; width:auto; border-radius:14px}
+#lupa .fechar{position:absolute; top:22px; right:26px; font-size:30px; line-height:1; color:#C8BCCB}
+#lupa .passa{position:absolute; top:50%; transform:translateY(-50%); font-size:40px; color:#C8BCCB; padding:16px}
+#lupa .passa.ant{left:18px}
+#lupa .passa.pos{right:18px}
+
+@media (max-width:1080px){
+  .grade{grid-template-columns:repeat(2,1fr)}
+  .painel{grid-template-columns:1fr}
+}
+@media (max-width:640px){
+  .grade{grid-template-columns:1fr}
+  .limite{padding:0 18px}
+  .topo{padding-top:44px}
+}
+/* Quem pede menos movimento no sistema nao ve a abertura animada nem o resto. */
+@media (prefers-reduced-motion:reduce){
+  *{animation:none !important; transition:none !important}
+  html{scroll-behavior:auto}
+}
+</style>
+</head>
+<body>
+
+<!-- ─────────── Abertura ─────────── -->
+<div id="abertura" role="button" tabindex="0" aria-label="Pular a abertura">
+  <div class="lua"></div>
+  <div class="nevoa nevoa--alto"><i></i></div>
+  <div class="nevoa nevoa--baixo"><i></i></div>
+
+  <svg class="teia teia--esq" viewBox="0 0 200 200" aria-hidden="true">
+    <path d="M0,0 L200,120 M0,0 L160,200 M0,0 L200,40 M0,0 L80,200 M0,0 L0,200 M0,0 L200,0"/>
+    <path d="M44,8 C40,28 28,40 8,44 M86,16 C78,52 52,78 16,86 M128,26 C116,78 78,116 26,128 M170,36 C154,104 104,154 36,170"/>
+  </svg>
+  <svg class="teia teia--dir" viewBox="0 0 200 200" aria-hidden="true">
+    <path d="M0,0 L200,120 M0,0 L160,200 M0,0 L200,40 M0,0 L80,200 M0,0 L0,200 M0,0 L200,0"/>
+    <path d="M44,8 C40,28 28,40 8,44 M86,16 C78,52 52,78 16,86 M128,26 C116,78 78,116 26,128 M170,36 C154,104 104,154 36,170"/>
+  </svg>
+
+  <svg class="morcego morcego--a" viewBox="0 0 64 32" aria-hidden="true">
+    <path class="asa" style="transform-origin:32px 16px" d="M32,16 C24,4 14,2 4,8 C10,10 10,18 2,22 C12,26 24,24 32,16 C40,24 52,26 62,22 C54,18 54,10 60,8 C50,2 40,4 32,16 Z"/>
+    <path d="M32,10 C34,12 34,20 32,23 C30,20 30,12 32,10 Z"/>
+  </svg>
+  <svg class="morcego morcego--b" viewBox="0 0 64 32" aria-hidden="true">
+    <path class="asa" style="transform-origin:32px 16px" d="M32,16 C24,4 14,2 4,8 C10,10 10,18 2,22 C12,26 24,24 32,16 C40,24 52,26 62,22 C54,18 54,10 60,8 C50,2 40,4 32,16 Z"/>
+    <path d="M32,10 C34,12 34,20 32,23 C30,20 30,12 32,10 Z"/>
+  </svg>
+  <svg class="morcego morcego--c" viewBox="0 0 64 32" aria-hidden="true">
+    <path class="asa" style="transform-origin:32px 16px" d="M32,16 C24,4 14,2 4,8 C10,10 10,18 2,22 C12,26 24,24 32,16 C40,24 52,26 62,22 C54,18 54,10 60,8 C50,2 40,4 32,16 Z"/>
+    <path d="M32,10 C34,12 34,20 32,23 C30,20 30,12 32,10 Z"/>
+  </svg>
+
+  <div class="titulo">
+    <span class="acima">Concurso de</span>
+    <span class="grande">Fantasia</span>
+    <span class="abaixo">WM Trading · Halloween 2026</span>
+    <span class="pular">clique para entrar</span>
+  </div>
+</div>
+
+<!-- ─────────── Pagina ─────────── -->
+<div class="conteudo">
+  <div class="faixa">
+    <div class="limite">
+      <span class="marca"><b>WM</b> Trading</span>
+      <span class="data">Halloween 2026</span>
+    </div>
+  </div>
+
+  <main class="limite">
+    <section class="topo">
+      <h1>Quem levou o <span>Halloween</span> mais a sério?</h1>
+      <p class="chamada">
+        Sete pessoas acordaram mais cedo, enfrentaram o trânsito e entraram no
+        escritório fantasiadas. Uma passou o dia inteiro de rosto pintado de
+        verde. Outra atravessou o expediente debaixo de um lençol. Agora a
+        decisão é sua — e é uma só.
+      </p>
+    </section>
+
+    <section class="painel">
+      <div class="caixa">
+        <h2>Como funciona</h2>
+        <ul class="regras">
+          <li><span><b>Um voto por pessoa.</b> Escolha uma fantasia só. Dividir o
+            coração entre sete é bonito, mas não conta.</span></li>
+          <li><span><b>Identifique-se.</b> Nome completo e setor são obrigatórios:
+            é o que separa um voto de um palpite. Voto sem identificação
+            é descartado.</span></li>
+          <li><span><b>Pode votar em si mesmo.</b> Modéstia não está entre os
+            critérios de avaliação.</span></li>
+          <li><span><b>O placar fica fechado até o anúncio.</b> Ninguém precisa
+            saber quem está na frente para decidir de quem gostou.</span></li>
+          <li><span><b>A ordem muda a cada visita.</b> A página embaralha os
+            participantes para ninguém levar vantagem por aparecer primeiro.</span></li>
+        </ul>
+      </div>
+      <div class="caixa">
+        <h2>Premiação</h2>
+        <ul class="premios">
+          <li><span class="pos">1º lugar</span><span class="valor">R$ 300,00</span></li>
+          <li><span class="pos">2º lugar</span><span class="valor">R$ 200,00</span></li>
+          <li><span class="pos">3º lugar</span><span class="valor">R$ 100,00</span></li>
+        </ul>
+      </div>
+    </section>
+
+    <ul class="grade" id="grade"></ul>
+
+    <p class="rodape">
+      Votação do Concurso de Fantasia da WM Trading. Dúvidas sobre a apuração?
+      Fale com o Marketing: <a href="mailto:marketing@wmtrading.com.br">marketing@wmtrading.com.br</a>.
+    </p>
+  </main>
+</div>
+
+<!-- ─────────── Janela do voto ─────────── -->
+<div class="janela" id="janela-voto" role="dialog" aria-modal="true" aria-labelledby="voto-titulo">
+  <div class="folha">
+    <h2 id="voto-titulo">Confirme seu voto</h2>
+    <p class="para">Você está votando em <b id="voto-alvo"></b>.</p>
+    <div class="aviso" id="voto-aviso" role="alert"></div>
+    <label class="campo">
+      <span>Seu nome completo</span>
+      <input id="voto-nome" type="text" autocomplete="name" maxlength="80" placeholder="Nome e sobrenome">
+    </label>
+    <label class="campo">
+      <span>Seu setor</span>
+      <select id="voto-setor">
+        <option value="">Selecione…</option>
+      </select>
+    </label>
+    <div class="armadilha" aria-hidden="true">
+      <label>Deixe em branco<input id="voto-gotcha" type="text" tabindex="-1" autocomplete="off"></label>
+    </div>
+    <div class="acoes">
+      <button class="confirmar" id="voto-enviar">Confirmar voto</button>
+      <button class="voltar" id="voto-cancelar">Cancelar</button>
+    </div>
+  </div>
+</div>
+
+<!-- ─────────── Janela de confirmacao ─────────── -->
+<div class="janela" id="janela-pronto" role="dialog" aria-modal="true" aria-labelledby="pronto-titulo">
+  <div class="folha pronto">
+    <div class="marca-ok">🎃</div>
+    <h2 id="pronto-titulo">Voto registrado</h2>
+    <p id="pronto-texto"></p>
+    <button id="pronto-fechar">Fechar</button>
+  </div>
+</div>
+
+<!-- ─────────── Foto ampliada ─────────── -->
+<div class="janela" id="lupa" role="dialog" aria-modal="true" aria-label="Foto ampliada">
+  <button class="fechar" id="lupa-fechar" aria-label="Fechar">×</button>
+  <button class="passa ant" id="lupa-ant" aria-label="Foto anterior">‹</button>
+  <img id="lupa-img" alt="">
+  <button class="passa pos" id="lupa-pos" aria-label="Próxima foto">›</button>
+</div>
+
+<script>
+(function () {
+  'use strict';
+
+  /* A lista aqui desenha os cards. A lista que VALE para contar o voto esta no
+     api/votacao.js, no servidor: mexer nesta pelo console do navegador nao cria
+     candidato nenhum. Se acrescentar alguem, acrescente nos dois. */
+  var PARTICIPANTES = [
+    { slug: 'davi',     nome: 'Davi',          fantasia: 'Aang' },
+    { slug: 'eduardo',  nome: 'Eduardo',       fantasia: 'Jason' },
+    { slug: 'gabriela', nome: 'Gabriela',      fantasia: 'Ronald McDonald' },
+    { slug: 'isabela',  nome: 'Isabela Melo',  fantasia: 'Fantasma' },
+    { slug: 'karine',   nome: 'Karine',        fantasia: 'A Dama dos Alfinetes' },
+    { slug: 'malena',   nome: 'Malena',        fantasia: 'Elphaba' },
+    { slug: 'maria',    nome: 'Maria Emília',  fantasia: 'Catrina, a Caveira Mexicana' }
+  ];
+
+  var SETORES = ['ADM','DHO','GEST','SEAFI','SECOM','SEDEP','SEFIS','SEJUD',
+                 'SELOG','SEMAK','SEOPE','SETEC','SGQ','Outro'];
+
+  var CHAVE_LOCAL = 'wm-fantasia-2026';
+
+  /* ── Abertura ─────────────────────────────────────────────────────────── */
+  var abertura = document.getElementById('abertura');
+  var saiuSozinha = setTimeout(fechaAbertura, 4600);
+  function fechaAbertura() {
+    clearTimeout(saiuSozinha);
+    abertura.classList.add('saiu');
+    setTimeout(function () { abertura.remove(); }, 900);
+  }
+  abertura.addEventListener('click', fechaAbertura);
+  abertura.addEventListener('keydown', function (e) {
+    if (e.key === 'Enter' || e.key === ' ' || e.key === 'Escape') { e.preventDefault(); fechaAbertura(); }
+  });
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) fechaAbertura();
+
+  /* ── Grade ────────────────────────────────────────────────────────────── */
+  /* Fisher-Yates. A ordem alfabetica daria vantagem fixa a quem comeca com D —
+     numa votacao de sete, a primeira posicao nao e um detalhe. */
+  function embaralha(lista) {
+    var copia = lista.slice();
+    for (var i = copia.length - 1; i > 0; i--) {
+      var j = Math.floor(Math.random() * (i + 1));
+      var t = copia[i]; copia[i] = copia[j]; copia[j] = t;
+    }
+    return copia;
+  }
+
+  var grade = document.getElementById('grade');
+  embaralha(PARTICIPANTES).forEach(function (p, pos) {
+    var li = document.createElement('li');
+    li.className = 'card';
+    li.dataset.slug = p.slug;
+    var alt = p.nome + ' fantasiada de ' + p.fantasia;
+    li.innerHTML =
+      '<div class="fotos">' +
+        '<img class="ativa" src="/concurso-fantasia/fotos/' + p.slug + '-1.webp" width="900" height="1200" alt="' + alt + '"' +
+          (pos < 3 ? '' : ' loading="lazy"') + '>' +
+        '<img src="/concurso-fantasia/fotos/' + p.slug + '-2.webp" width="900" height="1200" alt="" loading="lazy">' +
+        '<button class="ampliar" type="button">Ampliar</button>' +
+        '<div class="pontos">' +
+          '<button type="button" aria-current="true" aria-label="Foto 1 de ' + p.nome + '"></button>' +
+          '<button type="button" aria-current="false" aria-label="Foto 2 de ' + p.nome + '"></button>' +
+        '</div>' +
+      '</div>' +
+      '<div class="dados">' +
+        '<h3>' + p.nome + '</h3>' +
+        '<p class="fantasia">' + p.fantasia + '</p>' +
+        '<button class="votar" type="button">Votar nesta fantasia</button>' +
+        '<span class="selo">Seu voto 🎃</span>' +
+      '</div>';
+    grade.appendChild(li);
+  });
+
+  function mostraFoto(card, indice) {
+    var imgs = card.querySelectorAll('.fotos img');
+    var pontos = card.querySelectorAll('.pontos button');
+    for (var i = 0; i < imgs.length; i++) {
+      imgs[i].classList.toggle('ativa', i === indice);
+      pontos[i].setAttribute('aria-current', i === indice ? 'true' : 'false');
+    }
+    card.dataset.foto = indice;
+  }
+
+  /* Trocar de foto ao passar o mouse e o gesto natural num card de duas fotos;
+     os pontos ficam para quem navega por teclado ou toque. */
+  grade.addEventListener('mouseenter', function (e) {
+    var card = e.target.closest && e.target.closest('.card');
+    if (card && !card.dataset.fixou) mostraFoto(card, 1);
+  }, true);
+  grade.addEventListener('mouseleave', function (e) {
+    var card = e.target.closest && e.target.closest('.card');
+    if (card && !card.dataset.fixou) mostraFoto(card, 0);
+  }, true);
+
+  grade.addEventListener('click', function (e) {
+    var card = e.target.closest('.card');
+    if (!card) return;
+    var ponto = e.target.closest('.pontos button');
+    if (ponto) {
+      var pontos = [].slice.call(card.querySelectorAll('.pontos button'));
+      card.dataset.fixou = '1';
+      mostraFoto(card, pontos.indexOf(ponto));
+      return;
+    }
+    if (e.target.closest('.ampliar')) { abreLupa(card); return; }
+    if (e.target.closest('.votar')) { abreVoto(card.dataset.slug); return; }
+  });
+
+  /* ── Foto ampliada ────────────────────────────────────────────────────── */
+  var lupa = document.getElementById('lupa');
+  var lupaImg = document.getElementById('lupa-img');
+  var lupaSlug = null, lupaIndice = 0;
+
+  function abreLupa(card) {
+    lupaSlug = card.dataset.slug;
+    lupaIndice = Number(card.dataset.foto || 0);
+    pintaLupa();
+    abre(lupa);
+  }
+  function pintaLupa() {
+    var p = PARTICIPANTES.filter(function (x) { return x.slug === lupaSlug; })[0];
+    lupaImg.src = '/concurso-fantasia/fotos/' + lupaSlug + '-' + (lupaIndice + 1) + '.webp';
+    lupaImg.alt = p.nome + ' fantasiada de ' + p.fantasia;
+  }
+  function passaLupa(delta) {
+    lupaIndice = (lupaIndice + delta + 2) % 2;
+    pintaLupa();
+  }
+  document.getElementById('lupa-ant').addEventListener('click', function () { passaLupa(-1); });
+  document.getElementById('lupa-pos').addEventListener('click', function () { passaLupa(1); });
+  document.getElementById('lupa-fechar').addEventListener('click', function () { fecha(lupa); });
+  lupa.addEventListener('click', function (e) { if (e.target === lupa) fecha(lupa); });
+
+  /* ── Janela do voto ───────────────────────────────────────────────────── */
+  var janelaVoto = document.getElementById('janela-voto');
+  var janelaPronto = document.getElementById('janela-pronto');
+  var campoNome = document.getElementById('voto-nome');
+  var campoSetor = document.getElementById('voto-setor');
+  var aviso = document.getElementById('voto-aviso');
+  var botaoEnviar = document.getElementById('voto-enviar');
+  var alvo = null;
+  var abertoEm = 0;
+
+  SETORES.forEach(function (s) {
+    var o = document.createElement('option');
+    o.value = s; o.textContent = s;
+    campoSetor.appendChild(o);
+  });
+
+  function abre(janela) {
+    janela.classList.add('aberta');
+    document.body.style.overflow = 'hidden';
+  }
+  function fecha(janela) {
+    janela.classList.remove('aberta');
+    document.body.style.overflow = '';
+  }
+
+  function abreVoto(slug) {
+    if (document.body.classList.contains('ja-votou')) return;
+    alvo = PARTICIPANTES.filter(function (p) { return p.slug === slug; })[0];
+    document.getElementById('voto-alvo').textContent = alvo.nome + ' — ' + alvo.fantasia;
+    aviso.classList.remove('visivel');
+    abertoEm = Date.now();
+    abre(janelaVoto);
+    setTimeout(function () { campoNome.focus(); }, 40);
+  }
+
+  function erro(texto) {
+    aviso.textContent = texto;
+    aviso.classList.add('visivel');
+  }
+
+  document.getElementById('voto-cancelar').addEventListener('click', function () { fecha(janelaVoto); });
+  janelaVoto.addEventListener('click', function (e) { if (e.target === janelaVoto) fecha(janelaVoto); });
+  document.addEventListener('keydown', function (e) {
+    if (e.key !== 'Escape') return;
+    if (lupa.classList.contains('aberta')) fecha(lupa);
+    else if (janelaVoto.classList.contains('aberta')) fecha(janelaVoto);
+  });
+  campoNome.addEventListener('keydown', function (e) {
+    if (e.key === 'Enter') { e.preventDefault(); botaoEnviar.click(); }
+  });
+
+  botaoEnviar.addEventListener('click', function () {
+    var nome = campoNome.value.replace(/\s+/g, ' ').trim();
+    var setor = campoSetor.value;
+
+    if (nome.length < 3 || nome.indexOf(' ') === -1) {
+      erro('Escreva seu nome e sobrenome — é o que valida o voto.');
+      campoNome.focus();
+      return;
+    }
+    if (!setor) {
+      erro('Escolha o seu setor na lista.');
+      campoSetor.focus();
+      return;
+    }
+
+    botaoEnviar.disabled = true;
+    botaoEnviar.textContent = 'Registrando…';
+
+    /* Com a barra no fim: o vercel.json tem trailingSlash, e sem ela o POST
+       levaria um 308 antes de chegar na funcao. O js/contact-form.js do site
+       faz igual, pelo mesmo motivo. */
+    fetch('/api/votacao/', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        nome: nome,
+        setor: setor,
+        participante: alvo.slug,
+        _gotcha: document.getElementById('voto-gotcha').value,
+        ms_na_tela: Date.now() - abertoEm
+      })
+    }).then(function (r) {
+      return r.json().then(function (corpo) { return { status: r.status, corpo: corpo }; });
+    }).then(function (res) {
+      if (res.corpo && res.corpo.ok) {
+        registrado(nome);
+        return;
+      }
+      erro((res.corpo && res.corpo.error) || 'Não consegui registrar agora. Tente de novo.');
+    }).catch(function () {
+      erro('Sem conexão com o servidor. Tente de novo em alguns instantes.');
+    }).then(function () {
+      botaoEnviar.disabled = false;
+      botaoEnviar.textContent = 'Confirmar voto';
+    });
+  });
+
+  function registrado(nome) {
+    /* A trava de verdade e a do servidor, pelo nome. Esta aqui so evita que a
+       mesma pessoa reabra a janela por engano no mesmo navegador. */
+    try {
+      localStorage.setItem(CHAVE_LOCAL, JSON.stringify({ slug: alvo.slug, nome: nome }));
+    } catch (e) { /* navegacao privada: segue sem lembrar */ }
+    marcaVotado(alvo.slug);
+    fecha(janelaVoto);
+    document.getElementById('pronto-texto').textContent =
+      'Obrigado, ' + nome.split(' ')[0] + '. Seu voto em ' + alvo.nome +
+      ' foi contado. O resultado sai no anúncio dos vencedores.';
+    abre(janelaPronto);
+  }
+
+  function marcaVotado(slug) {
+    document.body.classList.add('ja-votou');
+    var card = grade.querySelector('.card[data-slug="' + slug + '"]');
+    if (card) card.classList.add('votado');
+  }
+
+  document.getElementById('pronto-fechar').addEventListener('click', function () { fecha(janelaPronto); });
+
+  /* Quem ja votou neste navegador volta direto para a tela de "ja foi". */
+  try {
+    var guardado = JSON.parse(localStorage.getItem(CHAVE_LOCAL) || 'null');
+    if (guardado && guardado.slug) marcaVotado(guardado.slug);
+  } catch (e) { /* ignora */ }
+})();
+</script>
+</body>
+</html>

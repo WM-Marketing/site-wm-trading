@@ -1,6 +1,13 @@
 # -*- coding: utf-8 -*-
 """
-Gera as duas versoes do convite da WM Party 26 a partir do pacote do designer.
+Gera o convite animado da WM Party 26 (versao dos clientes) a partir do pacote
+do designer.
+
+Desde 29/10/2026 so os CLIENTES recebem a animacao. A pagina dos colaboradores
+(wm-party-26/colaboradores.html) passou a ser escrita a mao, a partir do projeto
+"WM Party 26 Colaboradores" do Claude Design: capa, quando e onde com mapa,
+dress code e o formulario do Monday embutido. Este script NAO a gera mais — se
+voltasse a gerar, apagaria a pagina nova sem aviso.
 
 O pacote vem como um HTML unico de 1,2 MB que carrega React, Babel e o proprio
 codigo da animacao de dentro de si — tudo num manifesto base64+gzip embutido.
@@ -9,7 +16,7 @@ de confirmacao nao esta em texto puro no arquivo; ele vive comprimido dentro
 desse manifesto, e trocar exige abrir, editar e fechar de novo.
 
 Mudancas:
-  1. RSVP_URL  -> o formulario do publico certo (colaboradores ou clientes).
+  1. RSVP_URL  -> o formulario dos clientes.
   2. <base>    -> faz "assets/..." resolver sempre em /wm-party-26/assets/,
                   qualquer que seja o endereco da pagina. Sem isso, uma pagina
                   servida em /wm-party-26/colaboradores/ procuraria os arquivos
@@ -44,8 +51,9 @@ MARCA_RSVP = "const RSVP_URL = 'https://www.wmtrading.com.br';"
 # Num convite que as pessoas abrem no celular, isso e um terco do download.
 TROCA_FUNDO = ("assets/bg-revelacao.png", "assets/bg-revelacao.webp")
 
+# "colaboradores" saiu em 29/10/2026 (ver o topo). O formulario deles continua o
+# 5c61c4a1..., agora embutido direto na pagina escrita a mao.
 PUBLICOS = {
-    "colaboradores": "https://forms.monday.com/forms/5c61c4a157846e8cecd3dbb20f69875c?r=use1",
     "clientes": "https://forms.monday.com/forms/0cf7000d4faa94ffe2658435aa79908b?r=use1",
 }
 

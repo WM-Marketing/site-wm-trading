@@ -103,14 +103,14 @@ def fechar_datas_do_sitemap(paginas_html):
 # pode indexar.
 SITEMAP_PASTAS_FORA = {".git", ".claude", ".agents", ".cursor", ".windsurf", "node_modules",
                        "scripts", "content", "docs", "brand", "api", "js", "css", "images",
-                       "wp-content", "mapa-brasil", "interno", "wm-party-26"}
+                       "wp-content", "mapa-brasil", "interno", "wm-party-26", "concurso-fantasia"}
 SITEMAP_ARQUIVOS_FORA = {"404.html", "offline.html"}
 
 
 def paginas_do_sitemap():
     """Pares (loc, caminho) de tudo que entra no sitemap, incluindo /en/."""
     skip_dirs = {"node_modules", "scripts", "content", "images", "css", "js", "api",
-                 "wp-content", "wp-includes", "interno", "wm-party-26"}
+                 "wp-content", "wp-includes", "interno", "wm-party-26", "concurso-fantasia"}
     skip_files = {"404.html", "offline.html"}
     achados = []
     for walk_root, walk_dirs, walk_files in os.walk(ROOT_DIR):
