@@ -1977,8 +1977,13 @@ def gerar_listagens_do_blog(posts_data, head_tpl, header_tpl, footer_tpl):
         print(f" - listagem do blog ({lang}): {len(posts)} posts -> {'/'.join(destino)}")
 
 
-def build_contact_form_html(form_type="contato", selected_segment=""):
-    """Generates standard responsive contact form HTML styled with Brand system."""
+def build_contact_form_html(form_type="contato", selected_segment="", mensagem_opcional=False):
+    """Generates standard responsive contact form HTML styled with Brand system.
+
+    `mensagem_opcional` (30/10/2026): nas paginas de segmento a mensagem deixa de
+    ser obrigatoria (decisao do Renato). O Segmento continua na tela e obrigatorio.
+    """
+    mensagem_attrs = 'rows="4" placeholder="Mensagem (opcional)"' if mensagem_opcional         else 'required rows="4" placeholder="Mensagem *"'
     segment_options = ""
     for s in SEGMENTS_LIST:
         sel = "selected" if s.lower() == selected_segment.lower() else ""
@@ -2014,7 +2019,7 @@ def build_contact_form_html(form_type="contato", selected_segment=""):
             <option value="E-mail">E-mail</option>
           </select>
           
-          <textarea name="mensagem" required rows="4" placeholder="Mensagem *" class="input-wm sm-col-span-2 resize-y"></textarea>
+          <textarea name="mensagem" {mensagem_attrs} class="input-wm sm-col-span-2 resize-y"></textarea>
           
           <label class="sm-col-span-2 form-checkbox-label">
             <input type="checkbox" name="aceite_privacidade" required value="sim" />
@@ -2505,7 +2510,7 @@ def main():
         }
         selected_seg_label = slug_mapping.get(slug, "Outros")
         
-        form_html = build_contact_form_html("segmentos", selected_seg_label)
+        form_html = build_contact_form_html("segmentos", selected_seg_label, mensagem_opcional=True)
         form_image = assets.get("form_image", "")
         
         if form_image:

@@ -1995,6 +1995,33 @@ body.loaded .aero-hero__bg-img {
 .aero-resources__card b { font-size: 18px; }
 @media (max-width: 800px) { .aero-resources { padding: 64px 0; } .aero-resources__grid { grid-template-columns: 1fr; } .aero-resources__card { min-height: 0; } }
 
+/* ─────────────────────────────────────
+   MODELOS (30/10/2026) — links para as paginas de cada aeronave
+───────────────────────────────────── */
+.aero-models { padding: 96px 0; background: #F5F5F5; }
+.aero-models__heading { max-width: 760px; margin-bottom: 36px; }
+.aero-models h2 { margin: 0 0 14px; color: #3A3A3A; font-size: clamp(28px, 3vw, 42px); font-weight: 300; line-height: 1.15; }
+.aero-models h2 span { color: #FC5000; }
+.aero-models__heading p { margin: 0; color: #666; font-size: 16px; line-height: 1.7; }
+.aero-models__grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+.aero-models__card { display: flex; flex-direction: column; padding: 22px 22px 20px; border: 1px solid #E4E4E4; border-radius: 14px; background: #fff; color: #3A3A3A; text-decoration: none; transition: transform .2s ease, border-color .2s ease, box-shadow .2s ease; }
+.aero-models__card:hover { transform: translateY(-4px); border-color: #FC5000; box-shadow: 0 10px 26px rgba(0,0,0,.08); }
+.aero-models__card span { color: #888; font-size: 12px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; }
+.aero-models__card strong { margin: 6px 0 18px; font-size: 21px; font-weight: 600; line-height: 1.25; }
+.aero-models__card em { margin-top: auto; color: #FC5000; font-size: 14px; font-style: normal; font-weight: 700; }
+.aero-models__outro { margin: 28px 0 0; color: #666; font-size: 16px; }
+.aero-models__outro a { color: #FC5000; font-weight: 700; text-decoration: none; white-space: nowrap; }
+@media (max-width: 1000px) { .aero-models__grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 800px) { .aero-models { padding: 64px 0; } .aero-models__card strong { font-size: 18px; } }
+
+/* E-book no fim da pagina (30/10/2026): sem a sobreposicao da secao anterior */
+.aero-ebook.aero-ebook--fim { margin-top: 0; padding: 120px 0 72px; background: #fff; }
+@media (max-width: 768px) {
+  .aero-ebook.aero-ebook--fim { padding: 90px 0 48px; }
+  /* a capa sobe 55% e cobria a 1a linha do titulo (o fotovoltaico ja tinha este respiro) */
+  .aero-ebook--fim .aero-ebook__text { margin-top: 44px; }
+}
+
 /* =============================================
    SMALL MOBILE (≤ 480px)
    ============================================= */
