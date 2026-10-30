@@ -623,13 +623,16 @@ ATRIBUTOS_QS_EN = [
 # Se uma entrada nao casar, o build AVISA em vez de seguir quieto: texto em
 # portugues sobrando na pagina em ingles e exatamente o que ninguem percebe.
 TEXTOS_MAQUINAS_EN = [
+    # WhatsApp com mensagem pronta (30/10/2026): o texto vai na URL, codificado.
+    ("Ol%C3%A1!%20Vim%20pela%20p%C3%A1gina%20de%20importa%C3%A7%C3%A3o%20de%20m%C3%A1quinas%20e%20equipamentos%20e%20quero%20falar%20com%20um%20especialista",
+     "Hello!%20I%20came%20from%20the%20machinery%20and%20equipment%20import%20page%20and%20would%20like%20to%20talk%20to%20a%20specialist"),
     # ── S1 hero ──
     ("Importe máquinas e", "Import machinery and"),
     ("equipamentos com", "equipment with"),
     ("agilidade e segurança</span>", "speed and security</span>"),
     ("Planejamento tributário, licenciamento e logística para tornar sua operação\n          mais eficiente, da compra no exterior à entrega na sua planta.",
      "Tax planning, licensing and logistics to make your operation more efficient,\n          from the purchase abroad to delivery at your plant."),
-    ("Falar com um<br>especialista", "Talk to a<br>specialist"),
+    ("Falar com um especialista", "Talk to a specialist"),
 
     # ── S3 intro ──
     ("Importação de <span class=\"mq-intro__title-hl\">Máquinas<br>\n        e Equipamentos</span>",
@@ -638,7 +641,6 @@ TEXTOS_MAQUINAS_EN = [
      "Advanced-technology machinery can be a major investment for industry and\n        agribusiness. WM structures the operation from the tax analysis through to\n        customs clearance, assessing classification, licensing and the requirements\n        that apply to the cargo."),
     ("Quando necessário, o processo inclui suporte para Licença de Importação\n        e análise de exigências como LCVM junto ao IBAMA, reduzindo riscos antes\n        do embarque.",
      "Where required, the process includes support for the Import Licence and a\n        review of requirements such as the LCVM with IBAMA, reducing risk before\n        shipment."),
-    ("Nossas soluções →", "Our solutions →"),
 
     # ── S4 beneficios ──
     ("Nossos diferenciais", "What sets us apart"),
@@ -662,7 +664,6 @@ TEXTOS_MAQUINAS_EN = [
     ("Máquinas usadas", "Used machinery"),
     ("Condução das etapas específicas exigidas para máquinas usadas, onde a Licença de Importação costuma travar a operação.",
      "Handling the specific steps required for used machinery, where the Import Licence tends to hold the operation up."),
-    ("Saiba mais", "Learn more"),
 
     # ── S5 gestao ──
     ("Gestão completa<br>", "End-to-end management<br>"),
@@ -692,7 +693,6 @@ TEXTOS_MAQUINAS_EN = [
     ("<strong>previsibilidade, controle e eficiência</strong>",
      "<strong>predictability, control and efficiency</strong>"),
     ("à aquisição de máquinas e equipamentos.", "to the purchase of machinery and equipment."),
-    ("Conheça nossas soluções →", "See our solutions →"),
 
     # ── S7 diferenciais ──
     ("<span class=\"mq-diff__title-hl\">Diferenciais da WM</span> na importação de máquinas e equipamentos",
@@ -770,16 +770,10 @@ FORM_SEGMENTO_EN = '''<form class="mq-cta__form contact-form-js" data-form-type=
           </div>
         </div>
 
-        <div class="mq-cta__row mq-cta__row--2">
-          <div>
-            <label class="mq-cta__field-label" for="mq-empresa">Company</label>
-            <input class="mq-cta__input" id="mq-empresa" name="empresa" type="text">
-          </div>
-          <div>
-            <label class="mq-cta__field-label" for="mq-segmento">Segment</label>
-            <select class="mq-cta__input" id="mq-segmento" name="segmento">%s
-            </select>
-          </div>
+        <input type="hidden" name="segmento" value="%s">
+        <div class="mq-cta__row">
+          <label class="mq-cta__field-label" for="mq-empresa">Company</label>
+          <input class="mq-cta__input" id="mq-empresa" name="empresa" type="text">
         </div>
 
         <div class="mq-cta__row">
@@ -793,8 +787,8 @@ FORM_SEGMENTO_EN = '''<form class="mq-cta__form contact-form-js" data-form-type=
         </div>
 
         <div class="mq-cta__row">
-          <label class="mq-cta__field-label" for="mq-mensagem">Message *</label>
-          <textarea class="mq-cta__input mq-cta__textarea" id="mq-mensagem" name="mensagem" rows="4" required></textarea>
+          <label class="mq-cta__field-label" for="mq-mensagem">Tell us what you want to import (optional)</label>
+          <textarea class="mq-cta__input mq-cta__textarea" id="mq-mensagem" name="mensagem" rows="4"></textarea>
         </div>
 
         <label class="mq-cta__check">
@@ -815,12 +809,15 @@ FORM_SEGMENTO_EN = '''<form class="mq-cta__form contact-form-js" data-form-type=
 # As trocas sao aplicadas da mais longa para a mais curta pela
 # segmento_em_ingles(), e o que nao casar vira AVISO no build.
 TEXTOS_ACO_EN = [
+    # WhatsApp com mensagem pronta (30/10/2026): o texto vai na URL, codificado.
+    ("Ol%C3%A1!%20Vim%20pela%20p%C3%A1gina%20de%20importa%C3%A7%C3%A3o%20de%20a%C3%A7o%20e%20quero%20falar%20com%20um%20especialista",
+     "Hello!%20I%20came%20from%20the%20steel%20import%20page%20and%20would%20like%20to%20talk%20to%20a%20specialist"),
     # ── S1 hero ──
     ("Importe aço com", "Import steel with"),
     ("agilidade e segurança</span>", "speed and security</span>"),
     ("Planejamento tributário, licenciamento e logística para importar aço e\n          recursos siderúrgicos com eficiência, da compra no exterior à entrega na\n          sua planta.",
      "Tax planning, licensing and logistics to import steel and steelmaking inputs\n          efficiently, from the purchase abroad to delivery at your plant."),
-    ("Falar com um<br>especialista", "Talk to a<br>specialist"),
+    ("Falar com um especialista", "Talk to a specialist"),
 
     # ── S3 intro ──
     ("Importação de <span class=\"aco-intro__title-hl\">Aço</span>",
@@ -831,7 +828,6 @@ TEXTOS_ACO_EN = [
      "We study the characteristics of the product to be imported and monitor the\n        applicable rates, optimising the logistics and tax chain and reducing costs\n        during customs clearance."),
     ("<strong>Aços que temos expertise:</strong> galvanizado, galvalume, carbono,\n        laminado a quente e a frio, arames e telas, fios de solda, tubos, chapas,\n        válvulas, vergalhão e perfilados.",
      "<strong>Steel grades we handle:</strong> galvanised, galvalume, carbon,\n        hot- and cold-rolled, wire and mesh, welding wire, tubes, plate, valves,\n        rebar and sections."),
-    ("Nossas soluções →", "Our solutions →"),
 
     # ── S4 beneficios ──
     ("Nossos diferenciais", "What sets us apart"),
@@ -840,7 +836,6 @@ TEXTOS_ACO_EN = [
     ("Acompanhamento em tempo real", "Real-time tracking"),
     ("Dashboard completo no qual você acompanha cada etapa da operação, com mais controle e transparência sobre o processo de importação.",
      "A full dashboard where you follow every stage of the operation, with more control and transparency over the import process."),
-    ("Saiba mais", "Learn more"),
     ("Cadeia global de fornecedores", "Global supplier network"),
     ("Parcerias sólidas com fornecedores externos, para você escolher o produto mais adequado à necessidade e negociar as condições de compra.",
      "Solid partnerships with suppliers abroad, so you can choose the product that best fits your need and negotiate the terms of purchase."),
@@ -872,7 +867,6 @@ TEXTOS_ACO_EN = [
      "Domestic logistics coordinated all the way to the plant, heavy cargo included."),
     ("Coordenamos diferentes etapas da importação para dar mais\n        <strong>previsibilidade, controle e eficiência</strong>\n        à importação de aço e recursos siderúrgicos.",
      "We coordinate the different stages of the import to bring more\n        <strong>predictability, control and efficiency</strong>\n        to steel and steelmaking inputs."),
-    ("Conheça nossas soluções →", "See our solutions →"),
 
     # ── S7 diferenciais ──
     ("<span class=\"aco-diff__title-hl\">Diferenciais da WM</span> na importação de aço",
@@ -926,12 +920,15 @@ TEXTOS_ACO_EN = [
 
 
 TEXTOS_FOTOVOLTAICO_EN = [
+    # WhatsApp com mensagem pronta (30/10/2026): o texto vai na URL, codificado.
+    ("Ol%C3%A1!%20Vim%20pela%20p%C3%A1gina%20de%20importa%C3%A7%C3%A3o%20de%20equipamentos%20fotovoltaicos%20e%20quero%20falar%20com%20um%20especialista",
+     "Hello!%20I%20came%20from%20the%20photovoltaic%20equipment%20import%20page%20and%20would%20like%20to%20talk%20to%20a%20specialist"),
     # ── S1 hero ──
     ("Importe equipamentos<br>\n          fotovoltaicos com<br>", "Import photovoltaic<br>\n          equipment with<br>"),
     ("agilidade e segurança</span>", "speed and security</span>"),
     ("Planejamento tributário, logística e nacionalização para tornar sua operação\n          mais eficiente, da compra no exterior à entrega do projeto.",
      "Tax planning, logistics and customs clearance to make your operation more\n          efficient, from the purchase abroad to delivery at the project site."),
-    ("Falar com um<br>especialista", "Talk to a<br>specialist"),
+    ("Falar com um especialista", "Talk to a specialist"),
 
     # ── S3 intro ──
     ("Importação de<br>\n          <span class=\"fv-intro__title-hl\">Equipamentos<br>Fotovoltaicos</span>",
@@ -940,7 +937,6 @@ TEXTOS_FOTOVOLTAICO_EN = [
      "With experience in foreign trade since 2004, WM Trading offers complete solutions\n          for importing photovoltaic equipment, handling the planning, logistics and\n          customs clearance of the operation with\n          <strong>speed and security.</strong>"),
     ("Experiência em operações fotovoltaicas, com gestão completa da importação\n      até a entrega do projeto.",
      "Experience in photovoltaic operations, with full management of the import\n      through to delivery at the project site."),
-    ("Nossas soluções →", "Our solutions →"),
 
     # ── S4 beneficios ──
     ("Nossos diferenciais", "What sets us apart"),
@@ -949,7 +945,6 @@ TEXTOS_FOTOVOLTAICO_EN = [
     ("Importação de painéis solares", "Solar panel imports"),
     ("Especialização na importação de módulos fotovoltaicos, com relacionamento consolidado com fornecedores estratégicos e acompanhamento de toda a operação.",
      "Specialist expertise in importing photovoltaic modules, with established relationships with strategic suppliers and follow-up of the entire operation."),
-    ("Saiba mais", "Learn more"),
     ("Importação de inversores", "Inverter imports"),
     ("Soluções completas para importação de inversores, incluindo suporte técnico, certificação Inmetro e condução do processo para um desembaraço mais ágil.",
      "Complete solutions for importing inverters, including technical support, Inmetro certification and handling of the process for faster customs clearance."),
@@ -1086,7 +1081,7 @@ def formulario_segmento_en(prefixo="mq-", segmento="Máquinas e Equipamentos"):
     """Campos do formulario de uma pagina de segmento com desenho proprio.
 
     `prefixo` troca a familia de classes (.mq-, .aco-, .fv-) e `segmento` diz
-    qual opcao ja vem marcada. O molde e um so: os tres layouts sao clones e a
+    qual valor vai no campo escondido. O molde e um so: os tres layouts sao clones e a
     marcacao do CTA e identica fora o prefixo.
 
     Nao da para reaproveitar o formulario_en(): aquele devolve uma <section>
@@ -1103,14 +1098,12 @@ def formulario_segmento_en(prefixo="mq-", segmento="Máquinas e Equipamentos"):
     ingles do Zap estao adormecidos desde 09/07, e um envio que nao casa com ramo
     nenhum e descartado em silencio — o lead sumiria sem erro na tela.
     """
-    opcoes = "".join(
-        '\n              <option value="%s"%s>%s</option>'
-        % (valor, " selected" if valor == segmento else "", rotulo)
-        for valor, rotulo in SEGMENTOS_EN)
+    # Desde 30/10/2026 o segmento vai escondido, sem a lista na tela: quem esta
+    # na pagina de um segmento nao precisa escolher o segmento de novo.
     assert any(v == segmento for v, _ in SEGMENTOS_EN), (
         "segmento %r fora de SEGMENTOS_EN — o Zap nao classificaria o lead" % segmento)
 
-    return FORM_SEGMENTO_EN.replace("mq-", prefixo) % opcoes
+    return FORM_SEGMENTO_EN.replace("mq-", prefixo) % segmento
 
 
 def segmento_em_ingles(pagina, cfg):
