@@ -137,26 +137,43 @@
 }
 
 /* CTA */
+/* Botao cheio, laranja: era icone + texto solto e nao parecia clicavel (30/10/2026) */
 .aero-hero__cta {
   display: inline-flex;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
+  padding: calc(14px * var(--aero-scale)) calc(26px * var(--aero-scale));
+  border-radius: 8px;
+  background: #FC5000;
+  box-shadow: 0 8px 20px rgba(252, 80, 0, 0.28);
   text-decoration: none;
+  transition: background 0.2s ease, box-shadow 0.2s ease;
 }
 
-.aero-hero__cta-icon {
-  display: block;
-  flex-shrink: 0;
-  width:  calc(46px * var(--aero-scale));
-  height: calc(46px * var(--aero-scale));
+.aero-hero__cta:hover,
+.aero-hero__cta:focus-visible {
+  background: #E04700;
+  box-shadow: 0 10px 24px rgba(252, 80, 0, 0.38);
 }
 
 .aero-hero__cta-text {
   font-family: 'Poppins', sans-serif;
-  font-size: calc(15px * var(--aero-scale));
-  font-weight: 500;
-  line-height: 1.3;
-  color: var(--color-text-dark, #3A3A3A);
+  font-size: clamp(13px, calc(16px * var(--aero-scale)), 17px);
+  font-weight: 600;
+  line-height: 1.2;
+  color: #ffffff;
+  white-space: nowrap;
+}
+
+.aero-hero__cta-arrow {
+  color: #ffffff;
+  font-size: clamp(14px, calc(18px * var(--aero-scale)), 19px);
+  line-height: 1;
+  transition: transform 0.2s ease;
+}
+
+.aero-hero__cta:hover .aero-hero__cta-arrow {
+  transform: translateX(4px);
 }
 
 
@@ -1731,8 +1748,8 @@ body.loaded .aero-hero__bg-img {
   ───────────────────────────────────── */
   /* padding-bottom removido: o hero mobile encosta na secao seguinte. Estava
      aqui, num segundo bloco @media, e sobrescrevia o padding definido acima. */
-  .aero-hero__cta { gap: 8px; }
-  .aero-hero__cta-text { font-size: 11px; line-height: 1.3; }
+  .aero-hero__cta { gap: 8px; padding: 12px 20px; }
+  .aero-hero__cta-text { font-size: 14px; }
 
   /* ─────────────────────────────────────
      S3 — INTRO
