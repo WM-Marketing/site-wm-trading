@@ -770,10 +770,16 @@ FORM_SEGMENTO_EN = '''<form class="mq-cta__form contact-form-js" data-form-type=
           </div>
         </div>
 
-        <input type="hidden" name="segmento" value="%s">
-        <div class="mq-cta__row">
-          <label class="mq-cta__field-label" for="mq-empresa">Company</label>
-          <input class="mq-cta__input" id="mq-empresa" name="empresa" type="text">
+        <div class="mq-cta__row mq-cta__row--2">
+          <div>
+            <label class="mq-cta__field-label" for="mq-empresa">Company</label>
+            <input class="mq-cta__input" id="mq-empresa" name="empresa" type="text">
+          </div>
+          <div>
+            <label class="mq-cta__field-label" for="mq-segmento">Segment</label>
+            <select class="mq-cta__input" id="mq-segmento" name="segmento">%s
+            </select>
+          </div>
         </div>
 
         <div class="mq-cta__row">
@@ -1081,7 +1087,7 @@ def formulario_segmento_en(prefixo="mq-", segmento="Máquinas e Equipamentos"):
     """Campos do formulario de uma pagina de segmento com desenho proprio.
 
     `prefixo` troca a familia de classes (.mq-, .aco-, .fv-) e `segmento` diz
-    qual valor vai no campo escondido. O molde e um so: os tres layouts sao clones e a
+    qual opcao ja vem marcada. O molde e um so: os tres layouts sao clones e a
     marcacao do CTA e identica fora o prefixo.
 
     Nao da para reaproveitar o formulario_en(): aquele devolve uma <section>
@@ -1098,12 +1104,14 @@ def formulario_segmento_en(prefixo="mq-", segmento="Máquinas e Equipamentos"):
     ingles do Zap estao adormecidos desde 09/07, e um envio que nao casa com ramo
     nenhum e descartado em silencio — o lead sumiria sem erro na tela.
     """
-    # Desde 30/10/2026 o segmento vai escondido, sem a lista na tela: quem esta
-    # na pagina de um segmento nao precisa escolher o segmento de novo.
+    opcoes = "".join(
+        '\n              <option value="%s"%s>%s</option>'
+        % (valor, " selected" if valor == segmento else "", rotulo)
+        for valor, rotulo in SEGMENTOS_EN)
     assert any(v == segmento for v, _ in SEGMENTOS_EN), (
         "segmento %r fora de SEGMENTOS_EN — o Zap nao classificaria o lead" % segmento)
 
-    return FORM_SEGMENTO_EN.replace("mq-", prefixo) % segmento
+    return FORM_SEGMENTO_EN.replace("mq-", prefixo) % opcoes
 
 
 def segmento_em_ingles(pagina, cfg):
