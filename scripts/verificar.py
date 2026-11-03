@@ -58,15 +58,18 @@ URL_PADRAO = "https://site-wm-trading.vercel.app"
 # aba. Poem GTM ali e o visitante ganha banner de cookie num convite de festa,
 # para nao medir nada. Respondem X-Robots-Tag: noindex, nofollow, noarchive
 # (vercel.json) e ficam fora do sitemap (SITEMAP_PASTAS_FORA).
-# 29/10/2026: a dos colaboradores deixou de ser a animacao e passou a embutir
-# dois iframes de terceiros — o mapa do Google e o proprio formulario do Monday.
-# Continua sem GTM e sem cookie do site; o que esses dois gravam fica no dominio
-# deles, como em qualquer mapa ou formulario embutido.
+# 03/11/2026: os dois convites animados continuam nos seus enderecos. A pagina
+# escrita a mao que ocupou o /colaboradores/ entre 29/10 e 03/11 mudou para
+# detalhes.html, e entra aqui pelo mesmo motivo mais um: ela embute dois iframes
+# de terceiros, o mapa do Google e o formulario do Monday. Continua sem GTM e
+# sem cookie do site; o que esses dois gravam fica no dominio deles, como em
+# qualquer mapa ou formulario embutido.
 SEM_TRACKING_OK = {
     "offline.html",
     os.path.join("interno", "padrao-de-emails.html"),
     os.path.join("wm-party-26", "colaboradores.html"),
     os.path.join("wm-party-26", "clientes.html"),
+    os.path.join("wm-party-26", "detalhes.html"),
     os.path.join("mapa-brasil", "assets", "original_visitedplaces.html"),
     os.path.join("mapa-brasil", "mapa_colombia_panama.html"),
     os.path.join("mapa-brasil", "mapa_completo.html"),
