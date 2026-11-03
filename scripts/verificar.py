@@ -62,15 +62,8 @@ URL_PADRAO = "https://site-wm-trading.vercel.app"
 # dois iframes de terceiros — o mapa do Google e o proprio formulario do Monday.
 # Continua sem GTM e sem cookie do site; o que esses dois gravam fica no dominio
 # deles, como em qualquer mapa ou formulario embutido.
-# 29/10/2026: entra a votacao do concurso de fantasia em concurso-fantasia/.
-# Mesmo caso: pagina unica, fora da navegacao, sem cookie e sem tracking. Ela
-# TEM formulario, mas o formulario nao e de lead — manda o voto para
-# /api/votacao, que so fala com o board do Monday do concurso. Banner de cookie
-# numa votacao interna de sete fantasias seria atrito sem contrapartida.
 SEM_TRACKING_OK = {
     "offline.html",
-    os.path.join("concurso-fantasia", "index.html"),
-    os.path.join("concurso-fantasia", "resultado", "index.html"),
     os.path.join("interno", "padrao-de-emails.html"),
     os.path.join("wm-party-26", "colaboradores.html"),
     os.path.join("wm-party-26", "clientes.html"),
