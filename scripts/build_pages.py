@@ -460,7 +460,6 @@ SEGMENT_INDEX_THUMBS = {
     "equipamentos-fotovoltaicos": "/wp-content/uploads/2024/05/imagens-thumbnail-site_equi-fotovoltaico.webp",
     "cases-de-usinas-fotovoltaicas": "/wp-content/uploads/2024/06/banner-usinas.webp",
     "produtos-quimicos": "/wp-content/uploads/2024/05/imagens-thumbnail-site_produtos_quimicos.webp",
-    "combustivel": "/wp-content/uploads/2024/05/imagens-thumbnail-site_combustivel.webp",
     "derivados-petroleo": "/wp-content/uploads/2024/06/banner-combustivel.webp",
     "maquinas": "/wp-content/uploads/2024/05/imagens-thumbnail-site_maquinas.webp",
     "aco": "/wp-content/uploads/2024/05/imagens-thumbnail-site_aco.webp",
@@ -528,22 +527,6 @@ SEGMENT_IMAGES_MAP = {
             "/wp-content/uploads/2024/06/icoo.png",
             "/wp-content/uploads/2024/06/icooo.png",
             "/wp-content/uploads/2024/06/ico-varejo.png"
-        ]
-    },
-    "combustivel": {
-        "cover": "/wp-content/uploads/2024/06/banner-combustivel.webp",
-        "video": "https://youtu.be/RTGZirDu90A",
-        "intro_image": "",
-        "form_image": "/wp-content/uploads/2024/06/thumb-form-v2.webp",
-        "section_images": [
-            "/wp-content/uploads/2024/06/seguranca-1-v2.webp",
-            "/wp-content/uploads/2024/06/banner-site-combustiveis.webp",
-            "/wp-content/uploads/2024/06/expertise-v2.webp"
-        ],
-        "icons": [
-            "/wp-content/uploads/2024/06/icon-1.png",
-            "/wp-content/uploads/2024/06/icon-2.png",
-            "/wp-content/uploads/2024/06/icon-3.png"
         ]
     },
     "cosmeticos": {
@@ -2500,7 +2483,6 @@ def main():
             "maquinas": "Máquinas e Equipamentos",
             "produtos-quimicos": "Produtos Químicos",
             "vinho": "Alimentos e Bebidas",
-            "combustivel": "Combustível",
             "derivados-petroleo": "Combustível",
             "equipamentos-fotovoltaicos": "Energia Renovável",
             "cases-de-usinas-fotovoltaicas": "Energia Renovável",
