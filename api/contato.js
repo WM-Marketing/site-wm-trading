@@ -2,7 +2,11 @@
    WM Trading — api/contato.js (Vercel Serverless Function proxying to Zapier)
    ========================================================================== */
 
-const { criarLead, vaiParaOMonday } = require('./_monday');
+const { criarLead, vaiParaOMonday, avisarFalhaDoPipedrive } = require('./_monday');
+
+// Tempo maximo esperando o Zapier. O catch hook responde em menos de 1 s; o
+// limite existe para a falha ser tratada aqui, e nao virar timeout da funcao.
+const ZAPIER_TIMEOUT_MS = 6000;
 
 /* ══════════════════════════════════════════════════════════════════════════
    BARREIRAS ANTI-ROBO (31/08/2026)
@@ -236,20 +240,45 @@ module.exports = async function handler(req, res) {
     }
     payload.monday_item_id = mondayItemId;
 
-    const response = await fetch(webhook, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(payload)
-    });
+    // ── ZAPIER: O CAMINHO ATE O PIPEDRIVE ────────────────────────────────
+    // Ate 04/11/2026, qualquer falha do Zapier virava erro para o visitante,
+    // mesmo com o lead ja gravado no Monday: a pessoa tentava de novo (item
+    // duplicado) ou desistia, e nada no board dizia que faltava o Pipedrive.
+    //
+    // Agora: se o item do Monday existe, o lead esta registrado. O visitante ve
+    // sucesso e o item ganha um comentario pedindo o cadastro a mao. Sem item no
+    // Monday (tipo que nao vai para la, ou o Monday tambem falhou), o lead nao
+    // esta em lugar nenhum, e ai sim o visitante ve erro e tenta de novo.
+    //
+    // Falha que acontece DENTRO do Zap, depois do catch hook responder 200, nao
+    // chega aqui: essa so o aviso de erro do proprio Zapier pega.
+    let falhaZapier = '';
+    try {
+      const response = await fetch(webhook, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(payload),
+        signal: AbortSignal.timeout(ZAPIER_TIMEOUT_MS)
+      });
+      if (!response.ok) falhaZapier = `HTTP ${response.status}`;
+    } catch (erroZapier) {
+      falhaZapier = erroZapier && erroZapier.name === 'TimeoutError'
+        ? `sem resposta em ${ZAPIER_TIMEOUT_MS / 1000} s`
+        : `erro de rede: ${erroZapier && erroZapier.message}`;
+    }
 
-    if (!response.ok) {
-      // Aqui sim o envio falhou de verdade: o Zapier e o destino que sustenta a
-      // captacao. Se o item do Monday chegou a ser criado, reenviar duplicaria
-      // — por isso o id vai no log, para conciliacao manual.
-      throw new Error(`Zapier respondeu com status HTTP ${response.status}` +
-        (mondayItemId ? ` (item ${mondayItemId} ja criado no Monday)` : ''));
+    if (falhaZapier) {
+      if (!mondayItemId) {
+        throw new Error(`Zapier falhou (${falhaZapier}) e o lead nao tem item no Monday`);
+      }
+      console.error(`Zapier falhou (${falhaZapier}); lead preservado no item ${mondayItemId} do Monday`);
+      try {
+        await avisarFalhaDoPipedrive(mondayItemId, falhaZapier, payload);
+      } catch (erroAviso) {
+        console.error(`Monday: falha ao marcar o item ${mondayItemId} —`, erroAviso.message);
+      }
     }
 
     return res.status(200).json({ ok: true });

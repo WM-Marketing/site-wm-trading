@@ -301,4 +301,56 @@ async function criarLead(data) {
   return { id: String(id), colunasVazias: vazias };
 }
 
-module.exports = { criarLead, vaiParaOMonday };
+/* AVISO NO PROPRIO ITEM QUANDO O LEAD NAO CHEGA AO PIPEDRIVE (04/11/2026)
+   O item do Monday nasce antes do envio ao Zapier. Se o Zapier falha, o item e
+   o unico registro do lead, e quem olha o board precisa saber que ele nao esta
+   no Pipedrive. Um comentario (update) no item resolve sem coluna nova no board.
+   Leva o registro de aceite, porque o cadastro feito a mao precisa dele; IP e
+   user agent ficam de fora (so o Pipedrive guarda esses dois). */
+const MUTATION_UPDATE = `mutation ($itemId: ID!, $body: String!) {
+  create_update (item_id: $itemId, body: $body) { id }
+}`;
+
+function escapaHtml(valor) {
+  return String(valor || '').replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+}
+
+async function avisarFalhaDoPipedrive(itemId, motivo, data) {
+  const token = process.env.MONDAY_API_TOKEN;
+  if (!token) throw new Error('MONDAY_API_TOKEN ausente no ambiente');
+
+  const linhas = [
+    '<b>Este lead NÃO chegou ao Pipedrive.</b> O envio ao Zapier falhou (' + escapaHtml(motivo) + ').',
+    'Cadastre o lead à mão no Pipedrive e responda aqui quando estiver feito.',
+    'Formulário: ' + escapaHtml(data.formulario) + ' · Página: ' + escapaHtml(data.url) +
+      ' · Origem: ' + escapaHtml(data.origem_canal),
+    'Aceite da política: ' + escapaHtml(data.aceite_privacidade) + ' em ' + escapaHtml(data.aceite_em) +
+      ' (versão ' + escapaHtml(data.politica_versao) + ') · Aceite de marketing: ' + escapaHtml(data.aceite_marketing),
+  ];
+
+  const resposta = await fetch(MONDAY_ENDPOINT, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': token,
+      'API-Version': MONDAY_API_VERSION,
+    },
+    body: JSON.stringify({
+      query: MUTATION_UPDATE,
+      variables: { itemId: String(itemId), body: linhas.join('<br>') },
+    }),
+  });
+
+  if (!resposta.ok) throw new Error(`Monday respondeu HTTP ${resposta.status}`);
+  const corpo = await resposta.json().catch(() => null);
+  if (!corpo) throw new Error('Monday devolveu resposta ilegivel');
+  if (Array.isArray(corpo.errors) && corpo.errors.length) {
+    const motivoErro = corpo.errors.map((e) => e && e.message).filter(Boolean).join(' | ');
+    throw new Error(`GraphQL: ${motivoErro || 'erro sem mensagem'}`);
+  }
+  if (!(corpo.data && corpo.data.create_update && corpo.data.create_update.id)) {
+    throw new Error('resposta sem data.create_update.id');
+  }
+}
+
+module.exports = { criarLead, vaiParaOMonday, avisarFalhaDoPipedrive };
