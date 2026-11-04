@@ -1593,19 +1593,20 @@ body.loaded .section-cards .card-img:nth-child(3) {
    divulgar muito" e "nao precisa aparecer clicavel". Entao o link nasce com a
    cor e o peso do texto em volta — quem esta lendo a frase ate o fim acha;
    quem passa o olho pela pagina nao e puxado para ele.
-   Clicavel continua sendo: ao passar o mouse ou chegar pelo teclado, assume a
-   cor da marca e sublinha. Sem isso seria uma armadilha de acessibilidade —
-   um destino que existe e que ninguem consegue perceber. */
+   Sem traco nenhum embaixo (04/11/2026, decisao do Thiago depois de ver no ar):
+   na tela o link e texto puro. Ao passar o mouse assume o laranja da marca, que
+   e o unico aviso de que ali ha um destino.
+   Quem navega por teclado continua achando: nao mexemos no contorno de foco do
+   navegador, que aparece no :focus-visible. Sem ele isto seria um destino que
+   existe e que ninguem consegue perceber. */
 .link-discreto {
   color: inherit;
   text-decoration: none;
-  border-bottom: 1px solid rgba(96, 96, 96, 0.28);
-  transition: color 0.2s ease, border-color 0.2s ease;
+  transition: color 0.2s ease;
 }
 .link-discreto:hover,
 .link-discreto:focus-visible {
   color: var(--color-primary);
-  border-bottom-color: currentColor;
 }
 
 /* ---- css/responsive.css ---- */
