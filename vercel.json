@@ -19,6 +19,15 @@
       ]
     },
     {
+      "source": "/wp-content/uploads/2026/11/Preco-Lista-WM-Trading-CAP-Nov-2026.pdf",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, noarchive"
+        }
+      ]
+    },
+    {
       "source": "/interno/(.*)",
       "headers": [
         {
