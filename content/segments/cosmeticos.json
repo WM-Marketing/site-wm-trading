@@ -4,6 +4,30 @@
   "heroQuestion": "Sua empresa deseja importar cosméticos para revenda?",
   "heroSub": "De acordo com a definição da ANVISA, a classe de cosméticos abrange diversos produtos — de perfumes e itens de higiene pessoal a qualquer outro que traga embelezamento sem efeitos terapêuticos, como maquiagens, ácido hialurônico ou produtos de skin care.",
   "cardDesc": "Facilitamos a importação de cosméticos com redução de custos e planejamento logístico e tributário",
+  "faqs": [
+    {
+      "question": "O que é necessário para importar cosméticos?",
+      "answer": "A empresa deve ter o Alvará Sanitário Municipal ou Estadual e a AFE de Importação e Distribuição junto à ANVISA, com um responsável técnico da área da saúde. O produto também precisa ser registrado na ANVISA: dependendo do produto, será uma notificação ou ele pode ser classificado em grau 1 ou grau 2."
+    },
+    {
+      "question": "A WM Trading tem AFE para importar cosméticos?",
+      "answer": "Sim. A WM possui a AFE e as notificações de produtos da ANVISA para realizar a importação de cosméticos nas modalidades por Encomenda ou por Conta e Ordem."
+    },
+    {
+      "question": "Qual a diferença entre cosméticos de grau 1 e de grau 2?",
+      "answer": "Grau 1 reúne produtos cuja comprovação não é inicialmente necessária e que não exigem informações detalhadas de modo de uso e restrições, como perfumes, bases de maquiagem, cremes e sabonetes. Grau 2 reúne produtos com indicações específicas, que precisam de comprovação de eficácia e segurança, como bronzeadores, cosméticos infantis, repelentes e produtos para rugas.",
+      "link": {"url": "/blog/importacao-de-cosmeticos/", "label": "Entenda a importação de cosméticos"}
+    },
+    {
+      "question": "Por que a Licença de Importação de cosméticos pode demorar?",
+      "answer": "A ANVISA analisa os documentos para verificar se o produto atende aos requisitos regulatórios, da embalagem à rotulagem, de acordo com o seu grau de classificação. Planejamento antecipado e documentos organizados ajudam a evitar atrasos no deferimento da LI."
+    },
+    {
+      "question": "Todo cosmético importado está no regime monofásico de PIS e Cofins?",
+      "answer": "Não. O enquadramento depende da classificação fiscal e da destinação do produto, e deve ser validado antes do fechamento do pedido com o fornecedor.",
+      "link": {"url": "/blog/pis-cofins-monofasico-cosmeticos/", "label": "Veja o que avaliar no regime monofásico"}
+    }
+  ],
   "benefits": [
     {
       "title": "AFE e registros necessários",

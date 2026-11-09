@@ -1625,6 +1625,59 @@ def renderizar_posts_relacionados(slug, idioma, posts_por_slug, relacoes):
               </aside>'''
 
 
+def faq_segmento_jsonld(faqs):
+    """FAQPage de uma pagina de segmento, a partir de `faqs` no JSON do segmento.
+
+    Mesmo formato do faq_schema() das paginas-guia (build_hubs.py). A resposta vai
+    como texto puro: o mesmo que aparece na tela, sem o link do `link`.
+    """
+    return {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [{
+            "@type": "Question",
+            "name": item["question"],
+            "acceptedAnswer": {"@type": "Answer", "text": item["answer"]},
+        } for item in faqs],
+    }
+
+
+def faq_segmento_html(faqs, nome_segmento):
+    """Bloco "Perguntas frequentes" da pagina de segmento (09/11/2026).
+
+    Opcional: so sai quando o JSON do segmento traz `faqs`, uma lista de
+    {"question", "answer", "link"?}. `link` e {"url", "label"} e vira um
+    "Saiba mais" abaixo da resposta — fica fora do FAQPage, que e so texto.
+    Regra de conteudo: toda resposta sai de texto que ja esta no site ou no blog
+    (a fonte de cada uma fica registrada na proposta da sessao).
+    A versao /en/ destes segmentos sai de content/en, sem `faqs`: nada vaza.
+    """
+    if not faqs:
+        return ""
+    itens = []
+    for item in faqs:
+        extra = ""
+        link = item.get("link")
+        if link:
+            extra = (f'<p style="margin:10px 0 0;"><a href="{escape(link["url"])}" '
+                     f'style="color:var(--color-primary); font-weight:var(--fw-semibold);">'
+                     f'{escape(link["label"])} <span aria-hidden="true">→</span></a></p>')
+        itens.append(
+            '<details style="padding:20px 0; border-top:1px solid #ddd;">'
+            f'<summary style="cursor:pointer; color:var(--color-text-dark); font-size:18px; font-weight:var(--fw-semibold);">{escape(item["question"])}</summary>'
+            f'<p style="margin:12px 28px 0 0; color:var(--color-text-dark); line-height:1.6;">{escape(item["answer"])}</p>{extra}'
+            '</details>'
+        )
+    return f"""
+            <section class="page-section" id="perguntas-frequentes" aria-labelledby="faq-titulo">
+              <div class="container" style="max-width:900px;">
+                <h2 id="faq-titulo" class="section-title-left" style="font-weight:var(--fw-semibold); margin-bottom:18px;">Perguntas frequentes sobre a importação de {escape(nome_segmento.lower())}</h2>
+                <div style="border-bottom:1px solid #ddd;">{"".join(itens)}</div>
+              </div>
+            </section>
+            """
+
+
 def faq_jsonld_from_markdown(body):
     """Cria FAQPage a partir de uma secao 'Perguntas frequentes' do post.
 
@@ -2524,7 +2577,9 @@ def main():
             """
         
         related_html = renderizar_conteudos_aprofundar(s.get("relatedPosts", []), s.get("relatedTitle", f"a importação de {s['name'].lower()}"), s.get("relatedDescription", "Selecione um conteúdo para aprofundar o planejamento da sua operação."), s.get("relatedEyebrow", "CONTEÚDO WM"))
-        body_content = hero_html + intro_html + sections_html + benefits_html + related_html + contact_section_html
+        faqs = s.get("faqs") or []
+        faq_html = faq_segmento_html(faqs, s["name"])
+        body_content = hero_html + intro_html + sections_html + benefits_html + related_html + faq_html + contact_section_html
         output_path = os.path.join(SEGMENTS_OUT_DIR, f"{slug}.html")
         # `cardDesc` e a unica frase do JSON que descreve a operacao ("Através da
         # certificação MAPA, cuidamos da importação de vinhos de ponta a ponta").
@@ -2536,7 +2591,7 @@ def main():
             s["name"],
         )
         render_html_page(output_path, f"Importação de {s['name']}", s.get("heroQuestion", s["name"]), body_content, head_tpl, header_tpl, footer_tpl,
-                         jsonld=servico)
+                         jsonld=[servico] + ([faq_segmento_jsonld(faqs)] if faqs else []))
 
     if paginas_selecionadas:
         print(" - compilação seletiva concluída")

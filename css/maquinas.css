@@ -1668,3 +1668,42 @@ select.mq-cta__input { cursor: pointer; }
   .mq-result__header { grid-template-columns: 1fr; }
   .mq-result__text { text-align: left; }
 }
+
+
+/* ══════════════════════════════════════
+   S8b — PERGUNTAS FREQUENTES (09/11/2026)
+   Mesmo desenho das perguntas dos guias (.guide-faq, css/import-guides.css):
+   <details> nativo, sem JS — abre no teclado e no leitor de tela.
+══════════════════════════════════════ */
+.mq-faq {
+  padding: clamp(56px, 6vw, 96px) 0;
+  background: var(--color-bg-light, #F5F5F5);
+}
+.mq-faq__inner { max-width: 900px; }
+.mq-faq__title {
+  margin: 0 0 clamp(20px, 2.4vw, 32px);
+  font-family: var(--font-primary, 'Poppins', sans-serif);
+  font-size: clamp(24px, 2.6vw, 36px);
+  font-weight: var(--fw-light, 300);
+  line-height: 1.2;
+  color: var(--color-text-dark, #3A3A3A);
+}
+.mq-faq__list { border-bottom: 1px solid #ddd; }
+.mq-faq__list details { padding: 20px 0; border-top: 1px solid #ddd; }
+.mq-faq__list summary {
+  cursor: pointer;
+  color: var(--color-text-dark, #3A3A3A);
+  font-size: 18px;
+  font-weight: var(--fw-semibold, 600);
+}
+.mq-faq__list p {
+  margin: 12px 28px 0 0;
+  color: var(--color-text-dark, #3A3A3A);
+  line-height: 1.6;
+}
+.mq-faq__list a {
+  color: var(--color-primary, #FC5000);
+  font-weight: var(--fw-semibold, 600);
+  text-decoration: none;
+}
+.mq-faq__list a:hover { text-decoration: underline; }

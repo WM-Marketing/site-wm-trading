@@ -102,6 +102,12 @@ def troca_jsonld_por_ingles(html, pagina):
             novo = bp.organization_jsonld("en")
         elif tipo == "Service" and servico is not None:
             novo = servico
+        elif tipo == "FAQPage":
+            # As perguntas da pagina PT (ex.: /segmentos/maquinas/, 09/11/2026) nao
+            # tem versao revisada em ingles, e a secao visivel ja sai pelo
+            # remover_secoes. Marcacao de FAQ sem o texto na tela e em outro idioma
+            # seria pior do que nenhuma: o bloco sai inteiro.
+            return ""
         else:
             return m.group(0)
         return ('<script type="application/ld+json">%s</script>'
@@ -1060,7 +1066,8 @@ SEGMENTOS_COM_DESENHO_PROPRIO = {
         "prefixo": "mq-",
         "segmento": "Máquinas e Equipamentos",
         "textos": TEXTOS_MAQUINAS_EN,
-        "remover_secoes": ("blog",),
+        # "faq" (09/11/2026): as perguntas frequentes so existem em portugues.
+        "remover_secoes": ("blog", "faq"),
     },
     "/en/segments/steel": {
         "origem": "segmentos/aco.html",
