@@ -399,8 +399,7 @@ document.querySelectorAll('.tab-radio input[type="radio"]').forEach(input => {
       send_to: 'G-2ZYJ222PF0',
       post_origem: window.location.pathname,
       pagina_destino: destino,
-      cta_texto: (link.textContent || '').trim().slice(0, 100),
-      transport_type: 'beacon'
+      cta_texto: (link.textContent || '').trim().slice(0, 100)
     });
   });
 })();
