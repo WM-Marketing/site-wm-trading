@@ -373,3 +373,34 @@ document.querySelectorAll('.tab-radio input[type="radio"]').forEach(input => {
   sincronizar();
   window.addEventListener('resize', sincronizar);
 })();
+
+// Clique no bloco de chamada do fim dos posts (.post-cta) — evento GA4
+// `blog_cta_click` (09/11/2026). Vai direto pelo gtag do GA4 que o GTM ja
+// carrega (o mesmo que o utm-tracking.js usa para ler o client_id), entao nao
+// depende de tag nova no GTM. Link interno NUNCA leva UTM: a origem viaja nos
+// parametros do evento.
+//   post_origem    = caminho do post onde o clique aconteceu
+//   pagina_destino = caminho (+ ancora) para onde o botao leva
+//   cta_texto      = texto do botao ("Falar com um especialista", ...)
+// Para aparecer nos relatorios, post_origem e pagina_destino precisam estar
+// registrados como dimensoes personalizadas (escopo Evento) no GA4.
+(function () {
+  document.addEventListener('click', function (e) {
+    var link = e.target.closest && e.target.closest('.post-cta a[href]');
+    if (!link || typeof window.gtag !== 'function') return;
+    var destino;
+    try {
+      var u = new URL(link.getAttribute('href'), window.location.href);
+      destino = u.origin === window.location.origin ? u.pathname + u.hash : u.hostname;
+    } catch (err) {
+      destino = link.getAttribute('href');
+    }
+    window.gtag('event', 'blog_cta_click', {
+      send_to: 'G-2ZYJ222PF0',
+      post_origem: window.location.pathname,
+      pagina_destino: destino,
+      cta_texto: (link.textContent || '').trim().slice(0, 100),
+      transport_type: 'beacon'
+    });
+  });
+})();
