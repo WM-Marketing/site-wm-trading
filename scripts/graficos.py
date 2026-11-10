@@ -194,6 +194,339 @@ GRAFICOS = {
         "linha": {"label": "Valor médio (US$/kg)", "cor": AZUL, "data": [11.3, 27.7, 16.9],
                   "unidade": {"prefixo": "US$ ", "sufixo": "/kg", "casas": 1, "casas_eixo": 0}},
     },
+
+    # Pauta 1 do Radar Comex (nov/2026): Resolução Gecex 963/2026. Gerado a partir de
+    # WM_Radar_Comex_Outubro2026_v3_Dados.xlsx (abas R1_*), sem digitação à mão.
+    "gecex-963-mensal": {
+        "estilo": "radar",
+        "tipo": "linha",
+        "titulo": "Importação mensal dos 24 produtos da Resolução Gecex 963/2026",
+        "subtitulo": "US$ milhões, FOB — out/2024 a set/2026",
+        "conclusao": "Os 24 produtos somaram US$ 1,73 bilhão entre out/2025 e set/2026 (+14,6% sobre os 12 meses anteriores), com máxima de US$ 229,7 milhões em jul/2026.",
+        "fonte": "Fonte: levantamento WM Trading — Inteligência de Mercado, com dados do MDIC/Comex Stat.",
+        "alt": "Importação mensal dos 24 produtos da Resolução Gecex 963/2026 entre out/2024 e set/2026: máxima de US$ 229,7 milhões em jul/2026 e US$ 119,6 milhões em set/2026. Fonte: WM Trading com dados MDIC/Comex Stat.",
+        "labels": [
+            "out/24",
+            "nov/24",
+            "dez/24",
+            "jan/25",
+            "fev/25",
+            "mar/25",
+            "abr/25",
+            "mai/25",
+            "jun/25",
+            "jul/25",
+            "ago/25",
+            "set/25",
+            "out/25",
+            "nov/25",
+            "dez/25",
+            "jan/26",
+            "fev/26",
+            "mar/26",
+            "abr/26",
+            "mai/26",
+            "jun/26",
+            "jul/26",
+            "ago/26",
+            "set/26"
+        ],
+        "valores": [
+            148.24,
+            97.31,
+            109.57,
+            151.45,
+            119.59,
+            107.21,
+            129.59,
+            145.26,
+            125.67,
+            122.04,
+            128.58,
+            123.8,
+            155.17,
+            125.58,
+            121.14,
+            135.83,
+            100.94,
+            129.92,
+            134.63,
+            141.2,
+            190.48,
+            229.71,
+            143.54,
+            119.64
+        ],
+        "rotulo_ultimo": "US$ 119,6 mi",
+        "tabela": {
+            "colunas": [
+                "Mês",
+                "Importação (US$ milhões, FOB)"
+            ],
+            "linhas": [
+                [
+                    "out/24",
+                    "148,24"
+                ],
+                [
+                    "nov/24",
+                    "97,31"
+                ],
+                [
+                    "dez/24",
+                    "109,57"
+                ],
+                [
+                    "jan/25",
+                    "151,45"
+                ],
+                [
+                    "fev/25",
+                    "119,59"
+                ],
+                [
+                    "mar/25",
+                    "107,21"
+                ],
+                [
+                    "abr/25",
+                    "129,59"
+                ],
+                [
+                    "mai/25",
+                    "145,26"
+                ],
+                [
+                    "jun/25",
+                    "125,67"
+                ],
+                [
+                    "jul/25",
+                    "122,04"
+                ],
+                [
+                    "ago/25",
+                    "128,58"
+                ],
+                [
+                    "set/25",
+                    "123,80"
+                ],
+                [
+                    "out/25",
+                    "155,17"
+                ],
+                [
+                    "nov/25",
+                    "125,58"
+                ],
+                [
+                    "dez/25",
+                    "121,14"
+                ],
+                [
+                    "jan/26",
+                    "135,83"
+                ],
+                [
+                    "fev/26",
+                    "100,94"
+                ],
+                [
+                    "mar/26",
+                    "129,92"
+                ],
+                [
+                    "abr/26",
+                    "134,63"
+                ],
+                [
+                    "mai/26",
+                    "141,20"
+                ],
+                [
+                    "jun/26",
+                    "190,48"
+                ],
+                [
+                    "jul/26",
+                    "229,71"
+                ],
+                [
+                    "ago/26",
+                    "143,54"
+                ],
+                [
+                    "set/26",
+                    "119,64"
+                ]
+            ],
+            "rolagem": True
+        }
+    },
+    "gecex-963-ncms": {
+        "estilo": "radar",
+        "tipo": "barra_h",
+        "titulo": "Principais produtos da Resolução 963 — importação em 12 meses",
+        "subtitulo": "US$ milhões, FOB — out/2025 a set/2026",
+        "conclusao": "Copolímeros de etileno e alfa-olefina somaram US$ 895,9 milhões, 51,9% do valor importado dos 24 produtos da lista.",
+        "fonte": "Fonte: levantamento WM Trading — Inteligência de Mercado, com dados do MDIC/Comex Stat.",
+        "alt": "Principais produtos da Resolução Gecex 963/2026 por importação entre out/2025 e set/2026: Copolímeros de etileno e alfa-olefina US$ 895,9 milhões (+14,8%); copolímeros de propileno US$ 345,2 milhões (+12,7%); poliestireno expansível US$ 87,5 milhões (+61,3%); agentes orgânicos de superfície aniônicos US$ 85,2 milhões (+23,1%); copolímeros de etileno e acetato de vinila US$ 70,6 milhões (+25,5%). Fonte: WM Trading com dados MDIC/Comex Stat.",
+        "labels": [
+            "Copolímeros de etileno e alfa-olefina",
+            "Copolímeros de propileno",
+            "Poliestireno expansível",
+            "Agentes orgânicos de superfície aniônicos",
+            "Copolímeros de etileno e acetato de vinila"
+        ],
+        "valores": [
+            895.9,
+            345.2,
+            87.5,
+            85.2,
+            70.6
+        ],
+        "rotulos": [
+            "US$ 895,9 mi",
+            "US$ 345,2 mi",
+            "US$ 87,5 mi",
+            "US$ 85,2 mi",
+            "US$ 70,6 mi"
+        ],
+        "tabela": {
+            "colunas": [
+                "NCM",
+                "Produto",
+                "US$ 12 meses",
+                "Variação",
+                "Participação"
+            ],
+            "linhas": [
+                [
+                    "3901.40.00",
+                    "Copolímeros de etileno e alfa-olefina",
+                    "895,9 mi",
+                    "+14,8%",
+                    "51,9%"
+                ],
+                [
+                    "3902.30.00",
+                    "Copolímeros de propileno",
+                    "345,2 mi",
+                    "+12,7%",
+                    "20,0%"
+                ],
+                [
+                    "3903.11.20",
+                    "Poliestireno expansível",
+                    "87,5 mi",
+                    "+61,3%",
+                    "5,1%"
+                ],
+                [
+                    "3402.39.90",
+                    "Agentes orgânicos de superfície aniônicos",
+                    "85,2 mi",
+                    "+23,1%",
+                    "4,9%"
+                ],
+                [
+                    "3901.30.90",
+                    "Copolímeros de etileno e acetato de vinila",
+                    "70,6 mi",
+                    "+25,5%",
+                    "4,1%"
+                ]
+            ]
+        }
+    },
+    "gecex-963-origens": {
+        "estilo": "radar",
+        "tipo": "barra_h",
+        "titulo": "Origem das importações — participação em 12 meses",
+        "subtitulo": "% do valor FOB, out/2025 a set/2026; entre parênteses, a variação sobre os 12 meses anteriores",
+        "conclusao": "Os Estados Unidos seguem como principal origem (26,2%), mas recuaram 30,1%; Argentina (+66,3%) e China (+71,2%) ganharam participação.",
+        "fonte": "Fonte: levantamento WM Trading — Inteligência de Mercado, com dados do MDIC/Comex Stat.",
+        "alt": "Origem das importações dos 24 produtos da Resolução Gecex 963/2026 entre out/2025 e set/2026, participação no valor e variação em 12 meses: Estados Unidos 26,2% (−30,1%); Argentina 15,4% (+66,3%); China 13,7% (+71,2%); Colômbia 7,5% (+9,6%); Arábia Saudita 6,8% (+90,2%); Coreia do Sul 4,3% (+48,8%). Fonte: WM Trading com dados MDIC/Comex Stat.",
+        "labels": [
+            "Estados Unidos",
+            "Argentina",
+            "China",
+            "Colômbia",
+            "Arábia Saudita",
+            "Coreia do Sul"
+        ],
+        "detalhe": [
+            "−30,1%",
+            "+66,3%",
+            "+71,2%",
+            "+9,6%",
+            "+90,2%",
+            "+48,8%"
+        ],
+        "valores": [
+            26.2,
+            15.4,
+            13.7,
+            7.5,
+            6.8,
+            4.3
+        ],
+        "rotulos": [
+            "26,2%",
+            "15,4%",
+            "13,7%",
+            "7,5%",
+            "6,8%",
+            "4,3%"
+        ],
+        "tabela": {
+            "colunas": [
+                "País",
+                "Participação",
+                "Variação 12 meses",
+                "US$ 12 meses"
+            ],
+            "linhas": [
+                [
+                    "Estados Unidos",
+                    "26,2%",
+                    "−30,1%",
+                    "452,8 mi"
+                ],
+                [
+                    "Argentina",
+                    "15,4%",
+                    "+66,3%",
+                    "266,0 mi"
+                ],
+                [
+                    "China",
+                    "13,7%",
+                    "+71,2%",
+                    "236,1 mi"
+                ],
+                [
+                    "Colômbia",
+                    "7,5%",
+                    "+9,6%",
+                    "129,7 mi"
+                ],
+                [
+                    "Arábia Saudita",
+                    "6,8%",
+                    "+90,2%",
+                    "117,7 mi"
+                ],
+                [
+                    "Coreia do Sul",
+                    "4,3%",
+                    "+48,8%",
+                    "74,1 mi"
+                ]
+            ]
+        }
+    },
 }
 
 
@@ -520,6 +853,8 @@ DESENHOS = {"linha": _grafico_linha, "barra": _grafico_barra, "composicao": _gra
 def grafico_svg(chave):
     """O gráfico inteiro — SVG, leitura em <desc> e tabela — pronto para o HTML."""
     spec = GRAFICOS[chave]
+    if spec.get("estilo") == "radar":
+        return grafico_radar(chave, spec)
     m = _moldura(spec)
     id_titulo, id_desc, id_clip = f"g-{chave}-t", f"g-{chave}-d", f"g-{chave}-c"
     corpo = DESENHOS[spec["tipo"]](spec, m, id_clip)
@@ -539,5 +874,135 @@ def grafico_svg(chave):
         f'  <div class="wm-interactive-chart__canvas">{svg}</div>\n'
         f'  <p class="wm-interactive-chart__source">{escape(spec["fonte"])}</p>\n'
         f'  {tabela_dados(spec)}\n'
+        '</figure>'
+    )
+
+
+# ---------------------------------------------------------------------------
+# Estilo "Radar" (nov/2026): o padrão visual das figuras do Radar Comex.
+# Título em negrito e subtítulo com unidade e período acima; uma cor só (o
+# laranja da marca); grade horizontal pontilhada; só o último valor da série
+# marcado e rotulado; legenda abaixo com a conclusão e a fonte; tabela visível
+# com os mesmos números. Desenhado estreito (600 px de viewBox, letra grande)
+# para continuar legível no celular sem rolagem lateral.
+# A spec traz o texto pronto ("alt", "conclusao", "tabela"): os números dela são
+# gerados da planilha do Radar, não escritos à mão.
+# ---------------------------------------------------------------------------
+LARANJA_MARCA = "#FC5000"
+COR_TEXTO = "#3A3A3A"
+RADAR_LARGURA_LINHA = 440
+RADAR_LARGURA_BARRA = 460
+RADAR_FONTE = 20
+
+
+def _radar_linha(spec, clip_id):
+    w, h, f = RADAR_LARGURA_LINHA, 320, RADAR_FONTE - 2
+    dados, labels = spec["valores"], spec["labels"]
+    base, topo, marcas = escala(dados, do_zero=True)
+    x0, x1, y0, y1 = 42, w - 10, 26, h - 40
+    n = len(dados)
+    xs = [x0 + i * (x1 - x0) / (n - 1) for i in range(n)]
+    def y_de(v):
+        return y1 - (v - base) / (topo - base) * (y1 - y0)
+    partes = [f'<clipPath id="{clip_id}"><rect x="{x0}" y="{y0 - 30}" width="{x1 - x0 + 2}" '
+              f'height="{y1 - y0 + 30}"/></clipPath>']
+    for marca in marcas:
+        y = y_de(marca)
+        if marca != base:
+            partes.append(f'<line x1="{x0}" y1="{y:.1f}" x2="{x1}" y2="{y:.1f}" stroke="#d9d9d9" '
+                          f'stroke-width="1.2" stroke-dasharray="2 5" stroke-linecap="round"/>')
+        partes.append(f'<text x="{x0 - 10}" y="{y + 6:.1f}" text-anchor="end" font-size="{f - 2}" '
+                      f'fill="{COR_EIXO}">{escape(numero(marca, 0))}</text>')
+    partes.append(f'<line x1="{x0}" y1="{y1}" x2="{x1}" y2="{y1}" stroke="#bdbdbd" stroke-width="1.2"/>')
+    # Rótulos do eixo X: um a cada 6 meses e sempre o último.
+    visiveis = sorted(set(range(0, n, 6)) | {n - 1})
+    if n - 1 - visiveis[-2] < 4:
+        visiveis.pop(-2)
+    for i in visiveis:
+        ancora = "start" if i == 0 else ("end" if i == n - 1 else "middle")
+        partes.append(f'<text x="{xs[i]:.1f}" y="{y1 + 28}" text-anchor="{ancora}" font-size="{f - 2}" '
+                      f'fill="{COR_EIXO}">{escape(labels[i])}</text>')
+    pontos = [(xs[i], y_de(v)) for i, v in enumerate(dados)]
+    curva = caminho_suave(pontos)
+    partes.append(f'<path d="{curva} L {pontos[-1][0]:.1f} {y1} L {pontos[0][0]:.1f} {y1} Z" '
+                  f'fill="{LARANJA_MARCA}" fill-opacity="0.13" clip-path="url(#{clip_id})"/>')
+    partes.append(f'<path d="{curva}" fill="none" stroke="{LARANJA_MARCA}" stroke-width="3.2" '
+                  f'stroke-linecap="round" stroke-linejoin="round" clip-path="url(#{clip_id})"/>')
+    # Alvos invisíveis: passar o mouse mostra mês e valor, sem marcador na tela.
+    for i, (px, py) in enumerate(pontos):
+        partes.append(f'<circle cx="{px:.1f}" cy="{py:.1f}" r="9" fill="transparent">'
+                      f'<title>{escape(labels[i])}: US$ {escape(numero(dados[i], 1))} mi</title></circle>')
+    px, py = pontos[-1]
+    partes.append(f'<circle cx="{px:.1f}" cy="{py:.1f}" r="7" fill="{LARANJA_MARCA}" stroke="#fff" '
+                  f'stroke-width="2.5"/>')
+    partes.append(f'<text x="{px:.1f}" y="{py + 34:.1f}" text-anchor="end" font-size="{f + 1}" '
+                  f'font-weight="800" fill="{COR_VALOR}" paint-order="stroke" stroke="#fff" '
+                  f'stroke-width="4">{escape(spec["rotulo_ultimo"])}</text>')
+    return w, h, partes
+
+
+def _radar_barra_h(spec, clip_id):
+    w, f = RADAR_LARGURA_BARRA, RADAR_FONTE - 1
+    linha, barra, topo_y = 70, 24, 8
+    n = len(spec["valores"])
+    h = topo_y + n * linha + 4
+    maior = max(spec["valores"])
+    largura_util = w - 138
+    partes = []
+    for i, valor in enumerate(spec["valores"]):
+        y = topo_y + i * linha
+        partes.append(f'<text x="0" y="{y + f:.1f}" font-size="{f - 1}" fill="{COR_TEXTO}">'
+                      f'{escape(spec["labels"][i])}'
+                      + (f'<tspan fill="{COR_EIXO}" font-size="{f - 3}"> ({escape(spec["detalhe"][i])})</tspan>'
+                         if spec.get("detalhe") else "") + '</text>')
+        comprimento = max(4, valor / maior * largura_util)
+        yb = y + f + 10
+        partes.append(f'<rect x="0" y="{yb}" width="{comprimento:.1f}" height="{barra}" rx="4" '
+                      f'fill="{LARANJA_MARCA}"><title>{escape(spec["labels"][i])}: '
+                      f'{escape(spec["rotulos"][i])}</title></rect>')
+        partes.append(f'<text x="{comprimento + 10:.1f}" y="{yb + barra - 5}" font-size="{f}" '
+                      f'font-weight="800" fill="{COR_VALOR}">{escape(spec["rotulos"][i])}</text>')
+    return w, h, partes
+
+
+RADAR_DESENHOS = {"linha": _radar_linha, "barra_h": _radar_barra_h}
+
+
+def _radar_tabela(spec):
+    t = spec["tabela"]
+    # Coluna de texto (sem algarismo na 1a linha) alinha à esquerda; número, à direita.
+    texto = [not any(ch.isdigit() for ch in str(c)) for c in t["linhas"][0]]
+    def cls(j):
+        return ' class="txt"' if texto[j] else ""
+    cab = "".join(f'<th scope="col"{cls(j) if j else ""}>{escape(c)}</th>' for j, c in enumerate(t["colunas"]))
+    linhas = "".join(
+        "<tr>" + f'<th scope="row">{escape(str(r[0]))}</th>'
+        + "".join(f"<td{cls(j)}>{escape(str(c))}</td>" for j, c in enumerate(r) if j) + "</tr>"
+        for r in t["linhas"]
+    )
+    classe = "wm-chart-radar__tabela" + (" wm-chart-radar__tabela--rolagem" if t.get("rolagem") else "")
+    return (f'<div class="{classe}"><table><caption>Dados do gráfico: {escape(spec["titulo"])} '
+            f'({escape(spec["subtitulo"])})</caption><thead><tr>{cab}</tr></thead>'
+            f'<tbody>{linhas}</tbody></table></div>')
+
+
+def grafico_radar(chave, spec):
+    id_titulo, id_desc, id_clip = f"g-{chave}-t", f"g-{chave}-d", f"g-{chave}-c"
+    w, h, corpo = RADAR_DESENHOS[spec["tipo"]](spec, id_clip)
+    svg = (
+        f'<svg class="wm-chart-svg wm-chart-radar__svg" viewBox="0 0 {w} {h}" role="img" '
+        f'aria-labelledby="{id_titulo} {id_desc}" font-family="\'Nunito Sans\', Arial, sans-serif">'
+        f'<title id="{id_titulo}">{escape(spec["titulo"])}</title>'
+        f'<desc id="{id_desc}">{escape(spec["alt"])}</desc>'
+        + "".join(corpo) + "</svg>"
+    )
+    return (
+        f'<figure class="wm-interactive-chart wm-chart-radar" id="grafico-{chave}">\n'
+        f'  <p class="wm-chart-radar__titulo">{escape(spec["titulo"])}</p>\n'
+        f'  <p class="wm-chart-radar__subtitulo">{escape(spec["subtitulo"])}</p>\n'
+        f'  <div class="wm-interactive-chart__canvas">{svg}</div>\n'
+        f'  <figcaption>{escape(spec["conclusao"])} <span class="wm-chart-radar__fonte">'
+        f'{escape(spec["fonte"])}</span></figcaption>\n'
+        f'  {_radar_tabela(spec)}\n'
         '</figure>'
     )

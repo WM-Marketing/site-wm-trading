@@ -841,6 +841,74 @@ textarea.input-wm {
   font-size: 12px;
   text-align: center;
 }
+/* Estilo "Radar" (graficos.py, grafico_radar): título e subtítulo acima,
+   conclusão + fonte abaixo, tabela com os mesmos números à vista. */
+.wm-chart-radar { padding: 24px 24px 20px; }
+/* Desenho estreito (letra grande no celular); no desktop não passa de 520 px. */
+.wm-chart-radar .wm-chart-radar__svg { max-width: 520px; }
+.wm-chart-radar .wm-chart-radar__titulo {
+  margin: 0 0 4px !important;
+  color: #1f1f1f;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1.35;
+}
+.wm-chart-radar .wm-chart-radar__subtitulo {
+  margin: 0 0 18px !important;
+  color: var(--color-text-muted);
+  font-size: 14px;
+  line-height: 1.45;
+}
+.wm-chart-radar figcaption {
+  margin: 16px 0 0;
+  color: var(--color-text-dark);
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1.55;
+  text-align: left;
+}
+.wm-chart-radar__fonte {
+  display: block;
+  margin-top: 4px;
+  color: var(--color-text-muted);
+  font-size: 13px;
+}
+.wm-chart-radar__tabela { margin-top: 16px; overflow-x: auto; }
+.wm-chart-radar__tabela--rolagem { max-height: 280px; overflow-y: auto; }
+.wm-chart-radar__tabela table {
+  width: 100%;
+  margin: 0;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+/* A legenda da tabela repete o título visível logo acima: fica no HTML para
+   leitor de tela e robô, fora da tela (em tabela que rola de lado ela cortava). */
+.wm-chart-radar__tabela caption {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+.wm-chart-radar__tabela { position: relative; }
+.wm-chart-radar__tabela th,
+.wm-chart-radar__tabela td {
+  padding: 6px 10px;
+  border-bottom: 1px solid #ededed;
+  text-align: right;
+  white-space: nowrap;
+}
+.wm-chart-radar__tabela th:first-child,
+.wm-chart-radar__tabela .txt { text-align: left; }
+.wm-chart-radar__tabela thead th {
+  position: sticky;
+  top: 0;
+  background: #fff;
+  color: var(--color-text-dark);
+  font-weight: 700;
+}
+.wm-chart-radar__tabela tbody th { color: var(--color-text-dark); font-weight: 600; }
 .google-sheet-chart {
   display: block;
   width: 100%;
@@ -857,6 +925,10 @@ textarea.input-wm {
   .wm-interactive-chart__canvas { overflow-x: auto; }
   .wm-chart-svg { min-width: 560px; }
   .wm-chart-svg--largo { min-width: 760px; }
+  /* O Radar é desenhado estreito e com letra grande: cabe sem rolar. */
+  .wm-chart-radar { padding: 16px 14px; }
+  .wm-chart-radar .wm-chart-svg { min-width: 0; }
+  .wm-chart-radar .wm-chart-radar__titulo { font-size: 16px; }
   .wm-chart-dados { font-size: 12px; }
   .google-sheet-chart { height: 320px; }
 }
