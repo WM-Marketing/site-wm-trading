@@ -1542,7 +1542,10 @@ def data_modificacao_post(file_path, fm):
     """
     manual = str(fm.get("updated", "")).strip()
     if manual:
-        return manual[:10]
+        # Com hora (ISO, "AAAA-MM-DDTHH:MM..."), vale inteira: e o que permite
+        # registrar uma revisao no MESMO dia da publicacao (17/11/2026), que so
+        # com a data ficaria igual ao datePublished e seria descartada.
+        return manual if "T" in manual else manual[:10]
     rel = os.path.relpath(file_path, ROOT_DIR).replace(os.sep, "/")
     historico = _git("log", "--follow", "--format=%H %cs", "--", rel)
     if not historico:

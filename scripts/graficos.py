@@ -540,9 +540,7 @@ GRAFICOS = {
                      'de US$ 28,7 milhões em fev/2026 e US$ 27,9 milhões em set/2026, e passou a 52,0% do SH4 '
                      '8207.',
         'fonte': 'Fonte: levantamento WM Trading — Inteligência de Mercado, com dados do MDIC/Comex Stat.',
-        'alt': 'Importação mensal da NCM 8207.30.00 (ferramentas de embutir, estampar ou puncionar) entre '
-               'out/2024 e set/2026: máxima de US$ 28,7 milhões em fev/2026 e US$ 27,9 milhões em set/2026. '
-               'Fonte: WM Trading com dados MDIC/Comex Stat.',
+        'alt': 'Importação mensal da NCM 8207.30.00 entre out/2024 e set/2026: máxima de US$ 28,7 milhões em fev/2026 e US$ 27,9 milhões em set/2026; em 12 meses, US$ 222,8 milhões (+132,7%). Fonte: WM Trading com dados MDIC/Comex Stat.',
         'labels': [   'out/24',
                       'nov/24',
                       'dez/24',
@@ -654,14 +652,7 @@ GRAFICOS = {
         'conclusao': 'A NCM 8207.30.00 somou US$ 222,8 mi e respondeu por 52,0% do SH4 8207, com alta de 132,7%; '
                      'as demais NCMs cresceram entre +7,7% e +31,8%.',
         'fonte': 'Fonte: levantamento WM Trading — Inteligência de Mercado, com dados do MDIC/Comex Stat.',
-        'alt': 'Composição da importação do SH4 8207 (ferramentas intercambiáveis) entre out/2025 e set/2026, '
-               'por NCM: 8207.30.00 ferramentas de embutir, de estampar ou de puncionar US$ 222,8 milhões (52,0% '
-               'do SH4, +132,7%); 8207.19.10 ferramentas de perfuração (brocas) US$ 44,6 milhões (10,4% do SH4, '
-               '+31,8%); 8207.90.00 outras ferramentas intercambiáveis, de metais comuns US$ 34,2 milhões (8,0% '
-               'do SH4, +12,7%); 8207.50.11 brocas helicoidais, diâmetro ≤ 52 mm US$ 32,7 milhões (7,6% do SH4, '
-               '+8,9%); 8207.19.90 outras ferramentas de perfuração ou de sondagem US$ 21,1 milhões (4,9% do '
-               'SH4, +10,0%); 8207.70.10 ferramentas de fresar de topo US$ 15,1 milhões (3,5% do SH4, +7,7%). '
-               'Fonte: WM Trading com dados MDIC/Comex Stat.',
+        'alt': 'Composição do SH4 8207 em 12 meses (out/2025 a set/2026): a NCM 8207.30.00, ferramentas de embutir, estampar ou puncionar, somou US$ 222,8 milhões, 52,0% do total, com alta de 132,7%; as demais NCMs cresceram entre 7,7% e 31,8%. Fonte: WM Trading com dados MDIC/Comex Stat.',
         'labels': [   '8207.30.00 · Ferramentas de embutir, de estampar ou de puncionar',
                       '8207.19.10 · Ferramentas de perfuração (brocas)',
                       '8207.90.00 · Outras ferramentas intercambiáveis, de metais comuns',
@@ -706,10 +697,7 @@ GRAFICOS = {
         'conclusao': 'China (57,0%) e Coreia do Sul (19,7%) somam 76,7% do valor importado; Japão (−36,9%) e '
                      'Itália (−5,5%) perderam espaço.',
         'fonte': 'Fonte: levantamento WM Trading — Inteligência de Mercado, com dados do MDIC/Comex Stat.',
-        'alt': 'Origem das importações da NCM 8207.30.00 (ferramentas de embutir, estampar ou puncionar) entre '
-               'out/2025 e set/2026, participação no valor e variação em 12 meses: China 57,0% (+158,0%); Coreia '
-               'do Sul 19,7% (+435,6%); Estados Unidos 5,3% (+168,6%); Japão 3,0% (−36,9%); Alemanha 2,8% '
-               '(+71,8%); Itália 2,0% (−5,5%). Fonte: WM Trading com dados MDIC/Comex Stat.',
+        'alt': 'Origem das importações da NCM 8207.30.00 em 12 meses: China 57,0%, Coreia do Sul 19,7%, Estados Unidos 5,3%, Japão 3,0%, Alemanha 2,8% e Itália 2,0%. Fonte: WM Trading com dados MDIC/Comex Stat.',
         'labels': ['China', 'Coreia do Sul', 'Estados Unidos', 'Japão', 'Alemanha', 'Itália'],
         'detalhe': ['+158,0%', '+435,6%', '+168,6%', '−36,9%', '+71,8%', '−5,5%'],
         'valores': [57.0, 19.7, 5.3, 3.0, 2.8, 2.0],
@@ -1248,20 +1236,22 @@ def grafico_radar(chave, spec):
         # Largura total (pauta 2, nov/2026): o desenho estreito esticado a 750 px
         # ficava com letra de ~29 px. Saem dois desenhos do mesmo grafico: o largo
         # (desktop, ocupa o quadro) e o estreito de sempre (celular, letra ~13 px).
-        # O CSS mostra um ou outro; o estreito e aria-hidden e nao repete o <desc>.
+        # O CSS mostra um ou outro.
         fonte_svg = 'font-family="\'Nunito Sans\', Arial, sans-serif"'
         largo = dict(spec, largura=RADAR_LARGO[spec["tipo"]], quebra=None)
         wl, hl, corpo_l = RADAR_DESENHOS[spec["tipo"]](largo, id_clip + "l")
-        svg = (
-            f'<svg class="wm-chart-svg wm-chart-radar__svg wm-chart-radar__svg--largo" viewBox="0 0 {wl} {hl}" '
-            f'role="img" aria-labelledby="{id_titulo} {id_desc}" {fonte_svg}>'
-            f'<title id="{id_titulo}">{escape(spec["titulo"])}</title>'
-            f'<desc id="{id_desc}">{escape(spec["alt"])}</desc>'
-            + "".join(corpo_l) + "</svg>"
-            f'<svg class="wm-chart-svg wm-chart-radar__svg wm-chart-radar__svg--estreito" viewBox="0 0 {w} {h}" '
-            f'aria-hidden="true" focusable="false" {fonte_svg}>'
-            + "".join(corpo) + "</svg>"
-        )
+        # 17/11/2026: as duas versoes levam o texto alternativo inteiro (aria-label +
+        # <desc>). A que esta escondida por display:none sai sozinha da arvore de
+        # acessibilidade, entao o leitor de tela le uma so.
+        def _svg(classe, vw, vh, sufixo, corpo_svg):
+            t, d = id_titulo + sufixo, id_desc + sufixo
+            return (f'<svg class="wm-chart-svg wm-chart-radar__svg {classe}" viewBox="0 0 {vw} {vh}" '
+                    f'role="img" aria-label="{escape(spec["alt"])}" aria-describedby="{d}" {fonte_svg}>'
+                    f'<title id="{t}">{escape(spec["titulo"])}</title>'
+                    f'<desc id="{d}">{escape(spec["alt"])}</desc>'
+                    + "".join(corpo_svg) + "</svg>")
+        svg = (_svg("wm-chart-radar__svg--largo", wl, hl, "", corpo_l)
+               + _svg("wm-chart-radar__svg--estreito", w, h, "-m", corpo))
     return (
         f'<figure class="wm-interactive-chart wm-chart-radar{" wm-chart-radar--cheio" if spec.get("largura_total") else ""}" id="grafico-{chave}">\n'
         f'  <p class="wm-chart-radar__titulo">{escape(spec["titulo"])}</p>\n'
