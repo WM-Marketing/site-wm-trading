@@ -3949,7 +3949,11 @@ Se você tiver alguma pergunta sobre esta Política de Privacidade ou as prátic
             "headline": title,
             "datePublished": date_str,
             "dateModified": modified_str,
-            "author": {"@type": "Person", "name": author},
+            # author_type: "Organization" no frontmatter quando o autor e a propria WM
+            # (posts do Radar Comex, nov/2026); sem o campo, segue Person.
+            "author": ({"@type": "Organization", "name": author, "url": SITE_URL + "/"}
+                       if fm.get("author_type", "") == "Organization"
+                       else {"@type": "Person", "name": author}),
             "publisher": {"@type": "Organization", "name": "WM Trading", "logo": {"@type": "ImageObject", "url": SITE_URL + DEFAULT_OG_IMAGE}},
             "image": (SITE_URL + cover) if cover else (SITE_URL + DEFAULT_OG_IMAGE),
             "mainEntityOfPage": url_publica(f"blog/{slug}.html"),

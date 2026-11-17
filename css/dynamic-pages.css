@@ -846,6 +846,14 @@ textarea.input-wm {
 .wm-chart-radar { padding: 24px 24px 20px; }
 /* Desenho estreito (letra grande no celular); no desktop não passa de 520 px. */
 .wm-chart-radar .wm-chart-radar__svg { max-width: 520px; }
+/* "largura_total" na spec: o desenho ocupa o quadro inteiro (pauta 2, nov/2026). */
+/* Dois desenhos: o largo no desktop, o estreito (letra maior) ate 640 px. */
+.wm-chart-radar--cheio .wm-chart-radar__svg--largo { max-width: none; width: 100%; }
+.wm-chart-radar--cheio .wm-chart-radar__svg--estreito { display: none; }
+@media (max-width: 640px) {
+  .wm-chart-radar--cheio .wm-chart-radar__svg--largo { display: none; }
+  .wm-chart-radar--cheio .wm-chart-radar__svg--estreito { display: block; }
+}
 .wm-chart-radar .wm-chart-radar__titulo {
   margin: 0 0 4px !important;
   color: #1f1f1f;

@@ -527,6 +527,200 @@ GRAFICOS = {
             ]
         }
     },
+    # Pauta 2 do Radar Comex (nov/2026): ferramentas de estampar, NCM 8207.30.00. Gerado a partir de
+    # WM_Radar_Comex_Outubro2026_v3_Dados.xlsx (abas R2_SH4..., R2_extra, R2_origem), sem digitação à mão.
+    'ferramentas-estampar-mensal': {   'estilo': 'radar',
+        'tipo': 'linha',
+        'reta': True,
+        'largura_total': True,
+        'rotulo_ao_lado': True,
+        'titulo': 'Importação mensal de ferramentas de estampar (NCM 8207.30.00)',
+        'subtitulo': 'US$ milhões, FOB — out/2024 a set/2026',
+        'conclusao': 'A NCM 8207.30.00 somou US$ 222,8 milhões entre out/2025 e set/2026 (+132,7%), com máxima '
+                     'de US$ 28,7 milhões em fev/2026 e US$ 27,9 milhões em set/2026, e passou a 52,0% do SH4 '
+                     '8207.',
+        'fonte': 'Fonte: levantamento WM Trading — Inteligência de Mercado, com dados do MDIC/Comex Stat.',
+        'alt': 'Importação mensal da NCM 8207.30.00 (ferramentas de embutir, estampar ou puncionar) entre '
+               'out/2024 e set/2026: máxima de US$ 28,7 milhões em fev/2026 e US$ 27,9 milhões em set/2026. '
+               'Fonte: WM Trading com dados MDIC/Comex Stat.',
+        'labels': [   'out/24',
+                      'nov/24',
+                      'dez/24',
+                      'jan/25',
+                      'fev/25',
+                      'mar/25',
+                      'abr/25',
+                      'mai/25',
+                      'jun/25',
+                      'jul/25',
+                      'ago/25',
+                      'set/25',
+                      'out/25',
+                      'nov/25',
+                      'dez/25',
+                      'jan/26',
+                      'fev/26',
+                      'mar/26',
+                      'abr/26',
+                      'mai/26',
+                      'jun/26',
+                      'jul/26',
+                      'ago/26',
+                      'set/26'],
+        'valores': [   6.18,
+                       6.89,
+                       10.98,
+                       10.46,
+                       8.09,
+                       5.74,
+                       9.87,
+                       6.53,
+                       5.41,
+                       5.03,
+                       6.82,
+                       13.78,
+                       4.51,
+                       9.98,
+                       18.08,
+                       25.53,
+                       28.73,
+                       13.26,
+                       15.33,
+                       15.36,
+                       14.13,
+                       26.23,
+                       23.79,
+                       27.89],
+        'serie_label': 'NCM 8207.30.00',
+        'referencia': {   'label': 'SH4 8207 (total)',
+                          'valores': [   21.45,
+                                         20.91,
+                                         22.9,
+                                         28.15,
+                                         22.49,
+                                         20.28,
+                                         26.34,
+                                         20.68,
+                                         22.99,
+                                         21.85,
+                                         22.16,
+                                         29.65,
+                                         22.39,
+                                         25.14,
+                                         32.89,
+                                         41.37,
+                                         43.84,
+                                         32.2,
+                                         33.07,
+                                         29.62,
+                                         31.36,
+                                         44.7,
+                                         44.93,
+                                         47.15]},
+        'rotulo_ultimo': 'US$ 27,9 mi',
+        'tabela': {   'colunas': ['Mês', 'NCM 8207.30.00 (US$ mi)', 'SH4 8207 total (US$ mi)'],
+                      'linhas': [   ['out/24', '6,18', '21,45'],
+                                    ['nov/24', '6,89', '20,91'],
+                                    ['dez/24', '10,98', '22,90'],
+                                    ['jan/25', '10,46', '28,15'],
+                                    ['fev/25', '8,09', '22,49'],
+                                    ['mar/25', '5,74', '20,28'],
+                                    ['abr/25', '9,87', '26,34'],
+                                    ['mai/25', '6,53', '20,68'],
+                                    ['jun/25', '5,41', '22,99'],
+                                    ['jul/25', '5,03', '21,85'],
+                                    ['ago/25', '6,82', '22,16'],
+                                    ['set/25', '13,78', '29,65'],
+                                    ['out/25', '4,51', '22,39'],
+                                    ['nov/25', '9,98', '25,14'],
+                                    ['dez/25', '18,08', '32,89'],
+                                    ['jan/26', '25,53', '41,37'],
+                                    ['fev/26', '28,73', '43,84'],
+                                    ['mar/26', '13,26', '32,20'],
+                                    ['abr/26', '15,33', '33,07'],
+                                    ['mai/26', '15,36', '29,62'],
+                                    ['jun/26', '14,13', '31,36'],
+                                    ['jul/26', '26,23', '44,70'],
+                                    ['ago/26', '23,79', '44,93'],
+                                    ['set/26', '27,89', '47,15']],
+                      'rolagem': True}},
+    'ferramentas-estampar-sh4': {   'estilo': 'radar',
+        'tipo': 'barra_h',
+        'largura_total': True,
+        'destaque': 0,
+        'quebra': 40,
+        'titulo': 'Composição do SH4 8207 — importação em 12 meses (US$ milhões)',
+        'subtitulo': 'US$ milhões, FOB — out/2025 a set/2026; principais NCMs',
+        'conclusao': 'A NCM 8207.30.00 somou US$ 222,8 mi e respondeu por 52,0% do SH4 8207, com alta de 132,7%; '
+                     'as demais NCMs cresceram entre +7,7% e +31,8%.',
+        'fonte': 'Fonte: levantamento WM Trading — Inteligência de Mercado, com dados do MDIC/Comex Stat.',
+        'alt': 'Composição da importação do SH4 8207 (ferramentas intercambiáveis) entre out/2025 e set/2026, '
+               'por NCM: 8207.30.00 ferramentas de embutir, de estampar ou de puncionar US$ 222,8 milhões (52,0% '
+               'do SH4, +132,7%); 8207.19.10 ferramentas de perfuração (brocas) US$ 44,6 milhões (10,4% do SH4, '
+               '+31,8%); 8207.90.00 outras ferramentas intercambiáveis, de metais comuns US$ 34,2 milhões (8,0% '
+               'do SH4, +12,7%); 8207.50.11 brocas helicoidais, diâmetro ≤ 52 mm US$ 32,7 milhões (7,6% do SH4, '
+               '+8,9%); 8207.19.90 outras ferramentas de perfuração ou de sondagem US$ 21,1 milhões (4,9% do '
+               'SH4, +10,0%); 8207.70.10 ferramentas de fresar de topo US$ 15,1 milhões (3,5% do SH4, +7,7%). '
+               'Fonte: WM Trading com dados MDIC/Comex Stat.',
+        'labels': [   '8207.30.00 · Ferramentas de embutir, de estampar ou de puncionar',
+                      '8207.19.10 · Ferramentas de perfuração (brocas)',
+                      '8207.90.00 · Outras ferramentas intercambiáveis, de metais comuns',
+                      '8207.50.11 · Brocas helicoidais, diâmetro ≤ 52 mm',
+                      '8207.19.90 · Outras ferramentas de perfuração ou de sondagem',
+                      '8207.70.10 · Ferramentas de fresar de topo'],
+        'valores': [222.8, 44.6, 34.2, 32.7, 21.1, 15.1],
+        'rotulos': ['US$ 222,8 mi', 'US$ 44,6 mi', 'US$ 34,2 mi', 'US$ 32,7 mi', 'US$ 21,1 mi', 'US$ 15,1 mi'],
+        'tabela': {   'colunas': ['NCM', 'Produto', 'US$ 12 meses', 'Participação', 'Variação'],
+                      'linhas': [   [   '8207.30.00',
+                                        'Ferramentas de embutir, de estampar ou de puncionar',
+                                        '222,8 mi',
+                                        '52,0%',
+                                        '+132,7%'],
+                                    [   '8207.19.10',
+                                        'Ferramentas de perfuração (brocas)',
+                                        '44,6 mi',
+                                        '10,4%',
+                                        '+31,8%'],
+                                    [   '8207.90.00',
+                                        'Outras ferramentas intercambiáveis, de metais comuns',
+                                        '34,2 mi',
+                                        '8,0%',
+                                        '+12,7%'],
+                                    [   '8207.50.11',
+                                        'Brocas helicoidais, diâmetro ≤ 52 mm',
+                                        '32,7 mi',
+                                        '7,6%',
+                                        '+8,9%'],
+                                    [   '8207.19.90',
+                                        'Outras ferramentas de perfuração ou de sondagem',
+                                        '21,1 mi',
+                                        '4,9%',
+                                        '+10,0%'],
+                                    ['8207.70.10', 'Ferramentas de fresar de topo', '15,1 mi', '3,5%', '+7,7%']]}},
+    'ferramentas-estampar-origens': {   'estilo': 'radar',
+        'tipo': 'barra_h',
+        'largura_total': True,
+        'titulo': 'Origem das importações da NCM 8207.30.00 — participação em 12 meses (%)',
+        'subtitulo': '% do valor FOB, out/2025 a set/2026; entre parênteses, a variação sobre os 12 meses '
+                     'anteriores',
+        'conclusao': 'China (57,0%) e Coreia do Sul (19,7%) somam 76,7% do valor importado; Japão (−36,9%) e '
+                     'Itália (−5,5%) perderam espaço.',
+        'fonte': 'Fonte: levantamento WM Trading — Inteligência de Mercado, com dados do MDIC/Comex Stat.',
+        'alt': 'Origem das importações da NCM 8207.30.00 (ferramentas de embutir, estampar ou puncionar) entre '
+               'out/2025 e set/2026, participação no valor e variação em 12 meses: China 57,0% (+158,0%); Coreia '
+               'do Sul 19,7% (+435,6%); Estados Unidos 5,3% (+168,6%); Japão 3,0% (−36,9%); Alemanha 2,8% '
+               '(+71,8%); Itália 2,0% (−5,5%). Fonte: WM Trading com dados MDIC/Comex Stat.',
+        'labels': ['China', 'Coreia do Sul', 'Estados Unidos', 'Japão', 'Alemanha', 'Itália'],
+        'detalhe': ['+158,0%', '+435,6%', '+168,6%', '−36,9%', '+71,8%', '−5,5%'],
+        'valores': [57.0, 19.7, 5.3, 3.0, 2.8, 2.0],
+        'rotulos': ['57,0%', '19,7%', '5,3%', '3,0%', '2,8%', '2,0%'],
+        'tabela': {   'colunas': ['País', 'Participação', 'Variação 12 meses', 'US$ 12 meses'],
+                      'linhas': [   ['China', '57,0%', '+158,0%', '127,0 mi'],
+                                    ['Coreia do Sul', '19,7%', '+435,6%', '44,0 mi'],
+                                    ['Estados Unidos', '5,3%', '+168,6%', '11,8 mi'],
+                                    ['Japão', '3,0%', '−36,9%', '6,7 mi'],
+                                    ['Alemanha', '2,8%', '+71,8%', '6,3 mi'],
+                                    ['Itália', '2,0%', '−5,5%', '4,4 mi']]}},
 }
 
 
@@ -893,13 +1087,23 @@ COR_TEXTO = "#3A3A3A"
 RADAR_LARGURA_LINHA = 440
 RADAR_LARGURA_BARRA = 460
 RADAR_FONTE = 20
+RADAR_LARGO = {"linha": 720, "barra_h": 700}  # viewBox do desenho de largura total
 
 
 def _radar_linha(spec, clip_id):
-    w, h, f = RADAR_LARGURA_LINHA, 320, RADAR_FONTE - 2
+    # Opcionais (pauta 2, nov/2026): "largura" do viewBox, "reta" (segmentos retos,
+    # sem suavizar), "referencia" (série de contexto em cinza claro, desenhada por
+    # baixo e sem rótulo) e "serie_label" (com referência, sai uma legenda no topo).
+    w, f = spec.get("largura", RADAR_LARGURA_LINHA), RADAR_FONTE - 2
+    ref = spec.get("referencia")
+    h = 320 + (26 if ref else 0)
     dados, labels = spec["valores"], spec["labels"]
-    base, topo, marcas = escala(dados, do_zero=True)
-    x0, x1, y0, y1 = 42, w - 10, 26, h - 40
+    base, topo, marcas = escala(dados + (ref["valores"] if ref else []), do_zero=True)
+    x0, x1, y0, y1 = 42, w - 10, 26 + (26 if ref else 0), h - 40
+    # Rótulo ao lado do ponto final: só no desenho largo, com margem reservada à direita.
+    ao_lado = spec.get("rotulo_ao_lado") and w >= 600
+    if ao_lado:
+        x1 = w - 12 - int(len(spec["rotulo_ultimo"]) * (f + 1) * 0.62)
     n = len(dados)
     xs = [x0 + i * (x1 - x0) / (n - 1) for i in range(n)]
     def y_de(v):
@@ -923,9 +1127,31 @@ def _radar_linha(spec, clip_id):
         partes.append(f'<text x="{xs[i]:.1f}" y="{y1 + 28}" text-anchor="{ancora}" font-size="{f - 2}" '
                       f'fill="{COR_EIXO}">{escape(labels[i])}</text>')
     pontos = [(xs[i], y_de(v)) for i, v in enumerate(dados)]
-    curva = caminho_suave(pontos)
+    def tracado(pts):
+        if spec.get("reta"):
+            return "M " + " L ".join(f"{x:.1f} {y:.1f}" for x, y in pts)
+        return caminho_suave(pts)
+    curva = tracado(pontos)
+    if ref:
+        cinza = ref.get("cor", "#c4c4c4")
+        pontos_ref = [(xs[i], y_de(v)) for i, v in enumerate(ref["valores"])]
+        partes.append(f'<path d="{tracado(pontos_ref)}" fill="none" stroke="{cinza}" stroke-width="2.6" '
+                      f'stroke-linecap="round" stroke-linejoin="round" clip-path="url(#{clip_id})"/>')
+        for i, (px, py) in enumerate(pontos_ref):
+            partes.append(f'<circle cx="{px:.1f}" cy="{py:.1f}" r="7" fill="transparent">'
+                          f'<title>{escape(labels[i])} — {escape(ref["label"])}: US$ '
+                          f'{escape(numero(ref["valores"][i], 1))} mi</title></circle>')
+        # Legenda: traço + nome de cada série, na faixa acima da grade.
+        nomes = [(LARANJA_MARCA, spec.get("serie_label", ""), 3.2), (cinza, ref["label"], 2.6)]
+        lx = x0 - 30
+        for cor, nome, esp in nomes:
+            partes.append(f'<line x1="{lx}" y1="10" x2="{lx + 22}" y2="10" stroke="{cor}" '
+                          f'stroke-width="{esp + 1}" stroke-linecap="round"/>')
+            partes.append(f'<text x="{lx + 30}" y="{10 + 6}" font-size="{f - 2}" fill="{COR_TEXTO}">'
+                          f'{escape(nome)}</text>')
+            lx += 30 + len(nome) * (f - 2) * 0.56 + 26
     partes.append(f'<path d="{curva} L {pontos[-1][0]:.1f} {y1} L {pontos[0][0]:.1f} {y1} Z" '
-                  f'fill="{LARANJA_MARCA}" fill-opacity="0.13" clip-path="url(#{clip_id})"/>')
+                  f'fill="{LARANJA_MARCA}" fill-opacity="{0.10 if ref else 0.13}" clip-path="url(#{clip_id})"/>')
     partes.append(f'<path d="{curva}" fill="none" stroke="{LARANJA_MARCA}" stroke-width="3.2" '
                   f'stroke-linecap="round" stroke-linejoin="round" clip-path="url(#{clip_id})"/>')
     # Alvos invisíveis: passar o mouse mostra mês e valor, sem marcador na tela.
@@ -935,6 +1161,12 @@ def _radar_linha(spec, clip_id):
     px, py = pontos[-1]
     partes.append(f'<circle cx="{px:.1f}" cy="{py:.1f}" r="7" fill="{LARANJA_MARCA}" stroke="#fff" '
                   f'stroke-width="2.5"/>')
+    # Rótulo do último valor: abaixo do ponto (padrão) ou colado à esquerda dele.
+    if ao_lado:
+        partes.append(f'<text x="{px + 13:.1f}" y="{py + 7:.1f}" text-anchor="start" font-size="{f + 1}" '
+                      f'font-weight="800" fill="{COR_VALOR}" paint-order="stroke" stroke="#fff" '
+                      f'stroke-width="4">{escape(spec["rotulo_ultimo"])}</text>')
+        return w, h, partes
     partes.append(f'<text x="{px:.1f}" y="{py + 34:.1f}" text-anchor="end" font-size="{f + 1}" '
                   f'font-weight="800" fill="{COR_VALOR}" paint-order="stroke" stroke="#fff" '
                   f'stroke-width="4">{escape(spec["rotulo_ultimo"])}</text>')
@@ -942,23 +1174,39 @@ def _radar_linha(spec, clip_id):
 
 
 def _radar_barra_h(spec, clip_id):
-    w, f = RADAR_LARGURA_BARRA, RADAR_FONTE - 1
+    # Opcionais (pauta 2, nov/2026): "largura" do viewBox; "destaque" (índice da
+    # barra em laranja, as demais em cinza); "quebra" (rótulo longo em 2 linhas).
+    w, f = spec.get("largura", RADAR_LARGURA_BARRA), RADAR_FONTE - 1
     linha, barra, topo_y = 70, 24, 8
+    quebra = spec.get("quebra")
+    rotulos_txt = []
+    for rot in spec["labels"]:
+        if quebra and len(rot) > quebra:
+            corte = rot.rfind(" ", 0, quebra)
+            rotulos_txt.append([rot[:corte], rot[corte + 1:]])
+        else:
+            rotulos_txt.append([rot])
     n = len(spec["valores"])
-    h = topo_y + n * linha + 4
+    extra_y = [(len(r) - 1) * (f + 2) for r in rotulos_txt]
+    h = topo_y + n * linha + sum(extra_y) + 4
     maior = max(spec["valores"])
     largura_util = w - 138
+    destaque = spec.get("destaque")
     partes = []
+    y = topo_y
     for i, valor in enumerate(spec["valores"]):
-        y = topo_y + i * linha
+        texto = escape(rotulos_txt[i][0]) + "".join(
+            f'<tspan x="0" dy="{f + 2}">{escape(trecho)}</tspan>' for trecho in rotulos_txt[i][1:])
         partes.append(f'<text x="0" y="{y + f:.1f}" font-size="{f - 1}" fill="{COR_TEXTO}">'
-                      f'{escape(spec["labels"][i])}'
+                      f'{texto}'
                       + (f'<tspan fill="{COR_EIXO}" font-size="{f - 3}"> ({escape(spec["detalhe"][i])})</tspan>'
                          if spec.get("detalhe") else "") + '</text>')
         comprimento = max(4, valor / maior * largura_util)
-        yb = y + f + 10
+        yb = y + extra_y[i] + f + 10
+        cor = LARANJA_MARCA if destaque is None or destaque == i else "#c4c4c4"
+        y += linha + extra_y[i]
         partes.append(f'<rect x="0" y="{yb}" width="{comprimento:.1f}" height="{barra}" rx="4" '
-                      f'fill="{LARANJA_MARCA}"><title>{escape(spec["labels"][i])}: '
+                      f'fill="{cor}"><title>{escape(spec["labels"][i])}: '
                       f'{escape(spec["rotulos"][i])}</title></rect>')
         partes.append(f'<text x="{comprimento + 10:.1f}" y="{yb + barra - 5}" font-size="{f}" '
                       f'font-weight="800" fill="{COR_VALOR}">{escape(spec["rotulos"][i])}</text>')
@@ -996,8 +1244,26 @@ def grafico_radar(chave, spec):
         f'<desc id="{id_desc}">{escape(spec["alt"])}</desc>'
         + "".join(corpo) + "</svg>"
     )
+    if spec.get("largura_total"):
+        # Largura total (pauta 2, nov/2026): o desenho estreito esticado a 750 px
+        # ficava com letra de ~29 px. Saem dois desenhos do mesmo grafico: o largo
+        # (desktop, ocupa o quadro) e o estreito de sempre (celular, letra ~13 px).
+        # O CSS mostra um ou outro; o estreito e aria-hidden e nao repete o <desc>.
+        fonte_svg = 'font-family="\'Nunito Sans\', Arial, sans-serif"'
+        largo = dict(spec, largura=RADAR_LARGO[spec["tipo"]], quebra=None)
+        wl, hl, corpo_l = RADAR_DESENHOS[spec["tipo"]](largo, id_clip + "l")
+        svg = (
+            f'<svg class="wm-chart-svg wm-chart-radar__svg wm-chart-radar__svg--largo" viewBox="0 0 {wl} {hl}" '
+            f'role="img" aria-labelledby="{id_titulo} {id_desc}" {fonte_svg}>'
+            f'<title id="{id_titulo}">{escape(spec["titulo"])}</title>'
+            f'<desc id="{id_desc}">{escape(spec["alt"])}</desc>'
+            + "".join(corpo_l) + "</svg>"
+            f'<svg class="wm-chart-svg wm-chart-radar__svg wm-chart-radar__svg--estreito" viewBox="0 0 {w} {h}" '
+            f'aria-hidden="true" focusable="false" {fonte_svg}>'
+            + "".join(corpo) + "</svg>"
+        )
     return (
-        f'<figure class="wm-interactive-chart wm-chart-radar" id="grafico-{chave}">\n'
+        f'<figure class="wm-interactive-chart wm-chart-radar{" wm-chart-radar--cheio" if spec.get("largura_total") else ""}" id="grafico-{chave}">\n'
         f'  <p class="wm-chart-radar__titulo">{escape(spec["titulo"])}</p>\n'
         f'  <p class="wm-chart-radar__subtitulo">{escape(spec["subtitulo"])}</p>\n'
         f'  <div class="wm-interactive-chart__canvas">{svg}</div>\n'
